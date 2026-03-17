@@ -1,0 +1,838 @@
+<?php
+// 引入安全 Headers 和 CSRF Token
+require_once __DIR__ . '/includes/security/headers.php';
+require_once __DIR__ . '/includes/security/csrf.php';
+?>
+
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <title>AI 智慧語伴 | 奧洛｜創新研發・智慧陪伴新世代</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="以AI語音為核心，打造智慧陪伴與健康守護。結合語音互動與智慧分析，主動陪伴長者、即時掌握健康與情緒變化。">
+    <meta name="keywords" content="AI智慧語伴,智慧陪伴,長照科技,語音互動,健康守護,OCR掃描,社工輔助,智慧照護,長者照顧,AI陪伴系統"> 
+      
+    <!-- Favicon -->
+	<link href="images/favicon.ico" rel="shortcut icon">
+
+    <!-- ✅ LINE Seed 字體家族 (與 index.php 一致) -->
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CSRF Token -->
+    <?php echo CSRFProtection::getTokenScript(); ?>
+    
+    <!-- Iconoir Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+    
+    <style>
+    /* AI 智慧語伴專屬樣式 - 強化毛玻璃與漸層紋理 */
+    
+    /* 增加右側內容區與左側選單間距 */
+    #colorlib-main {
+        margin-left: 340px; /* 原本 300px + 40px */
+    }
+    
+    @media (max-width: 1199px) {
+        #colorlib-main {
+            margin-left: 0;
+        }
+    }
+    
+    /* 移除 Section Title 下方橘色線條 */
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 50px;
+        text-align: left;
+    }
+    
+    .section-title::after {
+        display: none;
+    }
+    
+    /* 影片上方文案區塊 */
+    .video-intro {
+        padding: 60px 0 40px 0;
+    }
+    
+    .video-intro-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #5a6c7d;
+        margin-bottom: 15px;
+    }
+    
+    .video-intro-content h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+    
+    .video-intro-content p {
+        font-size: 1.2rem;
+        color: #555;
+        line-height: 1.8;
+    }
+    
+    /* 影片區塊 */
+    .video-section {
+        padding: 0 0 80px 0;
+    }
+    
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 比例 */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    /* 問題與解決方案區塊 - 強化毛玻璃效果 + 漸層紋理 */
+    .problem-solution {
+        padding: 80px 0;
+    }
+    
+    .problem-card,
+    .solution-card {
+        position: relative;
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.9) 0%, 
+            rgba(255, 255, 255, 0.7) 50%, 
+            rgba(240, 245, 250, 0.8) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 40px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(90, 108, 125, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .problem-card::before,
+    .solution-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(145deg,
+            rgba(90, 108, 125, 0.03) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(90, 108, 125, 0.02) 100%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    .problem-card > *,
+    .solution-card > * {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .problem-card h3,
+    .solution-card h3 {
+        color: #5a6c7d;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    
+    .problem-card ul,
+    .solution-card ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .problem-card li,
+    .solution-card li {
+        padding: 10px 0;
+        padding-left: 30px;
+        position: relative;
+        font-size: 1.1rem;
+        color: #555;
+    }
+    
+    .problem-card li:before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: #5a6c7d;
+        font-size: 1.3rem;
+    }
+    
+    .solution-card li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #5a6c7d;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    
+    .solution-card p {
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.8;
+    }
+    
+    /* 功能模組區塊 - 滿版背景圖 + 深色遮罩 */
+    .features-section {
+        padding: 80px 0;
+    }
+    
+    .feature-box {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 40px 30px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        text-align: center;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        height: 100%;
+        overflow: hidden;
+        min-height: 320px;
+    }
+    
+    /* 深色遮罩層 */
+    .feature-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0.65) 100%);
+        pointer-events: none;
+        z-index: 1;
+        transition: all 0.4s ease;
+    }
+    
+    .feature-box:hover::before {
+        background: linear-gradient(135deg,
+            rgba(0, 0, 0, 0.5) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0.55) 100%);
+    }
+    
+    .feature-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* 為三張卡片設定不同的背景圖 */
+    /* 主動關懷 */
+    .col-md-4:nth-child(1) .feature-box {
+        background-image: url('images/feature-care-bg.jpg');
+    }
+    
+    /* 用藥提醒 */
+    .col-md-4:nth-child(2) .feature-box {
+        background-image: url('images/feature-medicine-bg.jpg');
+    }
+    
+    /* 社工輔助 */
+    .col-md-4:nth-child(3) .feature-box {
+        background-image: url('images/feature-social-bg.jpg');
+    }
+    
+    .feature-box > * {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Iconoir 圖標樣式 - 改為白色 */
+    .feature-icon {
+        font-size: 4rem;
+        color: #ffffff;
+        margin-bottom: 20px;
+        display: inline-block;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+    
+    .feature-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+    
+    .feature-list li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+        color: #e0e0e0;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .feature-list li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    
+    /* 未來應用區塊 - 移除白色底色與陰影，對齊數字 */
+    .future-section {
+        padding: 80px 0;
+    }
+    
+    .future-content {
+        padding: 0 20px; /* 增加左右內距以對齊數字 */
+    }
+    
+    .future-content h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #5a6c7d;
+    }
+    
+    .future-content p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 15px;
+        color: #555;
+    }
+    
+    /* 效益區塊 - 強化毛玻璃效果 + 漸層紋理 */
+    .benefits-section {
+        padding: 80px 0;
+    }
+    
+    .benefit-card {
+        position: relative;
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.9) 0%, 
+            rgba(255, 255, 255, 0.7) 50%, 
+            rgba(240, 245, 250, 0.8) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 40px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 32px rgba(90, 108, 125, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    
+    .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(145deg,
+            rgba(90, 108, 125, 0.03) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(90, 108, 125, 0.02) 100%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    .benefit-card > * {
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* 右下角淺色 icon 裝飾 */
+    .benefit-icon-decoration {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 5rem;
+        color: rgba(90, 108, 125, 0.08);
+        z-index: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+    
+    .benefit-card:hover .benefit-icon-decoration {
+        color: rgba(90, 108, 125, 0.12);
+        transform: scale(1.05);
+    }
+    
+    .benefit-card h4 {
+        color: #5a6c7d;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    
+    .benefit-card p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin: 0;
+        flex: 1;
+    }
+    
+    /* 試營運成果區塊 - 桌機/平板橫向，手機直向 */
+    .results-section {
+        padding: 80px 0;
+    }
+    
+    .results-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    
+    .result-item {
+        flex: 1;
+        text-align: center;
+        padding: 0 20px;
+    }
+    
+    .result-number {
+        font-size: 4rem;
+        font-weight: 700;
+        color: #5a6c7d;
+        display: block;
+        margin-bottom: 15px;
+    }
+    
+    .result-text {
+        font-size: 1.3rem;
+        color: #333;
+        font-weight: 500;
+        display: block;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .video-intro-content h2 {
+            font-size: 1.5rem;
+        }
+        
+        .video-intro-content h3 {
+            font-size: 1.2rem;
+        }
+        
+        .video-intro-content p {
+            font-size: 1rem;
+        }
+        
+        .problem-card,
+        .solution-card {
+            padding: 30px 20px;
+        }
+        
+        /* ✅ 手機版卡片間距 30px */
+        .problem-solution .row .col-md-6 {
+            padding-bottom: 30px;
+        }
+        
+        .problem-solution .row .col-md-6:last-child {
+            padding-bottom: 0;
+        }
+        
+        /* ✅ 功能模組卡片間距 */
+        .features-section .row .col-md-4 {
+            padding-bottom: 30px;
+        }
+        
+        .features-section .row .col-md-4:last-child {
+            padding-bottom: 0;
+        }
+        
+        /* ✅ 效益卡片間距 */
+        .benefits-section .row .col-md-6 {
+            padding-bottom: 30px;
+        }
+        
+        .benefits-section .row .col-md-6:last-child {
+            padding-bottom: 0;
+        }
+        
+        .future-content {
+            padding: 0;
+        }
+        
+        /* 手機板改為直向排列 */
+        .results-container {
+            flex-direction: column;
+        }
+        
+        .result-item {
+            margin-bottom: 50px;
+            padding: 0;
+        }
+        
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .result-number {
+            font-size: 3rem;
+        }
+        
+        .result-text {
+            font-size: 1.1rem;
+        }
+    }
+    </style>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <button type="button" title="填單諮詢" class="float" data-toggle="modal" data-target="#myModal">
+        <image class="forms_icon" src="images/forms_icon.svg" alt="Inquiry form"></image>
+    </button>
+  
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">歡迎填寫諮詢表單，由專人為您量身規劃!</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <form id="pop-qform" class="validate">
+                    <?php include './includes/contactform.php'; ?>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+            <?php include './includes/nav.php'; ?>
+        </aside>
+        
+        <!-- Anchor menu -->
+        <div class="btn fixed-top text-right">
+            <a href="#problem" class="btn btn-primary btn-sm">優先應用</a>
+            <a href="#features" class="btn btn-primary btn-sm">功能模組</a>
+            <a href="#benefits" class="btn btn-primary btn-sm">整合效益</a>
+            <a href="#results" class="btn btn-primary btn-sm">試營運成果</a>
+        </div>
+        
+        <div id="colorlib-main">
+            <!-- Breadcrumb -->
+            <section class="ftco-section ftco-bread ftco-extend-mb">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row no-gutters slider-text justify-content-end align-items-center">
+                        <div class="col-md-10 ftco-animate">
+                            <p class="breadcrumbs">
+                                <span class="mr-2"><a href="index.php">首頁</a></span> 
+                                <span>AI 智慧語伴</span>
+                            </p><br>
+                            <h2 style="color:#d9e0e7;">AI 智慧語伴</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Intro Section -->
+            <section class="video-intro">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="video-intro-content ftco-animate">
+                                <h3>AI CHATBOT</h3>
+                                <h2>創新研發 AI溫情守護・智慧陪伴新世代</h2>
+                                <p>以AI語音為核心，打造智慧陪伴與健康守護。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Section -->
+            <section class="video-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="video-wrapper ftco-animate">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/ev1YYi0tps8?rel=0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Problem & Solution Section -->
+            <section id="problem" class="problem-solution">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="mb-5">
+                                <h2 class="section-title ftco-animate">▏優先應用背景</h2>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 ftco-animate">
+                                    <div class="problem-card">
+                                        <h3>優先應用背景</h3>
+                                        <ul>
+                                            <li>偏鄉長者面臨孤獨與資源不足，社工人力有限，難以即時關懷</li>
+                                            <li>醫療與交通條件不足，使照護更加困難</li>
+                                            <li>隨著高齡化加劇，獨居老人比例不斷上升，社會關懷與照護壓力日益增加</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 ftco-animate">
+                                    <div class="solution-card">
+                                        <h3>我們的解決方案</h3>
+                                        <p>
+                                            「AI 智慧語伴」以語音科技為核心，結合情感互動與智慧分析，主動陪伴長者、即時掌握健康與情緒變化。
+                                        </p>
+                                        <p>
+                                            系統能自動生成關懷報告、提供用藥提醒與語音回報，協助社工快速掌握狀況，減輕工作負擔。
+                                        </p>
+                                        <p style="font-weight: 600; color: #5a6c7d;">
+                                            透過AI輔助，讓照護更高效、更貼心，實現溫情不間斷的智慧關懷。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="features-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="mb-5">
+                                <h2 class="section-title ftco-animate">▏功能模組</h2>
+                            </div>
+                            
+                            <div class="row">
+                                <!-- 主動關懷 -->
+                                <div class="col-md-4 ftco-animate">
+                                    <div class="feature-box">
+                                        <i class="iconoir-chat-bubble feature-icon"></i>
+                                        <h4 class="feature-title">主動關懷</h4>
+                                        <ul class="feature-list">
+                                            <li>智慧語音陪伴，了解健康與情緒</li>
+                                            <li>自動生成關懷報告，回應社工決策</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- 用藥提醒 -->
+                                <div class="col-md-4 ftco-animate">
+                                    <div class="feature-box">
+                                        <i class="iconoir-healthcare feature-icon"></i>
+                                        <h4 class="feature-title">用藥提醒</h4>
+                                        <ul class="feature-list">
+                                            <li>OCR掃描藥單，自動建檔</li>
+                                            <li>定時語音提醒與服藥回報</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- 社工輔助 -->
+                                <div class="col-md-4 ftco-animate">
+                                    <div class="feature-box">
+                                        <i class="iconoir-group feature-icon"></i>
+                                        <h4 class="feature-title">社工輔助</h4>
+                                        <ul class="feature-list">
+                                            <li>自動語音轉文字，節省工時</li>
+                                            <li>智慧分析老人需求，優化資源配置</li>
+                                            <li>新手社工快速上手，降低培訓成本</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Application Section -->
+            <section class="future-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="mb-5">
+                                <h2 class="section-title ftco-animate">未來應用:以智慧科技打造陪伴生態圈</h2>
+                            </div>
+                            
+                            <div class="future-content ftco-animate">
+                                <h3>從「理解人」走向「成為人性化關懷的夥伴」</h3>
+                                <p>
+                                    結合語音互動、情緒辨識與生成式AI技術，打造能傾聽、理解、並主動回應需求的智慧陪伴系統。
+                                </p>
+                                <p>
+                                    從偏鄉長者到都會居住者，從教育情緒輔導到企業員工支持，AI 關懷系統皆能依使用者的情緒與語境動態調整互動策略，協助機構提升服務溫度、情緒照護精準度與工作效率。
+                                </p>
+                                <p style="margin-top: 30px; font-size: 1.3rem; font-weight: 600;">
+                                    未來，我們將持續擴展應用場域，讓AI從「理解人」走向「成為人性化關懷的夥伴」，推動智慧社會向共融、共享、共好的方向邁進。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefits Section -->
+            <section id="benefits" class="benefits-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="mb-5">
+                                <h2 class="section-title ftco-animate">▏整合效益</h2>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 ftco-animate">
+                                    <div class="benefit-card">
+                                        <i class="iconoir-heart benefit-icon-decoration"></i>
+                                        <h4>社會與經濟效益</h4>
+                                        <p>
+                                            透過多語情感語音 AI，打造兼具溫度與效率的智慧照護系統，減少孤獨長者、提升照護公平與品質，協助社工降低人力負擔，推動台灣邁向低成本、高覆蓋率的智慧關懷新時代。
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 ftco-animate">
+                                    <div class="benefit-card">
+                                        <i class="iconoir-grid-plus benefit-icon-decoration"></i>
+                                        <h4>整合效益</h4>
+                                        <p>
+                                            「AI 智慧語伴」不僅減輕長者的孤獨感，提升生活品質與安全感，也讓社工能以更高效率服務更多人，優化決策與工作流程。透過AI分析與資料整合，實現資源的公平分配與永續照護，並建立健康數據庫，推動智慧醫療的長遠發展，為社會帶來溫度與科技並進的新範疇。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results" class="results-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-end">
+                        <div class="col-md-10">
+                            <div class="mb-5">
+                                <h2 class="section-title ftco-animate">▏試營運成果</h2>
+                            </div>
+                            
+                            <div class="results-container ftco-animate">
+                                <div class="result-item">
+                                    <span class="result-number">> 85%</span>
+                                    <span class="result-text">情感回應準確率</span>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <span class="result-number">40%</span>
+                                    <span class="result-text">服藥提醒執行率提升</span>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <span class="result-number">30%</span>
+                                    <span class="result-text">社工工時節省</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+                <?php include './includes/footer_simple.php'; ?>
+            </footer>
+        </div><!-- END COLORLIB-MAIN -->
+    </div><!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+        </svg>
+    </div>
+
+<!-- ✅ 優化後的 JS 載入 -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/external-link-warning.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main_optimized.js"></script>
+    <script src="js/form-validator.js"></script>
+    <script src="js/rate-limiter.js"></script>
+    <script src="js/qform.js"></script>
+    
+  </body>
+</html>

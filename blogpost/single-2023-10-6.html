@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <title>奧洛｜數位整合行銷.數據分析.行銷自動化.專屬LLM.客服中心系統建置/外包服務.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="奧洛在數位行銷浪潮下，致力于全網行銷技術的深耕于開拓，從網頁，電商建置，投放Google 關鍵字廣告，Facebook 廣告，協助粉絲團經營，分析成效">
+    <meta name="keywords" content="廣告投放,廣告代操,google關鍵字,yahoo關鍵字.搜尋廣告,GDN,google聯播網,多媒體聯播網,banner廣告,yahoo原生廣告,LINE廣告,LINE today廣告,社群行銷,社群經營,FB廣告,IG廣告,LINE官方帳號,LINE@,社群聆聽,網路聲量,網站數據分析,廣告數據分析,GA,GA4,Google Analytics,網頁數據,消費者行為">   
+    
+    <!-- ✅ 文章 Meta 資訊 (用於相關文章推薦) -->
+    <meta name="article-title" content='"數位行銷"當真非做不可嗎？'>
+    <meta name="article-category" content="品牌經營">
+    <meta name="article-date" content="2023-10-06">
+    <meta name="article-image" content="../images/image_231006.webp">
+
+    <!-- Favicon -->
+	  <link href="../images/favicon.ico" rel="shortcut icon">
+    
+    <!-- ✅ LINE Seed 字體家族 (與 index.html 一致) -->
+    <link rel="preload" href="../WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../WOFF2/LINESeedTW_OTF_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/line-seed-font.css">
+
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+
+    <!--<link rel="stylesheet" href="../css/aos.css">-->
+
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+
+    <!--<link rel="stylesheet" href="../css/bootstrap-datepicker.css">-->
+    <!--<link rel="stylesheet" href="../css/jquery.timepicker.css">-->
+
+    
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
+        })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+       <button type="button" title="填單諮詢" class="float" data-toggle="modal" data-target="#myModal">
+          <image class="forms_icon" src="../images/forms_icon.svg" alt="Inquiry form"></image>
+       </button>
+      
+       <div class="modal fade" id="myModal">
+       <div class="modal-dialog modal-dialog-scrollable">
+       <div class="modal-content">
+ 
+       <!-- Modal Header -->
+       <div class="modal-header">
+         <h5 class="modal-title">歡迎填寫諮詢表單，由專人為您量身規劃!</h5>
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+       </div>
+ 
+       <!-- Modal body -->
+        <form id="pop-qform" class="validate">
+<style>
+/* 重置可能的樣式衝突 */
+.compact-form * {
+    box-sizing: border-box;
+}
+
+.compact-form .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.compact-form .form-row fieldset {
+    flex: 1;
+    margin: 0;
+}
+
+.compact-form fieldset {
+    border: none;
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+.compact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.compact-form input[type="text"],
+.compact-form input[type="email"],
+.compact-form input[type="tel"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.compact-form .required {
+    color: #f96d00;
+}
+
+/* 諮詢類型 - 緊湊的三欄 inline checkbox */
+.compact-form .checkbox-inline-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 15px;
+    margin-top: 8px;
+}
+
+/* 修正 checkbox 樣式 - 重點區域 */
+.compact-form .form-check {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 4px 0;
+    position: relative;
+}
+
+.compact-form .form-check-input {
+    /* 重要：確保 checkbox 不被遮擋 */
+    margin: 0 12px 0 0 !important;
+    padding: 0 !important;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 16px !important;
+    height: 16px !important;
+    position: relative;
+    opacity: 1 !important;
+    appearance: auto;
+    -webkit-appearance: checkbox;
+}
+
+.compact-form .form-check label {
+    /* 確保文字不會覆蓋到 checkbox */
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.5;
+    user-select: none;
+}
+
+.compact-form textarea.form-control {
+    width: 100%;
+    min-height: 70px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+/* 提交按鈕樣式 */
+.compact-form .btn-form {
+    width: 100%;
+    padding: 12px 20px;
+    background: #6B9BB9; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.compact-form .btn-form:hover {
+    background: #578399; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 108, 125, 0.3);
+}
+
+.compact-form .btn-form:active {
+    transform: translateY(0);
+}
+
+.compact-form .btn-form:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .compact-form .form-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .compact-form .checkbox-inline-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .compact-form .checkbox-inline-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="compact-form">
+    <!-- 第一列：姓名 + Email -->
+    <div class="form-row">
+        <fieldset>
+            <label for="f01">您的姓名 <span class="required">*</span></label>
+            <input 
+                type="text" 
+                name="entry.162276222" 
+                id="f01" 
+                placeholder="請輸入姓名" 
+                required 
+            />
+        </fieldset>
+        
+        <fieldset>
+            <label for="f02">Email <span class="required">*</span></label>
+            <input 
+                type="email" 
+                name="entry.1357191828" 
+                id="f02" 
+                placeholder="example@gmail.com" 
+                required 
+            />
+        </fieldset>
+    </div>
+
+    <!-- 第二列：電話 + 公司名稱 -->
+    <div class="form-row">
+        <fieldset>
+            <label for="f03">聯絡電話 <span class="required">*</span></label>
+            <input 
+                type="tel" 
+                name="entry.1380546653" 
+                id="f03" 
+                placeholder="0911-XXX-XXX" 
+                required 
+            />
+        </fieldset>
+        
+        <fieldset>
+            <label for="f04">公司名稱</label>
+            <input 
+                type="text" 
+                name="entry.743695878" 
+                id="f04" 
+                placeholder="選填" 
+            />
+        </fieldset>
+    </div>
+
+    <!-- 諮詢類型 - 三欄緊湊排列 -->
+    <fieldset>
+        <label>諮詢類型</label>
+        <div class="checkbox-inline-grid">
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox"
+                    name="entry.1863307942"
+                    value="廣告投放" 
+                    id="f05-1" 
+                /> 
+                <label for="f05-1">廣告投放</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="社群服務" 
+                    id="f05-2" 
+                /> 
+                <label for="f05-2">社群服務</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="ACOUSTIC CXA" 
+                    id="f05-3" 
+                /> 
+                <label for="f05-3">ACOUSTIC CXA</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="CDP 顧客數據" 
+                    id="f05-4" 
+                /> 
+                <label for="f05-4">CDP 顧客數據</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="HCL UNICA" 
+                    id="f05-5" 
+                /> 
+                <label for="f05-5">HCL UNICA</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="MAGNOLIA CMS" 
+                    id="f05-6" 
+                /> 
+                <label for="f05-6">MAGNOLIA CMS</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="AI 智慧語伴" 
+                    id="f05-7" 
+                /> 
+                <label for="f05-7">AI 智慧語伴</label>
+            </div>
+            
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    name="entry.1863307942"
+                    value="其他" 
+                    id="f05-8" 
+                /> 
+                <label for="f05-8">其他</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 需求說明 -->
+    <fieldset>
+        <label for="f06">需求說明</label>
+        <textarea 
+            id="f06" 
+            class="form-control" 
+            name="entry.48027589" 
+            placeholder="請簡述您的需求（選填）"
+        ></textarea>
+    </fieldset>
+
+    <button id="submitButton" class="btn-form" type="button">送出</button>
+</div>
+</form>      
+        </div>
+        </div>
+        </div>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight">
+<nav id="colorlib-main-menu" role="navigation">
+  	<ul>
+  		<li><a href="../marketing.html">數位行銷</a></li>
+  		<li><a href="../solution.html">解決方案＆產品</a></li>
+  		<li><a href="https://cti.aurocore.com/index.html" target="_blank">客服中心</a></li>
+  		<li><a href="../ai-companion.html">AI 智慧語伴</a></li>
+  		<li><a href="../blog.html">新聞中心</a></li>
+  		<li><a href="../contact.html">聯絡我們</a></li>
+  	</ul>
+  	<p class="social">
+          <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+          </svg> 粉絲專頁</a></span>
+  	</p>
+  </nav>
+  
+  <div class="colorlib-footer">
+  	<h1><a href="../index.html">
+          <img src="../images/logo.svg" style="max-width: 185px" alt="AUROBASE" />
+      </a></h1>
+  </div>
+</aside> <!-- END COLORLIB-ASIDE -->
+		<div id="colorlib-main">
+			
+          <!-- particles.js container -->
+          <div id="particles-js"></div>
+           <section class="ftco-section ftco-bread ftco-extend-mb">
+				<div class="container-fluid px-3 px-md-0">
+					<div class="row no-gutters slider-text justify-content-end align-items-center">
+	          <div class="col-md-10 ftco-animate">
+	            <p class="breadcrumbs"><span class="mr-2"><a href=”../index.html”>首頁</a></span><span class=”mr-2”><a href=”../blog.html”>新聞中心</a></span><span>”數位行銷”當真非做不可嗎？</span></p><br>
+                <h1 style="color:#d9e0e7;">新聞中心</h1>  
+	          </div>
+	        </div>
+				</div>
+			</section> 
+
+			<section class="ftco-section ftco-no-pt">
+	    	<div class="container-fluid px-3 px-md-0">
+	    		<div class="row justify-content-end">
+	    			<div class="col-md-10">
+			    		<div class="row d-flex">
+			    			<div class="col-lg-7 ftco-animate">
+                <a class="color-orange">品牌經營 · 數位廣告</a>        
+			            <h1 class="mb-3 font-weight-bold">“數位行銷”當真非做不可嗎？</h1>
+                   <p><img src="../images/image_231006.webp" alt="" class="img-fluid"></p>
+			            <p>你可以忍耐多久不上網搜尋資料、不滑社交軟體，甚至不網購呢？
+                        現今，大多數人會透過網路尋找產品、餐廳、服務，也會參考其他消費者經驗決定是否入手商品、進餐廳吃飯、下榻酒店休息……等，如果你的資訊沒有在網上展露頭角，使對你產品或服務感興趣的人看見你、找到你，就無法抓住這些潛在商機。
+                        </p>
+			            <!-- <p>
+			              <img src="" alt="" class="img-fluid">
+			            </p> -->
+			            <p>相反的，如果你的競爭對手在網絡上有著強大存在(如：關鍵字廣告時時霸榜首頁、大搞特搞搜尋引擎優化、積極參與社群互動……等)，你便可能漸漸失去市場競爭力，在消費者心目中的形象也可能逐漸變得陳舊、模糊甚至最終豪無存在感。</p>
+			            <h2 class="mb-3 mt-5 font-weight-bold">即便有街坊鄰里的口耳相傳，亦需網路行銷的推波助瀾 數位行銷絕對是現代商業成功不可或缺的要素！</h2>
+			            <p>藉由無遠弗屆的網路、社交媒體幫助下觸及更多潛在客戶，不僅可針對「特定目標受眾」進行廣告投放，將你的廣告資訊「更有效地」傳達給「真正對你的產品或服務感興趣」的客群，也能透過後台的數據進一步分析了解哪些策略有效、哪些需要調整，進而持續優化廣告策略(如：變更文案、素材、投放時段、受眾……等)，這些都是傳統廣告難以匹敵的。
+                        <p>而且，數位行銷與傳統廣告相比亦更經濟實惠，並且能精確追蹤每一筆回報，更好管理預算，將資金投入在最有效益的廣告活動中。總之，想穩定擴展業務、增加品牌曝光，並與消費者建立更緊密的連結，絕不能忽視數位行銷的重要喔!</p>
+                        <h2 class="mb-3 mt-5 font-weight-bold">數位行銷 vs 傳統行銷</h2>
+			            <p>數位行銷：透過網路和各種數位媒體所進行的行銷活動，包括：網站、社群媒體、電子郵件、搜尋引擎等數位平台進行產品、服務或品牌推廣，吸引受眾目標並產生後續更緊密的互動。</p>
+                        <p>傳統行銷：主要透過電視、廣播、報紙、雜誌、戶外廣告、傳單等途徑逕行宣傳。</p><br>
+                        <h2 class="mb-3 mt-5 font-weight-bold">選擇數位行銷的優點？</h2>
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">➊ 無遠弗屆：</span></strong></h3>
+                        <p style="padding-left: 28px;">數位行銷不受地理限制，透過網站、社交媒體、便能讓全球各地的更多的潛在客戶看見你。然而，傳統行銷的範圍受限於地理位置和媒體的覆蓋率，較難達到全球性的廣告效果。</p>         
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">➋ 靈活性高、定位精準、成本較低：</span></strong></h3>
+                        <p style="padding-left: 28px;">數位行銷可根據用戶的興趣和行為進行定位，更準確地打入目標受眾，且透過數據分析能更清楚了解受眾喜好和行為，並在短時間內進行調整和優化，達到更好效果，傳統行銷則較難實現如此精準的定位，且往往需要付出更多的預算來推動，例如：廣告空間、場地租借、製作成本、人力派遣等，調整也需花費更長的時間來進行。</p>
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">➌ 可與品牌深層互動，更貼近消費者需求：</span></strong></h3>
+                        <p style="padding-left: 28px;">數位行銷可與潛在客戶進行更密切、即時的長期互動，透過社交媒體的留言、反饋、分享和直播等加強品牌與用戶間的聯繫外，亦可更直接傾聽心聲與訴求，提升品牌好感度。</p> 
+                        <h2 class="mb-3 mt-5 font-weight-bold">掌握數位行銷的起步關鍵</h2>
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">瞭解目標受眾：</span></strong></h3>
+                        <p style="padding-left: 28px;">清楚了解誰是你的目標受眾，包括年齡、性別、地理位置、興趣、需求和偏好等，會有利後續運用適合渠道並制定明確數位行銷策略。</p>         
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">建立線上存在：</span></strong></h3>
+                        <p style="padding-left: 28px;">現代消費者越來越偏好在網絡上尋找信息、產品和服務，無論業務規模如何，線上存在將是成功經營的重要基石，有助擴展客戶基礎、增加潛在客戶發現您的機會。此外，擁有良好用戶體驗的網站、充實的內容和安全的環境也會更有效吸引和保留客戶。</p>
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">創建有價值的內容：</span></strong></h3>
+                        <p style="padding-left: 28px;">有價值的內容有利吸引目標受眾關注，形式可能為文章、影片、圖片、社交媒體貼文等，避免「無意義的為發而發」，採取有趣、實用或有啟發性的內容並與產品或服務相關，人們更有可能關注和探索你的品牌或網站。</p> 
+                        <h3 style="padding-left: 28px;"><strong><span style="color: #052d5a;">優化搜索引擎（SEO）：</span></strong></h3>
+                        <p style="padding-left: 28px;">包括關鍵字研究、優化內容、建立高質量的外部鏈接等，良好的SEO排名有助提高品牌聲譽和信譽，提供高質量、有價值的內容網站排名就越可能越前，從而增加網站流量、品牌可信度、銷售和轉換率，同時降低廣告成本，且透過優化網站結構、速度和內容，也能提供更好的用戶體驗，助於提高轉換率並減少跳出率。</p>                 
+			        		<!-- <div class="tag-widget post-tag-container mb-5 mt-5">
+			              <div class="tagcloud">
+			                <a href="#" class="tag-cloud-link">品牌經營</a>
+			                <a href="#" class="tag-cloud-link">行銷科技</a>
+			                <a href="#" class="tag-cloud-link">數位廣告</a>
+			              </div>
+			            </div> -->    
+			    		</div>
+              <!-- 右側推薦區塊 -->
+              <div class="col-lg-3 sidebar ftco-animate">
+<!-- 相關文章推薦區塊 -->
+<div class="sidebar-box ftco-animate">
+    <h3 class="heading-2">相關文章推薦</h3>
+    
+        <div class="block-21 mb-4 d-flex">
+            <a href="single-2023-11-10.html" class="blog-img mr-4" style="background-image: url(../images/image_231110.webp);"></a>
+            <div class="text">
+                <h3 class="heading"><a href="single-2023-11-10.html">洞察顧客的超能力 - Tealeaf</a></h3>
+                <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> 2023-11-10</a></div>
+                    <div><a href="#"><span class="icon-folder-o"></span> 科技行銷</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="block-21 mb-4 d-flex">
+            <a href="single-2023-12-4.html" class="blog-img mr-4" style="background-image: url(../images/image_231204.webp);"></a>
+            <div class="text">
+                <h3 class="heading"><a href="single-2023-12-4.html">CDP到底是什麼？你不能不知道的關鍵！</a></h3>
+                <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> 2023-12-04</a></div>
+                    <div><a href="#"><span class="icon-folder-o"></span> 數據科技</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="block-21 mb-4 d-flex">
+            <a href="single-2024-1-8.html" class="blog-img mr-4" style="background-image: url(../images/image_240108.webp);"></a>
+            <div class="text">
+                <h3 class="heading"><a href="single-2024-1-8.html">社群經營超easy! Aurocore來助您</a></h3>
+                <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> 2024-01-08</a></div>
+                    <div><a href="#"><span class="icon-folder-o"></span> 品牌經營</a></div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- 返回新聞中心按鈕 -->
+<div class="sidebar-box ftco-animate">
+    <a href="../blog.html" class="btn btn-primary btn-block">
+        <span class="icon-arrow-left"></span> 返回新聞中心
+    </a>
+</div>
+</div>
+			    	</div>
+		    	</div>
+	    	</div>
+	    </section>
+        	
+		<footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+<div class="container px-md-4">
+<div class="footer-legal text-center">
+<div class=container>
+<div class="row justify-content-center">
+<div class=copyright style=color:#a9a9a9>
+Copyright &copy; 2023 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="../privacypolicy.html">隱私權政策</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+		</div><!-- END COLORLIB-MAIN -->
+	    </div><!-- END COLORLIB-PAGE -->
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  <!-- ✅ 優化後的 JS 載入 -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.waypoints.min.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main_optimized.js"></script>
+  <script src="../js/form-validator.js"></script>
+  <script src="../js/rate-limiter.js"></script>
+  <script src="../js/qform.js"></script>
+  </body>
+</html>
