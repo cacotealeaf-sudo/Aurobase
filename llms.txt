@@ -1,0 +1,65 @@
+# Aurobase (奧洛) - 數位整合行銷公司
+
+> 奧洛科技致力於數位行銷、數據分析、行銷自動化、AI 智慧語伴、客服中心系統建置與外包服務。
+
+## 公司資訊
+
+- 公司名稱: 奧洛科技 (Aurobase / Aurocore)
+- 地址: 台北市內湖區洲子街101號2樓
+- 電話: +886-2-5568-4688
+- Email: ad@aurocore.com
+- 語言: 繁體中文 (zh-Hant-TW)
+
+## 網站頁面
+
+- [首頁](index.html): 公司介紹、核心服務總覽、合作夥伴、解決方案與產品
+- [數位行銷](marketing.html): 廣告投放、社群經營、SEO、內容行銷等數位行銷服務
+- [解決方案＆產品](solution.html): Acoustic CXA 行銷自動化、CDP 顧客數據平台、HCL Unica、Magnolia CMS
+- [AI 智慧語伴](ai-companion.html): AI 語音陪伴與健康守護解決方案，結合語音互動與智慧分析
+- [新聞中心](blog.html): 公司部落格文章列表
+- [聯絡我們](contact.html): 諮詢表單與 Google Maps 位置
+- [隱私權政策](privacypolicy.html): 個人資料保護與 Cookie 使用政策
+- [客服中心](https://cti.aurocore.com/index.html): 客服系統 (外部連結)
+
+## 部落格文章
+
+- [「數位行銷」當真非做不可嗎？](blogpost/single-2023-10-6.html) - 2023/10/06
+- [洞察顧客的超能力 - Tealeaf](blogpost/single-2023-11-10.html) - 2023/11/10
+- [CDP到底是什麼？](blogpost/single-2023-12-4.html) - 2023/12/04
+- [社群經營超easy!](blogpost/single-2024-1-8.html) - 2024/01/08
+
+## 核心服務
+
+### 數位行銷
+廣告投放 (Google Ads, Facebook Ads)、社群經營、SEO 搜尋引擎優化、內容行銷、數據分析與成效追蹤。
+
+### 解決方案與產品
+- **Acoustic CXA**: 行銷自動化平台，提供個人化行銷旅程、Email 行銷、行為追蹤
+- **CDP 顧客數據平台**: 整合多渠道顧客數據，建立統一客戶視圖，精準分眾行銷
+- **HCL Unica**: 企業級行銷自動化解決方案
+- **Magnolia CMS**: 企業內容管理系統，支援多語言、多通路內容發布
+
+### AI 智慧語伴
+以 AI 語音為核心的智慧陪伴解決方案，主動陪伴長者、即時掌握健康與情緒變化。功能包含語音互動、健康監測、情緒分析、主動關懷提醒。
+
+### 客服中心
+客服中心系統建置與外包服務，提供專業客服解決方案。
+
+## 技術堆疊
+
+- 前端: HTML5, CSS3, Bootstrap 4, jQuery, Owl Carousel, AOS 動畫, Particles.js
+- 表單: SweetAlert2 提示、前端驗證 (FormValidator)、Rate Limiter
+- 後端 API: PHP (表單提交代理至 Google Forms)
+- 追蹤: Google Tag Manager (GTM-MB9RNG8)
+
+## 諮詢服務類型
+
+可透過網站表單諮詢以下服務:
+1. 廣告投放
+2. 社群服務
+3. 客服中心
+4. Acoustic CXA
+5. CDP 顧客數據
+6. HCL Unica
+7. Magnolia CMS
+8. AI 智慧語伴
