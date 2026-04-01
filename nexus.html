@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <title>AURO NEXUS｜AI 時代的企業智慧平台</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AURO NEXUS 是奧洛面向 AI 時代的產品家族，整合 AI 工作自動化平台、客戶數據平台 CDP、AI 語音平台，協助企業全面導入 AI 驅動的數位轉型。">
+    <meta name="keywords" content="AURO NEXUS,AI自動化,CDP,客戶數據平台,AI語音,語音合成,聲音複製,企業AI,行銷自動化,法律AI,財務分析AI">
+
+    <link rel="canonical" href="https://www.aurobase.com/nexus.html">
+    <meta property="og:title" content="AURO NEXUS｜AI 時代的企業智慧平台">
+    <meta property="og:description" content="AURO NEXUS 整合 AI 工作自動化、客戶數據平台 CDP、AI 語音平台，為企業打造完整的 AI 解決方案。">
+    <meta property="og:url" content="https://www.aurobase.com/nexus.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.aurobase.com/images/nexus-chat.webp">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "NEXUS 跟 ChatGPT 有什麼不同？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ChatGPT 是一個聊天機器人；NEXUS 是一個工作自動化平台。除了對話，NEXUS 能幫你生成文件、查詢法規、分析財報、管理知識庫，而且每個動作都有安全把關。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Nexus CDP 和 Salesforce 比有什麼優勢？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "三個關鍵差異：資料完全留在台灣境內符合金管會要求、5年總擁有成本比 Salesforce 低100至700萬美元、提供完整中文介面與本地顧問服務。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI Voice Studio 生成的語音夠自然嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "整合業界頂尖的多個AI語音引擎，系統會根據需求自動選用最適合的引擎。中文語音尤其針對台灣腔調優化，聽起來自然親切。"
+      }
+    }
+  ]
+}
+</script>
+
+    <!-- Favicon -->
+    <link href="images/favicon.ico" rel="shortcut icon">
+
+    <!-- LINE Seed 字體 -->
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+
+    <style>
+    /* NEXUS 專屬樣式 */
+    #colorlib-aside {
+        width: 340px !important;
+        background-color: #fff !important;
+    }
+    #colorlib-main {
+        margin-left: 340px !important;
+        width: calc(100% - 340px) !important;
+        float: none !important;
+    }
+    .pain-section .container-fluid,
+    .feature-section .container-fluid,
+    .screenshot-section .container-fluid,
+    .faq-section .container-fluid,
+    .cta-section .container-fluid {
+        padding-left: 60px !important;
+    }
+    @media (max-width: 991.98px) {
+        #colorlib-aside { width: 270px !important; }
+        #colorlib-main  { margin-left: 0 !important; width: 100% !important; }
+    }
+
+    /* ── Hero 區塊 ── */
+    .nexus-hero {
+        background: linear-gradient(135deg, #0D1117 0%, #1a2332 50%, #0f2027 100%);
+        color: #fff;
+        padding: 5rem 0 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .nexus-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%; right: -20%;
+        width: 600px; height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(249,109,0,0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .nexus-hero .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #F96D00;
+        margin-bottom: 1.2rem;
+    }
+    .nexus-hero .eyebrow::before {
+        content: '';
+        display: block;
+        width: 28px; height: 1px;
+        background: #F96D00;
+    }
+    .nexus-hero h1 {
+        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 1.2rem;
+    }
+    .nexus-hero h1 em {
+        font-style: normal;
+        color: #F96D00;
+    }
+    .nexus-hero .hero-sub {
+        font-size: 1.05rem;
+        color: rgba(255,255,255,0.7);
+        line-height: 1.8;
+        max-width: 540px;
+    }
+    .nexus-hero .hero-img {
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    /* ── 產品分隔 Banner ── */
+    .product-banner {
+        background: linear-gradient(135deg, #0D1117 0%, #1a2332 100%);
+        padding: 4rem 0 3rem;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+    .product-banner::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #F96D00, #ff9a44, #F96D00);
+    }
+    .product-banner h2 {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .product-banner h2 em {
+        font-style: normal;
+        color: #F96D00;
+    }
+    .product-banner p {
+        color: rgba(255,255,255,0.7);
+        font-size: 1.05rem;
+        line-height: 1.8;
+        max-width: 600px;
+    }
+
+    /* ── 痛點卡片 ── */
+    .pain-section {
+        background: #f8f9fa;
+        padding: 4rem 0;
+    }
+    .pain-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 2rem;
+        height: 100%;
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    .pain-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #F96D00, #ff9a44);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+    }
+    .pain-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(249,109,0,0.1); }
+    .pain-card:hover::before { transform: scaleX(1); }
+    .pain-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: rgba(249,109,0,0.12);
+        line-height: 1;
+        margin-bottom: 0.8rem;
+    }
+    .pain-card h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #28282c;
+        margin-bottom: 0.6rem;
+    }
+    .pain-card blockquote {
+        font-size: 0.92rem;
+        color: #666;
+        line-height: 1.7;
+        border-left: 3px solid #F96D00;
+        padding-left: 1rem;
+        margin: 0;
+        font-style: italic;
+    }
+
+    /* ── 功能卡片 ── */
+    .feature-section { padding: 4rem 0; }
+    .feature-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.8rem;
+        height: 100%;
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        transition: all 0.3s;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(249,109,0,0.1);
+    }
+    .feature-card .icon-wrap {
+        width: 48px; height: 48px;
+        background: linear-gradient(135deg, #F96D00, #ff9a44);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        color: #fff;
+        font-size: 1.3rem;
+    }
+    .feature-card h5 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #28282c;
+        margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+        font-size: 0.88rem;
+        color: #666;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ── 數據亮點 ── */
+    .highlights-section {
+        background: linear-gradient(135deg, #0D1117 0%, #1a2332 100%);
+        color: #fff;
+        padding: 4rem 0;
+    }
+    .highlight-item {
+        text-align: center;
+        padding: 1.5rem;
+    }
+    .highlight-num {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #F96D00;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    .highlight-text {
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.5;
+    }
+
+    /* ── 截圖展示 ── */
+    .screenshot-section { padding: 4rem 0; background: #f8f9fa; }
+    .screenshot-card {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        transition: transform 0.3s;
+        margin-bottom: 1.5rem;
+    }
+    .screenshot-card:hover { transform: translateY(-5px); }
+    .screenshot-card img { width: 100%; display: block; }
+    .screenshot-card .caption {
+        background: #fff;
+        padding: 1rem 1.2rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #555;
+    }
+
+    /* ── CDP 左右截圖版面 ── */
+    .cdp-preview-section { padding: 4rem 0; }
+    .cdp-preview-text {
+        position: sticky;
+        top: 100px;
+        padding-right: 2rem;
+        padding-top: 1rem;
+    }
+    .cdp-preview-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 2rem;
+    }
+    .cdp-preview-list li {
+        margin-bottom: 1.8rem;
+        padding-left: 1rem;
+        border-left: 3px solid #f96d00;
+    }
+    .cdp-preview-list li strong {
+        display: block;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.3rem;
+    }
+    .cdp-preview-list li span {
+        font-size: 0.88rem;
+        color: #666;
+        line-height: 1.6;
+    }
+    .cdp-preview-imgs { padding-left: 1rem; }
+    .cdp-screenshot-item {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s;
+    }
+    .cdp-screenshot-item:hover { transform: translateY(-4px); }
+    .cdp-screenshot-item img { width: 100%; display: block; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 4rem 0; }
+    .faq-item {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.8rem 2rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+    }
+    .faq-item h5 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #28282c;
+        margin-bottom: 0.6rem;
+    }
+    .faq-item h5::before {
+        content: 'Q. ';
+        color: #F96D00;
+        font-weight: 700;
+    }
+    .faq-item p {
+        font-size: 0.92rem;
+        color: #666;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+        background: linear-gradient(135deg, #F96D00 0%, #ff9a44 100%);
+        padding: 4rem 0;
+        text-align: center;
+        color: #fff;
+    }
+    .cta-section h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .cta-section p {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+    }
+    .btn-cta {
+        display: inline-block;
+        background: #fff;
+        color: #F96D00;
+        padding: 0.9rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        color: #F96D00;
+        text-decoration: none;
+    }
+
+    /* ── 產品截圖 Carousel ── */
+    .product-screenshots .item img {
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .section-label {
+        font-size: 0.78rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #F96D00;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+    }
+    .section-heading {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #28282c;
+        margin-bottom: 2.5rem;
+    }
+
+    /* 暗底區塊的文字顏色修正 */
+    .nexus-hero .section-label,
+    .product-banner .section-label,
+    .highlights-section .section-label { color: #ff9a44; }
+
+    .nexus-hero .section-heading,
+    .product-banner .section-heading,
+    .highlights-section .section-heading { color: #fff; }
+
+    .product-banner .eyebrow { color: #ff9a44; }
+    .nexus-hero .eyebrow { color: #F96D00; }
+
+    /* 深色 hero/banner 內的 h1/h2 確保白色 */
+    .nexus-hero h1,
+    .product-banner h2 { color: #fff; }
+    .product-banner p { color: rgba(255,255,255,0.75); }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== 浮動諮詢按鈕 + Modal ===== -->
+<div class="float-btn-wrapper">
+    <button type="button" title="填單諮詢" class="float" data-toggle="modal" data-target="#myModal">
+        <img class="forms_icon" src="images/forms_icon.svg" alt="Inquiry form" />
+    </button>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="font-weight: 600;">歡迎填寫諮詢表單，由專人為您量身規劃!</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color:white">&times;</button>
+            </div>
+            <div class="modal-body">
+<form id="pop-qform" class="validate">
+<div class="form-body">
+    <fieldset>
+        <label for="f01">您的姓名 <span class="required">*</span></label>
+        <input type="text" id="f01" class="form-control" name="entry.1069717981" placeholder="請輸入您的姓名" required>
+    </fieldset>
+    <fieldset>
+        <label for="f02">Email <span class="required">*</span></label>
+        <input type="email" id="f02" class="form-control" name="entry.1514498498" placeholder="請輸入您的 Email" required>
+    </fieldset>
+    <fieldset>
+        <label for="f03">聯絡電話 <span class="required">*</span></label>
+        <input type="tel" id="f03" class="form-control" name="entry.589498498" placeholder="請輸入您的電話號碼" required>
+    </fieldset>
+    <fieldset>
+        <label for="f04">公司名稱</label>
+        <input type="text" id="f04" class="form-control" name="entry.1808449289" placeholder="選填">
+    </fieldset>
+    <fieldset>
+        <label>感興趣的服務</label>
+        <div class="checkbox-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="數位廣告投放" id="f05-1" />
+                <label for="f05-1">數位廣告投放</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="社群媒體經營" id="f05-2" />
+                <label for="f05-2">社群媒體經營</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="ACOUSTIC CXA" id="f05-3" />
+                <label for="f05-3">ACOUSTIC CXA</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="HCL Unica" id="f05-4" />
+                <label for="f05-4">HCL Unica</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="CDP 客戶數據平台" id="f05-5" />
+                <label for="f05-5">CDP 客戶數據平台</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="NEXUS AI 自動化平台" id="f05-9" />
+                <label for="f05-9">NEXUS AI 自動化平台</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="AI Voice Studio" id="f05-10" />
+                <label for="f05-10">AI Voice Studio</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="AI 智慧語伴" id="f05-7" />
+                <label for="f05-7">AI 智慧語伴</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="其他" id="f05-8" />
+                <label for="f05-8">其他</label>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <label for="f06">需求說明</label>
+        <textarea id="f06" class="form-control" name="entry.48027589" placeholder="請簡述您的需求（選填）"></textarea>
+    </fieldset>
+    <button id="submitButton" class="btn-form" type="button">送出</button>
+</div>
+</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+            <nav id="colorlib-main-menu" role="navigation">
+                <ul>
+                    <li><a href="marketing.html">數位行銷</a></li>
+                    <li><a href="solution.html">解決方案＆產品</a></li>
+                    <li><a href="https://cti.aurocore.com/index.html" target="_blank">客服中心</a></li>
+                    <li><a href="ai-companion.html">AI 智慧語伴</a></li>
+                    <li class="active"><a href="nexus.html">AURO NEXUS</a></li>
+                    <li><a href="blog.html">新聞中心</a></li>
+                    <li><a href="contact.html">聯絡我們</a></li>
+                </ul>
+                <p class="social">
+                    <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                    </svg> 粉絲專頁</a></span>
+                </p>
+            </nav>
+            <div class="colorlib-footer">
+                <h1><a href="index.html">
+                    <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+                </a></h1>
+            </div>
+        </aside>
+
+        <!-- Anchor menu start -->
+        <div class="btn fixed-top text-right">
+          <a href="#nexus-v4" class="btn btn-primary btn-sm">NEXUS</a>
+          <a href="#nexus-cdp" class="btn btn-primary btn-sm">NEXUS CDP</a>
+          <a href="#nexus-voice" class="btn btn-primary btn-sm">NEXUS Voice</a>
+        </div>
+        <!-- END Anchor menu -->
+
+        <div id="colorlib-main">
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  NEXUS V4 — AI 工作自動化平台                                ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+            <!-- NEXUS V4 Hero -->
+            <section id="nexus-v4" class="nexus-hero">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="eyebrow">NEXUS — AI Automation Platform</div>
+                            <h1>你的 AI 工作夥伴<br>不只聰明，更<em>懂規矩</em></h1>
+                            <p class="hero-sub">NEXUS 是一個整合了 200+ 工具的 AI 自動化平台。從法律諮詢、財務分析到文件生成，一個對話框搞定所有工作流程 — 而且每一步都有安全把關。</p>
+                        </div>
+                        <div class="col-lg-7">
+                            <img src="images/nexus-chat.webp" alt="NEXUS AI 工作自動化平台介面" class="img-fluid hero-img mt-4 mt-lg-0">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS V4 Hero -->
+
+            <!-- NEXUS V4 Pain Section -->
+            <section class="pain-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">WHY NEXUS</p>
+                            <h2 class="section-heading">你也遇過這些問題嗎？</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">01</div>
+                                        <h4>AI 工具太多，每個都要學</h4>
+                                        <blockquote>市面上有做簡報的 AI、寫文案的 AI、分析數據的 AI... 我光是切換工具就花掉半天。</blockquote>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">02</div>
+                                        <h4>AI 給的答案不敢直接用</h4>
+                                        <blockquote>AI 幫我寫的合約真的合法嗎？生成的報告數字有沒有錯？每次都還要花時間自己再查一遍。</blockquote>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">03</div>
+                                        <h4>公司資料丟給 AI 不放心</h4>
+                                        <blockquote>客戶資料、財務報告... 傳到雲端 AI 感覺不安全，但不用 AI 又跟不上效率。</blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS V4 Pain Section -->
+
+            <!-- NEXUS V4 Feature Section -->
+            <section class="feature-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">CORE FEATURES</p>
+                            <h2 class="section-heading">一個平台，搞定所有 AI 工作流程</h2>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-chat-bubble"></i></div>
+                                        <h5>智慧對話</h5>
+                                        <p>用自然語言下指令，AI 自動判斷該用哪個工具完成任務</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-scale-frame-enlarge"></i></div>
+                                        <h5>法律助理 Themis</h5>
+                                        <p>涵蓋 11 部台灣法規，合約審查、存證信函、法條查詢一次到位</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-stats-up-square"></i></div>
+                                        <h5>財務分析</h5>
+                                        <p>股票研究、財報分析、估值比較，用說的就能產出專業報告</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-page"></i></div>
+                                        <h5>文件工場</h5>
+                                        <p>Word、PDF、Excel、簡報 — 從草稿到定稿，AI 幫你完成排版與內容</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-search"></i></div>
+                                        <h5>知識庫搜尋</h5>
+                                        <p>上傳公司內部文件，AI 幫你從中找答案，不用再翻海量資料</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
+                                        <h5>安全治理</h5>
+                                        <p>每個 AI 操作都有風險評估和審批機制，高敏感動作需要你點頭才執行</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-lock"></i></div>
+                                        <h5>資料不出境</h5>
+                                        <p>支援本機部署的 AI 模型，敏感資料不送雲端，合規又安心</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-cpu"></i></div>
+                                        <h5>多模型切換</h5>
+                                        <p>支援 8 家 AI 供應商，依任務複雜度自動選擇最適合的模型</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS V4 Feature Section -->
+
+            <!-- NEXUS V4 Screenshot Section -->
+            <section class="screenshot-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">PLATFORM PREVIEW</p>
+                            <h2 class="section-heading">平台實機畫面</h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="screenshot-card">
+                                        <img src="images/nexus-governance.webp" alt="安全治理中心">
+                                        <div class="caption">安全治理中心 — 合規狀態與審批管理一目瞭然</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="screenshot-card">
+                                        <img src="images/nexus-knowledge-base.webp" alt="知識庫管理">
+                                        <div class="caption">知識庫管理 — 上傳文件即可建立企業專屬知識庫</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="screenshot-card">
+                                        <img src="images/nexus-tools.webp" alt="工具市集">
+                                        <div class="caption">工具市集 — 159 個插件、63 個專業技能模組</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="screenshot-card">
+                                        <img src="images/nexus-system-health.webp" alt="系統健康監控">
+                                        <div class="caption">系統健康監控 — 即時掌握平台運行狀態</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS V4 Screenshot Section -->
+
+            <!-- NEXUS V4 Highlights Section -->
+            <section class="highlights-section">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">BY THE NUMBERS</p>
+                            <h2 class="section-heading">NEXUS 核心數據</h2>
+                            <div class="row">
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">200+</div>
+                                        <div class="highlight-text">內建工具，涵蓋法律、財務、文件等 8 大領域</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">63</div>
+                                        <div class="highlight-text">專業技能模組，16 個使用頂級 AI 模型</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">671</div>
+                                        <div class="highlight-text">法規知識段落，11 部台灣法規隨時查詢</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">8</div>
+                                        <div class="highlight-text">家 AI 供應商支援，不被單一廠商綁定</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS V4 Highlights Section -->
+
+            <!-- NEXUS V4 FAQ Section -->
+            <section class="faq-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <div class="faq-item">
+                                        <h5>我不懂技術，也能用嗎？</h5>
+                                        <p>完全可以。NEXUS 就像跟助理對話一樣 — 你說「幫我分析這份合約有沒有問題」，AI 就會自動找到合適的工具幫你完成。不需要寫程式、不需要學新軟體。</p>
+                                    </div>
+                                    <div class="faq-item">
+                                        <h5>我的資料安全嗎？</h5>
+                                        <p>NEXUS 支援本機部署的 AI 模型，敏感資料可以完全不離開你的電腦或公司伺服器。系統還會自動偵測個人資料（身分證號、信用卡號等），阻止它們被送到外部 AI 服務。每個 AI 操作都有完整的審計紀錄。</p>
+                                    </div>
+                                    <div class="faq-item">
+                                        <h5>跟 ChatGPT 有什麼不同？</h5>
+                                        <p>ChatGPT 是一個聊天機器人；NEXUS 是一個工作自動化平台。除了對話，NEXUS 能幫你生成文件、查詢法規、分析財報、管理知識庫，而且每個動作都有安全把關。你可以把它想成「有 200 個技能的智慧員工」，而不只是一個會聊天的 AI。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS V4 FAQ Section -->
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  NEXUS CDP — Customer Data Platform                         ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+            <!-- NEXUS CDP Product Banner -->
+            <section id="nexus-cdp" class="product-banner">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="eyebrow">NEXUS CDP — Customer Data Platform</div>
+                            <h2>讓每一個客戶<br>都感覺你<em>只為他服務</em></h2>
+                            <p>Nexus CDP 將您企業散落各處的客戶資料，整合成一個完整的人，幫助您的行銷團隊在對的時間，用對的方式，觸動對的人。</p>
+                            <img src="system_ui/CERTIFIED-HCL-Unica-Partner-Certifications.png" alt="Certified HCL Unica Partner" style="height:120px; margin-top:0.5rem; opacity:0.9;">
+                        </div>
+                        <div class="col-lg-7 mt-4 mt-lg-0">
+                            <img src="system_ui/messageImage_1774696889244.jpg" alt="Nexus CDP Overview 儀表板" class="img-fluid" style="border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS CDP Product Banner -->
+
+            <!-- NEXUS CDP Pain Section -->
+            <section class="pain-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">CHALLENGES</p>
+                            <h2 class="section-heading">行銷團隊的共同難題</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">01</div>
+                                        <h4>有很多資料，但不知道怎麼用</h4>
+                                        <blockquote>客戶資料分散在 CRM、電商平台、門市系統、APP，每個系統各說各話，行銷活動只能憑感覺。</blockquote>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">02</div>
+                                        <h4>個資外洩的新聞讓我們很擔心</h4>
+                                        <blockquote>客戶資料是公司最敏感的資產，一旦外洩，賠上的不只是罰款，而是多年建立的客戶信任。</blockquote>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">03</div>
+                                        <h4>競品活動一出，我們只能被動跟進</h4>
+                                        <blockquote>沒有即時的客戶洞察，行銷活動永遠慢半拍，無法在客戶最需要的時刻出現。</blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS CDP Pain Section -->
+
+            <!-- NEXUS CDP Feature Section -->
+            <section class="feature-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">CORE FEATURES</p>
+                            <h2 class="section-heading">完整的客戶數據解決方案</h2>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-user"></i></div>
+                                        <h5>客戶 360° 視圖</h5>
+                                        <p>把所有管道的客戶互動整合成一張完整的臉，讓您的團隊真正認識每一位客戶</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-filter"></i></div>
+                                        <h5>智慧分眾引擎</h5>
+                                        <p>用拖拉點選就能建立精準受眾，不需要工程師，行銷人員自己就能做到</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-flash"></i></div>
+                                        <h5>即時行為追蹤</h5>
+                                        <p>客戶剛瀏覽了什麼、剛買了什麼，幾秒內就能觸發個人化訊息</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-warning-triangle"></i></div>
+                                        <h5>AI 流失預警</h5>
+                                        <p>自動找出即將流失的高價值客戶，讓您在還來得及的時候挽回</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-mail"></i></div>
+                                        <h5>全通路行銷自動化</h5>
+                                        <p>Email、簡訊、推播通知一站管理，設定一次自動跑，省去重複手動作業</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-server"></i></div>
+                                        <h5>完全地端部署</h5>
+                                        <p>客戶資料永遠留在您自己的機房，不經過任何第三方雲端，符合金管會要求</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-privacy-policy"></i></div>
+                                        <h5>同意管理中心</h5>
+                                        <p>自動記錄每位客戶的個資授權狀態，輕鬆符合台灣個資法 2025 修正要求</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-color-filter"></i></div>
+                                        <h5>白標品牌化</h5>
+                                        <p>整個平台可掛上您的品牌識別，呈現給客戶的是您的品牌，不是軟體供應商</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS CDP Feature Section -->
+
+            <!-- NEXUS CDP Screenshot Section -->
+            <section class="screenshot-section cdp-preview-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start align-items-start">
+                        <div class="col-md-10">
+                            <div class="row align-items-start">
+                                <!-- 左側：文字說明 -->
+                                <div class="col-lg-4 cdp-preview-text">
+                                    <p class="section-label">PLATFORM PREVIEW</p>
+                                    <h2 class="section-heading">平台實機畫面</h2>
+                                    <ul class="cdp-preview-list">
+                                        <li>
+                                            <strong>CDP Overview</strong>
+                                            <span>統一客戶洞察儀表板，即時掌握 1,284,902 組整合資料與身份解析進度</span>
+                                        </li>
+                                        <li>
+                                            <strong>客戶 360° 視圖</strong>
+                                            <span>完整客戶檔案與 RFM 分層，Champion、At Risk 一目瞭然</span>
+                                        </li>
+                                        <li>
+                                            <strong>智慧分眾引擎</strong>
+                                            <span>拖拉建立精準受眾，High LTV Champions、At-Risk Winback 即時動態更新</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 右側：三張截圖垂直堆疊 -->
+                                <div class="col-lg-8 cdp-preview-imgs">
+                                    <div class="cdp-screenshot-item">
+                                        <img src="system_ui/messageImage_1774696889244.jpg" alt="Nexus CDP Overview">
+                                    </div>
+                                    <div class="cdp-screenshot-item">
+                                        <img src="system_ui/messageImage_1774697069483.jpg" alt="Nexus CDP 客戶列表">
+                                    </div>
+                                    <div class="cdp-screenshot-item">
+                                        <img src="system_ui/messageImage_1774697077070.jpg" alt="Nexus CDP 智慧分眾">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS CDP Screenshot Section -->
+
+            <!-- NEXUS CDP Highlights Section -->
+            <section class="highlights-section">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">KEY ADVANTAGES</p>
+                            <h2 class="section-heading">為什麼選擇 Nexus CDP</h2>
+                            <div class="row">
+                                <div class="col-6 col-md-4">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">$700萬</div>
+                                        <div class="highlight-text">5 年 TCO 較 Salesforce 最高節省 700 萬美元</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">100%</div>
+                                        <div class="highlight-text">資料主權歸屬客戶，機密資料採記憶體注入不落地</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">千萬級</div>
+                                        <div class="highlight-text">三節點高可用架構，支撐中大型企業用戶規模</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num" style="font-size:1.4rem">台灣團隊</div>
+                                        <div class="highlight-text">自主開發，原始碼託管 GitHub，可接受完整原始碼審計</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num" style="font-size:1.4rem">金管會合規</div>
+                                        <div class="highlight-text">專為台灣金融業設計，完全地端部署通過合規審查</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num" style="font-size:1.4rem">AI 助手</div>
+                                        <div class="highlight-text">自然語言描述受眾條件，系統自動建立分眾</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS CDP Highlights Section -->
+
+            <!-- NEXUS CDP FAQ Section -->
+            <section class="faq-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <div class="faq-item">
+                                        <h5>我們公司沒有大型 IT 團隊，可以導入 Nexus CDP 嗎？</h5>
+                                        <p>可以。Nexus CDP 的行銷操作介面專為非技術背景設計，分眾、活動排程、報表查看都能透過視覺化拖拉完成，不需要寫程式碼。導入期間我們的顧問團隊會全程陪跑。</p>
+                                    </div>
+                                    <div class="faq-item">
+                                        <h5>客戶資料放在 Nexus CDP 裡安全嗎？</h5>
+                                        <p>您的資料永遠只存在您自己的伺服器或私有雲，我們的平台不接觸、不儲存任何一筆您的客戶資料。所有機密金鑰採軍規等級的記憶體保護，技術人員在沒有您授權的情況下無法存取任何資料。</p>
+                                    </div>
+                                    <div class="faq-item">
+                                        <h5>和 Salesforce、Adobe 這類國際大廠比，Nexus CDP 有什麼優勢？</h5>
+                                        <p>三個關鍵差異：第一，資料完全留在台灣境內，符合金管會要求，國際大廠無法做到；第二，5 年總擁有成本比 Salesforce 低 100 至 700 萬美元；第三，Nexus CDP 提供完整中文介面與本地顧問服務，您不需要等海外支援時差。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS CDP FAQ Section -->
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  NEXUS VOICE — AI Voice Studio                              ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+            <!-- NEXUS Voice Product Banner -->
+            <section id="nexus-voice" class="product-banner">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="eyebrow">NEXUS VOICE — AI Voice Studio</div>
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h2>讓文字開口說話<br>讓品牌聲音<em>活起來</em></h2>
+                            <p>AI Voice Studio 是一套企業級 AI 語音平台，從語音合成、聲音複製到會說話的虛擬角色，一站完成。不需要錄音棚，不需要配音員，只需要輸入文字。</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="images/voice-studio-tts.webp" alt="AI Voice Studio 介面" class="img-fluid hero-img mt-4 mt-lg-0">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS Voice Product Banner -->
+
+            <!-- NEXUS Voice Pain Section -->
+            <section class="pain-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">CHALLENGES</p>
+                            <h2 class="section-heading">語音內容的三大痛點</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">01</div>
+                                        <h4>找配音員又貴又慢</h4>
+                                        <blockquote>每次需要語音內容，就要等配音員排程、來回修改、支付高額費用。急件更是不可能。</blockquote>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">02</div>
+                                        <h4>錄出來的聲音聽起來像機器人</h4>
+                                        <blockquote>免費 TTS 工具語調生硬、發音奇怪，用在正式場合只會讓品牌形象扣分。</blockquote>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="pain-card">
+                                        <div class="pain-number">03</div>
+                                        <h4>大量個人化通知根本來不及處理</h4>
+                                        <blockquote>幾百筆客戶通知、保單提醒、活動邀請，一則一則錄根本不可能，外包又超出預算。</blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS Voice Pain Section -->
+
+            <!-- NEXUS Voice Feature Section -->
+            <section class="feature-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">CORE FEATURES</p>
+                            <h2 class="section-heading">從文字到聲音，一站搞定</h2>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-mic"></i></div>
+                                        <h5>AI 語音合成</h5>
+                                        <p>輸入任何文字，秒速生成媲美真人的自然語音，支援中、英、日等多語言</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-voice"></i></div>
+                                        <h5>聲音複製</h5>
+                                        <p>只需上傳 10 秒錄音，AI 立刻複製出一模一樣的聲音，不需要龐大的訓練資料</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-music-double-note"></i></div>
+                                        <h5>專屬聲音訓練</h5>
+                                        <p>用自己的錄音訓練出獨一無二的品牌聲音，永久擁有，任意調用</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-emoji"></i></div>
+                                        <h5>情緒語音控制</h5>
+                                        <p>自由調整親切、關懷、熱情等情緒語調，讓語音內容更有溫度、更有說服力</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-video-camera"></i></div>
+                                        <h5>虛擬角色 Avatar</h5>
+                                        <p>上傳一張照片，輸入台詞，AI 自動生成會說話、會動嘴的虛擬代言人影片</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-copy"></i></div>
+                                        <h5>批次語音生成</h5>
+                                        <p>上傳客戶名單，一鍵生成數百則個人化語音，每位客戶聽到的都不一樣</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="icon-wrap"><i class="iconoir-folder"></i></div>
+                                        <h5>素材庫管理</h5>
+                                        <p>所有生成的音訊與影片集中管理，隨時下載、重複使用</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS Voice Feature Section -->
+
+            <!-- NEXUS Voice Screenshot Section -->
+            <section class="screenshot-section cdp-preview-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start align-items-start">
+                        <div class="col-md-10">
+                            <div class="row align-items-start">
+                                <!-- 左側：文字說明 -->
+                                <div class="col-lg-4 cdp-preview-text">
+                                    <p class="section-label">PLATFORM PREVIEW</p>
+                                    <h2 class="section-heading">平台實機畫面</h2>
+                                    <ul class="cdp-preview-list">
+                                        <li>
+                                            <strong>品牌語音庫</strong>
+                                            <span>管理系統與企業專屬聲音模型，多語系一站整合</span>
+                                        </li>
+                                        <li>
+                                            <strong>虛擬角色 Avatar</strong>
+                                            <span>上傳一張照片即可建立會說話的品牌代言人</span>
+                                        </li>
+                                        <li>
+                                            <strong>資產歷程管理</strong>
+                                            <span>完整記錄每筆語音生成的參數與內容，隨時調用重製</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 右側：三張截圖垂直堆疊 -->
+                                <div class="col-lg-8 cdp-preview-imgs">
+                                    <div class="cdp-screenshot-item">
+                                        <img src="images/voice-studio-library.webp" alt="品牌語音庫">
+                                    </div>
+                                    <div class="cdp-screenshot-item">
+                                        <img src="images/voice-studio-avatar.webp" alt="虛擬角色">
+                                    </div>
+                                    <div class="cdp-screenshot-item">
+                                        <img src="images/voice-studio-assets.webp" alt="資產歷程管理">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS Voice Screenshot Section -->
+
+            <!-- NEXUS Voice Highlights Section -->
+            <section class="highlights-section">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">BY THE NUMBERS</p>
+                            <h2 class="section-heading">AI Voice Studio 核心數據</h2>
+                            <div class="row">
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">6</div>
+                                        <div class="highlight-text">種 AI 語音引擎智能切換，永遠選用最適合的引擎</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">20+</div>
+                                        <div class="highlight-text">支援語言，中文針對台灣腔調深度優化</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">90%</div>
+                                        <div class="highlight-text">批次生成一次處理數百則，節省人工時間</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="highlight-item">
+                                        <div class="highlight-num">30秒</div>
+                                        <div class="highlight-text">從輸入文字到完成虛擬角色影片的平均時間</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS Voice Highlights Section -->
+
+            <!-- NEXUS Voice FAQ Section -->
+            <section class="faq-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-10">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <div class="faq-item">
+                                        <h5>我完全沒有技術背景，也能用嗎？</h5>
+                                        <p>可以。AI Voice Studio 介面設計直觀，像是一個專業錄音工作室，但操作邏輯就跟文字輸入框一樣簡單。選好語音、打字、點生成，就這樣。</p>
+                                    </div>
+                                    <div class="faq-item">
+                                        <h5>生成的語音聽起來夠自然嗎？和真人有差距嗎？</h5>
+                                        <p>我們整合了業界頂尖的多個 AI 語音引擎，系統會根據你的需求自動選用最適合的那一個。中文語音尤其針對台灣腔調優化，聽起來自然、親切，不會有機器感。</p>
+                                    </div>
+                                    <div class="faq-item">
+                                        <h5>我的聲音資料和客戶資料安全嗎？</h5>
+                                        <p>採用企業級多租戶架構，每個帳號的聲音模型、生成內容、客戶資料完全獨立，不同帳號之間無法互相存取。訓練好的專屬聲音模型只屬於你。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS Voice FAQ Section -->
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  CTA Section                                                 ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="container">
+                    <h2>準備好迎接 AI 時代了嗎？</h2>
+                    <p>無論是 AI 工作自動化、客戶數據整合，還是語音內容生成，AURO NEXUS 都能幫您一步到位。</p>
+                    <a class="btn-cta" href="contact.html">立即諮詢</a>
+                </div>
+            </section>
+            <!-- END CTA Section -->
+
+            <!-- Footer -->
+            <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+                <div class="container px-md-4">
+                    <div class="footer-legal text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="copyright" style="color:#a9a9a9">
+                                    Copyright &copy; 2023 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+
+        </div><!-- END COLORLIB-MAIN -->
+    </div><!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+        </svg>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js" defer></script>
+    <script src="js/aos.js" defer></script>
+    <script src="js/external-link-warning.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main_optimized.js" defer></script>
+    <script src="js/form-validator.js" defer></script>
+    <script src="js/rate-limiter.js" defer></script>
+    <script src="js/qform.js" defer></script>
+
+    <!-- 產品錨點導航 smooth scroll -->
+    <script>
+    $(document).ready(function(){
+        $('.btn.fixed-top a').on('click', function(e){
+            e.preventDefault();
+            var target = $(this).attr('href');
+            $('html, body').animate({ scrollTop: $(target).offset().top - 50 }, 600);
+        });
+    });
+    </script>
+
+  </body>
+</html>
