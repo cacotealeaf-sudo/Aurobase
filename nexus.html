@@ -449,6 +449,52 @@
     .nexus-hero h1,
     .product-banner h2 { color: #fff; }
     .product-banner p { color: rgba(255,255,255,0.75); }
+
+    /* ── CDP / GEO 功能分頁 ── */
+    .product-tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 2px solid rgba(0,0,0,0.08);
+        margin-bottom: 2rem;
+    }
+    .product-tab {
+        padding: 0.75rem 1.8rem;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #888;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        transition: color 0.2s, border-color 0.2s;
+        background: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        letter-spacing: 0.03em;
+    }
+    .product-tab:hover { color: #555; }
+    .product-tab.active { color: #F96D00; border-bottom-color: #F96D00; }
+    .product-panel { display: none; }
+    .product-panel.active { display: block; }
+
+    /* GEO 標籤與圖示 */
+    .geo-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: #4A36A0;
+        background: #F0EEFB;
+        padding: 0.18rem 0.55rem;
+        border-radius: 99px;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+    .icon-wrap.geo {
+        background: linear-gradient(135deg, #4A36A0, #7B5EA7);
+    }
     </style>
 
     <!-- Google Tag Manager -->
@@ -885,64 +931,147 @@
                         <div class="col-md-12">
                             <p class="section-label">CORE FEATURES</p>
                             <h2 class="section-heading">完整的客戶數據解決方案</h2>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-user"></i></div>
-                                        <h5>客戶 360° 視圖</h5>
-                                        <p>把所有管道的客戶互動整合成一張完整的臉，讓您的團隊真正認識每一位客戶</p>
+
+                            <!-- 分頁標籤 -->
+                            <div class="product-tabs">
+                                <button class="product-tab active" data-panel="panel-cdp">CDP 核心功能</button>
+                                <button class="product-tab" data-panel="panel-geo">GEO 生成式搜尋優化</button>
+                            </div>
+
+                            <!-- CDP Panel -->
+                            <div id="panel-cdp" class="product-panel active">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-user"></i></div>
+                                            <h5>客戶 360° 視圖</h5>
+                                            <p>把所有管道的客戶互動整合成一張完整的臉，讓您的團隊真正認識每一位客戶</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-filter"></i></div>
-                                        <h5>智慧分眾引擎</h5>
-                                        <p>用拖拉點選就能建立精準受眾，不需要工程師，行銷人員自己就能做到</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-filter"></i></div>
+                                            <h5>智慧分眾引擎</h5>
+                                            <p>用拖拉點選就能建立精準受眾，不需要工程師，行銷人員自己就能做到</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-flash"></i></div>
-                                        <h5>即時行為追蹤</h5>
-                                        <p>客戶剛瀏覽了什麼、剛買了什麼，幾秒內就能觸發個人化訊息</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-flash"></i></div>
+                                            <h5>即時行為追蹤</h5>
+                                            <p>客戶剛瀏覽了什麼、剛買了什麼，幾秒內就能觸發個人化訊息</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-warning-triangle"></i></div>
-                                        <h5>AI 流失預警</h5>
-                                        <p>自動找出即將流失的高價值客戶，讓您在還來得及的時候挽回</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-warning-triangle"></i></div>
+                                            <h5>AI 流失預警</h5>
+                                            <p>自動找出即將流失的高價值客戶，讓您在還來得及的時候挽回</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-mail"></i></div>
-                                        <h5>全通路行銷自動化</h5>
-                                        <p>Email、簡訊、推播通知一站管理，設定一次自動跑，省去重複手動作業</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-mail"></i></div>
+                                            <h5>全通路行銷自動化</h5>
+                                            <p>Email、簡訊、推播通知一站管理，設定一次自動跑，省去重複手動作業</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-server"></i></div>
-                                        <h5>可地端部署</h5>
-                                        <p>客戶資料永遠留在您自己的機房，不經過任何第三方雲端，符合金管會要求</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-server"></i></div>
+                                            <h5>可地端部署</h5>
+                                            <p>客戶資料永遠留在您自己的機房，不經過任何第三方雲端，符合金管會要求</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-privacy-policy"></i></div>
-                                        <h5>同意管理中心</h5>
-                                        <p>自動記錄每位客戶的個資授權狀態，輕鬆符合台灣個資法 2025 修正要求</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-privacy-policy"></i></div>
+                                            <h5>同意管理中心</h5>
+                                            <p>自動記錄每位客戶的個資授權狀態，輕鬆符合台灣個資法 2025 修正要求</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 mb-4">
-                                    <div class="feature-card">
-                                        <div class="icon-wrap"><i class="iconoir-color-filter"></i></div>
-                                        <h5>白標品牌化</h5>
-                                        <p>整個平台可掛上您的品牌識別，呈現給客戶的是您的品牌，不是軟體供應商<br>平台可使用公司的品牌識別，讓使用者更具沈浸感</p>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="icon-wrap"><i class="iconoir-color-filter"></i></div>
+                                            <h5>白標品牌化</h5>
+                                            <p>整個平台可掛上您的品牌識別，呈現給客戶的是您的品牌，不是軟體供應商</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- END CDP Panel -->
+
+                            <!-- GEO Panel -->
+                            <div id="panel-geo" class="product-panel">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-eye"></i></div>
+                                            <h5>AI 搜尋能見度分析</h5>
+                                            <p>追蹤品牌在 ChatGPT、Perplexity、Gemini 等 AI 搜尋引擎的被引用率與曝光排名</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-graph"></i></div>
+                                            <h5>結構化知識圖譜</h5>
+                                            <p>自動建立品牌知識實體與語意關聯，讓 AI 引擎正確識別並引用您的品牌資訊</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-edit-pencil"></i></div>
+                                            <h5>語義內容優化</h5>
+                                            <p>分析 AI 偏好的內容格式與結構，協助優化問答文件、產品說明，提升 AI 引用機率</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-stats-up-square"></i></div>
+                                            <h5>競品 AI 能見度對標</h5>
+                                            <p>比較您的品牌與競品在各大 AI 平台的曝光差距，找出搶佔 AI 心佔率的機會點</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-link"></i></div>
+                                            <h5>AI 引用來源追蹤</h5>
+                                            <p>即時監控哪些頁面與內容被 AI 引擎選為回答來源，掌握高價值內容的曝光狀況</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-megaphone"></i></div>
+                                            <h5>品牌聲音一致性</h5>
+                                            <p>確保 AI 引擎描述您的品牌時使用正確、一致的語言與定位，避免錯誤詮釋損害形象</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-chat-bubble-question"></i></div>
+                                            <h5>AI 友善 FAQ 生成</h5>
+                                            <p>根據客戶常見提問，自動生成符合 AI 引擎偏好的結構化問答，大幅提升被引用機率</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 mb-4">
+                                        <div class="feature-card">
+                                            <div class="geo-badge">GEO</div>
+                                            <div class="icon-wrap geo"><i class="iconoir-internet"></i></div>
+                                            <h5>跨平台佈局策略</h5>
+                                            <p>針對不同 AI 平台的訓練偏好與資料來源，制定差異化的內容佈局與發布策略</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END GEO Panel -->
+
                         </div>
                     </div>
                 </div>
@@ -1360,6 +1489,19 @@
     <script src="js/form-validator.js" defer></script>
     <script src="js/rate-limiter.js" defer></script>
     <script src="js/qform.js" defer></script>
+
+    <!-- CDP / GEO 功能分頁切換 -->
+    <script>
+    document.querySelectorAll('.product-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            var target = this.dataset.panel;
+            document.querySelectorAll('.product-tab').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.product-panel').forEach(function(p) { p.classList.remove('active'); });
+            this.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
+    });
+    </script>
 
     <!-- 產品錨點導航 smooth scroll -->
     <script>
