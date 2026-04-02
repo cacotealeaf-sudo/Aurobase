@@ -11,111 +11,113 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 No build system. All HTML, CSS, and JS are edited directly. To preview locally:
 
 ```bash
-# Simple static server (Python)
 python3 -m http.server 8000
-
-# PHP backend requires a PHP server for form submission
+# PHP form submission requires:
 php -S localhost:8000
 ```
 
-CSS is compiled from SCSS source at `scss/style.scss` → `css/style.css`. If you need to recompile:
+CSS is compiled from SCSS:
 
 ```bash
 sass scss/style.scss css/style.css --style=expanded
 ```
 
-## Architecture
-
-### Page Structure
-
-Each HTML page is self-contained with shared nav/footer patterns (no templating engine — copy-paste with modifications). Pages:
-
-| File | Purpose |
-|------|---------|
-| `index.html` | Homepage — services overview |
-| `marketing.html` | Digital marketing services |
-| `solution.html` | Marketing automation & CDP products |
-| `ai-companion.html` | AI voice companion for elder care |
-| `nexus.html` | AURO NEXUS platform (1,500+ lines, most complex page) |
-| `contact.html` | Contact form + inquiry modal |
-| `blog.html` + `blogpost/` | Blog listing + 4 articles |
-
-### nexus.html Internal Structure
-
-The page is divided into four product sections, each following the same pattern: **Product Banner → Pain Section → Feature Section → FAQ Section**. Sections are separated by large HTML comments (`╔══ NEXUS OS ══╗` etc.):
-
-1. **NEXUS OS** (`id="nexus-os"`) — AI agent platform
-2. **NEXUS CDP** (`id="nexus-cdp"`) — Customer Data Platform
-3. **NEXUS Voice** (`id="nexus-voice"`) — AI voice companion
-4. **NEXUS GEO** (`id="nexus-geo"`) — Location intelligence
-
-Each section has its own FAQ (`<!-- NEXUS X FAQ Section -->`). nexus.html also contains a large scoped `<style>` block at the top (~350 lines) for all page-specific styles — add new nexus-only styles there rather than in `css/style.css`.
-
-### CSS Architecture
-
-- **`css/style.css`** (8,987 lines) — primary stylesheet. Combines Bootstrap 4.1 base with custom Aurobase styles.
-- **`scss/style.scss`** — the only SCSS file to edit. `scss/bootstrap/` is vendored Bootstrap 4.1 source — do not modify.
-- Primary brand color: `#ff4816` (orange)
-- Typography: LINE Seed TW (WOFF2 fonts in `/WOFF2/`)
-- Bootstrap 4 grid (xs/sm/md/lg/xl breakpoints)
-- Avoid inline styles; use `css/style.css` or the page's scoped `<style>` block.
-
-### JavaScript Stack
-
-jQuery 3.2.1 based — no modern framework. Key custom scripts:
-
-- **`js/main_optimized.js`** — navigation, carousels, AOS scroll animations
-- **`js/qform.js`** — submits inquiry forms to Google Forms; manages checkbox state for service selection
-- **`js/form-validator.js`** — client-side validation (email, phone, name)
-- **`js/rate-limiter.js`** — prevents duplicate submissions via localStorage
-
-### Form Submission Flow
-
-```
-User → modal form → form-validator.js → rate-limiter.js → qform.js
-  → Google Forms (direct) OR api/submit-form.php (PHP fallback)
-  → submit-form.php: server-side validation, sanitization, rate limiting by IP, logs to /logs/
-```
-
-The inquiry modal appears on all pages and submits service interest checkboxes alongside contact info.
-
-### PHP Backend (`/api/`)
-
-- `api/submit-form.php` — handles form POST, validates, submits to Google Forms via cURL
-- `api/config/config.php` — reads credentials from `api/config/.env` (git-ignored)
-- `api/config/.env.example` — template for environment setup
-- Rate limit: 1 submission per 60 seconds per IP (file-based, stored in `/logs/`)
-
-### Assets
-
-- Images: `/images/` — prefer WebP with PNG fallback for new images
-- System UI mockups: `/system_ui/` — NEXUS product screenshots added by team
-- Fonts: `/WOFF2/` (LINESeedTW variants), `/fonts/`
-
-## SEO / Analytics
-
-- Google Tag Manager: `GTM-MB9RNG8` (in every page `<head>`)
-- JSON-LD structured data on index.html (FAQ schema, Organization)
-- OG meta tags on all pages
-- Canonical URLs set per page
-- `robots.txt`, `sitemap.xml` in root
+Only edit `scss/style.scss` — `scss/bootstrap/` is vendored Bootstrap 4.1, do not modify.
 
 ## Deployment
 
-Push to `main` branch → GitHub Pages auto-deploys to `aurobase.com` (CNAME). PHP backend requires a separate server; GitHub Pages only serves static files.
+Say **"push"** to commit and publish to GitHub. Remote is already configured:
 
-### 快速發佈指令
-
-當使用者說「**push**」時，執行以下步驟發佈到 GitHub：
-
-```bash
-git add nexus.html nexus-geo.html CLAUDE.md   # 視變更檔案調整
-git commit -m "type(scope): description"
-git push origin main
+```
+https://github.com/cacotealeaf-sudo/Aurobase  (origin/main)
 ```
 
-遠端倉庫：`https://github.com/cacotealeaf-sudo/Aurobase`（已設為 `origin`）
+GitHub Pages auto-deploys to `aurobase.com` on push to `main`. PHP backend requires a separate server.
+
+## Page Structure
+
+| File | Purpose |
+|------|---------|
+| `index.html` | Homepage |
+| `marketing.html` | Digital marketing services |
+| `solution.html` | Marketing automation & CDP products |
+| `ai-companion.html` | AI voice companion for elder care |
+| `nexus.html` | AURO NEXUS platform hub (1,500+ lines) |
+| `nexus-geo.html` | NEXUS GEO standalone page (GEO color: `#384FB5`/`#3F58CA`) |
+| `contact.html` | Contact form + inquiry modal |
+| `blog.html` + `blogpost/` | Blog listing + articles |
+
+## nexus.html Architecture
+
+Four product sections follow the pattern **Product Banner → Pain Section → Feature Section → FAQ Section**, separated by large HTML comments (`╔══ NEXUS X ══╗`):
+
+1. **NEXUS OS** (`id="nexus-v4"`)
+2. **NEXUS CDP** (`id="nexus-cdp"`) — includes a tabbed panel with CDP / GEO sub-tabs
+3. **NEXUS Voice** (`id="nexus-voice"`)
+
+The page has a large scoped `<style>` block at the top (~450 lines). Add new nexus-only styles there, not in `css/style.css`.
+
+### section-label / section-heading pattern
+
+These two utility classes are **defined inside nexus.html's scoped `<style>`** (not in global CSS):
+
+- `.section-label` — default `color: #F96D00`, `font-size: 0.78rem`, uppercase
+- `.section-heading` — default `color: #28282c` (dark), `font-size: 1.6rem`
+
+**On dark-background sections, the heading defaults to dark and becomes invisible.** Always add explicit overrides with `!important` for any dark section:
+
+```css
+.my-dark-section .section-label  { color: rgba(255,255,255,0.5) !important; }
+.my-dark-section .section-heading { color: #fff !important; }
+```
+
+nexus-geo.html has its own scoped `<style>` block that follows this same pattern.
+
+## CSS Architecture
+
+- **`css/style.css`** — primary stylesheet (Bootstrap 4.1 base + custom styles). Do not edit directly; edit `scss/style.scss` and recompile.
+- Primary brand color: `#F96D00` (orange)
+- GEO product color: `#384FB5` (dark) / `#3F58CA` (light)
+- Typography: LINE Seed TW (WOFF2 in `/WOFF2/`)
+- Bootstrap 4 grid (xs/sm/md/lg/xl)
+- Prefer page-scoped `<style>` blocks over inline styles or additions to `css/style.css`
+
+## Page Layout System
+
+All pages use a left-sidebar layout via `#colorlib-page`:
+
+```
+#colorlib-page
+  ├── #colorlib-aside  (340px fixed sidebar — nav + logo)
+  └── #colorlib-main   (remaining width, margin-left: 340px)
+```
+
+The nav sidebar and footer are copy-pasted across pages (no templating engine). When adding a new page, copy both from an existing page and update the `class="active"` nav item.
+
+## JavaScript
+
+jQuery 3.2.1 — no modern framework. `js/main.js` is legacy; `js/main_optimized.js` is the active version (navigation, AOS animations, carousels).
+
+Custom scripts:
+- `js/qform.js` — submits to Google Forms, manages checkbox state
+- `js/form-validator.js` — client-side validation (email, phone, name)
+- `js/rate-limiter.js` — 1 submission per 60s via localStorage
+
+## Inquiry Modal
+
+The floating button + `#myModal` form appears on every page. The modal form submits service-interest checkboxes + contact info to Google Forms via `qform.js`. When creating a new product page, pre-check the relevant service checkbox in the modal by adding `checked` to its `<input>`.
+
+## PHP Backend (`/api/`)
+
+- `api/submit-form.php` — validates + submits to Google Forms via cURL; rate-limits by IP (1/60s), logs to `/logs/`
+- `api/config/.env` — git-ignored; use `api/config/.env.example` as template
+
+## SEO / Analytics
+
+- Google Tag Manager: `GTM-MB9RNG8` — must be in `<head>` of every page
+- JSON-LD FAQ schema on nexus-geo.html and index.html
+- OG meta + canonical URL required on every page
 
 ## Language
 
-All pages are Traditional Chinese (`lang="zh-hant-TW"`). All UI copy should be in zh-Hant-TW unless explicitly English (e.g., product names like "AURO NEXUS").
+All UI copy in Traditional Chinese (`lang="zh-hant-TW"`). Product names (AURO NEXUS, NEXUS GEO, etc.) stay in English.
