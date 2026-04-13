@@ -274,16 +274,27 @@
 }
 .map-home:hover { color: #28282c; }
 
-/* Re-trigger button */
+/* Re-trigger button — circular, above .float inquiry button */
 .entry-retrigger {
-  position: fixed; bottom: 90px; right: 24px; z-index: 800;
-  background: #fff; border: 1px solid rgba(0,0,0,0.1);
-  padding: 10px 16px; font-size: 0.94rem; color: #28282c;
-  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  position: fixed;
+  bottom: 115px; /* .float is bottom:40px + height:60px + 15px gap */
+  right: 40px;   /* align with .float */
+  z-index: 998;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 0;
+  color: #F96D00;
+  font-size: 0;  /* hide text, icon only */
+  cursor: pointer;
+  box-shadow: 2px 2px 3px #999;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s;
 }
-.entry-retrigger:hover { border-color: #F96D00; box-shadow: 0 4px 16px rgba(249,109,0,0.12); }
-.entry-retrigger i { margin-right: 6px; color: #F96D00; }
+.entry-retrigger:hover { background: #F96D00; box-shadow: 2px 2px 6px rgba(249,109,0,0.3); }
+.entry-retrigger:hover i { color: #fff; }
+.entry-retrigger i { font-size: 20px; color: #F96D00; margin: 0; transition: color 0.2s; }
 
 /* ── HERO ── */
 #idx-hero {
@@ -1234,8 +1245,8 @@
   </footer>
 
   <!-- Re-trigger button (hidden when overlay is visible) -->
-  <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()">
-    <i class="flaticon-compass-symbol"></i> 需求診斷
+  <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()" title="需求診斷">
+    <i class="flaticon-compass-symbol"></i>
   </button>
 	         </div><!-- END COLORLIB-MAIN -->
 	         </div><!-- END COLORLIB-PAGE -->
@@ -1253,7 +1264,7 @@
     var ov = document.getElementById('entryOverlay');
     if (ov) { ov.classList.add('closed'); }
     var rb = document.getElementById('entryRetrigger');
-    if (rb) { rb.style.display = 'block'; }
+    if (rb) { rb.style.display = 'flex'; }
   }
 })();
 
@@ -1439,7 +1450,7 @@ function skipEntry() {
   setTimeout(function() {
     ov.classList.add('closed');
     var rb = document.getElementById('entryRetrigger');
-    if (rb) rb.style.display = 'block';
+    if (rb) rb.style.display = 'flex';
   }, 650);
 }
 
