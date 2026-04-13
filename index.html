@@ -87,6 +87,16 @@
    White + Orange (#F96D00) brand system
    ══════════════════════════════════════════════ */
 
+/* ── COLORLIB LAYOUT FIX (same as nexus.html) ── */
+#colorlib-main {
+  margin-left: 340px !important;
+  width: calc(100% - 340px) !important;
+  float: none !important;
+}
+@media (max-width: 992px) {
+  #colorlib-main { margin-left: 0 !important; width: 100% !important; }
+}
+
 /* ── ENTRY OVERLAY ── */
 #entryOverlay {
   position: fixed;
@@ -404,7 +414,7 @@
 .marquee-inner { display: inline-flex; animation: idxTicker 22s linear infinite; white-space: nowrap; }
 .marquee-item {
   font-size: 3.6rem; font-weight: 700; color: transparent;
-  -webkit-text-stroke: 0.5px rgba(0,0,0,0.06);
+  -webkit-text-stroke: 1px rgba(0,0,0,0.12);
   letter-spacing: 0.03em; padding: 0 40px; flex-shrink: 0;
 }
 .marquee-item.fill { -webkit-text-stroke: none; color: #F96D00; }
@@ -420,9 +430,9 @@
 }
 .partner-cell:last-child { border-right: none; }
 .partner-cell:hover { background: #fafafa; }
-.partner-name { font-size: 1rem; font-weight: 600; color: #999; margin-bottom: 4px; transition: color 0.2s; }
+.partner-name { font-size: 1rem; font-weight: 600; color: #666; margin-bottom: 4px; transition: color 0.2s; }
 .partner-cell:hover .partner-name { color: #28282c; }
-.partner-type { font-size: 0.6rem; color: rgba(0,0,0,0.25); letter-spacing: 0.08em; text-transform: uppercase; }
+.partner-type { font-size: 0.6rem; color: rgba(0,0,0,0.4); letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* ── CTA ── */
 #idx-cta {
