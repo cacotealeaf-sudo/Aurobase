@@ -134,10 +134,9 @@
   width: 100%; max-width: 480px; padding: 0 32px;
 }
 .boot-logo {
-  font-size: 3rem; font-weight: 700; color: #28282c; line-height: 1;
-  margin-bottom: 4px; text-align: center;
+  text-align: center; margin-bottom: 12px;
 }
-.boot-logo span { color: #F96D00; }
+.boot-logo img { max-width: 280px; width: 100%; height: auto; display: block; margin: 0 auto; }
 .boot-tagline {
   font-size: 1rem; letter-spacing: 0.15em; color: #999;
   text-transform: uppercase; margin-bottom: 40px; text-align: center;
@@ -293,8 +292,8 @@
   transition: background 0.2s, box-shadow 0.2s;
 }
 .entry-retrigger:hover { background: #F96D00; box-shadow: 2px 2px 6px rgba(249,109,0,0.3); }
-.entry-retrigger:hover i { color: #fff; }
-.entry-retrigger i { font-size: 20px; color: #F96D00; margin: 0; transition: color 0.2s; }
+.entry-retrigger:hover svg { stroke: #fff; }
+.entry-retrigger svg { stroke: #F96D00; transition: stroke 0.2s; }
 
 /* ── HERO ── */
 #idx-hero {
@@ -1246,7 +1245,7 @@
 
   <!-- Re-trigger button (hidden when overlay is visible) -->
   <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()" title="需求診斷">
-    <i class="flaticon-compass-symbol"></i>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
   </button>
 	         </div><!-- END COLORLIB-MAIN -->
 	         </div><!-- END COLORLIB-PAGE -->
