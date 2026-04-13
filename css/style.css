@@ -8860,7 +8860,7 @@ canvas {
     color: #333;
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 3px solid #F96D00;
+    border-bottom: 3px solid #E63109;
 }
 
 /* 文章卡片樣式 */
@@ -8915,7 +8915,7 @@ canvas {
 }
 
 .block-21 .heading a:hover {
-    color: #F96D00;
+    color: #E63109;
 }
 
 .block-21 .meta {
@@ -8933,7 +8933,7 @@ canvas {
 }
 
 .block-21 .meta a:hover {
-    color: #F96D00;
+    color: #E63109;
 }
 
 .block-21 .meta .icon-calendar,

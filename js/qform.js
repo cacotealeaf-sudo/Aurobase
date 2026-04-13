@@ -111,7 +111,7 @@ document.getElementById("submitButton").addEventListener("click", async function
             icon: 'error',
             title: '表單驗證失敗',
             html: errors.map(e => `• ${e}`).join('<br>'),
-            confirmButtonColor: '#F96D00'
+            confirmButtonColor: '#E63109'
         });
         return;
     }
@@ -154,7 +154,7 @@ document.getElementById("submitButton").addEventListener("click", async function
             icon: 'success',
             title: '提交成功',
             text: '感謝您的諮詢，我們將盡快與您聯繫',
-            confirmButtonColor: '#F96D00'
+            confirmButtonColor: '#E63109'
         }).then(() => {
             // 關閉 modal (如果有)
             if (document.getElementById('myModal')) {
@@ -189,7 +189,7 @@ document.getElementById("submitButton").addEventListener("click", async function
             icon: 'error',
             title: '網路錯誤',
             text: '無法連接到伺服器，請檢查網路連線',
-            confirmButtonColor: '#F96D00'
+            confirmButtonColor: '#E63109'
         });
     } finally {
         // 恢復提交按鈕

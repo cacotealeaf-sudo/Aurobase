@@ -60,7 +60,7 @@
         <div style="text-align: left;">
           <p>您即將前往奧洛客服中心系統：</p>
           <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
-            <strong style="color: #F96D00;">${linkText}</strong><br>
+            <strong style="color: #E63109;">${linkText}</strong><br>
             <small class="text-muted">${url}</small>
           </div>
           <p class="text-muted small mb-0">
@@ -71,7 +71,7 @@
         <div style="text-align: left;">
           <p>您即將前往外部網站：</p>
           <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
-            <strong style="color: #F96D00;">${linkText}</strong><br>
+            <strong style="color: #E63109;">${linkText}</strong><br>
             <small class="text-muted">${url}</small>
           </div>
           <p class="text-muted small mb-0">
@@ -80,9 +80,9 @@
         </div>
       `,
       icon: isCTI ? 'question' : 'info',
-      iconColor: '#F96D00',
+      iconColor: '#E63109',
       showCancelButton: true,
-      confirmButtonColor: '#F96D00',
+      confirmButtonColor: '#E63109',
       cancelButtonColor: '#6c757d',
       confirmButtonText: isCTI ? '前往客服中心' : '確定前往',
       cancelButtonText: '取消',

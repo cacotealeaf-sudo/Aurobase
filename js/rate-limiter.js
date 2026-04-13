@@ -211,7 +211,7 @@ const RateLimiter = {
           title: '提交過於頻繁',
           html: `請等待 <strong>${this.getFormattedCooldown()}</strong> 後再試`,
           confirmButtonText: '我知道了',
-          confirmButtonColor: '#F96D00'
+          confirmButtonColor: '#E63109'
         });
       } else {
         Swal.fire({
@@ -219,7 +219,7 @@ const RateLimiter = {
           title: '提交次數過多',
           text: '您今天的提交次數已達上限，請明天再試',
           confirmButtonText: '我知道了',
-          confirmButtonColor: '#F96D00'
+          confirmButtonColor: '#E63109'
         });
       }
     } else {

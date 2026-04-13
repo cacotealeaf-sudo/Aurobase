@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUROBASE — 進入版圖</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #050405; overflow: hidden; }
+
+/* ── GRAIN ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.28; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── ENTRY OVERLAY ── */
+#entryOverlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background:
+    radial-gradient(ellipse 60% 65% at 100% 0%, #5a0c05 0%, #1e0302 35%, transparent 62%),
+    radial-gradient(ellipse 40% 50% at 0% 100%, #2e0502 0%, transparent 55%),
+    #050405;
+  display: flex; flex-direction: column;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  overflow: hidden;
+}
+#entryOverlay.closing {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+#entryOverlay.closed { display: none; }
+
+/* ambient pulse */
+#entryOverlay::before {
+  content: '';
+  position: absolute; top: -15%; right: -8%; width: 50%; height: 70%;
+  background: radial-gradient(ellipse, rgba(110,12,5,0.18) 0%, transparent 70%);
+  border-radius: 60% 40% 70% 30%;
+  animation: breathe 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+#entryOverlay::after {
+  content: '';
+  position: absolute; bottom: -8%; left: -5%; width: 40%; height: 55%;
+  background: radial-gradient(ellipse, rgba(70,7,3,0.14) 0%, transparent 65%);
+  border-radius: 40% 60% 35% 65%;
+  animation: breathe 13s ease-in-out infinite alternate-reverse;
+  pointer-events: none;
+}
+@keyframes breathe {
+  from { transform: scale(1); opacity: 0.7; }
+  to   { transform: scale(1.1) translate(1%,1%); opacity: 1; }
+}
+
+/* ── TOP BAR ── */
+.entry-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 48px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.04);
+  position: relative; z-index: 2;
+}
+.entry-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  letter-spacing: 0.14em; color: #F0EDE8;
+}
+.entry-logo span { color: #D42E14; }
+.entry-skip {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #2a2a2e; background: none; border: none; cursor: pointer;
+  transition: color 0.2s;
+}
+.entry-skip:hover { color: #5a5a5e; }
+
+/* ── MAIN CONTENT ── */
+.entry-body {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2; overflow: hidden;
+}
+
+/* ── BOOT SCREEN ── */
+#bootScreen {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0; width: 100%; max-width: 480px; padding: 0 48px;
+}
+.boot-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 72px;
+  letter-spacing: 0.08em; color: #F0EDE8; line-height: 1;
+  margin-bottom: 4px; text-align: center;
+}
+.boot-logo span { color: #D42E14; }
+.boot-tagline {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; color: #3a3a3e; text-transform: uppercase;
+  margin-bottom: 48px; text-align: center;
+}
+.boot-lines { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-bottom: 32px; }
+.boot-line {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.06em; color: #2a2a2e;
+  display: flex; gap: 12px; align-items: center;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+.boot-line.visible { opacity: 1; transform: none; }
+.boot-line.done { color: #4a4a50; }
+.boot-line em { color: #D42E14; font-style: normal; }
+.boot-bar-wrap {
+  width: 100%; height: 1px; background: rgba(255,255,255,0.04);
+  margin-bottom: 24px; overflow: hidden;
+}
+.boot-bar {
+  height: 100%; width: 0%; background: #D42E14;
+  transition: width 0.1s linear;
+}
+.boot-pct {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; color: #3a3a3e; text-align: right;
+  margin-bottom: 32px;
+}
+.boot-cta {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #050405; background: #D42E14; border: none;
+  padding: 14px 40px; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease, background 0.2s;
+}
+.boot-cta.ready { opacity: 1; pointer-events: all; }
+.boot-cta:hover { background: #E8341A; }
+
+/* ── QUIZ SCREEN ── */
+#quizScreen {
+  display: none; flex-direction: column; align-items: center;
+  width: 100%; max-width: 640px; padding: 0 48px;
+}
+#quizScreen.active { display: flex; }
+
+.q-progress { display: flex; gap: 8px; margin-bottom: 32px; }
+.q-dot { width: 28px; height: 2px; background: rgba(255,255,255,0.07); transition: background 0.3s; }
+.q-dot.done { background: rgba(212,46,20,0.5); }
+.q-dot.active { background: #D42E14; }
+
+.q-step {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; color: #D42E14; text-transform: uppercase;
+  margin-bottom: 14px; text-align: center;
+}
+.q-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 42px;
+  letter-spacing: 0.04em; color: #F0EDE8; text-align: center;
+  line-height: 1.05; margin-bottom: 8px;
+}
+.q-sub {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  color: #3a3a3e; letter-spacing: 0.08em; text-align: center;
+  margin-bottom: 36px; line-height: 1.6;
+}
+.q-opts {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; width: 100%; margin-bottom: 28px;
+}
+.q-opt {
+  background: rgba(255,255,255,0.02); border: 0.5px solid rgba(255,255,255,0.06);
+  padding: 18px 20px; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative; overflow: hidden; text-align: left;
+  animation: optIn 0.3s ease forwards; opacity: 0;
+}
+@keyframes optIn { to { opacity: 1; transform: none; } from { opacity: 0; transform: translateY(8px); } }
+.q-opt:nth-child(1) { animation-delay: 0.05s; }
+.q-opt:nth-child(2) { animation-delay: 0.10s; }
+.q-opt:nth-child(3) { animation-delay: 0.15s; }
+.q-opt:nth-child(4) { animation-delay: 0.20s; }
+.q-opt:hover { border-color: rgba(212,46,20,0.35); background: rgba(212,46,20,0.04); }
+.q-opt.selected { border-color: #D42E14; background: rgba(212,46,20,0.07); }
+.q-opt.selected::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #D42E14; }
+.q-opt-code { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.14em; color: #D42E14; text-transform: uppercase; margin-bottom: 6px; }
+.q-opt-label { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.04em; color: #F0EDE8; margin-bottom: 4px; }
+.q-opt-desc { font-size: 11px; color: #5a5a60; line-height: 1.5; }
+.q-next {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #050405; background: #D42E14; border: none;
+  padding: 13px 40px; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s, background 0.2s;
+}
+.q-next.ready { opacity: 1; pointer-events: all; }
+.q-next:hover { background: #E8341A; }
+
+/* ── MAP SCREEN ── */
+#mapScreen {
+  display: none; flex-direction: column;
+  width: 100%; padding: 0 48px;
+  max-height: calc(100vh - 120px); overflow-y: auto;
+}
+#mapScreen.active { display: flex; }
+#mapScreen::-webkit-scrollbar { width: 2px; }
+#mapScreen::-webkit-scrollbar-track { background: transparent; }
+#mapScreen::-webkit-scrollbar-thumb { background: #2a2a2e; }
+
+.map-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 28px;
+}
+.map-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: #D42E14; text-transform: uppercase; margin-bottom: 8px; }
+.map-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.04em; color: #F0EDE8; line-height: 1; }
+.map-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.map-enter {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #050405; background: #D42E14;
+  border: none; padding: 10px 24px; cursor: pointer; transition: background 0.2s;
+}
+.map-enter:hover { background: #E8341A; }
+.map-reset {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
+  color: #2a2a2e; text-transform: uppercase; border: none; background: none;
+  cursor: pointer; transition: color 0.2s;
+}
+.map-reset:hover { color: #5a5a5e; }
+
+.tgrid { display: grid; gap: 8px; }
+.trow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.territory {
+  border: 0.5px solid rgba(255,255,255,0.05); padding: 18px 22px;
+  position: relative; overflow: hidden; cursor: default;
+  transition: border-color 0.5s, background 0.5s;
+}
+/* fogged */
+.territory.fogged .t-inner { opacity: 0.12; transition: opacity 0.5s; pointer-events: none; }
+.territory.fogged::after { content: ''; position: absolute; inset: 0; z-index: 2; }
+.lock-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 3; pointer-events: none; }
+.territory.unlocked .lock-icon { display: none; }
+
+/* unlocked */
+.territory.unlocked { border-color: rgba(212,46,20,0.28); background: rgba(212,46,20,0.04); cursor: pointer; }
+.territory.unlocked::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #D42E14; }
+.territory.unlocked::after { display: none; }
+.territory.unlocked .t-inner { opacity: 1; }
+.territory.unlocked:hover { border-color: rgba(212,46,20,0.55); background: rgba(212,46,20,0.08); }
+
+/* recommended */
+.territory.recommended { border-color: rgba(212,46,20,0.55); }
+.rec-badge {
+  display: none; position: absolute; top: 10px; right: 12px; z-index: 4;
+  font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.14em;
+  color: #D42E14; border: 0.5px solid rgba(212,46,20,0.4); padding: 2px 7px; text-transform: uppercase;
+}
+.territory.recommended .rec-badge { display: block; }
+
+.t-inner { transition: opacity 0.5s; }
+.t-flex { display: flex; align-items: center; justify-content: space-between; }
+.t-code { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.12em; color: #4a4a50; text-transform: uppercase; margin-bottom: 4px; }
+.t-name { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.05em; color: #F0EDE8; }
+.t-sub { font-size: 11px; color: #9A9AA0; margin-top: 2px; }
+.t-tag { font-family: 'Space Mono', monospace; font-size: 8px; color: #D42E14; border: 0.5px solid rgba(212,46,20,0.35); padding: 2px 7px; letter-spacing: 0.1em; flex-shrink: 0; }
+
+.result-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  border: 0.5px solid rgba(212,46,20,0.2); padding: 14px 22px; margin-top: 8px;
+  background: rgba(12,8,10,0.8);
+}
+.rs-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; color: #3a3a3e; text-transform: uppercase; margin-bottom: 3px; }
+.rs-val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.05em; color: #F0EDE8; }
+
+/* ── BOTTOM BAR ── */
+.entry-bottom {
+  padding: 16px 48px;
+  border-top: 0.5px solid rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 2;
+}
+.eb-left { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: #1e1e22; }
+.eb-right { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: #1e1e22; }
+
+/* ── PAGE BEHIND ── */
+#pageContent {
+  position: fixed; inset: 0; z-index: 1;
+  background: #050405; color: #F0EDE8;
+  font-family: 'Noto Sans TC', sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 1s ease 0.2s;
+}
+#pageContent.visible { opacity: 1; }
+.page-placeholder {
+  text-align: center;
+}
+.pp-logo { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.1em; color: #F0EDE8; }
+.pp-logo span { color: #D42E14; }
+.pp-sub { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #3a3a3e; text-transform: uppercase; margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE BEHIND (replace with actual site content) -->
+<div id="pageContent">
+  <div class="page-placeholder">
+    <div class="pp-logo">AURO<span>BASE</span></div>
+    <div class="pp-sub">數位整合行銷 · AI 智慧解決方案</div>
+  </div>
+</div>
+
+<!-- ENTRY OVERLAY -->
+<div id="entryOverlay">
+  <div class="entry-topbar">
+    <div class="entry-logo">AURO<span>BASE</span></div>
+    <button class="entry-skip" onclick="skipEntry()">略過 →</button>
+  </div>
+
+  <div class="entry-body">
+
+    <!-- BOOT -->
+    <div id="bootScreen">
+      <div class="boot-logo">AURO<span>BASE</span></div>
+      <div class="boot-tagline">數位整合行銷 · AI 智慧解決方案</div>
+      <div class="boot-lines" id="bootLines"></div>
+      <div class="boot-bar-wrap"><div class="boot-bar" id="bootBar"></div></div>
+      <div class="boot-pct" id="bootPct">0%</div>
+      <button class="boot-cta" id="bootCta" onclick="startQuiz()">開始診斷您的需求 →</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quizScreen">
+      <div class="q-progress" id="qProgress">
+        <div class="q-dot active" id="d0"></div>
+        <div class="q-dot" id="d1"></div>
+        <div class="q-dot" id="d2"></div>
+      </div>
+      <div class="q-step" id="qStep"></div>
+      <div class="q-title" id="qTitle"></div>
+      <div class="q-sub" id="qSub"></div>
+      <div class="q-opts" id="qOpts"></div>
+      <button class="q-next" id="qNext" onclick="nextQ()"></button>
+    </div>
+
+    <!-- MAP -->
+    <div id="mapScreen">
+      <div class="map-header">
+        <div>
+          <div class="map-eyebrow">// 版圖已解鎖 — 您的專屬方案</div>
+          <div class="map-title" id="mapTitle">為您推薦的<br>解決方案</div>
+        </div>
+        <div class="map-actions">
+          <button class="map-enter" onclick="enterSite()">進入官網 →</button>
+          <button class="map-reset" onclick="resetAll()">重新診斷</button>
+        </div>
+      </div>
+
+      <div class="tgrid">
+        <div class="territory fogged" id="t-digital">
+          <div class="rec-badge">推薦</div>
+          <div class="lock-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(240,237,232,0.2)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="t-inner">
+            <div class="t-flex">
+              <div><div class="t-code">⬡ 主力服務</div><div class="t-name">數位行銷</div><div class="t-sub">Google · Facebook · SEO · 社群</div></div>
+              <div class="t-tag">CORE</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trow">
+          <div class="territory fogged" id="t-martech">
+            <div class="rec-badge">推薦</div>
+            <div class="lock-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,237,232,0.2)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="t-inner"><div class="t-code">◈ 企業解決方案</div><div class="t-name">MarTech</div><div class="t-sub">CDP · CXA · Unica · CMS</div></div>
+          </div>
+          <div class="territory fogged" id="t-callcenter">
+            <div class="rec-badge">推薦</div>
+            <div class="lock-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,237,232,0.2)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="t-inner"><div class="t-code">⊞ 客戶服務</div><div class="t-name">客服中心</div><div class="t-sub">CTI · CRM · 智能客服</div></div>
+          </div>
+        </div>
+
+        <div class="trow">
+          <div class="territory fogged" id="t-ai">
+            <div class="rec-badge">推薦</div>
+            <div class="lock-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(240,237,232,0.2)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="t-inner"><div class="t-code">◉ 創新服務</div><div class="t-name">AI 智慧語伴</div><div class="t-sub">語音互動 · 健康守護</div></div>
+          </div>
+          <div class="territory unlocked" id="t-consult">
+            <div class="t-inner"><div class="t-code">⇌ 開始合作</div><div class="t-name">專案諮詢</div><div class="t-sub">量身規劃專屬方案</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-strip">
+        <div><div class="rs-label">診斷結果</div><div class="rs-val" id="rsVal">—</div></div>
+        <button class="map-enter" onclick="enterSite()" style="padding:8px 20px;font-size:10px;">進入官網 →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="entry-bottom">
+    <div class="eb-left">AUROBASE © 2026 · 台北市內湖區</div>
+    <div class="eb-right" id="ebTime"></div>
+  </div>
+</div>
+
+<script>
+// ── CLOCK ──
+function updateClock() {
+  const now = new Date();
+  const t = now.toTimeString().slice(0,8);
+  document.getElementById('ebTime').textContent = t + ' CST';
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── BOOT SEQUENCE ──
+const bootMessages = [
+  { text: '系統初始化...', delay: 200 },
+  { text: '載入數位行銷模組', delay: 600 },
+  { text: '連接 MarTech 平台', delay: 1000 },
+  { text: '啟動 AI 分析引擎', delay: 1400 },
+  { text: '版圖資料庫就緒', delay: 1800 },
+  { text: '準備診斷系統', delay: 2200 },
+];
+
+const bootLines = document.getElementById('bootLines');
+const bootBar = document.getElementById('bootBar');
+const bootPct = document.getElementById('bootPct');
+const bootCta = document.getElementById('bootCta');
+
+bootMessages.forEach((m, i) => {
+  const el = document.createElement('div');
+  el.className = 'boot-line';
+  el.innerHTML = `<em>//</em> ${m.text}`;
+  bootLines.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('visible');
+    const pct = Math.round(((i + 1) / bootMessages.length) * 100);
+    bootBar.style.width = pct + '%';
+    bootPct.textContent = pct + '%';
+    if (i > 0) bootLines.children[i - 1].classList.add('done');
+    if (i === bootMessages.length - 1) {
+      setTimeout(() => bootCta.classList.add('ready'), 300);
+    }
+  }, m.delay);
+});
+
+// ── QUIZ ──
+const questions = [
+  {
+    step: '// 01 — 核心挑戰', title: '您目前最大的挑戰是？',
+    sub: '根據您的選擇，系統將為您解鎖最相關的版圖',
+    opts: [
+      { code: '01', label: '廣告效益', desc: '投放成本高，難以精準觸及目標客群', key: 'ads' },
+      { code: '02', label: '客戶數據', desc: '數據分散，無法建立完整客戶視圖', key: 'data' },
+      { code: '03', label: '服務效率', desc: '客服量大，人力成本居高不下', key: 'service' },
+      { code: '04', label: 'AI 應用', desc: '想導入 AI，但不知道從何開始', key: 'ai' }
+    ]
+  },
+  {
+    step: '// 02 — 企業規模', title: '您的組織規模？',
+    sub: '幫助我們推薦最適合的方案規格與導入深度',
+    opts: [
+      { code: 'A', label: '中型企業', desc: '100 人以下，快速成長中', key: 'sme' },
+      { code: 'B', label: '大型企業', desc: '500 人以上，流程較為複雜', key: 'enterprise' },
+      { code: 'C', label: '集團組織', desc: '多品牌或跨國經營需求', key: 'group' },
+      { code: 'D', label: '新創公司', desc: '快速驗證市場，需靈活方案', key: 'startup' }
+    ]
+  },
+  {
+    step: '// 03 — 成效期望', title: '您希望多快看到成效？',
+    sub: '這將決定我們為您規劃的導入策略與節奏',
+    opts: [
+      { code: 'I', label: '立即見效', desc: '一個月內，優先廣告優化與流量提升', key: 'fast' },
+      { code: 'II', label: '中期布局', desc: '三至六個月，系統性建立數位能力', key: 'mid' },
+      { code: 'III', label: '長期戰略', desc: '一年以上，打造完整數位生態系', key: 'long' },
+      { code: 'IV', label: '尚在評估', desc: '希望先了解各方案後再決定', key: 'explore' }
+    ]
+  }
+];
+
+const unlockMap = {
+  ads:        ['t-digital', 't-martech'],
+  data:       ['t-martech', 't-digital'],
+  service:    ['t-callcenter', 't-martech'],
+  ai:         ['t-ai', 't-martech'],
+  sme:        ['t-digital'],
+  enterprise: ['t-martech', 't-callcenter'],
+  group:      ['t-martech', 't-callcenter', 't-ai'],
+  startup:    ['t-digital', 't-ai'],
+  fast:       ['t-digital'],
+  mid:        ['t-martech', 't-callcenter'],
+  long:       ['t-martech', 't-ai'],
+  explore:    ['t-digital', 't-martech']
+};
+const recMap = {
+  ads: 't-digital', data: 't-martech', service: 't-callcenter', ai: 't-ai',
+  sme: 't-digital', enterprise: 't-martech', group: 't-callcenter', startup: 't-ai',
+  fast: 't-digital', mid: 't-martech', long: 't-ai', explore: 't-digital'
+};
+const labelMap = {
+  ads: '數位廣告效益優化方案', data: '顧客數據整合方案', service: '客服效率提升方案', ai: 'AI 智慧導入方案',
+  sme: '中型企業成長方案', enterprise: '企業級整合方案', group: '集團多品牌方案', startup: '新創快速驗證方案',
+  fast: '快速見效策略', mid: '中期系統布局', long: '長期數位戰略', explore: '全方位評估方案'
+};
+const allT = ['t-digital','t-martech','t-callcenter','t-ai'];
+
+let curQ = 0, answers = [], sel = null;
+
+function startQuiz() {
+  document.getElementById('bootScreen').style.display = 'none';
+  document.getElementById('quizScreen').classList.add('active');
+  renderQ();
+}
+
+function renderQ() {
+  const q = questions[curQ];
+  document.getElementById('qStep').textContent = q.step;
+  document.getElementById('qTitle').textContent = q.title;
+  document.getElementById('qSub').textContent = q.sub;
+  document.getElementById('qOpts').innerHTML = q.opts.map(o => `
+    <div class="q-opt" onclick="pickOpt('${o.key}',this)">
+      <div class="q-opt-code">${o.code}</div>
+      <div class="q-opt-label">${o.label}</div>
+      <div class="q-opt-desc">${o.desc}</div>
+    </div>`).join('');
+  for (let i = 0; i < 3; i++) {
+    document.getElementById('d' + i).className = 'q-dot' + (i < curQ ? ' done' : i === curQ ? ' active' : '');
+  }
+  const btn = document.getElementById('qNext');
+  btn.textContent = curQ < 2 ? '下一題 →' : '解鎖我的版圖 →';
+  btn.classList.remove('ready');
+  sel = null;
+}
+
+function pickOpt(key, el) {
+  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  sel = key;
+  document.getElementById('qNext').classList.add('ready');
+}
+
+function nextQ() {
+  if (!sel) return;
+  answers.push(sel);
+  if (curQ < 2) { curQ++; renderQ(); }
+  else showMap();
+}
+
+function showMap() {
+  document.getElementById('quizScreen').classList.remove('active');
+  const ms = document.getElementById('mapScreen');
+  ms.classList.add('active');
+
+  const toUnlock = new Set();
+  const toRec = new Set();
+  answers.forEach(a => {
+    (unlockMap[a] || []).forEach(t => toUnlock.add(t));
+    if (recMap[a]) toRec.add(recMap[a]);
+  });
+
+  allT.forEach((id, idx) => {
+    const el = document.getElementById(id);
+    el.classList.remove('unlocked', 'recommended');
+    el.classList.add('fogged');
+    if (toUnlock.has(id)) {
+      setTimeout(() => {
+        el.classList.remove('fogged');
+        el.classList.add('unlocked');
+        if (toRec.has(id)) el.classList.add('recommended');
+      }, idx * 150 + 200);
+    }
+  });
+
+  document.getElementById('rsVal').textContent = labelMap[answers[0]] || '客製化方案';
+}
+
+function resetAll() {
+  curQ = 0; answers = []; sel = null;
+  document.getElementById('mapScreen').classList.remove('active');
+  allT.forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('unlocked', 'recommended');
+    el.classList.add('fogged');
+  });
+  document.getElementById('bootScreen').style.display = 'flex';
+  bootCta.classList.remove('ready');
+  Array.from(bootLines.children).forEach(el => { el.classList.remove('visible', 'done'); });
+  bootBar.style.width = '0%';
+  bootPct.textContent = '0%';
+  setTimeout(() => {
+    bootMessages.forEach((m, i) => {
+      setTimeout(() => {
+        bootLines.children[i].classList.add('visible');
+        const pct = Math.round(((i+1)/bootMessages.length)*100);
+        bootBar.style.width = pct + '%';
+        bootPct.textContent = pct + '%';
+        if (i > 0) bootLines.children[i-1].classList.add('done');
+        if (i === bootMessages.length - 1) setTimeout(() => bootCta.classList.add('ready'), 300);
+      }, m.delay);
+    });
+  }, 100);
+}
+
+function enterSite() {
+  const overlay = document.getElementById('entryOverlay');
+  overlay.classList.add('closing');
+  document.getElementById('pageContent').classList.add('visible');
+  setTimeout(() => overlay.classList.add('closed'), 850);
+}
+
+function skipEntry() { enterSite(); }
+</script>
+</body>
+</html>

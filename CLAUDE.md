@@ -46,6 +46,15 @@ GitHub Pages auto-deploys to `aurobase.com` on push to `main`. PHP backend requi
 | `nexus-geo.html` | NEXUS GEO standalone page (GEO color: `#384FB5`/`#3F58CA`) |
 | `contact.html` | Contact form + inquiry modal |
 | `blog.html` + `blogpost/` | Blog listing + articles |
+| `aurobase-entry.html` | Standalone landing/entry page (dark theme, no sidebar) |
+| `aurobase-real.html` | Standalone redesigned homepage (dark theme, no sidebar) |
+| `privacypolicy.html` | Privacy policy |
+
+The `aurobase-entry.html` and `aurobase-real.html` pages are standalone — they do **not** use the `#colorlib-page` sidebar layout or shared nav/footer. They are self-contained single-file pages with all styles inline.
+
+## archive/ Directory
+
+`archive/` contains a PHP-rendered version of the same site (`.php` files with `includes/` partials). This is the legacy server-rendered variant. The live GitHub Pages site uses the static `.html` files in the root. Do not modify `archive/` unless specifically asked.
 
 ## nexus.html Architecture
 
@@ -117,6 +126,16 @@ The floating button + `#myModal` form appears on every page. The modal form subm
 - Google Tag Manager: `GTM-MB9RNG8` — must be in `<head>` of every page
 - JSON-LD FAQ schema on nexus-geo.html and index.html
 - OG meta + canonical URL required on every page
+
+## SEO Checklist for New Pages
+
+- Update `sitemap.xml` with the new URL
+- Note: `nexus.html` and `nexus-geo.html` are currently **missing** from `sitemap.xml`
+
+## LLM / AI Discoverability
+
+- `robots.txt` explicitly allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended
+- `llms.txt` provides a structured company/service summary for LLM crawlers — update it when adding new products or pages
 
 ## Language
 
