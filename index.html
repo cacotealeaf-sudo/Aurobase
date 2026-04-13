@@ -864,7 +864,43 @@
 
   <!-- ╔══ ENTRY OVERLAY ══╗ -->
   <div id="entryOverlay">
-    <!-- filled in Task 3 -->
+    <button class="entry-skip" onclick="skipEntry()">略過 <i class="ion-ios-arrow-forward"></i></button>
+
+    <!-- Boot -->
+    <div id="bootScreen">
+      <div class="boot-logo">AURO<span>BASE</span></div>
+      <div class="boot-tagline">數位整合行銷 &middot; AI 智慧解決方案</div>
+      <div class="boot-lines" id="bootLines"></div>
+      <div class="boot-bar-wrap"><div class="boot-bar" id="bootBar"></div></div>
+      <div class="boot-pct" id="bootPct">0%</div>
+      <button class="boot-cta" id="bootCta" onclick="startQuiz()">開始診斷您的需求 <i class="ion-ios-arrow-forward"></i></button>
+    </div>
+
+    <!-- Quiz -->
+    <div id="quizScreen">
+      <div class="q-progress" id="qProgress">
+        <div class="q-dot active" id="qd0"></div>
+        <div class="q-dot" id="qd1"></div>
+        <div class="q-dot" id="qd2"></div>
+      </div>
+      <div class="q-step" id="qStep"></div>
+      <div class="q-title" id="qTitle"></div>
+      <div class="q-sub" id="qSub"></div>
+      <div class="q-opts" id="qOpts"></div>
+      <button class="q-next" id="qNext" onclick="nextQ()"></button>
+    </div>
+
+    <!-- Result Map -->
+    <div id="mapScreen">
+      <div class="map-eyebrow">// 為您推薦的解決方案</div>
+      <div class="map-title" id="mapTitle">您的專屬推薦</div>
+      <div id="mapTerritories"></div>
+      <div class="map-actions">
+        <button class="map-enter" id="mapEnter" onclick="goRecommended()">前往推薦頁面 <i class="ion-ios-arrow-forward"></i></button>
+        <button class="map-reset" onclick="resetQuiz()">重新診斷</button>
+        <button class="map-home" onclick="skipEntry()">進入首頁</button>
+      </div>
+    </div>
   </div>
 
   <!-- ╔══ HOMEPAGE CONTENT ══╗ -->
@@ -919,6 +955,239 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
      
   <!-- ✅ Phase 3 優化: 移除未使用的 JS 庫 (節省 70KB) -->
+  <script>
+// ══ ENTRY OVERLAY ══
+
+// -- localStorage check --
+(function() {
+  if (localStorage.getItem('aurobase_entry_done') === 'true') {
+    var ov = document.getElementById('entryOverlay');
+    if (ov) { ov.classList.add('closed'); }
+    var rb = document.getElementById('entryRetrigger');
+    if (rb) { rb.style.display = 'block'; }
+  }
+})();
+
+// -- Boot sequence --
+var bootMessages = [
+  { text: '系統初始化...', delay: 200 },
+  { text: '載入數位行銷模組', delay: 600 },
+  { text: '連接 MarTech 平台', delay: 1000 },
+  { text: '啟動 AI 分析引擎', delay: 1400 },
+  { text: '版圖資料庫就緒', delay: 1800 },
+  { text: '準備診斷系統', delay: 2200 }
+];
+
+var bootLines = document.getElementById('bootLines');
+var bootBar = document.getElementById('bootBar');
+var bootPct = document.getElementById('bootPct');
+var bootCta = document.getElementById('bootCta');
+
+if (bootLines && !document.getElementById('entryOverlay').classList.contains('closed')) {
+  bootMessages.forEach(function(m, i) {
+    var el = document.createElement('div');
+    el.className = 'boot-line';
+    el.innerHTML = '<em>//</em> ' + m.text;
+    bootLines.appendChild(el);
+    setTimeout(function() {
+      el.classList.add('visible');
+      var pct = Math.round(((i + 1) / bootMessages.length) * 100);
+      bootBar.style.width = pct + '%';
+      bootPct.textContent = pct + '%';
+      if (i > 0) bootLines.children[i - 1].classList.add('done');
+      if (i === bootMessages.length - 1) {
+        setTimeout(function() { bootCta.classList.add('ready'); }, 300);
+      }
+    }, m.delay);
+  });
+}
+
+// -- Quiz --
+var questions = [
+  {
+    step: '// 01 — 核心挑戰', title: '您目前最大的挑戰是？',
+    sub: '根據您的選擇，我們將為您推薦最相關的解決方案',
+    opts: [
+      { code: '01', label: '廣告效益', desc: '投放成本高，難以精準觸及目標客群', key: 'ads' },
+      { code: '02', label: '客戶數據', desc: '數據分散，無法建立完整客戶視圖', key: 'data' },
+      { code: '03', label: '服務效率', desc: '客服量大，人力成本居高不下', key: 'service' },
+      { code: '04', label: 'AI 應用', desc: '想導入 AI，但不知道從何開始', key: 'ai' }
+    ]
+  },
+  {
+    step: '// 02 — 企業規模', title: '您的組織規模？',
+    sub: '幫助我們推薦最適合的方案規格與導入深度',
+    opts: [
+      { code: 'A', label: '中型企業', desc: '100 人以下，快速成長中', key: 'sme' },
+      { code: 'B', label: '大型企業', desc: '500 人以上，流程較為複雜', key: 'enterprise' },
+      { code: 'C', label: '集團組織', desc: '多品牌或跨國經營需求', key: 'group' },
+      { code: 'D', label: '新創公司', desc: '快速驗證市場，需靈活方案', key: 'startup' }
+    ]
+  },
+  {
+    step: '// 03 — 成效期望', title: '您希望多快看到成效？',
+    sub: '這將決定我們為您規劃的導入策略與節奏',
+    opts: [
+      { code: 'I', label: '立即見效', desc: '一個月內，優先廣告優化與流量提升', key: 'fast' },
+      { code: 'II', label: '中期布局', desc: '三至六個月，系統性建立數位能力', key: 'mid' },
+      { code: 'III', label: '長期戰略', desc: '一年以上，打造完整數位生態系', key: 'long' },
+      { code: 'IV', label: '尚在評估', desc: '希望先了解各方案後再決定', key: 'explore' }
+    ]
+  }
+];
+
+var redirectMap = {
+  ads: 'marketing.html',
+  data: 'solution.html',
+  service: 'contact.html',
+  ai: 'ai-companion.html'
+};
+
+var territoryData = {
+  ads:     { code: '主力服務', name: '數位行銷', sub: 'Google · Facebook · SEO · 社群', tag: 'CORE', href: 'marketing.html' },
+  data:    { code: '企業解決方案', name: 'MarTech', sub: 'CDP · CXA · Unica · CMS', tag: 'PLATFORM', href: 'solution.html' },
+  service: { code: '客戶服務', name: '客服中心', sub: 'CTI · CRM · 智能客服', tag: 'SERVICE', href: 'contact.html' },
+  ai:      { code: '創新服務', name: 'AI 智慧語伴', sub: '語音互動 · 健康守護', tag: 'AI', href: 'ai-companion.html' }
+};
+
+var secondaryMap = {
+  sme: 'ads', enterprise: 'data', group: 'service', startup: 'ai',
+  fast: 'ads', mid: 'data', long: 'ai', explore: 'data'
+};
+
+var curQ = 0, answers = [], sel = null;
+
+function startQuiz() {
+  document.getElementById('bootScreen').style.display = 'none';
+  document.getElementById('quizScreen').classList.add('active');
+  renderQ();
+}
+
+function renderQ() {
+  var q = questions[curQ];
+  document.getElementById('qStep').textContent = q.step;
+  document.getElementById('qTitle').textContent = q.title;
+  document.getElementById('qSub').textContent = q.sub;
+  document.getElementById('qOpts').innerHTML = q.opts.map(function(o) {
+    return '<div class="q-opt" onclick="pickOpt(\'' + o.key + '\',this)">' +
+      '<div class="q-opt-code">' + o.code + '</div>' +
+      '<div class="q-opt-label">' + o.label + '</div>' +
+      '<div class="q-opt-desc">' + o.desc + '</div></div>';
+  }).join('');
+  for (var i = 0; i < 3; i++) {
+    document.getElementById('qd' + i).className = 'q-dot' + (i < curQ ? ' done' : i === curQ ? ' active' : '');
+  }
+  var btn = document.getElementById('qNext');
+  btn.textContent = curQ < 2 ? '下一題' : '查看推薦方案';
+  btn.classList.remove('ready');
+  sel = null;
+}
+
+function pickOpt(key, el) {
+  var opts = document.querySelectorAll('.q-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+  el.classList.add('selected');
+  sel = key;
+  document.getElementById('qNext').classList.add('ready');
+}
+
+function nextQ() {
+  if (!sel) return;
+  answers.push(sel);
+  if (curQ < 2) { curQ++; renderQ(); }
+  else showMap();
+}
+
+function showMap() {
+  document.getElementById('quizScreen').classList.remove('active');
+  var ms = document.getElementById('mapScreen');
+  ms.classList.add('active');
+
+  var primary = answers[0];
+  var secKey2 = secondaryMap[answers[1]];
+  var secKey3 = secondaryMap[answers[2]];
+  var secondary = (secKey2 !== primary) ? secKey2 : (secKey3 !== primary ? secKey3 : null);
+
+  var container = document.getElementById('mapTerritories');
+  container.innerHTML = '';
+
+  container.appendChild(buildTerritory(primary, true));
+  if (secondary && secondary !== primary) {
+    container.appendChild(buildTerritory(secondary, false));
+  }
+
+  document.getElementById('mapEnter').setAttribute('data-href', redirectMap[primary]);
+}
+
+function buildTerritory(key, isRec) {
+  var d = territoryData[key];
+  var div = document.createElement('div');
+  div.className = 'territory' + (isRec ? ' recommended' : '');
+  div.innerHTML =
+    '<div class="rec-badge">' + (isRec ? '推薦' : '') + '</div>' +
+    '<div class="t-flex"><div>' +
+    '<div class="t-code">' + d.code + '</div>' +
+    '<div class="t-name">' + d.name + '</div>' +
+    '<div class="t-sub">' + d.sub + '</div>' +
+    '</div><div class="t-tag">' + d.tag + '</div></div>';
+  div.style.cursor = 'pointer';
+  div.onclick = function() { window.location.href = d.href; };
+  return div;
+}
+
+function goRecommended() {
+  var href = document.getElementById('mapEnter').getAttribute('data-href');
+  if (href) {
+    localStorage.setItem('aurobase_entry_done', 'true');
+    window.location.href = href;
+  }
+}
+
+function skipEntry() {
+  var ov = document.getElementById('entryOverlay');
+  ov.classList.add('closing');
+  localStorage.setItem('aurobase_entry_done', 'true');
+  setTimeout(function() {
+    ov.classList.add('closed');
+    var rb = document.getElementById('entryRetrigger');
+    if (rb) rb.style.display = 'block';
+  }, 650);
+}
+
+function openEntryOverlay() {
+  var ov = document.getElementById('entryOverlay');
+  ov.classList.remove('closing', 'closed');
+  document.getElementById('entryRetrigger').style.display = 'none';
+  resetQuiz();
+}
+
+function resetQuiz() {
+  curQ = 0; answers = []; sel = null;
+  document.getElementById('mapScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('bootScreen').style.display = 'flex';
+  bootLines.innerHTML = '';
+  bootBar.style.width = '0%';
+  bootPct.textContent = '0%';
+  bootCta.classList.remove('ready');
+  bootMessages.forEach(function(m, i) {
+    var el = document.createElement('div');
+    el.className = 'boot-line';
+    el.innerHTML = '<em>//</em> ' + m.text;
+    bootLines.appendChild(el);
+    setTimeout(function() {
+      el.classList.add('visible');
+      var pct = Math.round(((i + 1) / bootMessages.length) * 100);
+      bootBar.style.width = pct + '%';
+      bootPct.textContent = pct + '%';
+      if (i > 0) bootLines.children[i - 1].classList.add('done');
+      if (i === bootMessages.length - 1) {
+        setTimeout(function() { bootCta.classList.add('ready'); }, 300);
+      }
+    }, m.delay);
+  });
+}
+</script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>
