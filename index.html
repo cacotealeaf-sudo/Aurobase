@@ -222,6 +222,15 @@
 }
 .q-next.ready { opacity: 1; pointer-events: all; }
 .q-next:hover { background: #c42a08; }
+.q-actions { display: flex; align-items: center; gap: 16px; }
+.q-back {
+  font-size: 0.94rem; letter-spacing: 0.08em;
+  color: #999; background: none; border: 1px solid rgba(0,0,0,0.1);
+  padding: 12px 28px; cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.q-back:hover { color: #E63109; border-color: #E63109; }
+.q-back i { margin-right: 4px; }
 
 /* Map/Result Screen */
 #mapScreen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 600px; padding: 0 32px; }
@@ -954,7 +963,10 @@
       <div class="q-title" id="qTitle"></div>
       <div class="q-sub" id="qSub"></div>
       <div class="q-opts" id="qOpts"></div>
-      <button class="q-next" id="qNext" onclick="nextQ()"></button>
+      <div class="q-actions">
+        <button class="q-back" id="qBack" onclick="prevQ()" style="display:none;"><i class="ion-ios-arrow-back"></i> 上一題</button>
+        <button class="q-next" id="qNext" onclick="nextQ()"></button>
+      </div>
     </div>
 
     <!-- Result Map -->
@@ -1422,7 +1434,16 @@ function renderQ() {
   var btn = document.getElementById('qNext');
   btn.textContent = curQ < 2 ? '下一題' : '查看推薦方案';
   btn.classList.remove('ready');
+  document.getElementById('qBack').style.display = curQ > 0 ? 'inline-block' : 'none';
   sel = null;
+}
+
+function prevQ() {
+  if (curQ > 0) {
+    answers.pop();
+    curQ--;
+    renderQ();
+  }
 }
 
 function pickOpt(key, el) {
