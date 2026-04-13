@@ -296,20 +296,36 @@
 .entry-retrigger:hover svg { stroke: #fff; }
 .entry-retrigger svg { stroke: #E63109; transition: stroke 0.2s; }
 
-/* ── HERO ── */
+/* ── HERO (blue-gray) ── */
 #idx-hero {
   padding: 80px 48px 60px;
   display: grid; grid-template-columns: 55% 45%;
   gap: 32px; align-items: center;
-  background: linear-gradient(165deg, #f7f7f7 0%, #f0f0f0 40%, #f7f7f7 100%);
-  position: relative;
+  background: linear-gradient(165deg, #5a7a8a 0%, #6B9BB9 40%, #4a6e80 100%);
+  position: relative; color: #fff;
 }
 #idx-hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  opacity: 0.35; mix-blend-mode: multiply;
+  opacity: 0.25; mix-blend-mode: soft-light;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
 }
+#idx-hero .hero-eyebrow { color: rgba(255,255,255,0.7); }
+#idx-hero .hero-eyebrow::before { background: rgba(255,255,255,0.5); }
+#idx-hero .hero-title { color: #fff; }
+#idx-hero .hero-title .orange { color: #fff; }
+#idx-hero .hero-desc { color: rgba(255,255,255,0.8); }
+#idx-hero .btn-ghost-idx { color: rgba(255,255,255,0.6); }
+#idx-hero .btn-ghost-idx:hover { color: #fff; }
+#idx-hero .hero-right { border-left-color: rgba(255,255,255,0.15); }
+#idx-hero .hero-map-label { color: rgba(255,255,255,0.5); }
+#idx-hero .hero-svc { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); }
+#idx-hero .hero-svc:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); }
+#idx-hero .hero-svc::before { background: #fff; }
+#idx-hero .hero-svc-code { color: rgba(255,255,255,0.5); }
+#idx-hero .hero-svc-name { color: #fff; }
+#idx-hero .hero-svc-sub { color: rgba(255,255,255,0.5); }
+#idx-hero .hero-svc-tag { color: #fff; border-color: rgba(255,255,255,0.3); }
 .hero-left { display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
 .hero-eyebrow {
   font-size: 0.94rem; letter-spacing: 0.15em; color: #E63109;
@@ -412,9 +428,9 @@
 .srv-feat-text { font-size: 0.94rem; color: #666; line-height: 1.6; }
 .srv-feat-title { font-size: 0.94rem; color: #28282c; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 3px; }
 
-/* ── SOLUTIONS GRID (dark section) ── */
+/* ── SOLUTIONS GRID (dark section — nexus hero gradient) ── */
 #idx-solutions {
-  background: #1a1a2e;
+  background: linear-gradient(135deg, #0D1117 0%, #1a2332 50%, #0f2027 100%);
   position: relative;
 }
 #idx-solutions::before {
@@ -429,8 +445,8 @@
 #idx-solutions .idx-section-link { color: rgba(255,255,255,0.5); }
 #idx-solutions .idx-section-link:hover { color: #E63109; }
 .sol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); position: relative; z-index: 1; }
-.sol-card { background: #1a1a2e; padding: 32px; transition: background 0.2s; }
-.sol-card:hover { background: #22223a; }
+.sol-card { background: rgba(255,255,255,0.03); padding: 32px; transition: background 0.2s; }
+.sol-card:hover { background: rgba(255,255,255,0.06); }
 .sol-card.span2 { grid-column: span 2; }
 .sol-badge {
   font-size: 0.94rem; color: #E63109; border: 1px solid rgba(230,49,9,0.4);
@@ -450,7 +466,7 @@
   border-top: 1px solid rgba(255,255,255,0.06);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   overflow: hidden;
-  background: #1a1a2e;
+  background: #0D1117;
 }
 .marquee-inner { display: inline-flex; animation: idxTicker 22s linear infinite; white-space: nowrap; }
 .marquee-item {
