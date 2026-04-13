@@ -139,12 +139,12 @@
 }
 .boot-logo span { color: #F96D00; }
 .boot-tagline {
-  font-size: 0.94rem; letter-spacing: 0.15em; color: #999;
+  font-size: 1rem; letter-spacing: 0.15em; color: #999;
   text-transform: uppercase; margin-bottom: 40px; text-align: center;
 }
-.boot-lines { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.boot-lines { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
 .boot-line {
-  font-size: 0.94rem; letter-spacing: 0.04em; color: #ccc;
+  font-size: 1.05rem; letter-spacing: 0.04em; color: #ccc;
   display: flex; gap: 10px; align-items: center;
   opacity: 0; transform: translateX(-6px);
   transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
@@ -158,13 +158,13 @@
 }
 .boot-bar { height: 100%; width: 0%; background: #F96D00; transition: width 0.1s linear; }
 .boot-pct {
-  font-size: 0.94rem; letter-spacing: 0.1em; color: #999;
-  text-align: right; margin-bottom: 28px;
+  font-size: 1.05rem; letter-spacing: 0.1em; color: #999;
+  text-align: right; margin-bottom: 32px;
 }
 .boot-cta {
-  font-size: 0.94rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 1.1rem; letter-spacing: 0.08em;
   color: #fff; background: #F96D00; border: none;
-  padding: 12px 36px; cursor: pointer;
+  padding: 16px 48px; cursor: pointer;
   opacity: 0; pointer-events: none;
   transition: opacity 0.4s ease, background 0.2s;
 }
@@ -893,7 +893,7 @@
 
     <!-- Boot -->
     <div id="bootScreen">
-      <div class="boot-logo">AURO<span>BASE</span></div>
+      <div class="boot-logo"><img src="images/logo.svg" alt="AUROBASE" style="max-width: 280px; height: auto;"></div>
       <div class="boot-tagline">數位整合行銷 &middot; AI 智慧解決方案</div>
       <div class="boot-lines" id="bootLines"></div>
       <div class="boot-bar-wrap"><div class="boot-bar" id="bootBar"></div></div>
