@@ -1221,7 +1221,7 @@
 
   <!-- Re-trigger button (hidden when overlay is visible) -->
   <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()">
-    <i class="icon-search"></i> 需求診斷
+    <i class="flaticon-compass-symbol"></i> 需求診斷
   </button>
 	         </div><!-- END COLORLIB-MAIN -->
 	         </div><!-- END COLORLIB-PAGE -->
@@ -1430,6 +1430,7 @@ function skipEntry() {
 }
 
 function openEntryOverlay() {
+  localStorage.removeItem('aurobase_entry_done');
   var ov = document.getElementById('entryOverlay');
   ov.classList.remove('closing', 'closed');
   document.getElementById('entryRetrigger').style.display = 'none';
