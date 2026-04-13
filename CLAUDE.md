@@ -70,7 +70,7 @@ The page has a large scoped `<style>` block at the top (~450 lines). Add new nex
 
 These two utility classes are **defined inside nexus.html's scoped `<style>`** (not in global CSS):
 
-- `.section-label` — default `color: #F96D00`, `font-size: 0.78rem`, uppercase
+- `.section-label` — default `color: #E63109`, `font-size: 0.78rem`, uppercase
 - `.section-heading` — default `color: #28282c` (dark), `font-size: 1.6rem`
 
 **On dark-background sections, the heading defaults to dark and becomes invisible.** Always add explicit overrides with `!important` for any dark section:
@@ -85,7 +85,7 @@ nexus-geo.html has its own scoped `<style>` block that follows this same pattern
 ## CSS Architecture
 
 - **`css/style.css`** — primary stylesheet (Bootstrap 4.1 base + custom styles). Do not edit directly; edit `scss/style.scss` and recompile.
-- Primary brand color: `#F96D00` (orange)
+- Primary brand color: `#E63109` (red)
 - GEO product color: `#384FB5` (dark) / `#3F58CA` (light)
 - Typography: LINE Seed TW (WOFF2 in `/WOFF2/`)
 - Bootstrap 4 grid (xs/sm/md/lg/xl)
