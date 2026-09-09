@@ -16,6 +16,9 @@
 - [數位行銷](marketing.html): 廣告投放、社群經營、SEO、內容行銷等數位行銷服務
 - [解決方案＆產品](solution.html): Acoustic CXA 行銷自動化、CDP 顧客數據平台、HCL Unica、Magnolia CMS
 - [AI 智慧語伴](ai-companion.html): AI 語音陪伴與健康守護解決方案，結合語音互動與智慧分析
+- [AURO NEXUS](nexus.html): AI 企業平台總覽 — NEXUS OS 工作自動化、NEXUS CDP 客戶數據平台、NEXUS Voice 語音平台
+- [NEXUS GEO](nexus-geo.html): 生成式引擎優化（GEO），提升品牌在 ChatGPT／Perplexity／Gemini 等 AI 答案中的曝光
+- [NEXUS SAGA](nexus-saga.html): 金融機構的非結構化資料治理層 — 稽核鏈（WORM）、生命週期與保存、資料共享治理、AI 使用溯源
 - [新聞中心](blog.html): 公司部落格文章列表
 - [聯絡我們](contact.html): 諮詢表單與 Google Maps 位置
 - [隱私權政策](privacypolicy.html): 個人資料保護與 Cookie 使用政策
@@ -38,6 +41,21 @@
 - **CDP 顧客數據平台**: 整合多渠道顧客數據，建立統一客戶視圖，精準分眾行銷
 - **HCL Unica**: 企業級行銷自動化解決方案
 - **Magnolia CMS**: 企業內容管理系統，支援多語言、多通路內容發布
+
+### AURO NEXUS
+AI 企業平台，包含 NEXUS OS（工作自動化）、NEXUS CDP（客戶數據平台）、NEXUS Voice（AI 語音平台）、NEXUS GEO（生成式引擎優化）與 NEXUS SAGA（資料治理層）。
+
+### NEXUS SAGA（資料治理）
+金融機構的非結構化資料治理層：讓「誰在什麼時候、依哪一條規定、對哪一份資料做了什麼」變成可查驗的紀錄。
+- **稽核鏈（WORM）**: 雜湊鏈稽核軌跡，資料庫層以 append-only 觸發器擋掉 UPDATE／DELETE；完整性驗證逐筆重算雜湊。用詞為「竄改可被偵測」，非「不可竄改」——雜湊鏈不能物理阻止具資料庫最高權限者，物理阻擋需儲存層 Object Lock。
+- **生命週期與保存**: 分媒體法定保存期限、法律保全（legal hold）、含簽核鏈與雜湊的處分證書。保存期限未到不得處分為伺服器強制。
+- **資料盤點與目錄**: Oracle／SQL Server／MySQL 唯讀收割元數據；NAS／檔案系統盤點只讀檔名、副檔名、大小、修改時間，不開啟檔案內容；血緣自五種訊號推導。
+- **資料共享治理**: 再識別風險分級、同意管理、當事人權利、中國牆利益衝突隔離。
+- **AI 治理**: AI 使用溯源、反向影響分析、模型治理登錄簿（未評估的模型在高風險用途上被擋下）。
+- **品質與施行**: 品質規則與計分卡，低品質資料無法通過共享閘；施行證明比對「核定 vs 實際」。
+- **權責與流程**: 五種角色寫入權限矩陣、四眼原則（不可自核）、治理流程建構器。
+- **部署**: docker compose 單機／POC、離線映像包（tar 現場 load，不需連外）、Helm chart（尚未在客戶叢集實跑）。可指向既有 PostgreSQL。
+- **邊界**: 不做內容擷取與 NER、不做通用流程引擎、不宣稱「符合」任何法規（對應的是規範要求的做法，合規與否由主管機關與客戶法遵認定）。
 
 ### AI 智慧語伴
 以 AI 語音為核心的智慧陪伴解決方案，主動陪伴長者、即時掌握健康與情緒變化。功能包含語音互動、健康監測、情緒分析、主動關懷提醒。
@@ -63,3 +81,7 @@
 6. HCL Unica
 7. Magnolia CMS
 8. AI 智慧語伴
+9. NEXUS AI 自動化平台
+10. AI Voice Studio
+11. NEXUS GEO 生成式搜尋優化
+12. NEXUS SAGA 資料治理

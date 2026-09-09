@@ -513,6 +513,48 @@
         border-color: #3D5A80;
         text-decoration: none;
     }
+
+    /* ── NEXUS SAGA 區塊（產品色 #0F5F4E / #16806A） ── */
+    #nexus-saga.product-banner {
+        background: linear-gradient(135deg, #0B1512 0%, #10241E 100%);
+    }
+    #nexus-saga.product-banner::after {
+        background: linear-gradient(90deg, #0F5F4E, #4FA98F, #0F5F4E);
+    }
+    #nexus-saga .eyebrow { color: #4FA98F !important; }
+    #nexus-saga h2 em { color: #4FA98F; }
+    .saga-feature-section .icon-wrap.saga {
+        background: linear-gradient(135deg, #0F5F4E, #16806A);
+    }
+    .saga-badge {
+        display: inline-block;
+        background: #E6F4F0;
+        color: #0F5F4E;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        margin-bottom: 0.7rem;
+    }
+    .btn-saga-link {
+        border: 1px solid #0F5F4E;
+        color: #0F5F4E;
+        border-radius: 6px;
+        padding: 0.55rem 1.5rem;
+        font-weight: 600;
+        font-size: 0.85rem;
+        background: transparent;
+        display: inline-block;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-saga-link:hover {
+        background: #0F5F4E;
+        color: #fff;
+        border-color: #0F5F4E;
+        text-decoration: none;
+    }
     </style>
 
     <!-- Google Tag Manager -->
@@ -592,6 +634,10 @@
                 <label for="f05-10">AI Voice Studio</label>
             </div>
             <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="entry.1863307942" value="NEXUS SAGA 資料治理" id="f05-12" />
+                <label for="f05-12">NEXUS SAGA 資料治理</label>
+            </div>
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="entry.1863307942" value="AI 智慧語伴" id="f05-7" />
                 <label for="f05-7">AI 智慧語伴</label>
             </div>
@@ -644,6 +690,7 @@
           <a href="#nexus-v4" class="btn btn-primary btn-sm">NEXUS OS</a>
           <a href="#nexus-cdp" class="btn btn-primary btn-sm">NEXUS CDP</a>
           <a href="#nexus-voice" class="btn btn-primary btn-sm">NEXUS Voice</a>
+          <a href="#nexus-saga" class="btn btn-primary btn-sm">NEXUS SAGA</a>
         </div>
         <!-- END Anchor menu -->
 
@@ -1474,6 +1521,79 @@
             <!-- END NEXUS Voice FAQ Section -->
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  NEXUS SAGA — Data Governance Layer                         ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+            <!-- NEXUS SAGA Product Banner -->
+            <section id="nexus-saga" class="product-banner">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="eyebrow">NEXUS SAGA — Data Governance Layer</div>
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h2>把治理動作<br>變成<em>可查驗的紀錄</em></h2>
+                            <p>金融機構的非結構化資料治理層。分級、保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行；每一次治理動作寫進 append-only 稽核鏈——竄改可被偵測。</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="images/nexus-saga/posture.webp" alt="NEXUS SAGA 治理態勢儀表板" class="img-fluid hero-img mt-4 mt-lg-0" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS SAGA Product Banner -->
+
+            <!-- NEXUS SAGA Feature Section -->
+            <section class="feature-section saga-feature-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">CORE FEATURES</p>
+                            <h2 class="section-heading">治理不是寫一本手冊，是讓每個動作都留得下證據</h2>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="saga-badge">SAGA</div>
+                                        <div class="icon-wrap saga"><i class="iconoir-lock"></i></div>
+                                        <h5>稽核鏈（WORM）</h5>
+                                        <p>雜湊鏈稽核軌跡，資料庫層以 append-only 觸發器擋掉 UPDATE／DELETE；驗證逐筆重算，斷鏈時指出斷在第幾筆</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="saga-badge">SAGA</div>
+                                        <div class="icon-wrap saga"><i class="iconoir-hourglass"></i></div>
+                                        <h5>生命週期與保存</h5>
+                                        <p>分媒體法定保存期限、法律保全、處分證書。保存期限未到不得處分，這是伺服器強制，不是畫面上的提示</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="saga-badge">SAGA</div>
+                                        <div class="icon-wrap saga"><i class="iconoir-share-android"></i></div>
+                                        <h5>資料共享治理</h5>
+                                        <p>再識別風險分級、同意管理、當事人權利、中國牆利益衝突隔離；低品質資料分享不出去</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mb-4">
+                                    <div class="feature-card">
+                                        <div class="saga-badge">SAGA</div>
+                                        <div class="icon-wrap saga"><i class="iconoir-brain"></i></div>
+                                        <h5>AI 治理與溯源</h5>
+                                        <p>一次 AI 決策引用了哪些來源、當下密級為何；未通過公平性評估的模型在高風險用途上被擋下</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align:center; padding: 1.5rem 0 0.5rem;">
+                                <a href="nexus-saga.html" class="btn-saga-link">
+                                    <i class="iconoir-arrow-right" style="margin-right:0.3rem;"></i> 了解 NEXUS SAGA 完整方案
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END NEXUS SAGA Feature Section -->
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
      ║  CTA Section                                                 ║
      ╚══════════════════════════════════════════════════════════════╝ -->
 
@@ -1545,8 +1665,9 @@
     <script>
     $(document).ready(function(){
         $('.btn.fixed-top a').on('click', function(e){
-            e.preventDefault();
             var target = $(this).attr('href');
+            if (target.charAt(0) !== '#' || $(target).length === 0) { return; }
+            e.preventDefault();
             $('html, body').animate({ scrollTop: $(target).offset().top - 50 }, 600);
         });
     });
