@@ -205,6 +205,8 @@
 .q-opt:nth-child(2) { animation-delay: 0.10s; }
 .q-opt:nth-child(3) { animation-delay: 0.15s; }
 .q-opt:nth-child(4) { animation-delay: 0.20s; }
+.q-opt:nth-child(5) { animation-delay: 0.25s; }
+.q-opt.wide { grid-column: 1 / -1; }
 .q-opt:hover { border-color: rgba(230,49,9,0.4); background: rgba(230,49,9,0.03); }
 .q-opt.selected { border-color: #E63109; background: rgba(230,49,9,0.06); }
 .q-opt.selected::before {
@@ -1387,11 +1389,12 @@
 // -- Boot sequence --
 var bootMessages = [
   { text: '系統初始化...', delay: 200 },
-  { text: '載入數位行銷模組', delay: 600 },
-  { text: '連接 MarTech 平台', delay: 1000 },
-  { text: '啟動 AI 分析引擎', delay: 1400 },
-  { text: '版圖資料庫就緒', delay: 1800 },
-  { text: '準備診斷系統', delay: 2200 }
+  { text: '載入數位行銷模組', delay: 500 },
+  { text: '連接 MarTech 平台', delay: 800 },
+  { text: '啟動 AI 分析引擎', delay: 1100 },
+  { text: '掛載資料治理層', delay: 1400 },
+  { text: '版圖資料庫就緒', delay: 1700 },
+  { text: '準備診斷系統', delay: 2000 }
 ];
 
 var bootLines = document.getElementById('bootLines');
@@ -1427,7 +1430,8 @@ var questions = [
       { code: '01', label: '廣告效益', desc: '投放成本高，難以精準觸及目標客群', key: 'ads' },
       { code: '02', label: '客戶數據', desc: '數據分散，無法建立完整客戶視圖', key: 'data' },
       { code: '03', label: '服務效率', desc: '客服量大，人力成本居高不下', key: 'service' },
-      { code: '04', label: 'AI 應用', desc: '想導入 AI，但不知道從何開始', key: 'ai' }
+      { code: '04', label: 'AI 應用', desc: '想導入 AI，但不知道從何開始', key: 'ai' },
+      { code: '05', label: '資料治理', desc: '稽核軌跡、保存期限、AI 資料來源說不清楚', key: 'governance', wide: true }
     ]
   },
   {
@@ -1456,18 +1460,20 @@ var redirectMap = {
   ads: 'marketing.html',
   data: 'solution.html',
   service: 'contact.html',
-  ai: 'nexus.html'
+  ai: 'nexus.html',
+  governance: 'nexus-saga.html'
 };
 
 var territoryData = {
   ads:     { code: '主力服務', name: '數位行銷', sub: 'Google · Facebook · SEO · 社群', tag: 'CORE', href: 'marketing.html' },
   data:    { code: '企業解決方案', name: 'MarTech', sub: 'CDP · CXA · Unica · CMS', tag: 'PLATFORM', href: 'solution.html' },
   service: { code: '客戶服務', name: '客服中心', sub: 'CTI · CRM · 智能客服', tag: 'SERVICE', href: 'contact.html' },
-  ai:      { code: 'AI 平台', name: 'AURO NEXUS', sub: 'AI 自動化 · CDP · 語音平台', tag: 'AI', href: 'nexus.html' }
+  ai:      { code: 'AI 平台', name: 'AURO NEXUS', sub: 'AI 自動化 · CDP · 語音平台', tag: 'AI', href: 'nexus.html' },
+  governance: { code: '資料治理', name: 'NEXUS SAGA', sub: '稽核鏈 · 保存期限 · AI 溯源', tag: 'GOVERNANCE', href: 'nexus-saga.html' }
 };
 
 var secondaryMap = {
-  sme: 'ads', enterprise: 'data', group: 'service', startup: 'ai',
+  sme: 'ads', enterprise: 'governance', group: 'service', startup: 'ai',
   fast: 'ads', mid: 'data', long: 'ai', explore: 'data'
 };
 
@@ -1485,7 +1491,7 @@ function renderQ() {
   document.getElementById('qTitle').textContent = q.title;
   document.getElementById('qSub').textContent = q.sub;
   document.getElementById('qOpts').innerHTML = q.opts.map(function(o) {
-    return '<div class="q-opt" onclick="pickOpt(\'' + o.key + '\',this)">' +
+    return '<div class="q-opt' + (o.wide ? ' wide' : '') + '" onclick="pickOpt(\'' + o.key + '\',this)">' +
       '<div class="q-opt-code">' + o.code + '</div>' +
       '<div class="q-opt-label">' + o.label + '</div>' +
       '<div class="q-opt-desc">' + o.desc + '</div></div>';
