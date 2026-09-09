@@ -6,38 +6,12 @@
  */
  /* ========================================
    自定義字體載入 - LINE Seed TW (繁體中文)
+   ----------------------------------------
+   這裡原本重複宣告了 100/400/700/900 四個 @font-face,全部指向完整字型檔。
+   因為 style.css 在每一頁都晚於 line-seed-font.css 載入,這組宣告會蓋掉
+   後者的子集字型 unicode-range,導致部落格內頁仍去載完整的 3.5 MB Bold。
+   字型宣告已統一收斂到 css/line-seed-font.css(每頁都有載),此處移除。
    ======================================== */
-@font-face {
-  font-family: 'LINE Seed TW';
-  font-style: normal;
-  font-weight: 100;
-  font-display: swap;
-  src: url('../WOFF2/LINESeedTW_OTF_Th.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'LINE Seed TW';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../WOFF2/LINESeedTW_OTF_Rg.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'LINE Seed TW';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../WOFF2/LINESeedTW_OTF_Bd.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'LINE Seed TW';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('../WOFF2/LINESeedTW_OTF_Eb.woff2') format('woff2');
-}
 
 :root {
   --blue: #007bff;
