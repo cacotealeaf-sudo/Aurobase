@@ -1,0 +1,177 @@
+/* ══════════════════════════════════════════════
+   AURORA THEME — shared dark styles for index.html + contact.html
+   Page-specific sections stay in each page's scoped <style>.
+   ══════════════════════════════════════════════ */
+
+:root {
+  --idx-accent: #E84B22;
+  --idx-accent-hover: #ff4816;
+  --idx-bg: #0e0e10;
+  --idx-sky: #0b0b0d;
+  --idx-surface: #151518;
+  --idx-raised: #28282c;
+  --idx-line: #26262b;
+  --idx-line-2: #3a3a40;
+  --idx-ink: #f4f4f5;
+  --idx-text: #b9b9c0;
+  --idx-text-2: #c6c6cc;
+  --idx-muted: #8b8b92;
+  --idx-font: 'LINE Seed Sans', 'LINE Seed TW', system-ui, sans-serif;
+  --idx-display: 'Archivo', 'LINE Seed Sans', 'LINE Seed TW', sans-serif;
+  --idx-mono: 'Space Mono', 'LINE Seed TW', ui-monospace, Menlo, monospace;
+}
+
+/* ── COLORLIB LAYOUT FIX (same as nexus.html) ── */
+#colorlib-aside {
+  width: 340px !important;
+  background-color: #fff !important;
+}
+#colorlib-main {
+  margin-left: 340px !important;
+  width: calc(100% - 340px) !important;
+  float: none !important;
+  background: var(--idx-bg);
+}
+@media (max-width: 991.98px) {
+  #colorlib-aside { width: 270px !important; }
+  #colorlib-main { margin-left: 0 !important; width: 100% !important; }
+}
+
+/* ── HOMEPAGE BASE ── */
+.idx-page {
+  font-family: var(--idx-font);
+  color: var(--idx-text);
+  background: var(--idx-bg);
+}
+.idx-page a { color: #e6e6e9; text-decoration: none; transition: color 0.2s; }
+.idx-page a:hover { color: var(--idx-accent-hover); }
+.idx-page a:focus-visible,
+.idx-page summary:focus-visible { outline: 2px solid var(--idx-accent-hover); outline-offset: 3px; }
+.idx-page p { margin: 0; }
+.idx-page h1, .idx-page h2, .idx-page h3 { margin: 0; color: var(--idx-ink); }
+.idx-wrap { max-width: 1240px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
+.idx-mono { font-family: var(--idx-mono); }
+.idx-arrow { flex-shrink: 0; }
+
+/* Accent + grey 2px rule under hero copy and section headers */
+.idx-rule { display: flex; height: 2px; width: 100%; }
+.idx-rule::before { content: ''; width: 56px; background: var(--idx-accent); }
+.idx-rule::after { content: ''; flex: 1; background: var(--idx-line-2); }
+
+/* Two-tone label pair: [AUROBASE][數位整合行銷…] */
+.idx-tagpair { display: inline-flex; align-self: flex-start; font-family: var(--idx-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.idx-tagpair span { padding: 7px 12px; }
+.idx-tagpair span:first-child { background: var(--idx-raised); color: var(--idx-ink); }
+.idx-tagpair span:last-child { background: var(--idx-accent); color: var(--idx-bg); }
+
+.idx-page .idx-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 52px; padding: 0 26px; font-size: 15px;
+}
+.idx-page .idx-btn-primary { background: var(--idx-accent); color: var(--idx-bg); font-weight: 700; }
+.idx-page .idx-btn-primary:hover { background: var(--idx-accent-hover); color: var(--idx-bg); }
+.idx-page .idx-btn-ghost { border: 1px solid #5a5a62; background: var(--idx-bg); font-weight: 500; }
+.idx-page .idx-btn-ghost:hover { border-color: var(--idx-accent-hover); }
+
+/* ── AURORA CANVAS SECTIONS (hero + CTA) ── */
+.idx-aurora { position: relative; overflow: hidden; background: var(--idx-sky); }
+.idx-aurora canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.idx-aurora-body { position: relative; z-index: 2; pointer-events: none; }
+.idx-aurora-body a { pointer-events: auto; }
+
+/* ── AURORA HERO (copy column; each page sets its own height/padding) ── */
+.idx-hero .idx-aurora-body { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.idx-hero-title {
+  font-family: var(--idx-display);
+  font-size: clamp(44px, 6.2vw, 80px); line-height: 1.08; font-weight: 700;
+  letter-spacing: -0.015em; max-width: 680px;
+}
+.idx-hero-title span { display: block; }
+.idx-hero-title em { font-style: normal; color: var(--idx-accent); }
+.idx-hero .idx-rule { max-width: 520px; }
+.idx-hero-desc { max-width: 520px; font-size: 17px; line-height: 1.85; color: var(--idx-text-2); }
+.idx-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── TICKER ── */
+.idx-ticker {
+  border-top: 1px solid var(--idx-line); border-bottom: 1px solid var(--idx-line);
+  overflow: hidden; padding: 16px 0; background: var(--idx-bg);
+  font-family: var(--idx-mono); font-size: 13px; color: var(--idx-muted);
+}
+.idx-ticker-track { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: idxTick 52s linear infinite; }
+@keyframes idxTick { to { transform: translateX(-50%); } }
+
+/* ── SECTIONS ── */
+.idx-section { padding-top: 120px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 48px; }
+.idx-section + .idx-section { padding-top: 100px; }
+.idx-sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.idx-sec-title-group { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
+.idx-sec-num {
+  font-family: 'Archivo', sans-serif; font-weight: 900;
+  font-size: 112px; line-height: 0.82; letter-spacing: -0.03em; color: var(--idx-accent);
+}
+.idx-sec-title-group > div { display: flex; flex-direction: column; gap: 12px; }
+.idx-eyebrow { font-family: var(--idx-mono); font-size: 13px; color: var(--idx-muted); }
+.idx-eyebrow.is-accent { color: var(--idx-accent); }
+.idx-sec-title { font-size: 42px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em; }
+.idx-page .idx-more { font-family: var(--idx-mono); font-size: 14px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+
+/* ── CARDS ── */
+.idx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.idx-card {
+  border: 1px solid var(--idx-line); background: var(--idx-surface);
+  padding: 32px; display: flex; flex-direction: column; gap: 16px;
+  transition: border-color 0.2s ease;
+}
+.idx-card:hover { border-color: var(--idx-accent); }
+.idx-card-meta { display: flex; justify-content: space-between; align-items: center; font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); }
+.idx-badge { border: 1px solid var(--idx-accent); color: var(--idx-accent); padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+.idx-card-title { font-size: 28px; font-weight: 700; }
+.idx-card-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); }
+.idx-card-desc { font-size: 15px; line-height: 1.85; }
+.idx-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; font-family: var(--idx-mono); font-size: 12px; color: var(--idx-text-2); }
+.idx-chips span { border: 1px solid var(--idx-line-2); border-radius: 4px; padding: 4px 9px; }
+
+.idx-card.is-compact { padding: 28px; gap: 12px; }
+.idx-card.is-compact .idx-card-title { font-size: 23px; }
+.idx-card.is-compact .idx-card-desc { font-size: 14px; }
+.idx-list { margin: 4px 0 0; padding: 0 0 0 18px; font-size: 13px; line-height: 1.95; color: var(--idx-muted); }
+
+/* ── FOOTER ── */
+.idx-footer { border-top: 1px solid var(--idx-line); background: var(--idx-bg); }
+.idx-footer .idx-wrap {
+  padding-top: 36px; padding-bottom: 44px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px;
+  font-size: 13px; color: var(--idx-muted);
+}
+.idx-footer-col { display: flex; flex-direction: column; gap: 8px; }
+.idx-footer-col:first-child { gap: 12px; }
+.idx-footer-logo { height: 20px; width: auto; align-self: flex-start; filter: brightness(0) invert(1); }
+.idx-footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.idx-footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1199.98px) {
+  .idx-sec-num { font-size: 80px; }
+  .idx-sec-title { font-size: 34px; }
+}
+
+@media (max-width: 991.98px) {
+  .idx-wrap { padding-left: 24px; padding-right: 24px; }
+  .idx-section { padding-top: 80px; gap: 36px; }
+  .idx-section + .idx-section { padding-top: 64px; }
+  .idx-sec-num { font-size: 64px; }
+  .idx-sec-title { font-size: 28px; }
+}
+
+@media (max-width: 576px) {
+  .idx-wrap { padding-left: 16px; padding-right: 16px; }
+  .idx-hero-desc { font-size: 16px; }
+  .idx-grid { grid-template-columns: 1fr; }
+  .idx-card { padding: 24px; }
+  .idx-sec-title-group { gap: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idx-ticker-track { animation-duration: 104s; }
+}

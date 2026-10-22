@@ -40,6 +40,109 @@
     
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/aurora-theme.css">
+    <style>
+/* ══════════════════════════════════════════════
+   CONTACT PAGE — Scoped Styles
+   Shared tokens/base/sections/cards/footer: css/aurora-theme.css
+   ══════════════════════════════════════════════ */
+
+/* ── HERO ── */
+#ct-hero { min-height: 660px; }
+#ct-hero .idx-aurora-body { padding-top: 140px; padding-bottom: 170px; }
+
+/* ── FORM ── */
+.ct-form-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; }
+.ct-direct { display: flex; flex-direction: column; gap: 20px; }
+.ct-direct-lead { font-size: 15px; line-height: 1.85; }
+.ct-lines { border-top: 2px solid var(--idx-line-2); }
+.ct-lines > div {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  min-height: 60px; border-bottom: 1px solid var(--idx-line);
+}
+.ct-lines dt { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); }
+.ct-lines dd { margin: 0; font-family: var(--idx-mono); font-size: 15px; color: var(--idx-ink); text-align: right; }
+
+.ct-form {
+  border: 1px solid var(--idx-line); background: var(--idx-surface);
+  padding: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;
+}
+.ct-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ct-field.is-full { grid-column: 1 / -1; }
+.ct-field > label, .ct-field legend {
+  font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted);
+  margin: 0; padding: 0; width: auto;
+}
+.ct-field legend { margin-bottom: 8px; }
+.ct-field fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.ct-req { color: var(--idx-accent); }
+/* css/style.css forces .form-control to white/black/52px with !important — match it here */
+.idx-page .ct-form .form-control {
+  height: 52px !important; padding: 0 16px; border-radius: 0;
+  background: var(--idx-bg) !important; border: 1px solid var(--idx-line-2);
+  color: var(--idx-ink) !important; font-size: 15px;
+}
+.idx-page .ct-form textarea.form-control { height: 140px !important; padding: 14px 16px; resize: vertical; }
+.idx-page .ct-form .form-control::placeholder { color: #5a5a62; }
+.idx-page .ct-form .form-control:focus { border-color: var(--idx-accent); outline: none; }
+.idx-page .ct-form .form-control.is-invalid { border-color: #ff6b6b; }
+
+/* 諮詢類型 — checkboxes rendered as toggle chips; ids/names are read by js/qform.js */
+.ct-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.ct-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.ct-chip label {
+  display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 0; padding: 0 14px;
+  border: 1px solid var(--idx-line-2); background: var(--idx-bg);
+  font-size: 14px; color: var(--idx-text-2); cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.ct-chip label::before {
+  content: ''; flex-shrink: 0; width: 12px; height: 12px;
+  border: 1px solid #5a5a62; transition: background 0.2s, border-color 0.2s;
+}
+.ct-chip label:hover { border-color: var(--idx-accent); }
+.ct-chip input:checked + label { border-color: var(--idx-accent); color: var(--idx-ink); background: rgba(232,75,34,0.08); }
+.ct-chip input:checked + label::before { background: var(--idx-accent); border-color: var(--idx-accent); }
+.ct-chip input:focus-visible + label { outline: 2px solid var(--idx-accent-hover); outline-offset: 2px; }
+
+.ct-submit { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.ct-submit-note { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); }
+.idx-page .btn-form {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 52px; padding: 0 32px; border: 0; border-radius: 0;
+  background: var(--idx-accent); color: var(--idx-bg);
+  font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+}
+.idx-page .btn-form:hover { background: var(--idx-accent-hover); }
+.idx-page .btn-form:disabled { background: var(--idx-line-2); color: var(--idx-muted); cursor: not-allowed; }
+
+/* ── OFFICES ── */
+.ct-office-meta { display: flex; justify-content: space-between; align-items: center; }
+.ct-office-lines { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; font-size: 15px; line-height: 1.7; }
+.ct-office-lines > div { display: grid; grid-template-columns: 56px 1fr; gap: 12px; }
+.ct-office-lines span:first-child { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); padding-top: 3px; }
+.ct-map { border: 1px solid var(--idx-line); background: var(--idx-surface); height: 420px; position: relative; overflow: hidden; }
+/* Invert the light Google map so it sits in the dark page */
+.ct-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: invert(0.9) hue-rotate(180deg) saturate(0.6); }
+.ct-offices-sec { padding-bottom: 110px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1199.98px) {
+  .ct-form-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 991.98px) {
+  #ct-hero { min-height: 0; }
+  #ct-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 140px; }
+  .ct-map { height: 320px; }
+}
+
+@media (max-width: 576px) {
+  .ct-form { grid-template-columns: 1fr; padding: 24px; }
+  .ct-chips { grid-template-columns: 1fr 1fr; }
+  .idx-page .btn-form { width: 100%; justify-content: center; }
+}
+</style>
     <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -81,241 +184,158 @@
 </aside>
         <!-- END COLORLIB-ASIDE -->
         <div id="colorlib-main">
-            <!-- particles.js container -->
-            <div id="particles-js"></div>
-            <section class="ftco-section ftco-bread ftco-extend-mb">
-                <div class="container-fluid px-3 px-md-0">
-                    <div class="row no-gutters slider-text justify-content-end align-items-center">
-                        <div class="col-md-10 ftco-animate">
-                            <p class="breadcrumbs">
-                                <span class="mr-2"><a href="index.html">首頁</a></span> <span>聯絡我們</span>
-                            </p>
-                            <br />
-                            <h3 style="color:#28282c; text-indent: 0.35em;">▏全球辦公室據點</h3> 
-                        </div>
-                    </div>
-                </div>
-            </section>
+  <div class="idx-page">
 
-            <section class="ftco-section contact-section ftco-no-pt">
-                <div class="container-fluid px-md-0 px-3">
-                    <div class="row mb-5 contact-info justify-content-end">
-                        <div class="col-md-5">
-                            <h2><b>奧洛/特聿科技行銷 股份有限公司</b></h2>
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="info py-4">
-                                        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                                        </svg> 114 台北市內湖區洲子街101號2樓</p>
-                                        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg><a href="tel:+886-2-5568-4688"> 02-5568-4688</a></p>
-                                        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
-                                        <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
-                                        <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-                                        </svg> 02-2659-6627</p>
-                                        <p><a href="mailto:ad@aurocore.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
-                                        </svg> ad@aurocore.com</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <h2><b>廣州辦事處</b></h2>
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="info py-4">
-                                        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                                        </svg> 广州市天河区岑村圣堂大街工业区3号321室</p>
-                                        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> 18925022494</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row block-9 justify-content-end">
-                        <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-6 d-flex">
-                                    <iframe
-                                        class="position-absolute w-100 h-100"
-                                        style="object-fit: cover;"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.6430423887405!2d121.5651966726451!3d25.08008498717496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ac6f755c2fb3%3A0xd1e120b473f5358f!2zMTE05Y-w5YyX5biC5YWn5rmW5Y2A5rSy5a2Q6KGXMTAx6Jmf!5e0!3m2!1szh-TW!2stw!4v1705648910939!5m2!1szh-TW!2stw"
-                                        frameborder="0"
-                                        allowfullscreen=""
-                                        aria-hidden="false"
-                                        tabindex="0"
-                                    ></iframe>
-                                </div>
-                                <div class="col-md-6 d-flex">
-                                    <form id="contactpage-form"   class="bg-white p-5 contact-form">
-<style>
-/* 提交按鈕樣式 - 與 contactform.php 一致 */
-.btn-form {
-    width: 100%;
-    padding: 12px 20px;
-    background: #6B9BB9; /* 溫和天藍灰 */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-}
+  <!-- Section 1: Hero (ASCII aurora canvas — js/aurora.js) -->
+  <section id="ct-hero" class="idx-aurora idx-hero">
+    <canvas data-aurora="hero" aria-hidden="true"></canvas>
+    <div class="idx-aurora-body idx-wrap">
+      <div class="idx-tagpair"><span>AUROBASE</span><span>聯絡我們 · 免費諮詢</span></div>
+      <h1 class="idx-hero-title">
+        <span>創造事業的</span>
+        <span>下一個高峰<em>.</em></span>
+      </h1>
+      <div class="idx-rule"></div>
+      <p class="idx-hero-desc">立即填寫諮詢表單，將有專人與您聯繫，為您量身規劃最適合的數位行銷解決方案。</p>
+      <div class="idx-hero-actions">
+        <a href="#ct-form" class="idx-btn idx-btn-primary">填寫諮詢表單<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 2v8M2.5 6.5L6 10l3.5-3.5"/></svg></a>
+        <a href="tel:+886-2-5568-4688" class="idx-btn idx-btn-ghost">02-5568-4688</a>
+      </div>
+    </div>
+  </section>
 
-.btn-form:hover {
-    background: #578399; /* 深一點的天藍灰 */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(107, 155, 185, 0.3);
-}
+  <!-- Section 2: Inquiry form (ids/names are read by js/qform.js — keep them) -->
+  <section id="ct-form" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">01</span>
+        <div>
+          <div class="idx-eyebrow">// 01 — 免費諮詢</div>
+          <h2 class="idx-sec-title">填寫諮詢表單</h2>
+        </div>
+      </div>
+    </div>
+    <div class="idx-rule"></div>
 
-.btn-form:active {
-    transform: translateY(0);
-}
+    <div class="ct-form-layout">
+      <div class="ct-direct">
+        <p class="ct-direct-lead">告訴我們您的需求，專人將於工作日內與您聯繫。也可以直接來電或來信：</p>
+        <dl class="ct-lines">
+          <div><dt>TEL</dt><dd><a href="tel:+886-2-5568-4688">02-5568-4688</a></dd></div>
+          <div><dt>FAX</dt><dd>02-2659-6627</dd></div>
+          <div><dt>MAIL</dt><dd><a href="mailto:ad@aurocore.com">ad@aurocore.com</a></dd></div>
+        </dl>
+      </div>
 
-.btn-form:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
-</style>
+      <form id="contactpage-form" class="ct-form contact-form">
+        <div class="ct-field">
+          <label for="f01">姓名 <span class="ct-req">*</span></label>
+          <input id="f01" type="text" name="entry.1357191828" class="form-control" placeholder="您的姓名" autocomplete="name" required>
+        </div>
+        <div class="ct-field">
+          <label for="f02">Email <span class="ct-req">*</span></label>
+          <input id="f02" type="text" name="entry.162276222" class="form-control" placeholder="name@company.com" inputmode="email" autocomplete="email" required>
+        </div>
+        <div class="ct-field">
+          <label for="f03">聯絡電話 <span class="ct-req">*</span></label>
+          <input id="f03" type="text" name="entry.1380546653" class="form-control" placeholder="02-1234-5678" inputmode="tel" autocomplete="tel" required>
+        </div>
+        <div class="ct-field">
+          <label for="f04">公司名稱</label>
+          <input id="f04" type="text" name="entry.743695878" class="form-control" placeholder="選填" autocomplete="organization">
+        </div>
 
-<a class="color-orange">免費諮詢</a>
-<h1 class="mb-4 font-weight-bold">創造事業的下一個高峰！</h1>
-<p class="mb-4 pb-2">立即填寫諮詢表單，將有專人與您聯繫。</p>
-<div class="form-group">
-<input id="f01"
-    type="text" 
-    name="entry.1357191828" 
-    class="form-control border-1" placeholder="您的姓名 (必填)" style="height: 55px;" 
-    required
-    />
-</div>
-<div class="form-group">
-<input id="f02"
-    type="text" 
-    name="entry.162276222"
-    class="form-control border-1" placeholder="您的Email（必填）" style="height: 55px;" 
-    required
-    />
-</div>
-<div class="form-group">
-<input id="f03"
-    type="text" 
-    name="entry.1380546653" 
-    class="form-control border-1" placeholder="聯絡電話 (必填)" style="height: 55px;"
-    required
-    />
-</div>
-<div class="form-group">
-<input id="f04"
-    type="text" 
-    name="entry.743695878" 
-    class="form-control border-1" placeholder="公司名稱" 
-    style="height: 55px;" 
-    />
-</div>
-<label id="f05" class="mb-4">諮詢類型</label>
-<div class="col-mb-12">
-<div class="form-check">
-<input id="f05-1"
-        class="form-check-input" type="checkbox" name="entry.1863307942" value="廣告投放"  style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-1">
-    廣告投放
-</label>
-</div>
-<div class="form-check">
-<input id="f05-2"
-        class="form-check-input" type="checkbox" name="entry.1863307942" value="社群服務"  style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-2">
-    社群服務
-</label>
-</div>
-<div class="form-check">
-<input id="f05-3"
-        class="form-check-input" type="checkbox" name="entry.1863307942" value="ACOUSTIC CXA" style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-3">
-    ACOUSTIC CXA
-</label>
-</div>
-<div class="form-check">
-<input id="f05-4"
-        class="form-check-input" type="checkbox" name="entry.1863307942" 
-        value="CDP 顧客數據" 
-        
-        style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-4">
-    CDP 顧客數據
-</label>
-</div>
-<div class="form-check">
-<input id="f05-5"
-        class="form-check-input" type="checkbox" name="entry.1863307942" 
-        value="HCL UNICA" 
-        style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-5">
-    HCL UNICA
-</label>
-</div>
-<div class="form-check">
-<input id="f05-6"
-        class="form-check-input" type="checkbox" name="entry.1863307942" value="MAGNOLIA CMS" 
-        style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-6">
-    MAGNOLIA CMS
-</label>
-</div>
-<div class="form-check">
-<input id="f05-7"
-        class="form-check-input" type="checkbox" name="entry.1863307942" value="AI 智慧語伴" 
-        style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-7">
-    AI 智慧語伴
-</label>
-</div>
-<div class="form-check">
-<input id="f05-8"
-        class="form-check-input" type="checkbox" name="entry.1863307942" value="其他" 
-        style="height: 18px; width: 18px;" />
-<label class="form-check-label" for="f05-8">
-    其他
-</label>
-</div>
-</div>
-<div class="form-group">
-<textarea id="f06" class="form-control border-1" cols="30" rows="5" name="entry.48027589" placeholder="需求說明"></textarea>
-</div>
-<div class="form-group">
-<button id="submitButton" class="btn-form" type="button">送出</button>
-</div>
-</form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div class="ct-field is-full">
+          <fieldset>
+            <legend id="f05">諮詢類型</legend>
+            <div class="ct-chips">
+              <div class="ct-chip"><input id="f05-1" type="checkbox" name="entry.1863307942" value="廣告投放"><label for="f05-1">廣告投放</label></div>
+              <div class="ct-chip"><input id="f05-2" type="checkbox" name="entry.1863307942" value="社群服務"><label for="f05-2">社群服務</label></div>
+              <div class="ct-chip"><input id="f05-3" type="checkbox" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+              <div class="ct-chip"><input id="f05-4" type="checkbox" name="entry.1863307942" value="CDP 顧客數據"><label for="f05-4">CDP 顧客數據</label></div>
+              <div class="ct-chip"><input id="f05-5" type="checkbox" name="entry.1863307942" value="HCL UNICA"><label for="f05-5">HCL Unica</label></div>
+              <div class="ct-chip"><input id="f05-6" type="checkbox" name="entry.1863307942" value="MAGNOLIA CMS"><label for="f05-6">Magnolia CMS</label></div>
+              <div class="ct-chip"><input id="f05-7" type="checkbox" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+              <div class="ct-chip"><input id="f05-8" type="checkbox" name="entry.1863307942" value="其他"><label for="f05-8">其他</label></div>
+            </div>
+          </fieldset>
+        </div>
 
-            <footer class="ftco-footer ftco-bg-dark ftco-section">
-<div class="container px-md-4">
-<div class="footer-legal text-center">
-<div class=container>
-<div class="row justify-content-center">
-<div class=copyright style=color:#a9a9a9>
-Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</footer>
+        <div class="ct-field is-full">
+          <label for="f06">需求說明</label>
+          <textarea id="f06" class="form-control" name="entry.48027589" placeholder="請簡述您的需求（選填）"></textarea>
+        </div>
+
+        <div class="ct-submit">
+          <span class="ct-submit-note">* 為必填欄位</span>
+          <button id="submitButton" class="btn-form" type="button">送出</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Section 3: Offices -->
+  <section id="ct-offices" class="idx-section idx-wrap ct-offices-sec">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">02</span>
+        <div>
+          <div class="idx-eyebrow">// 02 — 辦公室據點</div>
+          <h2 class="idx-sec-title">全球辦公室據點</h2>
+        </div>
+      </div>
+    </div>
+    <div class="idx-rule"></div>
+
+    <div class="idx-grid">
+      <article class="idx-card">
+        <div class="idx-card-meta"><span>// 台北總部</span><span class="idx-badge">HQ</span></div>
+        <h3 class="idx-card-title">奧洛/特聿科技行銷 股份有限公司</h3>
+        <div class="ct-office-lines">
+          <div><span>ADDR</span><span>114 台北市內湖區洲子街101號2樓</span></div>
+          <div><span>TEL</span><a href="tel:+886-2-5568-4688">02-5568-4688</a></div>
+          <div><span>FAX</span><span>02-2659-6627</span></div>
+          <div><span>MAIL</span><a href="mailto:ad@aurocore.com">ad@aurocore.com</a></div>
+        </div>
+      </article>
+      <article class="idx-card">
+        <div class="idx-card-meta"><span>// 中國</span></div>
+        <h3 class="idx-card-title">廣州辦事處</h3>
+        <div class="ct-office-lines">
+          <div><span>ADDR</span><span>广州市天河区岑村圣堂大街工业区3号321室</span></div>
+          <div><span>TEL</span><a href="tel:+86-189-2502-2494">18925022494</a></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="ct-map">
+      <iframe
+        title="奧洛台北總部地圖"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.6430423887405!2d121.5651966726451!3d25.08008498717496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ac6f755c2fb3%3A0xd1e120b473f5358f!2zMTE05Y-w5YyX5biC5YWn5rmW5Y2A5rSy5a2Q6KGXMTAx6Jmf!5e0!3m2!1szh-TW!2stw!4v1705648910939!5m2!1szh-TW!2stw"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer-sec" class="idx-footer">
+    <div class="idx-wrap">
+      <div class="idx-footer-col">
+        <img src="images/logo.svg" alt="AUROBASE 奧洛" class="idx-footer-logo" width="92" height="20">
+        <span>Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved.</span>
+      </div>
+      <div class="idx-footer-col">
+        <span>台北市內湖區洲子街101號2樓</span>
+        <div class="idx-footer-links">
+          <a href="https://www.facebook.com/AurobaseTW/" target="_blank" rel="noopener">粉絲專頁</a>
+          <a href="privacypolicy.html">隱私權政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- END .idx-page -->
             </div><!-- END COLORLIB-MAIN -->
 	        </div><!-- END COLORLIB-PAGE -->
 
@@ -328,7 +348,6 @@ Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市�
     </div>
     
   <!-- ✅ 優化後的 JS 載入 -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -341,5 +360,6 @@ Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市�
   <script src="js/form-validator.js" defer></script>
   <script src="js/rate-limiter.js" defer></script>
   <script src="js/qform.js" defer></script> 
+  <script src="js/aurora.js" defer></script>
  </body>
 </html>

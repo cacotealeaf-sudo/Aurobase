@@ -81,45 +81,13 @@
     <link rel="stylesheet" href="css/ionicons.min.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/aurora-theme.css">
     <style>
 /* ══════════════════════════════════════════════
    INDEX PAGE — Scoped Styles
-   Dark ASCII-aurora system (docs/Aurobase 極光首頁.html)
+   Shared tokens/base/sections/cards/footer: css/aurora-theme.css
    ══════════════════════════════════════════════ */
-
-:root {
-  --idx-accent: #E84B22;
-  --idx-accent-hover: #ff4816;
-  --idx-bg: #0e0e10;
-  --idx-sky: #0b0b0d;
-  --idx-surface: #151518;
-  --idx-raised: #28282c;
-  --idx-line: #26262b;
-  --idx-line-2: #3a3a40;
-  --idx-ink: #f4f4f5;
-  --idx-text: #b9b9c0;
-  --idx-text-2: #c6c6cc;
-  --idx-muted: #8b8b92;
-  --idx-font: 'LINE Seed Sans', 'LINE Seed TW', system-ui, sans-serif;
-  --idx-display: 'Archivo', 'LINE Seed Sans', 'LINE Seed TW', sans-serif;
-  --idx-mono: 'Space Mono', 'LINE Seed TW', ui-monospace, Menlo, monospace;
-}
-
-/* ── COLORLIB LAYOUT FIX (same as nexus.html) ── */
-#colorlib-aside {
-  width: 340px !important;
-  background-color: #fff !important;
-}
-#colorlib-main {
-  margin-left: 340px !important;
-  width: calc(100% - 340px) !important;
-  float: none !important;
-  background: var(--idx-bg);
-}
-@media (max-width: 991.98px) {
-  #colorlib-aside { width: 270px !important; }
-  #colorlib-main { margin-left: 0 !important; width: 100% !important; }
-}
 
 /* ── ENTRY OVERLAY ── */
 #entryOverlay {
@@ -302,131 +270,29 @@
 .map-reset:hover { color: var(--idx-accent-hover); }
 .map-home:hover { color: var(--idx-ink); }
 
-/* Re-trigger button — circular, above .float inquiry button */
+/* Re-trigger button — secondary circle above the .qf-fab inquiry button (css/aurora-theme.css) */
 .entry-retrigger {
   position: fixed;
-  bottom: 115px; /* .float is bottom:40px + height:60px + 15px gap */
-  right: 40px;   /* align with .float */
+  right: 32px; bottom: 96px; /* .qf-fab: bottom 32px + 52px tall + 12px gap */
   z-index: 998;
-  width: 60px; height: 60px;
+  width: 48px; height: 48px; padding: 0;
   border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
-  padding: 0;
-  color: #E63109;
-  font-size: 0;  /* hide text, icon only */
+  background: var(--idx-raised);
+  border: 1px solid var(--idx-line-2);
+  color: var(--idx-accent);
   cursor: pointer;
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
-.entry-retrigger:hover { background: #E63109; box-shadow: 2px 2px 6px rgba(230,49,9,0.3); }
-.entry-retrigger:hover svg { stroke: #fff; }
-.entry-retrigger svg { stroke: #E63109; transition: stroke 0.2s; }
-
-/* ── HOMEPAGE BASE ── */
-#idx-home {
-  font-family: var(--idx-font);
-  color: var(--idx-text);
-  background: var(--idx-bg);
-}
-#idx-home a { color: #e6e6e9; text-decoration: none; transition: color 0.2s; }
-#idx-home a:hover { color: var(--idx-accent-hover); }
-#idx-home a:focus-visible,
-#idx-home summary:focus-visible { outline: 2px solid var(--idx-accent-hover); outline-offset: 3px; }
-#idx-home p { margin: 0; }
-#idx-home h1, #idx-home h2, #idx-home h3 { margin: 0; color: var(--idx-ink); }
-.idx-wrap { max-width: 1240px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
-.idx-mono { font-family: var(--idx-mono); }
-.idx-arrow { flex-shrink: 0; }
-
-/* Accent + grey 2px rule under hero copy and section headers */
-.idx-rule { display: flex; height: 2px; width: 100%; }
-.idx-rule::before { content: ''; width: 56px; background: var(--idx-accent); }
-.idx-rule::after { content: ''; flex: 1; background: var(--idx-line-2); }
-
-/* Two-tone label pair: [AUROBASE][數位整合行銷…] */
-.idx-tagpair { display: inline-flex; align-self: flex-start; font-family: var(--idx-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
-.idx-tagpair span { padding: 7px 12px; }
-.idx-tagpair span:first-child { background: var(--idx-raised); color: var(--idx-ink); }
-.idx-tagpair span:last-child { background: var(--idx-accent); color: var(--idx-bg); }
-
-#idx-home .idx-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  min-height: 52px; padding: 0 26px; font-size: 15px;
-}
-#idx-home .idx-btn-primary { background: var(--idx-accent); color: var(--idx-bg); font-weight: 700; }
-#idx-home .idx-btn-primary:hover { background: var(--idx-accent-hover); color: var(--idx-bg); }
-#idx-home .idx-btn-ghost { border: 1px solid #5a5a62; background: var(--idx-bg); font-weight: 500; }
-#idx-home .idx-btn-ghost:hover { border-color: var(--idx-accent-hover); }
-
-/* ── AURORA CANVAS SECTIONS (hero + CTA) ── */
-.idx-aurora { position: relative; overflow: hidden; background: var(--idx-sky); }
-.idx-aurora canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.idx-aurora-body { position: relative; z-index: 2; pointer-events: none; }
-.idx-aurora-body a { pointer-events: auto; }
+.entry-retrigger:hover { background: var(--idx-accent); border-color: var(--idx-accent); color: var(--idx-bg); transform: translateY(-2px); }
+.entry-retrigger:focus { outline: none; }
+.entry-retrigger:focus-visible { outline: 2px solid var(--idx-ink); outline-offset: 3px; }
+.entry-retrigger svg { stroke: currentColor; }
 
 /* ── HERO ── */
 #idx-hero { min-height: 860px; }
-#idx-hero .idx-aurora-body {
-  padding-top: 140px; padding-bottom: 180px;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 28px;
-}
-.idx-hero-title {
-  font-family: var(--idx-display);
-  font-size: clamp(44px, 6.2vw, 80px); line-height: 1.08; font-weight: 700;
-  letter-spacing: -0.015em; max-width: 680px;
-}
-.idx-hero-title span { display: block; }
-.idx-hero-title em { font-style: normal; color: var(--idx-accent); }
-#idx-hero .idx-rule { max-width: 520px; }
-.idx-hero-desc { max-width: 520px; font-size: 17px; line-height: 1.85; color: var(--idx-text-2); }
-.idx-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
-/* ── TICKER ── */
-.idx-ticker {
-  border-top: 1px solid var(--idx-line); border-bottom: 1px solid var(--idx-line);
-  overflow: hidden; padding: 16px 0; background: var(--idx-bg);
-  font-family: var(--idx-mono); font-size: 13px; color: var(--idx-muted);
-}
-.idx-ticker-track { display: flex; gap: 48px; white-space: nowrap; width: max-content; animation: idxTick 52s linear infinite; }
-@keyframes idxTick { to { transform: translateX(-50%); } }
-
-/* ── SECTIONS ── */
-.idx-section { padding-top: 120px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 48px; }
-.idx-section + .idx-section { padding-top: 100px; }
-.idx-sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
-.idx-sec-title-group { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
-.idx-sec-num {
-  font-family: 'Archivo', sans-serif; font-weight: 900;
-  font-size: 112px; line-height: 0.82; letter-spacing: -0.03em; color: var(--idx-accent);
-}
-.idx-sec-title-group > div { display: flex; flex-direction: column; gap: 12px; }
-.idx-eyebrow { font-family: var(--idx-mono); font-size: 13px; color: var(--idx-muted); }
-.idx-eyebrow.is-accent { color: var(--idx-accent); }
-.idx-sec-title { font-size: 42px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em; }
-#idx-home .idx-more { font-family: var(--idx-mono); font-size: 14px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
-
-/* ── CARDS ── */
-.idx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.idx-card {
-  border: 1px solid var(--idx-line); background: var(--idx-surface);
-  padding: 32px; display: flex; flex-direction: column; gap: 16px;
-  transition: border-color 0.2s ease;
-}
-.idx-card:hover { border-color: var(--idx-accent); }
-.idx-card-meta { display: flex; justify-content: space-between; align-items: center; font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); }
-.idx-badge { border: 1px solid var(--idx-accent); color: var(--idx-accent); padding: 2px 8px; border-radius: 4px; font-weight: 700; }
-.idx-card-title { font-size: 28px; font-weight: 700; }
-.idx-card-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); }
-.idx-card-desc { font-size: 15px; line-height: 1.85; }
-.idx-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; font-family: var(--idx-mono); font-size: 12px; color: var(--idx-text-2); }
-.idx-chips span { border: 1px solid var(--idx-line-2); border-radius: 4px; padding: 4px 9px; }
-
-.idx-card.is-compact { padding: 28px; gap: 12px; }
-.idx-card.is-compact .idx-card-title { font-size: 23px; }
-.idx-card.is-compact .idx-card-desc { font-size: 14px; }
-.idx-list { margin: 4px 0 0; padding: 0 0 0 18px; font-size: 13px; line-height: 1.95; color: var(--idx-muted); }
+#idx-hero .idx-aurora-body { padding-top: 140px; padding-bottom: 180px; }
 
 /* Collisions / Communication / Collaboration */
 .idx-values { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; padding-top: 12px; }
@@ -495,50 +361,13 @@
 .idx-cta-contacts { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; font-family: var(--idx-mono); font-size: 14px; }
 .idx-cta-contacts a { display: inline-flex; align-items: center; min-height: 44px; }
 
-/* ── FOOTER ── */
-.idx-footer { border-top: 1px solid var(--idx-line); background: var(--idx-bg); }
-.idx-footer .idx-wrap {
-  padding-top: 36px; padding-bottom: 44px;
-  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px;
-  font-size: 13px; color: var(--idx-muted);
-}
-.idx-footer-col { display: flex; flex-direction: column; gap: 8px; }
-.idx-footer-col:first-child { gap: 12px; }
-.idx-footer-logo { height: 20px; width: auto; align-self: flex-start; filter: brightness(0) invert(1); }
-.idx-footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-.idx-footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
-
 /* ── RESPONSIVE ── */
-@media (max-width: 1199.98px) {
-  .idx-sec-num { font-size: 80px; }
-  .idx-sec-title { font-size: 34px; }
-}
-
 @media (max-width: 991.98px) {
-  /* Floating buttons — stack vertically, aligned right */
-  .float {
-    right: 16px !important;
-    bottom: 20px !important;
-    width: 52px !important; height: 52px !important;
-    z-index: 999 !important;
-  }
-  .entry-retrigger {
-    right: 16px !important;
-    bottom: 84px !important;
-    width: 52px !important; height: 52px !important;
-    z-index: 998 !important;
-  }
-
   #entryOverlay { left: 0; }
   #bootScreen, #quizScreen, #mapScreen { max-width: 100%; padding: 0 24px; }
 
-  .idx-wrap { padding-left: 24px; padding-right: 24px; }
   #idx-hero { min-height: 0; }
   #idx-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 140px; }
-  .idx-section { padding-top: 80px; gap: 36px; }
-  .idx-section + .idx-section { padding-top: 64px; }
-  .idx-sec-num { font-size: 64px; }
-  .idx-sec-title { font-size: 28px; }
   .idx-feature { padding: 28px; gap: 28px; }
   .idx-feature-title { font-size: 40px; }
   .idx-cta-title { font-size: 36px; }
@@ -546,11 +375,7 @@
 }
 
 @media (max-width: 576px) {
-  .idx-wrap { padding-left: 16px; padding-right: 16px; }
-  .idx-hero-desc { font-size: 16px; }
-  .idx-grid { grid-template-columns: 1fr; }
-  .idx-card { padding: 24px; }
-  .idx-sec-title-group { gap: 16px; }
+  .entry-retrigger { right: 20px; bottom: 84px; } /* centred over the 56px icon-only .qf-fab */
   .idx-modules > div { padding: 16px; }
   .idx-faq summary { font-size: 16px; }
   .idx-cta-title { font-size: 30px; }
@@ -561,9 +386,6 @@
   .map-enter { width: 100%; text-align: center; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .idx-ticker-track { animation-duration: 104s; }
-}
 </style>
     
 	<!-- Google Tag Manager -->
@@ -580,331 +402,96 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 	
-        <button type="button" title="填單諮詢" class="float" data-toggle="modal" data-target="#myModal">
-          <img class="forms_icon" src="images/forms_icon.svg" alt="Inquiry form" />
+        <button type="button" class="qf-fab" data-toggle="modal" data-target="#myModal" aria-haspopup="dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>免費諮詢</span>
         </button>
-      
-       <div class="modal fade" id="myModal">
-       <div class="modal-dialog modal-dialog-scrollable">
+
+       <!-- Inquiry modal — two steps (js/inquiry-modal.js); submission by js/qform.js, which reads
+            #f01–#f04, #f06, #submitButton and every checked input[name="entry.1863307942"] -->
+       <div class="modal fade qf-modal" id="myModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="qfTitle">
+       <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
- 
-       <!-- Modal Header -->
-       <div class="modal-header">
-         <h5 class="modal-title">歡迎填寫諮詢表單，由專人為您量身規劃!</h5>
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+         <div class="qf-head">
+           <div class="qf-eyebrow">// 免費諮詢 · 約 1 分鐘</div>
+           <h2 class="qf-title" id="qfTitle">告訴我們您的需求</h2>
+           <p class="qf-sub">由專人為您量身規劃最適合的解決方案</p>
+           <button type="button" class="qf-close" data-dismiss="modal" aria-label="關閉">
+             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+           </button>
+           <ol class="qf-progress" aria-label="填寫進度">
+             <li data-qf-dot="1" class="is-active">01 · 需求</li>
+             <li data-qf-dot="2">02 · 聯絡方式</li>
+           </ol>
+         </div>
+
+         <form id="pop-qform" novalidate>
+           <div class="modal-body">
+
+             <!-- Step 1: what they need (all optional) -->
+             <div class="qf-step" data-qf-step="1">
+               <fieldset class="qf-block">
+                 <legend class="qf-q">您想了解哪些服務？<small>可複選</small></legend>
+                 <div class="qf-chips">
+                   <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="廣告投放"><label for="f05-1">廣告投放</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群服務"><label for="f05-2">社群服務</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="CDP 顧客數據"><label for="f05-4">CDP 顧客數據</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="HCL UNICA"><label for="f05-5">HCL Unica</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-6" name="entry.1863307942" value="MAGNOLIA CMS"><label for="f05-6">Magnolia CMS</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-7" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-8" name="entry.1863307942" value="其他"><label for="f05-8">其他 / 還不確定</label></div>
+                 </div>
+               </fieldset>
+               <div class="qf-block qf-field">
+                 <label for="f06">想先讓我們知道的事 <span class="qf-opt">選填</span></label>
+                 <textarea id="f06" class="qf-input" name="entry.48027589" maxlength="1000" placeholder="例如：想提升廣告轉換率、評估導入 CDP、預計上線時程…"></textarea>
+                 <span class="qf-count" data-qf-count aria-live="polite">0 / 1000</span>
+               </div>
+             </div>
+
+             <!-- Step 2: how to reach them -->
+             <div class="qf-step" data-qf-step="2" hidden>
+               <span class="qf-q">怎麼聯絡您？</span>
+               <div class="qf-fields">
+                 <div class="qf-field">
+                   <label for="f01">姓名 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="text" id="f01" name="entry.162276222" autocomplete="name" placeholder="王小明" required aria-describedby="f01-msg">
+                   <span class="qf-msg" id="f01-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f04">公司名稱 <span class="qf-opt">選填</span></label>
+                   <input class="qf-input" type="text" id="f04" name="entry.743695878" autocomplete="organization" placeholder="公司或品牌名稱">
+                 </div>
+                 <div class="qf-field">
+                   <label for="f02">Email <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="email" id="f02" name="entry.1357191828" autocomplete="email" inputmode="email" placeholder="name@company.com" required aria-describedby="f02-msg">
+                   <span class="qf-msg" id="f02-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f03">聯絡電話 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="tel" id="f03" name="entry.1380546653" autocomplete="tel" inputmode="tel" placeholder="0912-345-678" required aria-describedby="f03-msg">
+                   <span class="qf-msg" id="f03-msg" aria-live="polite"></span>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+           <div class="qf-foot">
+             <span class="qf-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a></span>
+             <div class="qf-actions">
+               <button type="button" class="qf-btn qf-btn-ghost" data-qf-back hidden>上一步</button>
+               <button type="button" class="qf-btn qf-btn-primary" data-qf-next>下一步<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5"/></svg></button>
+               <button type="button" class="qf-btn qf-btn-primary" id="submitButton" hidden>送出</button>
+             </div>
+           </div>
+         </form>
+
        </div>
- 
-       <!-- Modal body -->
-        <form id="pop-qform" class="validate">
-<style>
-/* 重置可能的樣式衝突 */
-.compact-form * {
-    box-sizing: border-box;
-}
-
-.compact-form .form-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 12px;
-}
-
-.compact-form .form-row fieldset {
-    flex: 1;
-    margin: 0;
-}
-
-.compact-form fieldset {
-    border: none;
-    padding: 0;
-    margin-bottom: 12px;
-}
-
-.compact-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.compact-form input[type="text"],
-.compact-form input[type="email"],
-.compact-form input[type="tel"] {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.compact-form .required {
-    color: #E63109;
-}
-
-/* 諮詢類型 - 緊湊的三欄 inline checkbox */
-.compact-form .checkbox-inline-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px 15px;
-    margin-top: 8px;
-}
-
-/* 修正 checkbox 樣式 - 重點區域 */
-.compact-form .form-check {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 4px 0;
-    position: relative;
-}
-
-.compact-form .form-check-input {
-    /* 重要：確保 checkbox 不被遮擋 */
-    margin: 0 12px 0 0 !important;
-    padding: 0 !important;
-    cursor: pointer;
-    flex-shrink: 0;
-    width: 16px !important;
-    height: 16px !important;
-    position: relative;
-    opacity: 1 !important;
-    appearance: auto;
-    -webkit-appearance: checkbox;
-}
-
-.compact-form .form-check label {
-    /* 確保文字不會覆蓋到 checkbox */
-    margin: 0;
-    padding: 0;
-    font-weight: 400;
-    font-size: 0.85rem;
-    cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.5;
-    user-select: none;
-}
-
-.compact-form textarea.form-control {
-    width: 100%;
-    min-height: 70px;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    resize: vertical;
-}
-
-/* 提交按鈕樣式 */
-.compact-form .btn-form {
-    width: 100%;
-    padding: 12px 20px;
-    background: #6B9BB9; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-}
-
-.compact-form .btn-form:hover {
-    background: #578399; 
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(90, 108, 125, 0.3);
-}
-
-.compact-form .btn-form:active {
-    transform: translateY(0);
-}
-
-.compact-form .btn-form:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-    .compact-form .form-row {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .compact-form .checkbox-inline-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .compact-form .checkbox-inline-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-
-<div class="compact-form">
-    <!-- 第一列：姓名 + Email -->
-    <div class="form-row">
-        <fieldset>
-            <label for="f01">您的姓名 <span class="required">*</span></label>
-            <input 
-                type="text" 
-                name="entry.162276222" 
-                id="f01" 
-                placeholder="請輸入姓名" 
-                required 
-            />
-        </fieldset>
-        
-        <fieldset>
-            <label for="f02">Email <span class="required">*</span></label>
-            <input 
-                type="email" 
-                name="entry.1357191828" 
-                id="f02" 
-                placeholder="example@gmail.com" 
-                required 
-            />
-        </fieldset>
-    </div>
-
-    <!-- 第二列：電話 + 公司名稱 -->
-    <div class="form-row">
-        <fieldset>
-            <label for="f03">聯絡電話 <span class="required">*</span></label>
-            <input 
-                type="tel" 
-                name="entry.1380546653" 
-                id="f03" 
-                placeholder="0911-XXX-XXX" 
-                required 
-            />
-        </fieldset>
-        
-        <fieldset>
-            <label for="f04">公司名稱</label>
-            <input 
-                type="text" 
-                name="entry.743695878" 
-                id="f04" 
-                placeholder="選填" 
-            />
-        </fieldset>
-    </div>
-
-    <!-- 諮詢類型 - 三欄緊湊排列 -->
-    <fieldset>
-        <label>諮詢類型</label>
-        <div class="checkbox-inline-grid">
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox"
-                    name="entry.1863307942"
-                    value="廣告投放" 
-                    id="f05-1" 
-                /> 
-                <label for="f05-1">廣告投放</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="社群服務" 
-                    id="f05-2" 
-                /> 
-                <label for="f05-2">社群服務</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="ACOUSTIC CXA" 
-                    id="f05-3" 
-                /> 
-                <label for="f05-3">ACOUSTIC CXA</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="CDP 顧客數據" 
-                    id="f05-4" 
-                /> 
-                <label for="f05-4">CDP 顧客數據</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="HCL UNICA" 
-                    id="f05-5" 
-                /> 
-                <label for="f05-5">HCL UNICA</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="MAGNOLIA CMS" 
-                    id="f05-6" 
-                /> 
-                <label for="f05-6">MAGNOLIA CMS</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="AI 智慧語伴" 
-                    id="f05-7" 
-                /> 
-                <label for="f05-7">AI 智慧語伴</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="其他" 
-                    id="f05-8" 
-                /> 
-                <label for="f05-8">其他</label>
-            </div>
-        </div>
-    </fieldset>
-
-    <!-- 需求說明 -->
-    <fieldset>
-        <label for="f06">需求說明</label>
-        <textarea 
-            id="f06" 
-            class="form-control" 
-            name="entry.48027589" 
-            placeholder="請簡述您的需求（選填）"
-        ></textarea>
-    </fieldset>
-
-    <button id="submitButton" class="btn-form" type="button">送出</button>
-</div>
-</form>      
-        </div>
-        </div>
-        </div>
+       </div>
+       </div>
 
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
@@ -980,10 +567,10 @@
   </div>
 
   <!-- ╔══ HOMEPAGE CONTENT ══╗ -->
-  <div id="idx-home">
+  <div id="idx-home" class="idx-page">
 
   <!-- Section 1: Hero (ASCII aurora canvas — js/aurora.js) -->
-  <section id="idx-hero" class="idx-aurora">
+  <section id="idx-hero" class="idx-aurora idx-hero">
     <canvas data-aurora="hero" aria-hidden="true"></canvas>
     <div class="idx-aurora-body idx-wrap">
       <div class="idx-tagpair"><span>AUROBASE</span><span>數位整合行銷 · AI 智慧解決方案</span></div>
@@ -1204,7 +791,7 @@
   </div><!-- END #idx-home -->
 
   <!-- Re-trigger button (hidden when overlay is visible) -->
-  <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()" title="需求診斷">
+  <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()" title="需求診斷" aria-label="重新進行需求診斷">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
   </button>
 	         </div><!-- END COLORLIB-MAIN -->
@@ -1474,6 +1061,7 @@ function resetQuiz() {
   <script src="js/main_optimized.js" defer></script>
   <script src="js/form-validator.js" defer></script>
   <script src="js/rate-limiter.js" defer></script>
+  <script src="js/inquiry-modal.js" defer></script>
   <script src="js/qform.js" defer></script>
   <script src="js/aurora.js" defer></script>
   

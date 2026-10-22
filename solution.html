@@ -40,6 +40,7 @@
     
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
 	<!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -53,331 +54,96 @@
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-        <button type="button" title="填單諮詢" class="float" data-toggle="modal" data-target="#myModal">
-        <img class="forms_icon" src="images/forms_icon.svg" alt="Inquiry form" />
+        <button type="button" class="qf-fab" data-toggle="modal" data-target="#myModal" aria-haspopup="dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>免費諮詢</span>
         </button>
       
-       <div class="modal fade" id="myModal">
-       <div class="modal-dialog modal-dialog-scrollable">
+       <!-- Inquiry modal — two steps (js/inquiry-modal.js); submission by js/qform.js, which reads
+            #f01–#f04, #f06, #submitButton and every checked input[name="entry.1863307942"] -->
+       <div class="modal fade qf-modal" id="myModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="qfTitle">
+       <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
- 
-       <!-- Modal Header -->
-       <div class="modal-header">
-         <h5 class="modal-title">歡迎填寫諮詢表單，由專人為您量身規劃!</h5>
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+         <div class="qf-head">
+           <div class="qf-eyebrow">// 免費諮詢 · 約 1 分鐘</div>
+           <h2 class="qf-title" id="qfTitle">告訴我們您的需求</h2>
+           <p class="qf-sub">由專人為您量身規劃最適合的解決方案</p>
+           <button type="button" class="qf-close" data-dismiss="modal" aria-label="關閉">
+             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+           </button>
+           <ol class="qf-progress" aria-label="填寫進度">
+             <li data-qf-dot="1" class="is-active">01 · 需求</li>
+             <li data-qf-dot="2">02 · 聯絡方式</li>
+           </ol>
+         </div>
+
+         <form id="pop-qform" novalidate>
+           <div class="modal-body">
+
+             <!-- Step 1: what they need (all optional) -->
+             <div class="qf-step" data-qf-step="1">
+               <fieldset class="qf-block">
+                 <legend class="qf-q">您想了解哪些服務？<small>可複選</small></legend>
+                 <div class="qf-chips">
+                   <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="廣告投放"><label for="f05-1">廣告投放</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群服務"><label for="f05-2">社群服務</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="CDP 顧客數據"><label for="f05-4">CDP 顧客數據</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="HCL UNICA"><label for="f05-5">HCL Unica</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-6" name="entry.1863307942" value="MAGNOLIA CMS"><label for="f05-6">Magnolia CMS</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-7" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-8" name="entry.1863307942" value="其他"><label for="f05-8">其他 / 還不確定</label></div>
+                 </div>
+               </fieldset>
+               <div class="qf-block qf-field">
+                 <label for="f06">想先讓我們知道的事 <span class="qf-opt">選填</span></label>
+                 <textarea id="f06" class="qf-input" name="entry.48027589" maxlength="1000" placeholder="例如：想提升廣告轉換率、評估導入 CDP、預計上線時程…"></textarea>
+                 <span class="qf-count" data-qf-count aria-live="polite">0 / 1000</span>
+               </div>
+             </div>
+
+             <!-- Step 2: how to reach them -->
+             <div class="qf-step" data-qf-step="2" hidden>
+               <span class="qf-q">怎麼聯絡您？</span>
+               <div class="qf-fields">
+                 <div class="qf-field">
+                   <label for="f01">姓名 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="text" id="f01" name="entry.162276222" autocomplete="name" placeholder="王小明" required aria-describedby="f01-msg">
+                   <span class="qf-msg" id="f01-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f04">公司名稱 <span class="qf-opt">選填</span></label>
+                   <input class="qf-input" type="text" id="f04" name="entry.743695878" autocomplete="organization" placeholder="公司或品牌名稱">
+                 </div>
+                 <div class="qf-field">
+                   <label for="f02">Email <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="email" id="f02" name="entry.1357191828" autocomplete="email" inputmode="email" placeholder="name@company.com" required aria-describedby="f02-msg">
+                   <span class="qf-msg" id="f02-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f03">聯絡電話 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="tel" id="f03" name="entry.1380546653" autocomplete="tel" inputmode="tel" placeholder="0912-345-678" required aria-describedby="f03-msg">
+                   <span class="qf-msg" id="f03-msg" aria-live="polite"></span>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+           <div class="qf-foot">
+             <span class="qf-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a></span>
+             <div class="qf-actions">
+               <button type="button" class="qf-btn qf-btn-ghost" data-qf-back hidden>上一步</button>
+               <button type="button" class="qf-btn qf-btn-primary" data-qf-next>下一步<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5"/></svg></button>
+               <button type="button" class="qf-btn qf-btn-primary" id="submitButton" hidden>送出</button>
+             </div>
+           </div>
+         </form>
+
        </div>
- 
-       <!-- Modal body -->
-	    <form   id="pop-qform" class="validate">
-<style>
-/* 重置可能的樣式衝突 */
-.compact-form * {
-    box-sizing: border-box;
-}
-
-.compact-form .form-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 12px;
-}
-
-.compact-form .form-row fieldset {
-    flex: 1;
-    margin: 0;
-}
-
-.compact-form fieldset {
-    border: none;
-    padding: 0;
-    margin-bottom: 12px;
-}
-
-.compact-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.compact-form input[type="text"],
-.compact-form input[type="email"],
-.compact-form input[type="tel"] {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.compact-form .required {
-    color: #E63109;
-}
-
-/* 諮詢類型 - 緊湊的三欄 inline checkbox */
-.compact-form .checkbox-inline-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px 15px;
-    margin-top: 8px;
-}
-
-/* 修正 checkbox 樣式 - 重點區域 */
-.compact-form .form-check {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 4px 0;
-    position: relative;
-}
-
-.compact-form .form-check-input {
-    /* 重要：確保 checkbox 不被遮擋 */
-    margin: 0 12px 0 0 !important;
-    padding: 0 !important;
-    cursor: pointer;
-    flex-shrink: 0;
-    width: 16px !important;
-    height: 16px !important;
-    position: relative;
-    opacity: 1 !important;
-    appearance: auto;
-    -webkit-appearance: checkbox;
-}
-
-.compact-form .form-check label {
-    /* 確保文字不會覆蓋到 checkbox */
-    margin: 0;
-    padding: 0;
-    font-weight: 400;
-    font-size: 0.85rem;
-    cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.5;
-    user-select: none;
-}
-
-.compact-form textarea.form-control {
-    width: 100%;
-    min-height: 70px;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    resize: vertical;
-}
-
-/* 提交按鈕樣式 */
-.compact-form .btn-form {
-    width: 100%;
-    padding: 12px 20px;
-    background: #6B9BB9; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-}
-
-.compact-form .btn-form:hover {
-    background: #578399; 
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(90, 108, 125, 0.3);
-}
-
-.compact-form .btn-form:active {
-    transform: translateY(0);
-}
-
-.compact-form .btn-form:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-    .compact-form .form-row {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .compact-form .checkbox-inline-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .compact-form .checkbox-inline-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-
-<div class="compact-form">
-    <!-- 第一列：姓名 + Email -->
-    <div class="form-row">
-        <fieldset>
-            <label for="f01">您的姓名 <span class="required">*</span></label>
-            <input 
-                type="text" 
-                name="entry.162276222" 
-                id="f01" 
-                placeholder="請輸入姓名" 
-                required 
-            />
-        </fieldset>
-        
-        <fieldset>
-            <label for="f02">Email <span class="required">*</span></label>
-            <input 
-                type="email" 
-                name="entry.1357191828" 
-                id="f02" 
-                placeholder="example@gmail.com" 
-                required 
-            />
-        </fieldset>
-    </div>
-
-    <!-- 第二列：電話 + 公司名稱 -->
-    <div class="form-row">
-        <fieldset>
-            <label for="f03">聯絡電話 <span class="required">*</span></label>
-            <input 
-                type="tel" 
-                name="entry.1380546653" 
-                id="f03" 
-                placeholder="0911-XXX-XXX" 
-                required 
-            />
-        </fieldset>
-        
-        <fieldset>
-            <label for="f04">公司名稱</label>
-            <input 
-                type="text" 
-                name="entry.743695878" 
-                id="f04" 
-                placeholder="選填" 
-            />
-        </fieldset>
-    </div>
-
-    <!-- 諮詢類型 - 三欄緊湊排列 -->
-    <fieldset>
-        <label>諮詢類型</label>
-        <div class="checkbox-inline-grid">
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox"
-                    name="entry.1863307942"
-                    value="廣告投放" 
-                    id="f05-1" 
-                /> 
-                <label for="f05-1">廣告投放</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="社群服務" 
-                    id="f05-2" 
-                /> 
-                <label for="f05-2">社群服務</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="ACOUSTIC CXA" 
-                    id="f05-3" 
-                /> 
-                <label for="f05-3">ACOUSTIC CXA</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="CDP 顧客數據" 
-                    id="f05-4" 
-                /> 
-                <label for="f05-4">CDP 顧客數據</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="HCL UNICA" 
-                    id="f05-5" 
-                /> 
-                <label for="f05-5">HCL UNICA</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="MAGNOLIA CMS" 
-                    id="f05-6" 
-                /> 
-                <label for="f05-6">MAGNOLIA CMS</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="AI 智慧語伴" 
-                    id="f05-7" 
-                /> 
-                <label for="f05-7">AI 智慧語伴</label>
-            </div>
-            
-            <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="checkbox" 
-                    name="entry.1863307942"
-                    value="其他" 
-                    id="f05-8" 
-                /> 
-                <label for="f05-8">其他</label>
-            </div>
-        </div>
-    </fieldset>
-
-    <!-- 需求說明 -->
-    <fieldset>
-        <label for="f06">需求說明</label>
-        <textarea 
-            id="f06" 
-            class="form-control" 
-            name="entry.48027589" 
-            placeholder="請簡述您的需求（選填）"
-        ></textarea>
-    </fieldset>
-
-    <button id="submitButton" class="btn-form" type="button">送出</button>
-</div>
-</form>     
-        </div>
-        </div>
-        </div>
+       </div>
+       </div>
       
 
 	<div id="colorlib-page">
@@ -579,6 +345,7 @@ Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市�
   <script src="js/main_optimized.js" defer></script>
   <script src="js/form-validator.js" defer></script>
   <script src="js/rate-limiter.js" defer></script>
+  <script src="js/inquiry-modal.js" defer></script>
   <script src="js/qform.js" defer></script>   
   </body>
 </html>

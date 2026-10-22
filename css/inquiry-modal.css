@@ -1,0 +1,172 @@
+/* ══════════════════════════════════════════════
+   INQUIRY FAB + MODAL — dark two-step pop-up used on every page that has #myModal
+   Markup: .qf-fab button + #myModal.qf-modal (copy from index.html)
+   Step logic + inline validation: js/inquiry-modal.js; submission: js/qform.js
+   Self-contained: works on light pages too, so it must not depend on css/aurora-theme.css.
+   ══════════════════════════════════════════════ */
+
+/* Tokens (same values as css/aurora-theme.css :root), scoped to the pop-up and its button */
+.qf-fab, .qf-modal {
+  --idx-accent: #E84B22;
+  --idx-accent-hover: #ff4816;
+  --idx-bg: #0e0e10;
+  --idx-surface: #151518;
+  --idx-raised: #28282c;
+  --idx-line: #26262b;
+  --idx-line-2: #3a3a40;
+  --idx-ink: #f4f4f5;
+  --idx-text: #b9b9c0;
+  --idx-text-2: #c6c6cc;
+  --idx-muted: #8b8b92;
+  --idx-font: 'LINE Seed Sans', 'LINE Seed TW', system-ui, sans-serif;
+  --idx-mono: 'Space Mono', 'LINE Seed TW', ui-monospace, Menlo, monospace;
+}
+
+/* ── Floating action button ── */
+.qf-fab {
+  position: fixed; right: 32px; bottom: 32px; z-index: 999;
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 52px; padding: 0 22px 0 18px; border: 0; border-radius: 999px;
+  background: var(--idx-accent); color: var(--idx-bg);
+  font-family: var(--idx-font); font-size: 15px; font-weight: 700; letter-spacing: 0.02em;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+  cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.qf-fab:hover { background: var(--idx-accent-hover); transform: translateY(-2px); }
+.qf-fab:focus { outline: none; }
+.qf-fab:focus-visible { outline: 2px solid var(--idx-ink); outline-offset: 3px; }
+.qf-fab svg { flex-shrink: 0; }
+
+/* ── Modal shell ── */
+/* The sidebar burger (z-index 9999) would sit on top of the modal/bottom sheet */
+body.modal-open .colorlib-nav-toggle { visibility: hidden !important; }
+.modal-backdrop.show { opacity: 0.72; }
+.qf-modal .modal-dialog { max-width: 640px; }
+/* Bootstrap 4.1 has no .modal-dialog-scrollable: cap the panel height and scroll only the body,
+   so the step buttons always stay on screen */
+.qf-modal .modal-content { max-height: calc(100vh - 3.5rem); overflow: hidden; }
+.qf-modal .modal-content {
+  background: var(--idx-surface); color: var(--idx-text);
+  border: 1px solid var(--idx-line-2); border-radius: 0;
+  font-family: var(--idx-font);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.qf-head { position: relative; padding: 28px 32px 0; }
+.qf-eyebrow { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-accent); }
+.qf-title { margin: 8px 0 6px; font-size: 26px; font-weight: 700; color: var(--idx-ink); line-height: 1.3; }
+.qf-sub { margin: 0; font-size: 14px; color: var(--idx-muted); }
+.qf-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  background: none; border: 1px solid transparent; color: var(--idx-muted); cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.qf-close:hover { color: var(--idx-ink); border-color: var(--idx-line-2); }
+.qf-close:focus { outline: none; }
+.qf-close:focus-visible { outline: 2px solid var(--idx-accent-hover); }
+
+/* ── Progress ── */
+.qf-progress { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 22px 0 0; padding: 0; }
+.qf-progress li {
+  list-style: none; padding-top: 10px; border-top: 2px solid var(--idx-line-2);
+  font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted);
+  transition: border-color 0.3s, color 0.3s;
+}
+.qf-progress li.is-active, .qf-progress li.is-done { border-top-color: var(--idx-accent); color: var(--idx-ink); }
+
+/* ── Body / steps ── */
+.qf-modal form { padding: 0; margin: 0; display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+.qf-modal .modal-body { padding: 24px 32px 20px; overflow-y: auto; overscroll-behavior: contain; }
+.qf-step[hidden] { display: none; }
+.qf-step { animation: qfIn 0.25s ease; }
+@keyframes qfIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+.qf-q { display: block; margin: 0 0 12px; font-size: 16px; font-weight: 700; color: var(--idx-ink); }
+.qf-q small { margin-left: 6px; font-size: 12px; font-weight: 400; color: var(--idx-muted); }
+.qf-block + .qf-block { margin-top: 22px; }
+
+.qf-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.qf-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.qf-chip label {
+  display: flex; align-items: center; gap: 10px; min-height: 48px; margin: 0; padding: 0 14px;
+  border: 1px solid var(--idx-line-2); background: var(--idx-bg);
+  font-size: 14px; color: var(--idx-text-2); cursor: pointer; user-select: none;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.qf-chip label::before {
+  content: ''; flex-shrink: 0; width: 16px; height: 16px; border: 1px solid #5a5a62;
+  background: no-repeat center / 10px 10px; transition: background-color 0.2s, border-color 0.2s;
+}
+.qf-chip label:hover { border-color: var(--idx-accent); }
+.qf-chip input:checked + label { border-color: var(--idx-accent); background: rgba(232,75,34,0.08); color: var(--idx-ink); }
+.qf-chip input:checked + label::before {
+  background-color: var(--idx-accent); border-color: var(--idx-accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' fill='none' stroke='%230e0e10' stroke-width='1.8'%3E%3Cpath d='M1.5 5.2l2.3 2.3L8.5 2.8'/%3E%3C/svg%3E");
+}
+.qf-chip input:focus-visible + label { outline: 2px solid var(--idx-accent-hover); outline-offset: 2px; }
+
+.qf-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 14px; }
+.qf-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.qf-field.is-full { grid-column: 1 / -1; }
+.qf-field label { margin: 0; font-size: 13px; color: var(--idx-text-2); }
+.qf-req { color: var(--idx-accent); }
+.qf-opt { font-size: 12px; color: var(--idx-muted); }
+/* .qf-modal prefix: style.css's input[type='text'] { background: white } would otherwise win */
+.qf-modal .qf-input {
+  width: 100%; height: 48px; padding: 0 14px; border-radius: 0;
+  background: var(--idx-bg); border: 1px solid var(--idx-line-2); color: var(--idx-ink);
+  font-family: var(--idx-font); font-size: 16px; /* 16px keeps iOS from zooming on focus */
+  transition: border-color 0.2s;
+}
+.qf-modal textarea.qf-input { height: 112px; padding: 12px 14px; resize: vertical; line-height: 1.6; }
+.qf-modal .qf-input::placeholder { color: #5a5a62; }
+.qf-modal .qf-input:focus { outline: none; border-color: var(--idx-accent); }
+.qf-field.is-error .qf-input { border-color: #ff6b6b; }
+.qf-field.is-valid .qf-input { border-color: #3fa26b; }
+.qf-msg { min-height: 0; font-size: 12px; color: #ff8a8a; }
+.qf-msg:empty { display: none; }
+/* form-validator.js auto-binds to email/tel inputs and appends its own message; .qf-msg replaces it */
+.qf-modal .validation-error { display: none; }
+.qf-count { align-self: flex-end; font-family: var(--idx-mono); font-size: 11px; color: var(--idx-muted); }
+
+/* ── Footer ── */
+.qf-foot {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 32px 24px; background: var(--idx-surface);
+  border-top: 1px solid var(--idx-line);
+}
+.qf-note { font-size: 12px; color: var(--idx-muted); }
+.qf-note a { color: var(--idx-text-2); text-decoration: underline; }
+.qf-actions { display: flex; gap: 10px; margin-left: auto; }
+.qf-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 22px; border: 1px solid transparent; border-radius: 0;
+  font-family: var(--idx-font); font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.qf-btn:focus { outline: none; }
+.qf-btn:focus-visible { outline: 2px solid var(--idx-accent-hover); outline-offset: 2px; }
+.qf-btn-primary { background: var(--idx-accent); color: var(--idx-bg); }
+.qf-btn-primary:hover { background: var(--idx-accent-hover); }
+.qf-btn-primary:disabled { background: var(--idx-line-2); color: var(--idx-muted); cursor: not-allowed; }
+.qf-btn-ghost { background: transparent; color: var(--idx-text-2); border-color: var(--idx-line-2); font-weight: 500; }
+.qf-btn-ghost:hover { color: var(--idx-ink); border-color: var(--idx-muted); }
+.qf-btn[hidden] { display: none; }
+
+@media (max-width: 575.98px) {
+  .qf-fab { right: 16px; bottom: 16px; width: 56px; height: 56px; padding: 0; justify-content: center; }
+  .qf-fab span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  /* Bottom sheet on phones */
+  .qf-modal .modal-dialog { margin: 0; max-width: none; min-height: 100%; display: flex; align-items: flex-end; }
+  .qf-modal.fade .modal-dialog { transform: translateY(40px); }
+  .qf-modal.show .modal-dialog { transform: none; }
+  .qf-modal .modal-content { max-height: 92vh; border-left: 0; border-right: 0; border-bottom: 0; }
+  .qf-head { padding: 22px 20px 0; }
+  .qf-title { font-size: 22px; padding-right: 40px; }
+  .qf-modal .modal-body { padding: 20px 20px 16px; }
+  .qf-fields { grid-template-columns: 1fr; }
+  .qf-foot { padding: 14px 20px calc(16px + env(safe-area-inset-bottom)); flex-wrap: wrap; }
+  .qf-note { order: 2; width: 100%; text-align: center; }
+  .qf-actions { width: 100%; }
+  .qf-actions .qf-btn { flex: 1; }
+}
