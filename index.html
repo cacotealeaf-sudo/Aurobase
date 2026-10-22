@@ -98,10 +98,16 @@
   background: var(--idx-bg);
   font-family: var(--idx-font);
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  align-items: center;
   transition: opacity 0.6s ease, transform 0.6s ease;
-  overflow: hidden;
+  /* Scrolls when a screen is taller than the viewport (5 quiz options on a phone);
+     the screens' margin:auto centres them only when they fit */
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  padding: 56px 0;
 }
+#entryOverlay > #bootScreen, #entryOverlay > #quizScreen, #entryOverlay > #mapScreen { margin: auto; flex-shrink: 0; }
+/* The floating inquiry button would sit on top of the quiz */
+body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
 #entryOverlay.closing {
   opacity: 0;
   transform: scale(1.02);
@@ -363,7 +369,7 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 991.98px) {
-  #entryOverlay { left: 0; }
+  #entryOverlay { left: 0; padding-top: 88px; } /* clear the sidebar burger and 略過 */
   #bootScreen, #quizScreen, #mapScreen { max-width: 100%; padding: 0 24px; }
 
   #idx-hero { min-height: 0; }
@@ -379,9 +385,22 @@
   .idx-modules > div { padding: 16px; }
   .idx-faq summary { font-size: 16px; }
   .idx-cta-title { font-size: 30px; }
-  .q-opts { grid-template-columns: 1fr; }
-  .q-actions { flex-direction: column-reverse; width: 100%; }
-  .q-next, .q-back { width: 100%; text-align: center; }
+  .q-title { font-size: 1.5rem; }
+  .q-sub { margin-bottom: 20px; }
+  .q-opts { grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px; }
+  .q-opt { padding: 14px 16px; }
+  /* Keep 下一題 / 上一題 pinned to the bottom of the scrolling overlay */
+  #entryOverlay { padding-bottom: 0; }
+  .q-actions {
+    position: sticky; bottom: 0; z-index: 1;
+    flex-direction: column-reverse; gap: 10px; width: 100%;
+    padding: 20px 0 calc(16px + env(safe-area-inset-bottom));
+    background: linear-gradient(to bottom, rgba(14,14,16,0), var(--idx-bg) 20px);
+  }
+  .q-next, .q-back { width: 100%; text-align: center; min-height: 48px; }
+  .q-next { opacity: 0.35; } /* visible but dimmed until an option is picked */
+  .q-next.ready { opacity: 1; }
+  #mapScreen { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
   .map-actions { flex-direction: column; width: 100%; }
   .map-enter { width: 100%; text-align: center; }
 }
