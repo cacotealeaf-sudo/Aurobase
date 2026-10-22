@@ -19,71 +19,19 @@ const FORM_FIELDS = {
     message: 'entry.48027589'
 };
 
-// 諮詢類型變數
-var f051="", f052="", f053="", f054="", f055="", f056="", f057="", f058="", f059="";
+// 諮詢類型：直接讀取被勾選 checkbox 的 value。
+// 各頁的選項與順序不同（首頁 modal、contact.html、nexus.html…），
+// 不能用 id 對應寫死的標籤，否則送出的類型會錯位。
+const CONSULTATION_CHECKBOXES = 'input[name="' + FORM_FIELDS.consultationType + '"]';
 
-// 診斷類型 checkbox 事件監聽
-let checkbox051 = document.getElementById('f05-1');
-if (checkbox051) {
-    checkbox051.addEventListener('change', function() {
-        f051 = this.checked ? "廣告投放," : "";
-    });
+function consultationScope() {
+    return document.getElementById("submitButton").closest('form') || document;
 }
 
-let checkbox052 = document.getElementById('f05-2');
-if (checkbox052) {
-    checkbox052.addEventListener('change', function() {
-        f052 = this.checked ? "社群服務," : "";
-    });
-}
-
-let checkbox053 = document.getElementById('f05-3');
-if (checkbox053) {
-    checkbox053.addEventListener('change', function() {
-        f053 = this.checked ? "客服中心," : "";
-    });
-}
-
-let checkbox054 = document.getElementById('f05-4');
-if (checkbox054) {
-    checkbox054.addEventListener('change', function() {
-        f054 = this.checked ? "ACOUSTIC CXA," : "";
-    });
-}
-
-let checkbox055 = document.getElementById('f05-5');
-if (checkbox055) {
-    checkbox055.addEventListener('change', function() {
-        f055 = this.checked ? "CDP 顧客數據," : "";
-    });
-}
-
-let checkbox056 = document.getElementById('f05-6');
-if (checkbox056) {
-    checkbox056.addEventListener('change', function() {
-        f056 = this.checked ? "HCL UNICA," : "";
-    });
-}
-
-let checkbox057 = document.getElementById('f05-7');
-if (checkbox057) {
-    checkbox057.addEventListener('change', function() {
-        f057 = this.checked ? "MAGNOLIA CMS," : "";
-    });
-}
-
-let checkbox058 = document.getElementById('f05-8');
-if (checkbox058) {
-    checkbox058.addEventListener('change', function() {
-        f058 = this.checked ? "AI 智慧語伴," : "";
-    });
-}
-
-let checkbox059 = document.getElementById('f05-9');
-if (checkbox059) {
-    checkbox059.addEventListener('change', function() {
-        f059 = this.checked ? "其他" : "";
-    });
+function checkedConsultationTypes() {
+    return Array.from(consultationScope().querySelectorAll(CONSULTATION_CHECKBOXES + ':checked'))
+        .map(function(box) { return box.value; })
+        .join(',');
 }
 
 // 提交按鈕事件
@@ -100,7 +48,7 @@ document.getElementById("submitButton").addEventListener("click", async function
         email: document.getElementById("f02").value,
         phone: document.getElementById("f03").value,
         company: document.getElementById("f04").value,
-        consultationType: f051 + f052 + f053 + f054 + f055 + f056 + f057 + f058 + f059,
+        consultationType: checkedConsultationTypes(),
         message: document.getElementById("f06") ? document.getElementById("f06").value : ''
     };
 
@@ -171,17 +119,9 @@ document.getElementById("submitButton").addEventListener("click", async function
             }
 
             // 重置 checkbox
-            if (checkbox051) checkbox051.checked = false;
-            if (checkbox052) checkbox052.checked = false;
-            if (checkbox053) checkbox053.checked = false;
-            if (checkbox054) checkbox054.checked = false;
-            if (checkbox055) checkbox055.checked = false;
-            if (checkbox056) checkbox056.checked = false;
-            if (checkbox057) checkbox057.checked = false;
-            if (checkbox058) checkbox058.checked = false;
-            if (checkbox059) checkbox059.checked = false;
-
-            f051 = f052 = f053 = f054 = f055 = f056 = f057 = f058 = f059 = "";
+            consultationScope().querySelectorAll(CONSULTATION_CHECKBOXES).forEach(function(box) {
+                box.checked = false;
+            });
         });
     } catch (error) {
         console.error('提交錯誤:', error);
