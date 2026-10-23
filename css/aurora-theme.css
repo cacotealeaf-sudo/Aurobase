@@ -137,6 +137,20 @@
 .idx-card.is-compact .idx-card-desc { font-size: 14px; }
 .idx-list { margin: 4px 0 0; padding: 0 0 0 18px; font-size: 13px; line-height: 1.95; color: var(--idx-muted); }
 
+/* Whole-card link: the title's <a> stretches over the card; .idx-card-cta is the visual cue */
+.idx-card { position: relative; }
+.idx-page .idx-card-link, .idx-page .idx-card-link:hover { color: inherit; }
+.idx-card-link::after { content: ''; position: absolute; inset: 0; }
+.idx-page .idx-card-link:focus-visible { outline: none; }
+.idx-card:has(.idx-card-link:focus-visible) { outline: 2px solid var(--idx-accent-hover); outline-offset: 3px; }
+.idx-card-cta {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 16px;
+  border-top: 1px solid var(--idx-line); font-family: var(--idx-mono); font-size: 13px; color: var(--idx-muted);
+  transition: color 0.2s;
+}
+.idx-chips + .idx-card-cta { margin-top: 8px; }
+.idx-card:hover .idx-card-cta { color: var(--idx-accent); }
+
 /* ── FOOTER ── */
 .idx-footer { border-top: 1px solid var(--idx-line); background: var(--idx-bg); }
 .idx-footer .idx-wrap {
