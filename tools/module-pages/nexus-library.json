@@ -1,0 +1,249 @@
+{
+  "slug": "nexus-library",
+  "file": "nexus-library.html",
+  "code": "Library",
+  "name_zh": "個人知識收藏空間",
+  "leg": "知識",
+  "eyebrow": "Library — Personal Knowledge Space",
+  "description": "Library 是奧洛（Aurobase）的企業個人知識管理（PKM）工具：每位員工一個獨立收藏空間，文字、網址、筆記與檔案可一鍵存入、加標籤、搜尋，並有 Chrome 擴充套件；收藏留在企業環境內，可由 Insight 建立語意索引。",
+  "keywords": [
+    "個人知識管理",
+    "PKM",
+    "企業 PKM",
+    "書籤管理",
+    "書籤管理工具",
+    "知識收藏",
+    "筆記",
+    "瀏覽器擴充套件",
+    "企業知識庫",
+    "AURO NEXUS"
+  ],
+  "theme": {
+    "deep": "#8A5A0E",
+    "bright": "#B87A16",
+    "soft": "#E7B45C",
+    "tint": "#FBF3E3",
+    "ink1": "#17110A",
+    "ink2": "#2A1E10"
+  },
+  "inquiry_chip": "NEXUS AI 自動化平台",
+  "hero": {
+    "h1": "Library｜企業個人知識管理（PKM）",
+    "sub": "工作上讀到的文章、會議裡的一段筆記、同事傳來的連結，散在瀏覽器書籤、通訊軟體與個人電腦裡，需要時找不到。Library 給每位員工一個自己的收藏空間，一鍵存入、加上標籤、隨時搜尋。",
+    "tagline": "企業知識的起點，往往是某個人覺得「這個值得留下來」的那一刻。",
+    "badges": [
+      {
+        "icon": "folder",
+        "text": "個人空間"
+      },
+      {
+        "icon": "internet",
+        "text": "瀏覽器擴充套件"
+      },
+      {
+        "icon": "search",
+        "text": "搜尋與標籤"
+      },
+      {
+        "icon": "privacy-policy",
+        "text": "個資刪除可追溯"
+      }
+    ],
+    "slogan": "看到有用的東西<br>就<em>存進來</em>"
+  },
+  "summary": [
+    [
+      "是什麼",
+      "每位員工的個人知識收藏、標籤與搜尋空間。"
+    ],
+    [
+      "收藏類型",
+      "文字、Markdown、網址、檔案、網頁剪輯、筆記。"
+    ],
+    [
+      "收藏方式",
+      "單一入口存入，另有 Chrome 瀏覽器擴充套件。"
+    ],
+    [
+      "介面語言",
+      "四種介面語言。"
+    ],
+    [
+      "所屬",
+      "AURO NEXUS 平台「知識」能力，語意索引由 <a href=\"nexus-insight.html\">Insight</a> 提供。"
+    ]
+  ],
+  "pain": {
+    "heading": "個人知識散落的代價",
+    "cards": [
+      {
+        "title": "存在各處，找不回來",
+        "text": "書籤、通訊軟體、個人筆記各存一份，需要時想不起放在哪裡。"
+      },
+      {
+        "title": "公私不分",
+        "text": "工作資料存到個人雲端或私人筆記軟體，離職時帶走，也留下資安疑慮。"
+      },
+      {
+        "title": "無法成為組織知識",
+        "text": "個人收藏與企業知識庫是兩個世界，有價值的資料沒有機會被整理與共用。"
+      }
+    ],
+    "statement": "Library 讓個人收藏<strong>留在企業環境內、依人員劃分、可被企業知識層索引</strong>。"
+  },
+  "capabilities": {
+    "heading": "核心能力",
+    "cards": [
+      {
+        "icon": "folder",
+        "title": "每人一個空間",
+        "items": [
+          "依租戶與人員劃分獨立空間，彼此不可見。"
+        ]
+      },
+      {
+        "icon": "page",
+        "title": "單一入口收藏",
+        "items": [
+          "文字、Markdown、網址、檔案、網頁剪輯、筆記，都從同一個入口存入。",
+          "檔案上限 100MB。"
+        ]
+      },
+      {
+        "icon": "shield-check",
+        "title": "收藏時的安全檢查",
+        "items": [
+          "阻擋 <code>javascript:</code>、<code>data:</code>、<code>file:</code> 等危險網址格式。"
+        ]
+      },
+      {
+        "icon": "search",
+        "title": "搜尋與標籤",
+        "items": [
+          "全文比對搜尋。",
+          "標籤新增、刪除、改名與使用統計。"
+        ]
+      },
+      {
+        "icon": "internet",
+        "title": "瀏覽器擴充套件",
+        "items": [
+          "Chrome 擴充套件，瀏覽網頁時一鍵收藏。"
+        ]
+      },
+      {
+        "icon": "privacy-policy",
+        "title": "個資刪除與稽核",
+        "items": [
+          "個資刪除請求以雜湊墓碑處理：內容移除，紀錄可追溯。",
+          "處理過程寫入不可覆寫的稽核紀錄。"
+        ]
+      }
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "cards": [
+      {
+        "icon": "server",
+        "title": "留在企業環境內",
+        "text": "收藏內容存放在企業自己的環境，不經過外部筆記或書籤服務。"
+      },
+      {
+        "icon": "brain",
+        "title": "與企業知識層銜接",
+        "text": "收藏的內容可由 Insight 建立語意索引，個人收藏有機會成為組織知識。"
+      },
+      {
+        "icon": "privacy-policy",
+        "title": "個資刪除做得到",
+        "text": "當事人提出刪除請求時，內容確實移除，同時保留可稽核的處理紀錄。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "Library 與 <a href=\"nexus-insight.html\">Insight</a> 共同構成平台的<b>知識</b>能力：Library 負責收藏與個人整理，Insight 負責文件解析、語意索引與知識治理。Insight 建好索引後，會將連結回填到 Library 的收藏項目。",
+    "related": [
+      "nexus-insight",
+      "nexus-ai-office"
+    ]
+  },
+  "deploy": [
+    {
+      "tag": "叢集",
+      "title": "Kubernetes",
+      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+    },
+    {
+      "tag": "單機 / POC",
+      "title": "docker compose",
+      "text": "以 compose 起站，快速試用。"
+    },
+    {
+      "tag": "用戶端",
+      "title": "瀏覽器擴充套件",
+      "text": "Chrome 擴充套件可由企業統一派送。"
+    }
+  ],
+  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",
+  "limits": [
+    {
+      "title": "語意搜尋由 Insight 提供",
+      "text": "Library 本身提供全文比對搜尋；依語意的搜尋與問答需搭配 Insight。"
+    },
+    {
+      "title": "以個人空間為主",
+      "text": "目前版本以個人收藏為主；團隊共享空間依專案需求另行規劃。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "Library 可以收藏哪些內容？",
+      "a": "文字、Markdown、網址、檔案、網頁剪輯與筆記，都從同一個入口存入；瀏覽網頁時也可用 Chrome 擴充套件一鍵收藏。"
+    },
+    {
+      "q": "和一般書籤管理工具有什麼不同？",
+      "a": "Library 部署在企業環境內，依人員劃分空間，收藏時阻擋危險網址格式，並可由 Insight 建立語意索引，讓個人收藏銜接企業知識庫。"
+    },
+    {
+      "q": "其他同事看得到我的收藏嗎？",
+      "a": "看不到。每位員工的空間依租戶與人員劃分，彼此獨立。"
+    },
+    {
+      "q": "可以用自然語言搜尋嗎？",
+      "a": "Library 本身提供全文比對搜尋；搭配 Insight 後，可進行語意搜尋。"
+    }
+  ],
+  "cta": {
+    "heading": "想讓團隊的知識不再散落？",
+    "text": "我們可以為一個部門開通試用，實際用兩週看看收藏習慣是否改變。"
+  },
+  "title": "企業個人知識管理｜Library 知識收藏、書籤管理與搜尋",
+  "definition": {
+    "q": "什麼是企業版個人知識管理？",
+    "a": [
+      "<b>個人知識管理（PKM）</b>是把工作上讀到、想到的資訊有系統地收藏、整理與找回。企業版的差別在於：收藏留在企業環境內，並能成為組織知識的來源。",
+      "<b>Library</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的企業個人知識管理工具。每位員工有獨立的收藏空間，文字、網址、筆記、網頁剪輯與檔案可從同一個入口存入、加標籤、搜尋；Chrome 擴充套件一鍵收藏；收藏可由 Insight 建立語意索引。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "知識工作者",
+      "why": "要一個地方收齊文章、連結與筆記，需要時找得回來。"
+    },
+    {
+      "who": "資訊與資安單位",
+      "why": "不希望工作資料散落在員工私人的筆記或雲端服務。"
+    },
+    {
+      "who": "知識管理推動者",
+      "why": "要讓個人收藏有機會成為組織知識。"
+    }
+  ],
+  "updated": "2026-10-30",
+  "aliases": [
+    "NEXUS Library",
+    "AURO NEXUS Library"
+  ]
+}

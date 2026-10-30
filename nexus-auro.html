@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <title>企業級 AI Agent 平台｜Auro AI 任務編排與人工審核</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Auro 是奧洛（Aurobase）的企業級 AI Agent 平台：每個 AI 任務都有步數、token 與時限上限，每一步先經四態治理閘門判定放行、警示、送審或阻擋，可暫停交人審核、可緊急停止，全程留下稽核紀錄。">
+    <meta name="keywords" content="AI Agent 平台,企業級 AI Agent,AI agent 企業導入,AI agent 企業應用,AI 代理,任務編排,工作流程自動化,人工審核,AI 治理,AURO NEXUS">
+    <link rel="canonical" href="https://aurobase.com/nexus-auro.html">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/nexus-auro.html">
+    <meta property="og:title" content="企業級 AI Agent 平台｜Auro AI 任務編排與人工審核">
+    <meta property="og:description" content="Auro 是奧洛（Aurobase）的企業級 AI Agent 平台：每個 AI 任務都有步數、token 與時限上限，每一步先經四態治理閘門判定放行、警示、送審或阻擋，可暫停交人審核、可緊急停止，全程留下稽核紀錄。">
+    <meta property="og:url" content="https://aurobase.com/nexus-auro.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+    <meta property="og:image" content="https://aurobase.com/images/nexus-chat.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aurobase.com/nexus-auro.html#software",
+      "name": "Auro AI 任務編排",
+      "alternateName": [
+        "Auro — Governed AI Task Orchestration",
+        "NEXUS Auro",
+        "AURO NEXUS Auro"
+      ],
+      "description": "Auro 是奧洛（Aurobase）的企業級 AI Agent 平台：每個 AI 任務都有步數、token 與時限上限，每一步先經四態治理閘門判定放行、警示、送審或阻擋，可暫停交人審核、可緊急停止，全程留下稽核紀錄。",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "AI 編排",
+      "operatingSystem": "Linux（容器化部署）",
+      "inLanguage": "zh-Hant-TW",
+      "url": "https://aurobase.com/nexus-auro.html",
+      "isPartOf": {
+        "@id": "https://aurobase.com/nexus.html#platform"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "featureList": [
+        "有界執行",
+        "四態治理閘門",
+        "人工審核與緊急停止",
+        "代理間委派",
+        "受治理的長期記憶",
+        "技能登錄與執行"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/nexus-auro.html#webpage",
+      "url": "https://aurobase.com/nexus-auro.html",
+      "name": "企業級 AI Agent 平台｜Auro AI 任務編排與人工審核",
+      "description": "Auro 是奧洛（Aurobase）的企業級 AI Agent 平台：每個 AI 任務都有步數、token 與時限上限，每一步先經四態治理閘門判定放行、警示、送審或阻擋，可暫停交人審核、可緊急停止，全程留下稽核紀錄。",
+      "inLanguage": "zh-Hant-TW",
+      "dateModified": "2026-10-30",
+      "about": {
+        "@id": "https://aurobase.com/nexus-auro.html#software"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://aurobase.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AURO NEXUS",
+          "item": "https://aurobase.com/nexus.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Auro",
+          "item": "https://aurobase.com/nexus-auro.html"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "企業導入 AI Agent 最需要注意什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "三件事：成本與執行時間要有硬上限、會影響外部的動作要先經人審、每一步都要能事後重建。Auro 以預算上限、四態治理閘門、人工審核佇列與逐步稽核處理這三件事。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Auro 怎麼避免 AI Agent 失控？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每個任務都有步數、token 與時限上限；每一步先經治理閘門判定放行、警示、送審或阻擋；人員可隨時緊急停止任務，全程寫入稽核紀錄。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "治理服務當機時會怎樣？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Auro 採 fail-closed 設計：治理服務無法回應時，任務一律被阻擋，不會在沒有檢查的情況下繼續執行。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以在沒有網路的環境使用嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。Auro 提供完全離線的模型設定，只使用地端模型。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/iconoir-subset.css">
+    <link rel="stylesheet" href="css/nexus-module.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+  </head>
+  <body style="--m-deep:#5B2C8A;--m-bright:#7D45BF;--m-soft:#B794E8;--m-tint:#F3ECFB;--m-ink1:#120B1C;--m-ink2:#1E1330">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== 浮動諮詢按鈕 + Modal ===== -->
+<div class="float-btn-wrapper">
+        <button type="button" class="qf-fab" data-toggle="modal" data-target="#myModal" aria-haspopup="dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>免費諮詢</span>
+        </button>
+</div>
+
+       <!-- Inquiry modal — two steps (js/inquiry-modal.js); submission by js/qform.js, which reads
+            #f01–#f04, #f06, #submitButton and every checked input[name="entry.1863307942"] -->
+       <div class="modal fade qf-modal" id="myModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="qfTitle">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+
+         <div class="qf-head">
+           <div class="qf-eyebrow">// 免費諮詢 · 約 1 分鐘</div>
+           <h2 class="qf-title" id="qfTitle">告訴我們您的需求</h2>
+           <p class="qf-sub">由專人為您量身規劃最適合的解決方案</p>
+           <button type="button" class="qf-close" data-dismiss="modal" aria-label="關閉">
+             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+           </button>
+           <ol class="qf-progress" aria-label="填寫進度">
+             <li data-qf-dot="1" class="is-active">01 · 需求</li>
+             <li data-qf-dot="2">02 · 聯絡方式</li>
+           </ol>
+         </div>
+
+         <form id="pop-qform" novalidate>
+           <div class="modal-body">
+
+             <!-- Step 1: what they need (all optional) -->
+             <div class="qf-step" data-qf-step="1">
+               <fieldset class="qf-block">
+                 <legend class="qf-q">您想了解哪些服務？<small>可複選</small></legend>
+                 <div class="qf-chips">
+                   <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="數位廣告投放"><label for="f05-1">數位廣告投放</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群媒體經營"><label for="f05-2">社群媒體經營</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="HCL Unica"><label for="f05-4">HCL Unica</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="CDP 客戶數據平台"><label for="f05-5">CDP 客戶數據平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">NEXUS AI 自動化平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-10" name="entry.1863307942" value="AI Voice Studio"><label for="f05-10">AI Voice Studio</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-11" name="entry.1863307942" value="NEXUS GEO 生成式搜尋優化"><label for="f05-11">NEXUS GEO 生成式搜尋優化</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-12" name="entry.1863307942" value="NEXUS SAGA 資料治理"><label for="f05-12">NEXUS SAGA 資料治理</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-7" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-8" name="entry.1863307942" value="其他"><label for="f05-8">其他 / 還不確定</label></div>
+                 </div>
+               </fieldset>
+               <div class="qf-block qf-field">
+                 <label for="f06">想先讓我們知道的事 <span class="qf-opt">選填</span></label>
+                 <textarea id="f06" class="qf-input" name="entry.48027589" maxlength="1000" placeholder="例如：想提升廣告轉換率、評估導入 CDP、預計上線時程…"></textarea>
+                 <span class="qf-count" data-qf-count aria-live="polite">0 / 1000</span>
+               </div>
+             </div>
+
+             <!-- Step 2: how to reach them -->
+             <div class="qf-step" data-qf-step="2" hidden>
+               <span class="qf-q">怎麼聯絡您？</span>
+               <div class="qf-fields">
+                 <div class="qf-field">
+                   <label for="f01">姓名 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="text" id="f01" name="entry.162276222" autocomplete="name" placeholder="王小明" required aria-describedby="f01-msg">
+                   <span class="qf-msg" id="f01-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f04">公司名稱 <span class="qf-opt">選填</span></label>
+                   <input class="qf-input" type="text" id="f04" name="entry.743695878" autocomplete="organization" placeholder="公司或品牌名稱">
+                 </div>
+                 <div class="qf-field">
+                   <label for="f02">Email <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="email" id="f02" name="entry.1357191828" autocomplete="email" inputmode="email" placeholder="name@company.com" required aria-describedby="f02-msg">
+                   <span class="qf-msg" id="f02-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f03">聯絡電話 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="tel" id="f03" name="entry.1380546653" autocomplete="tel" inputmode="tel" placeholder="0912-345-678" required aria-describedby="f03-msg">
+                   <span class="qf-msg" id="f03-msg" aria-live="polite"></span>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+           <div class="qf-foot">
+             <span class="qf-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a></span>
+             <div class="qf-actions">
+               <button type="button" class="qf-btn qf-btn-ghost" data-qf-back hidden>上一步</button>
+               <button type="button" class="qf-btn qf-btn-primary" data-qf-next>下一步<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5"/></svg></button>
+               <button type="button" class="qf-btn qf-btn-primary" id="submitButton" hidden>送出</button>
+             </div>
+           </div>
+         </form>
+
+       </div>
+       </div>
+       </div>
+</div>
+
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+            <nav id="colorlib-main-menu" role="navigation">
+                <ul>
+                    <li><a href="marketing.html">數位行銷</a></li>
+                    <li><a href="solution.html">解決方案＆產品</a></li>
+                    <li><a href="https://aurocore.com/" target="_blank">客服中心</a></li>
+                    <li><a href="ai-companion.html">AI 智慧語伴</a></li>
+                    <li class="active"><a href="nexus.html">AURO NEXUS</a></li>
+                    <li><a href="blog.html">新聞中心</a></li>
+                    <li><a href="contact.html">聯絡我們</a></li>
+                </ul>
+                <p class="social">
+                    <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                    </svg> 粉絲專頁</a></span>
+                </p>
+            </nav>
+            <div class="colorlib-footer">
+                <div class="aside-logo"><a href="index.html">
+                    <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+                </a></div>
+            </div>
+        </aside>
+
+        <div id="colorlib-main">
+
+<!-- ╔══ Auro — AI 任務編排（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）══╗ -->
+
+            <section class="nm-hero nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <nav class="nm-crumbs" aria-label="麵包屑"><ol>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="nexus.html">AURO NEXUS</a></li>
+                        <li><span aria-current="page">Auro</span></li>
+                    </ol></nav>
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <p class="nm-family">AURO NEXUS 產品家族</p>
+                            <h1 class="eyebrow">Auro｜企業級 AI Agent 平台</h1>
+                            <p class="hero-slogan">讓 AI Agent 做事<br>但<em>不讓它失控</em></p>
+                            <p class="hero-sub">AI 代理能自己拆解任務、呼叫工具、委派子任務——也可能在迴圈裡打轉、超出預算、做出不該做的動作。Auro 為每個任務設好上限，每一步先過治理閘門，必要時暫停交人審核，任何時候都能緊急停止。</p>
+                            <p class="hero-tagline">自動化的前提，是隨時知道它在做什麼，也隨時停得下來。</p>
+                            <div class="hero-actions">
+                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
+                            </div>
+                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-hourglass"></i> 步數・token・時限上限</span><span class="nm-badge"><i class="iconoir-shield-check"></i> 四態治理閘門</span><span class="nm-badge"><i class="iconoir-group"></i> 人工審核佇列</span><span class="nm-badge"><i class="iconoir-warning-triangle"></i> 緊急停止</span></div>
+                        </div>
+                        <div class="col-lg-5 mt-5 mt-lg-0">
+                            <aside class="nm-summary">
+                                <h2>重點摘要</h2>
+                                <dl><dt>是什麼</dt><dd>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</dd><dt>治理閘門</dt><dd>每一步判定為放行、警示、送審或阻擋四種結果。</dd><dt>失效處理</dt><dd>治理服務無法回應時一律阻擋（fail-closed）。</dd><dt>部署情境</dt><dd>依環境選用模型組合：預設、完全離線、混合三種設定。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「AI 編排」能力，AI 呼叫經 <a href="nexus-forge.html">Forge</a>。</dd></dl>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="what-is" class="nm-define nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEFINITION</p>
+                            <h2 class="section-heading">什麼是企業級 AI Agent 平台？</h2>
+                            <div class="row">
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>企業級 AI Agent 平台</b>讓 AI 代理能拆解任務、呼叫工具、委派子任務，同時由平台強制執行預算、權限與人工審核，使自動化在受控範圍內運作。</p><p><b>Auro</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的企業級 AI Agent 平台。每個任務都有步數、token 與時限上限；每一步先經四態治理閘門判定放行、警示、送審或阻擋；治理服務無法回應時一律阻擋；人員可隨時緊急停止，全程寫入稽核紀錄。</p></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>數位轉型與流程負責人</b><span>想把重複性工作交給 AI Agent，但需要明確的上限與審核點。</span></li><li><b>資安與風控</b><span>要確保 AI Agent 的每個動作都經過檢查、出事時能逐步重建。</span></li><li><b>已導入 AI 治理平台的企業</b><span>要把治理從單次推論延伸到多步驟的代理任務。</span></li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-pain nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">THE PROBLEM</p>
+                            <h2 class="section-heading">AI 代理上線前，必須回答的三個問題</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">01</div>
+                                        <h3>它會不會停不下來？</h3><p>代理在迴圈中反覆呼叫模型與工具，成本與時間沒有上限，等發現時帳單已經出來。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">02</div>
+                                        <h3>它做的事誰核准？</h3><p>寄信、改資料、發通知這類動作，需要有人在動作發生前看過，而不是事後才知道。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">03</div>
+                                        <h3>出事時查得到嗎？</h3><p>代理做了哪些步驟、依據什麼判斷、呼叫了哪些工具，必須能逐步重建。</p></div></div>
+                            </div>
+                            <div class="pain-statement">Auro 讓 AI 任務<strong>有上限、有閘門、有人審、停得下、查得到</strong>。</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="capabilities" class="nm-cap nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">CAPABILITIES</p>
+                            <h2 class="section-heading">核心能力</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-hourglass"></i></div>
+                                        <h3>有界執行</h3><ul><li>每個任務設定<b>步數、token 與時限</b>上限，超出即停止。</li><li>每一步依序檢查：停止旗標 → 預算 → 政策 → 治理閘門 → 寫入稽核。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
+                                        <h3>四態治理閘門</h3><ul><li>每一步判定為<b>放行、警示、送審、阻擋</b>。</li><li>治理服務無法回應時<b>一律阻擋</b>，不會默默放行。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-group"></i></div>
+                                        <h3>人工審核與緊急停止</h3><ul><li>判定送審的步驟進入審核佇列，核准後才繼續。</li><li>任何時候都可由人員緊急停止任務。</li><li>任務進度以串流即時回報。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-git-branch"></i></div>
+                                        <h3>代理間委派</h3><ul><li>任務可委派子任務給其他代理。</li><li>委派有<b>深度上限</b>，父子任務<b>共用預算</b>。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-brain"></i></div>
+                                        <h3>受治理的長期記憶</h3><ul><li>記憶寫入需經政策判定，並設有保存期限。</li><li>記憶帳本只能附加，不能改寫。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-grid-plus"></i></div>
+                                        <h3>技能登錄與執行</h3><ul><li>技能集中登錄管理。</li><li>程式型技能在沙箱中執行，限制執行時間與可見的環境變數。</li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-compare nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">COMPARISON</p>
+                            <h2 class="section-heading">自行串接 AI Agent 與 Auro 的差異</h2>
+                            <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
+                                <thead><tr><th scope="col"></th><th scope="col">自行串接 AI Agent 框架</th><th scope="col" class=is-us>Auro</th></tr></thead>
+                                <tbody><tr><th scope="row">成本與時間上限</th><td>需自行實作</td><td class=is-us>步數、token、時限為執行環境強制的硬上限</td></tr><tr><th scope="row">每一步的檢查</th><td>依開發者實作</td><td class=is-us>停止旗標 → 預算 → 政策 → 治理閘門 → 稽核，逐步執行</td></tr><tr><th scope="row">治理服務故障時</th><td>依開發者實作</td><td class=is-us>一律阻擋（fail-closed）</td></tr><tr><th scope="row">人工審核</th><td>需自行開發</td><td class=is-us>送審步驟進入審核佇列，核准後才繼續</td></tr><tr><th scope="row">子任務委派</th><td>依框架而定</td><td class=is-us>有深度上限，父子任務共用預算</td></tr><tr><th scope="row">離線環境</th><td>依部署方式</td><td class=is-us>提供只用地端模型的離線設定</td></tr></tbody></table></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-diff nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">WHAT'S DIFFERENT</p>
+                            <h2 class="section-heading">差異點</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
+                                        <h3>預設是擋，不是放</h3><p>治理服務缺席或無法回應時，Auro 一律阻擋任務繼續，而不是在沒有檢查的情況下照常執行。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-hourglass diff-icon"></i>
+                                        <h3>預算是硬上限</h3><p>步數、token 與時限是執行環境強制的上限，連委派出去的子任務也共用同一份預算。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-server diff-icon"></i>
+                                        <h3>離線情境可用</h3><p>提供完全離線的模型設定，只使用地端模型，適合隔離網路環境。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-platform nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">ON THE PLATFORM</p>
+                            <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
+                            <div class="platform-text">Auro 是平台的<b>AI 編排</b>能力，負責把各模組串成可治理的工作流程。AI 呼叫與知識存取經 <a href="nexus-forge.html">Forge</a>；可接收 <a href="nexus-cdp.html">AURA CDP</a> 的分群事件觸發流程；<a href="nexus-ai-office.html">NEXUS AI-Office</a> 可作為流程中的文件產製節點，<a href="nexus-mira.html">MIRA</a> 的內容審核關卡也由 Auro 編排。</div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span></a><a class="nm-link" href="nexus-pulse.html"><b>Pulse</b><span>輿情訊號分析</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-deploy nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEPLOYMENT</p>
+                            <h2 class="section-heading">部署形態</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
+                                        <h3>Kubernetes</h3><p>以 Helm chart 部署於客戶的 Kubernetes 環境。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">單機 / POC</span>
+                                        <h3>docker compose</h3><p>以 compose 起一套示範環境，走過任務、審核與停止的完整流程。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">離線</span>
+                                        <h3>地端模型設定</h3><p>完全離線設定只使用地端模型，適合隔離網路。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-faq nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="faq-item"><h3>企業導入 AI Agent 最需要注意什麼？</h3><p>三件事：成本與執行時間要有硬上限、會影響外部的動作要先經人審、每一步都要能事後重建。Auro 以預算上限、四態治理閘門、人工審核佇列與逐步稽核處理這三件事。</p></div>
+                                    <div class="faq-item"><h3>Auro 怎麼避免 AI Agent 失控？</h3><p>每個任務都有步數、token 與時限上限；每一步先經治理閘門判定放行、警示、送審或阻擋；人員可隨時緊急停止任務，全程寫入稽核紀錄。</p></div>
+                                    <div class="faq-item"><h3>治理服務當機時會怎樣？</h3><p>Auro 採 fail-closed 設計：治理服務無法回應時，任務一律被阻擋，不會在沒有檢查的情況下繼續執行。</p></div>
+                                    <div class="faq-item"><h3>可以在沒有網路的環境使用嗎？</h3><p>可以。Auro 提供完全離線的模型設定，只使用地端模型。</p></div>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-cta">
+                <div class="container">
+                    <h2>挑一個重複性高的流程開始</h2>
+                    <p>我們可以挑一個每天都在做的流程，設好上限與審核點，實際跑一輪給您看。</p>
+                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+                <div class="container px-md-4">
+                    <div class="footer-legal text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="copyright" style="color:#a9a9a9">
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+
+        </div><!-- END COLORLIB-MAIN -->
+    </div><!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="currentColor" style="color:var(--m-deep)"/>
+        </svg>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js" defer></script>
+    <script src="js/aos.js" defer></script>
+    <script src="js/external-link-warning.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main_optimized.js" defer></script>
+    <script src="js/form-validator.js" defer></script>
+    <script src="js/rate-limiter.js" defer></script>
+    <script src="js/inquiry-modal.js" defer></script>
+    <script src="js/qform.js" defer></script>
+
+    <script>
+    $(function(){
+        $('a[href="#capabilities"]').on('click', function(e){
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+        });
+    });
+    </script>
+  </body>
+</html>

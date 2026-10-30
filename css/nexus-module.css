@@ -1,0 +1,288 @@
+/* ══ AURO NEXUS 模組頁共用樣式 ══
+   由 tools/build-module-pages.py 產生的 nexus-*.html 共用。
+   版型沿用 nexus-saga.html；每頁在 <body style="--m-deep:…"> 設定產品色：
+     --m-deep   深色（按鈕、標籤字）
+     --m-bright 亮色（漸層、項目符號）
+     --m-soft   深底上的強調字
+     --m-tint   淺底（標籤底色）
+     --m-ink1 / --m-ink2  深底區塊的漸層兩端 */
+
+body {
+    --m-deep: #0F5F4E;
+    --m-bright: #16806A;
+    --m-soft: #4FA98F;
+    --m-tint: #E6F4F0;
+    --m-ink1: #0B1512;
+    --m-ink2: #10241E;
+}
+
+/* ── 版面：沿用 #colorlib-page 左側欄 ── */
+#colorlib-aside { width: 340px !important; background-color: #fff !important; }
+#colorlib-main { margin-left: 340px !important; width: calc(100% - 340px) !important; float: none !important; }
+.nm-section .container-fluid { padding-left: 60px !important; }
+@media (max-width: 991.98px) {
+    #colorlib-aside { width: 270px !important; }
+    #colorlib-main  { margin-left: 0 !important; width: 100% !important; }
+    .nm-section .container-fluid { padding-left: 15px !important; }
+}
+
+/* ── section 標題 ── */
+.section-label {
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--m-deep); font-weight: 600; margin-bottom: 0.8rem;
+}
+.section-heading { font-size: 1.6rem; font-weight: 700; color: #28282c; margin-bottom: 1rem; }
+.section-intro { font-size: 0.95rem; color: #666; line-height: 1.9; max-width: 68ch; margin-bottom: 2.5rem; }
+
+.nm-dark .section-label { color: rgba(255,255,255,0.5) !important; }
+.nm-dark .section-heading { color: #fff !important; }
+.nm-dark .section-intro { color: rgba(255,255,255,0.62) !important; }
+
+/* ── 麵包屑 ── */
+.nm-crumbs { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-bottom: 1rem; padding: 10px 0; }
+.nm-crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.nm-crumbs li + li::before { content: '/'; margin-right: 0.35rem; color: rgba(255,255,255,0.25); }
+.nm-crumbs a { color: rgba(255,255,255,0.55); text-decoration: none; }
+.nm-crumbs a:hover { color: #fff; text-decoration: none; }
+.nm-crumbs [aria-current] { color: rgba(255,255,255,0.8); }
+
+/* ── Hero ── */
+.nm-hero {
+    background: linear-gradient(135deg, var(--m-ink1) 0%, var(--m-ink2) 52%, var(--m-ink1) 100%);
+    color: #fff; padding: 4.5rem 0 4rem; position: relative; overflow: hidden;
+}
+.nm-hero::before {
+    content: ''; position: absolute; top: -35%; right: -12%; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--m-bright) 22%, transparent) 0%, transparent 70%);
+    pointer-events: none;
+}
+.nm-hero .container-fluid { position: relative; z-index: 2; }
+.nm-hero .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--m-soft); margin-bottom: 1.2rem;
+}
+.nm-hero .eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--m-soft); }
+.nm-hero h1 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 700; line-height: 1.35; margin-bottom: 1.3rem; color: #fff !important; }
+.nm-hero h1 em { font-style: normal; color: var(--m-soft); }
+.nm-hero .hero-sub { font-size: 1.02rem; color: rgba(255,255,255,0.72); line-height: 1.9; max-width: 60ch; }
+.nm-hero .hero-tagline {
+    margin-top: 1.4rem; padding-left: 1rem; border-left: 2px solid var(--m-bright);
+    font-size: 0.92rem; color: rgba(255,255,255,0.55); line-height: 1.8;
+}
+.nm-hero .hero-actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-nm-primary {
+    display: inline-block; background: linear-gradient(135deg, var(--m-deep), var(--m-bright)); color: #fff;
+    padding: 0.9rem 2rem; border-radius: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.btn-nm-primary:hover { opacity: 0.88; transform: translateY(-2px); color: #fff; text-decoration: none; }
+.btn-nm-outline {
+    display: inline-block; background: transparent; color: rgba(255,255,255,0.72); padding: 0.9rem 2rem;
+    border-radius: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.22); transition: border-color 0.2s, color 0.2s;
+}
+.btn-nm-outline:hover { border-color: var(--m-soft); color: #fff; text-decoration: none; }
+.nm-badges { margin-top: 2.4rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.nm-badge {
+    display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 0.28rem 0.7rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.62); font-weight: 500;
+}
+
+/* ── 重點摘要（hero 右欄） ── */
+.nm-summary {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px;
+    padding: 1.6rem 1.7rem;
+}
+.nm-summary h2 { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 600; margin-bottom: 1rem; }
+.nm-summary dl { margin: 0; }
+.nm-summary dt { font-size: 0.78rem; color: var(--m-soft); font-weight: 600; margin-top: 0.9rem; }
+.nm-summary dt:first-child { margin-top: 0; }
+.nm-summary dd { font-size: 0.9rem; color: rgba(255,255,255,0.78); line-height: 1.75; margin: 0.2rem 0 0; }
+.nm-summary dd a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── 痛點 ── */
+.nm-pain { background: #f8f9fa; padding: 4rem 0; }
+.pain-card {
+    background: #fff; border-radius: 12px; padding: 2rem; height: 100%; border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04); position: relative; overflow: hidden;
+}
+.pain-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--m-deep), var(--m-bright));
+}
+.pain-number { font-size: 3rem; font-weight: 800; color: color-mix(in srgb, var(--m-deep) 14%, transparent); line-height: 1; margin-bottom: 0.8rem; }
+.pain-card h3 { font-size: 1.05rem; font-weight: 600; color: #28282c; margin-bottom: 0.7rem; }
+.pain-card p { font-size: 0.9rem; color: #666; line-height: 1.8; margin: 0; }
+.pain-statement {
+    margin-top: 2.5rem; background: #fff; border: 1px solid color-mix(in srgb, var(--m-deep) 18%, transparent);
+    border-left: 4px solid var(--m-deep); border-radius: 0 10px 10px 0; padding: 1.6rem 1.8rem;
+    font-size: 1rem; color: #28282c; line-height: 1.9;
+}
+.pain-statement strong { color: var(--m-deep); }
+
+/* ── 核心能力 ── */
+.nm-cap { background: #fff; padding: 4rem 0; }
+.cap-card {
+    background: #fff; border-radius: 12px; padding: 1.8rem; height: 100%; border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.cap-card .icon-wrap {
+    width: 46px; height: 46px; background: linear-gradient(135deg, var(--m-deep), var(--m-bright)); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: #fff; font-size: 1.25rem;
+}
+.cap-card h3 { font-size: 1rem; font-weight: 600; color: #28282c; margin-bottom: 0.8rem; }
+.cap-card ul { list-style: none; padding: 0; margin: 0; }
+.cap-card li { position: relative; padding-left: 1rem; font-size: 0.86rem; color: #666; line-height: 1.75; margin-bottom: 0.55rem; }
+.cap-card li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 5px; height: 5px; border-radius: 50%; background: var(--m-bright); }
+.cap-card li b { color: #28282c; font-weight: 600; }
+
+/* ── 差異點（深底） ── */
+.nm-diff { background: linear-gradient(135deg, var(--m-ink1) 0%, var(--m-ink2) 100%); color: #fff; padding: 4.5rem 0; }
+.diff-card {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px;
+    padding: 1.6rem 1.7rem; height: 100%;
+}
+.diff-card .diff-icon { color: var(--m-soft); font-size: 1.2rem; margin-bottom: 0.7rem; display: block; }
+.diff-card h3 { font-size: 0.98rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; }
+.diff-card p { font-size: 0.87rem; color: rgba(255,255,255,0.62); line-height: 1.8; margin: 0; }
+
+/* ── 與平台的關係 ── */
+.nm-platform { background: #f8f9fa; padding: 4rem 0; }
+.nm-platform .platform-text { font-size: 0.95rem; color: #4a4a4a; line-height: 1.9; max-width: 72ch; }
+.nm-platform .platform-text b { color: #28282c; }
+.nm-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.6rem; }
+.nm-link {
+    display: inline-flex; flex-direction: column; gap: 0.15rem; background: #fff; border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 8px; padding: 0.7rem 1rem; text-decoration: none; min-width: 180px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+.nm-link:hover { border-color: var(--m-bright); transform: translateY(-2px); text-decoration: none; }
+.nm-link b { font-size: 0.86rem; color: #28282c; }
+.nm-link span { font-size: 0.78rem; color: #777; }
+
+/* ── 部署形態 ── */
+.nm-deploy { background: #fff; padding: 4rem 0; }
+.deploy-card {
+    background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.8rem; height: 100%;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.deploy-card .deploy-tag {
+    display: inline-block; background: var(--m-tint); color: var(--m-deep); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 0.22rem 0.6rem; border-radius: 4px; margin-bottom: 0.9rem;
+}
+.deploy-card h3 { font-size: 1rem; font-weight: 600; color: #28282c; margin-bottom: 0.6rem; }
+.deploy-card p { font-size: 0.88rem; color: #666; line-height: 1.8; margin: 0; }
+
+/* ── 邊界 ── */
+.nm-limits { background: #FBF9F4; padding: 4rem 0; }
+.nm-limits .section-label { color: #9A5B00; }
+.limit-item {
+    background: #fff; border: 1px solid #EADFC6; border-radius: 10px; padding: 1.4rem 1.6rem; margin-bottom: 1rem;
+    display: flex; gap: 1.2rem; align-items: flex-start;
+}
+.limit-index {
+    flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: #9A5B00; color: #fff;
+    font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem;
+}
+.limit-item h3 { font-size: 0.97rem; font-weight: 700; color: #28282c; margin-bottom: 0.45rem; }
+.limit-item p { font-size: 0.88rem; color: #666; line-height: 1.85; margin: 0; }
+
+/* ── FAQ ── */
+.nm-faq { padding: 4rem 0; background: #f8f9fa; }
+.faq-item { background: #fff; border-radius: 10px; padding: 1.5rem 1.7rem; margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.06); }
+.faq-item h3 { font-size: 1rem; font-weight: 700; color: #28282c; margin-bottom: 0.6rem; }
+.faq-item h3::before { content: 'Q. '; color: var(--m-bright); }
+.faq-item p { font-size: 0.9rem; color: #666; line-height: 1.85; margin: 0; }
+
+/* ── CTA ── */
+.nm-cta { background: linear-gradient(135deg, var(--m-deep) 0%, var(--m-bright) 100%); padding: 4rem 0; text-align: center; color: #fff; }
+.nm-cta h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+.nm-cta p { font-size: 0.98rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.8; }
+.nm-cta .btn-cta {
+    display: inline-block; background: #fff; color: var(--m-deep); padding: 0.9rem 2.5rem; border-radius: 50px;
+    font-size: 1rem; font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+}
+.nm-cta .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); color: var(--m-deep); text-decoration: none; }
+
+/* ══ 手機版遮擋修正（放最末端） ══ */
+@media (max-width: 991.98px) {
+    /* 漢堡選單 fixed 於 x12–60 / y32–80，麵包屑要讓開 */
+    .nm-hero .nm-crumbs { margin-left: 56px; }
+}
+@media (max-width: 767.98px) {
+    .nm-hero { padding-top: 2rem; padding-bottom: 2rem; }
+    .nm-hero h1 { margin-bottom: 0.75rem; }
+    .nm-hero .hero-tagline { margin-top: 1rem; }
+    .nm-hero .hero-actions { margin-top: 1.5rem; }
+    .nm-link { min-width: 0; flex: 1 1 100%; }
+    .qf-fab { width: 48px; height: 48px; padding: 0; right: 16px; bottom: 16px; justify-content: center; }
+    .qf-fab span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+}
+
+/* ── 內文連結用產品色（全站預設連結色是品牌橘） ── */
+.nm-platform .platform-text a, .nm-summary dd a { color: var(--m-deep); }
+.nm-summary dd a { color: #fff; }
+@media (min-width: 992px) {
+    .nm-section .container-fluid { padding-right: 48px !important; }
+}
+
+/* ── Hero：關鍵字 H1（小）＋ 主張（大） ── */
+.nm-hero h1.eyebrow { font-size: 0.86rem; letter-spacing: 0.06em; text-transform: none; line-height: 1.6; margin-bottom: 1.2rem; color: var(--m-soft) !important; }
+.nm-hero .hero-slogan { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 700; line-height: 1.35; margin-bottom: 1.3rem; color: #fff; }
+.nm-hero .hero-slogan em { font-style: normal; color: var(--m-soft); }
+
+/* ── 定義（GEO 答案區） ── */
+.nm-define { background: #fff; padding: 4rem 0 2.5rem; }
+.define-answer { border-left: 4px solid var(--m-deep); padding: 0.4rem 0 0.4rem 1.4rem; }
+.define-answer p { font-size: 1rem; color: #3a3a3a; line-height: 1.95; margin-bottom: 0.9rem; }
+.define-answer p:first-child { font-size: 1.08rem; color: #28282c; }
+.define-answer p:last-child { margin-bottom: 0; }
+.define-answer b { color: var(--m-deep); }
+.audience { background: var(--m-tint); border-radius: 12px; padding: 1.4rem 1.6rem; }
+.audience h3 { font-size: 0.8rem; letter-spacing: 0.12em; color: var(--m-deep); font-weight: 700; margin-bottom: 0.8rem; }
+.audience ul { list-style: none; margin: 0; padding: 0; }
+.audience li { padding: 0.6rem 0; border-top: 1px solid color-mix(in srgb, var(--m-deep) 14%, transparent); }
+.audience li:first-child { border-top: 0; padding-top: 0; }
+.audience li b { display: block; font-size: 0.92rem; color: #28282c; }
+.audience li span { font-size: 0.85rem; color: #5a5a5a; line-height: 1.7; }
+
+/* ── 表格：法規對照、比較 ── */
+.nm-reg { background: #fff; padding: 4rem 0; }
+.nm-compare { background: #f8f9fa; padding: 4rem 0; }
+.nm-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: #fff; }
+.nm-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 560px; }
+.nm-table th, .nm-table td { padding: 0.9rem 1.1rem; text-align: left; vertical-align: top; line-height: 1.75; border-top: 1px solid rgba(0,0,0,0.06); }
+.nm-table thead th { background: var(--m-tint); color: var(--m-deep); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.04em; border-top: 0; }
+.nm-table tbody th { color: #28282c; font-weight: 600; width: 30%; }
+.nm-table td { color: #555; }
+.nm-table .is-us { background: color-mix(in srgb, var(--m-tint) 60%, #fff); color: #28282c; }
+.nm-table thead .is-us { background: var(--m-deep); color: #fff; }
+.nm-table-compare tbody th { width: 22%; }
+.nm-source { font-size: 0.8rem; color: #777; margin-top: 1rem; line-height: 1.8; }
+.nm-source a { color: var(--m-deep); }
+.nm-updated { margin: 1.6rem 0 0; font-size: 0.78rem; opacity: 0.7; }
+
+/* ── nexus.html 平台總覽：能力腿與治理底座 ── */
+.nm-legs { background: #f8f9fa; padding: 4rem 0; }
+.leg-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.5rem; height: 100%; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+.leg-name { font-size: 0.78rem; letter-spacing: 0.12em; font-weight: 700; color: var(--m-deep); margin-bottom: 0.3rem; }
+.leg-text { font-size: 0.86rem; color: #666; line-height: 1.7; margin-bottom: 0.9rem; }
+.leg-mod { display: block; padding: 0.75rem 0.9rem; border-radius: 8px; background: var(--m-tint); margin-top: 0.55rem; text-decoration: none; transition: transform 0.2s, background 0.2s; }
+.leg-mod:hover { transform: translateX(3px); background: color-mix(in srgb, var(--m-tint) 70%, var(--m-soft)); text-decoration: none; }
+.leg-mod b { font-size: 0.9rem; color: #28282c; margin-right: 0.4rem; }
+.leg-mod span { font-size: 0.85rem; color: var(--m-deep); font-weight: 600; }
+.leg-mod small { display: block; font-size: 0.8rem; color: #666; line-height: 1.65; margin-top: 0.2rem; }
+.leg-base { margin-top: 0.5rem; background: linear-gradient(135deg, var(--m-ink1), var(--m-ink2)); border-radius: 12px; padding: 1.6rem 1.8rem; }
+.leg-base .leg-name { color: var(--m-soft); }
+.leg-base .leg-text { color: rgba(255,255,255,0.7); }
+.leg-base .leg-mod { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+.leg-base .leg-mod b { color: #fff; }
+.leg-base .leg-mod span { color: var(--m-soft); }
+.leg-base .leg-mod small { color: rgba(255,255,255,0.62); }
+.nm-table td a { color: var(--m-deep); font-weight: 600; }
+.nm-overview + * { border-top: 0; }
+
+.define-answer a { color: var(--m-deep); text-decoration: underline; text-underline-offset: 3px; }
+.nm-hero .nm-family { font-size: 0.74rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
+.nm-hero .nm-family span { color: rgba(255,255,255,0.68); }

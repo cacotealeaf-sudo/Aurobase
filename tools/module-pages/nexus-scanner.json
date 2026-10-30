@@ -1,0 +1,304 @@
+{
+  "slug": "nexus-scanner",
+  "file": "nexus-scanner.html",
+  "code": "Scanner",
+  "name_zh": "源碼檢測與弱點掃描",
+  "leg": "安全",
+  "eyebrow": "Scanner — Governed Vulnerability Scanning",
+  "description": "Scanner 是奧洛（Aurobase）的源碼檢測與弱點掃描平台：涵蓋源碼檢測（SAST）、網站弱點掃描（DAST）、第三方套件分析（SCA）、機密外洩、容器與 IaC 掃描，產出 SARIF 報告與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、EPSS、CISA KEV、TWCERT 情資排序修補。",
+  "keywords": [
+    "源碼檢測",
+    "源碼檢測工具",
+    "弱點掃描",
+    "弱點掃描工具",
+    "弱點掃描報告",
+    "SBOM",
+    "SBOM 工具",
+    "SBOM 是什麼",
+    "SAST",
+    "DAST",
+    "SCA",
+    "容器掃描",
+    "供應鏈安全",
+    "AURO NEXUS"
+  ],
+  "theme": {
+    "deep": "#7A2E1F",
+    "bright": "#B4452C",
+    "soft": "#E58B6F",
+    "tint": "#FBEDE8",
+    "ink1": "#170D0A",
+    "ink2": "#2A1510"
+  },
+  "inquiry_chip": "NEXUS AI 自動化平台",
+  "hero": {
+    "h1": "Scanner｜源碼檢測・弱點掃描・SBOM 工具",
+    "sub": "原始碼、第三方套件、容器映像、雲端與基礎設施設定、對外網站——各自用不同工具掃，結果散在不同格式裡。Scanner 把這些掃描收進同一個平台，用同一套權限、同一條稽核紀錄、同一種報告格式交付。",
+    "tagline": "掃描結果要能交給稽核、交給開發、交給主管，<br>而且三方看到的是同一份事實。",
+    "badges": [
+      {
+        "icon": "page",
+        "text": "SAST／SCA"
+      },
+      {
+        "icon": "internet",
+        "text": "DAST"
+      },
+      {
+        "icon": "server",
+        "text": "容器／IaC"
+      },
+      {
+        "icon": "key",
+        "text": "機密外洩"
+      },
+      {
+        "icon": "copy",
+        "text": "SARIF・SBOM"
+      }
+    ],
+    "slogan": "一份報告看完<br>程式碼到線上服務的<em>弱點</em>"
+  },
+  "summary": [
+    [
+      "是什麼",
+      "涵蓋 SAST、DAST、SCA、機密外洩、容器與 IaC 的弱點掃描平台。"
+    ],
+    [
+      "交付格式",
+      "SARIF 2.1.0、CycloneDX、SPDX。"
+    ],
+    [
+      "威脅情資",
+      "NVD、OSV、EPSS、CISA KEV、TWCERT 自動同步。"
+    ],
+    [
+      "存取控管",
+      "角色權限、多租戶、SAML 2.0 單一登入與 SCIM 帳號同步。"
+    ],
+    [
+      "所屬",
+      "AURO NEXUS 平台「安全」能力，與 <a href=\"nexus-cardea.html\">Cardea</a> 互補。"
+    ]
+  ],
+  "pain": {
+    "heading": "弱點管理的難處，不在掃描，而在整合",
+    "intro": "多數組織不缺掃描工具，缺的是把結果收斂成一份能追蹤、能交代的清單。",
+    "cards": [
+      {
+        "title": "工具各自為政",
+        "text": "原始碼、套件、容器、網站各有一套工具與格式，彙整全靠人工，同一個弱點在不同報告裡重複出現。"
+      },
+      {
+        "title": "套件清單說不清楚",
+        "text": "被問到「系統裡用了哪些第三方元件、哪些有已知弱點」時，很難在短時間內拿出完整而一致的軟體物料清單。"
+      },
+      {
+        "title": "優先順序靠感覺",
+        "text": "弱點數以千計，缺少「是否已被實際利用」「被利用的機率」這類情資，修補排序只能憑經驗判斷。"
+      }
+    ],
+    "statement": "Scanner 的做法是：<strong>把各類掃描納入同一個平台，以標準格式輸出，並用公開威脅情資為每一筆弱點補上優先順序依據</strong>。"
+  },
+  "capabilities": {
+    "heading": "六類掃描，一套交付",
+    "intro": "掃描以佇列非同步執行，大型專案不會卡住介面；每次掃描的觸發者、範圍與結果都留有紀錄。",
+    "cards": [
+      {
+        "icon": "page",
+        "title": "原始碼與套件",
+        "items": [
+          "<b>SAST</b> 靜態原始碼分析。",
+          "<b>SCA</b> 第三方套件與授權分析。",
+          "<b>機密外洩偵測</b>：找出寫死在程式碼裡的金鑰與憑證。"
+        ]
+      },
+      {
+        "icon": "internet",
+        "title": "網站與服務",
+        "items": [
+          "<b>DAST</b> 動態網站掃描。",
+          "網路服務探測與已知弱點樣板比對。"
+        ]
+      },
+      {
+        "icon": "server",
+        "title": "容器與基礎設施",
+        "items": [
+          "容器映像弱點掃描。",
+          "<b>IaC</b> 基礎設施設定檔（如 Terraform、Kubernetes 設定）檢查。",
+          "Kubernetes 叢集安全基準檢查。"
+        ]
+      },
+      {
+        "icon": "copy",
+        "title": "標準格式輸出",
+        "items": [
+          "<b>SARIF 2.1.0</b>：可直接匯入開發工具與程式碼平台。",
+          "<b>SBOM</b>：CycloneDX 與 SPDX 兩種格式。"
+        ]
+      },
+      {
+        "icon": "warning-triangle",
+        "title": "威脅情資同步",
+        "items": [
+          "自 <b>NVD、OSV、EPSS、CISA KEV、TWCERT</b> 同步弱點與利用情資。",
+          "以「是否列入已遭利用清單」與「被利用機率」協助排序修補。"
+        ]
+      },
+      {
+        "icon": "group",
+        "title": "權限與身分整合",
+        "items": [
+          "角色權限控管與多租戶隔離。",
+          "<b>SAML 2.0</b> 單一登入、<b>SCIM</b> 帳號同步。",
+          "提供 VS Code 擴充套件，讓開發者在編輯器內看到結果。"
+        ]
+      }
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "intro": "掃描引擎本身不是秘密，差別在於結果是否誠實、能否交代。",
+    "cards": [
+      {
+        "icon": "badge-check",
+        "title": "能力清單照實回報",
+        "text": "平台內建能力登錄：尚未完整實作的掃描規則不計入宣稱的覆蓋範圍，報告上看到的就是實際有跑的。"
+      },
+      {
+        "icon": "copy",
+        "title": "標準格式，不綁平台",
+        "text": "結果以 SARIF、CycloneDX、SPDX 輸出，可以交給任何支援這些標準的工具，不被單一廠商格式鎖住。"
+      },
+      {
+        "icon": "stats-up-square",
+        "title": "情資驅動的優先順序",
+        "text": "把 EPSS 被利用機率與 CISA KEV 已遭利用清單併入每一筆弱點，修補排序有公開依據可循。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "Scanner 屬於平台的<b>安全</b>能力：Scanner 回答「程式與服務有哪些弱點」，<a href=\"nexus-cardea.html\">Cardea</a> 回答「機器身分與憑證是否受控」。兩者都把結果寫進可稽核的紀錄，與平台其他模組共用同一套治理思維。",
+    "related": [
+      "nexus-cardea",
+      "nexus-forge"
+    ]
+  },
+  "deploy": [
+    {
+      "tag": "單機 / POC",
+      "title": "docker compose",
+      "text": "掃描服務、佇列與資料庫以 compose 一次起站，適合概念驗證與小型團隊。"
+    },
+    {
+      "tag": "叢集",
+      "title": "Kubernetes",
+      "text": "提供 Kubernetes 部署設定，掃描工作者可依負載水平擴充。"
+    },
+    {
+      "tag": "整合",
+      "title": "開發流程",
+      "text": "SARIF 結果可匯入程式碼平台與 CI 流程；VS Code 擴充套件讓開發者就地修正。"
+    }
+  ],
+  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",
+  "limits": [
+    {
+      "title": "威脅情資需要連線更新",
+      "text": "NVD、OSV、EPSS 等情資來源以網路同步；完全隔離網路的環境需另行規劃情資更新方式。"
+    },
+    {
+      "title": "部分第三方掃描工具依授權條款另行提供",
+      "text": "個別開源掃描工具的授權條款不允許隨商用產品散布，此類工具依客戶環境與授權另行安裝。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "SBOM 是什麼？",
+      "a": "SBOM（Software Bill of Materials，軟體物料清單）列出一套軟體使用的所有第三方元件與版本，用來追蹤已知弱點與授權。Scanner 可產出 CycloneDX 與 SPDX 兩種格式的 SBOM。"
+    },
+    {
+      "q": "源碼檢測和弱點掃描差在哪？",
+      "a": "源碼檢測（SAST）在上線前分析原始碼；弱點掃描（DAST）從外部測試執行中的網站與服務。Scanner 兩者都涵蓋，另有第三方套件、機密外洩、容器與 IaC 掃描。"
+    },
+    {
+      "q": "弱點的修補優先順序怎麼決定？",
+      "a": "平台同步 NVD、OSV、EPSS、CISA KEV、TWCERT 等公開情資，為每筆弱點補上「是否已遭實際利用」與「被利用機率」，作為修補排序的依據。"
+    },
+    {
+      "q": "掃描結果可以匯入開發工具嗎？",
+      "a": "可以。結果以 SARIF 2.1.0 輸出，可匯入程式碼平台與 CI 流程；另提供 VS Code 擴充套件。"
+    },
+    {
+      "q": "可以接公司既有的帳號系統嗎？",
+      "a": "可以。Scanner 支援 SAML 2.0 單一登入與 SCIM 帳號同步，並提供角色權限與多租戶隔離。"
+    }
+  ],
+  "cta": {
+    "heading": "想先掃一個專案看看？",
+    "text": "我們可以挑一個代表性的專案，跑一次完整掃描，交付 SARIF 與 SBOM 報告。"
+  },
+  "title": "源碼檢測與弱點掃描工具｜Scanner SAST、DAST、SCA 與 SBOM",
+  "definition": {
+    "q": "源碼檢測、弱點掃描和 SBOM 有什麼不同？",
+    "a": [
+      "<b>源碼檢測（SAST）</b>在程式上線前分析原始碼；<b>弱點掃描（DAST）</b>從外部測試執行中的網站與服務；<b>SBOM（軟體物料清單）</b>則列出系統用了哪些第三方元件，用來追蹤已知弱點。三者互補，缺一就會有盲點。",
+      "<b>Scanner</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的源碼檢測與弱點掃描平台，把 SAST、DAST、SCA、機密外洩、容器與 IaC 掃描收進同一套權限與報告，輸出 SARIF 2.1.0 與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、OSV、EPSS、CISA KEV、TWCERT 情資協助排序修補。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "資安與應用程式安全團隊",
+      "why": "要把分散的掃描工具與報告收斂成一份清單。"
+    },
+    {
+      "who": "開發與 DevOps",
+      "why": "要在程式碼平台與編輯器裡直接看到結果並修正。"
+    },
+    {
+      "who": "委外與採購管理",
+      "why": "要求供應商交付 SBOM 與掃描報告時，需要一致的格式。"
+    }
+  ],
+  "compare": {
+    "heading": "分散工具與整合平台的差異",
+    "cols": [
+      "各類掃描工具分開使用",
+      "Scanner"
+    ],
+    "rows": [
+      [
+        "掃描類型",
+        "每種一套工具",
+        "SAST、DAST、SCA、機密外洩、容器、IaC 同一平台"
+      ],
+      [
+        "報告格式",
+        "各自不同",
+        "SARIF 2.1.0、CycloneDX、SPDX"
+      ],
+      [
+        "修補優先順序",
+        "依 CVSS 或經驗",
+        "加入 EPSS 被利用機率與 CISA KEV 已遭利用清單"
+      ],
+      [
+        "權限與帳號",
+        "各自管理",
+        "角色權限、多租戶、SAML 單一登入、SCIM 同步"
+      ],
+      [
+        "覆蓋範圍宣稱",
+        "依工具說明",
+        "能力登錄照實回報，未完整實作的規則不計入"
+      ]
+    ]
+  },
+  "updated": "2026-10-30",
+  "aliases": [
+    "NEXUS Scanner",
+    "AURO NEXUS Scanner"
+  ]
+}

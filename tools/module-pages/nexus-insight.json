@@ -1,0 +1,287 @@
+{
+  "slug": "nexus-insight",
+  "file": "nexus-insight.html",
+  "code": "Insight",
+  "name_zh": "企業知識萃取與治理",
+  "leg": "知識",
+  "eyebrow": "Insight — Knowledge Extraction & Governance",
+  "description": "Insight 是奧洛（Aurobase）的企業知識庫 AI：把 PDF、Word 等內部文件萃取成術語、知識點與問答，經人工審核後才開放 RAG 問答與語意搜尋，每一項知識都能追溯回出處文件，可在地端運作。",
+  "keywords": [
+    "企業知識庫",
+    "企業知識庫 AI",
+    "RAG",
+    "RAG 企業應用",
+    "企業級 RAG",
+    "知識管理系統",
+    "知識管理系統 AI",
+    "KMS",
+    "知識圖譜",
+    "語意搜尋",
+    "地端 AI",
+    "AURO NEXUS"
+  ],
+  "theme": {
+    "deep": "#8A5A0E",
+    "bright": "#B87A16",
+    "soft": "#E7B45C",
+    "tint": "#FBF3E3",
+    "ink1": "#17110A",
+    "ink2": "#2A1E10"
+  },
+  "inquiry_chip": "NEXUS AI 自動化平台",
+  "hero": {
+    "h1": "Insight｜企業知識庫 AI・RAG 問答",
+    "sub": "把文件直接丟給 AI 問答，答案看似合理，卻常常混入過時版本、互相矛盾的規定，或根本不存在的內容。Insight 先把文件整理成術語、知識點與問答，經人審核後才開放檢索，每一項知識都能追溯回原始文件。",
+    "tagline": "企業知識庫的價值，不在收了多少文件，而在答案能不能被信任。",
+    "badges": [
+      {
+        "icon": "page",
+        "text": "PDF・Word・Markdown"
+      },
+      {
+        "icon": "badge-check",
+        "text": "審核後才可檢索"
+      },
+      {
+        "icon": "search",
+        "text": "語意搜尋與問答"
+      },
+      {
+        "icon": "share-android",
+        "text": "知識圖譜"
+      },
+      {
+        "icon": "link",
+        "text": "出處可追溯"
+      }
+    ],
+    "slogan": "AI 回答的每一句<br>都要<em>找得到出處</em>"
+  },
+  "summary": [
+    [
+      "是什麼",
+      "企業文件的知識萃取、審核、檢索與圖譜平台。"
+    ],
+    [
+      "輸入",
+      "PDF、Word（DOCX）、Markdown、純文字。"
+    ],
+    [
+      "萃取",
+      "術語表、知識點、問答組，經人工審核後才可被檢索。"
+    ],
+    [
+      "應用",
+      "語意搜尋、RAG 問答、知識圖譜與出處追溯。"
+    ],
+    [
+      "所屬",
+      "AURO NEXUS 平台「知識」能力，生成經 <a href=\"nexus-forge.html\">Forge</a> 治理。"
+    ]
+  ],
+  "pain": {
+    "heading": "企業知識庫常見的三個問題",
+    "cards": [
+      {
+        "title": "新舊版本混在一起",
+        "text": "同一份規定改了三版，AI 問答不知道哪一版有效，答案可能引用早已廢止的內容。"
+      },
+      {
+        "title": "同一個詞，不同解讀",
+        "text": "各部門對同一個術語有不同定義，知識庫裡互相矛盾，沒有人負責統一。"
+      },
+      {
+        "title": "答案查不到根據",
+        "text": "AI 給了答案，卻說不出出自哪份文件、哪一段，使用者無法判斷能不能採信。"
+      }
+    ],
+    "statement": "Insight 在文件與問答之間加上一層<strong>萃取、審核與版本管理</strong>，讓答案有根據、有負責人、有版本。"
+  },
+  "capabilities": {
+    "heading": "核心能力",
+    "cards": [
+      {
+        "icon": "page",
+        "title": "文件解析",
+        "items": [
+          "支援 PDF、Word（DOCX）、Markdown、純文字上傳與解析。"
+        ]
+      },
+      {
+        "icon": "brain",
+        "title": "知識萃取",
+        "items": [
+          "以 AI 萃取<b>術語、知識點與問答組</b>。",
+          "萃取經 Forge 送往經核准的模型。"
+        ]
+      },
+      {
+        "icon": "badge-check",
+        "title": "審核流程",
+        "items": [
+          "萃取結果需經<b>人工核准</b>才可被檢索。",
+          "依角色控管誰能核准、誰能駁回。"
+        ]
+      },
+      {
+        "icon": "copy",
+        "title": "術語版本與衝突",
+        "items": [
+          "術語版本管理與差異比對。",
+          "衝突清單：找出互相矛盾的定義。"
+        ]
+      },
+      {
+        "icon": "search",
+        "title": "語意搜尋與問答",
+        "items": [
+          "語意搜尋與 RAG 問答，每租戶獨立限流。",
+          "術語與知識可匯出。"
+        ]
+      },
+      {
+        "icon": "share-android",
+        "title": "知識圖譜",
+        "items": [
+          "實體、關聯、路徑查詢。",
+          "每一項知識可<b>追溯回出處文件</b>。"
+        ]
+      }
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "cards": [
+      {
+        "icon": "badge-check",
+        "title": "先審核，再開放",
+        "text": "AI 萃取出的知識不會直接進入檢索，必須經人工核准，知識庫的內容有人負責。"
+      },
+      {
+        "icon": "server",
+        "title": "嵌入模型內建於映像",
+        "text": "語意向量模型預先打包在映像內並強制離線載入，不需要在部署時連外下載。"
+      },
+      {
+        "icon": "grid-plus",
+        "title": "可被其他模組呼叫",
+        "text": "平台其他模組經 Forge 的工具閘道存取 Insight 的知識，權限與紀錄只有一套。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "Insight 與 <a href=\"nexus-library.html\">Library</a> 共同構成平台的<b>知識</b>能力。AI 生成經 <a href=\"nexus-forge.html\">Forge</a> 治理；<a href=\"nexus-auro.html\">Auro</a>、<a href=\"nexus-pulse.html\">Pulse</a>、<a href=\"nexus-ai-office.html\">NEXUS AI-Office</a> 等模組經 Forge 存取 Insight 的知識；<a href=\"nexus-saga.html\">SAGA</a> 在 Insight 之上提供分類、保存與稽核等合規治理。",
+    "related": [
+      "nexus-library",
+      "nexus-forge",
+      "nexus-saga",
+      "nexus-auro",
+      "nexus-ai-office"
+    ]
+  },
+  "deploy": [
+    {
+      "tag": "叢集",
+      "title": "Kubernetes",
+      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+    },
+    {
+      "tag": "單機 / POC",
+      "title": "docker compose",
+      "text": "含向量資料庫、快取與物件儲存，一次起站。"
+    },
+    {
+      "tag": "離線",
+      "title": "內建嵌入模型",
+      "text": "嵌入模型打包於映像內，部署時不需連外下載模型。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "企業知識庫 RAG 怎麼導入比較穩？",
+      "a": "先整理知識、再開放問答。Insight 先把文件萃取成術語、知識點與問答，經人工核准後才進入檢索，避免過時或矛盾的內容被 AI 引用。"
+    },
+    {
+      "q": "Insight 支援哪些文件格式？",
+      "a": "PDF、Word（DOCX）、Markdown 與純文字。"
+    },
+    {
+      "q": "AI 萃取的內容會直接給使用者查嗎？",
+      "a": "不會。萃取出的術語、知識點與問答需經人工核准，才會進入搜尋與問答。"
+    },
+    {
+      "q": "答案能追溯到原始文件嗎？",
+      "a": "可以。每一項知識都記錄出處文件，知識圖譜也提供來源追溯。"
+    },
+    {
+      "q": "需要連外部 AI 服務嗎？",
+      "a": "不需要。AI 萃取經 Forge 送往經核准的模型，可限定只用地端模型；語意向量模型內建於映像。"
+    }
+  ],
+  "cta": {
+    "heading": "拿一份內部規章試試看",
+    "text": "提供一組內部文件，我們萃取術語與知識點，您看看審核清單長什麼樣子。"
+  },
+  "title": "企業知識庫 AI｜Insight RAG 問答、知識萃取與知識圖譜",
+  "definition": {
+    "q": "什麼是企業知識庫 AI？",
+    "a": [
+      "<b>企業知識庫 AI</b> 讓員工用自然語言查詢內部文件，由系統以 RAG（檢索增強生成）先找出相關段落、再產生答案。答案的可信度取決於知識庫的品質，而不只是模型。",
+      "<b>Insight</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的企業知識庫 AI。它先把文件萃取成術語、知識點與問答，經人工審核後才開放檢索；提供術語版本與衝突比對、語意搜尋、RAG 問答與知識圖譜，每一項知識都能追溯回出處文件。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "知識管理與教育訓練",
+      "why": "要讓規章、作業手冊與產品知識可以被正確查詢。"
+    },
+    {
+      "who": "客服與第一線人員",
+      "why": "要在幾秒內找到有出處、可以引用的答案。"
+    },
+    {
+      "who": "法遵與稽核",
+      "why": "要確認 AI 引用的是有效版本，且知道是誰核准的。"
+    }
+  ],
+  "compare": {
+    "heading": "直接把文件丟給 AI 問答，和 Insight 差在哪",
+    "cols": [
+      "直接把文件交給 AI 問答",
+      "Insight"
+    ],
+    "rows": [
+      [
+        "進入檢索的內容",
+        "上傳即可被檢索",
+        "萃取後經人工核准才可被檢索"
+      ],
+      [
+        "新舊版本",
+        "容易混用",
+        "術語版本管理與差異比對"
+      ],
+      [
+        "互相矛盾的定義",
+        "不易發現",
+        "衝突清單集中列出"
+      ],
+      [
+        "答案出處",
+        "依工具而定",
+        "每項知識可追溯回出處文件，並有知識圖譜"
+      ],
+      [
+        "模型與資料位置",
+        "依服務商",
+        "經 Forge 治理，可限定地端模型"
+      ]
+    ]
+  },
+  "updated": "2026-10-30",
+  "aliases": [
+    "NEXUS Insight",
+    "AURO NEXUS Insight"
+  ]
+}

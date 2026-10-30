@@ -16,7 +16,7 @@
 - [數位行銷](marketing.html): 廣告投放、社群經營、SEO、內容行銷等數位行銷服務
 - [解決方案＆產品](solution.html): Acoustic CXA 行銷自動化、CDP 顧客數據平台、HCL Unica、Magnolia CMS
 - [AI 智慧語伴](ai-companion.html): AI 語音陪伴與健康守護解決方案，結合語音互動與智慧分析
-- [AURO NEXUS](nexus.html): AI 企業平台總覽 — NEXUS OS 工作自動化、NEXUS CDP 客戶數據平台、NEXUS Voice 語音平台
+- [AURO NEXUS](nexus.html): AI 治理平台總覽 — 以 NEXUS Forge 為治理底座的 14 個模組，另含 NEXUS OS、NEXUS Voice 產品介紹
 - [NEXUS GEO](nexus-geo.html): 生成式引擎優化（GEO），提升品牌在 ChatGPT／Perplexity／Gemini 等 AI 答案中的曝光
 - [NEXUS SAGA](nexus-saga.html): 金融機構的非結構化資料治理層 — 稽核鏈（WORM）、生命週期與保存、資料共享治理、AI 使用溯源
 - [新聞中心](blog.html): 公司部落格文章列表
@@ -43,7 +43,47 @@
 - **Magnolia CMS**: 企業內容管理系統，支援多語言、多通路內容發布
 
 ### AURO NEXUS
-AI 企業平台，包含 NEXUS OS（工作自動化）、NEXUS CDP（客戶數據平台）、NEXUS Voice（AI 語音平台）、NEXUS GEO（生成式引擎優化）與 NEXUS SAGA（資料治理層）。
+AI 企業平台，包含 NEXUS OS（工作自動化）、AURA CDP（客戶數據平台）、NEXUS Voice（AI 語音平台）、NEXUS GEO（生成式引擎優化）與 SAGA（資料治理層）。
+
+<!-- MODULES:BEGIN（由 tools/build-module-pages.py 產生）-->
+## AURO NEXUS 產品一覽
+
+AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有環境裡導入生成式 AI，並保留可稽核的證據。平台以 Forge 為治理底座：各模組的 AI 呼叫都經 Forge 做權限與政策檢查、送往經核准的模型（可限定地端），並寫入雜湊鏈稽核軌跡。其上是 AI 編排、客戶資料、知識、內容與行銷智能、合規治理、生產力、現代化與安全等能力，共 14 個模組，可依需求分階段導入。
+
+平台總覽：[AURO NEXUS](nexus.html)
+
+### 治理底座
+- [Forge 治理化 AI 閘道](nexus-forge.html): Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。
+
+### AI 編排
+- [Auro AI 任務編排](nexus-auro.html): Auro 是奧洛（Aurobase）的企業級 AI Agent 平台：每個 AI 任務都有步數、token 與時限上限，每一步先經四態治理閘門判定放行、警示、送審或阻擋，可暫停交人審核、可緊急停止，全程留下稽核紀錄。
+
+### 客戶資料
+- [AURA CDP 客戶數據平台](nexus-cdp.html): AURA CDP 是奧洛（Aurobase）的 CDP 客戶數據平台：以身分解析整合各系統資料，建立單一客戶視圖，提供分群（含自然語言建分群）、旅程編排、ML 評分，以及同意管理與可追溯的個資刪除處理。可部署於企業自有機房。
+- [NEXUS ABM 企業客戶帳號經營](nexus-abm.html): NEXUS ABM 是奧洛（Aurobase）的 ABM（帳號式行銷）平台：把個人行為歸到所屬企業帳號，以可解釋的方式評估購買意圖，並用四種歸因模型計算各接觸點的貢獻，建構於 AURA CDP 之上。
+
+### 知識
+- [Insight 企業知識萃取與治理](nexus-insight.html): Insight 是奧洛（Aurobase）的企業知識庫 AI：把 PDF、Word 等內部文件萃取成術語、知識點與問答，經人工審核後才開放 RAG 問答與語意搜尋，每一項知識都能追溯回出處文件，可在地端運作。
+- [Library 個人知識收藏空間](nexus-library.html): Library 是奧洛（Aurobase）的企業個人知識管理（PKM）工具：每位員工一個獨立收藏空間，文字、網址、筆記與檔案可一鍵存入、加標籤、搜尋，並有 Chrome 擴充套件；收藏留在企業環境內，可由 Insight 建立語意索引。
+
+### 內容與行銷智能
+- [MIRA 受監理產業內容產製與審核](nexus-mira.html): MIRA 是奧洛（Aurobase）為金融與醫療等受監理產業打造的 AI 內容產製與審核平台：AI 寫文案、長文、圖文與衛教文章，產出先經規則式合規檢查與法條引用查核，再由人工審核，紀錄寫入可驗證的雜湊鏈，可完全在地端運作。
+- [Pulse 輿情訊號分析](nexus-pulse.html): Pulse 是奧洛（Aurobase）的 AI 輿情分析平台：接收企業既有來源的輿情訊號，以批次 AI 分析情緒、摘要與敘事走向，依規則觸發告警，並回算處理後的成效。AI 分析經 Forge 治理，個資刪除可回溯遮蔽。
+- [NEXUS GEO 生成式搜尋能見度](nexus-geo.html): 衡量品牌在 ChatGPT、Gemini 等生成式搜尋中被提及與引用的程度。
+
+### 合規治理
+- [SAGA 非結構化資料治理](nexus-saga.html): 金融機構的非結構化資料治理層：分級、保存、法律保全與稽核鏈。
+
+### 生產力
+- [NEXUS AI-Office 商業文件產製](nexus-ai-office.html): NEXUS AI-Office 是奧洛（Aurobase）的企業 AI 文件產生平台：依企業範本以 AI 產出提案書、報價單、週報、保密協議、工作說明書與簡報，輸出 DOCX、PDF、PPTX 並可在瀏覽器內線上編修；AI 生成經 Forge 治理。
+
+### 現代化
+- [LISA 主機程式現代化](nexus-lisa.html): LISA 是奧洛（Aurobase）的大型主機（mainframe）現代化工具：讀取 COBOL、PL/I、JCL、COPYBOOK 與 IMS 原始碼，以確定性解析產出繁體中文規格書，每一項都標明原始碼行號，作為 COBOL 轉 Java 等現代化專案的現況基準。
+
+### 安全
+- [Scanner 源碼檢測與弱點掃描](nexus-scanner.html): Scanner 是奧洛（Aurobase）的源碼檢測與弱點掃描平台：涵蓋源碼檢測（SAST）、網站弱點掃描（DAST）、第三方套件分析（SCA）、機密外洩、容器與 IaC 掃描，產出 SARIF 報告與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、EPSS、CISA KEV、TWCERT 情資排序修補。
+- [Cardea SSL 憑證管理與機器身分治理](nexus-cardea.html): Cardea 是奧洛（Aurobase）的 SSL 憑證管理與機器身分治理平台：自動盤點 TLS 憑證與 SSH 金鑰、依政策檢查弱金鑰與效期、到期前預警，以 ACME 自動更新並部署至 Nginx、Apache、IIS，產出後量子密碼（PQC）遷移所需的密碼盤點報告，可單機離線運作。
+<!-- MODULES:END -->
 
 ### NEXUS SAGA（資料治理）
 金融機構的非結構化資料治理層：讓「誰在什麼時候、依哪一條規定、對哪一份資料做了什麼」變成可查驗的紀錄。

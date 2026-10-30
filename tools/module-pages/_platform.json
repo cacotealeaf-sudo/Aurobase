@@ -1,0 +1,274 @@
+{
+  "title": "AI 治理平台｜AURO NEXUS 企業 AI 平台：地端 AI、AI Agent、CDP 與企業知識庫",
+  "description": "AURO NEXUS 是奧洛（Aurobase）的 AI 治理平台：以 Forge 為治理底座，所有模組的 AI 呼叫先經權限與政策檢查、可只用地端模型、並寫入可離線驗證的稽核軌跡；涵蓋 AI Agent、CDP 客戶數據平台、企業知識庫、AI 內容產製、源碼檢測與 SSL 憑證管理等 14 個模組。",
+  "keywords": [
+    "AI 治理平台",
+    "AI 治理",
+    "企業 AI 平台",
+    "企業 AI 導入",
+    "地端 AI",
+    "私有化 AI",
+    "金融業 AI",
+    "AI Agent 平台",
+    "CDP 客戶數據平台",
+    "企業知識庫",
+    "AURO NEXUS",
+    "奧洛",
+    "Aurobase"
+  ],
+  "updated": "2026-10-30",
+  "h1": "AURO NEXUS｜AI 治理平台・企業 AI 平台",
+  "slogan": "企業用 AI<br>要<em>用得了，也交代得清楚</em>",
+  "sub": "AURO NEXUS 是奧洛的企業 AI 平台。所有模組共用同一個治理底座：AI 請求先檢查、再推論、全程留痕；模型可以只用地端，資料可以不離開機房。從 AI Agent、客戶數據、企業知識庫到資安與憑證管理，每一個模組都在同一套規則下運作。",
+  "tagline": "治理不是 AI 之外多加的一層手續，而是讓 AI 能真正上線的前提。",
+  "summary": [
+    [
+      "是什麼",
+      "以治理底座串起 14 個模組的企業 AI 平台。"
+    ],
+    [
+      "治理底座",
+      "<a href=\"nexus-forge.html\">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。"
+    ],
+    [
+      "部署",
+      "企業自有機房或私有雲；模型可限定只用地端。"
+    ],
+    [
+      "適用",
+      "金融、醫療、公部門等受監理產業，以及重視資料主權的企業。"
+    ]
+  ],
+  "definition": {
+    "q": "什麼是 AURO NEXUS？",
+    "a": [
+      "<b>AURO NEXUS</b> 是奧洛（Aurobase）推出的<b>AI 治理平台</b>，讓企業在自有環境裡導入生成式 AI，並保留可稽核的證據。",
+      "平台以 <b>Forge</b> 為治理底座：各模組的 AI 呼叫都經 Forge 做權限與政策檢查、送往經核准的模型（可限定地端），並寫入雜湊鏈稽核軌跡。其上是 AI 編排、客戶資料、知識、內容與行銷智能、合規治理、生產力、現代化與安全等能力，共 14 個模組，可依需求分階段導入。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "金融與受監理產業",
+      "why": "要在私有或離線環境導入 AI，並對主管機關交代得清楚。"
+    },
+    {
+      "who": "資訊長與數位轉型負責人",
+      "why": "要一個平台收斂各部門的 AI 使用，而不是各自採購、各自串接。"
+    },
+    {
+      "who": "資安、法遵與稽核",
+      "why": "要看得到每一次 AI 使用的權限、資料與核准紀錄。"
+    }
+  ],
+  "legs": [
+    {
+      "name": "治理底座",
+      "text": "所有 AI 呼叫的必經入口與稽核軌跡。",
+      "modules": [
+        "nexus-forge"
+      ]
+    },
+    {
+      "name": "AI 編排",
+      "text": "有預算、有閘門、可人工審核的 AI Agent。",
+      "modules": [
+        "nexus-auro"
+      ]
+    },
+    {
+      "name": "客戶資料",
+      "text": "身分解析、單一客戶視圖與 B2B 帳號經營。",
+      "modules": [
+        "nexus-cdp",
+        "nexus-abm"
+      ]
+    },
+    {
+      "name": "知識",
+      "text": "可追溯出處的企業知識庫與個人收藏。",
+      "modules": [
+        "nexus-insight",
+        "nexus-library"
+      ]
+    },
+    {
+      "name": "內容與行銷智能",
+      "text": "受監理產業的內容產製、輿情分析與 AI 搜尋能見度。",
+      "modules": [
+        "nexus-mira",
+        "nexus-pulse",
+        "nexus-geo"
+      ]
+    },
+    {
+      "name": "合規治理",
+      "text": "金融非結構化資料的分級、保存與稽核。",
+      "modules": [
+        "nexus-saga"
+      ]
+    },
+    {
+      "name": "生產力",
+      "text": "依範本產出商業文件。",
+      "modules": [
+        "nexus-ai-office"
+      ]
+    },
+    {
+      "name": "現代化",
+      "text": "讀懂大型主機程式，產出可查證的規格書。",
+      "modules": [
+        "nexus-lisa"
+      ]
+    },
+    {
+      "name": "安全",
+      "text": "源碼檢測、弱點掃描與憑證治理。",
+      "modules": [
+        "nexus-scanner",
+        "nexus-cardea"
+      ]
+    }
+  ],
+  "extra_modules": {
+    "nexus-geo": {
+      "code": "NEXUS GEO",
+      "name_zh": "生成式搜尋能見度",
+      "file": "nexus-geo.html",
+      "what": "衡量品牌在 ChatGPT、Gemini 等生成式搜尋中被提及與引用的程度。"
+    },
+    "nexus-saga": {
+      "code": "SAGA",
+      "name_zh": "非結構化資料治理",
+      "file": "nexus-saga.html",
+      "what": "金融機構的非結構化資料治理層：分級、保存、法律保全與稽核鏈。"
+    }
+  },
+  "needs": {
+    "heading": "依需求找模組",
+    "intro": "不需要一次導入全部。從眼前最急的那件事開始，之後的模組共用同一個治理底座。",
+    "rows": [
+      [
+        "統一管理企業內的 AI 使用，並留下稽核紀錄",
+        "nexus-forge"
+      ],
+      [
+        "讓 AI Agent 自動執行工作，但保留人工審核",
+        "nexus-auro"
+      ],
+      [
+        "整合客戶資料，建立單一客戶視圖",
+        "nexus-cdp"
+      ],
+      [
+        "經營 B2B 目標客戶，評估購買意圖",
+        "nexus-abm"
+      ],
+      [
+        "建立可追溯出處的企業知識庫與 RAG 問答",
+        "nexus-insight"
+      ],
+      [
+        "讓員工的知識收藏留在企業環境內",
+        "nexus-library"
+      ],
+      [
+        "用 AI 產製金融宣傳內容或衛教文章，並經審核",
+        "nexus-mira"
+      ],
+      [
+        "分析輿情的情緒與敘事走向",
+        "nexus-pulse"
+      ],
+      [
+        "提升品牌在 AI 搜尋中的能見度",
+        "nexus-geo"
+      ],
+      [
+        "治理非結構化資料的分級、保存與處分",
+        "nexus-saga"
+      ],
+      [
+        "用 AI 產出提案書、報價單與週報",
+        "nexus-ai-office"
+      ],
+      [
+        "盤點大型主機程式，產出繁體中文規格書",
+        "nexus-lisa"
+      ],
+      [
+        "源碼檢測、弱點掃描與 SBOM",
+        "nexus-scanner"
+      ],
+      [
+        "SSL 憑證管理與後量子密碼盤點",
+        "nexus-cardea"
+      ]
+    ]
+  },
+  "diff": [
+    {
+      "icon": "shield-check",
+      "title": "先檢查，再推論",
+      "text": "AI 請求在送往模型之前就完成權限與政策檢查；不符合的請求不會到達模型。"
+    },
+    {
+      "icon": "lock",
+      "title": "證據可以離線驗證",
+      "text": "稽核軌跡以雜湊鏈保護，證據包附獨立驗證工具，稽核人員不需要連上平台就能查驗。"
+    },
+    {
+      "icon": "server",
+      "title": "可以完全不出機房",
+      "text": "平台與模型都可部署在企業自有環境，模型路由可限定只走地端模型。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "AURO NEXUS 是什麼？",
+      "a": "AURO NEXUS 是奧洛（Aurobase）推出的 AI 治理平台，以 Forge 為治理底座，涵蓋 AI Agent、CDP 客戶數據平台、企業知識庫、AI 內容產製、源碼檢測與 SSL 憑證管理等 14 個模組，可部署於企業自有環境。"
+    },
+    {
+      "q": "AI 治理平台和一般的企業 AI 平台差在哪？",
+      "a": "一般企業 AI 平台著重讓員工用得到 AI；AI 治理平台另外負責在推論前檢查權限與政策，並留下可查驗的紀錄。AURO NEXUS 的所有模組都經 Forge 做這件事。"
+    },
+    {
+      "q": "需要一次導入全部模組嗎？",
+      "a": "不需要。可以從最急的需求開始，例如先導入 Forge 統一管理 AI 使用，或先導入 AURA CDP 整合客戶資料；之後新增的模組共用同一個治理底座。"
+    },
+    {
+      "q": "AURO NEXUS 可以部署在自己的機房嗎？",
+      "a": "可以。平台與模型都可部署在企業自有機房或私有雲，模型路由可限定只使用地端模型。"
+    },
+    {
+      "q": "金融業導入 AI 要注意什麼？",
+      "a": "金管會〈金融業運用 AI 指引〉以治理與問責、隱私與客戶權益、系統穩健與安全、透明與可解釋等原則為架構。AURO NEXUS 以推論前檢查、地端模型、雜湊鏈稽核軌跡與可離線驗證的證據包對應這些原則；是否符合由主管機關與貴機構法遵認定。"
+    }
+  ],
+  "legacy_faq": [
+    {
+      "@type": "Question",
+      "name": "NEXUS 跟 ChatGPT 有什麼不同？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ChatGPT 是一個聊天機器人；NEXUS OS 是一個工作自動化平台。除了對話，NEXUS OS 能幫你生成文件、查詢法規、分析財報、管理知識庫，而且每個動作都有安全把關。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AURA CDP 和 Salesforce 比有什麼優勢？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "三個關鍵差異：資料完全留在台灣境內符合金管會要求、5年總擁有成本比 Salesforce 低100至700萬美元、提供完整中文介面與本地顧問服務。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI Voice Studio 生成的語音夠自然嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "整合業界頂尖的多個AI語音引擎，系統會根據需求自動選用最適合的引擎。中文語音尤其針對台灣腔調優化，聽起來自然親切。"
+      }
+    }
+  ]
+}

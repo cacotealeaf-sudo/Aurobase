@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <title>地端 AI 閘道｜Forge 地端 LLM、企業知識庫 RAG 與 AI 稽核軌跡</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。">
+    <meta name="keywords" content="地端 AI,地端 LLM,地端 LLM 建置,AI 閘道,LLM gateway,私有化 AI,AI 治理,AI 稽核,企業知識庫 RAG,MCP,OpenAI 相容 API,金融業 AI 指引,AURO NEXUS">
+    <link rel="canonical" href="https://aurobase.com/nexus-forge.html">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/nexus-forge.html">
+    <meta property="og:title" content="地端 AI 閘道｜Forge 地端 LLM、企業知識庫 RAG 與 AI 稽核軌跡">
+    <meta property="og:description" content="Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。">
+    <meta property="og:url" content="https://aurobase.com/nexus-forge.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+    <meta property="og:image" content="https://aurobase.com/images/nexus-chat.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aurobase.com/nexus-forge.html#software",
+      "name": "Forge 治理化 AI 閘道",
+      "alternateName": [
+        "Forge — Governed AI Gateway",
+        "NEXUS Forge",
+        "AURO NEXUS Forge"
+      ],
+      "description": "Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "治理底座",
+      "operatingSystem": "Linux（容器化部署）",
+      "inLanguage": "zh-Hant-TW",
+      "url": "https://aurobase.com/nexus-forge.html",
+      "isPartOf": {
+        "@id": "https://aurobase.com/nexus.html#platform"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "featureList": [
+        "多模型路由",
+        "知識庫 RAG",
+        "MCP 工具閘道",
+        "自然語言查資料",
+        "審批與驗證",
+        "稽核帳與證據包"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/nexus-forge.html#webpage",
+      "url": "https://aurobase.com/nexus-forge.html",
+      "name": "地端 AI 閘道｜Forge 地端 LLM、企業知識庫 RAG 與 AI 稽核軌跡",
+      "description": "Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。",
+      "inLanguage": "zh-Hant-TW",
+      "dateModified": "2026-10-30",
+      "about": {
+        "@id": "https://aurobase.com/nexus-forge.html#software"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://aurobase.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AURO NEXUS",
+          "item": "https://aurobase.com/nexus.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Forge",
+          "item": "https://aurobase.com/nexus-forge.html"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI 閘道（LLM Gateway）是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI 閘道是企業內所有 AI 請求的必經入口，負責在推論前檢查權限與政策、把請求路由到經核准的模型，並記錄推論、資料存取與工具使用。Forge 是奧洛推出的治理化 AI 閘道，提供 OpenAI 相容 API、地端模型路由與可離線驗證的稽核軌跡。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "地端 AI 的主要優勢是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "主要是資料不需送出企業環境、可依內部規範控管模型與存取權限，適合處理個資與機敏資料的金融、醫療與公部門。Forge 可限定只路由到地端 LLM，並為每次推論留下稽核紀錄。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "地端 LLM 建置之後，還需要 AI 治理平台嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "需要。地端 LLM 解決的是「資料不出機房」，但誰能用哪個模型、能查哪些知識庫、推論紀錄能否證明沒被修改，仍需要治理層。Forge 就是放在地端 LLM 前面的那一層。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Forge 跟直接用 ChatGPT 有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Forge 不是聊天工具，而是企業內部所有 AI 請求的閘道：請求先經權限與政策檢查，再送往經核准的模型（可限定只用地端模型），每一步都寫入雜湊鏈稽核軌跡。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "既有的 AI 應用要改寫才能接 Forge 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "多數不需要。Forge 提供 OpenAI 相容 API，支援 OpenAI 介面的工具與程式庫只要改連線位址即可接上。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "稽核紀錄怎麼證明沒被改過？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Forge 的稽核軌跡是雜湊鏈；匯出的證據包整包封印，並附獨立驗證工具，稽核人員可在離線環境自行驗證。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/iconoir-subset.css">
+    <link rel="stylesheet" href="css/nexus-module.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+  </head>
+  <body style="--m-deep:#2B3A8C;--m-bright:#4659C9;--m-soft:#8FA0F0;--m-tint:#ECEFFC;--m-ink1:#0C0F1F;--m-ink2:#141A35">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== 浮動諮詢按鈕 + Modal ===== -->
+<div class="float-btn-wrapper">
+        <button type="button" class="qf-fab" data-toggle="modal" data-target="#myModal" aria-haspopup="dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>免費諮詢</span>
+        </button>
+</div>
+
+       <!-- Inquiry modal — two steps (js/inquiry-modal.js); submission by js/qform.js, which reads
+            #f01–#f04, #f06, #submitButton and every checked input[name="entry.1863307942"] -->
+       <div class="modal fade qf-modal" id="myModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="qfTitle">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+
+         <div class="qf-head">
+           <div class="qf-eyebrow">// 免費諮詢 · 約 1 分鐘</div>
+           <h2 class="qf-title" id="qfTitle">告訴我們您的需求</h2>
+           <p class="qf-sub">由專人為您量身規劃最適合的解決方案</p>
+           <button type="button" class="qf-close" data-dismiss="modal" aria-label="關閉">
+             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+           </button>
+           <ol class="qf-progress" aria-label="填寫進度">
+             <li data-qf-dot="1" class="is-active">01 · 需求</li>
+             <li data-qf-dot="2">02 · 聯絡方式</li>
+           </ol>
+         </div>
+
+         <form id="pop-qform" novalidate>
+           <div class="modal-body">
+
+             <!-- Step 1: what they need (all optional) -->
+             <div class="qf-step" data-qf-step="1">
+               <fieldset class="qf-block">
+                 <legend class="qf-q">您想了解哪些服務？<small>可複選</small></legend>
+                 <div class="qf-chips">
+                   <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="數位廣告投放"><label for="f05-1">數位廣告投放</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群媒體經營"><label for="f05-2">社群媒體經營</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="HCL Unica"><label for="f05-4">HCL Unica</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="CDP 客戶數據平台"><label for="f05-5">CDP 客戶數據平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">NEXUS AI 自動化平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-10" name="entry.1863307942" value="AI Voice Studio"><label for="f05-10">AI Voice Studio</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-11" name="entry.1863307942" value="NEXUS GEO 生成式搜尋優化"><label for="f05-11">NEXUS GEO 生成式搜尋優化</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-12" name="entry.1863307942" value="NEXUS SAGA 資料治理"><label for="f05-12">NEXUS SAGA 資料治理</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-7" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-8" name="entry.1863307942" value="其他"><label for="f05-8">其他 / 還不確定</label></div>
+                 </div>
+               </fieldset>
+               <div class="qf-block qf-field">
+                 <label for="f06">想先讓我們知道的事 <span class="qf-opt">選填</span></label>
+                 <textarea id="f06" class="qf-input" name="entry.48027589" maxlength="1000" placeholder="例如：想提升廣告轉換率、評估導入 CDP、預計上線時程…"></textarea>
+                 <span class="qf-count" data-qf-count aria-live="polite">0 / 1000</span>
+               </div>
+             </div>
+
+             <!-- Step 2: how to reach them -->
+             <div class="qf-step" data-qf-step="2" hidden>
+               <span class="qf-q">怎麼聯絡您？</span>
+               <div class="qf-fields">
+                 <div class="qf-field">
+                   <label for="f01">姓名 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="text" id="f01" name="entry.162276222" autocomplete="name" placeholder="王小明" required aria-describedby="f01-msg">
+                   <span class="qf-msg" id="f01-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f04">公司名稱 <span class="qf-opt">選填</span></label>
+                   <input class="qf-input" type="text" id="f04" name="entry.743695878" autocomplete="organization" placeholder="公司或品牌名稱">
+                 </div>
+                 <div class="qf-field">
+                   <label for="f02">Email <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="email" id="f02" name="entry.1357191828" autocomplete="email" inputmode="email" placeholder="name@company.com" required aria-describedby="f02-msg">
+                   <span class="qf-msg" id="f02-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f03">聯絡電話 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="tel" id="f03" name="entry.1380546653" autocomplete="tel" inputmode="tel" placeholder="0912-345-678" required aria-describedby="f03-msg">
+                   <span class="qf-msg" id="f03-msg" aria-live="polite"></span>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+           <div class="qf-foot">
+             <span class="qf-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a></span>
+             <div class="qf-actions">
+               <button type="button" class="qf-btn qf-btn-ghost" data-qf-back hidden>上一步</button>
+               <button type="button" class="qf-btn qf-btn-primary" data-qf-next>下一步<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5"/></svg></button>
+               <button type="button" class="qf-btn qf-btn-primary" id="submitButton" hidden>送出</button>
+             </div>
+           </div>
+         </form>
+
+       </div>
+       </div>
+       </div>
+</div>
+
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+            <nav id="colorlib-main-menu" role="navigation">
+                <ul>
+                    <li><a href="marketing.html">數位行銷</a></li>
+                    <li><a href="solution.html">解決方案＆產品</a></li>
+                    <li><a href="https://aurocore.com/" target="_blank">客服中心</a></li>
+                    <li><a href="ai-companion.html">AI 智慧語伴</a></li>
+                    <li class="active"><a href="nexus.html">AURO NEXUS</a></li>
+                    <li><a href="blog.html">新聞中心</a></li>
+                    <li><a href="contact.html">聯絡我們</a></li>
+                </ul>
+                <p class="social">
+                    <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                    </svg> 粉絲專頁</a></span>
+                </p>
+            </nav>
+            <div class="colorlib-footer">
+                <div class="aside-logo"><a href="index.html">
+                    <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+                </a></div>
+            </div>
+        </aside>
+
+        <div id="colorlib-main">
+
+<!-- ╔══ Forge — 治理化 AI 閘道（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）══╗ -->
+
+            <section class="nm-hero nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <nav class="nm-crumbs" aria-label="麵包屑"><ol>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="nexus.html">AURO NEXUS</a></li>
+                        <li><span aria-current="page">Forge</span></li>
+                    </ol></nav>
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <p class="nm-family">AURO NEXUS 產品家族</p>
+                            <h1 class="eyebrow">Forge｜地端 AI 閘道・LLM Gateway</h1>
+                            <p class="hero-slogan">讓企業的每一次 AI 呼叫<br>都<em>有授權、有紀錄</em></p>
+                            <p class="hero-sub">各部門開始用 AI 之後，問題就來了：誰用了哪個模型、送出了什麼資料、查了哪份知識、呼叫了哪個工具？Forge 是所有 AI 請求的必經閘道，先檢查權限與政策，再送往模型，並把每一步寫進可驗證的稽核帳。</p>
+                            <p class="hero-tagline">治理不是事後補的報表，而是每一次推論之前的那道檢查。</p>
+                            <div class="hero-actions">
+                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
+                            </div>
+                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-network"></i> OpenAI 相容 API</span><span class="nm-badge"><i class="iconoir-cpu"></i> 地端模型</span><span class="nm-badge"><i class="iconoir-database"></i> 知識庫 RAG</span><span class="nm-badge"><i class="iconoir-grid-plus"></i> MCP 工具閘道</span><span class="nm-badge"><i class="iconoir-lock"></i> 雜湊鏈稽核帳</span></div>
+                        </div>
+                        <div class="col-lg-5 mt-5 mt-lg-0">
+                            <aside class="nm-summary">
+                                <h2>重點摘要</h2>
+                                <dl><dt>是什麼</dt><dd>企業內部 AI 的治理閘道：模型路由、知識庫、工具閘道與稽核帳。</dd><dt>介面</dt><dd>OpenAI 相容 API，既有的 AI 工具與程式庫可直接接上。</dd><dt>模型</dt><dd>地端 Ollama、OpenAI 相容服務（如 vLLM）、Anthropic；可完全只用地端模型。</dd><dt>稽核</dt><dd>雜湊鏈稽核帳；證據包可用獨立工具離線驗證。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「治理底座」，平台各模組的 AI 呼叫經由 Forge。</dd></dl>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="what-is" class="nm-define nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEFINITION</p>
+                            <h2 class="section-heading">什麼是 AI 閘道（LLM Gateway）？</h2>
+                            <div class="row">
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AI 閘道（LLM Gateway）</b>是企業內所有 AI 請求的必經入口：在請求送到模型之前檢查權限與政策，把請求路由到經核准的模型，並記錄推論、資料存取與工具使用。它是 AI 治理平台最核心的一層。</p><p><b>Forge</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的治理化 AI 閘道，也是 <a href="nexus.html">AURO NEXUS AI 治理平台</a>的底座。它以 OpenAI 相容 API 提供服務，既有工具改連線位址即可接入；模型可以只用地端 LLM；每一次推論、知識庫查詢與工具呼叫都寫入雜湊鏈稽核軌跡，並可匯出供稽核人員離線驗證的證據包。</p></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>資訊長、架構師</b><span>要把各部門自行串接的 AI 收斂成一個入口、一套權限。</span></li><li><b>資安與法遵</b><span>要回答「資料送去哪裡、誰核准、紀錄有沒有被改過」。</span></li><li><b>金融與受監理產業</b><span>要在私有或離線環境導入生成式 AI，並保留可稽核的證據。</span></li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-pain nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">THE PROBLEM</p>
+                            <h2 class="section-heading">AI 進入企業之後，最先失控的是這三件事</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">01</div>
+                                        <h3>資料去了哪裡說不清</h3><p>員工把內部文件貼進外部 AI 服務，資料送往哪個模型、是否被保留，事後無從追查。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">02</div>
+                                        <h3>每個系統各接一套</h3><p>各部門、各系統各自串接模型與金鑰，權限與紀錄分散，無法統一管理。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">03</div>
+                                        <h3>稽核時拿不出證據</h3><p>被問到「某次 AI 建議引用了哪些資料、經過誰核准」時，只有零散的應用程式紀錄，無法證明未被修改。</p></div></div>
+                            </div>
+                            <div class="pain-statement">Forge 把 AI 收斂到<strong>一個入口、一套權限、一條稽核帳</strong>：先檢查、再推論、全程留痕。</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="capabilities" class="nm-cap nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">CAPABILITIES</p>
+                            <h2 class="section-heading">核心能力</h2>
+                            <p class="section-intro">Forge 以 OpenAI 相容介面提供服務，既有的 AI 工具與程式庫不需改寫即可接上。</p>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-network"></i></div>
+                                        <h3>多模型路由</h3><ul><li>支援地端 <b>Ollama</b>、<b>OpenAI 相容服務</b>（如 vLLM）與 <b>Anthropic</b>。</li><li>金絲雀分流、依成本排序、多模型共識與備援。</li><li>可設定為<b>只使用地端模型</b>。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
+                                        <h3>知識庫 RAG</h3><ul><li>上傳 PDF、DOCX、PPTX、XLSX、CSV、Markdown、純文字。</li><li>知識庫層級授權，資料庫列級安全（RLS）做租戶隔離。</li><li>服務啟動時拒絕以資料庫超級使用者身分連線。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-grid-plus"></i></div>
+                                        <h3>MCP 工具閘道</h3><ul><li>平台內部模組與外部 MCP 伺服器的工具呼叫，都先經政策決策。</li><li>每一次工具呼叫寫入稽核帳。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-search"></i></div>
+                                        <h3>自然語言查資料</h3><ul><li>模型產生的 SQL 先經語法閘檢查，再以<b>唯讀身分</b>查詢。</li><li>查詢結果做個資遮罩後才回傳。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-badge-check"></i></div>
+                                        <h3>審批與驗證</h3><ul><li>審閱 → 簽核 → 套用／駁回的審批流程，支援雙人覆核。</li><li>對抗式驗證：多位互不可見的審查者反駁同一主張。</li><li>模型評測閘道。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
+                                        <h3>稽核帳與證據包</h3><ul><li>雜湊鏈稽核帳記錄每一次推論、查詢與工具呼叫。</li><li>證據包匯出時整包封印，可用獨立工具<b>離線驗證</b>。</li><li>個資刪除請求就地遮罩，雜湊鏈仍可驗證。</li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-reg nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">REGULATORY MAPPING</p>
+                            <h2 class="section-heading">對應金融業運用 AI 指引的做法</h2>
+                            <p class="section-intro">金管會於 2024 年發布〈金融業運用 AI 指引〉，以六項核心原則為架構。下表列出與 Forge 功能直接相關的原則與對應做法。</p>
+                            <div class="nm-table-wrap"><table class="nm-table">
+                                <thead><tr><th scope="col">指引核心原則</th><th scope="col">Forge 的對應做法</th></tr></thead>
+                                <tbody><tr><th scope="row">建立治理及問責機制</th><td>所有 AI 請求先經權限與政策檢查才送往模型；審批流程支援雙人覆核；每次推論寫入雜湊鏈稽核軌跡。</td></tr><tr><th scope="row">保護隱私及客戶權益</th><td>模型可限定只用地端 LLM；自然語言查資料以唯讀身分執行並遮罩個資；個資刪除請求可在稽核紀錄中就地遮罩。</td></tr><tr><th scope="row">確保系統穩健與安全</th><td>多模型備援與金絲雀分流；模型評測閘道；服務拒絕以資料庫超級使用者身分連線。</td></tr><tr><th scope="row">落實透明性與可解釋性</th><td>推論、知識庫引用與工具呼叫逐筆留痕；證據包附獨立驗證工具，可離線查驗；對抗式驗證讓多位審查者反駁同一主張。</td></tr></tbody></table></div>
+                            <p class="nm-source">資料來源：<a href="https://www.fsc.gov.tw/" target="_blank" rel="noopener">金管會〈金融業運用人工智慧（AI）指引〉（2024 年 6 月 20 日發布）</a>。指引屬行政指導；本表列出的是對應做法，是否符合由主管機關與貴機構法遵認定。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-compare nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">COMPARISON</p>
+                            <h2 class="section-heading">三種導入企業 AI 的方式比較</h2>
+                            <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
+                                <thead><tr><th scope="col"></th><th scope="col">直接使用公有雲 AI 服務</th><th scope="col">自建地端 LLM</th><th scope="col" class=is-us>Forge</th></tr></thead>
+                                <tbody><tr><th scope="row">資料存放位置</th><td>服務商的資料中心</td><td>企業自有環境</td><td class=is-us>企業自有環境</td></tr><tr><th scope="row">可用模型</th><td>該服務商提供的模型</td><td>自行部署的模型</td><td class=is-us>地端 Ollama、OpenAI 相容服務（如 vLLM）、Anthropic，可限定只用地端</td></tr><tr><th scope="row">推論前的權限與政策檢查</th><td>依服務商功能</td><td>需自行開發</td><td class=is-us>內建，所有請求必經</td></tr><tr><th scope="row">稽核紀錄</th><td>依服務商提供</td><td>需自行開發</td><td class=is-us>雜湊鏈稽核軌跡，涵蓋推論、知識庫與工具呼叫</td></tr><tr><th scope="row">證據可離線驗證</th><td>—</td><td>需自行開發</td><td class=is-us>證據包附獨立驗證工具</td></tr><tr><th scope="row">既有 AI 工具接入</th><td>使用該服務商 API</td><td>依部署方式</td><td class=is-us>OpenAI 相容 API，改連線位址即可</td></tr></tbody></table></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-diff nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">WHAT'S DIFFERENT</p>
+                            <h2 class="section-heading">差異點</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-server diff-icon"></i>
+                                        <h3>可以完全不出機房</h3><p>模型、知識庫與稽核帳都可部署在客戶自有環境，模型路由可限定只走地端模型。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-lock diff-icon"></i>
+                                        <h3>證據可以離線驗</h3><p>證據包附帶獨立驗證工具，稽核人員不需要連上 Forge，也不需要相信 Forge，就能驗證紀錄未被修改。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
+                                        <h3>先檢查，再推論</h3><p>權限與政策檢查放在推論之前；不符合的請求不會送到模型，而不是送出之後才記一筆。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-platform nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">ON THE PLATFORM</p>
+                            <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
+                            <div class="platform-text">Forge 是平台的<b>治理底座</b>。<a href="nexus-auro.html">Auro</a>、<a href="nexus-insight.html">Insight</a>、<a href="nexus-mira.html">MIRA</a>、<a href="nexus-pulse.html">Pulse</a>、<a href="nexus-ai-office.html">NEXUS AI-Office</a> 等模組的 AI 呼叫經由 Forge 送往模型；模組之間存取知識也經 Forge 的 MCP 閘道，權限與紀錄因此只有一套。</div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus-cardea.html"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-deploy nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEPLOYMENT</p>
+                            <h2 class="section-heading">部署形態</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
+                                        <h3>Kubernetes</h3><p>以 Helm chart 部署於客戶的 Kubernetes 環境，含監控儀表板設定。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">單機 / POC</span>
+                                        <h3>docker compose</h3><p>含向量資料庫與快取，一次起站。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">地端模型</span>
+                                        <h3>Ollama・OpenAI 相容服務</h3><p>模型可部署在客戶自有的 GPU 主機，Forge 只把請求路由到經核准的模型。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-faq nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="faq-item"><h3>AI 閘道（LLM Gateway）是什麼？</h3><p>AI 閘道是企業內所有 AI 請求的必經入口，負責在推論前檢查權限與政策、把請求路由到經核准的模型，並記錄推論、資料存取與工具使用。Forge 是奧洛推出的治理化 AI 閘道，提供 OpenAI 相容 API、地端模型路由與可離線驗證的稽核軌跡。</p></div>
+                                    <div class="faq-item"><h3>地端 AI 的主要優勢是什麼？</h3><p>主要是資料不需送出企業環境、可依內部規範控管模型與存取權限，適合處理個資與機敏資料的金融、醫療與公部門。Forge 可限定只路由到地端 LLM，並為每次推論留下稽核紀錄。</p></div>
+                                    <div class="faq-item"><h3>地端 LLM 建置之後，還需要 AI 治理平台嗎？</h3><p>需要。地端 LLM 解決的是「資料不出機房」，但誰能用哪個模型、能查哪些知識庫、推論紀錄能否證明沒被修改，仍需要治理層。Forge 就是放在地端 LLM 前面的那一層。</p></div>
+                                    <div class="faq-item"><h3>Forge 跟直接用 ChatGPT 有什麼不同？</h3><p>Forge 不是聊天工具，而是企業內部所有 AI 請求的閘道：請求先經權限與政策檢查，再送往經核准的模型（可限定只用地端模型），每一步都寫入雜湊鏈稽核軌跡。</p></div>
+                                    <div class="faq-item"><h3>既有的 AI 應用要改寫才能接 Forge 嗎？</h3><p>多數不需要。Forge 提供 OpenAI 相容 API，支援 OpenAI 介面的工具與程式庫只要改連線位址即可接上。</p></div>
+                                    <div class="faq-item"><h3>稽核紀錄怎麼證明沒被改過？</h3><p>Forge 的稽核軌跡是雜湊鏈；匯出的證據包整包封印，並附獨立驗證工具，稽核人員可在離線環境自行驗證。</p></div>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-cta">
+                <div class="container">
+                    <h2>先讓一個部門的 AI 走進閘道</h2>
+                    <p>我們可以從一個部門、一個模型開始，接上 Forge 之後再看稽核帳裡留下了什麼。</p>
+                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+                <div class="container px-md-4">
+                    <div class="footer-legal text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="copyright" style="color:#a9a9a9">
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+
+        </div><!-- END COLORLIB-MAIN -->
+    </div><!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="currentColor" style="color:var(--m-deep)"/>
+        </svg>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js" defer></script>
+    <script src="js/aos.js" defer></script>
+    <script src="js/external-link-warning.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main_optimized.js" defer></script>
+    <script src="js/form-validator.js" defer></script>
+    <script src="js/rate-limiter.js" defer></script>
+    <script src="js/inquiry-modal.js" defer></script>
+    <script src="js/qform.js" defer></script>
+
+    <script>
+    $(function(){
+        $('a[href="#capabilities"]').on('click', function(e){
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+        });
+    });
+    </script>
+  </body>
+</html>

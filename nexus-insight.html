@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <title>企業知識庫 AI｜Insight RAG 問答、知識萃取與知識圖譜</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Insight 是奧洛（Aurobase）的企業知識庫 AI：把 PDF、Word 等內部文件萃取成術語、知識點與問答，經人工審核後才開放 RAG 問答與語意搜尋，每一項知識都能追溯回出處文件，可在地端運作。">
+    <meta name="keywords" content="企業知識庫,企業知識庫 AI,RAG,RAG 企業應用,企業級 RAG,知識管理系統,知識管理系統 AI,KMS,知識圖譜,語意搜尋,地端 AI,AURO NEXUS">
+    <link rel="canonical" href="https://aurobase.com/nexus-insight.html">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/nexus-insight.html">
+    <meta property="og:title" content="企業知識庫 AI｜Insight RAG 問答、知識萃取與知識圖譜">
+    <meta property="og:description" content="Insight 是奧洛（Aurobase）的企業知識庫 AI：把 PDF、Word 等內部文件萃取成術語、知識點與問答，經人工審核後才開放 RAG 問答與語意搜尋，每一項知識都能追溯回出處文件，可在地端運作。">
+    <meta property="og:url" content="https://aurobase.com/nexus-insight.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+    <meta property="og:image" content="https://aurobase.com/images/nexus-chat.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aurobase.com/nexus-insight.html#software",
+      "name": "Insight 企業知識萃取與治理",
+      "alternateName": [
+        "Insight — Knowledge Extraction & Governance",
+        "NEXUS Insight",
+        "AURO NEXUS Insight"
+      ],
+      "description": "Insight 是奧洛（Aurobase）的企業知識庫 AI：把 PDF、Word 等內部文件萃取成術語、知識點與問答，經人工審核後才開放 RAG 問答與語意搜尋，每一項知識都能追溯回出處文件，可在地端運作。",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "知識",
+      "operatingSystem": "Linux（容器化部署）",
+      "inLanguage": "zh-Hant-TW",
+      "url": "https://aurobase.com/nexus-insight.html",
+      "isPartOf": {
+        "@id": "https://aurobase.com/nexus.html#platform"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "featureList": [
+        "文件解析",
+        "知識萃取",
+        "審核流程",
+        "術語版本與衝突",
+        "語意搜尋與問答",
+        "知識圖譜"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/nexus-insight.html#webpage",
+      "url": "https://aurobase.com/nexus-insight.html",
+      "name": "企業知識庫 AI｜Insight RAG 問答、知識萃取與知識圖譜",
+      "description": "Insight 是奧洛（Aurobase）的企業知識庫 AI：把 PDF、Word 等內部文件萃取成術語、知識點與問答，經人工審核後才開放 RAG 問答與語意搜尋，每一項知識都能追溯回出處文件，可在地端運作。",
+      "inLanguage": "zh-Hant-TW",
+      "dateModified": "2026-10-30",
+      "about": {
+        "@id": "https://aurobase.com/nexus-insight.html#software"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://aurobase.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AURO NEXUS",
+          "item": "https://aurobase.com/nexus.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Insight",
+          "item": "https://aurobase.com/nexus-insight.html"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "企業知識庫 RAG 怎麼導入比較穩？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "先整理知識、再開放問答。Insight 先把文件萃取成術語、知識點與問答，經人工核准後才進入檢索，避免過時或矛盾的內容被 AI 引用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Insight 支援哪些文件格式？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PDF、Word（DOCX）、Markdown 與純文字。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 萃取的內容會直接給使用者查嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。萃取出的術語、知識點與問答需經人工核准，才會進入搜尋與問答。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "答案能追溯到原始文件嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。每一項知識都記錄出處文件，知識圖譜也提供來源追溯。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "需要連外部 AI 服務嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不需要。AI 萃取經 Forge 送往經核准的模型，可限定只用地端模型；語意向量模型內建於映像。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/iconoir-subset.css">
+    <link rel="stylesheet" href="css/nexus-module.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+  </head>
+  <body style="--m-deep:#8A5A0E;--m-bright:#B87A16;--m-soft:#E7B45C;--m-tint:#FBF3E3;--m-ink1:#17110A;--m-ink2:#2A1E10">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== 浮動諮詢按鈕 + Modal ===== -->
+<div class="float-btn-wrapper">
+        <button type="button" class="qf-fab" data-toggle="modal" data-target="#myModal" aria-haspopup="dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>免費諮詢</span>
+        </button>
+</div>
+
+       <!-- Inquiry modal — two steps (js/inquiry-modal.js); submission by js/qform.js, which reads
+            #f01–#f04, #f06, #submitButton and every checked input[name="entry.1863307942"] -->
+       <div class="modal fade qf-modal" id="myModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="qfTitle">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+
+         <div class="qf-head">
+           <div class="qf-eyebrow">// 免費諮詢 · 約 1 分鐘</div>
+           <h2 class="qf-title" id="qfTitle">告訴我們您的需求</h2>
+           <p class="qf-sub">由專人為您量身規劃最適合的解決方案</p>
+           <button type="button" class="qf-close" data-dismiss="modal" aria-label="關閉">
+             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+           </button>
+           <ol class="qf-progress" aria-label="填寫進度">
+             <li data-qf-dot="1" class="is-active">01 · 需求</li>
+             <li data-qf-dot="2">02 · 聯絡方式</li>
+           </ol>
+         </div>
+
+         <form id="pop-qform" novalidate>
+           <div class="modal-body">
+
+             <!-- Step 1: what they need (all optional) -->
+             <div class="qf-step" data-qf-step="1">
+               <fieldset class="qf-block">
+                 <legend class="qf-q">您想了解哪些服務？<small>可複選</small></legend>
+                 <div class="qf-chips">
+                   <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="數位廣告投放"><label for="f05-1">數位廣告投放</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群媒體經營"><label for="f05-2">社群媒體經營</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="HCL Unica"><label for="f05-4">HCL Unica</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="CDP 客戶數據平台"><label for="f05-5">CDP 客戶數據平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">NEXUS AI 自動化平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-10" name="entry.1863307942" value="AI Voice Studio"><label for="f05-10">AI Voice Studio</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-11" name="entry.1863307942" value="NEXUS GEO 生成式搜尋優化"><label for="f05-11">NEXUS GEO 生成式搜尋優化</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-12" name="entry.1863307942" value="NEXUS SAGA 資料治理"><label for="f05-12">NEXUS SAGA 資料治理</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-7" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-8" name="entry.1863307942" value="其他"><label for="f05-8">其他 / 還不確定</label></div>
+                 </div>
+               </fieldset>
+               <div class="qf-block qf-field">
+                 <label for="f06">想先讓我們知道的事 <span class="qf-opt">選填</span></label>
+                 <textarea id="f06" class="qf-input" name="entry.48027589" maxlength="1000" placeholder="例如：想提升廣告轉換率、評估導入 CDP、預計上線時程…"></textarea>
+                 <span class="qf-count" data-qf-count aria-live="polite">0 / 1000</span>
+               </div>
+             </div>
+
+             <!-- Step 2: how to reach them -->
+             <div class="qf-step" data-qf-step="2" hidden>
+               <span class="qf-q">怎麼聯絡您？</span>
+               <div class="qf-fields">
+                 <div class="qf-field">
+                   <label for="f01">姓名 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="text" id="f01" name="entry.162276222" autocomplete="name" placeholder="王小明" required aria-describedby="f01-msg">
+                   <span class="qf-msg" id="f01-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f04">公司名稱 <span class="qf-opt">選填</span></label>
+                   <input class="qf-input" type="text" id="f04" name="entry.743695878" autocomplete="organization" placeholder="公司或品牌名稱">
+                 </div>
+                 <div class="qf-field">
+                   <label for="f02">Email <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="email" id="f02" name="entry.1357191828" autocomplete="email" inputmode="email" placeholder="name@company.com" required aria-describedby="f02-msg">
+                   <span class="qf-msg" id="f02-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f03">聯絡電話 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="tel" id="f03" name="entry.1380546653" autocomplete="tel" inputmode="tel" placeholder="0912-345-678" required aria-describedby="f03-msg">
+                   <span class="qf-msg" id="f03-msg" aria-live="polite"></span>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+           <div class="qf-foot">
+             <span class="qf-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a></span>
+             <div class="qf-actions">
+               <button type="button" class="qf-btn qf-btn-ghost" data-qf-back hidden>上一步</button>
+               <button type="button" class="qf-btn qf-btn-primary" data-qf-next>下一步<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5"/></svg></button>
+               <button type="button" class="qf-btn qf-btn-primary" id="submitButton" hidden>送出</button>
+             </div>
+           </div>
+         </form>
+
+       </div>
+       </div>
+       </div>
+</div>
+
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+            <nav id="colorlib-main-menu" role="navigation">
+                <ul>
+                    <li><a href="marketing.html">數位行銷</a></li>
+                    <li><a href="solution.html">解決方案＆產品</a></li>
+                    <li><a href="https://aurocore.com/" target="_blank">客服中心</a></li>
+                    <li><a href="ai-companion.html">AI 智慧語伴</a></li>
+                    <li class="active"><a href="nexus.html">AURO NEXUS</a></li>
+                    <li><a href="blog.html">新聞中心</a></li>
+                    <li><a href="contact.html">聯絡我們</a></li>
+                </ul>
+                <p class="social">
+                    <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                    </svg> 粉絲專頁</a></span>
+                </p>
+            </nav>
+            <div class="colorlib-footer">
+                <div class="aside-logo"><a href="index.html">
+                    <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+                </a></div>
+            </div>
+        </aside>
+
+        <div id="colorlib-main">
+
+<!-- ╔══ Insight — 企業知識萃取與治理（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）══╗ -->
+
+            <section class="nm-hero nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <nav class="nm-crumbs" aria-label="麵包屑"><ol>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="nexus.html">AURO NEXUS</a></li>
+                        <li><span aria-current="page">Insight</span></li>
+                    </ol></nav>
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <p class="nm-family">AURO NEXUS 產品家族</p>
+                            <h1 class="eyebrow">Insight｜企業知識庫 AI・RAG 問答</h1>
+                            <p class="hero-slogan">AI 回答的每一句<br>都要<em>找得到出處</em></p>
+                            <p class="hero-sub">把文件直接丟給 AI 問答，答案看似合理，卻常常混入過時版本、互相矛盾的規定，或根本不存在的內容。Insight 先把文件整理成術語、知識點與問答，經人審核後才開放檢索，每一項知識都能追溯回原始文件。</p>
+                            <p class="hero-tagline">企業知識庫的價值，不在收了多少文件，而在答案能不能被信任。</p>
+                            <div class="hero-actions">
+                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
+                            </div>
+                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-page"></i> PDF・Word・Markdown</span><span class="nm-badge"><i class="iconoir-badge-check"></i> 審核後才可檢索</span><span class="nm-badge"><i class="iconoir-search"></i> 語意搜尋與問答</span><span class="nm-badge"><i class="iconoir-share-android"></i> 知識圖譜</span><span class="nm-badge"><i class="iconoir-link"></i> 出處可追溯</span></div>
+                        </div>
+                        <div class="col-lg-5 mt-5 mt-lg-0">
+                            <aside class="nm-summary">
+                                <h2>重點摘要</h2>
+                                <dl><dt>是什麼</dt><dd>企業文件的知識萃取、審核、檢索與圖譜平台。</dd><dt>輸入</dt><dd>PDF、Word（DOCX）、Markdown、純文字。</dd><dt>萃取</dt><dd>術語表、知識點、問答組，經人工審核後才可被檢索。</dd><dt>應用</dt><dd>語意搜尋、RAG 問答、知識圖譜與出處追溯。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「知識」能力，生成經 <a href="nexus-forge.html">Forge</a> 治理。</dd></dl>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="what-is" class="nm-define nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEFINITION</p>
+                            <h2 class="section-heading">什麼是企業知識庫 AI？</h2>
+                            <div class="row">
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>企業知識庫 AI</b> 讓員工用自然語言查詢內部文件，由系統以 RAG（檢索增強生成）先找出相關段落、再產生答案。答案的可信度取決於知識庫的品質，而不只是模型。</p><p><b>Insight</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的企業知識庫 AI。它先把文件萃取成術語、知識點與問答，經人工審核後才開放檢索；提供術語版本與衝突比對、語意搜尋、RAG 問答與知識圖譜，每一項知識都能追溯回出處文件。</p></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>知識管理與教育訓練</b><span>要讓規章、作業手冊與產品知識可以被正確查詢。</span></li><li><b>客服與第一線人員</b><span>要在幾秒內找到有出處、可以引用的答案。</span></li><li><b>法遵與稽核</b><span>要確認 AI 引用的是有效版本，且知道是誰核准的。</span></li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-pain nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">THE PROBLEM</p>
+                            <h2 class="section-heading">企業知識庫常見的三個問題</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">01</div>
+                                        <h3>新舊版本混在一起</h3><p>同一份規定改了三版，AI 問答不知道哪一版有效，答案可能引用早已廢止的內容。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">02</div>
+                                        <h3>同一個詞，不同解讀</h3><p>各部門對同一個術語有不同定義，知識庫裡互相矛盾，沒有人負責統一。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">03</div>
+                                        <h3>答案查不到根據</h3><p>AI 給了答案，卻說不出出自哪份文件、哪一段，使用者無法判斷能不能採信。</p></div></div>
+                            </div>
+                            <div class="pain-statement">Insight 在文件與問答之間加上一層<strong>萃取、審核與版本管理</strong>，讓答案有根據、有負責人、有版本。</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="capabilities" class="nm-cap nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">CAPABILITIES</p>
+                            <h2 class="section-heading">核心能力</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
+                                        <h3>文件解析</h3><ul><li>支援 PDF、Word（DOCX）、Markdown、純文字上傳與解析。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-brain"></i></div>
+                                        <h3>知識萃取</h3><ul><li>以 AI 萃取<b>術語、知識點與問答組</b>。</li><li>萃取經 Forge 送往經核准的模型。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-badge-check"></i></div>
+                                        <h3>審核流程</h3><ul><li>萃取結果需經<b>人工核准</b>才可被檢索。</li><li>依角色控管誰能核准、誰能駁回。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-copy"></i></div>
+                                        <h3>術語版本與衝突</h3><ul><li>術語版本管理與差異比對。</li><li>衝突清單：找出互相矛盾的定義。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-search"></i></div>
+                                        <h3>語意搜尋與問答</h3><ul><li>語意搜尋與 RAG 問答，每租戶獨立限流。</li><li>術語與知識可匯出。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-share-android"></i></div>
+                                        <h3>知識圖譜</h3><ul><li>實體、關聯、路徑查詢。</li><li>每一項知識可<b>追溯回出處文件</b>。</li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-compare nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">COMPARISON</p>
+                            <h2 class="section-heading">直接把文件丟給 AI 問答，和 Insight 差在哪</h2>
+                            <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
+                                <thead><tr><th scope="col"></th><th scope="col">直接把文件交給 AI 問答</th><th scope="col" class=is-us>Insight</th></tr></thead>
+                                <tbody><tr><th scope="row">進入檢索的內容</th><td>上傳即可被檢索</td><td class=is-us>萃取後經人工核准才可被檢索</td></tr><tr><th scope="row">新舊版本</th><td>容易混用</td><td class=is-us>術語版本管理與差異比對</td></tr><tr><th scope="row">互相矛盾的定義</th><td>不易發現</td><td class=is-us>衝突清單集中列出</td></tr><tr><th scope="row">答案出處</th><td>依工具而定</td><td class=is-us>每項知識可追溯回出處文件，並有知識圖譜</td></tr><tr><th scope="row">模型與資料位置</th><td>依服務商</td><td class=is-us>經 Forge 治理，可限定地端模型</td></tr></tbody></table></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-diff nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">WHAT'S DIFFERENT</p>
+                            <h2 class="section-heading">差異點</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-badge-check diff-icon"></i>
+                                        <h3>先審核，再開放</h3><p>AI 萃取出的知識不會直接進入檢索，必須經人工核准，知識庫的內容有人負責。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-server diff-icon"></i>
+                                        <h3>嵌入模型內建於映像</h3><p>語意向量模型預先打包在映像內並強制離線載入，不需要在部署時連外下載。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-grid-plus diff-icon"></i>
+                                        <h3>可被其他模組呼叫</h3><p>平台其他模組經 Forge 的工具閘道存取 Insight 的知識，權限與紀錄只有一套。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-platform nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">ON THE PLATFORM</p>
+                            <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
+                            <div class="platform-text">Insight 與 <a href="nexus-library.html">Library</a> 共同構成平台的<b>知識</b>能力。AI 生成經 <a href="nexus-forge.html">Forge</a> 治理；<a href="nexus-auro.html">Auro</a>、<a href="nexus-pulse.html">Pulse</a>、<a href="nexus-ai-office.html">NEXUS AI-Office</a> 等模組經 Forge 存取 Insight 的知識；<a href="nexus-saga.html">SAGA</a> 在 Insight 之上提供分類、保存與稽核等合規治理。</div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-library.html"><b>Library</b><span>個人知識收藏空間</span></a><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span></a><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-deploy nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEPLOYMENT</p>
+                            <h2 class="section-heading">部署形態</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
+                                        <h3>Kubernetes</h3><p>以 Helm chart 部署於客戶的 Kubernetes 環境。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">單機 / POC</span>
+                                        <h3>docker compose</h3><p>含向量資料庫、快取與物件儲存，一次起站。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">離線</span>
+                                        <h3>內建嵌入模型</h3><p>嵌入模型打包於映像內，部署時不需連外下載模型。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-faq nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="faq-item"><h3>企業知識庫 RAG 怎麼導入比較穩？</h3><p>先整理知識、再開放問答。Insight 先把文件萃取成術語、知識點與問答，經人工核准後才進入檢索，避免過時或矛盾的內容被 AI 引用。</p></div>
+                                    <div class="faq-item"><h3>Insight 支援哪些文件格式？</h3><p>PDF、Word（DOCX）、Markdown 與純文字。</p></div>
+                                    <div class="faq-item"><h3>AI 萃取的內容會直接給使用者查嗎？</h3><p>不會。萃取出的術語、知識點與問答需經人工核准，才會進入搜尋與問答。</p></div>
+                                    <div class="faq-item"><h3>答案能追溯到原始文件嗎？</h3><p>可以。每一項知識都記錄出處文件，知識圖譜也提供來源追溯。</p></div>
+                                    <div class="faq-item"><h3>需要連外部 AI 服務嗎？</h3><p>不需要。AI 萃取經 Forge 送往經核准的模型，可限定只用地端模型；語意向量模型內建於映像。</p></div>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-cta">
+                <div class="container">
+                    <h2>拿一份內部規章試試看</h2>
+                    <p>提供一組內部文件，我們萃取術語與知識點，您看看審核清單長什麼樣子。</p>
+                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+                <div class="container px-md-4">
+                    <div class="footer-legal text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="copyright" style="color:#a9a9a9">
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+
+        </div><!-- END COLORLIB-MAIN -->
+    </div><!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="currentColor" style="color:var(--m-deep)"/>
+        </svg>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js" defer></script>
+    <script src="js/aos.js" defer></script>
+    <script src="js/external-link-warning.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main_optimized.js" defer></script>
+    <script src="js/form-validator.js" defer></script>
+    <script src="js/rate-limiter.js" defer></script>
+    <script src="js/inquiry-modal.js" defer></script>
+    <script src="js/qform.js" defer></script>
+
+    <script>
+    $(function(){
+        $('a[href="#capabilities"]').on('click', function(e){
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+        });
+    });
+    </script>
+  </body>
+</html>

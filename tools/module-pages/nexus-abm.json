@@ -1,0 +1,239 @@
+{
+  "slug": "nexus-abm",
+  "file": "nexus-abm.html",
+  "code": "NEXUS ABM",
+  "name_zh": "企業客戶帳號經營",
+  "leg": "客戶資料",
+  "eyebrow": "NEXUS ABM — Account-Based Engine",
+  "description": "NEXUS ABM 是奧洛（Aurobase）的 ABM（帳號式行銷）平台：把個人行為歸到所屬企業帳號，以可解釋的方式評估購買意圖，並用四種歸因模型計算各接觸點的貢獻，建構於 AURA CDP 之上。",
+  "keywords": [
+    "ABM",
+    "ABM 行銷",
+    "ABM 是什麼",
+    "B2B 行銷",
+    "B2B 行銷策略",
+    "帳號式行銷",
+    "意圖評分",
+    "多觸點歸因",
+    "B2B 行銷漏斗",
+    "AURO NEXUS"
+  ],
+  "theme": {
+    "deep": "#0E4C8A",
+    "bright": "#1769C2",
+    "soft": "#6FA8E8",
+    "tint": "#E7F0FB",
+    "ink1": "#08121F",
+    "ink2": "#0E1E33"
+  },
+  "inquiry_chip": "CDP 客戶數據平台",
+  "hero": {
+    "h1": "NEXUS ABM｜ABM 帳號式行銷平台",
+    "sub": "同一家企業的採購、技術、主管分別看了官網、下載了白皮書、參加了講座——在一般行銷工具裡，他們是三筆互不相干的名單。NEXUS ABM 把他們歸到同一個企業帳號，算出這家公司的購買意圖，並說得出分數是怎麼來的。",
+    "tagline": "分數要能被業務相信，前提是它說得出理由。",
+    "badges": [
+      {
+        "icon": "group",
+        "text": "企業帳號解析"
+      },
+      {
+        "icon": "stats-up-square",
+        "text": "可解釋意圖評分"
+      },
+      {
+        "icon": "share-android",
+        "text": "多觸點歸因"
+      },
+      {
+        "icon": "filter",
+        "text": "帳號分群"
+      }
+    ],
+    "slogan": "B2B 的客戶<br>是一家公司，<em>不是一個人</em>"
+  },
+  "summary": [
+    [
+      "是什麼",
+      "B2B 目標客戶經營引擎：帳號解析、意圖評分、歸因與分群。"
+    ],
+    [
+      "帳號解析",
+      "依 Email、網域、公司名稱與 IP 將個人歸到企業帳號。"
+    ],
+    [
+      "意圖評分",
+      "時間衰減、分級門檻，每一分都說得出來源。"
+    ],
+    [
+      "歸因模型",
+      "首次觸點、最後觸點、線性、時間衰減四種。"
+    ],
+    [
+      "所屬",
+      "AURO NEXUS 平台「客戶資料」能力，建構於 <a href=\"nexus-cdp.html\">AURA CDP</a> 之上。"
+    ]
+  ],
+  "pain": {
+    "heading": "B2B 行銷的三個盲點",
+    "cards": [
+      {
+        "title": "名單是人，生意是公司",
+        "text": "行銷工具以個人為單位，看不出同一家公司裡有多少人正在研究你的產品。"
+      },
+      {
+        "title": "評分是黑盒子",
+        "text": "名單分數高，業務卻不知道為什麼高，最後還是憑直覺挑客戶。"
+      },
+      {
+        "title": "功勞算不清楚",
+        "text": "成交前經過講座、廣告、業務拜訪，各自宣稱貢獻，預算分配缺少依據。"
+      }
+    ],
+    "statement": "NEXUS ABM 以<strong>企業帳號</strong>為單位，讓意圖分數<strong>可解釋</strong>、讓接觸點的貢獻<strong>可比較</strong>。"
+  },
+  "capabilities": {
+    "heading": "核心能力",
+    "cards": [
+      {
+        "icon": "group",
+        "title": "企業帳號解析",
+        "items": [
+          "依 Email、網域、公司名稱與 IP 比對，將個人行為歸到所屬企業。"
+        ]
+      },
+      {
+        "icon": "stats-up-square",
+        "title": "可解釋的意圖評分",
+        "items": [
+          "時間衰減：越近期的行為權重越高。",
+          "分級門檻：依分數將帳號分級。",
+          "每一分都能回溯到具體行為。"
+        ]
+      },
+      {
+        "icon": "share-android",
+        "title": "多觸點歸因",
+        "items": [
+          "<b>首次觸點、最後觸點、線性、時間衰減</b>四種模型。",
+          "同一份資料可比較不同模型的結果。"
+        ]
+      },
+      {
+        "icon": "filter",
+        "title": "帳號分群",
+        "items": [
+          "以分群語法定義目標帳號清單。"
+        ]
+      },
+      {
+        "icon": "mail",
+        "title": "外展序列管理",
+        "items": [
+          "規劃對目標帳號的多步驟接觸序列。"
+        ]
+      }
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "cards": [
+      {
+        "icon": "eye",
+        "title": "評分看得見",
+        "text": "意圖分數採可解釋的規則與權重，業務看得到每一分來自哪一次行為，而不是一個無從追問的數字。"
+      },
+      {
+        "icon": "share-android",
+        "title": "歸因可並列比較",
+        "text": "四種歸因模型可並列比較，避免只用單一模型而高估或低估某個通路。"
+      },
+      {
+        "icon": "database",
+        "title": "與 CDP 共用圖譜",
+        "text": "建構於 AURA CDP 之上，B2C 與 B2B 的客戶資料不必維護兩套。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "NEXUS ABM 與 <a href=\"nexus-cdp.html\">AURA CDP</a> 共同構成平台的<b>客戶資料</b>能力：CDP 解析「這個人是誰」，ABM 回答「這家公司走到哪一步」。需要 AI 輔助的功能經 <a href=\"nexus-forge.html\">Forge</a> 治理。",
+    "related": [
+      "nexus-cdp",
+      "nexus-forge",
+      "nexus-insight"
+    ]
+  },
+  "deploy": [
+    {
+      "tag": "叢集",
+      "title": "Kubernetes",
+      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+    },
+    {
+      "tag": "展示 / POC",
+      "title": "docker compose",
+      "text": "以 compose 起一套展示環境，快速走過帳號解析、評分與歸因。"
+    },
+    {
+      "tag": "介接",
+      "title": "CRM 介接",
+      "text": "與既有 CRM 的同步依導入專案規劃與驗證。"
+    }
+  ],
+  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",
+  "limits": [
+    {
+      "title": "CRM 與名單補全依專案介接",
+      "text": "與既有 CRM 的雙向同步、第三方企業名錄與名單補全服務，依導入專案的實際系統規劃並驗證。"
+    },
+    {
+      "title": "外展序列不代為寄送",
+      "text": "ABM 負責規劃與管理接觸序列；實際寄送交由客戶既有的郵件或行銷自動化系統。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "ABM 是什麼？",
+      "a": "ABM（帳號式行銷）是以目標企業為單位經營客戶的 B2B 行銷策略。NEXUS ABM 把個人行為歸到企業帳號，計算可解釋的意圖分數與多觸點歸因。"
+    },
+    {
+      "q": "NEXUS ABM 和 AURA CDP 有什麼不同？",
+      "a": "AURA CDP 以個人為單位整合客戶資料；NEXUS ABM 建構於 CDP 之上，把個人行為歸到企業帳號，評估整家公司的購買意圖。"
+    },
+    {
+      "q": "意圖分數是怎麼算的？",
+      "a": "依行為類型與時間衰減計算，並依分數分級；每一分都可以回溯到具體行為，業務看得到分數的來源。"
+    },
+    {
+      "q": "提供哪些歸因模型？",
+      "a": "首次觸點、最後觸點、線性與時間衰減四種，可在同一份資料上並列比較。"
+    }
+  ],
+  "cta": {
+    "heading": "用您的目標客戶清單試算一次",
+    "text": "提供一份目標帳號清單與行為資料，我們算出意圖分數與歸因結果。"
+  },
+  "title": "ABM 行銷平台｜NEXUS ABM B2B 帳號解析、意圖評分與多觸點歸因",
+  "definition": {
+    "q": "ABM 是什麼？",
+    "a": [
+      "<b>ABM（Account-Based Marketing，帳號式行銷）</b>是 B2B 行銷策略：以目標企業為單位，而不是以個別名單為單位，集中資源經營最有價值的客戶。",
+      "<b>NEXUS ABM</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的 ABM 平台。它依 Email、網域、公司名稱與 IP 把個人行為歸到企業帳號，以時間衰減與分級門檻計算可解釋的意圖分數，並提供首次觸點、最後觸點、線性、時間衰減四種歸因模型，建構於 AURA CDP 之上。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "B2B 行銷主管",
+      "why": "要知道哪些目標企業正在研究你的產品。"
+    },
+    {
+      "who": "業務主管",
+      "why": "要一份說得出理由的優先拜訪名單。"
+    },
+    {
+      "who": "行銷營運",
+      "why": "要比較各接觸點的貢獻，調整預算分配。"
+    }
+  ],
+  "updated": "2026-10-30"
+}

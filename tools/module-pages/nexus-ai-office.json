@@ -1,0 +1,275 @@
+{
+  "slug": "nexus-ai-office",
+  "file": "nexus-ai-office.html",
+  "code": "NEXUS AI-Office",
+  "name_zh": "商業文件產製",
+  "leg": "生產力",
+  "eyebrow": "NEXUS AI-Office — Governed Document Generation",
+  "description": "NEXUS AI-Office 是奧洛（Aurobase）的企業 AI 文件產生平台：依企業範本以 AI 產出提案書、報價單、週報、保密協議、工作說明書與簡報，輸出 DOCX、PDF、PPTX 並可在瀏覽器內線上編修；AI 生成經 Forge 治理。",
+  "keywords": [
+    "AI 文件產生",
+    "AI 寫提案",
+    "AI 簡報產生器",
+    "AI 產生簡報",
+    "提案書",
+    "報價單範本",
+    "週報",
+    "合約範本",
+    "文件自動化",
+    "線上編輯",
+    "AURO NEXUS"
+  ],
+  "theme": {
+    "deep": "#0E6A7A",
+    "bright": "#1890A5",
+    "soft": "#6CC8D8",
+    "tint": "#E5F5F8",
+    "ink1": "#081619",
+    "ink2": "#0E252A"
+  },
+  "inquiry_chip": "NEXUS AI 自動化平台",
+  "hero": {
+    "h1": "NEXUS AI-Office｜AI 文件產生・AI 寫提案",
+    "sub": "提案書、報價單、週報，每份都要從上一份複製再改，格式跑掉、數字漏改。NEXUS AI-Office 依企業自己的範本產出文件初稿，在瀏覽器裡直接編修，輸出 Word、PDF 或簡報。",
+    "tagline": "AI 寫初稿，人做判斷；每一份文件從哪個範本、哪些資料產出，都查得到。",
+    "badges": [
+      {
+        "icon": "page",
+        "text": "DOCX"
+      },
+      {
+        "icon": "page",
+        "text": "PDF"
+      },
+      {
+        "icon": "page",
+        "text": "PPTX"
+      },
+      {
+        "icon": "edit-pencil",
+        "text": "瀏覽器內編修"
+      },
+      {
+        "icon": "lock",
+        "text": "稽核紀錄"
+      }
+    ],
+    "slogan": "格式交給範本<br>內容交給 AI<br>決定<em>留給人</em>"
+  },
+  "summary": [
+    [
+      "是什麼",
+      "依範本產出商業文件、並可線上編修的文件產製平台。"
+    ],
+    [
+      "內建範本",
+      "提案書、報價單、週報，另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報等範本。"
+    ],
+    [
+      "輸出格式",
+      "DOCX、PDF、PPTX。"
+    ],
+    [
+      "編修",
+      "瀏覽器內線上編修，不需另裝軟體。"
+    ],
+    [
+      "所屬",
+      "AURO NEXUS 平台「生產力」能力，生成經 <a href=\"nexus-forge.html\">Forge</a> 治理。"
+    ]
+  ],
+  "pain": {
+    "heading": "商業文件的重複勞動",
+    "cards": [
+      {
+        "title": "每份都從上一份改",
+        "text": "複製舊檔再修改，格式跑掉、客戶名稱或數字漏改，是最常見也最尷尬的錯誤。"
+      },
+      {
+        "title": "範本沒人維護",
+        "text": "公司範本散在各人電腦裡，版本不一，新人不知道該用哪一份。"
+      },
+      {
+        "title": "用外部 AI 有洩漏疑慮",
+        "text": "把客戶資料貼進外部 AI 服務寫提案，資料去了哪裡、有沒有被拿去訓練，無從確認。"
+      }
+    ],
+    "statement": "NEXUS AI-Office 讓<strong>範本集中管理、初稿由受治理的 AI 產出、編修在企業環境內完成</strong>。"
+  },
+  "capabilities": {
+    "heading": "核心能力",
+    "cards": [
+      {
+        "icon": "page",
+        "title": "範本產製",
+        "items": [
+          "內建提案書、報價單、週報三種主範本。",
+          "另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報等範本。"
+        ]
+      },
+      {
+        "icon": "copy",
+        "title": "範本管理",
+        "items": [
+          "範本新增、修改、複製，保留歷史版本。",
+          "企業可建立自己的範本庫。"
+        ]
+      },
+      {
+        "icon": "edit-pencil",
+        "title": "線上編修",
+        "items": [
+          "在瀏覽器內直接編修產出的文件。",
+          "輸出 <b>DOCX、PDF、PPTX</b>。"
+        ]
+      },
+      {
+        "icon": "chat-bubble",
+        "title": "文稿審閱",
+        "items": [
+          "檢視文稿的冗詞與重複，提供精簡建議。"
+        ]
+      },
+      {
+        "icon": "database",
+        "title": "知識檔參照",
+        "items": [
+          "上傳參考資料，由 Insight 解析後供產製引用。"
+        ]
+      },
+      {
+        "icon": "lock",
+        "title": "稽核紀錄",
+        "items": [
+          "每份文件的產出寫入不可覆寫的稽核紀錄。"
+        ]
+      }
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "cards": [
+      {
+        "icon": "shield-check",
+        "title": "生成受治理",
+        "text": "AI 生成經 Forge 送往經核准的模型，可設定為只用地端模型，推論紀錄可稽核。"
+      },
+      {
+        "icon": "server",
+        "title": "編修不離開企業環境",
+        "text": "線上編修服務部署在企業自己的環境，文件不經過外部雲端文書服務。"
+      },
+      {
+        "icon": "grid-plus",
+        "title": "可被流程呼叫",
+        "text": "AI-Office 可作為 Auro 工作流程中的一個步驟，讓文件產出成為自動化流程的一環。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "NEXUS AI-Office 是平台的<b>生產力</b>能力。生成經 <a href=\"nexus-forge.html\">Forge</a> 治理；參考資料的解析與知識圖譜由 <a href=\"nexus-insight.html\">Insight</a> 提供；也可作為 <a href=\"nexus-auro.html\">Auro</a> 工作流程的執行節點。",
+    "related": [
+      "nexus-forge",
+      "nexus-insight",
+      "nexus-auro",
+      "nexus-library"
+    ]
+  },
+  "deploy": [
+    {
+      "tag": "叢集",
+      "title": "Kubernetes",
+      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+    },
+    {
+      "tag": "單機 / POC",
+      "title": "docker compose",
+      "text": "含文件服務、資料庫、身分驗證與物件儲存，一次起站。"
+    },
+    {
+      "tag": "線上編修",
+      "title": "自架編輯服務",
+      "text": "線上編修服務與文件服務一同部署在客戶環境。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "AI 可以幫忙寫提案書嗎？",
+      "a": "可以。NEXUS AI-Office 依企業範本以 AI 產出提案書初稿，人員在瀏覽器內編修後輸出 DOCX、PDF 或 PPTX。"
+    },
+    {
+      "q": "NEXUS AI-Office 可以產出哪些文件？",
+      "a": "內建提案書、報價單、週報三種主範本，另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報等範本；企業也可以建立自己的範本。"
+    },
+    {
+      "q": "產出的文件可以再修改嗎？",
+      "a": "可以。產出的文件可直接在瀏覽器內編修，並輸出為 DOCX、PDF 或 PPTX。"
+    },
+    {
+      "q": "客戶資料會被送到外部 AI 嗎？",
+      "a": "AI 生成經 Forge 送往經核准的模型，可設定為只使用地端模型；推論與文件產出都留有稽核紀錄。"
+    }
+  ],
+  "cta": {
+    "heading": "把貴公司的範本放進來試試",
+    "text": "提供一份常用的提案或報價範本，我們示範從資料到完稿的流程。"
+  },
+  "title": "AI 文件產生｜NEXUS AI-Office AI 寫提案、報價單、週報與簡報",
+  "definition": {
+    "q": "企業怎麼用 AI 產生提案書與報價單？",
+    "a": [
+      "做法是把<b>企業範本</b>與<b>受治理的 AI</b> 結合：範本固定格式與必要欄位，AI 依資料產出初稿，人員在線上編修後定稿。",
+      "<b>NEXUS AI-Office</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的 AI 文件產生平台。內建提案書、報價單、週報等範本，另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報範本；輸出 DOCX、PDF、PPTX，並可在瀏覽器內編修。AI 生成經 Forge 治理，每份文件的產出都留有稽核紀錄。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "業務與售前",
+      "why": "要快速產出格式一致、數字正確的提案與報價。"
+    },
+    {
+      "who": "專案與管理階層",
+      "why": "要讓週報與內部文件不再從上一份複製修改。"
+    },
+    {
+      "who": "資安與法務",
+      "why": "不希望客戶資料被貼進外部 AI 服務。"
+    }
+  ],
+  "compare": {
+    "heading": "用通用 AI 聊天工具寫文件，和 NEXUS AI-Office 差在哪",
+    "cols": [
+      "通用 AI 聊天工具",
+      "NEXUS AI-Office"
+    ],
+    "rows": [
+      [
+        "文件格式",
+        "複製貼上後再排版",
+        "依企業範本直接產出 DOCX、PDF、PPTX"
+      ],
+      [
+        "範本管理",
+        "無",
+        "集中管理、保留歷史版本"
+      ],
+      [
+        "資料去向",
+        "依服務商",
+        "經 Forge 治理，可限定地端模型"
+      ],
+      [
+        "編修",
+        "另開文書軟體",
+        "瀏覽器內線上編修"
+      ],
+      [
+        "紀錄",
+        "對話紀錄",
+        "每份文件的產出寫入稽核紀錄"
+      ]
+    ]
+  },
+  "updated": "2026-10-30"
+}
