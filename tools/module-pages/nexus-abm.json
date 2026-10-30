@@ -29,8 +29,8 @@
   "inquiry_chip": "CDP 客戶數據平台",
   "hero": {
     "h1": "NEXUS ABM｜ABM 帳號式行銷平台",
-    "sub": "同一家企業的採購、技術、主管分別看了官網、下載了白皮書、參加了講座——在一般行銷工具裡，他們是三筆互不相干的名單。NEXUS ABM 把他們歸到同一個企業帳號，算出這家公司的購買意圖，並說得出分數是怎麼來的。",
-    "tagline": "分數要能被業務相信，前提是它說得出理由。",
+    "sub": "同一家企業的採購、技術、主管分別看了官網、下載了白皮書、參加了講座，在一般行銷工具裡卻是三筆互不相干的名單。NEXUS ABM 把他們歸到同一個企業帳號，算出這家公司的購買意圖，並說得出分數是怎麼來的。",
+    "tagline": "每一分意圖分數都能回溯到具體行為，業務看得到為什麼。",
     "badges": [
       {
         "icon": "group",
@@ -89,7 +89,7 @@
         "text": "成交前經過講座、廣告、業務拜訪，各自宣稱貢獻，預算分配缺少依據。"
       }
     ],
-    "statement": "NEXUS ABM 以<strong>企業帳號</strong>為單位，讓意圖分數<strong>可解釋</strong>、讓接觸點的貢獻<strong>可比較</strong>。"
+    "statement": "NEXUS ABM 以企業帳號為單位計算意圖分數，並用四種歸因模型比較各接觸點的貢獻。"
   },
   "capabilities": {
     "heading": "核心能力",
@@ -165,19 +165,19 @@
   },
   "deploy": [
     {
-      "tag": "叢集",
-      "title": "Kubernetes",
-      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+      "tag": "雲端",
+      "title": "公有雲 Kubernetes",
+      "text": "以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。"
     },
     {
-      "tag": "展示 / POC",
-      "title": "docker compose",
-      "text": "以 compose 起一套展示環境，快速走過帳號解析、評分與歸因。"
+      "tag": "地端",
+      "title": "自有機房",
+      "text": "部署於企業自有機房或私有雲，與 AURA CDP 共用客戶圖譜。"
     },
     {
-      "tag": "介接",
-      "title": "CRM 介接",
-      "text": "與既有 CRM 的同步依導入專案規劃與驗證。"
+      "tag": "客製",
+      "title": "CRM 與評分規則",
+      "text": "與既有 CRM 的同步、評分權重與分級門檻，依貴公司的銷售流程設定與驗證。"
     }
   ],
   "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",

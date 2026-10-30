@@ -286,3 +286,11 @@ body {
 .define-answer a { color: var(--m-deep); text-decoration: underline; text-underline-offset: 3px; }
 .nm-hero .nm-family { font-size: 0.74rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
 .nm-hero .nm-family span { color: rgba(255,255,255,0.68); }
+
+/* ── 首屏：可雲・可地・可客製 ── */
+.nm-modes { display: inline-flex; margin-top: 1rem; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; overflow: hidden; text-decoration: none; }
+.nm-modes span { padding: 0.3rem 0.9rem; font-size: 0.8rem; font-weight: 600; color: #fff; letter-spacing: 0.06em; }
+.nm-modes span + span { border-left: 1px solid rgba(255,255,255,0.18); }
+.nm-modes:hover { text-decoration: none; border-color: var(--m-soft); }
+.nm-modes:hover span { color: #fff; }
+.nm-deploy .deploy-tag { font-size: 0.8rem; letter-spacing: 0.12em; }

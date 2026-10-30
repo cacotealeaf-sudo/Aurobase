@@ -330,13 +330,14 @@
                             <p class="nm-family">AURO NEXUS 產品家族</p>
                             <h1 class="eyebrow">Scanner｜源碼檢測・弱點掃描・SBOM 工具</h1>
                             <p class="hero-slogan">一份報告看完<br>程式碼到線上服務的<em>弱點</em></p>
-                            <p class="hero-sub">原始碼、第三方套件、容器映像、雲端與基礎設施設定、對外網站——各自用不同工具掃，結果散在不同格式裡。Scanner 把這些掃描收進同一個平台，用同一套權限、同一條稽核紀錄、同一種報告格式交付。</p>
-                            <p class="hero-tagline">掃描結果要能交給稽核、交給開發、交給主管，<br>而且三方看到的是同一份事實。</p>
+                            <p class="hero-sub">原始碼、第三方套件、容器映像、雲端與基礎設施設定、對外網站，各自用不同工具掃，結果散在不同格式裡。Scanner 把這些掃描收進同一個平台，用同一套權限、同一條稽核紀錄、同一種報告格式交付。</p>
+                            <p class="hero-tagline">開發、資安與稽核看到的是同一份掃描結果。</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges"><span class="nm-badge"><i class="iconoir-page"></i> SAST／SCA</span><span class="nm-badge"><i class="iconoir-internet"></i> DAST</span><span class="nm-badge"><i class="iconoir-server"></i> 容器／IaC</span><span class="nm-badge"><i class="iconoir-key"></i> 機密外洩</span><span class="nm-badge"><i class="iconoir-copy"></i> SARIF・SBOM</span></div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
@@ -368,7 +369,7 @@
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">THE PROBLEM</p>
-                            <h2 class="section-heading">弱點管理的難處，不在掃描，而在整合</h2>
+                            <h2 class="section-heading">弱點管理最花時間的是整合結果</h2>
                             <p class="section-intro">多數組織不缺掃描工具，缺的是把結果收斂成一份能追蹤、能交代的清單。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
@@ -381,7 +382,7 @@
                                     <div class="pain-card"><div class="pain-number">03</div>
                                         <h3>優先順序靠感覺</h3><p>弱點數以千計，缺少「是否已被實際利用」「被利用的機率」這類情資，修補排序只能憑經驗判斷。</p></div></div>
                             </div>
-                            <div class="pain-statement">Scanner 的做法是：<strong>把各類掃描納入同一個平台，以標準格式輸出，並用公開威脅情資為每一筆弱點補上優先順序依據</strong>。</div>
+                            <div class="pain-statement">Scanner 把各類掃描放進同一個平台，以標準格式輸出，並用公開威脅情資為每一筆弱點補上修補順序的依據。</div>
                         </div>
                     </div>
                 </div>
@@ -439,7 +440,6 @@
                         <div class="col-md-12">
                             <p class="section-label">WHAT'S DIFFERENT</p>
                             <h2 class="section-heading">差異點</h2>
-                            <p class="section-intro">掃描引擎本身不是秘密，差別在於結果是否誠實、能否交代。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-badge-check diff-icon"></i>
@@ -469,22 +469,23 @@
                 </div>
             </section>
 
-            <section class="nm-deploy nm-section">
+            <section id="deploy" class="nm-deploy nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">DEPLOYMENT</p>
-                            <h2 class="section-heading">部署形態</h2>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">以容器交付，可放在公有雲的台灣區域、企業自有機房或私有雲；威脅情資需要連線更新。掃描規則與報告格式可依貴機構需求客製。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">單機 / POC</span>
-                                        <h3>docker compose</h3><p>掃描服務、佇列與資料庫以 compose 一次起站，適合概念驗證與小型團隊。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲</h3><p>以 docker compose 或 Kubernetes 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
-                                        <h3>Kubernetes</h3><p>提供 Kubernetes 部署設定，掃描工作者可依負載水平擴充。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>自有機房</h3><p>部署於企業自有機房或私有雲，掃描工作者可依負載擴充；威脅情資需可連外更新。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">整合</span>
-                                        <h3>開發流程</h3><p>SARIF 結果可匯入程式碼平台與 CI 流程；VS Code 擴充套件讓開發者就地修正。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>掃描規則與報告</h3><p>依貴機構的開發流程設定掃描範圍、規則與報告格式，並串接 CI 與程式碼平台。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -580,9 +581,9 @@
 
     <script>
     $(function(){
-        $('a[href="#capabilities"]').on('click', function(e){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
         });
     });
     </script>

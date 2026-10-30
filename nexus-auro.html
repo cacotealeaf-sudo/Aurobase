@@ -322,13 +322,14 @@
                             <p class="nm-family">AURO NEXUS 產品家族</p>
                             <h1 class="eyebrow">Auro｜企業級 AI Agent 平台</h1>
                             <p class="hero-slogan">讓 AI Agent 做事<br>但<em>不讓它失控</em></p>
-                            <p class="hero-sub">AI 代理能自己拆解任務、呼叫工具、委派子任務——也可能在迴圈裡打轉、超出預算、做出不該做的動作。Auro 為每個任務設好上限，每一步先過治理閘門，必要時暫停交人審核，任何時候都能緊急停止。</p>
-                            <p class="hero-tagline">自動化的前提，是隨時知道它在做什麼，也隨時停得下來。</p>
+                            <p class="hero-sub">AI 代理能自己拆解任務、呼叫工具、委派子任務，也可能在迴圈裡打轉、超出預算、做出不該做的動作。Auro 為每個任務設好上限，每一步先過治理閘門，必要時暫停交人審核，任何時候都能緊急停止。</p>
+                            <p class="hero-tagline">步數、token 與時間都有上限，送審的步驟要等人核准才會繼續。</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges"><span class="nm-badge"><i class="iconoir-hourglass"></i> 步數・token・時限上限</span><span class="nm-badge"><i class="iconoir-shield-check"></i> 四態治理閘門</span><span class="nm-badge"><i class="iconoir-group"></i> 人工審核佇列</span><span class="nm-badge"><i class="iconoir-warning-triangle"></i> 緊急停止</span></div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
@@ -360,7 +361,7 @@
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">THE PROBLEM</p>
-                            <h2 class="section-heading">AI 代理上線前，必須回答的三個問題</h2>
+                            <h2 class="section-heading">AI 代理上線前要先回答的三個問題</h2>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="pain-card"><div class="pain-number">01</div>
@@ -372,7 +373,7 @@
                                     <div class="pain-card"><div class="pain-number">03</div>
                                         <h3>出事時查得到嗎？</h3><p>代理做了哪些步驟、依據什麼判斷、呼叫了哪些工具，必須能逐步重建。</p></div></div>
                             </div>
-                            <div class="pain-statement">Auro 讓 AI 任務<strong>有上限、有閘門、有人審、停得下、查得到</strong>。</div>
+                            <div class="pain-statement">Auro 為每個任務設定硬上限與審核點，治理服務無法回應時一律停下，每一步都留有紀錄。</div>
                         </div>
                     </div>
                 </div>
@@ -432,7 +433,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
-                                        <h3>預設是擋，不是放</h3><p>治理服務缺席或無法回應時，Auro 一律阻擋任務繼續，而不是在沒有檢查的情況下照常執行。</p></div></div>
+                                        <h3>治理服務缺席時一律阻擋</h3><p>治理服務缺席或無法回應時，Auro 一律阻擋任務繼續，而不是在沒有檢查的情況下照常執行。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-hourglass diff-icon"></i>
                                         <h3>預算是硬上限</h3><p>步數、token 與時限是執行環境強制的上限，連委派出去的子任務也共用同一份預算。</p></div></div>
@@ -458,22 +459,23 @@
                 </div>
             </section>
 
-            <section class="nm-deploy nm-section">
+            <section id="deploy" class="nm-deploy nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">DEPLOYMENT</p>
-                            <h2 class="section-heading">部署形態</h2>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">以容器交付，同一套系統可以放在公有雲的台灣區域、企業自有機房或私有雲；流程、規則與既有系統的介接，可依貴機構需求客製。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
-                                        <h3>Kubernetes</h3><p>以 Helm chart 部署於客戶的 Kubernetes 環境。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲 Kubernetes</h3><p>以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域），與 Forge 部署在同一個環境。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">單機 / POC</span>
-                                        <h3>docker compose</h3><p>以 compose 起一套示範環境，走過任務、審核與停止的完整流程。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>自有機房與離線設定</h3><p>部署於企業自有機房；完全離線的設定只使用地端模型，適合隔離網路。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">離線</span>
-                                        <h3>地端模型設定</h3><p>完全離線設定只使用地端模型，適合隔離網路。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>流程與審核點</h3><p>依貴機構的作業流程設計任務、技能與審核關卡，由奧洛團隊協助串接既有系統。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -550,9 +552,9 @@
 
     <script>
     $(function(){
-        $('a[href="#capabilities"]').on('click', function(e){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
         });
     });
     </script>

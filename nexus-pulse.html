@@ -322,13 +322,14 @@
                             <p class="nm-family">AURO NEXUS 產品家族</p>
                             <h1 class="eyebrow">Pulse｜AI 輿情分析平台</h1>
                             <p class="hero-slogan">從一堆聲量數字<br>看出<em>正在成形的敘事</em></p>
-                            <p class="hero-sub">輿情工具給的是提及次數與正負面比例；真正要判斷的是：大家在講什麼故事、往哪個方向發展、要不要處理。Pulse 用批次 AI 分析情緒、摘要與敘事，依規則觸發告警，並回頭計算處理之後的成效。</p>
-                            <p class="hero-tagline">輿情分析的價值，在於讓人在對的時間做對的決定。</p>
+                            <p class="hero-sub">輿情工具給的是提及次數與正負面比例，但要判斷的是大家在講什麼、往哪個方向發展、要不要處理。Pulse 用批次 AI 分析情緒、摘要與敘事，依規則觸發告警，並回頭計算處理之後的成效。</p>
+                            <p class="hero-tagline">每一次告警都追溯得到觸發它的訊號，處理之後也算得出變化。</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges"><span class="nm-badge"><i class="iconoir-emoji"></i> 情緒分析</span><span class="nm-badge"><i class="iconoir-chat-bubble"></i> 敘事與摘要</span><span class="nm-badge"><i class="iconoir-warning-triangle"></i> 規則告警</span><span class="nm-badge"><i class="iconoir-stats-up-square"></i> 成效回算</span></div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
@@ -372,7 +373,7 @@
                                     <div class="pain-card"><div class="pain-number">03</div>
                                         <h3>處理之後沒有回頭看</h3><p>危機處理或回應做完了，卻沒有人計算它到底有沒有改變輿論走向。</p></div></div>
                             </div>
-                            <div class="pain-statement">Pulse 串起<strong>分析、告警、處理、成效回算</strong>四個環節，讓每一次輿情處理都有前因後果可查。</div>
+                            <div class="pain-statement">Pulse 把分析、告警、處理與成效回算接在一起，每一次輿情處理都查得到前因後果。</div>
                         </div>
                     </div>
                 </div>
@@ -418,7 +419,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-stats-up-square diff-icon"></i>
-                                        <h3>回算處理成效</h3><p>結合 Auro 的任務紀錄，計算每一次輿情處理之後的變化，不只停在監測。</p></div></div>
+                                        <h3>回算處理成效</h3><p>結合 Auro 的任務紀錄，計算每一次輿情處理之後的變化。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
                                         <h3>AI 分析受治理</h3><p>所有 AI 分析都經 Forge 送往模型，推論紀錄可稽核，資料不會被送往未經核准的模型。</p></div></div>
@@ -444,22 +445,23 @@
                 </div>
             </section>
 
-            <section class="nm-deploy nm-section">
+            <section id="deploy" class="nm-deploy nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">DEPLOYMENT</p>
-                            <h2 class="section-heading">部署形態</h2>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">以容器交付，同一套系統可以放在公有雲的台灣區域、企業自有機房或私有雲；流程、規則與既有系統的介接，可依貴機構需求客製。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
-                                        <h3>Kubernetes</h3><p>以 Helm chart 部署，含服務網格與網路政策設定。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲 Kubernetes</h3><p>以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">展示 / POC</span>
-                                        <h3>docker compose</h3><p>以 compose 起一套展示環境，快速走過完整流程。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>自有機房</h3><p>部署於企業自有機房；AI 分析經 Forge 治理，可限定只用地端模型。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">介接</span>
-                                        <h3>訊號推入 API</h3><p>既有的輿情來源或資料管線透過 API 將訊號推入 Pulse。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>訊號來源與告警規則</h3><p>依貴機構既有的輿情來源設計訊號推入方式，告警條件與通知對象可自訂。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -554,9 +556,9 @@
 
     <script>
     $(function(){
-        $('a[href="#capabilities"]').on('click', function(e){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
         });
     });
     </script>

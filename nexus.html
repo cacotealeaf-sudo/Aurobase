@@ -191,6 +191,14 @@
         },
         {
           "@type": "Question",
+          "name": "AURO NEXUS 可以放在公有雲嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。AURO NEXUS 可部署於公有雲的台灣區域（例如 Google Cloud 台灣區域），也可部署於企業自有機房或隔離網路，三種方式使用同一套權限、模型路由與稽核軌跡。"
+          }
+        },
+        {
+          "@type": "Question",
           "name": "AURO NEXUS 可以部署在自己的機房嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -903,14 +911,15 @@
                             <h1 class="eyebrow">AURO NEXUS｜AI 治理平台・企業 AI 平台</h1>
                             <p class="hero-slogan">企業用 AI<br>要<em>用得了，也交代得清楚</em></p>
                             <p class="hero-sub">AURO NEXUS 是奧洛的企業 AI 平台。所有模組共用同一個治理底座：AI 請求先檢查、再推論、全程留痕；模型可以只用地端，資料可以不離開機房。從 AI Agent、客戶數據、企業知識庫到資安與憑證管理，每一個模組都在同一套規則下運作。</p>
-                            <p class="hero-tagline">治理不是 AI 之外多加的一層手續，而是讓 AI 能真正上線的前提。</p>
+                            <p class="hero-tagline">先從一個模組開始，之後新增的模組都共用同一套權限、模型與稽核軌跡。</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary">預約平台簡報</a>
                                 <a href="#modules" class="btn-nm-outline">看全部模組</a>
                             </div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
-                            <aside class="nm-summary"><h2>重點摘要</h2><dl><dt>是什麼</dt><dd>以治理底座串起 14 個模組的企業 AI 平台。</dd><dt>治理底座</dt><dd><a href="nexus-forge.html">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。</dd><dt>部署</dt><dd>企業自有機房或私有雲；模型可限定只用地端。</dd><dt>適用</dt><dd>金融、醫療、公部門等受監理產業，以及重視資料主權的企業。</dd></dl></aside>
+                            <aside class="nm-summary"><h2>重點摘要</h2><dl><dt>是什麼</dt><dd>以治理底座串起 14 個模組的企業 AI 平台。</dd><dt>治理底座</dt><dd><a href="nexus-forge.html">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。</dd><dt>部署</dt><dd>可雲、可地、可客製：公有雲台灣區域、企業自有機房或隔離網路，流程與規則可依需求調整。</dd><dt>適用</dt><dd>金融、醫療、公部門等受監理產業，以及重視資料主權的企業。</dd></dl></aside>
                         </div>
                     </div>
                 </div>
@@ -925,6 +934,29 @@
                             <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AURO NEXUS</b> 是奧洛（Aurobase）推出的<b>AI 治理平台</b>，讓企業在自有環境裡導入生成式 AI，並保留可稽核的證據。</p><p>平台以 <b>Forge</b> 為治理底座：各模組的 AI 呼叫都經 Forge 做權限與政策檢查、送往經核准的模型（可限定地端），並寫入雜湊鏈稽核軌跡。其上是 AI 編排、客戶資料、知識、內容與行銷智能、合規治理、生產力、現代化與安全等能力，共 14 個模組，可依需求分階段導入。</p></div></div>
                                 <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>金融與受監理產業</b><span>要在私有或離線環境導入 AI，並對主管機關交代得清楚。</span></li><li><b>資訊長與數位轉型負責人</b><span>要一個平台收斂各部門的 AI 使用，而不是各自採購、各自串接。</span></li><li><b>資安、法遵與稽核</b><span>要看得到每一次 AI 使用的權限、資料與核准紀錄。</span></li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="deploy" class="nm-deploy nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEPLOYMENT</p>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">同一套平台可以放在公有雲、企業自有機房或隔離網路；三種方式使用相同的權限、模型路由與稽核軌跡，之後也可以搬移。</p>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲台灣區域</h3><p>部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）的 Kubernetes，資料留在台灣，適合要快速上線的企業。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>自有機房、可離線</h3><p>部署於企業自有機房或私有雲，模型可限定只用地端，適合金融與受監理產業。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>依流程客製</h3><p>模組之間可以組合成專案方案；權限規則、審核流程與既有系統介接，由奧洛工程團隊依需求開發。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -974,7 +1006,7 @@
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">WHAT'S DIFFERENT</p>
-                            <h2 class="section-heading">平台的三個承諾</h2>
+                            <h2 class="section-heading">平台的三個設計</h2>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
@@ -984,7 +1016,7 @@
                                         <h3>證據可以離線驗證</h3><p>稽核軌跡以雜湊鏈保護，證據包附獨立驗證工具，稽核人員不需要連上平台就能查驗。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-server diff-icon"></i>
-                                        <h3>可以完全不出機房</h3><p>平台與模型都可部署在企業自有環境，模型路由可限定只走地端模型。</p></div></div>
+                                        <h3>雲端與地端用同一套</h3><p>公有雲與自有機房部署的是同一套平台與治理規則，日後搬移不需要重新導入。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -1001,6 +1033,7 @@
                                     <div class="faq-item"><h3>AURO NEXUS 是什麼？</h3><p>AURO NEXUS 是奧洛（Aurobase）推出的 AI 治理平台，以 Forge 為治理底座，涵蓋 AI Agent、CDP 客戶數據平台、企業知識庫、AI 內容產製、源碼檢測與 SSL 憑證管理等 14 個模組，可部署於企業自有環境。</p></div>
                                     <div class="faq-item"><h3>AI 治理平台和一般的企業 AI 平台差在哪？</h3><p>一般企業 AI 平台著重讓員工用得到 AI；AI 治理平台另外負責在推論前檢查權限與政策，並留下可查驗的紀錄。AURO NEXUS 的所有模組都經 Forge 做這件事。</p></div>
                                     <div class="faq-item"><h3>需要一次導入全部模組嗎？</h3><p>不需要。可以從最急的需求開始，例如先導入 Forge 統一管理 AI 使用，或先導入 AURA CDP 整合客戶資料；之後新增的模組共用同一個治理底座。</p></div>
+                                    <div class="faq-item"><h3>AURO NEXUS 可以放在公有雲嗎？</h3><p>可以。AURO NEXUS 可部署於公有雲的台灣區域（例如 Google Cloud 台灣區域），也可部署於企業自有機房或隔離網路，三種方式使用同一套權限、模型路由與稽核軌跡。</p></div>
                                     <div class="faq-item"><h3>AURO NEXUS 可以部署在自己的機房嗎？</h3><p>可以。平台與模型都可部署在企業自有機房或私有雲，模型路由可限定只使用地端模型。</p></div>
                                     <div class="faq-item"><h3>金融業導入 AI 要注意什麼？</h3><p>金管會〈金融業運用 AI 指引〉以治理與問責、隱私與客戶權益、系統穩健與安全、透明與可解釋等原則為架構。AURO NEXUS 以推論前檢查、地端模型、雜湊鏈稽核軌跡與可離線驗證的證據包對應這些原則；是否符合由主管機關與貴機構法遵認定。</p></div>
                             </div></div>

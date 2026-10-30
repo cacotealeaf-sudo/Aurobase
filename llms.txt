@@ -67,7 +67,7 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 - [Library 個人知識收藏空間](nexus-library.html): Library 是奧洛（Aurobase）的企業個人知識管理（PKM）工具：每位員工一個獨立收藏空間，文字、網址、筆記與檔案可一鍵存入、加標籤、搜尋，並有 Chrome 擴充套件；收藏留在企業環境內，可由 Insight 建立語意索引。
 
 ### 內容與行銷智能
-- [MIRA 受監理產業內容產製與審核](nexus-mira.html): MIRA 是奧洛（Aurobase）為金融與醫療等受監理產業打造的 AI 內容產製與審核平台：AI 寫文案、長文、圖文與衛教文章，產出先經規則式合規檢查與法條引用查核，再由人工審核，紀錄寫入可驗證的雜湊鏈，可完全在地端運作。
+- [MIRA 受監理產業內容產製與審核](nexus-mira.html): MIRA 是奧洛（Aurobase）為金融與醫療等受監理產業設計的 AI 內容產製與審核平台：AI 寫文案、長文、圖文與衛教文章，產出先經規則式合規檢查與法條引用查核，再由人工審核，紀錄寫入可驗證的雜湊鏈，可完全在地端運作。
 - [Pulse 輿情訊號分析](nexus-pulse.html): Pulse 是奧洛（Aurobase）的 AI 輿情分析平台：接收企業既有來源的輿情訊號，以批次 AI 分析情緒、摘要與敘事走向，依規則觸發告警，並回算處理後的成效。AI 分析經 Forge 治理，個資刪除可回溯遮蔽。
 - [NEXUS GEO 生成式搜尋能見度](nexus-geo.html): 衡量品牌在 ChatGPT、Gemini 等生成式搜尋中被提及與引用的程度。
 

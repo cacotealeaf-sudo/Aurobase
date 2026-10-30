@@ -31,7 +31,7 @@
   "hero": {
     "h1": "NEXUS AI-Office｜AI 文件產生・AI 寫提案",
     "sub": "提案書、報價單、週報，每份都要從上一份複製再改，格式跑掉、數字漏改。NEXUS AI-Office 依企業自己的範本產出文件初稿，在瀏覽器裡直接編修，輸出 Word、PDF 或簡報。",
-    "tagline": "AI 寫初稿，人做判斷；每一份文件從哪個範本、哪些資料產出，都查得到。",
+    "tagline": "每一份文件從哪個範本、哪些資料產出，都查得到。",
     "badges": [
       {
         "icon": "page",
@@ -54,7 +54,7 @@
         "text": "稽核紀錄"
       }
     ],
-    "slogan": "格式交給範本<br>內容交給 AI<br>決定<em>留給人</em>"
+    "slogan": "格式交給範本<br>初稿交給 AI<br><em>定稿由人決定</em>"
   },
   "summary": [
     [
@@ -94,7 +94,7 @@
         "text": "把客戶資料貼進外部 AI 服務寫提案，資料去了哪裡、有沒有被拿去訓練，無從確認。"
       }
     ],
-    "statement": "NEXUS AI-Office 讓<strong>範本集中管理、初稿由受治理的 AI 產出、編修在企業環境內完成</strong>。"
+    "statement": "AI-Office 把範本集中管理，初稿由受治理的 AI 產出，編修在企業環境內完成。"
   },
   "capabilities": {
     "heading": "核心能力",
@@ -178,19 +178,19 @@
   },
   "deploy": [
     {
-      "tag": "叢集",
-      "title": "Kubernetes",
-      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+      "tag": "雲端",
+      "title": "公有雲 Kubernetes",
+      "text": "以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域），線上編修服務一併部署。"
     },
     {
-      "tag": "單機 / POC",
-      "title": "docker compose",
-      "text": "含文件服務、資料庫、身分驗證與物件儲存，一次起站。"
+      "tag": "地端",
+      "title": "自有機房",
+      "text": "部署於企業自有機房，文件與線上編修都不經過外部文書服務。"
     },
     {
-      "tag": "線上編修",
-      "title": "自架編輯服務",
-      "text": "線上編修服務與文件服務一同部署在客戶環境。"
+      "tag": "客製",
+      "title": "企業範本",
+      "text": "依貴公司的提案、報價與內部文件格式建立範本庫，並可串接既有資料來源。"
     }
   ],
   "faq": [

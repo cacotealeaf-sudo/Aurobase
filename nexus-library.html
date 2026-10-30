@@ -323,12 +323,13 @@
                             <h1 class="eyebrow">Library｜企業個人知識管理（PKM）</h1>
                             <p class="hero-slogan">看到有用的東西<br>就<em>存進來</em></p>
                             <p class="hero-sub">工作上讀到的文章、會議裡的一段筆記、同事傳來的連結，散在瀏覽器書籤、通訊軟體與個人電腦裡，需要時找不到。Library 給每位員工一個自己的收藏空間，一鍵存入、加上標籤、隨時搜尋。</p>
-                            <p class="hero-tagline">企業知識的起點，往往是某個人覺得「這個值得留下來」的那一刻。</p>
+                            <p class="hero-tagline">收藏留在企業環境內，需要時可交給 Insight 建立語意索引。</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges"><span class="nm-badge"><i class="iconoir-folder"></i> 個人空間</span><span class="nm-badge"><i class="iconoir-internet"></i> 瀏覽器擴充套件</span><span class="nm-badge"><i class="iconoir-search"></i> 搜尋與標籤</span><span class="nm-badge"><i class="iconoir-privacy-policy"></i> 個資刪除可追溯</span></div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
@@ -372,7 +373,7 @@
                                     <div class="pain-card"><div class="pain-number">03</div>
                                         <h3>無法成為組織知識</h3><p>個人收藏與企業知識庫是兩個世界，有價值的資料沒有機會被整理與共用。</p></div></div>
                             </div>
-                            <div class="pain-statement">Library 讓個人收藏<strong>留在企業環境內、依人員劃分、可被企業知識層索引</strong>。</div>
+                            <div class="pain-statement">Library 讓個人收藏留在企業環境內、依人員劃分，並可由企業知識庫建立索引。</div>
                         </div>
                     </div>
                 </div>
@@ -424,7 +425,7 @@
                                         <h3>與企業知識層銜接</h3><p>收藏的內容可由 Insight 建立語意索引，個人收藏有機會成為組織知識。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-privacy-policy diff-icon"></i>
-                                        <h3>個資刪除做得到</h3><p>當事人提出刪除請求時，內容確實移除，同時保留可稽核的處理紀錄。</p></div></div>
+                                        <h3>個資刪除可追溯</h3><p>當事人提出刪除請求時，內容確實移除，同時保留可稽核的處理紀錄。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -444,22 +445,23 @@
                 </div>
             </section>
 
-            <section class="nm-deploy nm-section">
+            <section id="deploy" class="nm-deploy nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">DEPLOYMENT</p>
-                            <h2 class="section-heading">部署形態</h2>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">以容器交付，同一套系統可以放在公有雲的台灣區域、企業自有機房或私有雲；流程、規則與既有系統的介接，可依貴機構需求客製。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">叢集</span>
-                                        <h3>Kubernetes</h3><p>以 Helm chart 部署於客戶的 Kubernetes 環境。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲 Kubernetes</h3><p>以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">單機 / POC</span>
-                                        <h3>docker compose</h3><p>以 compose 起站，快速試用。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>自有機房</h3><p>部署於企業自有機房或私有雲；Chrome 擴充套件可由企業統一派送。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card"><span class="deploy-tag">用戶端</span>
-                                        <h3>瀏覽器擴充套件</h3><p>Chrome 擴充套件可由企業統一派送。</p></div></div>
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>收藏來源與介接</h3><p>依貴機構需要增加收藏入口或調整與企業知識庫的串接方式。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -554,9 +556,9 @@
 
     <script>
     $(function(){
-        $('a[href="#capabilities"]').on('click', function(e){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
         });
     });
     </script>

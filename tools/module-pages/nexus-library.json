@@ -30,7 +30,7 @@
   "hero": {
     "h1": "Library｜企業個人知識管理（PKM）",
     "sub": "工作上讀到的文章、會議裡的一段筆記、同事傳來的連結，散在瀏覽器書籤、通訊軟體與個人電腦裡，需要時找不到。Library 給每位員工一個自己的收藏空間，一鍵存入、加上標籤、隨時搜尋。",
-    "tagline": "企業知識的起點，往往是某個人覺得「這個值得留下來」的那一刻。",
+    "tagline": "收藏留在企業環境內，需要時可交給 Insight 建立語意索引。",
     "badges": [
       {
         "icon": "folder",
@@ -89,7 +89,7 @@
         "text": "個人收藏與企業知識庫是兩個世界，有價值的資料沒有機會被整理與共用。"
       }
     ],
-    "statement": "Library 讓個人收藏<strong>留在企業環境內、依人員劃分、可被企業知識層索引</strong>。"
+    "statement": "Library 讓個人收藏留在企業環境內、依人員劃分，並可由企業知識庫建立索引。"
   },
   "capabilities": {
     "heading": "核心能力",
@@ -156,7 +156,7 @@
       },
       {
         "icon": "privacy-policy",
-        "title": "個資刪除做得到",
+        "title": "個資刪除可追溯",
         "text": "當事人提出刪除請求時，內容確實移除，同時保留可稽核的處理紀錄。"
       }
     ]
@@ -171,19 +171,19 @@
   },
   "deploy": [
     {
-      "tag": "叢集",
-      "title": "Kubernetes",
-      "text": "以 Helm chart 部署於客戶的 Kubernetes 環境。"
+      "tag": "雲端",
+      "title": "公有雲 Kubernetes",
+      "text": "以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。"
     },
     {
-      "tag": "單機 / POC",
-      "title": "docker compose",
-      "text": "以 compose 起站，快速試用。"
+      "tag": "地端",
+      "title": "自有機房",
+      "text": "部署於企業自有機房或私有雲；Chrome 擴充套件可由企業統一派送。"
     },
     {
-      "tag": "用戶端",
-      "title": "瀏覽器擴充套件",
-      "text": "Chrome 擴充套件可由企業統一派送。"
+      "tag": "客製",
+      "title": "收藏來源與介接",
+      "text": "依貴機構需要增加收藏入口或調整與企業知識庫的串接方式。"
     }
   ],
   "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",

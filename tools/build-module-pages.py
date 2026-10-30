@@ -306,6 +306,11 @@ def head(m):
 '''
 
 
+DEPLOY_INTRO = '以容器交付，同一套系統可以放在公有雲的台灣區域、企業自有機房或私有雲；流程、規則與既有系統的介接，可依貴機構需求客製。'
+DEPLOY_STRIP = ('<a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製">'
+                '<span>雲端</span><span>地端</span><span>客製</span></a>')
+
+
 def theme_style(t):
     return ';'.join('--m-%s:%s' % (k, v) for k, v in t.items())
 
@@ -367,6 +372,7 @@ def body(m, mods):
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges">{badges}</div>
+                            {DEPLOY_STRIP}
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
@@ -447,10 +453,7 @@ def body(m, mods):
         f'                            <div class="platform-text">{pl["text"]}</div>\n'
         f'                            <div class="nm-links">{"".join(links)}</div>'))
 
-    out.append(section('nm-deploy', 'DEPLOYMENT', '部署形態',
-        cards(m['deploy'], lambda it: f'''
-                                    <div class="deploy-card"><span class="deploy-tag">{it['tag']}</span>
-                                        <h3>{it['title']}</h3><p>{it['text']}</p></div>''')))
+    out.append(deploy_section(m['deploy'], m.get('deploy_intro', DEPLOY_INTRO)))
 
     if m.get('limits'):
         items = '\n'.join(
@@ -483,11 +486,19 @@ def body(m, mods):
     return ''.join(out)
 
 
+def deploy_section(items, intro):
+    return section('nm-deploy', 'DEPLOYMENT', '部署：可雲、可地、可客製',
+        cards(items, lambda it: f'''
+                                    <div class="deploy-card"><span class="deploy-tag">{it['tag']}</span>
+                                        <h3>{it['title']}</h3><p>{it['text']}</p></div>'''),
+        intro=intro, sid='deploy')
+
+
 SMOOTH = '''    <script>
     $(function(){
-        $('a[href="#capabilities"]').on('click', function(e){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $('#capabilities').offset().top - 50 }, 600);
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
         });
     });
     </script>
@@ -544,6 +555,7 @@ def overview_html(pf, mods):
                                 <a href="contact.html" class="btn-nm-primary">預約平台簡報</a>
                                 <a href="#modules" class="btn-nm-outline">看全部模組</a>
                             </div>
+                            {DEPLOY_STRIP}
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary"><h2>重點摘要</h2><dl>{summary}</dl></aside>
@@ -559,6 +571,9 @@ def overview_html(pf, mods):
                                 <div class="col-lg-7 mb-4"><div class="define-answer">{''.join('<p>%s</p>' % x for x in df['a'])}</div></div>
                                 <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul>{aud}</ul></div></div>
                             </div>'''))
+
+    if pf.get('deploy'):
+        out.append(deploy_section(pf['deploy'], pf.get('deploy_intro', DEPLOY_INTRO)))
 
     def mod_link(slug):
         x = get(slug)
@@ -581,7 +596,7 @@ def overview_html(pf, mods):
                                 <thead><tr><th scope="col">您的需求</th><th scope="col">對應模組</th></tr></thead>
                                 <tbody>{rows}</tbody></table></div>''', intro=nd['intro']))
 
-    out.append(section('nm-diff', "WHAT'S DIFFERENT", '平台的三個承諾',
+    out.append(section('nm-diff', "WHAT'S DIFFERENT", '平台的三個設計',
         cards(pf['diff'], lambda it: f'''
                                     <div class="diff-card"><i class="iconoir-{it['icon']} diff-icon"></i>
                                         <h3>{it['title']}</h3><p>{it['text']}</p></div>'''), dark=True))
@@ -779,6 +794,10 @@ def audit(m, mods, pf):
     except ValueError:
         C.append(_chk('GEO', 'warn', '內容更新日期', '未設定'))
     C.append(_chk('GEO', 'pass' if len(m.get('audience') or []) >= 2 else 'warn', '「適合誰」至少 2 種對象'))
+    tags = {d.get('tag') for d in m.get('deploy') or []}
+    lack = [t for t in ('雲端', '地端', '客製') if t not in tags]
+    C.append(_chk('GEO', 'fail' if lack else 'pass', '部署段落寫明雲端、地端、客製三種方式',
+                  '缺：' + '、'.join(lack) if lack else '部署卡片的標籤要用「雲端」「地端」「客製」'))
     C += site_checks(m.get('file', ''))
 
     score = {}

@@ -72,8 +72,9 @@ window.MODULE_SCHEMA = [
     { k: 'platform.text', label: '說明', type: 'text' },
     { k: 'platform.related', label: '相關產品連結', type: 'multi', options: 'related_options' },
   ]},
-  { sec: '部署形態', fields: [
-    { k: 'deploy', label: '部署卡片', type: 'objlist', item: [{ k: 'tag', label: '標籤', type: 'str' }, { k: 'title', label: '標題', type: 'str' }, { k: 'text', label: '說明', type: 'text' }] },
+  { sec: '部署：可雲、可地、可客製', fields: [
+    { k: 'deploy_intro', label: '引言（空白則用預設文字）', type: 'text' },
+    { k: 'deploy', label: '部署卡片（標籤用「雲端」「地端」「客製」，三種都要有）', type: 'objlist', item: [{ k: 'tag', label: '標籤', type: 'str' }, { k: 'title', label: '標題', type: 'str' }, { k: 'text', label: '說明', type: 'text' }] },
   ]},
   { sec: '範圍界定', fields: [
     { k: 'limits_intro', label: '引言', type: 'text' },
@@ -115,6 +116,10 @@ window.PLATFORM_SCHEMA = [
     { k: 'definition.a', label: '回答段落', type: 'list', item: 'text' },
     { k: 'audience', label: '適合誰', type: 'objlist', item: [{ k: 'who', label: '對象', type: 'str' }, { k: 'why', label: '原因', type: 'text' }] },
   ]},
+  { sec: '部署：可雲、可地、可客製', fields: [
+    { k: 'deploy_intro', label: '引言', type: 'text' },
+    { k: 'deploy', label: '部署卡片（標籤用「雲端」「地端」「客製」）', type: 'objlist', item: [{ k: 'tag', label: '標籤', type: 'str' }, { k: 'title', label: '標題', type: 'str' }, { k: 'text', label: '說明', type: 'text' }] },
+  ]},
   { sec: '能力架構', fields: [
     { k: 'legs', label: '能力分組（第一組是治理底座，顯示在最下方）', type: 'objlist', item: [
       { k: 'name', label: '名稱', type: 'str' }, { k: 'text', label: '一句話', type: 'str' },
@@ -125,7 +130,7 @@ window.PLATFORM_SCHEMA = [
     { k: 'needs.intro', label: '引言', type: 'text' },
     { k: 'needs.rows', label: '需求 → 產品代號', type: 'rows', ncols: () => 2 },
   ]},
-  { sec: '平台的承諾', fields: [
+  { sec: '平台的三個設計', fields: [
     { k: 'diff', label: '卡片', type: 'objlist', item: [ICON, { k: 'title', label: '標題', type: 'str' }, { k: 'text', label: '說明', type: 'text' }] },
   ]},
   { sec: '常見問題', fields: [
