@@ -1,0 +1,334 @@
+{
+  "slug": "solution-digital-trail",
+  "file": "solution-digital-trail.html",
+  "kind": "solution",
+  "industry": "數位行銷",
+  "code": "AURA Connect",
+  "name_zh": "數位軌跡行銷資料整合",
+  "nav_label": "數位軌跡整合",
+  "leg": "數位行銷解決方案",
+  "title": "數位軌跡資料整合｜AURA Connect 行為軌跡、身分回溯與行銷標籤",
+  "description": "AURA Connect 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡資料整合方案：讀取 HCL Discover 記錄的網站與 App 行為軌跡，切成工作階段，回溯同一裝置登入前後的身分，計算行銷標籤，依排程以 SFTP 交付資料倉儲，並提供行銷平台即時查詢的 API。",
+  "keywords": [
+    "數位軌跡",
+    "行為軌跡",
+    "網站行為數據",
+    "HCL Discover",
+    "行銷標籤",
+    "資料整合",
+    "ETL",
+    "即時查詢 API",
+    "AURO NEXUS"
+  ],
+  "eyebrow": "AURA Connect — Digital Trail Data Integration",
+  "aliases": [
+    "NEXUS AURA Connect",
+    "AURA-Connect"
+  ],
+  "updated": "2026-10-30",
+  "inquiry_chip": "CDP 客戶數據平台",
+  "theme": {
+    "deep": "#0E4C8A",
+    "bright": "#1769C2",
+    "soft": "#6FA8E8",
+    "tint": "#E7F0FB",
+    "ink1": "#08121F",
+    "ink2": "#0E1E33"
+  },
+  "hero": {
+    "h1": "AURA Connect｜數位軌跡・行為資料整合",
+    "slogan": "網站與 App 上的行為<br>變成<em>行銷用得上的標籤</em>",
+    "sub": "客戶在網站與 App 上的瀏覽、點擊與表單操作，記錄在行為分析工具裡，卻很難交到行銷系統手上。AURA Connect 讀取這些行為軌跡，整理成工作階段與客戶身分，算出行銷標籤，依排程交付資料倉儲，也讓行銷平台即時查詢。",
+    "tagline": "每一批交付都先做筆數勾稽，對不上就不交付。",
+    "badges": [
+      {
+        "icon": "internet",
+        "text": "行為軌跡匯入"
+      },
+      {
+        "icon": "user",
+        "text": "身分回溯"
+      },
+      {
+        "icon": "filter",
+        "text": "行銷標籤"
+      },
+      {
+        "icon": "database",
+        "text": "SFTP 交付"
+      },
+      {
+        "icon": "flash",
+        "text": "即時查詢 API"
+      }
+    ]
+  },
+  "summary": [
+    [
+      "是什麼",
+      "把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供即時查詢的方案。"
+    ],
+    [
+      "來源",
+      "HCL Discover 記錄的行為軌跡檔案，欄位順序可設定。"
+    ],
+    [
+      "交付",
+      "ETL 匯出、筆數勾稽、SFTP 金鑰傳輸；行銷平台即時查詢 API。"
+    ],
+    [
+      "資料庫",
+      "SQL Server 或 PostgreSQL。"
+    ],
+    [
+      "所屬",
+      "AURA 家族，與 <a href=\"nexus-cdp.html\">AURA CDP</a> 同屬客戶資料能力。"
+    ]
+  ],
+  "definition": {
+    "q": "什麼是數位軌跡資料整合？",
+    "a": [
+      "<b>數位軌跡</b>是客戶在網站與 App 上留下的瀏覽、點擊與操作紀錄。數位軌跡資料整合把這些紀錄整理成可以辨識客戶、可以下標籤的資料，交給行銷系統使用。",
+      "<b>AURA Connect</b> 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡資料整合方案。它讀取 HCL Discover 記錄的行為軌跡，切成工作階段，回溯同一裝置登入前後的身分，一次掃描算出多個行銷標籤，經筆數勾稽後以 SFTP 交付資料倉儲，並提供有限流與降級保護的即時查詢 API。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "數位行銷團隊",
+      "why": "要把網站與 App 上的行為變成可以圈選的標籤。"
+    },
+    {
+      "who": "資料倉儲與資訊單位",
+      "why": "要穩定、可勾稽的批次交付，而不是臨時匯出的檔案。"
+    },
+    {
+      "who": "已使用 HCL Discover 的企業",
+      "why": "要把既有的行為紀錄接到行銷流程裡。"
+    }
+  ],
+  "flow_heading": "從行為紀錄到行銷標籤的六個步驟",
+  "flow": [
+    {
+      "title": "軌跡匯入",
+      "text": "讀取 HCL Discover 的行為軌跡檔案，欄位順序可設定。",
+      "modules": [
+        "HCL Discover 介接"
+      ]
+    },
+    {
+      "title": "工作階段",
+      "text": "把零散的事件整理成一段段工作階段。",
+      "modules": [
+        "軌跡處理"
+      ]
+    },
+    {
+      "title": "身分回溯",
+      "text": "同一裝置登入後，回溯登入前的匿名行為；不做跨裝置推測。",
+      "modules": [
+        "身分對應"
+      ]
+    },
+    {
+      "title": "標籤計算",
+      "text": "一次掃描算出多個行銷標籤。",
+      "modules": [
+        "標籤引擎"
+      ]
+    },
+    {
+      "title": "勾稽與交付",
+      "text": "交付前做筆數勾稽，對不上就不交付；以 SFTP 金鑰傳輸並原子就位。",
+      "modules": [
+        "ETL",
+        "SFTP"
+      ]
+    },
+    {
+      "title": "即時查詢",
+      "text": "行銷平台透過 API 即時查詢客戶標籤，含限流與降級保護。",
+      "modules": [
+        "即時查詢 API"
+      ]
+    }
+  ],
+  "pain": {
+    "heading": "行為資料進不了行銷流程的三個原因",
+    "cards": [
+      {
+        "title": "紀錄在分析工具裡出不來",
+        "text": "行為分析工具記錄得很完整，但要交給行銷系統，往往只能臨時匯出。"
+      },
+      {
+        "title": "匿名行為對不上客戶",
+        "text": "登入前的瀏覽行為沒有身分，行銷看不到同一位客戶完整的路徑。"
+      },
+      {
+        "title": "批次交付沒人勾稽",
+        "text": "每天交付的檔案筆數對不對、有沒有漏，很少有人檢查。"
+      }
+    ],
+    "statement": "AURA Connect 把行為軌跡整理成工作階段、身分與標籤，交付前先勾稽，行銷平台也能即時查詢。"
+  },
+  "capabilities": {
+    "heading": "已提供的功能",
+    "cards": [
+      {
+        "icon": "internet",
+        "title": "行為軌跡匯入",
+        "items": [
+          "讀取 <b>HCL Discover</b> 的行為軌跡檔案。",
+          "欄位順序可設定。",
+          "事件整理成工作階段。"
+        ]
+      },
+      {
+        "icon": "user",
+        "title": "身分回溯",
+        "items": [
+          "同一裝置登入後，回溯登入前的匿名行為。",
+          "不做跨裝置推測，避免誤併。"
+        ]
+      },
+      {
+        "icon": "filter",
+        "title": "行銷標籤",
+        "items": [
+          "一次掃描算出多個標籤，減少重複運算。"
+        ]
+      },
+      {
+        "icon": "database",
+        "title": "交付與品質檢核",
+        "items": [
+          "ETL 匯出，交付前做<b>筆數勾稽</b>，對不上就不交付。",
+          "以 SFTP 金鑰傳輸，檔案原子就位。"
+        ]
+      },
+      {
+        "icon": "flash",
+        "title": "即時查詢 API",
+        "items": [
+          "行銷平台即時查詢客戶標籤。",
+          "含限流與降級保護。"
+        ]
+      },
+      {
+        "icon": "server",
+        "title": "資料庫",
+        "items": [
+          "支援 SQL Server 與 PostgreSQL。"
+        ]
+      }
+    ]
+  },
+  "compare": {
+    "heading": "臨時匯出與 AURA Connect 的差異",
+    "cols": [
+      "臨時匯出行為資料",
+      "AURA Connect"
+    ],
+    "rows": [
+      [
+        "交付方式",
+        "人工匯出、手動上傳",
+        "依排程以 SFTP 交付，檔案原子就位"
+      ],
+      [
+        "資料品質",
+        "少有人檢查",
+        "交付前筆數勾稽，對不上就不交付"
+      ],
+      [
+        "匿名行為",
+        "對不上客戶",
+        "同一裝置登入後回溯登入前行為"
+      ],
+      [
+        "行銷即時使用",
+        "需等下一批檔案",
+        "即時查詢 API，含限流與降級"
+      ]
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "cards": [
+      {
+        "icon": "badge-check",
+        "title": "對不上就不交付",
+        "text": "每一批交付先做筆數勾稽，避免錯誤資料流進資料倉儲。"
+      },
+      {
+        "icon": "user",
+        "title": "不做跨裝置推測",
+        "text": "身分回溯只在同一裝置內進行，寧可少併，也不誤併。"
+      },
+      {
+        "icon": "server",
+        "title": "單機也能裝",
+        "text": "可安裝在單一虛擬機並離線安裝，不一定要 Kubernetes。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "AURA Connect 與 <a href=\"nexus-cdp.html\">AURA CDP</a> 同屬 AURA 家族的客戶資料能力：AURA Connect 負責把行為軌跡整理成標籤與交付，AURA CDP 負責身分解析、單一客戶視圖與旅程。",
+    "related": [
+      "nexus-cdp",
+      "nexus-abm",
+      "nexus-forge"
+    ]
+  },
+  "deploy_intro": "可部署於公有雲的台灣區域、企業自有機房，或單一虛擬機離線安裝；欄位對應、標籤規則與交付格式依貴公司需求客製。",
+  "deploy": [
+    {
+      "tag": "雲端",
+      "title": "公有雲 Kubernetes",
+      "text": "以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。"
+    },
+    {
+      "tag": "地端",
+      "title": "自有機房、單機可離線",
+      "text": "可安裝於企業自有機房的單一虛擬機，提供離線安裝手冊，不需連外。"
+    },
+    {
+      "tag": "客製",
+      "title": "欄位、標籤與交付",
+      "text": "依貴公司的行為事件、標籤定義、資料倉儲格式與交付排程客製。"
+    }
+  ],
+  "limits_intro": "以下是目前版本的範圍，導入前會在評估階段逐項確認。",
+  "limits": [
+    {
+      "title": "行銷活動由既有系統執行",
+      "text": "AURA Connect 負責整理與交付行為資料、提供即時查詢；行銷活動的設定與發送由貴公司既有的行銷系統負責。"
+    },
+    {
+      "title": "不做跨裝置身分推測",
+      "text": "身分回溯只在同一裝置內進行；跨裝置的身分整合需搭配 AURA CDP 的身分解析。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "AURA Connect 支援哪些行為資料來源？",
+      "a": "AURA Connect 目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
+    },
+    {
+      "q": "AURA Connect 怎麼確保交付的資料正確？",
+      "a": "AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸並原子就位，避免下游讀到不完整的檔案。"
+    },
+    {
+      "q": "AURA Connect 會把不同裝置的行為合併到同一人嗎？",
+      "a": "不會。AURA Connect 只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。"
+    },
+    {
+      "q": "AURA Connect 可以裝在自己的機房嗎？",
+      "a": "可以。AURA Connect 可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。"
+    }
+  ],
+  "cta": {
+    "heading": "用一天的行為紀錄試跑",
+    "text": "提供一天份去識別化的行為軌跡檔案，我們產出工作階段、標籤與交付檔案供您對照。"
+  }
+}

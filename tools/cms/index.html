@@ -9,12 +9,14 @@
 <body>
   <aside class="side">
     <div class="brand">AURO NEXUS<small>產品頁編輯器</small></div>
-    <button class="btn-new" id="btnNew" type="button">＋ 新增產品</button>
+    <button class="btn-new" id="btnNew" type="button">＋ 新增產品或解決方案</button>
     <nav>
       <p class="nav-label">平台</p>
       <ul id="navPlatform"></ul>
       <p class="nav-label">產品</p>
       <ul id="navModules"></ul>
+      <p class="nav-label">解決方案</p>
+      <ul id="navSolutions"></ul>
     </nav>
     <div class="git" id="gitStatus"></div>
   </aside>
@@ -52,12 +54,14 @@
 
   <dialog id="wizard">
     <form method="dialog" id="wizForm">
-      <h2>新增產品</h2>
-      <p class="hint">先建成草稿：不會產頁、不會出現在總覽。內容填完、取消「草稿」後儲存，才會發布並自動放進平台總覽。</p>
-      <label>產品名 <input name="code" required placeholder="例如：Vault"></label>
-      <label>中文功能名 <input name="name_zh" required placeholder="例如：金鑰與機密管理"></label>
+      <h2>新增產品或解決方案</h2>
+      <p class="hint">先建成草稿：不會產頁、不會出現在總覽。內容填完、取消「草稿」後儲存，才會發布並自動放進平台總覽與選單。</p>
+      <label>類型 <select name="kind"><option value="product">產品（可重複使用的模組）</option><option value="solution">產業解決方案（由模組組成）</option></select></label>
+      <label>名稱 <input name="code" required placeholder="產品例如 Vault；解決方案可直接用中文名稱"></label>
+      <label>中文名稱 <input name="name_zh" required placeholder="例如：金鑰與機密管理"></label>
       <label>網址代號 <input name="slug" required pattern="nexus-[a-z0-9]+(-[a-z0-9]+)*" placeholder="nexus-vault"><small>會成為 aurobase.com/<b data-slug>nexus-vault</b>.html，建立後不能改。</small></label>
-      <label>平台分組 <select name="platform_leg" required></select></label>
+      <label id="wizLeg">平台分組 <select name="platform_leg" required></select></label>
+      <label id="wizIndustry" hidden>產業分類 <input name="industry" list="industryList" placeholder="例如：公部門、金融保險"><datalist id="industryList"></datalist></label>
       <label>需求一句話 <input name="need" required placeholder="例如：集中管理金鑰與系統密碼"><small>放進總覽頁「依需求找模組」表格。</small></label>
       <p class="wiz-err" id="wizErr"></p>
       <menu>

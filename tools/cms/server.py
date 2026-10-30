@@ -100,9 +100,10 @@ def state():
     pf = gen.load_platform()
     return {
         'modules': [{'slug': s, 'code': m.get('code') or s, 'name_zh': m.get('name_zh', ''), 'file': m.get('file'),
-                     'draft': bool(m.get('draft')), 'updated': m.get('updated', '')}
+                     'draft': bool(m.get('draft')), 'updated': m.get('updated', ''), 'kind': m.get('kind', 'product')}
                     for s, m in sorted(allm.items(), key=lambda kv: kv[1].get('code', kv[0]).lower())],
         'legs': [lg['name'] for lg in pf['legs']],
+        'industries': sorted({m['industry'] for m in allm.values() if m.get('industry')}),
         'related_options': sorted(set(allm) | set(pf.get('extra_modules', {}))),
         'chips': gen.inquiry_chips(),
         'icons': sorted(gen.available_icons()),
@@ -195,11 +196,11 @@ def save(doc_id, body):
 
 
 def place_on_platform(m):
-    """產品第一次發布時，放進精靈選的平台分組與「依需求找模組」表。"""
+    """第一次發布時，產品放進精靈選的平台分組；產品與解決方案都放進「依需求找模組」表。"""
     pf = gen.load_platform()
     slug = m['slug']
     changed = False
-    if not any(slug in lg['modules'] for lg in pf['legs']):
+    if not gen.is_solution(m) and not any(slug in lg['modules'] for lg in pf['legs']):
         leg = next((lg for lg in pf['legs'] if lg['name'] == m.get('platform_leg')), pf['legs'][-1])
         leg['modules'].append(slug)
         changed = True
@@ -213,24 +214,35 @@ def place_on_platform(m):
 
 def create(body):
     slug = (body.get('slug') or '').strip()
-    if not gen.SLUG_RE.match(slug):
-        return 400, {'errors': ['代號須為 nexus- 開頭的小寫英數與連字號，例如 nexus-vault']}
+    solution = body.get('kind') == 'solution'
+    prefix = 'solution-' if solution else 'nexus-'
+    if not gen.SLUG_RE.match(slug) or not slug.startswith(prefix):
+        return 400, {'errors': ['代號須為 %s 開頭的小寫英數與連字號，例如 %s' % (prefix, prefix + ('ai-record' if solution else 'vault'))]}
     if os.path.exists(doc_path(slug)) or os.path.exists(os.path.join(gen.ROOT, slug + '.html')):
         return 409, {'errors': ['%s 已經存在' % slug]}
-    for k, label in (('code', '產品名'), ('name_zh', '中文功能名'), ('platform_leg', '平台分組'), ('need', '需求一句話')):
+    required = (('code', '名稱'), ('name_zh', '中文名稱'), ('industry', '產業'), ('need', '需求一句話')) if solution else \
+        (('code', '產品名'), ('name_zh', '中文功能名'), ('platform_leg', '平台分組'), ('need', '需求一句話'))
+    for k, label in required:
         if not (body.get(k) or '').strip():
             return 400, {'errors': ['%s 不可空白' % label]}
     pf = gen.load_platform()
     m = copy.deepcopy(TEMPLATE)
     m.update({'slug': slug, 'file': slug + '.html', 'code': body['code'].strip(), 'name_zh': body['name_zh'].strip(),
-              'leg': body['platform_leg'], 'platform_leg': body['platform_leg'], 'platform_need': body['need'].strip(),
+              'leg': body.get('platform_leg', ''), 'platform_leg': body.get('platform_leg', ''), 'platform_need': body['need'].strip(),
               'updated': gen.today()})
     m['eyebrow'] = m['code']
-    m['hero']['h1'] = '%s｜%s' % (m['code'], m['name_zh'])
-    m['summary'][1][1] = 'AURO NEXUS 平台「%s」能力。' % body['platform_leg']
+    m['hero']['h1'] = '%s｜%s' % (m['code'], m['name_zh']) if m['code'] != m['name_zh'] else m['name_zh']
+    if solution:
+        m.update({'kind': 'solution', 'industry': body['industry'].strip(), 'leg': body['industry'].strip() + '解決方案',
+                  'flow_heading': '運作流程', 'flow': [{'title': '', 'text': '', 'modules': ['nexus-forge']}]})
+        m.pop('platform_leg', None)
+        m['summary'][1] = ['組成', '']
+        m['platform']['heading'] = '由哪些平台模組組成'
+    else:
+        m['summary'][1][1] = 'AURO NEXUS 平台「%s」能力。' % body['platform_leg']
     # 配色沿用同分組既有產品，讓同一條能力腿看起來是一家人
     allm = gen.load_modules(include_drafts=True)
-    leg = next((lg for lg in pf['legs'] if lg['name'] == body['platform_leg']), None)
+    leg = next((lg for lg in pf['legs'] if lg['name'] == body.get('platform_leg')), None)
     sib = next((allm[s] for s in (leg['modules'] if leg else []) if s in allm), None)
     m['theme'] = dict(sib['theme']) if sib else dict(allm['nexus-forge']['theme'])
     io.open(doc_path(slug), 'w', encoding='utf-8').write(json_dump(m))

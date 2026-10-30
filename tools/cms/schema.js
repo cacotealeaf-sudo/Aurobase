@@ -137,3 +137,18 @@ window.PLATFORM_SCHEMA = [
     { k: 'faq', label: '問答', type: 'objlist', item: [{ k: 'q', label: '問題', type: 'str' }, { k: 'a', label: '回答', type: 'text' }] },
   ]},
 ];
+
+// 解決方案多出的欄位：插在「發布狀態」之後
+window.SOLUTION_EXTRA = [
+  { sec: '解決方案設定', fields: [
+    { k: 'industry', label: '產業分類', type: 'str', help: '選單與平台總覽依這個分組，例如「公部門」「金融保險」。' },
+    { k: 'nav_label', label: '選單上的短名稱', type: 'str' },
+  ]},
+  { sec: '運作流程', fields: [
+    { k: 'flow_heading', label: '標題', type: 'str' },
+    { k: 'flow_intro', label: '引言（選填）', type: 'text' },
+    { k: 'flow', label: '步驟', type: 'objlist', help: '每一步標出由哪些平台模組負責；填產品代號（例如 nexus-forge）會連到產品頁，其他文字照原樣顯示。', item: [
+      { k: 'title', label: '步驟名稱', type: 'str' }, { k: 'text', label: '說明', type: 'text' },
+      { k: 'modules', label: '負責的模組或元件', type: 'tags' }] },
+  ]},
+];

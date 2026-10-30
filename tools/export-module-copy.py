@@ -39,7 +39,8 @@ def platform(out):
 
 def module(out, m):
     h = m['hero']
-    out += [f"## {m['code']} {m['name_zh']}（{m['leg']}）", f"網址：{m['file']}", '',
+    name = m['name_zh'] if m['code'] == m['name_zh'] else f"{m['code']} {m['name_zh']}"
+    out += [f"## {name}（{m.get('industry') or m['leg']}）", f"網址：{m['file']}", '',
             f"**頁面標題**：{m['title']}  ", f"**搜尋摘要**：{t(m['description'])}  ",
             f"**目標關鍵字**：{'、'.join(k for k in m['keywords'] if k != 'AURO NEXUS')}", '',
             f"**H1**：{t(h['h1'])}  ", f"**主張**：{t(h['slogan'])}  ", f"**副標**：{t(h['sub'])}  ",
@@ -47,6 +48,10 @@ def module(out, m):
     out += [f"- {k}：{t(v)}" for k, v in m['summary']]
     d = m['definition']
     out += ['', f"**定義區｜{d['q']}**", ''] + [t(x) + '\n' for x in d['a']]
+    if m.get('flow'):
+        out += [f"**運作流程｜{m.get('flow_heading', '運作流程')}**", '']
+        out += [f"{i}. {st['title']}：{t(st.get('text', ''))}（{'、'.join(st.get('modules') or [])}）" for i, st in enumerate(m['flow'], 1)]
+        out.append('')
     out += ['**適合誰**', ''] + [f"- {a['who']}：{a['why']}" for a in m['audience']]
     p = m['pain']
     out += ['', f"**問題｜{t(p['heading'])}**", ''] + ([t(p['intro']), ''] if p.get('intro') else [])
@@ -81,6 +86,10 @@ def main():
     platform(out)
     for slug in ORDER:
         module(out, load(slug + '.json'))
+    out += ['# 產業解決方案', '']
+    for p in sorted(os.listdir(SRC)):
+        if p.startswith('solution-') and p.endswith('.json'):
+            module(out, load(p))
     io.open(dst, 'w', encoding='utf-8').write('\n'.join(out))
     print('wrote', dst)
 

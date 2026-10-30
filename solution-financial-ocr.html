@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <title>AI OCR 財報辨識｜財務報表欄位擷取、勾稽檢核與人工核對</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AI OCR 財報智慧辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：辨認財務報表的四大主表與續頁，擷取會計科目、金額、期別、幣別與單位，依版本化的勾稽規則檢查，每個數值都附原始影像座標供人工核對；金額不由生成式模型自行產生，可部署在機房內。">
+    <meta name="keywords" content="AI OCR,財報辨識,財務報表 OCR,OCR 表格辨識,財報擷取,勾稽,文件辨識,AI 文件理解,地端 OCR,AURO NEXUS">
+    <link rel="canonical" href="https://aurobase.com/solution-financial-ocr.html">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/solution-financial-ocr.html">
+    <meta property="og:title" content="AI OCR 財報辨識｜財務報表欄位擷取、勾稽檢核與人工核對">
+    <meta property="og:description" content="AI OCR 財報智慧辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：辨認財務報表的四大主表與續頁，擷取會計科目、金額、期別、幣別與單位，依版本化的勾稽規則檢查，每個數值都附原始影像座標供人工核對；金額不由生成式模型自行產生，可部署在機房內。">
+    <meta property="og:url" content="https://aurobase.com/solution-financial-ocr.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+    <meta property="og:image" content="https://aurobase.com/images/nexus-chat.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://aurobase.com/solution-financial-ocr.html#software",
+      "name": "AI OCR 財報智慧辨識",
+      "alternateName": [
+        "AI OCR — Financial Statement Recognition",
+        "AI OCR 財報",
+        "財報智慧辨識引擎"
+      ],
+      "serviceType": "AI OCR 財報智慧辨識",
+      "description": "AI OCR 財報智慧辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：辨認財務報表的四大主表與續頁，擷取會計科目、金額、期別、幣別與單位，依版本化的勾稽規則檢查，每個數值都附原始影像座標供人工核對；金額不由生成式模型自行產生，可部署在機房內。",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "金融保險"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "台灣"
+      },
+      "provider": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "url": "https://aurobase.com/solution-financial-ocr.html"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/solution-financial-ocr.html#webpage",
+      "url": "https://aurobase.com/solution-financial-ocr.html",
+      "name": "AI OCR 財報辨識｜財務報表欄位擷取、勾稽檢核與人工核對",
+      "description": "AI OCR 財報智慧辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：辨認財務報表的四大主表與續頁，擷取會計科目、金額、期別、幣別與單位，依版本化的勾稽規則檢查，每個數值都附原始影像座標供人工核對；金額不由生成式模型自行產生，可部署在機房內。",
+      "inLanguage": "zh-Hant-TW",
+      "dateModified": "2026-10-30",
+      "about": {
+        "@id": "https://aurobase.com/solution-financial-ocr.html#software"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://aurobase.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "產業解決方案",
+          "item": "https://aurobase.com/nexus.html#solutions"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI OCR 財報智慧辨識",
+          "item": "https://aurobase.com/solution-financial-ocr.html"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI OCR 財報智慧辨識和一般 OCR 有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一般 OCR 只把影像轉成文字。AI OCR 財報智慧辨識會辨認報表種類，擷取科目、金額、期別與單位，依勾稽規則檢查是否平衡，並為每個數值附上原始影像座標。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI OCR 財報智慧辨識會用生成式 AI 產生金額嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。AI OCR 財報智慧辨識的金額一律取自原始文字或 OCR 結果；生成式模型產生、但對不回原件的數字會被標記並轉人工。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI OCR 財報智慧辨識支援哪些檔案格式？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI OCR 財報智慧辨識接受 PDF、PNG、JPG、TIFF 與 HEIC；有文字層的頁面直接讀取，掃描頁做 OCR，並自動偵測直式與橫式方向。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI OCR 財報智慧辨識可以部署在機房內嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。AI OCR 財報智慧辨識以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機；也可部署於公有雲的台灣區域。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "辨識不出來的欄位怎麼處理？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI OCR 財報智慧辨識抽不到的欄位會回報「找不到」，不以猜測填空；勾稽不平衡的項目也會轉給人員，在影像並排畫面核對。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/iconoir-subset.css">
+    <link rel="stylesheet" href="css/nexus-module.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+      <link rel="stylesheet" href="css/site-nav.css">
+  </head>
+  <body style="--m-deep:#3B3A8C;--m-bright:#5654C2;--m-soft:#A3A1EE;--m-tint:#EEEDFC;--m-ink1:#0E0D20;--m-ink2:#18173A">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ===== 浮動諮詢按鈕 + Modal ===== -->
+<div class="float-btn-wrapper">
+        <button type="button" class="qf-fab" data-toggle="modal" data-target="#myModal" aria-haspopup="dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>免費諮詢</span>
+        </button>
+</div>
+
+       <!-- Inquiry modal — two steps (js/inquiry-modal.js); submission by js/qform.js, which reads
+            #f01–#f04, #f06, #submitButton and every checked input[name="entry.1863307942"] -->
+       <div class="modal fade qf-modal" id="myModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="qfTitle">
+       <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+
+         <div class="qf-head">
+           <div class="qf-eyebrow">// 免費諮詢 · 約 1 分鐘</div>
+           <h2 class="qf-title" id="qfTitle">告訴我們您的需求</h2>
+           <p class="qf-sub">由專人為您量身規劃最適合的解決方案</p>
+           <button type="button" class="qf-close" data-dismiss="modal" aria-label="關閉">
+             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14"/></svg>
+           </button>
+           <ol class="qf-progress" aria-label="填寫進度">
+             <li data-qf-dot="1" class="is-active">01 · 需求</li>
+             <li data-qf-dot="2">02 · 聯絡方式</li>
+           </ol>
+         </div>
+
+         <form id="pop-qform" novalidate>
+           <div class="modal-body">
+
+             <!-- Step 1: what they need (all optional) -->
+             <div class="qf-step" data-qf-step="1">
+               <fieldset class="qf-block">
+                 <legend class="qf-q">您想了解哪些服務？<small>可複選</small></legend>
+                 <div class="qf-chips">
+                   <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="數位廣告投放"><label for="f05-1">數位廣告投放</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群媒體經營"><label for="f05-2">社群媒體經營</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="HCL Unica"><label for="f05-4">HCL Unica</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="CDP 客戶數據平台"><label for="f05-5">CDP 客戶數據平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">NEXUS AI 自動化平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-10" name="entry.1863307942" value="AI Voice Studio"><label for="f05-10">AI Voice Studio</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-11" name="entry.1863307942" value="NEXUS GEO 生成式搜尋優化"><label for="f05-11">NEXUS GEO 生成式搜尋優化</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-12" name="entry.1863307942" value="NEXUS SAGA 資料治理"><label for="f05-12">NEXUS SAGA 資料治理</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-7" name="entry.1863307942" value="AI 智慧語伴"><label for="f05-7">AI 智慧語伴</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-8" name="entry.1863307942" value="其他"><label for="f05-8">其他 / 還不確定</label></div>
+                 </div>
+               </fieldset>
+               <div class="qf-block qf-field">
+                 <label for="f06">想先讓我們知道的事 <span class="qf-opt">選填</span></label>
+                 <textarea id="f06" class="qf-input" name="entry.48027589" maxlength="1000" placeholder="例如：想提升廣告轉換率、評估導入 CDP、預計上線時程…"></textarea>
+                 <span class="qf-count" data-qf-count aria-live="polite">0 / 1000</span>
+               </div>
+             </div>
+
+             <!-- Step 2: how to reach them -->
+             <div class="qf-step" data-qf-step="2" hidden>
+               <span class="qf-q">怎麼聯絡您？</span>
+               <div class="qf-fields">
+                 <div class="qf-field">
+                   <label for="f01">姓名 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="text" id="f01" name="entry.162276222" autocomplete="name" placeholder="王小明" required aria-describedby="f01-msg">
+                   <span class="qf-msg" id="f01-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f04">公司名稱 <span class="qf-opt">選填</span></label>
+                   <input class="qf-input" type="text" id="f04" name="entry.743695878" autocomplete="organization" placeholder="公司或品牌名稱">
+                 </div>
+                 <div class="qf-field">
+                   <label for="f02">Email <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="email" id="f02" name="entry.1357191828" autocomplete="email" inputmode="email" placeholder="name@company.com" required aria-describedby="f02-msg">
+                   <span class="qf-msg" id="f02-msg" aria-live="polite"></span>
+                 </div>
+                 <div class="qf-field">
+                   <label for="f03">聯絡電話 <span class="qf-req" aria-hidden="true">*</span></label>
+                   <input class="qf-input" type="tel" id="f03" name="entry.1380546653" autocomplete="tel" inputmode="tel" placeholder="0912-345-678" required aria-describedby="f03-msg">
+                   <span class="qf-msg" id="f03-msg" aria-live="polite"></span>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+           <div class="qf-foot">
+             <span class="qf-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a></span>
+             <div class="qf-actions">
+               <button type="button" class="qf-btn qf-btn-ghost" data-qf-back hidden>上一步</button>
+               <button type="button" class="qf-btn qf-btn-primary" data-qf-next>下一步<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5"/></svg></button>
+               <button type="button" class="qf-btn qf-btn-primary" id="submitButton" hidden>送出</button>
+             </div>
+           </div>
+         </form>
+
+       </div>
+       </div>
+       </div>
+</div>
+
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+            <nav id="colorlib-main-menu" role="navigation">
+                <!-- SITE-NAV:BEGIN（由 tools/build-module-pages.py 依 _nav.json 產生）-->
+<ul><li class="has-sub"><div class="nav-row"><a href="nexus.html">AI 治理平台</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-platform" aria-label="展開AI 治理平台的產品">▾</button></div><ul class="nav-sub" id="nav-sub-platform" hidden><li class="nav-all"><a href="nexus.html#platform">平台總覽</a></li><li class="nav-leg"><span class="nav-leg-name">治理底座</span><span class="nav-leg-links"><a href="nexus-forge.html">Forge</a></span></li><li class="nav-leg"><span class="nav-leg-name">AI 編排</span><span class="nav-leg-links"><a href="nexus-auro.html">Auro</a></span></li><li class="nav-leg"><span class="nav-leg-name">客戶資料</span><span class="nav-leg-links"><a href="nexus-cdp.html">AURA CDP</a><a href="nexus-abm.html">NEXUS ABM</a></span></li><li class="nav-leg"><span class="nav-leg-name">知識</span><span class="nav-leg-links"><a href="nexus-insight.html">Insight</a><a href="nexus-library.html">Library</a></span></li><li class="nav-leg"><span class="nav-leg-name">內容與行銷智能</span><span class="nav-leg-links"><a href="nexus-mira.html">MIRA</a><a href="nexus-pulse.html">Pulse</a><a href="nexus-geo.html">NEXUS GEO</a></span></li><li class="nav-leg"><span class="nav-leg-name">合規治理</span><span class="nav-leg-links"><a href="nexus-saga.html">SAGA</a></span></li><li class="nav-leg"><span class="nav-leg-name">生產力</span><span class="nav-leg-links"><a href="nexus-ai-office.html">NEXUS AI-Office</a></span></li><li class="nav-leg"><span class="nav-leg-name">現代化</span><span class="nav-leg-links"><a href="nexus-lisa.html">LISA</a></span></li><li class="nav-leg"><span class="nav-leg-name">安全</span><span class="nav-leg-links"><a href="nexus-scanner.html">Scanner</a><a href="nexus-cardea.html">Cardea</a></span></li></ul></li><li class="has-sub active"><div class="nav-row"><a href="nexus.html#solutions">產業解決方案</a><button type="button" class="nav-sub-toggle" aria-expanded="true" aria-controls="nav-sub-solutions" aria-label="展開產業解決方案">▾</button></div><ul class="nav-sub" id="nav-sub-solutions"><li class="nav-leg"><span class="nav-leg-name">公部門</span><span class="nav-leg-links"><a href="solution-police-record.html">AI 警詢筆錄</a></span></li><li class="nav-leg"><span class="nav-leg-name">金融保險</span><span class="nav-leg-links"><a href="solution-financial-ocr.html" aria-current="page">AI OCR 財報</a><a href="solution-telesales.html">電銷對話智能</a></span></li><li class="nav-leg"><span class="nav-leg-name">數位行銷</span><span class="nav-leg-links"><a href="solution-digital-trail.html">數位軌跡整合</a></span></li></ul></li><li><a href="ai-companion.html">AI 智慧語伴</a></li><li><a href="solution.html">代理產品</a></li><li><a href="marketing.html">數位行銷服務</a></li><li><a href="https://aurocore.com/" target="_blank" rel="noopener">客服中心<span class="nav-ext" aria-hidden="true">↗</span></a></li><li><a href="blog.html">新聞中心</a></li><li><a href="contact.html">聯絡我們</a></li></ul>
+<script>document.querySelectorAll('.nav-sub-toggle').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);document.getElementById(b.getAttribute('aria-controls')).hidden=!o;});});</script>
+<!-- SITE-NAV:END -->
+                <p class="social">
+                    <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                    </svg> 粉絲專頁</a></span>
+                </p>
+            </nav>
+            <div class="colorlib-footer">
+                <div class="aside-logo"><a href="index.html">
+                    <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+                </a></div>
+            </div>
+        </aside>
+
+        <div id="colorlib-main">
+
+<!-- ╔══ AI OCR 財報智慧辨識 — AI OCR 財報智慧辨識（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）══╗ -->
+
+            <section class="nm-hero nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <nav class="nm-crumbs" aria-label="麵包屑"><ol>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="nexus.html#solutions">產業解決方案</a></li>
+                        <li><span aria-current="page">AI OCR 財報智慧辨識</span></li>
+                    </ol></nav>
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <p class="nm-family">AURO NEXUS 產業解決方案 · 金融保險</p>
+                            <h1 class="eyebrow">AI OCR 財報智慧辨識｜欄位擷取・勾稽檢核・人工核對</h1>
+                            <p class="hero-slogan">財報上的每一個數字<br>都<em>對得回原始影像</em></p>
+                            <p class="hero-sub">授信與徵信人員收到的財務報表有電子檔也有掃描件，科目名稱各家不同，金額要一格一格登打再核對。這套方案辨認四大主表、擷取科目與金額、換算單位與期別，依勾稽規則檢查，再把每個數值和原始影像並排給人員核對。</p>
+                            <p class="hero-tagline">金額一定取自原始文字或影像，不讓生成式模型自己寫數字。</p>
+                            <div class="hero-actions">
+                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
+                            </div>
+                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-page"></i> 四大主表分類</span><span class="nm-badge"><i class="iconoir-database"></i> 科目與金額擷取</span><span class="nm-badge"><i class="iconoir-badge-check"></i> 勾稽檢核</span><span class="nm-badge"><i class="iconoir-eye"></i> 影像並排核對</span><span class="nm-badge"><i class="iconoir-server"></i> 機房內部署</span></div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
+                        </div>
+                        <div class="col-lg-5 mt-5 mt-lg-0">
+                            <aside class="nm-summary">
+                                <h2>重點摘要</h2>
+                                <dl><dt>是什麼</dt><dd>辨認財務報表、擷取科目與金額，並依勾稽規則檢查的 AI OCR 解決方案。</dd><dt>輸入</dt><dd>PDF、PNG、JPG、TIFF、HEIC；有文字層的直接讀取，掃描件再做 OCR。</dd><dt>輸出</dt><dd>標準化 JSON，另可匯出 Excel、CSV、XML。</dd><dt>核對</dt><dd>每個數值附原始影像座標，可並排放大核對；不平衡的項目轉人工。</dd><dt>組成</dt><dd><a href="nexus-insight.html">Insight</a> 的文件解析能力，加上財報辨識引擎與勾稽規則集。</dd></dl>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="what-is" class="nm-define nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEFINITION</p>
+                            <h2 class="section-heading">什麼是財報 AI OCR？</h2>
+                            <div class="row">
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>財報 AI OCR</b> 不只把影像轉成文字，還要認出這是哪一張報表、哪個數字屬於哪個科目與期別，並檢查數字之間是否平衡。</p><p><b>AI OCR 財報智慧辨識</b>是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案。它辨認資產負債表、綜合損益表等四大主表與續頁，擷取會計科目、金額、幣別與單位，處理跨頁表格、多期並列、括號負數與千元換算，依版本化的勾稽規則檢查，並為每個數值附上原始影像座標。金額一律取自原始文字或 OCR 結果，不由生成式模型自行產生。</p></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>授信與徵信單位</b><span>要減少財報登打與核對的時間，並保留每個數字的來源。</span></li><li><b>作業與審查主管</b><span>要知道哪些報表不平衡、哪些數值需要人工複核。</span></li><li><b>資訊與資安單位</b><span>要求系統在機房內運作、資料不跨境，並能提供軟體物料清單。</span></li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="flow" class="nm-flow nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">HOW IT WORKS</p>
+                            <h2 class="section-heading">從上傳到核對的六個步驟</h2>
+                            <ol class="flow">
+                                <li class="flow-step"><span class="flow-n">01</span><h3>上傳檢查</h3><p>檢查檔案格式、大小與內容，逐頁回報解析度，低於門檻提出警示。</p>
+                                    <div class="flow-mods"><span class="nm-chip">上傳防護</span></div></li>
+                                <li class="flow-step"><span class="flow-n">02</span><h3>頁面分類</h3><p>辨認四大主表與續頁；需要時先由人員確認頁面，再進入辨識。</p>
+                                    <div class="flow-mods"><a class="nm-chip" href="nexus-insight.html">Insight</a></div></li>
+                                <li class="flow-step"><span class="flow-n">03</span><h3>文字擷取</h3><p>有文字層的頁面直接讀取；掃描頁做 OCR，並自動偵測直式、橫式方向。</p>
+                                    <div class="flow-mods"><a class="nm-chip" href="nexus-insight.html">Insight</a><span class="nm-chip">OCR</span></div></li>
+                                <li class="flow-step"><span class="flow-n">04</span><h3>欄位標準化</h3><p>擷取科目、金額、幣別與單位，處理跨頁、多期並列、括號負數與千元換算。</p>
+                                    <div class="flow-mods"><span class="nm-chip">財報辨識引擎</span></div></li>
+                                <li class="flow-step"><span class="flow-n">05</span><h3>勾稽檢核</h3><p>依版本化的勾稽規則檢查，不平衡或對不上的項目轉人工。</p>
+                                    <div class="flow-mods"><span class="nm-chip">勾稽規則集</span></div></li>
+                                <li class="flow-step"><span class="flow-n">06</span><h3>核對與匯出</h3><p>數值與原始影像並排核對，結果輸出 JSON、Excel、CSV 或 XML。</p>
+                                    <div class="flow-mods"><span class="nm-chip">財報辨識引擎</span></div></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-pain nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">THE PROBLEM</p>
+                            <h2 class="section-heading">財報登打最耗人力的三個環節</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">01</div>
+                                        <h3>一格一格登打</h3><p>電子檔與掃描件混在一起，科目名稱各家不同，只能逐格登打。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">02</div>
+                                        <h3>核對來回翻頁</h3><p>登打後要回頭比對原始報表，跨頁表格與多期並列特別容易看錯欄。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="pain-card"><div class="pain-number">03</div>
+                                        <h3>通用 OCR 只給文字</h3><p>通用 OCR 不知道哪個數字屬於哪個科目、哪一期，也不會檢查報表是否平衡。</p></div></div>
+                            </div>
+                            <div class="pain-statement">AI OCR 財報智慧辨識把分類、擷取、勾稽與核對接在一起，人員只需要處理系統標出的項目。</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="capabilities" class="nm-cap nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">CAPABILITIES</p>
+                            <h2 class="section-heading">已提供的功能</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
+                                        <h3>財報頁面分類</h3><ul><li>辨認四大主表與續頁。</li><li>可設定先由人員確認頁面，再進入辨識。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
+                                        <h3>科目與金額擷取</h3><ul><li>擷取會計科目、金額、幣別與單位。</li><li>處理跨頁表格、多期並列、括號負數與千元換算。</li><li>輸出標準化 JSON。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-badge-check"></i></div>
+                                        <h3>勾稽檢核</h3><ul><li>內建勾稽規則，可新增或調整。</li><li>規則有版本，發佈後即生效，舊版可追溯。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-eye"></i></div>
+                                        <h3>影像並排核對</h3><ul><li>每個數值附原始影像座標，可放大、拖曳核對。</li><li>多頁合併預覽與標註。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-grid-plus"></i></div>
+                                        <h3>自訂欄位擷取</h3><ul><li>用欄位定義描述要擷取的內容，免訓練、即時生效。</li><li>抽不到就回報「找不到」，不猜測；每個結果附原字串與座標。</li><li>一般表單可轉成 Excel，另附 CSV 與 XML。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
+                                        <h3>安全與稽核</h3><ul><li>只接受 TLS 1.3 連線。</li><li>稽核日誌以雜湊鏈保護，竄改可被偵測。</li><li>提供 CycloneDX 格式的軟體物料清單；建置時檢查執行環境中的中國來源套件。</li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-compare nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">COMPARISON</p>
+                            <h2 class="section-heading">三種處理財報的方式</h2>
+                            <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
+                                <thead><tr><th scope="col"></th><th scope="col">通用 OCR</th><th scope="col">生成式模型直接讀財報</th><th scope="col" class=is-us>AI OCR 財報智慧辨識</th></tr></thead>
+                                <tbody><tr><th scope="row">輸出</th><td>純文字</td><td>自由格式的摘要或表格</td><td class=is-us>科目、金額、期別、單位的標準化欄位</td></tr><tr><th scope="row">金額來源</th><td>原始文字</td><td>模型產生，可能與原件不符</td><td class=is-us>一律取自原始文字或 OCR 結果</td></tr><tr><th scope="row">報表是否平衡</th><td>不檢查</td><td>不一定</td><td class=is-us>依版本化勾稽規則檢查，不平衡轉人工</td></tr><tr><th scope="row">人工核對</th><td>自行比對</td><td>難以對回原件</td><td class=is-us>每個數值附影像座標，並排核對</td></tr></tbody></table></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-diff nm-section nm-dark">
+                <div class="container-fluid px-3 px-md-5">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">WHAT'S DIFFERENT</p>
+                            <h2 class="section-heading">差異點</h2>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-link diff-icon"></i>
+                                        <h3>數字不是模型寫的</h3><p>金額一律取自原始文字或 OCR 結果，生成式模型產生、但對不回原件的數字會被標記。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-badge-check diff-icon"></i>
+                                        <h3>找不到就說找不到</h3><p>欄位抽不到時回報「找不到」，不以猜測填空。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="diff-card"><i class="iconoir-server diff-icon"></i>
+                                        <h3>資料不出機房</h3><p>辨識、儲存與備份都在機房內；對外連線只有白名單內的完成通知。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-platform nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">ON THE PLATFORM</p>
+                            <h2 class="section-heading">由哪些平台模組組成</h2>
+                            <div class="platform-text">AI OCR 財報智慧辨識建立在 <a href="nexus-insight.html">Insight</a> 的文件解析能力上，加上財報專用的頁面分類、科目標準化與勾稽規則。需要把財報內容進一步整理成知識或交給 AI 流程時，可搭配 <a href="nexus-forge.html">Forge</a> 與 <a href="nexus-auro.html">Auro</a>。</div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-scanner.html"><b>Scanner</b><span>源碼檢測與弱點掃描</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="deploy" class="nm-deploy nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEPLOYMENT</p>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">以容器交付（可用 Podman 載入與執行），可部署於機房內或公有雲的台灣區域；科目表、勾稽規則、擷取欄位與既有系統介接依需求客製。</p>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲台灣區域</h3><p>以容器部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）的虛擬機或 Kubernetes，資料留在台灣。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>機房內、資料不跨境</h3><p>於自有機房以 Podman 載入映像並以非 root 身分執行；儲存與備份都在本機，對外只連白名單內的完成通知。</p></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>科目、規則與介接</h3><p>依貴機構的行業別科目表、勾稽規則與既有審核系統，調整擷取欄位與完成通知的介接方式。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-limits nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">SCOPE</p>
+                            <h2 class="section-heading">範圍界定</h2>
+                            <p class="section-intro">以下是目前版本的範圍，導入前會用貴機構的實際樣本逐項驗證。</p>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="limit-item"><div class="limit-index">1</div>
+                                        <div><h3>掃描件與中小企業書表需實際樣本驗證</h3><p>手寫、印章、各家報稅軟體列印的書表差異很大，辨識效果需以貴機構的實際樣本驗證與調校。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">2</div>
+                                        <div><h3>以繁體中文與英文財報為主</h3><p>日文、韓文、俄文等其他語言的辨識仍在調校中。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">3</div>
+                                        <div><h3>行業科目表需確認</h3><p>銀行、保險、證券等特殊行業的科目表，導入時需與貴機構確認對照方式。</p></div></div>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-faq nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">FAQ</p>
+                            <h2 class="section-heading">常見問題</h2>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="faq-item"><h3>AI OCR 財報智慧辨識和一般 OCR 有什麼不同？</h3><p>一般 OCR 只把影像轉成文字。AI OCR 財報智慧辨識會辨認報表種類，擷取科目、金額、期別與單位，依勾稽規則檢查是否平衡，並為每個數值附上原始影像座標。</p></div>
+                                    <div class="faq-item"><h3>AI OCR 財報智慧辨識會用生成式 AI 產生金額嗎？</h3><p>不會。AI OCR 財報智慧辨識的金額一律取自原始文字或 OCR 結果；生成式模型產生、但對不回原件的數字會被標記並轉人工。</p></div>
+                                    <div class="faq-item"><h3>AI OCR 財報智慧辨識支援哪些檔案格式？</h3><p>AI OCR 財報智慧辨識接受 PDF、PNG、JPG、TIFF 與 HEIC；有文字層的頁面直接讀取，掃描頁做 OCR，並自動偵測直式與橫式方向。</p></div>
+                                    <div class="faq-item"><h3>AI OCR 財報智慧辨識可以部署在機房內嗎？</h3><p>可以。AI OCR 財報智慧辨識以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機；也可部署於公有雲的台灣區域。</p></div>
+                                    <div class="faq-item"><h3>辨識不出來的欄位怎麼處理？</h3><p>AI OCR 財報智慧辨識抽不到的欄位會回報「找不到」，不以猜測填空；勾稽不平衡的項目也會轉給人員，在影像並排畫面核對。</p></div>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-cta">
+                <div class="container">
+                    <h2>用幾份財報試跑</h2>
+                    <p>提供幾份去識別化的財務報表（電子檔或掃描件），我們產出擷取結果、勾稽報告與核對畫面供您比對。</p>
+                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
+                <div class="container px-md-4">
+                    <div class="footer-legal text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="copyright" style="color:#a9a9a9">
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+
+        </div><!-- END COLORLIB-MAIN -->
+    </div><!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="currentColor" style="color:var(--m-deep)"/>
+        </svg>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js" defer></script>
+    <script src="js/aos.js" defer></script>
+    <script src="js/external-link-warning.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main_optimized.js" defer></script>
+    <script src="js/form-validator.js" defer></script>
+    <script src="js/rate-limiter.js" defer></script>
+    <script src="js/inquiry-modal.js" defer></script>
+    <script src="js/qform.js" defer></script>
+
+    <script>
+    $(function(){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
+        });
+    });
+    </script>
+  </body>
+</html>

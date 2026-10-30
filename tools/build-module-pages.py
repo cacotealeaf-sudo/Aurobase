@@ -82,7 +82,11 @@ def load_chrome():
 
 # ── 內容檢查：錯誤會擋下產頁；警告只提醒 ──
 
-SLUG_RE = re.compile(r'^nexus-[a-z0-9]+(-[a-z0-9]+)*$')
+SLUG_RE = re.compile(r'^(nexus|solution)-[a-z0-9]+(-[a-z0-9]+)*$')
+
+
+def is_solution(m):
+    return m.get('kind') == 'solution'
 THEME_KEYS = ('deep', 'bright', 'soft', 'tint', 'ink1', 'ink2')
 
 
@@ -115,7 +119,15 @@ def validate(m, mods, pf):
 
     slug = m.get('slug', '')
     if not SLUG_RE.match(slug):
-        errors.append('slug 須為 nexus- 開頭的小寫英數與連字號')
+        errors.append('slug 須為 nexus-（產品）或 solution-（解決方案）開頭的小寫英數與連字號')
+    if is_solution(m):
+        need('industry', m.get('industry'))
+        need('flow', m.get('flow'))
+        for i, st in enumerate(m.get('flow') or [], 1):
+            need('flow[%d].title' % i, st.get('title'))
+            for x in st.get('modules') or []:
+                if SLUG_RE.match(x) and x not in known_slugs(mods, pf):
+                    errors.append('flow[%d] 的「%s」不是已發布的產品' % (i, x))
     if m.get('file') != slug + '.html':
         errors.append('file 應為 %s.html' % slug)
     for k in ('code', 'name_zh', 'leg', 'title', 'description', 'eyebrow', 'keywords', 'updated'):
@@ -209,8 +221,20 @@ def url_of(m):
 
 def jsonld(m):
     page_url = url_of(m)
+    main = {
+            '@type': 'Service',
+            '@id': page_url + '#software',
+            'name': '%s %s' % (m['code'], m['name_zh']) if m['code'] != m['name_zh'] else m['name_zh'],
+            'alternateName': [m['eyebrow']] + m.get('aliases', []),
+            'serviceType': m['name_zh'],
+            'description': plain(m['description']),
+            'audience': {'@type': 'Audience', 'audienceType': m.get('industry', '')},
+            'areaServed': {'@type': 'Country', 'name': '台灣'},
+            'provider': {'@id': ORG['@id']},
+            'url': page_url,
+        } if is_solution(m) else None
     graph = [
-        {
+        main or {
             '@type': 'SoftwareApplication',
             '@id': page_url + '#software',
             'name': '%s %s' % (m['code'], m['name_zh']),
@@ -241,7 +265,8 @@ def jsonld(m):
             '@type': 'BreadcrumbList',
             'itemListElement': [
                 {'@type': 'ListItem', 'position': 1, 'name': '首頁', 'item': SITE + '/'},
-                {'@type': 'ListItem', 'position': 2, 'name': 'AURO NEXUS', 'item': SITE + '/nexus.html'},
+                {'@type': 'ListItem', 'position': 2, 'name': '產業解決方案' if is_solution(m) else 'AURO NEXUS',
+                 'item': SITE + ('/nexus.html#solutions' if is_solution(m) else '/nexus.html')},
                 {'@type': 'ListItem', 'position': 3, 'name': m['code'], 'item': page_url},
             ],
         },
@@ -347,7 +372,7 @@ def body(m, mods):
     h = m['hero']
     crumbs = f'''<nav class="nm-crumbs" aria-label="麵包屑"><ol>
                         <li><a href="index.html">首頁</a></li>
-                        <li><a href="nexus.html">AURO NEXUS</a></li>
+                        <li><a href="{'nexus.html#solutions' if is_solution(m) else 'nexus.html'}">{'產業解決方案' if is_solution(m) else 'AURO NEXUS'}</a></li>
                         <li><span aria-current="page">{m['code']}</span></li>
                     </ol></nav>'''
     badges = ''.join(
@@ -362,7 +387,7 @@ def body(m, mods):
                     {crumbs}
                     <div class="row align-items-center">
                         <div class="col-lg-7">
-                            <p class="nm-family">AURO NEXUS 產品家族{(' · <span lang="en">' + m['fullname'] + '</span>') if m.get('fullname') else ''}</p>
+                            <p class="nm-family">{('AURO NEXUS 產業解決方案 · ' + m['industry']) if is_solution(m) else 'AURO NEXUS 產品家族'}{(' · <span lang="en">' + m['fullname'] + '</span>') if m.get('fullname') else ''}</p>
                             <h1 class="eyebrow">{h['h1']}</h1>
                             <p class="hero-slogan">{h['slogan']}</p>
                             <p class="hero-sub">{h['sub']}</p>
@@ -392,6 +417,9 @@ def body(m, mods):
                                 <div class="col-lg-7 mb-4"><div class="define-answer">{''.join('<p>%s</p>' % s for s in df['a'])}</div></div>
                                 <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul>{aud}</ul></div></div>
                             </div>''', sid='what-is'))
+
+    if m.get('flow'):
+        out.append(flow_section(m, mods))
 
     p = m['pain']
     out.append(section('nm-pain', 'THE PROBLEM', p['heading'],
@@ -484,6 +512,24 @@ def body(m, mods):
 
 ''')
     return ''.join(out)
+
+
+def module_chip(x, mods, cls='nm-chip'):
+    """流程步驟裡的模組：已發布的產品連到產品頁，其他文字照原樣顯示。"""
+    r = mods.get(x)
+    if r and not is_solution(r):
+        return f'<a class="{cls}" href="{r["file"]}">{r["code"]}</a>'
+    return f'<span class="{cls}">{x}</span>'
+
+
+def flow_section(m, mods):
+    steps = ''.join(f'''
+                                <li class="flow-step"><span class="flow-n">{i:02d}</span><h3>{st['title']}</h3><p>{st.get('text', '')}</p>
+                                    <div class="flow-mods">{''.join(module_chip(x, mods) for x in st.get('modules') or [])}</div></li>'''
+        for i, st in enumerate(m['flow'], 1))
+    return section('nm-flow', 'HOW IT WORKS', m.get('flow_heading', '運作流程'),
+        f'                            <ol class="flow">{steps}\n                            </ol>',
+        intro=m.get('flow_intro'), sid='flow')
 
 
 def deploy_section(items, intro):
@@ -589,6 +635,18 @@ def overview_html(pf, mods):
                             <div class="leg-base"><p class="leg-name">{base['name']}</p><p class="leg-text">{base['text']}所有模組的 AI 呼叫都經過這一層。</p>{''.join(mod_link(s) for s in live(pf, mods, base['modules']))}</div>''',
         intro='上層的每一個模組各自解決一類問題；下層的治理底座讓它們共用同一套權限、模型與稽核軌跡。', sid='modules'))
 
+    sols = solutions(mods)
+    if sols:
+        def sol_card(m):
+            used = []
+            for st in m['flow']:
+                used += [x for x in st.get('modules') or [] if x in mods and x not in used]
+            return (f'<div class="sol-card"><span class="sol-ind">{m["industry"]}</span>'
+                    f'<h3><a href="{m["file"]}">{m["name_zh"]}</a></h3><p>{plain(dict(m["summary"])["是什麼"])}</p>'
+                    f'<div class="flow-mods">{"".join(module_chip(x, mods) for x in used)}</div></div>')
+        out.append(section('nm-cap', 'SOLUTIONS', pf.get('solutions_heading', '產業解決方案'),
+            cards(sols, sol_card), intro=pf.get('solutions_intro'), sid='solutions'))
+
     nd = pf['needs']
     rows = ''.join(f'<tr><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{get(s)["code"]} {get(s)["name_zh"]}</a></td></tr>' for need, s in nd['rows'] if get(s))
     out.append(section('nm-compare', 'WHERE TO START', nd['heading'],
@@ -605,6 +663,11 @@ def overview_html(pf, mods):
     out.append(section('nm-faq', 'FAQ', '關於 AURO NEXUS 的常見問題',
         f'                            <div class="row"><div class="col-lg-10">\n{items}\n                            </div></div>'))
     return BEGIN + '\n<div class="nm-overview" style="--m-deep:#2B3A8C;--m-bright:#4659C9;--m-soft:#8FA0F0;--m-tint:#ECEFFC;--m-ink1:#0C0F1F;--m-ink2:#141A35">' + ''.join(out) + '</div>\n' + END
+
+
+def solutions(mods):
+    order = {'公部門': 0, '金融保險': 1}
+    return sorted((m for m in mods.values() if is_solution(m)), key=lambda m: (order.get(m['industry'], 9), m['name_zh']))
 
 
 def overview_jsonld(pf, mods, old_faq):
@@ -676,6 +739,12 @@ def update_llms(mods, pf=None):
             x = get(slug)
             desc = plain(mods[slug]['description']) if slug in mods else x['what']
             b.append('- [%s %s](%s): %s' % (x['code'], x['name_zh'], x['file'], desc))
+        b.append('')
+    sols = solutions(mods)
+    if sols:
+        b.append('### 產業解決方案（由平台模組組成）')
+        for m in sols:
+            b.append('- [%s](%s): %s' % (m['name_zh'], m['file'], plain(m['description'])))
         b.append('')
     block = LLMS_BEGIN + '\n' + '\n'.join(b) + LLMS_END
     p = os.path.join(ROOT, 'llms.txt')
@@ -926,6 +995,22 @@ def nav_html(page, prefix, pf, mods):
                 '<ul class="nav-sub" id="nav-sub-platform"%s><li class="nav-all"><a href="%snexus.html#platform"%s>%s</a></li>%s</ul></li>'
                 % (' active' if here else '', prefix, it['href'], it['label'], 'true' if here else 'false', it['label'],
                    '' if here else ' hidden', prefix, cur('nexus.html'), it['overview_label'], ''.join(legs)))
+        elif it.get('type') == 'solutions':
+            sols = solutions(mods)
+            here = page.startswith('solution-')
+            cur = lambda f: ' aria-current="page"' if f == page else ''
+            groups = {}
+            for m in sols:
+                groups.setdefault(m['industry'], []).append(m)
+            rows = ''.join('<li class="nav-leg"><span class="nav-leg-name">%s</span><span class="nav-leg-links">%s</span></li>'
+                           % (ind, ''.join('<a href="%s%s"%s>%s</a>' % (prefix, m['file'], cur(m['file']), m['nav_label'] if m.get('nav_label') else m['name_zh']) for m in ms))
+                           for ind, ms in groups.items())
+            out.append(
+                '<li class="has-sub%s"><div class="nav-row"><a href="%s%s">%s</a>'
+                '<button type="button" class="nav-sub-toggle" aria-expanded="%s" aria-controls="nav-sub-solutions" '
+                'aria-label="展開%s">▾</button></div><ul class="nav-sub" id="nav-sub-solutions"%s>%s</ul></li>'
+                % (' active' if here else '', prefix, it['href'], it['label'], 'true' if here else 'false', it['label'],
+                   '' if here else ' hidden', rows))
         elif it.get('external'):
             out.append('<li><a href="%s" target="_blank" rel="noopener">%s<span class="nav-ext" aria-hidden="true">↗</span></a></li>'
                        % (it['href'], it['label']))

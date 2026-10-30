@@ -145,6 +145,30 @@ class EditorTest(SiteCopy):
         self.assertIn('href="nexus-vault.html"', self.page('nexus.html'))
         self.assertIn('nexus-vault.html', self.page('sitemap.xml'))
 
+    def test_solution_publishes_into_overview_menu_and_needs_table(self):
+        code, body = server.create({'kind': 'solution', 'slug': 'solution-ai-demo', 'code': '示範方案', 'name_zh': '示範方案',
+                                    'industry': '公部門', 'need': '示範需求'})
+        self.assertEqual(code, 200, body)
+        m = self.doc('solution-ai-demo')
+        self.assertEqual(m['kind'], 'solution')
+        donor = self.doc('solution-police-record')
+        for k in ('title', 'description', 'keywords', 'eyebrow', 'hero', 'summary', 'definition', 'audience', 'pain',
+                  'capabilities', 'diff', 'platform', 'deploy', 'faq', 'cta', 'flow'):
+            m[k] = donor[k]
+        m['draft'] = False
+        code, body = server.save('solution-ai-demo', m)
+        self.assertEqual(code, 200, body)
+        pf = gen.load_platform()
+        self.assertFalse(any('solution-ai-demo' in lg['modules'] for lg in pf['legs']))
+        self.assertIn(['示範需求', 'solution-ai-demo'], pf['needs']['rows'])
+        self.assertIn('href="solution-ai-demo.html"', self.page('nexus.html'))
+        self.assertIn('href="solution-ai-demo.html"', self.page('index.html'))
+        self.assertIn('"@type": "Service"', self.page('solution-ai-demo.html'))
+
+    def test_solution_slug_must_use_solution_prefix(self):
+        r = server.create({'kind': 'solution', 'slug': 'nexus-wrong', 'code': 'x', 'name_zh': 'x', 'industry': 'x', 'need': 'x'})
+        self.assertEqual(r[0], 400)
+
     def test_create_rejects_bad_or_existing_slug(self):
         base = {'code': 'X', 'name_zh': 'x', 'platform_leg': '安全', 'need': 'x'}
         self.assertEqual(server.create(dict(base, slug='Vault'))[0], 400)

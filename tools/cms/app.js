@@ -36,7 +36,9 @@
     const navP = $('#navPlatform'); const navM = $('#navModules');
     navP.innerHTML = ''; navM.innerHTML = '';
     navP.append(navItem('_platform', '平台總覽', 'nexus.html'));
-    r.data.modules.forEach((m) => navM.append(navItem(m.slug, m.code, m.name_zh, m.draft)));
+    r.data.modules.filter((m) => m.kind !== 'solution').forEach((m) => navM.append(navItem(m.slug, m.code, m.name_zh, m.draft)));
+    const navS = $('#navSolutions'); navS.innerHTML = '';
+    r.data.modules.filter((m) => m.kind === 'solution').forEach((m) => navS.append(navItem(m.slug, m.name_zh, m.slug.replace(/^solution-/, ''), m.draft)));
     const g = r.data.git_dirty;
     $('#gitStatus').innerHTML = g.length
       ? `<b>${g.length} 個檔案尚未 commit</b><span>發布：commit 後 push 到 main</span>`
@@ -62,8 +64,11 @@
     const r = await api('GET', '/api/doc/' + id);
     if (!r.ok) return toast((r.data.errors || ['讀取失敗']).join('、'), 'err');
     state.id = id; state.doc = r.data; state.saved = JSON.stringify(r.data);
-    state.schema = id === '_platform' ? window.PLATFORM_SCHEMA : window.MODULE_SCHEMA;
-    $('#docTitle').textContent = id === '_platform' ? '平台總覽（nexus.html 上方區塊）' : `${r.data.code} ${r.data.name_zh}`;
+    state.schema = id === '_platform' ? window.PLATFORM_SCHEMA
+      : r.data.kind === 'solution' ? [window.MODULE_SCHEMA[0], ...window.SOLUTION_EXTRA, ...window.MODULE_SCHEMA.slice(1)]
+      : window.MODULE_SCHEMA;
+    $('#docTitle').textContent = id === '_platform' ? '平台總覽（nexus.html 上方區塊）'
+      : r.data.code === r.data.name_zh ? r.data.name_zh : `${r.data.code} ${r.data.name_zh}`;
     $('#docMeta').textContent = id === '_platform' ? 'tools/module-pages/_platform.json' : `aurobase.com/${r.data.file}　·　tools/module-pages/${id}.json`;
     $('#openLive').href = '/site/' + (id === '_platform' ? 'nexus.html' : r.data.file);
     history.replaceState(null, '', '#' + id);
@@ -391,14 +396,26 @@
     f.reset(); $('#wizErr').textContent = '';
     const sel = f.platform_leg; sel.innerHTML = '';
     state.meta.legs.forEach((l) => sel.append(new Option(l, l)));
+    $('#industryList').innerHTML = state.meta.industries.map((x) => `<option value="${esc(x)}">`).join('');
+    const prefix = () => (f.kind.value === 'solution' ? 'solution-' : 'nexus-');
+    const syncKind = () => {
+      const sol = f.kind.value === 'solution';
+      $('#wizLeg').hidden = sol; $('#wizIndustry').hidden = !sol;
+      f.platform_leg.required = !sol; f.industry.required = sol;
+      f.slug.pattern = sol ? 'solution-[a-z0-9]+(-[a-z0-9]+)*' : 'nexus-[a-z0-9]+(-[a-z0-9]+)*';
+      f.slug.placeholder = prefix() + (sol ? 'ai-record' : 'vault');
+      if (!touched) f.code.oninput();
+    };
+    f.kind.onchange = syncKind;
     let touched = false;
     f.slug.oninput = () => { touched = true; $('[data-slug]').textContent = f.slug.value || 'nexus-…'; };
     f.code.oninput = () => {
       if (touched) return;
       const s = f.code.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-      f.slug.value = s ? 'nexus-' + s.replace(/^nexus-/, '') : '';
+      f.slug.value = s ? prefix() + s.replace(/^(nexus|solution)-/, '') : '';
       $('[data-slug]').textContent = f.slug.value || 'nexus-…';
     };
+    syncKind();
     dlg.showModal();
   }
   async function submitWizard(e) {

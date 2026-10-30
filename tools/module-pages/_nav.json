@@ -1,12 +1,41 @@
 {
   "_說明": "全站左側選單。type=platform 的項目會展開 AI 治理平台的產品（取自 _platform.json 的分組），在 AURO NEXUS 相關頁面自動展開。改完跑 python3 tools/build-module-pages.py。",
   "items": [
-    {"type": "platform", "label": "AI 治理平台", "href": "nexus.html", "overview_label": "平台總覽"},
-    {"label": "AI 智慧語伴", "href": "ai-companion.html"},
-    {"label": "代理產品", "href": "solution.html"},
-    {"label": "數位行銷服務", "href": "marketing.html"},
-    {"label": "客服中心", "href": "https://aurocore.com/", "external": true},
-    {"label": "新聞中心", "href": "blog.html"},
-    {"label": "聯絡我們", "href": "contact.html"}
+    {
+      "type": "platform",
+      "label": "AI 治理平台",
+      "href": "nexus.html",
+      "overview_label": "平台總覽"
+    },
+    {
+      "type": "solutions",
+      "label": "產業解決方案",
+      "href": "nexus.html#solutions"
+    },
+    {
+      "label": "AI 智慧語伴",
+      "href": "ai-companion.html"
+    },
+    {
+      "label": "代理產品",
+      "href": "solution.html"
+    },
+    {
+      "label": "數位行銷服務",
+      "href": "marketing.html"
+    },
+    {
+      "label": "客服中心",
+      "href": "https://aurocore.com/",
+      "external": true
+    },
+    {
+      "label": "新聞中心",
+      "href": "blog.html"
+    },
+    {
+      "label": "聯絡我們",
+      "href": "contact.html"
+    }
   ]
 }

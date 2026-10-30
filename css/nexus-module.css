@@ -294,3 +294,22 @@ body {
 .nm-modes:hover { text-decoration: none; border-color: var(--m-soft); }
 .nm-modes:hover span { color: #fff; }
 .nm-deploy .deploy-tag { font-size: 0.8rem; letter-spacing: 0.12em; }
+
+/* ── 解決方案：運作流程 ── */
+.nm-flow { background: #f8f9fa; padding: 4rem 0; }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+.flow-step { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.3rem 1.3rem 1.1rem; position: relative; }
+.flow-n { font-size: 0.78rem; font-weight: 700; color: var(--m-bright); letter-spacing: 0.08em; }
+.flow-step h3 { font-size: 0.98rem; font-weight: 700; color: #28282c; margin: 0.35rem 0 0.5rem; }
+.flow-step p { font-size: 0.86rem; color: #666; line-height: 1.75; margin: 0 0 0.8rem; }
+.flow-mods { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.nm-chip { display: inline-block; font-size: 0.74rem; font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 999px; background: var(--m-tint); color: var(--m-deep); text-decoration: none; }
+a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none; }
+/* 平台總覽：解決方案卡片 */
+.sol-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.5rem; height: 100%; display: flex; flex-direction: column; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+.sol-card .sol-ind { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--m-bright); font-weight: 700; }
+.sol-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0.4rem 0 0.5rem; }
+.sol-card h3 a { color: #28282c; text-decoration: none; }
+.sol-card h3 a:hover { color: var(--m-deep); }
+.sol-card p { font-size: 0.86rem; color: #666; line-height: 1.75; flex: 1; }
+.sol-card .flow-mods { margin-top: 0.6rem; }
