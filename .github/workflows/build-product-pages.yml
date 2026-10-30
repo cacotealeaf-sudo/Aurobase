@@ -46,9 +46,24 @@ jobs:
           { echo '## SEO / GEO 檢查'; echo '```'; cat audit.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           rm audit.txt
 
+      # 字型子集只在網站出現子集沒有的中文字時才重建：不同版本的 fonttools 產出位元組不同，
+      # 每次都重建會在沒有新字時也多一筆 commit
       - name: Rebuild font and icon subsets
         run: |
-          bash tools/build-font-subset.sh
+          if python3 - <<'PY'
+          import glob, io, sys
+          from fontTools.ttLib import TTFont
+          chars = set()
+          for f in glob.glob('*.html') + glob.glob('blogpost/*.html') + glob.glob('*.txt') + glob.glob('css/*.css') + glob.glob('js/*.js'):
+              chars |= set(io.open(f, encoding='utf-8', errors='ignore').read())
+          full = set(TTFont('WOFF2/LINESeedTW_OTF_Rg.woff2').getBestCmap())
+          cmap = set(TTFont('WOFF2/LINESeedTW_OTF_Rg.subset.woff2').getBestCmap())
+          # 只算完整字型有、子集沒有的字（完整字型本來就沒有的字，例如簡體字，重建也補不進來）
+          missing = sorted(c for c in chars if ord(c) in full and ord(c) not in cmap)
+          print('字型子集缺 %d 字' % len(missing), ''.join(missing[:40]))
+          sys.exit(0 if missing else 1)
+          PY
+          then bash tools/build-font-subset.sh; fi
           bash tools/build-iconoir-subset.sh
 
       - name: Commit regenerated files
