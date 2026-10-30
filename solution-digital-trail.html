@@ -131,7 +131,7 @@
           "name": "AURA Connect 支援哪些行為資料來源？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AURA Connect 目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
+            "text": "目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
           }
         },
         {
@@ -139,7 +139,7 @@
           "name": "AURA Connect 怎麼確保交付的資料正確？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸並原子就位，避免下游讀到不完整的檔案。"
+            "text": "AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案，避免下游讀到不完整的檔案。"
           }
         },
         {
@@ -147,7 +147,7 @@
           "name": "AURA Connect 會把不同裝置的行為合併到同一人嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不會。AURA Connect 只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。"
+            "text": "不會。只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。"
           }
         },
         {
@@ -155,7 +155,7 @@
           "name": "AURA Connect 可以裝在自己的機房嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以。AURA Connect 可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。"
+            "text": "可以。可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。"
           }
         }
       ]
@@ -340,7 +340,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供即時查詢的方案。</dd><dt>來源</dt><dd>HCL Discover 記錄的行為軌跡檔案，欄位順序可設定。</dd><dt>交付</dt><dd>ETL 匯出、筆數勾稽、SFTP 金鑰傳輸；行銷平台即時查詢 API。</dd><dt>資料庫</dt><dd>SQL Server 或 PostgreSQL。</dd><dt>所屬</dt><dd>AURA 家族，與 <a href="nexus-cdp.html">AURA CDP</a> 同屬客戶資料能力。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供即時查詢的方案。</dd><dt>來源</dt><dd>HCL Discover 記錄的行為軌跡檔案，欄位順序可設定。</dd><dt>交付</dt><dd>ETL 匯出、筆數勾稽、SFTP 金鑰傳輸；行銷平台即時查詢 API。</dd><dt>資料庫</dt><dd>SQL Server 或 PostgreSQL。</dd><dt>組成</dt><dd>行為軌跡處理、身分對應、標籤引擎與 ETL 交付，與 <a href="nexus-cdp.html">AURA CDP</a> 同屬 AURA 家族。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                             <h2 class="section-heading">什麼是數位軌跡資料整合？</h2>
                             <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>數位軌跡</b>是客戶在網站與 App 上留下的瀏覽、點擊與操作紀錄。數位軌跡資料整合把這些紀錄整理成可以辨識客戶、可以下標籤的資料，交給行銷系統使用。</p><p><b>AURA Connect</b> 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡資料整合方案。它讀取 HCL Discover 記錄的行為軌跡，切成工作階段，回溯同一裝置登入前後的身分，一次掃描算出多個行銷標籤，經筆數勾稽後以 SFTP 交付資料倉儲，並提供有限流與降級保護的即時查詢 API。</p></div></div>
-                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>數位行銷團隊</b><span>要把網站與 App 上的行為變成可以圈選的標籤。</span></li><li><b>資料倉儲與資訊單位</b><span>要穩定、可勾稽的批次交付，而不是臨時匯出的檔案。</span></li><li><b>已使用 HCL Discover 的企業</b><span>要把既有的行為紀錄接到行銷流程裡。</span></li></ul></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>數位行銷團隊</b><span>要把網站與 App 上的行為變成可以圈選的標籤。</span></li><li><b>資料倉儲與資訊單位</b><span>要穩定、可勾稽的批次交付，不再依賴臨時匯出的檔案。</span></li><li><b>已使用 HCL Discover 的企業</b><span>要把既有的行為紀錄接到行銷流程裡。</span></li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -377,7 +377,7 @@
                                     <div class="flow-mods"><span class="nm-chip">身分對應</span></div></li>
                                 <li class="flow-step"><span class="flow-n">04</span><h3>標籤計算</h3><p>一次掃描算出多個行銷標籤。</p>
                                     <div class="flow-mods"><span class="nm-chip">標籤引擎</span></div></li>
-                                <li class="flow-step"><span class="flow-n">05</span><h3>勾稽與交付</h3><p>交付前做筆數勾稽，對不上就不交付；以 SFTP 金鑰傳輸並原子就位。</p>
+                                <li class="flow-step"><span class="flow-n">05</span><h3>勾稽與交付</h3><p>交付前做筆數勾稽，對不上就不交付；以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案。</p>
                                     <div class="flow-mods"><span class="nm-chip">ETL</span><span class="nm-chip">SFTP</span></div></li>
                                 <li class="flow-step"><span class="flow-n">06</span><h3>即時查詢</h3><p>行銷平台透過 API 即時查詢客戶標籤，含限流與降級保護。</p>
                                     <div class="flow-mods"><span class="nm-chip">即時查詢 API</span></div></li>
@@ -428,7 +428,7 @@
                                         <h3>行銷標籤</h3><ul><li>一次掃描算出多個標籤，減少重複運算。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
-                                        <h3>交付與品質檢核</h3><ul><li>ETL 匯出，交付前做<b>筆數勾稽</b>，對不上就不交付。</li><li>以 SFTP 金鑰傳輸，檔案原子就位。</li></ul></div></div>
+                                        <h3>交付與品質檢核</h3><ul><li>ETL 匯出，交付前做<b>筆數勾稽</b>，對不上就不交付。</li><li>以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-flash"></i></div>
                                         <h3>即時查詢 API</h3><ul><li>行銷平台即時查詢客戶標籤。</li><li>含限流與降級保護。</li></ul></div></div>
@@ -449,7 +449,7 @@
                             <h2 class="section-heading">臨時匯出與 AURA Connect 的差異</h2>
                             <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
                                 <thead><tr><th scope="col"></th><th scope="col">臨時匯出行為資料</th><th scope="col" class=is-us>AURA Connect</th></tr></thead>
-                                <tbody><tr><th scope="row">交付方式</th><td>人工匯出、手動上傳</td><td class=is-us>依排程以 SFTP 交付，檔案原子就位</td></tr><tr><th scope="row">資料品質</th><td>少有人檢查</td><td class=is-us>交付前筆數勾稽，對不上就不交付</td></tr><tr><th scope="row">匿名行為</th><td>對不上客戶</td><td class=is-us>同一裝置登入後回溯登入前行為</td></tr><tr><th scope="row">行銷即時使用</th><td>需等下一批檔案</td><td class=is-us>即時查詢 API，含限流與降級</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">交付方式</th><td data-label="臨時匯出行為資料">人工匯出、手動上傳</td><td data-label="AURA Connect" class=is-us>依排程以 SFTP 交付，傳完才上架</td></tr><tr><th scope="row">資料品質</th><td data-label="臨時匯出行為資料">少有人檢查</td><td data-label="AURA Connect" class=is-us>交付前筆數勾稽，對不上就不交付</td></tr><tr><th scope="row">匿名行為</th><td data-label="臨時匯出行為資料">對不上客戶</td><td data-label="AURA Connect" class=is-us>同一裝置登入後回溯登入前行為</td></tr><tr><th scope="row">行銷即時使用</th><td data-label="臨時匯出行為資料">需等下一批檔案</td><td data-label="AURA Connect" class=is-us>即時查詢 API，含限流與降級</td></tr></tbody></table></div>
                         </div>
                     </div>
                 </div>
@@ -482,9 +482,9 @@
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">ON THE PLATFORM</p>
-                            <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
-                            <div class="platform-text">AURA Connect 與 <a href="nexus-cdp.html">AURA CDP</a> 同屬 AURA 家族的客戶資料能力：AURA Connect 負責把行為軌跡整理成標籤與交付，AURA CDP 負責身分解析、單一客戶視圖與旅程。</div>
-                            <div class="nm-links"><a class="nm-link" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span></a><a class="nm-link" href="nexus-abm.html"><b>NEXUS ABM</b><span>企業客戶帳號經營</span></a><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                            <h2 class="section-heading">由哪些平台模組組成</h2>
+                            <div class="platform-text">AURA Connect 與 <a href="nexus-cdp.html">AURA CDP</a> 同屬 AURA 家族的客戶資料能力：AURA Connect 負責把行為軌跡整理成標籤並交付，AURA CDP 負責身分解析、單一客戶視圖與旅程。行為軌跡的來源可以是奧洛代理的 <a href="solution.html#hcl_discover">HCL Discover</a>。</div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
                         </div>
                     </div>
                 </div>
@@ -538,10 +538,10 @@
                             <p class="section-label">FAQ</p>
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
-                                    <div class="faq-item"><h3>AURA Connect 支援哪些行為資料來源？</h3><p>AURA Connect 目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。</p></div>
-                                    <div class="faq-item"><h3>AURA Connect 怎麼確保交付的資料正確？</h3><p>AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸並原子就位，避免下游讀到不完整的檔案。</p></div>
-                                    <div class="faq-item"><h3>AURA Connect 會把不同裝置的行為合併到同一人嗎？</h3><p>不會。AURA Connect 只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。</p></div>
-                                    <div class="faq-item"><h3>AURA Connect 可以裝在自己的機房嗎？</h3><p>可以。AURA Connect 可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。</p></div>
+                                    <div class="faq-item"><h3>AURA Connect 支援哪些行為資料來源？</h3><p>目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。</p></div>
+                                    <div class="faq-item"><h3>AURA Connect 怎麼確保交付的資料正確？</h3><p>AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案，避免下游讀到不完整的檔案。</p></div>
+                                    <div class="faq-item"><h3>AURA Connect 會把不同裝置的行為合併到同一人嗎？</h3><p>不會。只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。</p></div>
+                                    <div class="faq-item"><h3>AURA Connect 可以裝在自己的機房嗎？</h3><p>可以。可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。</p></div>
                             </div></div>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>

@@ -132,7 +132,7 @@
           "name": "SUADA 會取代品管人員嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不會。SUADA 分析每一通通話並列出告知缺漏、不當用語與評分，AI 評審只作參考、不改變總分；最後判定由品管與法遵人員確認。"
+            "text": "不會。系統分析每一通通話並列出告知缺漏、不當用語與評分，AI 評審只作參考、不改變總分；最後判定由品管與法遵人員確認。"
           }
         },
         {
@@ -140,7 +140,7 @@
           "name": "SUADA 怎麼檢核電話行銷的告知要件？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SUADA 依〈保險業保險代理人公司保險經紀人公司辦理電話行銷業務應注意事項〉的要件，逐句比對業務員語句；規則有版本，事後查得到當時採用哪一版。"
+            "text": "依〈保險業保險代理人公司保險經紀人公司辦理電話行銷業務應注意事項〉的要件，逐句比對業務員語句；規則有版本，事後查得到當時採用哪一版。"
           }
         },
         {
@@ -148,7 +148,7 @@
           "name": "SUADA 的禁語閘門怎麼運作？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SUADA 的禁語閘門用確定性規則比對業務員語句，不依賴 AI 判斷；全形字、插入空白等變體也擋得住，結果可解釋、可重現。"
+            "text": "禁語閘門用確定性規則比對業務員語句，不依賴 AI 判斷；全形字、插入空白等變體也擋得住，結果可解釋、可重現。"
           }
         },
         {
@@ -156,7 +156,7 @@
           "name": "SUADA 可以部署在自己的機房嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以。SUADA 以容器交付，可部署於企業自有機房或公有雲的台灣區域，AI 呼叫經 Forge 治理並可限定只用地端模型。"
+            "text": "可以。以容器交付，可部署於企業自有機房或公有雲的台灣區域，AI 呼叫經 Forge 治理並可限定只用地端模型。"
           }
         }
       ]
@@ -341,7 +341,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>電話行銷與視訊銷售的對話分析、話術提示與品質稽核方案。</dd><dt>即時</dt><dd>通話以串流送入，座席面板提示回應話術，主管可即時監看。</dd><dt>合規</dt><dd>依電話行銷應注意事項逐項檢核告知與紀錄要件；確定性禁語閘門。</dd><dt>品質</dt><dd>每一通通話依評分表評分，AI 評審只作參考、不改變總分。</dd><dt>組成</dt><dd><a href="nexus-forge.html">Forge</a> 治理 AI 呼叫，加上對話引擎、話術庫與品質稽核元件。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>電話行銷與視訊銷售的對話分析、話術提示與品質稽核方案。</dd><dt>即時</dt><dd>通話以串流送入，座席面板提示回應話術，主管可即時監看。</dd><dt>合規</dt><dd>依電話行銷應注意事項逐項檢核告知與紀錄要件；確定性禁語閘門。</dd><dt>品質</dt><dd>每一通通話依評分表評分，品管人員有最後決定權。</dd><dt>組成</dt><dd><a href="nexus-forge.html">Forge</a> 治理 AI 呼叫，加上對話引擎、話術庫與品質稽核元件。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -378,7 +378,7 @@
                                     <div class="flow-mods"><span class="nm-chip">話術庫</span></div></li>
                                 <li class="flow-step"><span class="flow-n">04</span><h3>告知與禁語檢核</h3><p>逐項檢核告知要件；禁語閘門擋下不當用語，全形或插入空白的變體也擋得住。</p>
                                     <div class="flow-mods"><span class="nm-chip">合規檢核</span></div></li>
-                                <li class="flow-step"><span class="flow-n">05</span><h3>全量評分</h3><p>每一通通話依評分表評分，AI 評審結果只作參考。</p>
+                                <li class="flow-step"><span class="flow-n">05</span><h3>全量評分</h3><p>每一通通話依評分表評分，結果交給品管人員確認。</p>
                                     <div class="flow-mods"><span class="nm-chip">品質稽核</span></div></li>
                                 <li class="flow-step"><span class="flow-n">06</span><h3>教練與稽核</h3><p>教練追蹤與報表排程；稽核紀錄寫入雜湊鏈，可驗證是否遭竄改。</p>
                                     <div class="flow-mods"><a class="nm-chip" href="nexus-forge.html">Forge</a></div></li>
@@ -403,7 +403,7 @@
                                         <h3>告知缺漏事後才發現</h3><p>法定告知有沒有講完整，常在客訴或稽核時才回頭查。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="pain-card"><div class="pain-number">03</div>
-                                        <h3>話術效果說不清楚</h3><p>哪些回應方式能化解異議，缺少數據支持，教練只能憑經驗。</p></div></div>
+                                        <h3>話術效果說不清楚</h3><p>哪些回應方式能化解異議，缺少數據佐證，教練只能憑經驗。</p></div></div>
                             </div>
                             <div class="pain-statement">SUADA 分析每一通通話，把告知檢核、不當用語與品質評分寫成可以追蹤的紀錄，再由品管人員確認。</div>
                         </div>
@@ -432,7 +432,7 @@
                                         <h3>話術庫管理</h3><ul><li>話術的送審、核准與退役流程。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-stats-up-square"></i></div>
-                                        <h3>全量品質稽核</h3><ul><li>每一通通話依評分表評分。</li><li>AI 評審只作參考，不改變總分。</li><li>校準會議統一評分標準。</li></ul></div></div>
+                                        <h3>全量品質稽核</h3><ul><li>每一通通話依評分表評分。</li><li>品管人員有最後決定權。</li><li>校準會議統一評分標準。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-group"></i></div>
                                         <h3>教練與報表</h3><ul><li>教練追蹤與報表排程。</li><li>Webhook 通知與話術 A/B 實驗。</li><li>稽核紀錄寫入雜湊鏈並可驗證。</li></ul></div></div>
@@ -451,8 +451,8 @@
                             <p class="section-intro">下表列出與 SUADA 功能直接相關的規範與對應做法。</p>
                             <div class="nm-table-wrap"><table class="nm-table">
                                 <thead><tr><th scope="col">規範</th><th scope="col">SUADA 的對應做法</th></tr></thead>
-                                <tbody><tr><th scope="row">電話行銷應注意事項：告知與紀錄要件</th><td>業務員語句逐項比對告知要件，缺漏的項目列在通話紀錄中，供品管人員複核。</td></tr><tr><th scope="row">金融業運用 AI 指引：治理及問責</th><td>AI 評審只作參考、不改變總分；話術須經核准才會提示給業務員。</td></tr></tbody></table></div>
-                            <p class="nm-source">資料來源：<a href="https://law.moj.gov.tw/" target="_blank" rel="noopener">全國法規資料庫</a> <a href="https://www.fsc.gov.tw/" target="_blank" rel="noopener">金管會〈金融業運用人工智慧（AI）指引〉（2024 年 6 月 20 日發布）</a>。「電話行銷應注意事項」指〈保險業保險代理人公司保險經紀人公司辦理電話行銷業務應注意事項〉。本表列出的是對應做法，是否符合規範由主管機關與貴公司法遵認定。</p>
+                                <tbody><tr><th scope="row">電話行銷應注意事項：告知與紀錄要件</th><td data-label="SUADA 的對應做法">業務員語句逐項比對告知要件，缺漏的項目列在通話紀錄中，供品管人員複核。</td></tr><tr><th scope="row">金融業運用 AI 指引：治理及問責</th><td data-label="SUADA 的對應做法">AI 評審只作參考、不改變總分；話術須經核准才會提示給業務員。</td></tr></tbody></table></div>
+                            <p class="nm-source">資料來源：<a href="https://law.moj.gov.tw/" target="_blank" rel="noopener">全國法規資料庫</a>；<a href="https://www.fsc.gov.tw/" target="_blank" rel="noopener">金管會〈金融業運用人工智慧（AI）指引〉（2024 年 6 月 20 日發布）</a>。「電話行銷應注意事項」指〈保險業保險代理人公司保險經紀人公司辦理電話行銷業務應注意事項〉。本表列出的是對應做法，是否符合規範由主管機關與貴公司法遵認定。</p>
                         </div>
                     </div>
                 </div>
@@ -541,10 +541,10 @@
                             <p class="section-label">FAQ</p>
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
-                                    <div class="faq-item"><h3>SUADA 會取代品管人員嗎？</h3><p>不會。SUADA 分析每一通通話並列出告知缺漏、不當用語與評分，AI 評審只作參考、不改變總分；最後判定由品管與法遵人員確認。</p></div>
-                                    <div class="faq-item"><h3>SUADA 怎麼檢核電話行銷的告知要件？</h3><p>SUADA 依〈保險業保險代理人公司保險經紀人公司辦理電話行銷業務應注意事項〉的要件，逐句比對業務員語句；規則有版本，事後查得到當時採用哪一版。</p></div>
-                                    <div class="faq-item"><h3>SUADA 的禁語閘門怎麼運作？</h3><p>SUADA 的禁語閘門用確定性規則比對業務員語句，不依賴 AI 判斷；全形字、插入空白等變體也擋得住，結果可解釋、可重現。</p></div>
-                                    <div class="faq-item"><h3>SUADA 可以部署在自己的機房嗎？</h3><p>可以。SUADA 以容器交付，可部署於企業自有機房或公有雲的台灣區域，AI 呼叫經 Forge 治理並可限定只用地端模型。</p></div>
+                                    <div class="faq-item"><h3>SUADA 會取代品管人員嗎？</h3><p>不會。系統分析每一通通話並列出告知缺漏、不當用語與評分，AI 評審只作參考、不改變總分；最後判定由品管與法遵人員確認。</p></div>
+                                    <div class="faq-item"><h3>SUADA 怎麼檢核電話行銷的告知要件？</h3><p>依〈保險業保險代理人公司保險經紀人公司辦理電話行銷業務應注意事項〉的要件，逐句比對業務員語句；規則有版本，事後查得到當時採用哪一版。</p></div>
+                                    <div class="faq-item"><h3>SUADA 的禁語閘門怎麼運作？</h3><p>禁語閘門用確定性規則比對業務員語句，不依賴 AI 判斷；全形字、插入空白等變體也擋得住，結果可解釋、可重現。</p></div>
+                                    <div class="faq-item"><h3>SUADA 可以部署在自己的機房嗎？</h3><p>可以。以容器交付，可部署於企業自有機房或公有雲的台灣區域，AI 呼叫經 Forge 治理並可限定只用地端模型。</p></div>
                             </div></div>
                         </div>
                     </div>
@@ -567,7 +567,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>

@@ -1,12 +1,20 @@
 /* 全站左側選單的「AI 治理平台」產品子選單（由 tools/build-module-pages.py 產生選單結構） */
 #colorlib-aside { overflow-y: auto; scrollbar-width: thin; }
-#colorlib-aside #colorlib-main-menu .nav-row { display: flex; align-items: center; gap: 0.4rem; }
+/* 有子選單的項目：連結維持行內排版，高度與其他項目一致；展開鈕是置於文字後的小箭頭 */
+#colorlib-aside #colorlib-main-menu .nav-row { display: block; }
 #colorlib-aside #colorlib-main-menu .nav-sub-toggle {
-    border: 0; background: none; padding: 0.2rem 0.35rem; line-height: 1; cursor: pointer;
-    color: #8a8a8f; font-size: 0.9rem; border-radius: 4px; transition: transform 0.25s, color 0.2s;
+    display: inline-block; vertical-align: middle; width: 26px; height: 26px; margin: -4px 0 0 0.3rem; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: #9a9aa0; font-size: 0; line-height: 0; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover { color: #E63109; }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle[aria-expanded="true"] { transform: rotate(180deg); }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle::before {
+    content: ''; display: block; width: 7px; height: 7px; margin: 7px auto 0;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.25s, margin 0.25s;
+}
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle[aria-expanded="true"]::before { transform: rotate(-135deg); margin-top: 11px; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover { background: #f4efed; color: #E63109; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:focus { outline: none; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:focus-visible { outline: 2px solid #E63109; outline-offset: 2px; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub {
     margin: 0.15rem 0 0.7rem; padding: 0.35rem 0 0.35rem 0.9rem; border-left: 2px solid #f0d5cc;
 }
@@ -24,7 +32,7 @@
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:after { display: none; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover { border-color: #E63109; color: #E63109; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] { background: #E63109; border-color: #E63109; color: #fff; }
-#colorlib-aside #colorlib-main-menu .nav-ext { font-size: 0.6em; color: #9a9aa0; margin-left: 0.15em; }
+#colorlib-aside #colorlib-main-menu .nav-ext { font-size: 0.5em; color: #b0b0b5; margin-left: 0.25em; vertical-align: 0.35em; }
 
 /* 目前所在頁面：沿用原本滑過時的橘色底線 */
 #colorlib-aside #colorlib-main-menu > ul > li.active > a:after,
@@ -37,9 +45,36 @@
 
 /* 手機：頁首錨點按鈕列可橫向滑動並讓開漢堡選單（nexus.html、solution.html 等） */
 @media (max-width: 991.98px) {
-    .btn.fixed-top.text-right { white-space: nowrap; overflow-x: auto; padding-left: 72px; scrollbar-width: none; }
+    .btn.fixed-top.text-right { white-space: nowrap; overflow-x: auto; padding-left: 72px; scrollbar-width: none;
+        background: rgba(255,255,255,0.94); box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+        /* 右側淡出，提示還可以往右滑 */
+        -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+                mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
     .btn.fixed-top.text-right::-webkit-scrollbar { display: none; }
+}
+/* 桌機：錨點按鈕收成右上角一組，有底色，捲動時不會和內文疊在一起 */
+@media (min-width: 992px) {
+    .btn.fixed-top.text-right { left: auto; right: 16px; top: 12px; padding: 4px; border-radius: 999px;
+        background: rgba(255,255,255,0.92); box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+    .btn.fixed-top.text-right .btn { margin: 0; }
 }
 
 /* 子選單展開時，固定在底部的標誌改接在選單後面，避免蓋到選單 */
 #colorlib-aside:has(.nav-sub:not([hidden])) .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }
+
+/* 手機：右下浮動「免費諮詢」鈕不要蓋到頁尾的版權與聯絡資訊 */
+@media (max-width: 767.98px) {
+    #footer-sec { padding-bottom: 88px !important; }
+}
+
+/* 頁尾的地址、電話、Email 不在字中間斷行 */
+.ft-nw { white-space: nowrap; }
+
+/* 新聞中心卡片標題保留原本大小寫（英文不強制轉大寫） */
+.card__title { text-transform: none; letter-spacing: 0.5px; }
+
+/* 舊版頁面（服務、代理產品、AI 智慧語伴）內容欄靠右貼齊視窗，桌機加右側留白 */
+@media (min-width: 992px) {
+    #colorlib-main .row.justify-content-end > .col-md-10 { padding-right: 48px; }
+}

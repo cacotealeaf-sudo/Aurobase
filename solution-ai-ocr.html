@@ -140,7 +140,7 @@
           "name": "AI OCR 可以辨識手寫嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "AI OCR 智慧文件辨識可由地端視覺模型照影像抄寫手寫欄位，但結果只當提議，一律交人工覆核；不符欄位樣式的提議直接捨棄，不會自動寫入。"
+            "text": "可以抄寫，但不自動採用。手寫欄位由地端視覺模型照影像抄寫成提議，一律交人工覆核；不符欄位樣式的提議直接捨棄。"
           }
         },
         {
@@ -148,7 +148,7 @@
           "name": "遇到新的文件格式要重新訓練嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不需要。AI OCR 智慧文件辨識用欄位定義描述要擷取的內容，新增或修改後即時生效；抽不到的欄位回報「找不到」，不會猜測。"
+            "text": "不需要。用欄位定義描述要擷取的內容，新增或修改後即時生效；抽不到的欄位回報「找不到」，不會猜測。"
           }
         },
         {
@@ -156,7 +156,7 @@
           "name": "人工改過的結果會讓系統越來越準嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "會。AI OCR 智慧文件辨識把人工修正回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。"
+            "text": "會。人工修正會回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。"
           }
         },
         {
@@ -164,7 +164,7 @@
           "name": "AI OCR 智慧文件辨識可以部署在機房內嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以。AI OCR 智慧文件辨識以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機，手寫抄寫也使用地端模型；也可部署於公有雲的台灣區域。"
+            "text": "可以。以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機，手寫抄寫也使用地端模型；也可部署於公有雲的台灣區域。"
           }
         },
         {
@@ -172,7 +172,7 @@
           "name": "AI OCR 智慧文件辨識也能處理財務報表嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以。AI OCR 智慧文件辨識內建財務報表的頁面分類、科目擷取與勾稽檢核，每個數值附原始影像座標，不平衡的項目轉人工核對。"
+            "text": "可以。內建財務報表的頁面分類、科目擷取與勾稽檢核，每個數值附原始影像座標，不平衡的項目轉人工核對。"
           }
         }
       ]
@@ -357,7 +357,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>免訓練擷取各種文件欄位，手寫與信心不足的轉人工覆核的 AI OCR 解決方案。</dd><dt>格式</dt><dd>PDF、PNG、JPG、TIFF、HEIC；有文字層的直接讀取，掃描件做 OCR，直式橫式自動轉正。</dd><dt>手寫</dt><dd>可由地端視覺模型先逐字抄寫成提議，一律交人工覆核。</dd><dt>學習</dt><dd>人工修正回寫並學習欄位別名，下一份文件即生效，不需要重新訓練模型。</dd><dt>內建</dt><dd>財務報表的頁面分類、科目擷取與勾稽檢核。</dd><dt>組成</dt><dd>文件辨識引擎、勾稽規則集與人工覆核流程，屬於平台的知識能力，與 <a href="nexus-insight.html">Insight</a> 一同開發。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>免訓練擷取各種文件欄位，手寫與信心不足的轉人工覆核的 AI OCR 解決方案。</dd><dt>格式</dt><dd>PDF、PNG、JPG、TIFF、HEIC；有文字層的直接讀取，掃描件做 OCR，直式橫式自動轉正。</dd><dt>手寫</dt><dd>可由地端視覺模型先逐字抄寫成提議，一律交人工覆核。</dd><dt>學習</dt><dd>人工修正回寫並學習欄位別名，下一份文件即生效，不需要重新訓練模型。</dd><dt>內建</dt><dd>財務報表的頁面分類、科目擷取與勾稽檢核。</dd><dt>組成</dt><dd>文件辨識引擎、勾稽規則集與人工覆核流程，與 <a href="nexus-insight.html">Insight</a> 同屬平台的知識能力。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -372,7 +372,7 @@
                             <h2 class="section-heading">AI OCR 是什麼？</h2>
                             <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AI OCR</b> 在文字辨識之外，還會判斷每段文字屬於哪個欄位、可信度多高，並整理成系統可以直接使用的資料。傳統 OCR 只輸出文字，欄位要由人另外整理。</p><p><b>AI OCR 智慧文件辨識</b>是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案。它用欄位定義描述要擷取的內容，免訓練就能處理表單、證明文件與理賠附件等不同格式；每個欄位附信心分數與原始影像座標；印刷字由 OCR 讀取，手寫與信心不足的欄位轉人工覆核；修正結果回寫，下一份文件即生效。財務報表另有內建的頁面分類、科目擷取與勾稽檢核。</p></div></div>
-                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>保險理賠與核保作業</b><span>理賠附件來自各國、各家機構，格式不一，還常夾雜手寫。</span></li><li><b>授信與徵信單位</b><span>要減少財報登打與核對的時間，並保留每個數字的來源。</span></li><li><b>申請與審查單位</b><span>要把各種申請書與證明文件的欄位，直接帶進既有的審查流程。</span></li></ul></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>保險理賠與核保作業</b><span>理賠附件來自不同機構，格式不一，還常夾雜手寫。</span></li><li><b>授信與徵信單位</b><span>要減少財報登打與核對的時間，並保留每個數字的來源。</span></li><li><b>申請與審查單位</b><span>要把各種申請書與證明文件的欄位，直接帶進既有的審查流程。</span></li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="pain-card"><div class="pain-number">01</div>
-                                        <h3>格式太多</h3><p>每個國家、每家機構開出的證明文件格式都不同，一份一份寫範本來不及。</p></div></div>
+                                        <h3>格式太多</h3><p>每家機構開出的證明文件格式都不同，一份一份寫範本來不及。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="pain-card"><div class="pain-number">02</div>
                                         <h3>手寫讀不準</h3><p>手寫字跡差異大，辨識錯了又看起來合理，自動帶入反而更危險。</p></div></div>
@@ -473,7 +473,7 @@
                             <h2 class="section-heading">三種處理文件的方式</h2>
                             <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
                                 <thead><tr><th scope="col"></th><th scope="col">傳統 OCR</th><th scope="col">生成式模型直接讀文件</th><th scope="col" class=is-us>AI OCR 智慧文件辨識</th></tr></thead>
-                                <tbody><tr><th scope="row">輸出</th><td>純文字</td><td>自由格式的摘要或表格</td><td class=is-us>欄位、數值與信心分數</td></tr><tr><th scope="row">新格式</th><td>要另外寫範本</td><td>不用範本，但數值可能與原件不符</td><td class=is-us>用欄位定義描述，免訓練、即時生效</td></tr><tr><th scope="row">手寫</th><td>常讀錯</td><td>看似合理，但可能錯</td><td class=is-us>只當提議，一律人工覆核</td></tr><tr><th scope="row">人工修正</th><td>下一份還要再改</td><td>無法累積</td><td class=is-us>回寫並學習別名，下一份生效</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">輸出</th><td data-label="傳統 OCR">純文字</td><td data-label="生成式模型直接讀文件">自由格式的摘要或表格</td><td data-label="AI OCR 智慧文件辨識" class=is-us>欄位、數值與信心分數</td></tr><tr><th scope="row">新格式</th><td data-label="傳統 OCR">要另外寫範本</td><td data-label="生成式模型直接讀文件">不用範本，但數值可能與原件不符</td><td data-label="AI OCR 智慧文件辨識" class=is-us>用欄位定義描述，免訓練、即時生效</td></tr><tr><th scope="row">手寫</th><td data-label="傳統 OCR">常讀錯</td><td data-label="生成式模型直接讀文件">看似合理，但可能錯</td><td data-label="AI OCR 智慧文件辨識" class=is-us>只當提議，一律人工覆核</td></tr><tr><th scope="row">人工修正</th><td data-label="傳統 OCR">下一份還要再改</td><td data-label="生成式模型直接讀文件">無法累積</td><td data-label="AI OCR 智慧文件辨識" class=is-us>回寫並學習別名，下一份生效</td></tr></tbody></table></div>
                         </div>
                     </div>
                 </div>
@@ -507,7 +507,7 @@
                         <div class="col-md-12">
                             <p class="section-label">ON THE PLATFORM</p>
                             <h2 class="section-heading">由哪些平台模組組成</h2>
-                            <div class="platform-text">AI OCR 智慧文件辨識屬於平台的知識能力，與 <a href="nexus-insight.html">Insight</a> 一同開發，由文件辨識引擎、勾稽規則集與人工覆核流程組成。辨識後的文件如需分級、保存與稽核，可搭配 <a href="nexus-saga.html">SAGA</a>；需要串進 AI 流程時，可搭配 <a href="nexus-forge.html">Forge</a> 與 <a href="nexus-auro.html">Auro</a>。</div>
+                            <div class="platform-text">AI OCR 智慧文件辨識與 <a href="nexus-insight.html">Insight</a> 同屬平台的知識能力，由文件辨識引擎、勾稽規則集與人工覆核流程組成。辨識後的文件如需分級、保存與稽核，可搭配 <a href="nexus-saga.html">SAGA</a>；需要串進 AI 流程時，可搭配 <a href="nexus-forge.html">Forge</a> 與 <a href="nexus-auro.html">Auro</a>。</div>
                             <div class="nm-links"><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span></a><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
                         </div>
                     </div>
@@ -567,11 +567,11 @@
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
                                     <div class="faq-item"><h3>AI OCR 是什麼？</h3><p>AI OCR 在文字辨識之外，還會判斷每段文字屬於哪個欄位與可信度。AI OCR 智慧文件辨識用欄位定義擷取各種文件，手寫與信心不足的欄位轉人工覆核。</p></div>
-                                    <div class="faq-item"><h3>AI OCR 可以辨識手寫嗎？</h3><p>AI OCR 智慧文件辨識可由地端視覺模型照影像抄寫手寫欄位，但結果只當提議，一律交人工覆核；不符欄位樣式的提議直接捨棄，不會自動寫入。</p></div>
-                                    <div class="faq-item"><h3>遇到新的文件格式要重新訓練嗎？</h3><p>不需要。AI OCR 智慧文件辨識用欄位定義描述要擷取的內容，新增或修改後即時生效；抽不到的欄位回報「找不到」，不會猜測。</p></div>
-                                    <div class="faq-item"><h3>人工改過的結果會讓系統越來越準嗎？</h3><p>會。AI OCR 智慧文件辨識把人工修正回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。</p></div>
-                                    <div class="faq-item"><h3>AI OCR 智慧文件辨識可以部署在機房內嗎？</h3><p>可以。AI OCR 智慧文件辨識以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機，手寫抄寫也使用地端模型；也可部署於公有雲的台灣區域。</p></div>
-                                    <div class="faq-item"><h3>AI OCR 智慧文件辨識也能處理財務報表嗎？</h3><p>可以。AI OCR 智慧文件辨識內建財務報表的頁面分類、科目擷取與勾稽檢核，每個數值附原始影像座標，不平衡的項目轉人工核對。</p></div>
+                                    <div class="faq-item"><h3>AI OCR 可以辨識手寫嗎？</h3><p>可以抄寫，但不自動採用。手寫欄位由地端視覺模型照影像抄寫成提議，一律交人工覆核；不符欄位樣式的提議直接捨棄。</p></div>
+                                    <div class="faq-item"><h3>遇到新的文件格式要重新訓練嗎？</h3><p>不需要。用欄位定義描述要擷取的內容，新增或修改後即時生效；抽不到的欄位回報「找不到」，不會猜測。</p></div>
+                                    <div class="faq-item"><h3>人工改過的結果會讓系統越來越準嗎？</h3><p>會。人工修正會回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。</p></div>
+                                    <div class="faq-item"><h3>AI OCR 智慧文件辨識可以部署在機房內嗎？</h3><p>可以。以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機，手寫抄寫也使用地端模型；也可部署於公有雲的台灣區域。</p></div>
+                                    <div class="faq-item"><h3>AI OCR 智慧文件辨識也能處理財務報表嗎？</h3><p>可以。內建財務報表的頁面分類、科目擷取與勾稽檢核，每個數值附原始影像座標，不平衡的項目轉人工核對。</p></div>
                             </div></div>
                         </div>
                     </div>
@@ -594,7 +594,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>

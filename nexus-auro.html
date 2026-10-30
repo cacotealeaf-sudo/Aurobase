@@ -380,7 +380,7 @@
                                         <h3>它會不會停不下來？</h3><p>代理在迴圈中反覆呼叫模型與工具，成本與時間沒有上限，等發現時帳單已經出來。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="pain-card"><div class="pain-number">02</div>
-                                        <h3>它做的事誰核准？</h3><p>寄信、改資料、發通知這類動作，需要有人在動作發生前看過，而不是事後才知道。</p></div></div>
+                                        <h3>它做的事誰核准？</h3><p>寄信、改資料、發通知這類動作，需要有人在動作發生前先看過。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="pain-card"><div class="pain-number">03</div>
                                         <h3>出事時查得到嗎？</h3><p>代理做了哪些步驟、依據什麼判斷、呼叫了哪些工具，必須能逐步重建。</p></div></div>
@@ -430,7 +430,7 @@
                             <h2 class="section-heading">自行串接 AI Agent 與 Auro 的差異</h2>
                             <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
                                 <thead><tr><th scope="col"></th><th scope="col">自行串接 AI Agent 框架</th><th scope="col" class=is-us>Auro</th></tr></thead>
-                                <tbody><tr><th scope="row">成本與時間上限</th><td>需自行實作</td><td class=is-us>步數、token、時限為執行環境強制的硬上限</td></tr><tr><th scope="row">每一步的檢查</th><td>依開發者實作</td><td class=is-us>停止旗標 → 預算 → 政策 → 治理閘門 → 稽核，逐步執行</td></tr><tr><th scope="row">治理服務故障時</th><td>依開發者實作</td><td class=is-us>一律阻擋（fail-closed）</td></tr><tr><th scope="row">人工審核</th><td>需自行開發</td><td class=is-us>送審步驟進入審核佇列，核准後才繼續</td></tr><tr><th scope="row">子任務委派</th><td>依框架而定</td><td class=is-us>有深度上限，父子任務共用預算</td></tr><tr><th scope="row">離線環境</th><td>依部署方式</td><td class=is-us>提供只用地端模型的離線設定</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">成本與時間上限</th><td data-label="自行串接 AI Agent 框架">需自行實作</td><td data-label="Auro" class=is-us>步數、token、時限為執行環境強制的硬上限</td></tr><tr><th scope="row">每一步的檢查</th><td data-label="自行串接 AI Agent 框架">依開發者實作</td><td data-label="Auro" class=is-us>停止旗標 → 預算 → 政策 → 治理閘門 → 稽核，逐步執行</td></tr><tr><th scope="row">治理服務故障時</th><td data-label="自行串接 AI Agent 框架">依開發者實作</td><td data-label="Auro" class=is-us>一律阻擋（fail-closed）</td></tr><tr><th scope="row">人工審核</th><td data-label="自行串接 AI Agent 框架">需自行開發</td><td data-label="Auro" class=is-us>送審步驟進入審核佇列，核准後才繼續</td></tr><tr><th scope="row">子任務委派</th><td data-label="自行串接 AI Agent 框架">依框架而定</td><td data-label="Auro" class=is-us>有深度上限，父子任務共用預算</td></tr><tr><th scope="row">離線環境</th><td data-label="自行串接 AI Agent 框架">依部署方式</td><td data-label="Auro" class=is-us>提供只用地端模型的離線設定</td></tr></tbody></table></div>
                         </div>
                     </div>
                 </div>
@@ -445,7 +445,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
-                                        <h3>治理服務缺席時一律阻擋</h3><p>治理服務缺席或無法回應時，Auro 一律阻擋任務繼續，而不是在沒有檢查的情況下照常執行。</p></div></div>
+                                        <h3>治理服務缺席時一律阻擋</h3><p>治理服務缺席或無法回應時，Auro 一律暫停任務，未經檢查的動作不會執行。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-hourglass diff-icon"></i>
                                         <h3>預算是硬上限</h3><p>步數、token 與時限是執行環境強制的上限，連委派出去的子任務也共用同一份預算。</p></div></div>
@@ -527,7 +527,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>

@@ -47,13 +47,6 @@
       "name": "隱私權政策",
       "description": "奧洛數位整合行銷的隱私權政策，說明本網站如何蒐集、處理與利用您透過諮詢表單提供的個人資料，Cookie 的使用方式，以及個人資料的刪除與聯絡方式。"
     },
-    "nexus-saga.html": {
-      "type": "WebPage"
-    },
-    "nexus-geo.html": {
-      "type": "WebPage",
-      "og_image": "images/nexus-chat.webp"
-    },
     "blogpost/single-2023-10-6.html": {
       "type": "BlogPosting",
       "date": "2023-10-06",

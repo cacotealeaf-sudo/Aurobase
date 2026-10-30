@@ -180,6 +180,11 @@ def validate(m, mods, pf):
         if any(len(r) != 2 for r in rg.get('rows') or []):
             errors.append('regulation.rows 每列須為兩格')
         need('regulation.sources', rg.get('sources'))
+    for it in g(m, 'shots', 'items') or []:
+        if not os.path.exists(os.path.join(ROOT, it.get('src', ''))):
+            errors.append('shots 的圖片「%s」不存在' % it.get('src'))
+        if not it.get('alt'):
+            errors.append('shots 的圖片「%s」缺替代文字（alt）' % it.get('src'))
     cp = m.get('compare')
     if cp:
         n = len(cp.get('cols') or [])
@@ -433,16 +438,36 @@ def body(m, mods):
         intro=p.get('intro')))
 
     c = m['capabilities']
+    # 3 欄排到最後一列只剩一張時（4、7 張），大螢幕改排 4 欄
+    cap_cols = 'col-xl-3 col-lg-4 col-md-6 mb-4' if len(c['cards']) % 3 == 1 and len(c['cards']) > 3 else 'col-lg-4 col-md-6 mb-4'
     out.append(section('nm-cap', 'CAPABILITIES', c['heading'],
-        cards(c['cards'], lambda it: f'''
+        cards(c['cards'], cols=cap_cols, render=lambda it: f'''
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-{it['icon']}"></i></div>
                                         <h3>{it['title']}</h3><ul>{''.join('<li>%s</li>' % li for li in it['items'])}</ul></div>'''),
         intro=c.get('intro'), sid='capabilities'))
 
+    sh = m.get('shots')
+    if sh:
+        figs = ''.join(f'''
+                                <figure class="nm-shot"><a href="{it['src']}" target="_blank" rel="noopener"><img src="{it['src']}" alt="{attr(it['alt'])}" loading="lazy"></a>
+                                    <figcaption><b>{it['title']}</b>{it['caption']}</figcaption></figure>''' for it in sh['items'])
+        note = f'\n                            <p class="nm-source">{sh["note"]}</p>' if sh.get('note') else ''
+        out.append(section('nm-shots', 'PLATFORM SCREENS', sh['heading'],
+            f'                            <div class="nm-shot-grid">{figs}\n                            </div>{note}',
+            intro=sh.get('intro'), sid='screens'))
+
+    ev = m.get('evidence')
+    if ev:
+        tiles = ''.join(f'<div class="nm-metric"><b>{x["value"]}</b><span>{x["label"]}</span><p>{x["text"]}</p></div>' for x in ev.get('metrics', []))
+        items = ''.join(f'<div class="nm-proof"><h3>{x["title"]}</h3><p>{x["text"]}</p></div>' for x in ev.get('items', []))
+        out.append(section('nm-evidence', 'MEASURED', ev['heading'],
+            f'                            <div class="nm-metrics">{tiles}</div>\n                            <div class="nm-proofs">{items}</div>',
+            intro=ev.get('intro')))
+
     rg = m.get('regulation')
     if rg:
-        rows = ''.join(f'<tr><th scope="row">{r[0]}</th><td>{r[1]}</td></tr>' for r in rg['rows'])
-        src = ' '.join(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>' for s in rg['sources'])
+        rows = ''.join(f'<tr><th scope="row">{r[0]}</th><td data-label="{attr(rg["cols"][1])}">{r[1]}</td></tr>' for r in rg['rows'])
+        src = '；'.join(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>' for s in rg['sources'])
         out.append(section('nm-reg', 'REGULATORY MAPPING', rg['heading'],
             f'''                            <div class="nm-table-wrap"><table class="nm-table">
                                 <thead><tr><th scope="col">{rg['cols'][0]}</th><th scope="col">{rg['cols'][1]}</th></tr></thead>
@@ -454,7 +479,7 @@ def body(m, mods):
     if cp:
         head = ''.join(f'<th scope="col"{" class=is-us" if i == len(cp["cols"]) - 1 else ""}>{c}</th>' for i, c in enumerate(cp['cols']))
         rows = ''.join('<tr><th scope="row">%s</th>%s</tr>' % (r[0], ''.join(
-            f'<td{" class=is-us" if i == len(r) - 2 else ""}>{v}</td>' for i, v in enumerate(r[1:]))) for r in cp['rows'])
+            f'<td data-label="{attr(cp["cols"][i])}"{" class=is-us" if i == len(r) - 2 else ""}>{v}</td>' for i, v in enumerate(r[1:]))) for r in cp['rows'])
         out.append(section('nm-compare', 'COMPARISON', cp['heading'],
             f'''                            <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
                                 <thead><tr><th scope="col"></th>{head}</tr></thead>
@@ -474,10 +499,6 @@ def body(m, mods):
         r = mods.get(s)
         if r:
             links.append(f'<a class="nm-link" href="{r["file"]}"><b>{r["code"]}</b><span>{r["name_zh"]}</span></a>')
-        elif s == 'nexus-saga':
-            links.append('<a class="nm-link" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span></a>')
-        elif s == 'nexus-geo':
-            links.append('<a class="nm-link" href="nexus-geo.html"><b>NEXUS GEO</b><span>生成式搜尋能見度</span></a>')
         # 不存在的產品在 validate() 就會被擋下；草稿預覽時略過
     links.append('<a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a>')
     out.append(section('nm-platform', 'ON THE PLATFORM', pl['heading'],
@@ -582,6 +603,11 @@ def overview_mods(pf, mods):
     return get
 
 
+def full_name(x):
+    """代號加中文名；解決方案的代號常常就是中文名，不重複寫兩次。"""
+    return x['name_zh'] if x['code'] in x['name_zh'] else f"{x['code']} {x['name_zh']}"
+
+
 def live(pf, mods, slugs):
     """略過草稿與不存在的產品。"""
     get = overview_mods(pf, mods)
@@ -629,7 +655,7 @@ def overview_html(pf, mods):
         return f'<a class="leg-mod" href="{x["file"]}"><b>{x["code"]}</b><span>{x["name_zh"]}</span><small>{x["what"]}</small></a>'
     base = pf['legs'][0]
     legs = ''.join(f'''
-                                <div class="col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">{lg['name']}</p><p class="leg-text">{lg['text']}</p>{''.join(mod_link(s) for s in live(pf, mods, lg['modules']))}</div></div>'''
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">{lg['name']}</p><p class="leg-text">{lg['text']}</p>{''.join(mod_link(s) for s in live(pf, mods, lg['modules']))}</div></div>'''
         for lg in pf['legs'][1:] if live(pf, mods, lg['modules']))
     n = sum(len(live(pf, mods, lg['modules'])) for lg in pf['legs'])
     out.append(section('nm-legs', 'ARCHITECTURE', f'一個治理底座，{n} 個模組',
@@ -641,17 +667,16 @@ def overview_html(pf, mods):
     sols = solutions(mods)
     if sols:
         def sol_card(m):
-            used = []
-            for st in m['flow']:
-                used += [x for x in st.get('modules') or [] if x in mods and x not in used]
+            # 卡片上的模組標籤取自「由哪些平台模組組成」，每張卡的依據一致
+            used = [x for x in m['platform']['related'] if x in mods and not is_solution(mods[x])]
             return (f'<div class="sol-card"><span class="sol-ind">{m["industry"]}</span>'
                     f'<h3><a href="{m["file"]}">{m["name_zh"]}</a></h3><p>{plain(dict(m["summary"])["是什麼"])}</p>'
                     f'<div class="flow-mods">{"".join(module_chip(x, mods) for x in used)}</div></div>')
         out.append(section('nm-cap', 'SOLUTIONS', pf.get('solutions_heading', '產業解決方案'),
-            cards(sols, sol_card), intro=pf.get('solutions_intro'), sid='solutions'))
+            cards(sols, sol_card, cols='col-lg-6 mb-4'), intro=pf.get('solutions_intro'), sid='solutions'))
 
     nd = pf['needs']
-    rows = ''.join(f'<tr><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{get(s)["code"]} {get(s)["name_zh"]}</a></td></tr>' for need, s in nd['rows'] if get(s))
+    rows = ''.join(f'<tr><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{full_name(get(s))}</a></td></tr>' for need, s in nd['rows'] if get(s))
     out.append(section('nm-compare', 'WHERE TO START', nd['heading'],
         f'''                            <div class="nm-table-wrap"><table class="nm-table">
                                 <thead><tr><th scope="col">您的需求</th><th scope="col">對應模組</th></tr></thead>
@@ -839,7 +864,9 @@ def audit(m, mods, pf):
                       '和 %s 搶同一個主關鍵字' % '、'.join(twins) if twins else ''))
     C.append(_chk('SEO', 'pass' if 70 <= len(desc) <= 160 else 'warn', '搜尋摘要長度', '%d 字（建議 70～160）' % len(desc)))
     C.append(_chk('SEO', 'pass' if 5 <= len(kws) <= 15 else 'warn', '目標關鍵字數量', '%d 個（建議 5～15）' % len(kws)))
-    rel = len((m.get('platform') or {}).get('related') or [])
+    pl_text = (m.get('platform') or {}).get('text', '')
+    rel = len(set((m.get('platform') or {}).get('related') or []) |
+              {re.sub(r'\.html.*$', '', h) for h in re.findall(r'href="([a-z0-9-]+\.html)', pl_text)} - {m.get('slug')})
     C.append(_chk('SEO', 'pass' if rel >= 2 else 'warn', '連到其他產品頁（內部連結）', '%d 個' % rel))
 
     # GEO

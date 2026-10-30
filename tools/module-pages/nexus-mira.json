@@ -3,7 +3,7 @@
   "file": "nexus-mira.html",
   "code": "MIRA",
   "name_zh": "受監理產業內容產製與審核",
-  "leg": "內容智能",
+  "leg": "內容與行銷智能",
   "eyebrow": "MIRA — Content for Regulated Industries",
   "description": "MIRA 是奧洛（Aurobase）為金融與醫療等受監理產業設計的 AI 內容產製與審核平台：AI 寫文案、長文、圖文與衛教文章，產出先經規則式合規檢查與法條引用查核，再由人工審核，紀錄寫入可驗證的雜湊鏈，可完全在地端運作。",
   "keywords": [
@@ -64,7 +64,7 @@
     ],
     [
       "適用產業",
-      "金融（銀行、保險、證券）與醫療院所；產業規則由租戶設定決定。"
+      "金融（銀行、保險、證券）與醫療院所。"
     ],
     [
       "內容類型",
@@ -76,7 +76,7 @@
     ],
     [
       "所屬",
-      "AURO NEXUS 平台「內容智能」能力，生成經 <a href=\"nexus-forge.html\">Forge</a> 治理。"
+      "AURO NEXUS 平台「內容與行銷智能」能力，生成經 <a href=\"nexus-forge.html\">Forge</a> 治理。"
     ]
   ],
   "pain": {
@@ -176,7 +176,7 @@
   },
   "platform": {
     "heading": "在 AURO NEXUS 平台上的位置",
-    "text": "MIRA 屬於平台的<b>內容智能</b>能力。文字生成經 <a href=\"nexus-forge.html\">Forge</a> 送往模型並留下推論紀錄；審核關卡由 <a href=\"nexus-auro.html\">Auro</a> 編排；需要時可從 <a href=\"nexus-cdp.html\">AURA CDP</a> 同步受眾，或接收 <a href=\"nexus-geo.html\">NEXUS GEO</a> 的生成式搜尋洞察作為內容方向。",
+    "text": "MIRA 屬於平台的<b>內容與行銷智能</b>能力。文字生成經 <a href=\"nexus-forge.html\">Forge</a> 送往模型並留下推論紀錄；審核關卡由 <a href=\"nexus-auro.html\">Auro</a> 編排；需要時可從 <a href=\"nexus-cdp.html\">AURA CDP</a> 同步受眾，或接收 <a href=\"nexus-geo.html\">NEXUS GEO</a> 的生成式搜尋洞察作為內容方向。",
     "related": [
       "nexus-forge",
       "nexus-auro",
@@ -224,7 +224,7 @@
     },
     {
       "q": "MIRA 適用哪些產業？",
-      "a": "金融（銀行、保險、證券）與醫療院所。產業規則由租戶設定決定，金融與醫療的規則不會混用。"
+      "a": "MIRA 適用於金融（銀行、保險、證券）與醫療院所。產業別由租戶設定決定，兩個產業的規則各自獨立、不會混用。"
     },
     {
       "q": "AI 引用的法條會不會是編造的？",
@@ -247,8 +247,8 @@
   "definition": {
     "q": "受監理產業怎麼安全地用 AI 寫內容？",
     "a": [
-      "關鍵在於把<b>產製、合規檢查、人工審核</b>放進同一條可稽核的流程，而不是讓 AI 寫完再靠人工逐字把關。",
-      "<b>MIRA</b> 是奧洛（Aurobase）AURO NEXUS 產品家族中，為金融與醫療設計的 AI 內容產製與審核平台。產業規則由租戶設定決定；AI 產出的文案、長文、圖文與衛教文章先經規則式合規檢查與法條引用查核（查不到即標示「未驗證」），再由不同人員審核與核准，全程寫入雜湊鏈稽核紀錄。"
+      "關鍵在於把<b>產製、合規檢查、人工審核</b>放進同一條可稽核的流程，不必等 AI 寫完再靠人工逐字把關。",
+      "<b>MIRA</b> 是奧洛（Aurobase）AURO NEXUS 產品家族中，為金融與醫療設計的 AI 內容產製與審核平台。AI 產出的文案、長文、圖文與衛教文章先經規則式合規檢查與法條引用查核（查不到即標示「未驗證」），再由不同人員審核與核准，全程寫入雜湊鏈稽核紀錄。"
     ]
   },
   "audience": [

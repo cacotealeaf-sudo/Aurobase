@@ -81,8 +81,8 @@
       "SQL Server 或 PostgreSQL。"
     ],
     [
-      "所屬",
-      "AURA 家族，與 <a href=\"nexus-cdp.html\">AURA CDP</a> 同屬客戶資料能力。"
+      "組成",
+      "行為軌跡處理、身分對應、標籤引擎與 ETL 交付，與 <a href=\"nexus-cdp.html\">AURA CDP</a> 同屬 AURA 家族。"
     ]
   ],
   "definition": {
@@ -99,7 +99,7 @@
     },
     {
       "who": "資料倉儲與資訊單位",
-      "why": "要穩定、可勾稽的批次交付，而不是臨時匯出的檔案。"
+      "why": "要穩定、可勾稽的批次交付，不再依賴臨時匯出的檔案。"
     },
     {
       "who": "已使用 HCL Discover 的企業",
@@ -138,7 +138,7 @@
     },
     {
       "title": "勾稽與交付",
-      "text": "交付前做筆數勾稽，對不上就不交付；以 SFTP 金鑰傳輸並原子就位。",
+      "text": "交付前做筆數勾稽，對不上就不交付；以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案。",
       "modules": [
         "ETL",
         "SFTP"
@@ -202,7 +202,7 @@
         "title": "交付與品質檢核",
         "items": [
           "ETL 匯出，交付前做<b>筆數勾稽</b>，對不上就不交付。",
-          "以 SFTP 金鑰傳輸，檔案原子就位。"
+          "以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案。"
         ]
       },
       {
@@ -232,7 +232,7 @@
       [
         "交付方式",
         "人工匯出、手動上傳",
-        "依排程以 SFTP 交付，檔案原子就位"
+        "依排程以 SFTP 交付，傳完才上架"
       ],
       [
         "資料品質",
@@ -272,12 +272,10 @@
     ]
   },
   "platform": {
-    "heading": "在 AURO NEXUS 平台上的位置",
-    "text": "AURA Connect 與 <a href=\"nexus-cdp.html\">AURA CDP</a> 同屬 AURA 家族的客戶資料能力：AURA Connect 負責把行為軌跡整理成標籤與交付，AURA CDP 負責身分解析、單一客戶視圖與旅程。",
+    "heading": "由哪些平台模組組成",
+    "text": "AURA Connect 與 <a href=\"nexus-cdp.html\">AURA CDP</a> 同屬 AURA 家族的客戶資料能力：AURA Connect 負責把行為軌跡整理成標籤並交付，AURA CDP 負責身分解析、單一客戶視圖與旅程。行為軌跡的來源可以是奧洛代理的 <a href=\"solution.html#hcl_discover\">HCL Discover</a>。",
     "related": [
-      "nexus-cdp",
-      "nexus-abm",
-      "nexus-forge"
+      "nexus-cdp"
     ]
   },
   "deploy_intro": "可部署於公有雲的台灣區域、企業自有機房，或單一虛擬機離線安裝；欄位對應、標籤規則與交付格式依貴公司需求客製。",
@@ -312,19 +310,19 @@
   "faq": [
     {
       "q": "AURA Connect 支援哪些行為資料來源？",
-      "a": "AURA Connect 目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
+      "a": "目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
     },
     {
       "q": "AURA Connect 怎麼確保交付的資料正確？",
-      "a": "AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸並原子就位，避免下游讀到不完整的檔案。"
+      "a": "AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案，避免下游讀到不完整的檔案。"
     },
     {
       "q": "AURA Connect 會把不同裝置的行為合併到同一人嗎？",
-      "a": "不會。AURA Connect 只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。"
+      "a": "不會。只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。"
     },
     {
       "q": "AURA Connect 可以裝在自己的機房嗎？",
-      "a": "可以。AURA Connect 可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。"
+      "a": "可以。可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。"
     }
   ],
   "cta": {

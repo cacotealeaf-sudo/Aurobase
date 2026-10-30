@@ -3,6 +3,7 @@
 
     python3 -m unittest tools/cms/test_cms.py
 """
+import glob
 import json
 import os
 import shutil
@@ -28,6 +29,13 @@ class SiteCopy(unittest.TestCase):
         self.tmp = tempfile.mkdtemp()
         self.root = os.path.join(self.tmp, 'site')
         shutil.copytree(REPO, self.root, ignore=SKIP)
+        # 圖片資料夾不整包複製；產品頁「實機畫面」引用的截圖要在，否則驗證會擋
+        for f in glob.glob(os.path.join(REPO, 'tools', 'module-pages', '*.json')):
+            with open(f, encoding='utf-8') as fh:
+                doc = json.load(fh)
+            for it in (doc.get('shots') or {}).get('items', []) if isinstance(doc, dict) else []:
+                os.makedirs(os.path.dirname(os.path.join(self.root, it['src'])), exist_ok=True)
+                shutil.copy(os.path.join(REPO, it['src']), os.path.join(self.root, it['src']))
         gen.set_root(self.root)
 
     def tearDown(self):

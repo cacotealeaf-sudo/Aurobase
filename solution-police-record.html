@@ -131,7 +131,7 @@
           "name": "警詢筆錄 AI 輔助會自動寫好筆錄嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不會自動定稿。警詢筆錄 AI 輔助先把錄音轉成逐字稿並預擬筆錄草稿，每一段附錄音時間碼與來源句；員警審閱、修改後才套印，修改軌跡完整留存。"
+            "text": "不會自動定稿。系統先把錄音轉成逐字稿並預擬筆錄草稿，每一段附錄音時間碼與來源句；員警審閱、修改後才套印，修改軌跡完整留存。"
           }
         },
         {
@@ -139,7 +139,7 @@
           "name": "警詢筆錄的錄音會傳到外部雲端嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不會。警詢筆錄 AI 輔助可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。"
+            "text": "不會。整套系統可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。"
           }
         },
         {
@@ -147,7 +147,7 @@
           "name": "警詢筆錄 AI 輔助怎麼檢查法定程序？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "系統依刑事訴訟法的告知事項、全程錄音與夜間詢問等規定，檢查詢問內容與時段，同音字也能辨認；檢查結果作為提示，由員警確認。"
+            "text": "系統依刑事訴訟法的告知事項、全程錄音與夜間詢問等規定，檢查詢問內容與時段；轉寫出現同音錯字時，仍能比對出告知用語。檢查結果作為提示，由員警確認。"
           }
         },
         {
@@ -155,7 +155,7 @@
           "name": "警詢筆錄 AI 輔助支援台語或客語嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "警詢筆錄 AI 輔助目前以國語語音辨識為主；台語、客語需要依案場的錄音條件另行評估。"
+            "text": "目前以國語語音辨識為主，採台灣開發的開源模型；台語、客語需要依案場的錄音條件另行評估。"
           }
         },
         {
@@ -163,7 +163,7 @@
           "name": "構成要件檢核包可以新增罪名嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以。警詢筆錄 AI 輔助依罪名整理構成要件與常見追問，作為檢核包；新增或修改的檢核包由機關法制人員審定後啟用。"
+            "text": "可以。檢核包依罪名整理構成要件與常見追問；新增或修改的檢核包由機關法制人員審定後啟用。"
           }
         }
       ]
@@ -386,7 +386,7 @@
                                     <div class="flow-mods"><a class="nm-chip" href="nexus-ai-office.html">NEXUS AI-Office</a><a class="nm-chip" href="nexus-forge.html">Forge</a></div></li>
                                 <li class="flow-step"><span class="flow-n">04</span><h3>構成要件與追問</h3><p>依罪名的構成要件檢核包比對內容，列出還沒問到的要件與追問建議。</p>
                                     <div class="flow-mods"><span class="nm-chip">構成要件檢核包</span></div></li>
-                                <li class="flow-step"><span class="flow-n">05</span><h3>程序檢核</h3><p>檢查告知事項、全程錄音、夜間詢問等程序規定，同音字也能辨認。</p>
+                                <li class="flow-step"><span class="flow-n">05</span><h3>程序檢核</h3><p>檢查告知事項、全程錄音、夜間詢問等程序規定；轉寫出現同音錯字時，仍能比對出告知用語。</p>
                                     <div class="flow-mods"><span class="nm-chip">法定程序檢核</span></div></li>
                                 <li class="flow-step"><span class="flow-n">06</span><h3>審閱與套印</h3><p>員警審閱修改，系統保留每一版草稿與修改軌跡，最後套印警詢筆錄格式。</p>
                                     <div class="flow-mods"><a class="nm-chip" href="nexus-ai-office.html">NEXUS AI-Office</a><a class="nm-chip" href="nexus-forge.html">Forge</a></div></li>
@@ -438,7 +438,7 @@
                                         <h3>構成要件檢核</h3><ul><li>依罪名的檢核包比對筆錄內容。</li><li>列出還沒問到的要件與追問建議。</li><li>檢核包內容由機關法制人員審定後啟用。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
-                                        <h3>法定程序檢核</h3><ul><li>告知事項（刑事訴訟法第 95 條）。</li><li>全程錄音（第 100 條之 1）、夜間詢問（第 100 條之 3）。</li><li>同音字也能辨認，減少漏判。</li></ul></div></div>
+                                        <h3>法定程序檢核</h3><ul><li>告知事項（刑事訴訟法第 95 條）。</li><li>全程錄音（第 100 條之 1）、夜間詢問（第 100 條之 3）。</li><li>轉寫出現同音錯字時，仍能比對出告知用語，減少漏判。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-copy"></i></div>
                                         <h3>套印與版本</h3><ul><li>套印警詢筆錄格式。</li><li>每一版草稿與修改軌跡完整留存。</li></ul></div></div>
@@ -460,7 +460,7 @@
                             <p class="section-intro">司法警察詢問犯罪嫌疑人時，依刑事訴訟法第 43 條之 1 與第 100 條之 2，準用筆錄製作與訊問程序的規定。下表列出與本方案功能直接相關的條文。</p>
                             <div class="nm-table-wrap"><table class="nm-table">
                                 <thead><tr><th scope="col">條文</th><th scope="col">本方案的對應做法</th></tr></thead>
-                                <tbody><tr><th scope="row">第 41 條、第 43 條之 1（筆錄製作）</th><td>預擬問答體筆錄草稿並套印格式；每一段對應錄音時間碼與來源句，方便核對。</td></tr><tr><th scope="row">第 95 條（告知事項）</th><td>檢查詢問內容是否完成罪名、緘默權、選任辯護人與請求調查有利證據等告知。</td></tr><tr><th scope="row">第 100 條之 1（全程錄音）</th><td>錄音檔雜湊值寫入事件鏈，筆錄段落與錄音時間碼一一對應。</td></tr><tr><th scope="row">第 100 條之 3（夜間詢問）</th><td>依詢問時段檢查是否落在夜間。</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">第 41 條、第 43 條之 1（筆錄製作）</th><td data-label="本方案的對應做法">預擬問答體筆錄草稿並套印格式；每一段對應錄音時間碼與來源句，方便核對。</td></tr><tr><th scope="row">第 95 條（告知事項）</th><td data-label="本方案的對應做法">檢查詢問內容是否完成罪名、緘默權、選任辯護人與請求調查有利證據等告知。</td></tr><tr><th scope="row">第 100 條之 1（全程錄音）</th><td data-label="本方案的對應做法">錄音檔雜湊值寫入事件鏈，筆錄段落與錄音時間碼一一對應。</td></tr><tr><th scope="row">第 100 條之 3（夜間詢問）</th><td data-label="本方案的對應做法">依詢問時段檢查是否落在夜間。</td></tr></tbody></table></div>
                             <p class="nm-source">資料來源：<a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=C0010001" target="_blank" rel="noopener">全國法規資料庫：刑事訴訟法</a>。本表列出的是對應做法；筆錄的法律效力與程序是否合法，仍由製作人員與機關法制單位認定。</p>
                         </div>
                     </div>
@@ -496,7 +496,7 @@
                             <p class="section-label">ON THE PLATFORM</p>
                             <h2 class="section-heading">由哪些平台模組組成</h2>
                             <div class="platform-text">警詢筆錄 AI 輔助以 <a href="nexus-forge.html">Forge</a> 治理所有 AI 呼叫並留存稽核紀錄，以 <a href="nexus-ai-office.html">AI-Office</a> 整理文稿與套印，再加上語音辨識、構成要件檢核與法定程序檢核等領域元件。</div>
-                            <div class="nm-links"><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
                         </div>
                     </div>
                 </div>
@@ -552,11 +552,11 @@
                             <p class="section-label">FAQ</p>
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
-                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助會自動寫好筆錄嗎？</h3><p>不會自動定稿。警詢筆錄 AI 輔助先把錄音轉成逐字稿並預擬筆錄草稿，每一段附錄音時間碼與來源句；員警審閱、修改後才套印，修改軌跡完整留存。</p></div>
-                                    <div class="faq-item"><h3>警詢筆錄的錄音會傳到外部雲端嗎？</h3><p>不會。警詢筆錄 AI 輔助可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。</p></div>
-                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助怎麼檢查法定程序？</h3><p>系統依刑事訴訟法的告知事項、全程錄音與夜間詢問等規定，檢查詢問內容與時段，同音字也能辨認；檢查結果作為提示，由員警確認。</p></div>
-                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助支援台語或客語嗎？</h3><p>警詢筆錄 AI 輔助目前以國語語音辨識為主；台語、客語需要依案場的錄音條件另行評估。</p></div>
-                                    <div class="faq-item"><h3>構成要件檢核包可以新增罪名嗎？</h3><p>可以。警詢筆錄 AI 輔助依罪名整理構成要件與常見追問，作為檢核包；新增或修改的檢核包由機關法制人員審定後啟用。</p></div>
+                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助會自動寫好筆錄嗎？</h3><p>不會自動定稿。系統先把錄音轉成逐字稿並預擬筆錄草稿，每一段附錄音時間碼與來源句；員警審閱、修改後才套印，修改軌跡完整留存。</p></div>
+                                    <div class="faq-item"><h3>警詢筆錄的錄音會傳到外部雲端嗎？</h3><p>不會。整套系統可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。</p></div>
+                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助怎麼檢查法定程序？</h3><p>系統依刑事訴訟法的告知事項、全程錄音與夜間詢問等規定，檢查詢問內容與時段；轉寫出現同音錯字時，仍能比對出告知用語。檢查結果作為提示，由員警確認。</p></div>
+                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助支援台語或客語嗎？</h3><p>目前以國語語音辨識為主，採台灣開發的開源模型；台語、客語需要依案場的錄音條件另行評估。</p></div>
+                                    <div class="faq-item"><h3>構成要件檢核包可以新增罪名嗎？</h3><p>可以。檢核包依罪名整理構成要件與常見追問；新增或修改的檢核包由機關法制人員審定後啟用。</p></div>
                             </div></div>
                         </div>
                     </div>
@@ -579,7 +579,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>

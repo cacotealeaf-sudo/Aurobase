@@ -1,0 +1,288 @@
+{
+  "slug": "nexus-geo",
+  "file": "nexus-geo.html",
+  "code": "NEXUS GEO",
+  "name_zh": "生成式搜尋能見度",
+  "fullname": "Generative Engine Optimization",
+  "leg": "內容與行銷智能",
+  "eyebrow": "NEXUS GEO — Generative Engine Optimization",
+  "title": "生成式引擎優化 GEO｜NEXUS GEO 品牌 AI 能見度量測",
+  "description": "NEXUS GEO 是奧洛（Aurobase）的生成式引擎優化（GEO）平台：經 Forge 向 ChatGPT、Claude、Gemini、Perplexity 提問，量測品牌被提及與引用的程度，檢查網站對 AI 爬蟲與結構化資料的準備度，產出優化建議與月報。",
+  "keywords": [
+    "生成式引擎優化",
+    "GEO",
+    "GEO 優化",
+    "AI 搜尋優化",
+    "AI SEO",
+    "品牌 AI 能見度",
+    "AI 引用率",
+    "ChatGPT 品牌曝光",
+    "Perplexity",
+    "AURO NEXUS"
+  ],
+  "aliases": [
+    "GEO",
+    "AURO NEXUS GEO"
+  ],
+  "theme": {
+    "deep": "#2B3F9E",
+    "bright": "#3F58CA",
+    "soft": "#8EA0EC",
+    "tint": "#EEF2FB",
+    "ink1": "#0B0F22",
+    "ink2": "#141B3A"
+  },
+  "inquiry_chip": "NEXUS AI 自動化平台",
+  "hero": {
+    "h1": "NEXUS GEO｜生成式引擎優化與品牌 AI 能見度量測",
+    "slogan": "客戶問 AI 的時候<br><em>您的品牌在答案裡嗎</em>",
+    "sub": "越來越多人直接問 ChatGPT、Gemini 或 Perplexity「該選哪一家」。NEXUS GEO 用一組固定的問題反覆向各 AI 引擎提問，記錄品牌有沒有被提到、引用了哪些網頁，再檢查網站本身哪裡讓 AI 讀不懂。",
+    "tagline": "每一個能見度數字都追得到是哪一題、哪一個引擎、哪一次回答。",
+    "badges": [
+      {
+        "icon": "search",
+        "text": "多引擎提問"
+      },
+      {
+        "icon": "eye",
+        "text": "引用追蹤"
+      },
+      {
+        "icon": "page-search",
+        "text": "網站體檢"
+      },
+      {
+        "icon": "stats-report",
+        "text": "月報與建議"
+      }
+    ]
+  },
+  "summary": [
+    [
+      "是什麼",
+      "量測品牌在生成式搜尋中被提及與引用程度，並提出網站優化建議的平台。"
+    ],
+    [
+      "提問引擎",
+      "ChatGPT、Claude、Gemini、Perplexity，經 Forge 治理送出。"
+    ],
+    [
+      "量測項目",
+      "提及次數、聲量占比、引用來源、週間趨勢。"
+    ],
+    [
+      "網站體檢",
+      "AI 爬蟲存取、結構化資料與技術檢查，每條規則附官方出處。"
+    ],
+    [
+      "所屬",
+      "AURO NEXUS 平台「內容與行銷智能」能力，品牌標籤回流 <a href=\"nexus-cdp.html\">AURA CDP</a>。"
+    ]
+  ],
+  "definition": {
+    "q": "什麼是生成式引擎優化（GEO）？",
+    "a": [
+      "<b>生成式引擎優化（Generative Engine Optimization，GEO）</b>是讓品牌的網站與內容更容易被 ChatGPT、Gemini、Perplexity 這類生成式 AI 讀懂、採信與引用的做法。SEO 關心的是搜尋結果的排名；GEO 關心的是 AI 回答裡有沒有提到您、引用了誰。",
+      "<b>NEXUS GEO</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的生成式引擎優化平台。它經 Forge 向多個 AI 引擎提出同一組問題，記錄品牌提及與引用來源，計算聲量占比與趨勢；同時檢查網站的 AI 爬蟲存取與結構化資料，產出優化建議與月報。"
+    ]
+  },
+  "audience": [
+    {
+      "who": "品牌與行銷主管",
+      "why": "想知道客戶問 AI 時，自家品牌和同業誰被提到。"
+    },
+    {
+      "who": "網站與內容團隊",
+      "why": "要一份有出處的檢查清單，知道網站哪裡讓 AI 讀不懂。"
+    },
+    {
+      "who": "金融機構的品牌風險管理",
+      "why": "AI 不再提到品牌、或引用了非官方來源時，要能及早發現。"
+    }
+  ],
+  "pain": {
+    "heading": "品牌在 AI 搜尋裡的三個盲點",
+    "cards": [
+      {
+        "title": "不知道 AI 怎麼介紹您",
+        "text": "客戶問 AI「推薦哪一家」，答案裡有沒有您、怎麼描述您，平常沒有人在看。"
+      },
+      {
+        "title": "成效說不清楚",
+        "text": "做了內容調整，卻沒有一致的問題組與量測方法，無法比較改之前與改之後。"
+      },
+      {
+        "title": "不知道網站哪裡出問題",
+        "text": "AI 爬蟲被擋、結構化資料缺漏、重點資訊藏在圖片裡，這些問題不檢查就看不到。"
+      }
+    ],
+    "statement": "NEXUS GEO 把提問、量測、網站體檢與建議接在同一條流程，每一次調整前後都能用同一組問題比較。"
+  },
+  "capabilities": {
+    "heading": "核心能力",
+    "cards": [
+      {
+        "icon": "search",
+        "title": "多引擎能見度掃描",
+        "items": [
+          "向 ChatGPT、Claude、Gemini、Perplexity 提出同一組問題。",
+          "所有提問經 Forge 送出，推論紀錄可稽核。"
+        ]
+      },
+      {
+        "icon": "eye",
+        "title": "引用量測計畫",
+        "items": [
+          "以問題組 × 引擎 × 回合設計量測，在背景執行。",
+          "無法驗證的回答標成「未驗證」，不計入引用率。"
+        ]
+      },
+      {
+        "icon": "network",
+        "title": "品牌實體擷取",
+        "items": [
+          "從 AI 回答中擷取品牌、產品與公司名稱。",
+          "擷取結果每 5 分鐘回流 AURA CDP，成為客戶輪廓的標籤。"
+        ]
+      },
+      {
+        "icon": "stats-up-square",
+        "title": "行銷主管儀表板",
+        "items": [
+          "聲量占比、週間趨勢、最常被提及的內容與各引擎回答量。"
+        ]
+      },
+      {
+        "icon": "page-search",
+        "title": "網站技術體檢",
+        "items": [
+          "檢查 AI 爬蟲存取、結構化資料與技術項目，給出分數與待修清單。",
+          "每條檢查規則附官方文件出處。"
+        ]
+      },
+      {
+        "icon": "warning-triangle",
+        "title": "品牌風險告警與報告",
+        "items": [
+          "AI 不再提到品牌，或回答未引用官方網域時發出告警。",
+          "月報、調整前後比較報告，以及可交付的程式碼修正包。"
+        ]
+      }
+    ]
+  },
+  "compare": {
+    "heading": "傳統 SEO 與 GEO 看的東西不同",
+    "cols": [
+      "傳統 SEO",
+      "NEXUS GEO"
+    ],
+    "rows": [
+      [
+        "目標",
+        "搜尋結果排名",
+        "AI 回答中的提及與引用"
+      ],
+      [
+        "量測方式",
+        "關鍵字排名與點擊",
+        "固定問題組反覆向多個 AI 引擎提問"
+      ],
+      [
+        "網站檢查",
+        "連結、速度、索引",
+        "另加 AI 爬蟲存取與結構化資料"
+      ],
+      [
+        "成效比較",
+        "排名升降",
+        "同一組問題在調整前後的提及與引用變化"
+      ]
+    ]
+  },
+  "diff": {
+    "heading": "差異點",
+    "cards": [
+      {
+        "icon": "shield-check",
+        "title": "提問經過治理",
+        "text": "向 AI 引擎提問經 Forge 送出，用了哪個模型、問了什麼都有紀錄。"
+      },
+      {
+        "icon": "check-circle",
+        "title": "量不到就照實標示",
+        "text": "無法驗證的回答與無法連線的資料來源會標示出來，不會當成 0 或滿分。"
+      },
+      {
+        "icon": "user",
+        "title": "能見度接回客戶資料",
+        "text": "品牌提及的標籤回流 AURA CDP，行銷可以把 AI 能見度和客戶旅程放在一起看。"
+      }
+    ]
+  },
+  "platform": {
+    "heading": "在 AURO NEXUS 平台上的位置",
+    "text": "NEXUS GEO 屬於平台的<b>內容與行銷智能</b>能力。向 AI 引擎提問經 <a href=\"nexus-forge.html\">Forge</a> 治理；品牌標籤回流 <a href=\"nexus-cdp.html\">AURA CDP</a>；需要企業知識時經 Forge 的 MCP 閘道向 <a href=\"nexus-insight.html\">Insight</a> 查詢。輿情面的情緒與敘事分析，可搭配 <a href=\"nexus-pulse.html\">Pulse</a>。",
+    "related": [
+      "nexus-forge",
+      "nexus-cdp",
+      "nexus-insight",
+      "nexus-pulse",
+      "nexus-mira"
+    ]
+  },
+  "deploy": [
+    {
+      "tag": "雲端",
+      "title": "公有雲 Kubernetes",
+      "text": "以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。"
+    },
+    {
+      "tag": "地端",
+      "title": "自有機房",
+      "text": "部署於企業自有機房；向外部 AI 引擎提問需開放對外連線，並經 Forge 留下紀錄。"
+    },
+    {
+      "tag": "客製",
+      "title": "問題組與品牌設定",
+      "text": "依貴機構的品牌、產品與同業設計量測問題組，並設定要比較的對象。"
+    }
+  ],
+  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",
+  "limits": [
+    {
+      "title": "引擎與模型依部署設定",
+      "text": "要向哪些 AI 引擎提問、使用哪個模型版本，於部署時設定並取得各引擎的使用授權。"
+    },
+    {
+      "title": "量測的是回答，不是演算法",
+      "text": "NEXUS GEO 依實際回答計算提及與引用，不宣稱知道各 AI 引擎內部如何排序或挑選來源。"
+    },
+    {
+      "title": "關鍵字排名與反向連結需另接資料來源",
+      "text": "傳統 SEO 的排名、反向連結與網站速度資料需另接資料來源，未接上時畫面標示「無法取得」。"
+    }
+  ],
+  "faq": [
+    {
+      "q": "GEO 和 SEO 有什麼不同？做了 SEO 還需要 GEO 嗎？",
+      "a": "SEO 關心搜尋結果的排名，GEO 關心 AI 回答裡有沒有提到品牌、引用了誰。兩者不衝突，結構化資料與清楚的網站內容對兩邊都有幫助，建議一起做。"
+    },
+    {
+      "q": "NEXUS GEO 怎麼量測品牌在 AI 裡的能見度？",
+      "a": "NEXUS GEO 用一組固定的問題，反覆向 ChatGPT、Claude、Gemini、Perplexity 提問，記錄品牌是否被提及、引用了哪些網頁，再計算聲量占比與趨勢；無法驗證的回答不計入。"
+    },
+    {
+      "q": "多久能看到 GEO 的成效？",
+      "a": "沒有固定時程。AI 引擎更新內容的速度不一，NEXUS GEO 的做法是調整前後用同一組問題量測比較，讓成效有數字依據，不預先承諾天數。"
+    },
+    {
+      "q": "我的官網需要大幅改版嗎？",
+      "a": "通常不需要。多數改善來自補上結構化資料、讓 AI 爬蟲讀得到、把重點資訊寫成文字；NEXUS GEO 的網站體檢會列出待修項目與官方出處。"
+    }
+  ],
+  "cta": {
+    "heading": "先看看 AI 現在怎麼介紹您",
+    "text": "我們用一組與貴機構業務相關的問題，向多個 AI 引擎提問，整理一份目前的能見度與網站體檢結果。"
+  },
+  "updated": "2026-10-30"
+}

@@ -1,809 +1,69 @@
 <!DOCTYPE html>
-<html lang="zh-hant-TW">
+<html lang="zh-Hant-TW">
   <head>
-    <title>NEXUS SAGA｜金融機構的非結構化資料治理層</title>
+    <title>非結構化資料治理｜SAGA 資料分級、保存期限與稽核鏈</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="NEXUS SAGA 是金融機構的非結構化資料治理層。分級、保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入 append-only 稽核鏈，竄改可被偵測。">
-    <meta name="keywords" content="資料治理,非結構化資料治理,稽核軌跡,WORM,雜湊鏈,四眼原則,法律保全,保存期限,資料血緣,AI 治理,模型治理,去識別化,中國牆,金融資料治理,AURO NEXUS">
-
+    <meta name="description" content="SAGA 是奧洛（Aurobase）的非結構化資料治理平台：資料盤點與血緣、分級與保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入只能附加的雜湊鏈稽核紀錄，竄改可被偵測，可地端離線部署。">
+    <meta name="keywords" content="資料治理,非結構化資料治理,資料治理平台,資料分級,保存期限,法律保全,稽核軌跡,WORM,資料血緣,四眼原則,AI 治理,金融資料治理,AURO NEXUS">
     <link rel="canonical" href="https://aurobase.com/nexus-saga.html">
-    <meta property="og:title" content="NEXUS SAGA｜金融機構的非結構化資料治理層">
-    <meta property="og:description" content="讓「誰在什麼時候、依哪一條規定、對哪一份資料做了什麼」變成可查驗的紀錄，而不是一份說明文件。">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/nexus-saga.html">
+    <meta property="og:title" content="非結構化資料治理｜SAGA 資料分級、保存期限與稽核鏈">
+    <meta property="og:description" content="SAGA 是奧洛（Aurobase）的非結構化資料治理平台：資料盤點與血緣、分級與保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入只能附加的雜湊鏈稽核紀錄，竄改可被偵測，可地端離線部署。">
     <meta property="og:url" content="https://aurobase.com/nexus-saga.html">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
     <meta property="og:site_name" content="奧洛 Aurobase">
     <meta property="og:image" content="https://aurobase.com/images/nexus-saga/posture.webp">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "NEXUS SAGA 會讀取檔案裡的內容嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "不會。非結構化（NAS／檔案系統）盤點只讀檔名、副檔名、大小與修改時間，不開啟檔案內容。文字擷取與實體辨識（NER）不在 SAGA 的範圍——SAGA 治理的是分類結果，分類本身需由上游的內容解析提供。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "稽核紀錄真的改不掉嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "我們的說法是「竄改可被偵測」，不是「不可竄改」。稽核軌跡是雜湊鏈，資料庫層以 append-only 觸發器擋掉 UPDATE 與 DELETE，完整性驗證逐筆重算雜湊、斷鏈時指出斷在第幾筆。但握有資料庫最高權限的人仍動得了資料；要在物理上阻止，需要儲存層 Object Lock，那是部署時另行疊加的選項。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "導入 NEXUS SAGA 就代表符合法規了嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "我們不宣稱「符合」任何法規。SAGA 對應的是規範要求的做法——分級、保存期限、當事人權利、利益衝突隔離——合規與否由主管機關與貴機構法遵認定。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "可以裝在地端或離線環境嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "可以。單機／POC 以 docker compose 部署，含治理底座三個服務與資料庫；離線環境可將映像打包成 tar 現場 load，不需連外。資料庫可用我們帶的，也可指向既有的 PostgreSQL。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "支援哪些資料來源？盤點會影響來源系統嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oracle、SQL Server、MySQL 的元數據以唯讀方式收割：表、欄位、型別、主鍵、外鍵、註解與檢視表 DDL。Oracle XE 與 SQL Server 2022 已在實機上跑過元數據收割與血緣擷取。映像為 linux/amd64，含 Oracle 與 SQL Server 驅動。"
-      }
-    }
-  ]
-}
-</script>
-
-    <!-- Favicon -->
-    <link href="images/favicon.ico" rel="shortcut icon">
-
-    <!-- LINE Seed 字體 -->
-    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/line-seed-font.css">
-
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/inquiry-modal.css">
-    <link rel="stylesheet" href="css/iconoir-subset.css">
-
-    <style>
-    /* ══ NEXUS SAGA 頁面專屬樣式 ══
-       產品色：#0F5F4E（深）/ #16806A（亮）/ #E6F4F0（淺底） */
-
-    /* ── 版面：沿用 #colorlib-page 左側欄 ── */
-    #colorlib-aside {
-        width: 340px !important;
-        background-color: #fff !important;
-    }
-    #colorlib-main {
-        margin-left: 340px !important;
-        width: calc(100% - 340px) !important;
-        float: none !important;
-    }
-    .saga-section .container-fluid {
-        padding-left: 60px !important;
-    }
-    @media (max-width: 991.98px) {
-        #colorlib-aside { width: 270px !important; }
-        #colorlib-main  { margin-left: 0 !important; width: 100% !important; }
-        .saga-section .container-fluid { padding-left: 15px !important; }
-    }
-
-    /* ── section 標題（本頁自有，不在全域 CSS） ── */
-    .section-label {
-        font-size: 0.78rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #0F5F4E;
-        font-weight: 600;
-        margin-bottom: 0.8rem;
-    }
-    .section-heading {
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: #28282c;
-        margin-bottom: 1rem;
-    }
-    .section-intro {
-        font-size: 0.95rem;
-        color: #666;
-        line-height: 1.9;
-        max-width: 68ch;
-        margin-bottom: 2.5rem;
-    }
-
-    /* ── 深色區塊：文字顏色必須明確覆寫 ── */
-    .saga-hero .section-label,
-    .saga-diff .section-label,
-    .saga-evidence .section-label {
-        color: rgba(255,255,255,0.5) !important;
-    }
-    .saga-hero .section-heading,
-    .saga-diff .section-heading,
-    .saga-evidence .section-heading {
-        color: #fff !important;
-    }
-    .saga-diff .section-intro,
-    .saga-evidence .section-intro {
-        color: rgba(255,255,255,0.62) !important;
-    }
-
-    /* ── Hero ── */
-    .saga-hero {
-        background: linear-gradient(135deg, #0B1512 0%, #10241E 52%, #0C1A18 100%);
-        color: #fff;
-        padding: 4.5rem 0 4rem;
-        position: relative;
-        overflow: hidden;
-    }
-    .saga-hero::before {
-        content: '';
-        position: absolute;
-        top: -35%; right: -12%;
-        width: 620px; height: 620px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(22,128,106,0.20) 0%, transparent 70%);
-        pointer-events: none;
-    }
-    .saga-hero::after {
-        content: '';
-        position: absolute;
-        bottom: -22%; left: -8%;
-        width: 380px; height: 380px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(15,95,78,0.16) 0%, transparent 70%);
-        pointer-events: none;
-    }
-    .saga-hero .container-fluid { position: relative; z-index: 2; }
-    .back-to-nexus {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.8rem;
-        color: rgba(255,255,255,0.45);
-        text-decoration: none;
-        margin-bottom: 1rem;
-        padding: 10px 0;
-        transition: color 0.2s;
-    }
-    .back-to-nexus:hover { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .back-to-nexus i { font-size: 0.9rem; }
-    .saga-hero .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #4FA98F;
-        margin-bottom: 1.2rem;
-    }
-    .saga-hero .eyebrow::before {
-        content: '';
-        display: block;
-        width: 28px; height: 1px;
-        background: #4FA98F;
-    }
-    .saga-hero h1 {
-        font-size: clamp(1.8rem, 3.4vw, 2.5rem);
-        font-weight: 700;
-        line-height: 1.35;
-        margin-bottom: 1.3rem;
-        color: #fff !important;
-    }
-    .saga-hero h1 em { font-style: normal; color: #4FA98F; }
-    .saga-hero .hero-sub {
-        font-size: 1.02rem;
-        color: rgba(255,255,255,0.72);
-        line-height: 1.9;
-        max-width: 60ch;
-    }
-    .saga-hero .hero-tagline {
-        margin-top: 1.4rem;
-        padding-left: 1rem;
-        border-left: 2px solid #16806A;
-        font-size: 0.92rem;
-        color: rgba(255,255,255,0.55);
-        line-height: 1.8;
-    }
-    .saga-hero .hero-actions {
-        margin-top: 2rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-    .btn-saga-primary {
-        display: inline-block;
-        background: linear-gradient(135deg, #0F5F4E, #16806A);
-        color: #fff;
-        padding: 0.9rem 2rem;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 0.95rem;
-        text-decoration: none;
-        transition: opacity 0.2s, transform 0.2s;
-    }
-    .btn-saga-primary:hover { opacity: 0.88; transform: translateY(-2px); color: #fff; text-decoration: none; }
-    .btn-saga-outline {
-        display: inline-block;
-        background: transparent;
-        color: rgba(255,255,255,0.72);
-        padding: 0.9rem 2rem;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 0.95rem;
-        text-decoration: none;
-        border: 1px solid rgba(255,255,255,0.22);
-        transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-saga-outline:hover { border-color: #4FA98F; color: #fff; text-decoration: none; }
-    .source-badges {
-        margin-top: 2.4rem;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        flex-wrap: wrap;
-    }
-    .source-badges-label {
-        font-size: 0.72rem;
-        color: rgba(255,255,255,0.62);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        white-space: nowrap;
-    }
-    .source-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 4px;
-        padding: 0.28rem 0.7rem;
-        font-size: 0.75rem;
-        color: rgba(255,255,255,0.62);
-        font-weight: 500;
-    }
-    .hero-shot {
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.12);
-        box-shadow: 0 22px 60px rgba(0,0,0,0.45);
-        background: #0B1512;
-    }
-    .hero-shot img { display: block; width: 100%; height: auto; }
-    .hero-shot figcaption {
-        padding: 0.85rem 1.1rem;
-        font-size: 0.78rem;
-        color: rgba(255,255,255,0.5);
-        line-height: 1.7;
-        border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .hero-shot figcaption b { color: rgba(255,255,255,0.8); font-weight: 600; }
-
-    /* ── 痛點 ── */
-    .saga-pain { background: #f8f9fa; padding: 4rem 0; }
-    .pain-card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 2rem;
-        height: 100%;
-        border: 1px solid rgba(0,0,0,0.06);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-        transition: transform 0.3s, box-shadow 0.3s;
-        position: relative;
-        overflow: hidden;
-    }
-    .pain-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #0F5F4E, #16806A);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.4s;
-    }
-    .pain-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(15,95,78,0.12); }
-    .pain-card:hover::before { transform: scaleX(1); }
-    .pain-number {
-        font-size: 3rem;
-        font-weight: 800;
-        color: rgba(15,95,78,0.12);
-        line-height: 1;
-        margin-bottom: 0.8rem;
-    }
-    .pain-card h3 {
-        font-size: 1.05rem;
-        font-weight: 600;
-        color: #28282c;
-        margin-bottom: 0.7rem;
-    }
-    .pain-card p {
-        font-size: 0.9rem;
-        color: #666;
-        line-height: 1.8;
-        margin: 0;
-    }
-    .pain-statement {
-        margin-top: 2.5rem;
-        background: #fff;
-        border: 1px solid rgba(15,95,78,0.18);
-        border-left: 4px solid #0F5F4E;
-        border-radius: 0 10px 10px 0;
-        padding: 1.6rem 1.8rem;
-        font-size: 1rem;
-        color: #28282c;
-        line-height: 1.9;
-    }
-    .pain-statement strong { color: #0F5F4E; }
-
-    /* ── 核心能力 ── */
-    .saga-capability { background: #fff; padding: 4rem 0; }
-    .cap-card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 1.8rem;
-        height: 100%;
-        border: 1px solid rgba(0,0,0,0.06);
-        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .cap-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(15,95,78,0.12); }
-    .cap-card .icon-wrap {
-        width: 46px; height: 46px;
-        background: linear-gradient(135deg, #0F5F4E, #16806A);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
-        color: #fff;
-        font-size: 1.25rem;
-    }
-    .cap-card h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #28282c;
-        margin-bottom: 0.8rem;
-    }
-    .cap-card ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .cap-card li {
-        position: relative;
-        padding-left: 1rem;
-        font-size: 0.86rem;
-        color: #666;
-        line-height: 1.75;
-        margin-bottom: 0.55rem;
-    }
-    .cap-card li::before {
-        content: '';
-        position: absolute;
-        left: 0; top: 0.65em;
-        width: 5px; height: 5px;
-        border-radius: 50%;
-        background: #16806A;
-    }
-    .cap-card li b { color: #28282c; font-weight: 600; }
-    .cap-count {
-        display: inline-block;
-        background: #E6F4F0;
-        color: #0F5F4E;
-        border-radius: 4px;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.78rem;
-        font-weight: 600;
-        margin-left: 0.4rem;
-    }
-
-    /* ── 差異點（深底） ── */
-    .saga-diff {
-        background: linear-gradient(135deg, #0B1512 0%, #10241E 100%);
-        color: #fff;
-        padding: 4.5rem 0;
-        position: relative;
-        overflow: hidden;
-    }
-    .saga-diff::before {
-        content: '';
-        position: absolute;
-        top: -28%; right: -8%;
-        width: 480px; height: 480px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(22,128,106,0.16) 0%, transparent 70%);
-        pointer-events: none;
-    }
-    .saga-diff .container-fluid { position: relative; z-index: 2; }
-    .diff-card {
-        background: rgba(255,255,255,0.035);
-        border: 1px solid rgba(255,255,255,0.09);
-        border-radius: 10px;
-        padding: 1.6rem 1.7rem;
-        height: 100%;
-        transition: background 0.25s, border-color 0.25s;
-    }
-    .diff-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(79,169,143,0.35); }
-    .diff-card .diff-icon {
-        color: #4FA98F;
-        font-size: 1.2rem;
-        margin-bottom: 0.7rem;
-        display: block;
-    }
-    .diff-card h3 {
-        font-size: 0.98rem;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 0.6rem;
-    }
-    .diff-card p {
-        font-size: 0.87rem;
-        color: rgba(255,255,255,0.62);
-        line-height: 1.8;
-        margin: 0;
-    }
-    .diff-card code {
-        background: rgba(79,169,143,0.14);
-        color: #7FC9B2;
-        padding: 0.05rem 0.35rem;
-        border-radius: 3px;
-        font-size: 0.85em;
-    }
-
-    /* ── 實機畫面 ── */
-    .saga-shots { background: #f8f9fa; padding: 4rem 0; }
-    .shots-note {
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.07);
-        border-left: 4px solid #16806A;
-        border-radius: 0 10px 10px 0;
-        padding: 1.4rem 1.6rem;
-        margin-bottom: 2.5rem;
-    }
-    .shots-note h3 {
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: #0F5F4E;
-        margin-bottom: 0.6rem;
-    }
-    .shots-note p {
-        font-size: 0.87rem;
-        color: #666;
-        line-height: 1.85;
-        margin: 0 0 0.6rem;
-    }
-    .shots-note p:last-child { margin-bottom: 0; }
-    .shots-note .mono {
-        font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
-        font-size: 0.85em;
-        color: #0F5F4E;
-    }
-    .shot-figure {
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.07);
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-    .shot-figure img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-    .shot-figure figcaption {
-        padding: 1.3rem 1.6rem;
-        font-size: 0.89rem;
-        color: #666;
-        line-height: 1.85;
-    }
-    .shot-figure figcaption .shot-title {
-        display: block;
-        font-size: 1rem;
-        font-weight: 700;
-        color: #28282c;
-        margin-bottom: 0.5rem;
-    }
-    .shot-figure figcaption b { color: #28282c; }
-    .shot-figure figcaption .mono {
-        font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
-        font-size: 0.88em;
-        color: #0F5F4E;
-    }
-    .shot-figure figcaption code {
-        background: #E6F4F0;
-        color: #0F5F4E;
-        padding: 0.05rem 0.35rem;
-        border-radius: 3px;
-        font-size: 0.88em;
-    }
-
-    /* ── 實測證據（深底） ── */
-    .saga-evidence {
-        background: linear-gradient(135deg, #0B1512 0%, #10241E 100%);
-        color: #fff;
-        padding: 4.5rem 0;
-    }
-    .metric-box {
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 10px;
-        padding: 1.8rem;
-        height: 100%;
-    }
-    .metric-num {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #4FA98F;
-        line-height: 1.1;
-        margin-bottom: 0.4rem;
-    }
-    .metric-num.is-text {
-        font-size: 1.3rem;
-        line-height: 1.45;
-        font-weight: 700;
-    }
-    .metric-label {
-        font-size: 0.85rem;
-        color: rgba(255,255,255,0.62);
-        line-height: 1.75;
-    }
-    .metric-label b { color: rgba(255,255,255,0.85); font-weight: 600; }
-    .metric-before {
-        color: rgba(255,255,255,0.45);
-        text-decoration: line-through;
-        text-decoration-color: rgba(255,255,255,0.3);
-        white-space: nowrap;
-    }
-    .proof-item {
-        border-left: 2px solid rgba(79,169,143,0.5);
-        padding-left: 1.1rem;
-        margin-bottom: 1.4rem;
-    }
-    .proof-item h4 {
-        font-size: 0.93rem;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 0.4rem;
-    }
-    .proof-item p {
-        font-size: 0.87rem;
-        color: rgba(255,255,255,0.62);
-        line-height: 1.85;
-        margin: 0;
-    }
-    .proof-item code {
-        background: rgba(79,169,143,0.14);
-        color: #7FC9B2;
-        padding: 0.05rem 0.35rem;
-        border-radius: 3px;
-        font-size: 0.85em;
-    }
-
-    /* ── 部署形態 ── */
-    .saga-deploy { background: #fff; padding: 4rem 0; }
-    .deploy-card {
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.07);
-        border-radius: 12px;
-        padding: 1.8rem;
-        height: 100%;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-    .deploy-card .deploy-tag {
-        display: inline-block;
-        background: #E6F4F0;
-        color: #0F5F4E;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        padding: 0.22rem 0.6rem;
-        border-radius: 4px;
-        margin-bottom: 0.9rem;
-    }
-    .deploy-card h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #28282c;
-        margin-bottom: 0.6rem;
-    }
-    .deploy-card p {
-        font-size: 0.88rem;
-        color: #666;
-        line-height: 1.8;
-        margin: 0;
-    }
-    .deploy-card code {
-        background: #f2f4f3;
-        color: #0F5F4E;
-        padding: 0.05rem 0.35rem;
-        border-radius: 3px;
-        font-size: 0.88em;
-    }
-    .deploy-note {
-        margin-top: 1.6rem;
-        font-size: 0.87rem;
-        color: #666;
-        line-height: 1.8;
-    }
-
-    /* ── 誠實邊界 ── */
-    .saga-limits { background: #FBF9F4; padding: 4rem 0; }
-    .saga-limits .section-label { color: #9A5B00; }
-    .limits-lede {
-        font-size: 0.98rem;
-        color: #4a4a4a;
-        line-height: 1.9;
-        max-width: 70ch;
-        margin-bottom: 2.2rem;
-    }
-    .limit-item {
-        background: #fff;
-        border: 1px solid #EADFC6;
-        border-radius: 10px;
-        padding: 1.4rem 1.6rem;
-        margin-bottom: 1rem;
-        display: flex;
-        gap: 1.2rem;
-        align-items: flex-start;
-    }
-    .limit-index {
-        flex: 0 0 auto;
-        width: 30px; height: 30px;
-        border-radius: 50%;
-        background: #9A5B00;
-        color: #fff;
-        font-size: 0.82rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 0.15rem;
-    }
-    .limit-item h3 {
-        font-size: 0.97rem;
-        font-weight: 700;
-        color: #28282c;
-        margin-bottom: 0.45rem;
-    }
-    .limit-item p {
-        font-size: 0.88rem;
-        color: #666;
-        line-height: 1.85;
-        margin: 0;
-    }
-    .limit-item b { color: #28282c; }
-
-    /* ── FAQ ── */
-    .saga-faq { padding: 4rem 0; background: #f8f9fa; }
-    .faq-item {
-        background: #fff;
-        border-radius: 12px;
-        padding: 1.7rem 1.9rem;
-        margin-bottom: 1rem;
-        border: 1px solid rgba(0,0,0,0.06);
-        box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-    }
-    .faq-item h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #28282c;
-        margin-bottom: 0.6rem;
-    }
-    .faq-item h3::before {
-        content: 'Q. ';
-        color: #0F5F4E;
-        font-weight: 700;
-    }
-    .faq-item p {
-        font-size: 0.9rem;
-        color: #666;
-        line-height: 1.85;
-        margin: 0;
-    }
-    .faq-item code {
-        background: #E6F4F0;
-        color: #0F5F4E;
-        padding: 0.05rem 0.35rem;
-        border-radius: 3px;
-        font-size: 0.88em;
-    }
-
-    /* ── CTA ── */
-    .saga-cta {
-        background: linear-gradient(135deg, #0F5F4E 0%, #16806A 100%);
-        padding: 4rem 0;
-        text-align: center;
-        color: #fff;
-    }
-    .saga-cta h2 {
-        font-size: 1.7rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #fff;
-    }
-    .saga-cta p {
-        font-size: 0.98rem;
-        opacity: 0.9;
-        margin-bottom: 2rem;
-        line-height: 1.8;
-    }
-    .btn-cta {
-        display: inline-block;
-        background: #fff;
-        color: #0F5F4E;
-        padding: 0.9rem 2.5rem;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-cta:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        color: #0F5F4E;
-        text-decoration: none;
-    }
-
-    /* ══ 手機版遮擋修正（必須放在 style 最末端，否則會被前面的 padding 簡寫蓋掉）══ */
-    @media (max-width: 991.98px) {
-        /* 漢堡選單 fixed 於 x12–60 / y32–80，返回鍵原本與它重疊 45×7px */
-        .saga-hero .back-to-nexus { margin-left: 56px; }
-    }
-    @media (max-width: 767.98px) {
-        /* ≤700px 高的螢幕首屏塞不下，兩顆 CTA 會落到浮動諮詢鈕底下 */
-        .saga-hero { padding-top: 2rem; padding-bottom: 2rem; }
-        .saga-hero h1 { margin-bottom: 0.75rem; }
-        .saga-hero .hero-sub { margin-bottom: 0.75rem; }
-        .saga-hero .hero-tagline { margin-top: 1rem; margin-bottom: 0; }
-        .saga-hero .hero-actions { margin-top: 1.5rem; }
-        .qf-fab { width: 48px; height: 48px; padding: 0; right: 16px; bottom: 16px; justify-content: center; }
-        .qf-fab span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-    }
-    </style>
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
-      <link rel="stylesheet" href="css/site-nav.css">
-      <!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "SoftwareApplication",
+      "@id": "https://aurobase.com/nexus-saga.html#software",
+      "name": "SAGA 非結構化資料治理",
+      "alternateName": [
+        "SAGA — Data Governance Layer",
+        "NEXUS SAGA",
+        "AURO NEXUS SAGA",
+        "Stewardship · Audit · Governance · Archiving"
+      ],
+      "description": "SAGA 是奧洛（Aurobase）的非結構化資料治理平台：資料盤點與血緣、分級與保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入只能附加的雜湊鏈稽核紀錄，竄改可被偵測，可地端離線部署。",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "合規治理",
+      "operatingSystem": "Linux（容器化部署）",
+      "inLanguage": "zh-Hant-TW",
+      "url": "https://aurobase.com/nexus-saga.html",
+      "isPartOf": {
+        "@id": "https://aurobase.com/nexus.html#platform"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "featureList": [
+        "資料盤點與目錄",
+        "生命週期與保存",
+        "稽核鏈",
+        "資料共享治理",
+        "AI 治理",
+        "品質與施行",
+        "權責與流程"
+      ]
+    },
+    {
       "@type": "WebPage",
       "@id": "https://aurobase.com/nexus-saga.html#webpage",
       "url": "https://aurobase.com/nexus-saga.html",
-      "name": "NEXUS SAGA｜金融機構的非結構化資料治理層",
-      "description": "NEXUS SAGA 是金融機構的非結構化資料治理層。分級、保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入 append-only 稽核鏈，竄改可被偵測。",
+      "name": "非結構化資料治理｜SAGA 資料分級、保存期限與稽核鏈",
+      "description": "SAGA 是奧洛（Aurobase）的非結構化資料治理平台：資料盤點與血緣、分級與保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入只能附加的雜湊鏈稽核紀錄，竄改可被偵測，可地端離線部署。",
       "inLanguage": "zh-Hant-TW",
+      "dateModified": "2026-10-30",
+      "about": {
+        "@id": "https://aurobase.com/nexus-saga.html#software"
+      },
       "isPartOf": {
         "@type": "WebSite",
         "@id": "https://aurobase.com/#website",
@@ -813,6 +73,29 @@
       "publisher": {
         "@id": "https://aurobase.com/#organization"
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://aurobase.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AURO NEXUS",
+          "item": "https://aurobase.com/nexus.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SAGA",
+          "item": "https://aurobase.com/nexus-saga.html"
+        }
+      ]
     },
     {
       "@type": "Organization",
@@ -847,13 +130,81 @@
       "sameAs": [
         "https://www.facebook.com/AurobaseTW/"
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "SAGA 會讀取我們檔案裡的內容嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。SAGA 盤點 NAS 與檔案系統時只讀檔名、副檔名、大小與修改時間，不開啟檔案內容；文件內容的解析與分類需由上游提供。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SAGA 支援哪些資料來源？會影響來源系統嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SAGA 以唯讀方式收割 Oracle、SQL Server、MySQL 的元資料，不寫入來源系統；Oracle XE 與 SQL Server 2022 已實機驗證，映像內含兩者的驅動程式。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SAGA 的稽核紀錄真的改不掉嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SAGA 的說法是竄改可被偵測。稽核紀錄是雜湊鏈，資料庫層擋下修改與刪除，驗證時逐筆重算；擁有資料庫最高權限的人仍可能動到資料，要物理上阻止需加上儲存層 Object Lock。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SAGA 可以裝在地端或離線環境嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。SAGA 單機以 docker compose 部署，離線環境以映像包現場載入，不需連外；也提供 Helm chart 部署於叢集或公有雲台灣區域。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "導入 SAGA 就代表符合法規了嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不代表。SAGA 提供的是分級、保存期限、當事人權利與利益衝突隔離等做法的執行與紀錄，是否符合法規由主管機關與貴機構法遵認定。"
+          }
+        }
+      ]
     }
   ]
 }
 </script>
-    <!-- SITE-LD:END -->
+
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/iconoir-subset.css">
+    <link rel="stylesheet" href="css/nexus-module.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+      <link rel="stylesheet" href="css/site-nav.css">
   </head>
-  <body>
+  <body style="--m-deep:#2C6E5B;--m-bright:#3E9479;--m-soft:#7FCBB3;--m-tint:#E8F5F0;--m-ink1:#0A1512;--m-ink2:#11241E">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -979,555 +330,285 @@
 
         <div id="colorlib-main">
 
+<!-- ╔══ SAGA — 非結構化資料治理（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）══╗ -->
 
-
-<!-- ╔══════════════════════════════════════════════════════════════╗
-     ║  NEXUS SAGA — 非結構化資料治理層                              ║
-     ╚══════════════════════════════════════════════════════════════╝ -->
-
-            <!-- Hero -->
-            <section class="saga-hero saga-section">
+            <section class="nm-hero nm-section nm-dark">
                 <div class="container-fluid px-3 px-md-5">
-                    <a href="nexus.html" class="back-to-nexus">
-                        <i class="iconoir-arrow-left"></i> 返回 AURO NEXUS
-                    </a>
+                    <nav class="nm-crumbs" aria-label="麵包屑"><ol>
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="nexus.html">AURO NEXUS</a></li>
+                        <li><span aria-current="page">SAGA</span></li>
+                    </ol></nav>
                     <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="eyebrow">NEXUS SAGA — Data Governance Layer</div>
-                            <h1>讓治理動作<br>變成<em>可查驗的紀錄</em></h1>
-                            <p class="hero-sub">金融機構的非結構化資料治理層。「誰在什麼時候、依哪一條規定、對哪一份資料做了什麼」——這應該是一筆查得到的紀錄，而不是一份說明文件。</p>
-                            <p class="hero-tagline">治理不是寫一本手冊，是讓每個動作都留得下證據。<br>資料治理的稽核軌跡，要能在金檢當下拿得出來。</p>
+                        <div class="col-lg-7">
+                            <p class="nm-family">AURO NEXUS 產品家族 · <span lang="en">Stewardship · Audit · Governance · Archiving</span></p>
+                            <h1 class="eyebrow">SAGA｜金融機構的非結構化資料治理平台</h1>
+                            <p class="hero-slogan">讓每一個治理動作<br>都<em>留下查得到的紀錄</em></p>
+                            <p class="hero-sub">金檢時常被問到：這份資料現在是第幾級、保存到哪一天、誰核准銷毀的。SAGA 把分級、保存期限、法律保全與四眼簽核做成伺服器端的強制控制，每一次治理動作都寫進只能附加的稽核鏈。</p>
+                            <p class="hero-tagline">盤點、分級、保存、共享與 AI 使用溯源，都在同一套稽核紀錄裡查得到。</p>
                             <div class="hero-actions">
-                                <a href="contact.html" class="btn-saga-primary">預約產品簡報</a>
-                                <a href="#saga-shots" class="btn-saga-outline">看實機畫面</a>
+                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
+                                <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
-                            <div class="source-badges">
-                                <span class="source-badges-label">資料來源</span>
-                                <span class="source-badge"><i class="iconoir-database"></i> Oracle</span>
-                                <span class="source-badge"><i class="iconoir-database"></i> SQL Server</span>
-                                <span class="source-badge"><i class="iconoir-database"></i> MySQL</span>
-                                <span class="source-badge"><i class="iconoir-folder"></i> NAS／檔案系統</span>
-                                <span class="source-badge"><i class="iconoir-server"></i> 地端／離線可裝</span>
-                            </div>
+                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-database"></i> 資料盤點與血緣</span><span class="nm-badge"><i class="iconoir-hourglass"></i> 保存期限</span><span class="nm-badge"><i class="iconoir-lock"></i> 法律保全</span><span class="nm-badge"><i class="iconoir-user-badge-check"></i> 四眼簽核</span><span class="nm-badge"><i class="iconoir-shield-check"></i> 雜湊鏈稽核</span></div>
+                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
-                        <div class="col-lg-6 mt-5 mt-lg-0">
-                            <figure class="hero-shot">
-                                <a href="images/nexus-saga/posture.webp" target="_blank" rel="noopener">
-                                    <img src="images/nexus-saga/posture.webp" alt="NEXUS SAGA 治理態勢儀表板：不合規資料 15.9%、分類覆蓋率 84%、WORM 完整性完好" width="1800" height="1071" loading="eager">
-                                </a>
-                                <figcaption><b>治理態勢</b> —— 主控台首頁，取自實際運作的展示站。這一頁刻意不好看：分類覆蓋率 84%（目標 95%）、保存綁定率 66% 都標成未達標，首行直接寫「不合規資料 15.9%」。頁尾那句「本平台僅量測與報告，不自動修復」是產品立場。</figcaption>
-                            </figure>
+                        <div class="col-lg-5 mt-5 mt-lg-0">
+                            <aside class="nm-summary">
+                                <h2>重點摘要</h2>
+                                <dl><dt>是什麼</dt><dd>金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。</dd><dt>資料來源</dt><dd>Oracle、SQL Server、MySQL 唯讀收割元資料；NAS／檔案系統只讀檔案屬性。</dd><dt>治理構面</dt><dd>盤點與目錄、生命週期與保存、稽核鏈、資料共享、AI 治理、品質、權責與流程。</dd><dt>稽核紀錄</dt><dd>雜湊鏈加資料庫層只能附加的觸發器，竄改可被偵測。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「合規治理」能力，與 <a href="nexus-forge.html">Forge</a> 共用治理底座。</dd></dl>
+                            </aside>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END Hero -->
 
-            <!-- 解決什麼問題 -->
-            <section class="saga-pain saga-section">
+            <section id="what-is" class="nm-define nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">DEFINITION</p>
+                            <h2 class="section-heading">什麼是非結構化資料治理？</h2>
+                            <div class="row">
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>非結構化資料治理</b>是對文件、錄音、影像、電子郵件與資料表等資料，做分級、保存期限、存取權限與銷毀的管理，並留下能證明「誰在什麼時候依哪一條規定做了什麼」的紀錄。</p><p><b>SAGA</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的非結構化資料治理平台。它從 Oracle、SQL Server、MySQL 與檔案系統唯讀盤點資料，依機構政策設定分級與保存期限；保存期限、法律保全、角色權限與四眼簽核在伺服器端強制執行，每一次治理動作寫入雜湊鏈稽核紀錄，竄改可被偵測。</p></div></div>
+                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>法遵與稽核單位</b><span>金檢時要拿得出分級、保存與銷毀的執行證據。</span></li><li><b>資料治理與紀錄管理</b><span>要把寫在政策文件裡的保存期限，變成系統會擋的控制。</span></li><li><b>導入 AI 的金融機構</b><span>要答得出 AI 引用了哪些資料、當時是什麼密級。</span></li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-pain nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">THE PROBLEM</p>
-                            <h2 class="section-heading">治理現況，通常是三件事並存</h2>
-                            <p class="section-intro">這三件事單獨看都不算問題，但擺在一起，就沒有人回答得出金檢當下會被問的那一句。</p>
+                            <h2 class="section-heading">資料治理現況，常見三件事並存</h2>
+                            <p class="section-intro">單獨看都不算問題，擺在一起，金檢當下被問的那一句就答不出來。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="pain-card">
-                                        <div class="pain-number">01</div>
-                                        <h3>有政策、沒有執行證據</h3>
-                                        <p>分級與保存期限寫在文件裡，但無法回答「這份紀錄現在是第幾級、保存到哪一天、誰核准的」。</p>
-                                    </div>
-                                </div>
+                                    <div class="pain-card"><div class="pain-number">01</div>
+                                        <h3>有政策，沒有執行證據</h3><p>分級與保存期限寫在文件裡，但答不出「這份紀錄現在是第幾級、保存到哪一天、誰核准的」。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="pain-card">
-                                        <div class="pain-number">02</div>
-                                        <h3>有稽核紀錄、但可以被改</h3>
-                                        <p>稽核表存在一般資料表裡，DBA 改得動。紀錄存在，但沒有辦法證明它從寫入之後沒有被動過。</p>
-                                    </div>
-                                </div>
+                                    <div class="pain-card"><div class="pain-number">02</div>
+                                        <h3>有稽核紀錄，但改得動</h3><p>稽核表存在一般資料表裡，資料庫管理員改得動，無法證明寫入之後沒有被動過。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="pain-card">
-                                        <div class="pain-number">03</div>
-                                        <h3>AI 進來之後，說不清楚來源</h3>
-                                        <p>模型產出了一份建議，但答不出「它引用了哪些資料、那些資料當時是什麼密級、其中有沒有已經該銷毀的」。</p>
-                                    </div>
-                                </div>
+                                    <div class="pain-card"><div class="pain-number">03</div>
+                                        <h3>AI 用了哪些資料，說不清楚</h3><p>模型產出一份建議，卻答不出引用了哪些資料、當時的密級，其中有沒有已經該銷毀的。</p></div></div>
                             </div>
-                            <div class="pain-statement">
-                                NEXUS SAGA 針對的就是這三件事：<strong>把治理動作變成受控的狀態轉換，每一次轉換都寫進 append-only 的稽核鏈</strong>——動過就驗得出來。
-                            </div>
+                            <div class="pain-statement">SAGA 把治理動作做成受控的狀態轉換，每一次轉換都寫進只能附加的稽核鏈，事後可以逐筆驗證。</div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END 解決什麼問題 -->
 
-            <!-- 核心能力 -->
-            <section class="saga-capability saga-section">
+            <section id="capabilities" class="nm-cap nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">CAPABILITIES</p>
-                            <h2 class="section-heading">七個治理構面<span class="cap-count">主控台 30 個功能頁</span></h2>
-                            <p class="section-intro">以下每一項都有畫面、有 API、有測試。下方「實機畫面」一節可以逐頁對照。</p>
+                            <h2 class="section-heading">七個治理構面</h2>
+                            <p class="section-intro">每一項都有對應的操作畫面、API 與測試，下方「實機畫面」可逐頁對照。</p>
                             <div class="row">
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-database"></i></div>
-                                        <h3>資料盤點與目錄</h3>
-                                        <ul>
-                                            <li>從 Oracle／SQL Server／MySQL <b>唯讀</b>收割元數據：表、欄位、型別、主鍵、外鍵、註解、檢視表 DDL。</li>
-                                            <li>非結構化（NAS／檔案系統）盤點只讀檔名、副檔名、大小、修改時間，<b>不開啟檔案內容</b>。</li>
-                                            <li>血緣自五種訊號推導（外鍵、檢視表 DDL 解析、來源系統、AI 使用紀錄、資料共享），不是靠人手畫。</li>
-                                            <li>業務詞彙表、欄位級對應、當責矩陣。</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-hourglass"></i></div>
-                                        <h3>生命週期與保存</h3>
-                                        <ul>
-                                            <li>分媒體保存期限（<b>依機構政策設定，預設值</b>）：電話錄音 7 年、影像 5 年、書面文件 5 年、數位通訊 6 年、一般數位 5 年。</li>
-                                            <li>保存期限<b>未到不得處分</b>——伺服器強制，不是畫面上的提示。</li>
-                                            <li>法律保全（legal hold）：保全中的紀錄無法被處分。</li>
-                                            <li>處分證書：含簽核鏈與雜湊，可離線驗證。</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-lock"></i></div>
-                                        <h3>稽核鏈（WORM）</h3>
-                                        <ul>
-                                            <li>雜湊鏈稽核軌跡，資料庫層以 append-only 觸發器擋掉 UPDATE／DELETE。</li>
-                                            <li>完整性驗證逐筆重算雜湊，斷鏈時指出斷在第幾筆。</li>
-                                            <li>我們的說法是<b>「竄改可被偵測」</b>，不是「不可竄改」——理由寫在下方誠實邊界。</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-share-android"></i></div>
-                                        <h3>資料共享治理</h3>
-                                        <ul>
-                                            <li>對手方評估、再識別風險分級、同意管理、當事人權利（查詢／更正／停止使用）、申訴補救。</li>
-                                            <li>中國牆（利益衝突隔離）：同一個人在同一衝突類別內，存取過 A 公司就不得再存取 B 公司。</li>
-                                            <li>牆的範圍（以子公司為界或跨整個機構）由客戶實施時選定。</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-brain"></i></div>
-                                        <h3>AI 治理</h3>
-                                        <ul>
-                                            <li>AI 使用溯源：一次 AI 決策引用了哪些來源、每個來源當下的密級為何。</li>
-                                            <li>反向影響分析：某份資料被銷毀或降級後，回頭找出哪些過去的 AI 決策引用過它。</li>
-                                            <li>模型治理登錄簿：公平性與穩健性評估，<b>未評估的模型在高風險用途上被擋下</b>。</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-badge-check"></i></div>
-                                        <h3>品質與施行</h3>
-                                        <ul>
-                                            <li>品質規則（完整／唯一／時效／有效／準確／一致）、計分卡、趨勢。</li>
-                                            <li><b>低品質資料分享不出去</b>——品質判定接在共享閘上，不是只有儀表板。</li>
-                                            <li>施行證明：把核定的遮罩規則推到執行點，再回讀實況比對「核定 vs 實際」。</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="cap-card">
-                                        <div class="icon-wrap"><i class="iconoir-network"></i></div>
-                                        <h3>權責與流程</h3>
-                                        <ul>
-                                            <li>六種角色（admin / steward / records_manager / dpo / auditor / analyst），其中<b>稽核員唯讀</b>；五種可寫角色的權限矩陣逐面控制。</li>
-                                            <li>四眼原則：敏感變更需第二人簽核，且<b>不可自核</b>。</li>
-                                            <li>治理流程建構器：把上述能力組成可重複執行的流程，每次執行留痕。</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
+                                        <h3>資料盤點與目錄</h3><ul><li>從 Oracle、SQL Server、MySQL <b>唯讀</b>收割表、欄位、型別、主鍵、外鍵、註解與檢視表定義。</li><li>NAS／檔案系統只讀檔名、副檔名、大小與修改時間，<b>不開啟檔案內容</b>。</li><li>血緣由外鍵、檢視表定義、來源系統、AI 使用紀錄與資料共享五種訊號推導。</li><li>業務詞彙表、欄位級對應與當責矩陣。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-hourglass"></i></div>
+                                        <h3>生命週期與保存</h3><ul><li>分媒體設定保存期限，預設值依機構政策調整。</li><li>保存期限未到，伺服器拒絕銷毀。</li><li>法律保全中的紀錄無法銷毀。</li><li>銷毀證明含簽核鏈與雜湊，可離線驗證。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
+                                        <h3>稽核鏈</h3><ul><li>雜湊鏈稽核紀錄，資料庫層以只能附加的觸發器擋下修改與刪除。</li><li>完整性驗證逐筆重算雜湊，斷鏈時指出斷在第幾筆。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-share-android"></i></div>
+                                        <h3>資料共享治理</h3><ul><li>對手方評估、再識別風險分級、同意管理與當事人權利（查詢、更正、停止使用）。</li><li>利益衝突隔離：同一衝突類別內存取過 A 公司，就不能再存取 B 公司；隔離範圍於導入時設定。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-brain"></i></div>
+                                        <h3>AI 治理</h3><ul><li>AI 使用溯源：一次 AI 決策引用了哪些來源、當下的密級。</li><li>反向影響分析：資料被銷毀或降級後，找出過去引用過它的 AI 決策。</li><li>模型登錄：公平性與穩健性評估，未評估的模型不能用在高風險用途。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-check-circle"></i></div>
+                                        <h3>品質與施行</h3><ul><li>完整、唯一、時效、有效、準確、一致六類品質規則與計分卡。</li><li>品質判定接在共享閘上，未達標的資料無法分享出去。</li><li>把核定的遮罩規則推到執行點，再回讀實況比對核定與實際。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-user-badge-check"></i></div>
+                                        <h3>權責與流程</h3><ul><li>六種角色，稽核員唯讀；其餘角色依權限矩陣逐項控制。</li><li>敏感變更需第二人簽核，提案人不能自己核准。</li><li>治理流程可組裝成例行作業，每次執行都留下紀錄。</li></ul></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END 核心能力 -->
 
-            <!-- 可查證的差異點 -->
-            <section class="saga-diff saga-section">
-                <div class="container-fluid px-3 px-md-5">
-                    <div class="row justify-content-start">
-                        <div class="col-md-12">
-                            <p class="section-label">WHAT'S DIFFERENT</p>
-                            <h2 class="section-heading">可查證的差異點</h2>
-                            <p class="section-intro">資料目錄工具幫你「知道有什麼」；NEXUS SAGA 是在那之上，把該擋的擋在後端——保存期限沒到就是刪不掉，提案人核不了自己的案。以下每一項都寫得出具體是什麼。</p>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="diff-card">
-                                        <i class="iconoir-server diff-icon"></i>
-                                        <h3>控制是伺服器強制的</h3>
-                                        <p>保存期限、法律保全、角色權限、四眼，全部在後端擋。把畫面繞過去直接打 API 也擋得住。</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="diff-card">
-                                        <i class="iconoir-lock diff-icon"></i>
-                                        <h3>稽核鏈有資料庫層保護</h3>
-                                        <p>append-only 觸發器，不是「應用程式不去改它」。</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="diff-card">
-                                        <i class="iconoir-graph-down diff-icon"></i>
-                                        <h3>空集合不假綠</h3>
-                                        <p>沒有樣本的指標顯示「無樣本」，不顯示 100%。一套什麼都還沒做的系統，在我們的儀表板上不會是滿分。</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="diff-card">
-                                        <i class="iconoir-eye diff-icon"></i>
-                                        <h3>盤點不完整會講出來</h3>
-                                        <p>權限不足讀不到的資料夾／資料表會被數出來並列名，不會靜默少算。</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="diff-card">
-                                        <i class="iconoir-key diff-icon"></i>
-                                        <h3>去識別化用金鑰雜湊</h3>
-                                        <p>無金鑰的雜湊可被暴力回推——實測單執行緒約 195 萬組／秒，<b>單一字首開頭的 10 億組空間 6 分鐘</b>就回推完。我們用依租戶加鹽的 HMAC，而且沒有金鑰時<b>拒絕建立規則</b>。</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="diff-card">
-                                        <i class="iconoir-cloud-xmark diff-icon"></i>
-                                        <h3>地端／離線可裝</h3>
-                                        <p>提供離線映像包，現場 <code>load</code> 即可，不需要連外。</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- END 可查證的差異點 -->
-
-            <!-- 實機畫面 -->
-            <section id="saga-shots" class="saga-shots saga-section">
+            <section id="screens" class="nm-shots nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">PLATFORM SCREENS</p>
                             <h2 class="section-heading">實機畫面</h2>
-                            <div class="row justify-content-start">
-                                <div class="col-lg-10">
-                                    <div class="shots-note">
-                                        <h3>這些圖是怎麼來的</h3>
-                                        <p>2026-09-09 從<b>實際運作的展示站</b>擷取，不是示意圖、不是設計稿。站上是一個虛構的示範租戶（<span class="mono">demo-insurance.tw</span>），資料為合成的產險情境，共 1,802 筆資料資產。<b>畫面裡沒有任何真實客戶的名稱或資料。</b></p>
-                                        <p>稽核鏈的筆數在各張圖上不會完全一樣（治理態勢 2,045、稽核鏈 2,050）——因為<b>每一次讀取敏感資料本身就是一筆稽核事件</b>，截圖的動作也會讓鏈變長。這不是誤差，是這條鏈的性質。</p>
-                                        <p>點擊任一張圖可開啟原尺寸畫面。</p>
-                                    </div>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/worm.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/worm.webp" alt="WORM 鏈驗證頁：鏈狀態完好、驗證方法說明與最近事件" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">稽核鏈驗證</span>
-                                            2,050 筆事件的整鏈即時重算，回報「完好」。左下「驗證方法」把演算法寫在畫面上（SHA-256 連前一筆雜湊一起簽入，創世前雜湊為 64 個 0），並註明<b>此為應用層雜湊鏈驗證；儲存層 WORM（如 Object Lock）於部署時另行疊加</b>。
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/catalog.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/catalog.webp" alt="資料目錄與血緣頁：1802 筆資產、92% 已分類覆蓋、受控業務詞彙表" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">資料目錄與血緣</span>
-                                            1,802 筆資產、92% 已分類覆蓋。右側是受控業務詞彙表（已賺保費、未決賠款準備金、自留額……），每個詞彙標著它掛到幾個資產、幾個欄位。
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/lifecycle.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/lifecycle.webp" alt="生命週期管理頁：紀錄清單與右側生命週期時間軸" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">生命週期</span>
-                                            每筆紀錄的類別、機密性、狀態、保存到期日。右側時間軸是這一頁的重點：<span class="mono">擷取 → 分類 → 保存 → 法律保全 → 銷毀 → 處置證書</span>，走到哪一格畫面上看得到。圖中選取的那筆處於「保全中」，所以按鈕是「釋放保全」而不是銷毀。
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/datasharing.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/datasharing.webp" alt="資料共享治理頁：R1-R4 再識別風險分級表與已登錄共享" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">資料共享治理</span>
-                                            R1–R4 再識別風險分級，對應去識別化／PET 技術、保護環境要求、是否需同意。下方「已登錄共享」的對象是示範人壽、示範銀行（均為虛構）。
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/approvals.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/approvals.webp" alt="四眼簽核頁：一筆待簽、一筆已套用，提案人與核准人不同" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">四眼簽核</span>
-                                            兩筆遮罩規則提案都由 <span class="mono">wang.dpo@</span> 提出；上面一筆還在「待簽」，下面一筆的套用結果寫著由 <span class="mono">sys.admin@</span> 核准套用——<b>提案人與核准人是不同的人</b>。同一天實測：由提案人自己按核准會被伺服器擋下（<code>409</code>）。
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/dataquality.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/dataquality.webp" alt="資料品質頁：3 個有規則資產、9 條規則、9 筆檢測結果、9 筆未結 breach" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">資料品質</span>
-                                            3 個資產、9 條規則（全部可自動檢查）、9 筆檢測結果、<b>9 筆未結 breach</b>，計分卡 0 良好／3 中等／6 不佳。這張圖適合放在「空集合不假綠」旁邊：規則沒過就是沒過，畫面不會替它圓過去。
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/pipelines.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/pipelines.webp" alt="治理流程建構器：左側節點面板，畫布上是四節點的月度治理例行流程" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">治理流程</span>
-                                            畫布上是一條實際存檔的流程「月度治理例行」：<span class="mono">血緣擷取 → 品質檢核 → 門檻閘 → 稽核里程碑</span>。左側節點面板由後端供給。副標寫得很清楚：<b>「節點為治理動作（收割、分級、遮罩、品質、共享、保存）；資料搬運屬中台，不在此處。」</b>
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/provenance.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/provenance.webp" alt="AI 溯源與模型治理頁：三個模型的公平性與穩健安全評估" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">AI 溯源與模型治理</span>
-                                            三個模型的治理狀態：妥適／有條件／<b>不足</b>。<span class="mono">uw-risk-score-v2</span> 的公平性未通過（equalized_odds 最大群體差異 0.087，門檻 0.05），因此標為「治理狀態：不足」。<b>這種模型在高風險用途上會被擋下。</b>
-                                        </figcaption>
-                                    </figure>
-
-                                    <figure class="shot-figure">
-                                        <a href="images/nexus-saga/program.webp" target="_blank" rel="noopener">
-                                            <img src="images/nexus-saga/program.webp" alt="治理計畫量測頁：跨模組 KPI 彙整，計畫健康度 57%" width="1800" height="1071" loading="lazy">
-                                        </a>
-                                        <figcaption>
-                                            <span class="shot-title">治理計畫量測</span>
-                                            跨模組治理 KPI／SLI 彙整，每次量測寫入 WORM 留痕。計畫健康度 <b>57%</b>（4/7 KPI 達標），三項標紅未達標：品質檢核通過率 0%（0/9）、模型治理妥適率 33%（1/3）、治理 SLI 達標率 60%。同樣是刻意不粉飾的一頁——這台儀表板<b>不會因為東西少就給滿分</b>。
-                                        </figcaption>
-                                    </figure>
-                                </div>
+                            <p class="section-intro">以下畫面於 2026 年 9 月 9 日擷取自實際運作的展示站，租戶與資料均為虛構的產險情境（1,802 筆資料資產），不含任何真實客戶資料。</p>
+                            <div class="nm-shot-grid">
+                                <figure class="nm-shot"><a href="images/nexus-saga/posture.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/posture.webp" alt="SAGA 治理態勢儀表板，未達標的指標以紅色標示" loading="lazy"></a>
+                                    <figcaption><b>治理態勢</b>主控台首頁。未達標的指標直接標成紅色，頁尾註明平台只量測與報告，不自動修復。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/worm.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/worm.webp" alt="SAGA 稽核鏈完整性驗證畫面" loading="lazy"></a>
+                                    <figcaption><b>稽核鏈驗證</b>整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時另行加上。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/catalog.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/catalog.webp" alt="SAGA 資料目錄與業務詞彙表" loading="lazy"></a>
+                                    <figcaption><b>資料目錄與血緣</b>資料資產與受控的業務詞彙表，每個詞彙標示對應到幾個資產、幾個欄位。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/lifecycle.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/lifecycle.webp" alt="SAGA 紀錄生命週期與時間軸" loading="lazy"></a>
+                                    <figcaption><b>生命週期</b>每筆紀錄的類別、機密性、狀態與保存到期日；保全中的紀錄只能釋放保全，不能直接銷毀。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/datasharing.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/datasharing.webp" alt="SAGA 資料共享治理與再識別風險分級" loading="lazy"></a>
+                                    <figcaption><b>資料共享治理</b>再識別風險分四級，對應去識別化技術、保護環境要求與是否需要同意；共享對象均為虛構機構。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/approvals.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/approvals.webp" alt="SAGA 四眼簽核畫面" loading="lazy"></a>
+                                    <figcaption><b>四眼簽核</b>遮罩規則由一人提案、另一人核准；提案人自己按核准時，伺服器回絕。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/dataquality.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/dataquality.webp" alt="SAGA 資料品質規則與計分卡" loading="lazy"></a>
+                                    <figcaption><b>資料品質</b>規則沒過就顯示沒過，計分卡如實列出良好、中等與不佳的數量。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/pipelines.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/pipelines.webp" alt="SAGA 治理流程畫布" loading="lazy"></a>
+                                    <figcaption><b>治理流程</b>「月度治理例行」流程：血緣擷取、品質檢核、門檻閘、稽核里程碑。資料搬運不在這裡做。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/provenance.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/provenance.webp" alt="SAGA AI 溯源與模型治理" loading="lazy"></a>
+                                    <figcaption><b>AI 溯源與模型治理</b>公平性未通過門檻的模型標為「不足」，不能用在高風險用途。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/program.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/program.webp" alt="SAGA 治理計畫量測儀表板" loading="lazy"></a>
+                                    <figcaption><b>治理計畫量測</b>跨模組的治理指標彙整，每次量測都寫入稽核紀錄；沒有樣本的指標顯示「無樣本」，不算成滿分。</figcaption></figure>
                             </div>
+                            <p class="nm-source">稽核鏈筆數在各張圖上不完全相同，因為每一次讀取敏感資料本身就是一筆稽核事件，截圖的動作也會讓鏈變長。點圖可開啟原尺寸畫面。</p>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END 實機畫面 -->
 
-            <!-- 實測證據 -->
-            <section class="saga-evidence saga-section">
+            <section class="nm-evidence nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">MEASURED</p>
+                            <h2 class="section-heading">實際跑出來的數字</h2>
+                            <p class="section-intro">以下為實機量測結果。規模測試環境為數十萬張表、PostgreSQL 16、單機容器。</p>
+                            <div class="nm-metrics"><div class="nm-metric"><b>133 毫秒</b><span>目錄搜尋</span><p>數十萬張表規模下的搜尋回應時間。</p></div><div class="nm-metric"><b>1.27 秒</b><span>血緣名稱解析</span><p>一次解析 600 個名稱的耗時。</p></div><div class="nm-metric"><b>1.35 秒</b><span>稽核鏈驗證</span><p>20 萬筆事件逐筆重算雜湊，峰值記憶體 67 MB。</p></div><div class="nm-metric"><b>2 種</b><span>資料庫實機驗證</span><p>Oracle XE 與 SQL Server 2022 的元資料收割與血緣擷取已實機跑通。</p></div></div>
+                            <div class="nm-proofs"><div class="nm-proof"><h3>提案人自己核准會被擋下</h3><p>提案人送出核准時，伺服器回 409 並說明不得由提案人核准；身分比對前先做正規化，大小寫、全形＠與零寬字元都繞不過去。</p></div><div class="nm-proof"><h3>門檻閘拿不到指標就不放行</h3><p>流程裡的門檻閘讀不到上游指標時，該段直接失敗並寫明原因，不會預設通過。</p></div><div class="nm-proof"><h3>去識別化用帶金鑰的雜湊</h3><p>不帶金鑰的雜湊可被暴力回推：實測單執行緒約每秒 195 萬組，10 億組的空間約 9 分鐘就能窮舉。SAGA 用依租戶設定金鑰的 HMAC，沒有金鑰時拒絕建立規則。</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-compare nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">COMPARISON</p>
+                            <h2 class="section-heading">資料目錄工具，和 SAGA 差在哪</h2>
+                            <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
+                                <thead><tr><th scope="col"></th><th scope="col">一般資料目錄工具</th><th scope="col" class=is-us>SAGA</th></tr></thead>
+                                <tbody><tr><th scope="row">主要用途</th><td data-label="一般資料目錄工具">知道有哪些資料、在哪裡</td><td data-label="SAGA" class=is-us>在盤點之上執行分級、保存與銷毀控制</td></tr><tr><th scope="row">保存期限</th><td data-label="一般資料目錄工具">記錄在欄位或文件裡</td><td data-label="SAGA" class=is-us>期限未到，伺服器拒絕銷毀</td></tr><tr><th scope="row">稽核紀錄</th><td data-label="一般資料目錄工具">一般資料表，可被修改</td><td data-label="SAGA" class=is-us>雜湊鏈加資料庫層保護，竄改可被偵測</td></tr><tr><th scope="row">簽核</th><td data-label="一般資料目錄工具">依工具而定</td><td data-label="SAGA" class=is-us>四眼簽核，提案人不能自己核准</td></tr><tr><th scope="row">AI 使用</th><td data-label="一般資料目錄工具">多半不追蹤</td><td data-label="SAGA" class=is-us>記錄 AI 決策引用的來源與當下密級</td></tr></tbody></table></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-diff nm-section nm-dark">
                 <div class="container-fluid px-3 px-md-5">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">MEASURED, NOT CLAIMED</p>
-                            <h2 class="section-heading">實際跑出來的數字</h2>
-                            <p class="section-intro">以下是實機量測與展示站上打出來的回應，不是規格書上的宣稱。規模測試環境為<b>數十萬張表、PostgreSQL 16、單機容器</b>。</p>
+                            <p class="section-label">WHAT'S DIFFERENT</p>
+                            <h2 class="section-heading">差異點</h2>
+                            <p class="section-intro">資料目錄工具讓您知道有哪些資料；SAGA 在這之上把該擋的動作擋在伺服器端。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="metric-box">
-                                        <div class="metric-num">133 毫秒</div>
-                                        <div class="metric-label"><b>目錄搜尋</b>回應時間。同一份資料，強化前是 <span class="metric-before">48.4 秒</span>。</div>
-                                    </div>
-                                </div>
+                                    <div class="diff-card"><i class="iconoir-server diff-icon"></i>
+                                        <h3>控制在伺服器端執行</h3><p>保存期限、法律保全、角色權限與四眼簽核都在後端檢查，繞過畫面直接呼叫 API 也一樣會被擋下。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="metric-box">
-                                        <div class="metric-num">1.27 秒</div>
-                                        <div class="metric-label"><b>血緣名稱解析 × 600</b>。強化前約 <span class="metric-before">9 小時</span>。</div>
-                                    </div>
-                                </div>
+                                    <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
+                                        <h3>稽核鏈有資料庫層保護</h3><p>以只能附加的觸發器擋下修改與刪除，稽核紀錄不靠應用程式自律。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="metric-box">
-                                        <div class="metric-num">1.35 秒</div>
-                                        <div class="metric-label"><b>20 萬筆事件</b>的整鏈完整性驗證耗時，逐筆重算雜湊。峰值記憶體 67 MB。</div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="metric-box">
-                                        <div class="metric-num is-text">Oracle XE<br>SQL Server 2022</div>
-                                        <div class="metric-label">元數據收割與血緣擷取皆<b>實機跑通過</b>，非文件宣稱。</div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="metric-box">
-                                        <div class="metric-num is-text">linux/amd64</div>
-                                        <div class="metric-label">映像內含 <b>Oracle 與 SQL Server 驅動</b>，不需另外安裝。</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-lg-10">
-                                    <h3 style="color:#fff; font-size:1rem; font-weight:700; margin-bottom:1.2rem;">展示站上實跑的控制證據（2026-09-09）</h3>
-                                    <div class="proof-item">
-                                        <h4>提案人自核被擋</h4>
-                                        <p>由提案人本人送出核准，伺服器回 <code>409</code> 並說明「提案由該人提出，不得由同一人核准」；換成另一個人核准才成功套用。身分比對會先做正規化——大小寫、全形 <code>＠</code>、零寬字元都繞不過去。</p>
-                                    </div>
-                                    <div class="proof-item">
-                                        <h4>門檻閘不猜、不放行</h4>
-                                        <p>流程裡的門檻閘被設成看一個上游沒有產生的指標時，它直接讓那一段失敗並寫明「上游沒有產生指標 <code>score</code>」，而不是預設通過。</p>
-                                    </div>
-                                </div>
+                                    <div class="diff-card"><i class="iconoir-stats-report diff-icon"></i>
+                                        <h3>儀表板不灌水</h3><p>沒有樣本的指標顯示「無樣本」；權限不足讀不到的資料夾與資料表會逐一列出，不會少算。</p></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END 實測證據 -->
 
-            <!-- 部署形態 -->
-            <section class="saga-deploy saga-section">
+            <section class="nm-platform nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">ON THE PLATFORM</p>
+                            <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
+                            <div class="platform-text">SAGA 是平台的<b>合規治理</b>能力，與 <a href="nexus-forge.html">Forge</a> 共用治理底座的授權、政策與事件服務。AI 決策引用了哪些資料，由 SAGA 的 AI 使用溯源記錄；文件內容的解析與分類結果，可由 <a href="nexus-insight.html">Insight</a> 或 <a href="solution-ai-ocr.html">AI OCR 智慧文件辨識</a>提供。</div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span></a><a class="nm-link" href="nexus-cardea.html"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span></a><a class="nm-link" href="solution-ai-ocr.html"><b>AI OCR 智慧文件辨識</b><span>AI OCR 智慧文件辨識</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="deploy" class="nm-deploy nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">DEPLOYMENT</p>
-                            <h2 class="section-heading">部署形態</h2>
+                            <h2 class="section-heading">部署：可雲、可地、可客製</h2>
+                            <p class="section-intro">以容器交付，同一套系統可以放在公有雲的台灣區域、企業自有機房或私有雲；流程、規則與既有系統的介接，可依貴機構需求客製。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card">
-                                        <span class="deploy-tag">單機 / POC</span>
-                                        <h3>docker compose</h3>
-                                        <p>含治理底座三個服務與資料庫，一份 compose 檔即可起站。</p>
-                                    </div>
-                                </div>
+                                    <div class="deploy-card"><span class="deploy-tag">雲端</span>
+                                        <h3>公有雲 Kubernetes</h3><p>提供 Helm chart，可部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card">
-                                        <span class="deploy-tag">離線環境</span>
-                                        <h3>離線映像包</h3>
-                                        <p>映像打包成 <code>tar</code>，現場 <code>load</code>，不需連外。</p>
-                                    </div>
-                                </div>
+                                    <div class="deploy-card"><span class="deploy-tag">地端</span>
+                                        <h3>單機或離線環境</h3><p>單機以 docker compose 起站，含治理底座服務與資料庫；離線環境以映像包現場載入，不需連外。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="deploy-card">
-                                        <span class="deploy-tag">叢集</span>
-                                        <h3>Helm chart</h3>
-                                        <p>提供 Helm chart。尚未在客戶叢集實跑，這一點寫在下方誠實邊界，不列為賣點。</p>
-                                    </div>
-                                </div>
+                                    <div class="deploy-card"><span class="deploy-tag">客製</span>
+                                        <h3>保存政策與來源系統</h3><p>依貴機構的保存政策、角色分工與來源系統設定，資料庫可指向既有的 PostgreSQL。</p></div></div>
                             </div>
-                            <p class="deploy-note">單機 POC 以 docker compose 起站，接上一套來源系統即可開始收割元數據。資料庫可以用我們帶的，也可以指向貴機構既有的 PostgreSQL。</p>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END 部署形態 -->
 
-            <!-- 誠實邊界 -->
-            <section class="saga-limits saga-section">
+            <section class="nm-limits nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">HONEST BOUNDARIES</p>
-                            <h2 class="section-heading">誠實邊界：我們不做、也不宣稱的事</h2>
-                            <p class="limits-lede">產品定位是治理與稽核，所以這一頁不能有一句經不起追問的話。以下是刻意寫出來的邊界，放在這裡，不折疊、不藏在頁尾。</p>
-                            <div class="row justify-content-start">
-                                <div class="col-lg-10">
-                                    <div class="limit-item">
-                                        <div class="limit-index">1</div>
-                                        <div>
-                                            <h3>「竄改可被偵測」，而不是「不可竄改」</h3>
-                                            <p>雜湊鏈能證明資料被動過，<b>不能物理阻止有資料庫最高權限的人動它</b>。要做到後者需要儲存層 Object Lock，那是另一個層次的部署選項。</p>
-                                        </div>
-                                    </div>
-                                    <div class="limit-item">
-                                        <div class="limit-index">2</div>
-                                        <div>
-                                            <h3>不做內容擷取與 NER</h3>
-                                            <p>文字擷取與實體辨識不在 NEXUS SAGA 的範圍。SAGA 治理的是<b>分類結果</b>，分類本身需由上游的內容解析提供——這是導入時要一併確認的前提。</p>
-                                        </div>
-                                    </div>
-                                    <div class="limit-item">
-                                        <div class="limit-index">3</div>
-                                        <div>
-                                            <h3>不做流程引擎</h3>
-                                            <p>治理流程建構器組裝的是既有治理能力，不是通用工作流引擎。</p>
-                                        </div>
-                                    </div>
-                                    <div class="limit-item">
-                                        <div class="limit-index">4</div>
-                                        <div>
-                                            <h3>不宣稱「符合」任何法規</h3>
-                                            <p>我們對應的是規範要求的<b>做法</b>（分級、保存、當事人權利、利益衝突隔離），合規與否由主管機關與貴機構法遵認定。</p>
-                                        </div>
-                                    </div>
-                                    <div class="limit-item">
-                                        <div class="limit-index">5</div>
-                                        <div>
-                                            <h3>尚未實測的項目</h3>
-                                            <p>目前包含：客戶叢集 Helm 部署、CIFS/NFS 實際掛載、授權到期行為。這些不寫進賣點。</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="section-label">SCOPE</p>
+                            <h2 class="section-heading">範圍界定</h2>
+                            <p class="section-intro">SAGA 的定位是治理與稽核，以下邊界在導入前會逐項確認。</p>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="limit-item"><div class="limit-index">1</div>
+                                        <div><h3>竄改可被偵測，不是不可竄改</h3><p>雜湊鏈能證明資料被動過，但無法阻止擁有資料庫最高權限的人修改；要在物理上阻止，需加上儲存層的 Object Lock。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">2</div>
+                                        <div><h3>不做內容擷取與實體辨識</h3><p>SAGA 治理的是分類結果，文件內容的解析與分類需由上游提供。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">3</div>
+                                        <div><h3>不是通用流程引擎</h3><p>治理流程組裝的是既有的治理動作，資料搬運與一般業務流程不在範圍內。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">4</div>
+                                        <div><h3>不宣稱符合任何法規</h3><p>SAGA 對應的是規範要求的做法（分級、保存、當事人權利、利益衝突隔離），是否合規由主管機關與貴機構法遵認定。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">5</div>
+                                        <div><h3>尚未實測的項目</h3><p>客戶叢集上的 Helm 部署、CIFS/NFS 實際掛載與授權到期行為尚未實測，導入時列為驗收項目。</p></div></div>
+                            </div></div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END 誠實邊界 -->
 
-            <!-- FAQ -->
-            <section class="saga-faq saga-section">
+            <section class="nm-faq nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
                             <p class="section-label">FAQ</p>
                             <h2 class="section-heading">常見問題</h2>
-                            <div class="row justify-content-start">
-                                <div class="col-lg-10">
-                                    <div class="faq-item">
-                                        <h3>NEXUS SAGA 會讀取我們檔案裡的內容嗎？</h3>
-                                        <p>不會。非結構化（NAS／檔案系統）盤點只讀檔名、副檔名、大小與修改時間，不開啟檔案內容。文字擷取與實體辨識（NER）不在 SAGA 的範圍——SAGA 治理的是分類結果，分類本身需由上游的內容解析提供。</p>
-                                    </div>
-                                    <div class="faq-item">
-                                        <h3>支援哪些資料來源？盤點會影響來源系統嗎？</h3>
-                                        <p>Oracle、SQL Server、MySQL 的元數據以唯讀方式收割：表、欄位、型別、主鍵、外鍵、註解與檢視表 DDL。Oracle XE 與 SQL Server 2022 已在實機上跑過元數據收割與血緣擷取。映像為 <code>linux/amd64</code>，含 Oracle 與 SQL Server 驅動。</p>
-                                    </div>
-                                    <div class="faq-item">
-                                        <h3>稽核紀錄真的改不掉嗎？</h3>
-                                        <p>我們的說法是「竄改可被偵測」，不是「不可竄改」。稽核軌跡是雜湊鏈，資料庫層以 append-only 觸發器擋掉 UPDATE 與 DELETE，完整性驗證逐筆重算雜湊、斷鏈時指出斷在第幾筆。但握有資料庫最高權限的人仍動得了資料；要在物理上阻止，需要儲存層 Object Lock，那是部署時另行疊加的選項。</p>
-                                    </div>
-                                    <div class="faq-item">
-                                        <h3>可以裝在地端或離線環境嗎？</h3>
-                                        <p>可以。單機／POC 以 docker compose 部署，含治理底座三個服務與資料庫；離線環境可將映像打包成 tar 現場 load，不需連外。資料庫可用我們帶的，也可指向既有的 PostgreSQL。叢集用的 Helm chart 已提供，但尚未在客戶叢集實跑。</p>
-                                    </div>
-                                    <div class="faq-item">
-                                        <h3>導入之後就代表符合法規了嗎？</h3>
-                                        <p>我們不宣稱「符合」任何法規。SAGA 對應的是規範要求的做法——分級、保存期限、當事人權利、利益衝突隔離——合規與否由主管機關與貴機構法遵認定。</p>
-                                    </div>
-                                    <div class="faq-item">
-                                        <h3>儀表板上的分數會不會虛高？</h3>
-                                        <p>沒有樣本的指標顯示「無樣本」，不顯示 100%；權限不足讀不到的資料夾或資料表會被數出來並列名，不會靜默少算。上方展示站的治理態勢首頁本身就標著「不合規資料 15.9%」與兩項未達標，治理計畫量測頁的健康度是 57%。</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="faq-item"><h3>SAGA 會讀取我們檔案裡的內容嗎？</h3><p>不會。SAGA 盤點 NAS 與檔案系統時只讀檔名、副檔名、大小與修改時間，不開啟檔案內容；文件內容的解析與分類需由上游提供。</p></div>
+                                    <div class="faq-item"><h3>SAGA 支援哪些資料來源？會影響來源系統嗎？</h3><p>SAGA 以唯讀方式收割 Oracle、SQL Server、MySQL 的元資料，不寫入來源系統；Oracle XE 與 SQL Server 2022 已實機驗證，映像內含兩者的驅動程式。</p></div>
+                                    <div class="faq-item"><h3>SAGA 的稽核紀錄真的改不掉嗎？</h3><p>SAGA 的說法是竄改可被偵測。稽核紀錄是雜湊鏈，資料庫層擋下修改與刪除，驗證時逐筆重算；擁有資料庫最高權限的人仍可能動到資料，要物理上阻止需加上儲存層 Object Lock。</p></div>
+                                    <div class="faq-item"><h3>SAGA 可以裝在地端或離線環境嗎？</h3><p>可以。SAGA 單機以 docker compose 部署，離線環境以映像包現場載入，不需連外；也提供 Helm chart 部署於叢集或公有雲台灣區域。</p></div>
+                                    <div class="faq-item"><h3>導入 SAGA 就代表符合法規了嗎？</h3><p>不代表。SAGA 提供的是分級、保存期限、當事人權利與利益衝突隔離等做法的執行與紀錄，是否符合法規由主管機關與貴機構法遵認定。</p></div>
+                            </div></div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- END FAQ -->
 
-            <!-- CTA -->
-            <section class="saga-cta">
+            <section class="nm-cta">
                 <div class="container">
                     <h2>想看這條稽核鏈跑在您的資料上？</h2>
-                    <p>我們可以用展示站走一次完整流程，或就貴機構的來源系統規劃一次 POC。</p>
-                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <p>我們可以用展示站走一次完整流程，或就貴機構的一套來源系統規劃 POC。</p>
+                    <a class="btn-cta" href="contact.html" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
+                    <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
                 </div>
             </section>
-            <!-- END CTA -->
 
             <!-- Footer -->
             <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
@@ -1536,7 +617,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>
@@ -1552,7 +633,7 @@
     <div id="ftco-loader" class="show fullscreen">
         <svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#0F5F4E"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="currentColor" style="color:var(--m-deep)"/>
         </svg>
     </div>
 
@@ -1571,15 +652,13 @@
     <script src="js/inquiry-modal.js" defer></script>
     <script src="js/qform.js" defer></script>
 
-    <!-- SAGA 頁面：平滑捲動至實機畫面 -->
     <script>
-    $(document).ready(function(){
-        $('a[href="#saga-shots"]').on('click', function(e){
+    $(function(){
+        $('a[href="#capabilities"], a[href="#deploy"]').on('click', function(e){
             e.preventDefault();
-            $('html, body').animate({ scrollTop: $('#saga-shots').offset().top - 50 }, 600);
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 50 }, 600);
         });
     });
     </script>
-
   </body>
 </html>

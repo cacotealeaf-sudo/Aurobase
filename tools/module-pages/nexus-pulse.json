@@ -3,7 +3,7 @@
   "file": "nexus-pulse.html",
   "code": "Pulse",
   "name_zh": "輿情訊號分析",
-  "leg": "行銷智能",
+  "leg": "內容與行銷智能",
   "eyebrow": "Pulse — Social Signal Intelligence",
   "description": "Pulse 是奧洛（Aurobase）的 AI 輿情分析平台：接收企業既有來源的輿情訊號，以批次 AI 分析情緒、摘要與敘事走向，依規則觸發告警，並回算處理後的成效。AI 分析經 Forge 治理，個資刪除可回溯遮蔽。",
   "keywords": [
@@ -71,7 +71,7 @@
     ],
     [
       "所屬",
-      "AURO NEXUS 平台「行銷智能」能力，分析經 <a href=\"nexus-forge.html\">Forge</a> 治理。"
+      "AURO NEXUS 平台「內容與行銷智能」能力，分析經 <a href=\"nexus-forge.html\">Forge</a> 治理。"
     ]
   ],
   "pain": {
@@ -166,7 +166,7 @@
   },
   "platform": {
     "heading": "在 AURO NEXUS 平台上的位置",
-    "text": "Pulse 屬於平台的<b>行銷智能</b>能力。AI 分析經 <a href=\"nexus-forge.html\">Forge</a> 治理；告警路由參考 <a href=\"nexus-insight.html\">Insight</a> 的知識圖譜；處理成效則取自 <a href=\"nexus-auro.html\">Auro</a> 的任務結果。",
+    "text": "Pulse 屬於平台的<b>內容與行銷智能</b>能力。AI 分析經 <a href=\"nexus-forge.html\">Forge</a> 治理；告警路由參考 <a href=\"nexus-insight.html\">Insight</a> 的知識圖譜；處理成效則取自 <a href=\"nexus-auro.html\">Auro</a> 的任務結果。",
     "related": [
       "nexus-forge",
       "nexus-insight",
@@ -206,7 +206,7 @@
   "faq": [
     {
       "q": "輿情分析工具怎麼選？",
-      "a": "先確認你需要的是「收集」還是「判讀」。收集端看來源涵蓋；判讀端看能否分析敘事、告警是否可調、處理後能否回算成效。Pulse 專注在判讀端，訊號由既有來源推入。"
+      "a": "先確認您需要的是「收集」還是「判讀」。收集端看來源涵蓋；判讀端看能否分析敘事、告警是否可調、處理後能否回算成效。Pulse 專注在判讀端，訊號由既有來源推入。"
     },
     {
       "q": "Pulse 會自己去抓社群資料嗎？",

@@ -70,10 +70,10 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 ### 內容與行銷智能
 - [MIRA 受監理產業內容產製與審核](nexus-mira.html): MIRA 是奧洛（Aurobase）為金融與醫療等受監理產業設計的 AI 內容產製與審核平台：AI 寫文案、長文、圖文與衛教文章，產出先經規則式合規檢查與法條引用查核，再由人工審核，紀錄寫入可驗證的雜湊鏈，可完全在地端運作。
 - [Pulse 輿情訊號分析](nexus-pulse.html): Pulse 是奧洛（Aurobase）的 AI 輿情分析平台：接收企業既有來源的輿情訊號，以批次 AI 分析情緒、摘要與敘事走向，依規則觸發告警，並回算處理後的成效。AI 分析經 Forge 治理，個資刪除可回溯遮蔽。
-- [NEXUS GEO 生成式搜尋能見度](nexus-geo.html): 衡量品牌在 ChatGPT、Gemini 等生成式搜尋中被提及與引用的程度。
+- [NEXUS GEO 生成式搜尋能見度](nexus-geo.html): NEXUS GEO 是奧洛（Aurobase）的生成式引擎優化（GEO）平台：經 Forge 向 ChatGPT、Claude、Gemini、Perplexity 提問，量測品牌被提及與引用的程度，檢查網站對 AI 爬蟲與結構化資料的準備度，產出優化建議與月報。
 
 ### 合規治理
-- [SAGA 非結構化資料治理](nexus-saga.html): 金融機構的非結構化資料治理層：分級、保存、法律保全與稽核鏈。
+- [SAGA 非結構化資料治理](nexus-saga.html): SAGA 是奧洛（Aurobase）的非結構化資料治理平台：資料盤點與血緣、分級與保存期限、法律保全、四眼簽核與 AI 使用溯源由伺服器強制執行，每一次治理動作寫入只能附加的雜湊鏈稽核紀錄，竄改可被偵測，可地端離線部署。
 
 ### 生產力
 - [NEXUS AI-Office 商業文件產製](nexus-ai-office.html): NEXUS AI-Office 是奧洛（Aurobase）的企業 AI 文件產生平台：依企業範本以 AI 產出提案書、報價單、週報、保密協議、工作說明書與簡報，輸出 DOCX、PDF、PPTX 並可在瀏覽器內線上編修；AI 生成經 Forge 治理。

@@ -161,7 +161,7 @@
           "name": "Forge 跟直接用 ChatGPT 有什麼不同？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Forge 不是聊天工具，而是企業內部所有 AI 請求的閘道：請求先經權限與政策檢查，再送往經核准的模型（可限定只用地端模型），每一步都寫入雜湊鏈稽核軌跡。"
+            "text": "Forge 是企業內部所有 AI 請求的閘道：請求先經權限與政策檢查，再送往經核准的模型（可限定只用地端模型），每一步都寫入雜湊鏈稽核軌跡。"
           }
         },
         {
@@ -445,10 +445,10 @@
                         <div class="col-md-12">
                             <p class="section-label">REGULATORY MAPPING</p>
                             <h2 class="section-heading">對應金融業運用 AI 指引的做法</h2>
-                            <p class="section-intro">金管會於 2024 年發布〈金融業運用 AI 指引〉，以六項核心原則為架構。下表列出與 Forge 功能直接相關的原則與對應做法。</p>
+                            <p class="section-intro">金管會於 2024 年發布〈金融業運用人工智慧（AI）指引〉，以六項核心原則為架構。下表列出與 Forge 功能直接相關的原則與對應做法。</p>
                             <div class="nm-table-wrap"><table class="nm-table">
                                 <thead><tr><th scope="col">指引核心原則</th><th scope="col">Forge 的對應做法</th></tr></thead>
-                                <tbody><tr><th scope="row">建立治理及問責機制</th><td>所有 AI 請求先經權限與政策檢查才送往模型；審批流程支援雙人覆核；每次推論寫入雜湊鏈稽核軌跡。</td></tr><tr><th scope="row">保護隱私及客戶權益</th><td>模型可限定只用地端 LLM；自然語言查資料以唯讀身分執行並遮罩個資；個資刪除請求可在稽核紀錄中就地遮罩。</td></tr><tr><th scope="row">確保系統穩健與安全</th><td>多模型備援與金絲雀分流；模型評測閘道；服務拒絕以資料庫超級使用者身分連線。</td></tr><tr><th scope="row">落實透明性與可解釋性</th><td>推論、知識庫引用與工具呼叫逐筆留痕；證據包附獨立驗證工具，可離線查驗；對抗式驗證讓多位審查者反駁同一主張。</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">建立治理及問責機制</th><td data-label="Forge 的對應做法">所有 AI 請求先經權限與政策檢查才送往模型；審批流程支援雙人覆核；每次推論寫入雜湊鏈稽核軌跡。</td></tr><tr><th scope="row">保護隱私及客戶權益</th><td data-label="Forge 的對應做法">模型可限定只用地端 LLM；自然語言查資料以唯讀身分執行並遮罩個資；個資刪除請求可在稽核紀錄中就地遮罩。</td></tr><tr><th scope="row">確保系統穩健與安全</th><td data-label="Forge 的對應做法">多模型備援與金絲雀分流；模型評測閘道；服務拒絕以資料庫超級使用者身分連線。</td></tr><tr><th scope="row">落實透明性與可解釋性</th><td data-label="Forge 的對應做法">推論、知識庫引用與工具呼叫逐筆留痕；證據包附獨立驗證工具，可離線查驗；對抗式驗證讓多位審查者反駁同一主張。</td></tr></tbody></table></div>
                             <p class="nm-source">資料來源：<a href="https://www.fsc.gov.tw/" target="_blank" rel="noopener">金管會〈金融業運用人工智慧（AI）指引〉（2024 年 6 月 20 日發布）</a>。指引屬行政指導；本表列出的是對應做法，是否符合由主管機關與貴機構法遵認定。</p>
                         </div>
                     </div>
@@ -463,7 +463,7 @@
                             <h2 class="section-heading">三種導入企業 AI 的方式比較</h2>
                             <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
                                 <thead><tr><th scope="col"></th><th scope="col">直接使用公有雲 AI 服務</th><th scope="col">自建地端 LLM</th><th scope="col" class=is-us>Forge</th></tr></thead>
-                                <tbody><tr><th scope="row">資料存放位置</th><td>服務商的資料中心</td><td>企業自有環境</td><td class=is-us>企業自有環境</td></tr><tr><th scope="row">可用模型</th><td>該服務商提供的模型</td><td>自行部署的模型</td><td class=is-us>地端 Ollama、OpenAI 相容服務（如 vLLM）、Anthropic，可限定只用地端</td></tr><tr><th scope="row">推論前的權限與政策檢查</th><td>依服務商功能</td><td>需自行開發</td><td class=is-us>內建，所有請求必經</td></tr><tr><th scope="row">稽核紀錄</th><td>依服務商提供</td><td>需自行開發</td><td class=is-us>雜湊鏈稽核軌跡，涵蓋推論、知識庫與工具呼叫</td></tr><tr><th scope="row">證據可離線驗證</th><td>—</td><td>需自行開發</td><td class=is-us>證據包附獨立驗證工具</td></tr><tr><th scope="row">既有 AI 工具接入</th><td>使用該服務商 API</td><td>依部署方式</td><td class=is-us>OpenAI 相容 API，改連線位址即可</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">資料存放位置</th><td data-label="直接使用公有雲 AI 服務">服務商的資料中心</td><td data-label="自建地端 LLM">企業自有環境</td><td data-label="Forge" class=is-us>企業自有環境</td></tr><tr><th scope="row">可用模型</th><td data-label="直接使用公有雲 AI 服務">該服務商提供的模型</td><td data-label="自建地端 LLM">自行部署的模型</td><td data-label="Forge" class=is-us>地端 Ollama、OpenAI 相容服務（如 vLLM）、Anthropic，可限定只用地端</td></tr><tr><th scope="row">推論前的權限與政策檢查</th><td data-label="直接使用公有雲 AI 服務">依服務商功能</td><td data-label="自建地端 LLM">需自行開發</td><td data-label="Forge" class=is-us>內建，所有請求必經</td></tr><tr><th scope="row">稽核紀錄</th><td data-label="直接使用公有雲 AI 服務">依服務商提供</td><td data-label="自建地端 LLM">需自行開發</td><td data-label="Forge" class=is-us>雜湊鏈稽核軌跡，涵蓋推論、知識庫與工具呼叫</td></tr><tr><th scope="row">證據可離線驗證</th><td data-label="直接使用公有雲 AI 服務">—</td><td data-label="自建地端 LLM">需自行開發</td><td data-label="Forge" class=is-us>證據包附獨立驗證工具</td></tr><tr><th scope="row">既有 AI 工具接入</th><td data-label="直接使用公有雲 AI 服務">使用該服務商 API</td><td data-label="自建地端 LLM">依部署方式</td><td data-label="Forge" class=is-us>OpenAI 相容 API，改連線位址即可</td></tr></tbody></table></div>
                         </div>
                     </div>
                 </div>
@@ -484,7 +484,7 @@
                                         <h3>證據可以離線驗</h3><p>證據包附帶獨立驗證工具，稽核人員不需要連上 Forge，也不需要相信 Forge，就能驗證紀錄未被修改。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-shield-check diff-icon"></i>
-                                        <h3>先檢查，再推論</h3><p>權限與政策檢查放在推論之前；不符合的請求不會送到模型，而不是送出之後才記一筆。</p></div></div>
+                                        <h3>先檢查，再推論</h3><p>權限與政策檢查放在推論之前；不符合的請求在送出前就被擋下，不會到達模型。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -498,7 +498,7 @@
                             <p class="section-label">ON THE PLATFORM</p>
                             <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
                             <div class="platform-text">Forge 是平台的<b>治理底座</b>。<a href="nexus-auro.html">Auro</a>、<a href="nexus-insight.html">Insight</a>、<a href="nexus-mira.html">MIRA</a>、<a href="nexus-pulse.html">Pulse</a>、<a href="nexus-ai-office.html">NEXUS AI-Office</a> 等模組的 AI 呼叫經由 Forge 送往模型；模組之間存取知識也經 Forge 的 MCP 閘道，權限與紀錄因此只有一套。</div>
-                            <div class="nm-links"><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus-cardea.html"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
+                            <div class="nm-links"><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span></a><a class="nm-link" href="nexus-pulse.html"><b>Pulse</b><span>輿情訊號分析</span></a><a class="nm-link" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
                         </div>
                     </div>
                 </div>
@@ -537,7 +537,7 @@
                                     <div class="faq-item"><h3>AI 閘道（LLM Gateway）是什麼？</h3><p>AI 閘道是企業內所有 AI 請求的必經入口，負責在推論前檢查權限與政策、把請求路由到經核准的模型，並記錄推論、資料存取與工具使用。Forge 是奧洛推出的治理化 AI 閘道，提供 OpenAI 相容 API、地端模型路由與可離線驗證的稽核軌跡。</p></div>
                                     <div class="faq-item"><h3>地端 AI 的主要優勢是什麼？</h3><p>主要是資料不需送出企業環境、可依內部規範控管模型與存取權限，適合處理個資與機敏資料的金融、醫療與公部門。Forge 可限定只路由到地端 LLM，並為每次推論留下稽核紀錄。</p></div>
                                     <div class="faq-item"><h3>地端 LLM 建置之後，還需要 AI 治理平台嗎？</h3><p>需要。地端 LLM 解決的是「資料不出機房」，但誰能用哪個模型、能查哪些知識庫、推論紀錄能否證明沒被修改，仍需要治理層。Forge 就是放在地端 LLM 前面的那一層。</p></div>
-                                    <div class="faq-item"><h3>Forge 跟直接用 ChatGPT 有什麼不同？</h3><p>Forge 不是聊天工具，而是企業內部所有 AI 請求的閘道：請求先經權限與政策檢查，再送往經核准的模型（可限定只用地端模型），每一步都寫入雜湊鏈稽核軌跡。</p></div>
+                                    <div class="faq-item"><h3>Forge 跟直接用 ChatGPT 有什麼不同？</h3><p>Forge 是企業內部所有 AI 請求的閘道：請求先經權限與政策檢查，再送往經核准的模型（可限定只用地端模型），每一步都寫入雜湊鏈稽核軌跡。</p></div>
                                     <div class="faq-item"><h3>既有的 AI 應用要改寫才能接 Forge 嗎？</h3><p>多數不需要。Forge 提供 OpenAI 相容 API，支援 OpenAI 介面的工具與程式庫只要改連線位址即可接上。</p></div>
                                     <div class="faq-item"><h3>稽核紀錄怎麼證明沒被改過？</h3><p>Forge 的稽核軌跡是雜湊鏈；匯出的證據包整包封印，並附獨立驗證工具，稽核人員可在離線環境自行驗證。</p></div>
                             </div></div>
@@ -562,7 +562,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="copyright" style="color:#a9a9a9">
-                                    Copyright &copy; 2026 奧洛股份有限公司, All Right Reserved. | 台北市內湖區洲子街101號2樓 | +886-2-5568-4688 | ad@aurocore.com | <a href="privacypolicy.html">隱私權政策</a>
+                                    Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span class="ft-nw">台北市內湖區洲子街101號2樓</span> | <a class="ft-nw" href="tel:+886-2-5568-4688">+886-2-5568-4688</a> | <a class="ft-nw" href="mailto:ad@aurocore.com">ad@aurocore.com</a> | <a href="privacypolicy.html">隱私權政策</a>
                                 </div>
                             </div>
                         </div>

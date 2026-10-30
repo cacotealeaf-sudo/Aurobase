@@ -151,10 +151,10 @@ body {
 .nm-platform { background: #f8f9fa; padding: 4rem 0; }
 .nm-platform .platform-text { font-size: 0.95rem; color: #4a4a4a; line-height: 1.9; max-width: 72ch; }
 .nm-platform .platform-text b { color: #28282c; }
-.nm-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.6rem; }
+.nm-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0.7rem; margin-top: 1.6rem; }
 .nm-link {
     display: inline-flex; flex-direction: column; gap: 0.15rem; background: #fff; border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 8px; padding: 0.7rem 1rem; text-decoration: none; min-width: 180px;
+    border-radius: 8px; padding: 0.7rem 1rem; text-decoration: none; min-width: 0;
     transition: border-color 0.2s, transform 0.2s;
 }
 .nm-link:hover { border-color: var(--m-bright); transform: translateY(-2px); text-decoration: none; }
@@ -215,7 +215,7 @@ body {
     .nm-hero h1 { margin-bottom: 0.75rem; }
     .nm-hero .hero-tagline { margin-top: 1rem; }
     .nm-hero .hero-actions { margin-top: 1.5rem; }
-    .nm-link { min-width: 0; flex: 1 1 100%; }
+    .nm-links { grid-template-columns: 1fr 1fr; }
     .qf-fab { width: 48px; height: 48px; padding: 0; right: 16px; bottom: 16px; justify-content: center; }
     .qf-fab span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 }
@@ -313,3 +313,41 @@ a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none;
 .sol-card h3 a:hover { color: var(--m-deep); }
 .sol-card p { font-size: 0.86rem; color: #666; line-height: 1.75; flex: 1; }
 .sol-card .flow-mods { margin-top: 0.6rem; }
+
+/* ── 手機：對照表改成每列一張卡，欄名標在格子前，自家產品欄不會被捲動藏起來 ── */
+@media (max-width: 767.98px) {
+    .nm-table-wrap { overflow: visible; border: 0; background: transparent; }
+    .nm-table, .nm-table tbody, .nm-table tr, .nm-table th, .nm-table td { display: block; width: 100%; min-width: 0; }
+    .nm-table thead { display: none; }
+    .nm-table tr { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; margin-bottom: 0.8rem; overflow: hidden; }
+    .nm-table tbody th { width: 100% !important; background: var(--m-tint); color: var(--m-deep); border-top: 0; padding: 0.7rem 1rem; }
+    .nm-table td { border-top: 1px solid rgba(0,0,0,0.05); padding: 0.65rem 1rem; }
+    .nm-table td[data-label]::before { content: attr(data-label); display: block; font-size: 0.74rem; font-weight: 700; color: #8a8a90; margin-bottom: 0.15rem; }
+    .nm-table td.is-us { background: color-mix(in srgb, var(--m-tint) 55%, #fff); }
+    .nm-table td.is-us::before { color: var(--m-deep); }
+}
+
+/* ── 實機畫面（選用）── */
+.nm-shots { background: #fff; padding: 4rem 0; }
+.nm-shot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.4rem; }
+.nm-shot { margin: 0; background: #f8f9fa; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.nm-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.nm-shot figcaption { padding: 0.9rem 1.1rem 1.1rem; font-size: 0.86rem; color: #555; line-height: 1.75; }
+.nm-shot figcaption b { display: block; color: #28282c; font-size: 0.95rem; margin-bottom: 0.25rem; }
+
+/* ── 實測數字（選用）── */
+.nm-evidence { background: #f8f9fa; padding: 4rem 0; }
+.nm-metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.nm-metric { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.3rem 1.4rem; }
+.nm-metric b { display: block; font-size: 1.7rem; line-height: 1.2; color: var(--m-deep); white-space: nowrap; }
+.nm-metric span { display: block; font-weight: 700; font-size: 0.92rem; color: #28282c; margin: 0.35rem 0; }
+.nm-metric p { font-size: 0.84rem; color: #666; line-height: 1.7; margin: 0; }
+.nm-proofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+.nm-proof { background: #fff; border-left: 3px solid var(--m-bright); border-radius: 0 10px 10px 0; padding: 1.1rem 1.3rem; }
+.nm-proof h3 { font-size: 1rem; font-weight: 700; margin: 0 0 0.4rem; }
+.nm-proof p { font-size: 0.86rem; color: #555; line-height: 1.75; margin: 0; }
+@media (max-width: 767.98px) {
+    .nm-shot-grid, .nm-proofs { grid-template-columns: 1fr; }
+    .nm-metrics { grid-template-columns: 1fr 1fr; }
+    .nm-metric b { font-size: 1.35rem; }
+}
