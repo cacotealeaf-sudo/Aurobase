@@ -1,1 +1,5 @@
 permalink: /:basename/
+# 內部文件與建置工具不對外發布（docs/ 內含產品評估與開發計畫）
+exclude:
+  - docs
+  - tools

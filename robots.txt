@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://www.aurobase.com/sitemap.xml
+Sitemap: https://aurobase.com/sitemap.xml
