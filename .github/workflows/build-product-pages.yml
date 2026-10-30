@@ -1,0 +1,68 @@
+# 產品頁內容（tools/module-pages/*.json）推到 main 之後，重新產頁、重建字型與圖示子集，
+# 有變動就 commit 回 main，並請 GitHub Pages 重新建置。內容有錯時這一步會失敗、不會 commit。
+name: Build product pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/module-pages/**'
+      - 'tools/build-module-pages.py'
+      - 'tools/cms/**'
+      - 'css/nexus-module.css'
+      - '.github/workflows/build-product-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: build-product-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install font tools
+        run: pip install fonttools brotli
+
+      - name: Test the generator and editor
+        run: CMS_SKIP_FONTS=1 python3 tools/cms/test_cms.py
+
+      - name: Build pages
+        run: python3 tools/build-module-pages.py
+
+      - name: Rebuild font and icon subsets
+        run: |
+          bash tools/build-font-subset.sh
+          bash tools/build-iconoir-subset.sh
+
+      - name: Commit regenerated files
+        id: commit
+        run: |
+          git add -A -- '*.html' llms.txt sitemap.xml css/line-seed-font.css css/iconoir-subset.css WOFF2
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "產出與 repo 內容一致，不需要 commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore(build): regenerate product pages"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # 用 GITHUB_TOKEN 推的 commit 不一定會觸發 Pages 建置，主動請求一次
+      - name: Request a GitHub Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages 建置請求失敗，可在 Settings → Pages 手動重建"

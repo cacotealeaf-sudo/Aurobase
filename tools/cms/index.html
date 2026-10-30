@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AURO NEXUS 產品頁編輯器</title>
+  <link rel="stylesheet" href="/cms/app.css">
+</head>
+<body>
+  <aside class="side">
+    <div class="brand">AURO NEXUS<small>產品頁編輯器</small></div>
+    <button class="btn-new" id="btnNew" type="button">＋ 新增產品</button>
+    <nav>
+      <p class="nav-label">平台</p>
+      <ul id="navPlatform"></ul>
+      <p class="nav-label">產品</p>
+      <ul id="navModules"></ul>
+    </nav>
+    <div class="git" id="gitStatus"></div>
+  </aside>
+
+  <main class="editor">
+    <header class="bar">
+      <div>
+        <h1 id="docTitle">請從左側選一頁</h1>
+        <p id="docMeta"></p>
+      </div>
+      <div class="bar-actions">
+        <span id="dirty" class="dirty" hidden>未儲存</span>
+        <button id="btnSave" class="btn-primary" type="button" disabled>儲存並產頁</button>
+      </div>
+    </header>
+    <div id="issues" class="issues" hidden></div>
+    <form id="form" autocomplete="off" onsubmit="return false"></form>
+  </main>
+
+  <section class="preview">
+    <header class="bar">
+      <div class="seg" role="group" aria-label="預覽寬度">
+        <button type="button" data-w="desktop" class="on">桌機</button>
+        <button type="button" data-w="mobile">手機</button>
+      </div>
+      <a id="openLive" target="_blank" rel="noopener">在新分頁開啟已產生的頁面 ↗</a>
+    </header>
+    <div class="frame-wrap"><iframe id="frame" title="即時預覽"></iframe></div>
+  </section>
+
+  <dialog id="wizard">
+    <form method="dialog" id="wizForm">
+      <h2>新增產品</h2>
+      <p class="hint">先建成草稿：不會產頁、不會出現在總覽。內容填完、取消「草稿」後儲存，才會發布並自動放進平台總覽。</p>
+      <label>產品名 <input name="code" required placeholder="例如：Vault"></label>
+      <label>中文功能名 <input name="name_zh" required placeholder="例如：金鑰與機密管理"></label>
+      <label>網址代號 <input name="slug" required pattern="nexus-[a-z0-9]+(-[a-z0-9]+)*" placeholder="nexus-vault"><small>會成為 aurobase.com/<b data-slug>nexus-vault</b>.html，建立後不能改。</small></label>
+      <label>平台分組 <select name="platform_leg" required></select></label>
+      <label>需求一句話 <input name="need" required placeholder="例如：集中管理金鑰與系統密碼"><small>放進總覽頁「依需求找模組」表格。</small></label>
+      <p class="wiz-err" id="wizErr"></p>
+      <menu>
+        <button value="cancel" type="button" id="wizCancel">取消</button>
+        <button value="ok" class="btn-primary" id="wizOk">建立草稿</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/cms/schema.js"></script>
+  <script src="/cms/app.js"></script>
+</body>
+</html>

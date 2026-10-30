@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""產生 AURO NEXUS 模組介紹頁（nexus-<slug>.html）。
+"""產生 AURO NEXUS 產品頁（nexus-<slug>.html）、nexus.html 平台總覽、llms.txt 產品一覽與 sitemap。
 
-內容在 tools/module-pages/<slug>.json，共用外框在 tools/module-pages/chrome-*.html，
-樣式在 css/nexus-module.css。改內容後重跑：
+內容在 tools/module-pages/<slug>.json（平台總覽在 _platform.json），共用外框在
+tools/module-pages/chrome-*.html，樣式在 css/nexus-module.css。改內容後重跑：
 
     python3 tools/build-module-pages.py
 
-再跑 tools/build-font-subset.sh（新字）與 tools/build-iconoir-subset.sh（新圖示）。
+內容有錯（缺欄位、連到不存在的產品…）時列出錯誤並以非零狀態結束，不寫任何檔案。
+"draft": true 的產品不產頁、不進總覽；已產過的頁面會被移除。
+新字與新圖示另跑 tools/build-font-subset.sh、tools/build-iconoir-subset.sh（GitHub Action 會代跑）。
+編輯介面：python3 tools/cms/server.py。
 JSON 內的文字欄位允許 <b> <em> <code> <a> 等行內標籤；結構化資料會去掉標籤。
 """
+import datetime
 import glob
 import html
 import io
@@ -19,6 +23,15 @@ import sys
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
 SRC = os.path.join(ROOT, 'tools', 'module-pages')
+
+
+def set_root(root):
+    """讓編輯器與測試指向另一份網站目錄。"""
+    global ROOT, SRC
+    ROOT = os.path.normpath(root)
+    SRC = os.path.join(ROOT, 'tools', 'module-pages')
+
+
 SITE = 'https://aurobase.com'
 ORG = {
     '@type': 'Organization',
@@ -35,7 +48,8 @@ ORG = {
 
 
 def read(p):
-    return io.open(p, encoding='utf-8').read()
+    with io.open(p, encoding='utf-8') as f:
+        return f.read()
 
 
 def plain(s):
@@ -46,14 +60,147 @@ def attr(s):
     return html.escape(plain(s), quote=True)
 
 
-def load_modules():
+def load_modules(include_drafts=False):
     mods = {}
     for p in sorted(glob.glob(os.path.join(SRC, '*.json'))):
         if os.path.basename(p).startswith('_'):
             continue
         m = json.loads(read(p))
+        if m.get('draft') and not include_drafts:
+            continue
         mods[m['slug']] = m
     return mods
+
+
+def load_platform():
+    return json.loads(read(os.path.join(SRC, '_platform.json')))
+
+
+def load_chrome():
+    return read(os.path.join(SRC, 'chrome-top.html')), read(os.path.join(SRC, 'chrome-bottom.html'))
+
+
+# ── 內容檢查：錯誤會擋下產頁；警告只提醒 ──
+
+SLUG_RE = re.compile(r'^nexus-[a-z0-9]+(-[a-z0-9]+)*$')
+THEME_KEYS = ('deep', 'bright', 'soft', 'tint', 'ink1', 'ink2')
+
+
+def available_icons():
+    css = read(os.path.join(ROOT, 'css', 'iconoir-subset.css'))
+    return set(re.findall(r'\.iconoir-([a-z0-9-]+)::before', css))
+
+
+def inquiry_chips():
+    return re.findall(r'name="entry\.1863307942" value="([^"]+)"', load_chrome()[0])
+
+
+def known_slugs(mods, pf):
+    return set(mods) | set(pf.get('extra_modules', {}))
+
+
+def validate(m, mods, pf):
+    errors, warnings = [], []
+
+    def need(path, v):
+        if v is None or (isinstance(v, (str, list)) and not (v.strip() if isinstance(v, str) else v)):
+            errors.append('%s 不可空白' % path)
+
+    def g(d, *keys):
+        for k in keys:
+            if not isinstance(d, dict):
+                return None
+            d = d.get(k)
+        return d
+
+    slug = m.get('slug', '')
+    if not SLUG_RE.match(slug):
+        errors.append('slug 須為 nexus- 開頭的小寫英數與連字號')
+    if m.get('file') != slug + '.html':
+        errors.append('file 應為 %s.html' % slug)
+    for k in ('code', 'name_zh', 'leg', 'title', 'description', 'eyebrow', 'keywords', 'updated'):
+        need(k, m.get(k))
+    for k in ('h1', 'slogan', 'sub', 'tagline'):
+        need('hero.' + k, g(m, 'hero', k))
+    theme = m.get('theme') or {}
+    for k in THEME_KEYS:
+        if not re.match(r'^#[0-9A-Fa-f]{6}$', theme.get(k, '')):
+            errors.append('theme.%s 須為 #RRGGBB 色碼' % k)
+    if '是什麼' not in dict(m.get('summary') or []):
+        errors.append('重點摘要須有「是什麼」一項（平台總覽卡片會用到）')
+    need('definition.q', g(m, 'definition', 'q'))
+    need('definition.a', g(m, 'definition', 'a'))
+    need('audience', m.get('audience'))
+    for k in ('heading', 'cards', 'statement'):
+        need('pain.' + k, g(m, 'pain', k))
+    for sec in ('capabilities', 'diff'):
+        need(sec + '.heading', g(m, sec, 'heading'))
+        need(sec + '.cards', g(m, sec, 'cards'))
+    need('platform.heading', g(m, 'platform', 'heading'))
+    need('platform.text', g(m, 'platform', 'text'))
+    need('deploy', m.get('deploy'))
+    need('cta.heading', g(m, 'cta', 'heading'))
+    need('cta.text', g(m, 'cta', 'text'))
+    for i, f in enumerate(m.get('faq') or [], 1):
+        need('faq[%d].q' % i, f.get('q'))
+        need('faq[%d].a' % i, f.get('a'))
+    for i, c in enumerate(g(m, 'capabilities', 'cards') or [], 1):
+        need('capabilities.cards[%d].title' % i, c.get('title'))
+        need('capabilities.cards[%d].items' % i, c.get('items'))
+    if m.get('updated') and not re.match(r'^\d{4}-\d{2}-\d{2}$', m['updated']):
+        errors.append('updated 須為 YYYY-MM-DD')
+    drafts = set(load_modules(include_drafts=True)) - set(mods)
+    for s in g(m, 'platform', 'related') or []:
+        if s in drafts:
+            warnings.append('相關產品「%s」目前是草稿，頁面上暫時不顯示這個連結' % s)
+        elif s not in known_slugs(mods, pf) and s != slug:
+            errors.append('platform.related 的「%s」不存在' % s)
+    chip = m.get('inquiry_chip')
+    if chip and chip not in inquiry_chips():
+        errors.append('inquiry_chip「%s」不在諮詢表單選項裡' % chip)
+    rg = m.get('regulation')
+    if rg:
+        if len(rg.get('cols') or []) != 2:
+            errors.append('regulation.cols 須為兩欄')
+        if any(len(r) != 2 for r in rg.get('rows') or []):
+            errors.append('regulation.rows 每列須為兩格')
+        need('regulation.sources', rg.get('sources'))
+    cp = m.get('compare')
+    if cp:
+        n = len(cp.get('cols') or [])
+        if any(len(r) != n + 1 for r in cp.get('rows') or []):
+            errors.append('compare.rows 每列須為「項目」加 %d 格' % n)
+
+    icons = available_icons()
+    used = [b.get('icon') for b in g(m, 'hero', 'badges') or []]
+    used += [c.get('icon') for sec in ('capabilities', 'diff') for c in g(m, sec, 'cards') or []]
+    for ic in sorted(set(filter(None, used)) - icons):
+        warnings.append('圖示「%s」不在目前的圖示子集，發布時 GitHub Action 會重建；若名稱打錯則不會顯示' % ic)
+    if len(m.get('title', '')) > 45:
+        warnings.append('頁面標題 %d 字，搜尋結果大約只顯示前 30～40 個中文字' % len(m['title']))
+    dl = len(plain(m.get('description', '')))
+    if dl and not 70 <= dl <= 160:
+        warnings.append('搜尋摘要 %d 字，建議 70～160 字' % dl)
+    if len(m.get('faq') or []) < 3:
+        warnings.append('常見問題少於 3 題，AI 引擎可引用的內容較少')
+    return errors, warnings
+
+
+def validate_platform(pf, mods):
+    errors = []
+    known = known_slugs(mods, pf)
+    drafts = set(load_modules(include_drafts=True)) - set(mods)
+    for lg in pf.get('legs') or []:
+        for s in lg.get('modules') or []:
+            if s not in known and s not in drafts:
+                errors.append('平台分組「%s」的「%s」不存在' % (lg.get('name'), s))
+    for need_text, s in (pf.get('needs') or {}).get('rows') or []:
+        if s not in known and s not in drafts:
+            errors.append('依需求找模組的「%s」指到不存在的「%s」' % (need_text, s))
+    for k in ('title', 'description', 'h1', 'slogan', 'sub'):
+        if not (pf.get(k) or '').strip():
+            errors.append('平台總覽 %s 不可空白' % k)
+    return errors
 
 
 def url_of(m):
@@ -294,8 +441,7 @@ def body(m, mods):
             links.append('<a class="nm-link" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span></a>')
         elif s == 'nexus-geo':
             links.append('<a class="nm-link" href="nexus-geo.html"><b>NEXUS GEO</b><span>生成式搜尋能見度</span></a>')
-        else:
-            sys.exit('%s: platform.related 指到不存在的模組 %s' % (m['slug'], s))
+        # 不存在的產品在 validate() 就會被擋下；草稿預覽時略過
     links.append('<a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a>')
     out.append(section('nm-platform', 'ON THE PLATFORM', pl['heading'],
         f'                            <div class="platform-text">{pl["text"]}</div>\n'
@@ -371,8 +517,14 @@ def overview_mods(pf, mods):
             m = mods[slug]
             return {'code': m['code'], 'name_zh': m['name_zh'], 'file': m['file'],
                     'what': plain(dict(m['summary'])['是什麼'])}
-        return pf['extra_modules'][slug]
+        return pf['extra_modules'].get(slug)
     return get
+
+
+def live(pf, mods, slugs):
+    """略過草稿與不存在的產品。"""
+    get = overview_mods(pf, mods)
+    return [s for s in slugs if get(s)]
 
 
 def overview_html(pf, mods):
@@ -412,17 +564,17 @@ def overview_html(pf, mods):
         return f'<a class="leg-mod" href="{x["file"]}"><b>{x["code"]}</b><span>{x["name_zh"]}</span><small>{x["what"]}</small></a>'
     base = pf['legs'][0]
     legs = ''.join(f'''
-                                <div class="col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">{lg['name']}</p><p class="leg-text">{lg['text']}</p>{''.join(mod_link(s) for s in lg['modules'])}</div></div>'''
-        for lg in pf['legs'][1:])
-    n = sum(len(lg['modules']) for lg in pf['legs'])
+                                <div class="col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">{lg['name']}</p><p class="leg-text">{lg['text']}</p>{''.join(mod_link(s) for s in live(pf, mods, lg['modules']))}</div></div>'''
+        for lg in pf['legs'][1:] if live(pf, mods, lg['modules']))
+    n = sum(len(live(pf, mods, lg['modules'])) for lg in pf['legs'])
     out.append(section('nm-legs', 'ARCHITECTURE', f'一個治理底座，{n} 個模組',
         f'''                            <div class="row">{legs}
                             </div>
-                            <div class="leg-base"><p class="leg-name">{base['name']}</p><p class="leg-text">{base['text']}所有模組的 AI 呼叫都經過這一層。</p>{''.join(mod_link(s) for s in base['modules'])}</div>''',
+                            <div class="leg-base"><p class="leg-name">{base['name']}</p><p class="leg-text">{base['text']}所有模組的 AI 呼叫都經過這一層。</p>{''.join(mod_link(s) for s in live(pf, mods, base['modules']))}</div>''',
         intro='上層的每一個模組各自解決一類問題；下層的治理底座讓它們共用同一套權限、模型與稽核軌跡。', sid='modules'))
 
     nd = pf['needs']
-    rows = ''.join(f'<tr><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{get(s)["code"]} {get(s)["name_zh"]}</a></td></tr>' for need, s in nd['rows'])
+    rows = ''.join(f'<tr><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{get(s)["code"]} {get(s)["name_zh"]}</a></td></tr>' for need, s in nd['rows'] if get(s))
     out.append(section('nm-compare', 'WHERE TO START', nd['heading'],
         f'''                            <div class="nm-table-wrap"><table class="nm-table">
                                 <thead><tr><th scope="col">您的需求</th><th scope="col">對應模組</th></tr></thead>
@@ -442,7 +594,7 @@ def overview_html(pf, mods):
 def overview_jsonld(pf, mods, old_faq):
     get = overview_mods(pf, mods)
     url = SITE + '/nexus.html'
-    slugs = [s for lg in pf['legs'] for s in lg['modules']]
+    slugs = live(pf, mods, [s for lg in pf['legs'] for s in lg['modules']])
     graph = [
         {'@type': 'WebPage', '@id': url + '#webpage', 'url': url, 'name': pf['title'],
          'description': plain(pf['description']), 'inLanguage': 'zh-Hant-TW', 'dateModified': pf['updated'],
@@ -464,8 +616,8 @@ def overview_jsonld(pf, mods, old_faq):
     return json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2)
 
 
-def build_overview(mods):
-    pf = json.loads(read(os.path.join(SRC, '_platform.json')))
+def build_overview(mods, pf=None, write=True):
+    pf = pf or load_platform()
     p = os.path.join(ROOT, 'nexus.html')
     s = read(p)
     # 舊段落（NEXUS OS / CDP / Voice）的 FAQ 仍在頁面上，結構化資料一併保留（_platform.json legacy_faq）
@@ -485,21 +637,26 @@ def build_overview(mods):
         anchor = '<div id="colorlib-main">'
         assert anchor in s
         s = s.replace(anchor, anchor + '\n' + block + '\n', 1)
-    io.open(p, 'w', encoding='utf-8').write(s)
-    print('updated nexus.html overview')
+    if write:
+        io.open(p, 'w', encoding='utf-8').write(s)
+    return s
 
 
 LLMS_BEGIN, LLMS_END = '<!-- MODULES:BEGIN（由 tools/build-module-pages.py 產生）-->', '<!-- MODULES:END -->'
 
 
-def update_llms(mods):
-    pf = json.loads(read(os.path.join(SRC, '_platform.json')))
+def update_llms(mods, pf=None):
+    pf = pf or load_platform()
     get = overview_mods(pf, mods)
     b = ['## AURO NEXUS 產品一覽', '', ''.join(plain(x) for x in pf['definition']['a']), '',
          '平台總覽：[AURO NEXUS](nexus.html)', '']
     for lg in pf['legs']:
         b.append('### ' + lg['name'])
-        for slug in lg['modules']:
+        slugs = live(pf, mods, lg['modules'])
+        if not slugs:
+            b.pop()
+            continue
+        for slug in slugs:
             x = get(slug)
             desc = plain(mods[slug]['description']) if slug in mods else x['what']
             b.append('- [%s %s](%s): %s' % (x['code'], x['name_zh'], x['file'], desc))
@@ -528,17 +685,63 @@ def update_sitemap(mods):
     io.open(p, 'w', encoding='utf-8').write(t)
 
 
-def main():
-    top = read(os.path.join(SRC, 'chrome-top.html'))
-    bottom = read(os.path.join(SRC, 'chrome-bottom.html'))
-    mods = load_modules()
+GENERATED_MARK = '（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）'
+
+
+def render_module(m, mods):
+    top, bottom = load_chrome()
+    return build(m, mods, top, bottom)
+
+
+def check_all(mods=None, pf=None):
+    mods = load_modules() if mods is None else mods
+    pf = pf or load_platform()
+    errors = []
     for m in mods.values():
-        out = os.path.join(ROOT, m['file'])
-        io.open(out, 'w', encoding='utf-8').write(build(m, mods, top, bottom))
-        print('wrote', m['file'])
-    build_overview(mods)
-    update_llms(mods)
+        errors += ['%s：%s' % (m['slug'], e) for e in validate(m, mods, pf)[0]]
+    errors += validate_platform(pf, mods)
+    return errors
+
+
+def build_all():
+    """檢查全部內容、產生全部頁面。有錯誤時不寫任何檔案並回傳錯誤清單。"""
+    mods = load_modules()
+    pf = load_platform()
+    errors = check_all(mods, pf)
+    if errors:
+        return {'errors': errors, 'written': [], 'removed': []}
+    top, bottom = load_chrome()
+    written, removed = [], []
+    for m in mods.values():
+        io.open(os.path.join(ROOT, m['file']), 'w', encoding='utf-8').write(build(m, mods, top, bottom))
+        written.append(m['file'])
+    for slug, m in load_modules(include_drafts=True).items():
+        p = os.path.join(ROOT, m['file'])
+        if slug not in mods and os.path.exists(p) and GENERATED_MARK in read(p):
+            os.remove(p)
+            removed.append(m['file'])
+    build_overview(mods, pf)
+    update_llms(mods, pf)
     update_sitemap(mods)
+    written += ['nexus.html', 'llms.txt', 'sitemap.xml']
+    return {'errors': [], 'written': written, 'removed': removed}
+
+
+def today():
+    return datetime.date.today().isoformat()
+
+
+def main():
+    r = build_all()
+    if r['errors']:
+        print('內容有錯，未產生任何檔案：', file=sys.stderr)
+        for e in r['errors']:
+            print('  - ' + e, file=sys.stderr)
+        sys.exit(1)
+    for f in r['written']:
+        print('wrote', f)
+    for f in r['removed']:
+        print('removed', f)
 
 
 if __name__ == '__main__':
