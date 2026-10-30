@@ -10,14 +10,20 @@
 #colorlib-aside #colorlib-main-menu ul.nav-sub {
     margin: 0.15rem 0 0.7rem; padding: 0.35rem 0 0.35rem 0.9rem; border-left: 2px solid #f0d5cc;
 }
-#colorlib-aside #colorlib-main-menu ul.nav-sub li { font-size: 14px; line-height: 1.55; margin: 0.18rem 0; font-weight: 400; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub li { font-size: 14px; line-height: 1.55; margin: 0; font-weight: 400; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub li a { padding: 1px 0; font-family: inherit; color: #3a3a3f; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub li a:after { bottom: -1px; height: 1px; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-all a { font-weight: 600; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg { display: grid; grid-template-columns: 4.4em 1fr; gap: 0 0.5rem; align-items: baseline; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-name { font-size: 12px; line-height: 1.4; color: #9a9aa0; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links { display: flex; flex-wrap: wrap; gap: 0 0.6rem; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub li a[aria-current="page"] { color: #E63109; font-weight: 600; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg { margin: 0.5rem 0 0; line-height: 1.4; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-name { display: block; font-size: 11px; letter-spacing: 0.08em; color: #a3a3a8; margin-bottom: 0.2rem; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a {
+    font-size: 13px; line-height: 1.45; padding: 0.1rem 0.6rem; border: 1px solid #e7e2df; border-radius: 999px;
+    color: #3a3a3f; background: #fff; transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:after { display: none; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover { border-color: #E63109; color: #E63109; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] { background: #E63109; border-color: #E63109; color: #fff; }
 #colorlib-aside #colorlib-main-menu .nav-ext { font-size: 0.6em; color: #9a9aa0; margin-left: 0.15em; }
 
 /* 目前所在頁面：沿用原本滑過時的橘色底線 */
@@ -34,3 +40,6 @@
     .btn.fixed-top.text-right { white-space: nowrap; overflow-x: auto; padding-left: 72px; scrollbar-width: none; }
     .btn.fixed-top.text-right::-webkit-scrollbar { display: none; }
 }
+
+/* 子選單展開時，固定在底部的標誌改接在選單後面，避免蓋到選單 */
+#colorlib-aside:has(.nav-sub:not([hidden])) .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }

@@ -1163,7 +1163,8 @@ def nav_html(page, prefix, pf, mods):
             for lg in pf['legs']:
                 slugs = live(pf, mods, lg['modules'])
                 if slugs:
-                    links = ''.join('<a href="%s%s"%s>%s</a>' % (prefix, get(s)['file'], cur(get(s)['file']), get(s)['code']) for s in slugs)
+                    # 選單空間有限：拿掉「NEXUS 」前綴（ABM、GEO、AI-Office），頁面本身的名稱不變
+                    links = ''.join('<a href="%s%s"%s>%s</a>' % (prefix, get(s)['file'], cur(get(s)['file']), re.sub(r'^NEXUS ', '', get(s)['code'])) for s in slugs)
                     legs.append('<li class="nav-leg"><span class="nav-leg-name">%s</span><span class="nav-leg-links">%s</span></li>' % (lg['name'], links))
             out.append(
                 '<li class="has-sub%s"><div class="nav-row"><a href="%s%s">%s</a>'
