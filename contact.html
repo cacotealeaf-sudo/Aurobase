@@ -120,6 +120,10 @@
 .ct-office-meta { display: flex; justify-content: space-between; align-items: center; }
 .ct-office-lines { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; font-size: 15px; line-height: 1.7; }
 .ct-office-lines > div { display: grid; grid-template-columns: 56px 1fr; gap: 12px; }
+/* 總部資訊與地圖並排；手機改上下排 */
+.ct-hq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; align-items: stretch; }
+.ct-hq .ct-map { margin-top: 0; }
+@media (max-width: 991.98px) { .ct-hq { grid-template-columns: 1fr; } }
 .ct-office-lines span:first-child { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); padding-top: 3px; }
 .ct-map { border: 1px solid var(--idx-line); background: var(--idx-surface); height: 420px; position: relative; overflow: hidden; }
 /* Invert the light Google map so it sits in the dark page */
@@ -341,13 +345,13 @@
         <span class="idx-sec-num">02</span>
         <div>
           <div class="idx-eyebrow">// 02 — 辦公室據點</div>
-          <h2 class="idx-sec-title">全球辦公室據點</h2>
+          <h2 class="idx-sec-title">台北總部</h2>
         </div>
       </div>
     </div>
     <div class="idx-rule"></div>
 
-    <div class="idx-grid">
+    <div class="ct-hq">
       <article class="idx-card">
         <div class="idx-card-meta"><span>// 台北總部</span><span class="idx-badge">HQ</span></div>
         <h3 class="idx-card-title">奧洛/特聿行銷科技 股份有限公司</h3>
@@ -358,15 +362,6 @@
           <div><span>MAIL</span><a href="mailto:ad@aurocore.com">ad@aurocore.com</a></div>
         </div>
       </article>
-      <article class="idx-card">
-        <div class="idx-card-meta"><span>// 中國</span></div>
-        <h3 class="idx-card-title">廣州辦事處</h3>
-        <div class="ct-office-lines">
-          <div><span>ADDR</span><span>广州市天河区岑村圣堂大街工业区3号321室</span></div>
-          <div><span>TEL</span><a href="tel:+86-189-2502-2494">18925022494</a></div>
-        </div>
-      </article>
-    </div>
 
     <div class="ct-map">
       <iframe
@@ -375,6 +370,7 @@
         loading="lazy"
         allowfullscreen
         referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
     </div>
   </section>
 
