@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
     paths:
+      - '**.html'
+      - 'llms.txt'
+      - 'sitemap.xml'
+      - 'css/**'
       - 'tools/module-pages/**'
       - 'tools/build-module-pages.py'
       - 'tools/cms/**'
@@ -26,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -87,3 +93,36 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages 建置請求失敗，可在 Settings → Pages 手動重建"
+
+      # IndexNow：Pages 建置完成後，通知 Bing 等支援 IndexNow 的搜尋引擎哪些網址更新了（Google 不支援，需用 Search Console）
+      - name: Notify search engines (IndexNow)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          for i in $(seq 1 40); do
+            status=$(gh api "repos/${{ github.repository }}/pages/builds/latest" --jq .status 2>/dev/null || echo unknown)
+            [ "$status" = "built" ] && break
+            sleep 15
+          done
+          python3 - <<'PY'
+          import json, os, re, subprocess, urllib.request
+          KEY = '8a26a98adce85abe99c2370c8828e900'
+          SITE = 'https://aurobase.com'
+          before = os.environ.get('BEFORE', '')
+          if before and not set(before) <= {'0'}:
+              out = subprocess.run(['git', 'diff', '--name-only', before, 'HEAD', '--', '*.html'], capture_output=True, text=True).stdout
+              files = [f for f in out.split() if not f.startswith(('archive/', 'tools/'))]
+              urls = [SITE + '/' + ('' if f == 'index.html' else f) for f in files]
+          else:
+              urls = re.findall(r'<loc>([^<]+)</loc>', open('sitemap.xml', encoding='utf-8').read())
+          if not urls:
+              print('沒有變動的網頁，不送 IndexNow'); raise SystemExit(0)
+          body = json.dumps({'host': 'aurobase.com', 'key': KEY, 'keyLocation': SITE + '/' + KEY + '.txt', 'urlList': urls[:10000]}).encode()
+          req = urllib.request.Request('https://api.indexnow.org/indexnow', data=body, headers={'Content-Type': 'application/json; charset=utf-8'})
+          try:
+              print('IndexNow', urllib.request.urlopen(req, timeout=30).status, len(urls), '個網址')
+          except Exception as e:
+              print('IndexNow 送出失敗（不影響發布）：', e)
+          PY
+
