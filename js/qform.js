@@ -66,6 +66,9 @@ document.getElementById("submitButton").addEventListener("click", async function
 
     // 4. 清理數據
     const cleanData = FormValidator.sanitizeFormData(formData);
+    // 附上來源頁面，讓業務知道客戶從哪一個產品或方案頁提出需求
+    const source = document.title.split('｜')[0].trim();
+    cleanData.message = (cleanData.message ? cleanData.message + '\n\n' : '') + '（來源頁面：' + source + '）';
 
     // 5. 提交到 Google Forms
     try {

@@ -26,7 +26,7 @@
     },
     f03: function (v) {
       if (!v.trim()) return '請輸入聯絡電話';
-      return FormValidator.validatePhone(v) ? '' : '請輸入台灣手機或市話，例如 0912-345-678';
+      return FormValidator.validatePhone(v) ? '' : '請輸入電話號碼，例如 0912-345-678、02-5568-4688 或 +886 912 345 678';
     }
   };
 

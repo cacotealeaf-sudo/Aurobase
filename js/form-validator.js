@@ -60,16 +60,19 @@ const FormValidator = {
    * @returns {boolean} 是否有效
    */
   validatePhone(phone) {
-    // 移除空白和連字號
-    const cleaned = phone.replace(/[\s-]/g, '');
-    
+    // 去掉空白、連字號、括號與句點；分機（#123、分機123、ext 123、轉123）不列入判斷
+    const cleaned = phone.trim().replace(/[\s\-().]/g, '').replace(/(#|分機|ext|轉)\d{1,6}$/i, '');
+    // +886 / 00886 開頭的台灣號碼換回 0 開頭再判斷
+    const local = cleaned.replace(/^(\+|00)886/, '0');
+
     // 台灣手機號碼: 09 開頭，共10碼
     const mobileRe = /^09\d{8}$/;
-    
-    // 台灣市話: 02/03/04/05/06/07/08/09 開頭
+    // 台灣市話: 02–09 開頭
     const landlineRe = /^0[2-9]\d{7,8}$/;
-    
-    return mobileRe.test(cleaned) || landlineRe.test(cleaned);
+    // 其他國家：+ 加 8–15 位數字
+    const internationalRe = /^\+\d{8,15}$/;
+
+    return mobileRe.test(local) || landlineRe.test(local) || internationalRe.test(cleaned);
   },
 
   /**
@@ -177,7 +180,7 @@ const FormValidator = {
     if (!formData.phone || !formData.phone.trim()) {
       errors.push('聯絡電話不能為空');
     } else if (!this.validatePhone(formData.phone)) {
-      errors.push('電話號碼格式不正確 (請輸入台灣手機或市話)');
+      errors.push('電話號碼格式不正確，例如 0912-345-678、02-5568-4688 或 +886 912 345 678');
     }
     
     // 4. 驗證公司名稱 (選填，但有填就要檢查長度)

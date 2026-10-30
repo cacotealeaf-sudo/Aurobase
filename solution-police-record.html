@@ -107,6 +107,18 @@
         "addressCountry": "TW"
       },
       "telephone": "+886-2-5568-4688",
+      "email": "ad@aurocore.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+886-2-5568-4688",
+        "email": "ad@aurocore.com",
+        "areaServed": "TW",
+        "availableLanguage": [
+          "zh-Hant",
+          "en"
+        ]
+      },
       "sameAs": [
         "https://www.facebook.com/AurobaseTW/"
       ]
@@ -127,7 +139,7 @@
           "name": "警詢筆錄的錄音會傳到外部雲端嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不需要。警詢筆錄 AI 輔助可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。"
+            "text": "不會。警詢筆錄 AI 輔助可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。"
           }
         },
         {
@@ -226,10 +238,10 @@
                  <div class="qf-chips">
                    <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="數位廣告投放"><label for="f05-1">數位廣告投放</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群媒體經營"><label for="f05-2">社群媒體經營</label></div>
-                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">CXA 顧客體驗分析</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="HCL Unica"><label for="f05-4">HCL Unica</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="CDP 客戶數據平台"><label for="f05-5">CDP 客戶數據平台</label></div>
-                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">NEXUS AI 自動化平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">AURO NEXUS AI 治理平台</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-10" name="entry.1863307942" value="AI Voice Studio"><label for="f05-10">AI Voice Studio</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-11" name="entry.1863307942" value="NEXUS GEO 生成式搜尋優化"><label for="f05-11">NEXUS GEO 生成式搜尋優化</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-12" name="entry.1863307942" value="NEXUS SAGA 資料治理"><label for="f05-12">NEXUS SAGA 資料治理</label></div>
@@ -327,7 +339,7 @@
                             <p class="hero-sub">製作警詢筆錄，員警要一邊詢問一邊打字，事後再回頭核對錄音。這套方案把詢問錄音轉成標好時間碼的逐字稿，預擬問答體筆錄草稿，依罪名檢查構成要件、提示可以追問的地方，並檢查告知事項等法定程序。員警審閱、修改後再套印。</p>
                             <p class="hero-tagline">草稿的每一段都對得回錄音時間碼與原句，每一次修改都留有紀錄。</p>
                             <div class="hero-actions">
-                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges"><span class="nm-badge"><i class="iconoir-voice"></i> 語音轉寫</span><span class="nm-badge"><i class="iconoir-page"></i> 筆錄草稿</span><span class="nm-badge"><i class="iconoir-badge-check"></i> 構成要件檢核</span><span class="nm-badge"><i class="iconoir-shield-check"></i> 法定程序檢核</span><span class="nm-badge"><i class="iconoir-server"></i> 機關內部部署</span></div>
@@ -432,7 +444,7 @@
                                         <h3>套印與版本</h3><ul><li>套印警詢筆錄格式。</li><li>每一版草稿與修改軌跡完整留存。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
-                                        <h3>稽核與權限</h3><ul><li>錄音雜湊與草稿版本寫入案件事件鏈。</li><li>AI 呼叫經 Forge 留下不可覆寫的稽核紀錄。</li><li>依案件成員設定存取權限。</li></ul></div></div>
+                                        <h3>稽核與權限</h3><ul><li>錄音雜湊與草稿版本寫入案件事件鏈。</li><li>AI 呼叫經 Forge 留下可驗證的稽核紀錄。</li><li>依案件成員設定存取權限。</li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -541,7 +553,7 @@
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
                                     <div class="faq-item"><h3>警詢筆錄 AI 輔助會自動寫好筆錄嗎？</h3><p>不會自動定稿。警詢筆錄 AI 輔助先把錄音轉成逐字稿並預擬筆錄草稿，每一段附錄音時間碼與來源句；員警審閱、修改後才套印，修改軌跡完整留存。</p></div>
-                                    <div class="faq-item"><h3>警詢筆錄的錄音會傳到外部雲端嗎？</h3><p>不需要。警詢筆錄 AI 輔助可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。</p></div>
+                                    <div class="faq-item"><h3>警詢筆錄的錄音會傳到外部雲端嗎？</h3><p>不會。警詢筆錄 AI 輔助可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。</p></div>
                                     <div class="faq-item"><h3>警詢筆錄 AI 輔助怎麼檢查法定程序？</h3><p>系統依刑事訴訟法的告知事項、全程錄音與夜間詢問等規定，檢查詢問內容與時段，同音字也能辨認；檢查結果作為提示，由員警確認。</p></div>
                                     <div class="faq-item"><h3>警詢筆錄 AI 輔助支援台語或客語嗎？</h3><p>警詢筆錄 AI 輔助目前以國語語音辨識為主；台語、客語需要依案場的錄音條件另行評估。</p></div>
                                     <div class="faq-item"><h3>構成要件檢核包可以新增罪名嗎？</h3><p>可以。警詢筆錄 AI 輔助依罪名整理構成要件與常見追問，作為檢核包；新增或修改的檢核包由機關法制人員審定後啟用。</p></div>
@@ -555,7 +567,7 @@
                 <div class="container">
                     <h2>用一段模擬詢問錄音試跑</h2>
                     <p>提供一段模擬或去識別化的詢問錄音，我們產出逐字稿、筆錄草稿與檢核結果供您對照。</p>
-                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <a class="btn-cta" href="contact.html" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                     <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
                 </div>
             </section>

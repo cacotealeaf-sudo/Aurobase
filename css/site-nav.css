@@ -28,3 +28,9 @@
 @media (max-height: 880px) {
     #colorlib-aside .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }
 }
+
+/* 手機：頁首錨點按鈕列可橫向滑動並讓開漢堡選單（nexus.html、solution.html 等） */
+@media (max-width: 991.98px) {
+    .btn.fixed-top.text-right { white-space: nowrap; overflow-x: auto; padding-left: 72px; scrollbar-width: none; }
+    .btn.fixed-top.text-right::-webkit-scrollbar { display: none; }
+}

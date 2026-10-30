@@ -108,6 +108,18 @@
         "addressCountry": "TW"
       },
       "telephone": "+886-2-5568-4688",
+      "email": "ad@aurocore.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+886-2-5568-4688",
+        "email": "ad@aurocore.com",
+        "areaServed": "TW",
+        "availableLanguage": [
+          "zh-Hant",
+          "en"
+        ]
+      },
       "sameAs": [
         "https://www.facebook.com/AurobaseTW/"
       ]
@@ -144,7 +156,7 @@
           "name": "人工改過的結果會讓系統越來越準嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "會累積。AI OCR 智慧文件辨識把人工修正回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。"
+            "text": "會。AI OCR 智慧文件辨識把人工修正回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。"
           }
         },
         {
@@ -235,10 +247,10 @@
                  <div class="qf-chips">
                    <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="數位廣告投放"><label for="f05-1">數位廣告投放</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群媒體經營"><label for="f05-2">社群媒體經營</label></div>
-                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">Acoustic CXA</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">CXA 顧客體驗分析</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="HCL Unica"><label for="f05-4">HCL Unica</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="CDP 客戶數據平台"><label for="f05-5">CDP 客戶數據平台</label></div>
-                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">NEXUS AI 自動化平台</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-9" name="entry.1863307942" value="NEXUS AI 自動化平台" checked><label for="f05-9">AURO NEXUS AI 治理平台</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-10" name="entry.1863307942" value="AI Voice Studio"><label for="f05-10">AI Voice Studio</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-11" name="entry.1863307942" value="NEXUS GEO 生成式搜尋優化"><label for="f05-11">NEXUS GEO 生成式搜尋優化</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-12" name="entry.1863307942" value="NEXUS SAGA 資料治理"><label for="f05-12">NEXUS SAGA 資料治理</label></div>
@@ -336,7 +348,7 @@
                             <p class="hero-sub">理賠附件、申請書、證明文件、財務報表，每個來源的格式都不一樣，有的還夾著手寫。這套方案用欄位定義描述要擷取的內容，免訓練就能處理新格式；印刷字由 OCR 讀取，手寫與信心不足的欄位轉人工覆核，人員修正的結果下一份文件就用上。</p>
                             <p class="hero-tagline">數值一律取自原始文字或影像；手寫欄位只當提議，不自動採用。</p>
                             <div class="hero-actions">
-                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges"><span class="nm-badge"><i class="iconoir-grid-plus"></i> 任意格式擷取</span><span class="nm-badge"><i class="iconoir-edit-pencil"></i> 手寫轉人工覆核</span><span class="nm-badge"><i class="iconoir-filter"></i> 信心度分流</span><span class="nm-badge"><i class="iconoir-copy"></i> 修正下一份即生效</span><span class="nm-badge"><i class="iconoir-page"></i> 財報辨識</span><span class="nm-badge"><i class="iconoir-server"></i> 機房內部署</span></div>
@@ -345,7 +357,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>免訓練擷取各種文件欄位，手寫與信心不足的轉人工覆核的 AI OCR 解決方案。</dd><dt>格式</dt><dd>PDF、PNG、JPG、TIFF、HEIC；有文字層的直接讀取，掃描件做 OCR，直式橫式自動轉正。</dd><dt>手寫</dt><dd>可由地端視覺模型先逐字抄寫成提議，一律交人工覆核。</dd><dt>學習</dt><dd>人工修正回寫並學習欄位別名，下一份文件即生效，不需要重新訓練模型。</dd><dt>內建</dt><dd>財務報表的頁面分類、科目擷取與勾稽檢核。</dd><dt>組成</dt><dd><a href="nexus-insight.html">Insight</a> 的文件解析能力，加上文件辨識引擎、勾稽規則集與人工覆核流程。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>免訓練擷取各種文件欄位，手寫與信心不足的轉人工覆核的 AI OCR 解決方案。</dd><dt>格式</dt><dd>PDF、PNG、JPG、TIFF、HEIC；有文字層的直接讀取，掃描件做 OCR，直式橫式自動轉正。</dd><dt>手寫</dt><dd>可由地端視覺模型先逐字抄寫成提議，一律交人工覆核。</dd><dt>學習</dt><dd>人工修正回寫並學習欄位別名，下一份文件即生效，不需要重新訓練模型。</dd><dt>內建</dt><dd>財務報表的頁面分類、科目擷取與勾稽檢核。</dd><dt>組成</dt><dd>文件辨識引擎、勾稽規則集與人工覆核流程，屬於平台的知識能力，與 <a href="nexus-insight.html">Insight</a> 一同開發。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -359,7 +371,7 @@
                             <p class="section-label">DEFINITION</p>
                             <h2 class="section-heading">AI OCR 是什麼？</h2>
                             <div class="row">
-                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AI OCR</b> 在文字辨識之外，還會判斷每段文字屬於哪個欄位、可信度多高，並整理成系統可以直接使用的資料。傳統 OCR 給的是文字，AI OCR 給的是欄位。</p><p><b>AI OCR 智慧文件辨識</b>是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案。它用欄位定義描述要擷取的內容，免訓練就能處理表單、證明文件與理賠附件等不同格式；每個欄位附信心分數與原始影像座標；印刷字由 OCR 讀取，手寫與信心不足的欄位轉人工覆核；修正結果回寫，下一份文件即生效。財務報表另有內建的頁面分類、科目擷取與勾稽檢核。</p></div></div>
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AI OCR</b> 在文字辨識之外，還會判斷每段文字屬於哪個欄位、可信度多高，並整理成系統可以直接使用的資料。傳統 OCR 只輸出文字，欄位要由人另外整理。</p><p><b>AI OCR 智慧文件辨識</b>是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案。它用欄位定義描述要擷取的內容，免訓練就能處理表單、證明文件與理賠附件等不同格式；每個欄位附信心分數與原始影像座標；印刷字由 OCR 讀取，手寫與信心不足的欄位轉人工覆核；修正結果回寫，下一份文件即生效。財務報表另有內建的頁面分類、科目擷取與勾稽檢核。</p></div></div>
                                 <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>保險理賠與核保作業</b><span>理賠附件來自各國、各家機構，格式不一，還常夾雜手寫。</span></li><li><b>授信與徵信單位</b><span>要減少財報登打與核對的時間，並保留每個數字的來源。</span></li><li><b>申請與審查單位</b><span>要把各種申請書與證明文件的欄位，直接帶進既有的審查流程。</span></li></ul></div></div>
                             </div>
                         </div>
@@ -378,10 +390,10 @@
                                 <li class="flow-step"><span class="flow-n">01</span><h3>收件與檢查</h3><p>檢查檔案格式、大小與解析度；直式、橫式自動轉正。</p>
                                     <div class="flow-mods"><span class="nm-chip">上傳防護</span></div></li>
                                 <li class="flow-step"><span class="flow-n">02</span><h3>依文件類型擷取</h3><p>依文件類型套用欄位定義，免訓練、即時生效；財務報表使用內建的頁面分類與科目表。</p>
-                                    <div class="flow-mods"><a class="nm-chip" href="nexus-insight.html">Insight</a><span class="nm-chip">欄位定義</span></div></li>
+                                    <div class="flow-mods"><span class="nm-chip">文件辨識引擎</span><span class="nm-chip">欄位定義</span></div></li>
                                 <li class="flow-step"><span class="flow-n">03</span><h3>印刷字辨識</h3><p>有文字層的頁面直接讀取，掃描頁做 OCR；字碼對照不到的罕用字標為待確認。</p>
                                     <div class="flow-mods"><span class="nm-chip">OCR</span></div></li>
-                                <li class="flow-step"><span class="flow-n">04</span><h3>信心度分流</h3><p>每個欄位附信心分數；抽不到、型別不符、有歧義與手寫欄位轉人工，其餘交給後端流程。</p>
+                                <li class="flow-step"><span class="flow-n">04</span><h3>信心度分流</h3><p>每個欄位附信心分數；抽不到、型別不符、有歧義與手寫欄位轉人工，處理完成後通知後端系統。</p>
                                     <div class="flow-mods"><span class="nm-chip">分流規則</span><span class="nm-chip">完成通知</span></div></li>
                                 <li class="flow-step"><span class="flow-n">05</span><h3>人工覆核</h3><p>欄位與原始影像並排核對；手寫欄位可由地端視覺模型先抄寫成提議，由人員確認。</p>
                                     <div class="flow-mods"><span class="nm-chip">覆核畫面</span></div></li>
@@ -410,7 +422,7 @@
                                     <div class="pain-card"><div class="pain-number">03</div>
                                         <h3>改過的不會變好</h3><p>人工修正的結果沒有回到系統，同樣的錯誤每一份都要再改一次。</p></div></div>
                             </div>
-                            <div class="pain-statement">AI OCR 智慧文件辨識讓信心度高的欄位直接進流程，手寫與不確定的轉人工，人員修正的結果下一份就用上。</div>
+                            <div class="pain-statement">AI OCR 智慧文件辨識把信心度足夠的欄位交給後端流程，手寫與不確定的轉人工，人員修正的結果下一份就用上。</div>
                         </div>
                     </div>
                 </div>
@@ -446,7 +458,7 @@
                                         <h3>核對與輸出</h3><ul><li>每個數值附原始影像座標，可並排放大核對。</li><li>輸出 JSON，另可匯出 Excel、CSV、XML。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
-                                        <h3>安全與稽核</h3><ul><li>只接受 TLS 1.3 連線。</li><li>稽核日誌以雜湊鏈保護，竄改可被偵測。</li><li>提供 CycloneDX 格式的軟體物料清單；建置時檢查執行環境中的中國來源套件。</li></ul></div></div>
+                                        <h3>安全與稽核</h3><ul><li>對外服務只接受 TLS 1.3 加密連線。</li><li>稽核日誌以雜湊鏈保護，竄改可被偵測。</li><li>提供 CycloneDX 格式的軟體物料清單；建置時檢查執行環境中的中國來源套件。</li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -495,7 +507,7 @@
                         <div class="col-md-12">
                             <p class="section-label">ON THE PLATFORM</p>
                             <h2 class="section-heading">由哪些平台模組組成</h2>
-                            <div class="platform-text">AI OCR 智慧文件辨識建立在 <a href="nexus-insight.html">Insight</a> 的文件解析能力上，加上文件辨識引擎、勾稽規則集與人工覆核流程。辨識後的文件如需分級、保存與稽核，可搭配 <a href="nexus-saga.html">SAGA</a>；需要串進 AI 流程時，可搭配 <a href="nexus-forge.html">Forge</a> 與 <a href="nexus-auro.html">Auro</a>。</div>
+                            <div class="platform-text">AI OCR 智慧文件辨識屬於平台的知識能力，與 <a href="nexus-insight.html">Insight</a> 一同開發，由文件辨識引擎、勾稽規則集與人工覆核流程組成。辨識後的文件如需分級、保存與稽核，可搭配 <a href="nexus-saga.html">SAGA</a>；需要串進 AI 流程時，可搭配 <a href="nexus-forge.html">Forge</a> 與 <a href="nexus-auro.html">Auro</a>。</div>
                             <div class="nm-links"><a class="nm-link" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="nm-link" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span></a><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
                         </div>
                     </div>
@@ -557,7 +569,7 @@
                                     <div class="faq-item"><h3>AI OCR 是什麼？</h3><p>AI OCR 在文字辨識之外，還會判斷每段文字屬於哪個欄位與可信度。AI OCR 智慧文件辨識用欄位定義擷取各種文件，手寫與信心不足的欄位轉人工覆核。</p></div>
                                     <div class="faq-item"><h3>AI OCR 可以辨識手寫嗎？</h3><p>AI OCR 智慧文件辨識可由地端視覺模型照影像抄寫手寫欄位，但結果只當提議，一律交人工覆核；不符欄位樣式的提議直接捨棄，不會自動寫入。</p></div>
                                     <div class="faq-item"><h3>遇到新的文件格式要重新訓練嗎？</h3><p>不需要。AI OCR 智慧文件辨識用欄位定義描述要擷取的內容，新增或修改後即時生效；抽不到的欄位回報「找不到」，不會猜測。</p></div>
-                                    <div class="faq-item"><h3>人工改過的結果會讓系統越來越準嗎？</h3><p>會累積。AI OCR 智慧文件辨識把人工修正回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。</p></div>
+                                    <div class="faq-item"><h3>人工改過的結果會讓系統越來越準嗎？</h3><p>會。AI OCR 智慧文件辨識把人工修正回寫，並學習欄位別名，下一份文件即生效；這是規則與別名的累積，不是重新訓練模型。</p></div>
                                     <div class="faq-item"><h3>AI OCR 智慧文件辨識可以部署在機房內嗎？</h3><p>可以。AI OCR 智慧文件辨識以容器交付，可用 Podman 在機房內執行，儲存與備份都在本機，手寫抄寫也使用地端模型；也可部署於公有雲的台灣區域。</p></div>
                                     <div class="faq-item"><h3>AI OCR 智慧文件辨識也能處理財務報表嗎？</h3><p>可以。AI OCR 智慧文件辨識內建財務報表的頁面分類、科目擷取與勾稽檢核，每個數值附原始影像座標，不平衡的項目轉人工核對。</p></div>
                             </div></div>
@@ -570,7 +582,7 @@
                 <div class="container">
                     <h2>拿幾份實際文件試跑</h2>
                     <p>提供幾份去識別化的理賠附件、申請書或財務報表，我們產出擷取結果、分流清單與核對畫面供您比對。</p>
-                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <a class="btn-cta" href="contact.html" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                     <p class="nm-updated">最後更新：<time datetime="2026-10-30">2026-10-30</time></p>
                 </div>
             </section>

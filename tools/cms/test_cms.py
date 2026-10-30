@@ -205,6 +205,8 @@ class EditorTest(SiteCopy):
             self.assertEqual(out['errors'], [])
             self.assertIn('href="/site/css/nexus-module.css"', out['html'])
             self.assertNotIn('googletagmanager', out['html'])
+            page = urllib.request.urlopen('http://127.0.0.1:%d/site/nexus-forge.html' % port).read().decode('utf-8')
+            self.assertNotIn('googletagmanager', page)
             r = urllib.request.urlopen('http://127.0.0.1:%d/site/css/nexus-module.css' % port)
             self.assertEqual(r.status, 200)
             with self.assertRaises(urllib.error.HTTPError):

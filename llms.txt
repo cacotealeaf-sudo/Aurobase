@@ -14,7 +14,7 @@
 
 - [首頁](index.html): 公司介紹、核心服務總覽、合作夥伴、解決方案與產品
 - [數位行銷](marketing.html): 廣告投放、社群經營、SEO、內容行銷等數位行銷服務
-- [解決方案＆產品](solution.html): Acoustic CXA 行銷自動化、CDP 顧客數據平台、HCL Unica、Magnolia CMS
+- [代理產品](solution.html): CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 顧客數據平台、HCL Unica、Magnolia CMS
 - [AI 智慧語伴](ai-companion.html): AI 語音陪伴與健康守護解決方案，結合語音互動與智慧分析
 - [AURO NEXUS](nexus.html): AI 治理平台總覽 — 以 NEXUS Forge 為治理底座的 14 個模組，另含 NEXUS OS、NEXUS Voice 產品介紹
 - [NEXUS GEO](nexus-geo.html): 生成式引擎優化（GEO），提升品牌在 ChatGPT／Perplexity／Gemini 等 AI 答案中的曝光
@@ -37,7 +37,8 @@
 廣告投放 (Google Ads, Facebook Ads)、社群經營、SEO 搜尋引擎優化、內容行銷、數據分析與成效追蹤。
 
 ### 解決方案與產品
-- **Acoustic CXA**: 行銷自動化平台，提供個人化行銷旅程、Email 行銷、行為追蹤
+- **CXA 顧客體驗分析**: 影像回放、表格分析、熱點圖、關注圖、行為分析與警示通知，掌握顧客線上操作行為
+- **HCL Discover 數位體驗分析**: HCLSoftware 的企業級數位體驗分析平台；工作階段回放、掙扎與異常偵測、熱圖與表單分析、事件與旅程漏斗、儀表板與告警、AI 工作階段洞察；可部署於企業自有機房，奧洛負責轉售、建置與維護
 - **CDP 顧客數據平台**: 整合多渠道顧客數據，建立統一客戶視圖，精準分眾行銷
 - **HCL Unica**: 企業級行銷自動化解決方案
 - **Magnolia CMS**: 企業內容管理系統，支援多語言、多通路內容發布
@@ -123,7 +124,7 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 1. 廣告投放
 2. 社群服務
 3. 客服中心
-4. Acoustic CXA
+4. CXA 顧客體驗分析
 5. CDP 顧客數據
 6. HCL Unica
 7. Magnolia CMS

@@ -285,7 +285,12 @@ class Handler(BaseHTTPRequestHandler):
             if p.startswith('/cms/'):
                 return self.static(HERE, p[len('/cms/'):])
             if p.startswith('/site/'):
-                return self.static(gen.ROOT, p[len('/site/'):] or 'index.html')
+                rel = p[len('/site/'):] or 'index.html'
+                full = os.path.normpath(os.path.join(gen.ROOT, rel))
+                if rel.endswith('.html') and full.startswith(gen.ROOT + os.sep) and os.path.isfile(full):
+                    # 本機瀏覽網站頁面時拿掉 GTM，不送流量統計與轉換事件
+                    return self.send(200, GTM_RE.sub('', gen.read(full)).encode('utf-8'), 'text/html; charset=utf-8')
+                return self.static(gen.ROOT, rel)
             if p == '/api/state':
                 return self.send(200, state())
             if p == '/api/suggest':

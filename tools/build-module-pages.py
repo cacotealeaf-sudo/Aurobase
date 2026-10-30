@@ -43,6 +43,9 @@ ORG = {
     'address': {'@type': 'PostalAddress', 'streetAddress': '洲子街101號2樓', 'addressLocality': '內湖區',
                 'addressRegion': '台北市', 'addressCountry': 'TW'},
     'telephone': '+886-2-5568-4688',
+    'email': 'ad@aurocore.com',
+    'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'telephone': '+886-2-5568-4688',
+                     'email': 'ad@aurocore.com', 'areaServed': 'TW', 'availableLanguage': ['zh-Hant', 'en']},
     'sameAs': ['https://www.facebook.com/AurobaseTW/'],
 }
 
@@ -393,7 +396,7 @@ def body(m, mods):
                             <p class="hero-sub">{h['sub']}</p>
                             <p class="hero-tagline">{h['tagline']}</p>
                             <div class="hero-actions">
-                                <a href="contact.html" class="btn-nm-primary">預約產品簡報</a>
+                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
                             <div class="nm-badges">{badges}</div>
@@ -505,7 +508,7 @@ def body(m, mods):
                 <div class="container">
                     <h2>{cta['heading']}</h2>
                     <p>{cta['text']}</p>
-                    <a class="btn-cta" href="contact.html">預約產品簡報</a>
+                    <a class="btn-cta" href="contact.html" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                     <p class="nm-updated">最後更新：<time datetime="{m['updated']}">{m['updated']}</time></p>
                 </div>
             </section>
@@ -598,7 +601,7 @@ def overview_html(pf, mods):
                             <p class="hero-sub">{pf['sub']}</p>
                             <p class="hero-tagline">{pf['tagline']}</p>
                             <div class="hero-actions">
-                                <a href="contact.html" class="btn-nm-primary">預約平台簡報</a>
+                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約平台簡報</a>
                                 <a href="#modules" class="btn-nm-outline">看全部模組</a>
                             </div>
                             {DEPLOY_STRIP}
@@ -909,6 +912,79 @@ def audit_platform(pf):
             'serp': {'title': title, 'url': 'aurobase.com › nexus.html', 'description': desc}}
 
 
+def site_pages():
+    pages = sorted(glob.glob(os.path.join(ROOT, '*.html'))) + sorted(glob.glob(os.path.join(ROOT, 'blogpost', '*.html')))
+    return [os.path.relpath(p, ROOT) for p in pages]
+
+
+def page_audit(rel):
+    """單一 HTML 頁的 SEO / GEO 檢查（全站共用，不分是否由產生器產出）。"""
+    s = read(os.path.join(ROOT, rel))
+    C = []
+    head = s[:s.find('</head>')] if '</head>' in s else s
+    m = re.search(r'<title>(.*?)</title>', head, re.S)
+    title = html.unescape(m.group(1).strip()) if m else ''
+    C.append(_chk('SEO', 'pass' if title and disp_width(title) <= 32 else ('warn' if title else 'fail'), '頁面標題',
+                  '%s（%.0f 格）' % (title, disp_width(title)) if title else '沒有 <title>'))
+    m = re.search(r'<meta name="description" content="([^"]*)"', head)
+    desc = html.unescape(m.group(1)) if m else ''
+    C.append(_chk('SEO', 'pass' if 70 <= len(desc) <= 160 else ('warn' if desc else 'fail'), '搜尋摘要（meta description）',
+                  '%d 字（建議 70～160）' % len(desc) if desc else '沒有 meta description'))
+    want = SITE + '/' + ('' if rel == 'index.html' else rel)
+    m = re.search(r'<link rel="canonical" href="([^"]*)"', head)
+    can = m.group(1) if m else ''
+    C.append(_chk('SEO', 'pass' if can in (want, SITE + '/' + rel) else 'fail', 'canonical 指向本頁正式網址',
+                  can or '沒有 canonical'))
+    lang = re.search(r'<html[^>]*\blang="([^"]+)"', s)
+    C.append(_chk('SEO', 'pass' if lang and lang.group(1).lower().startswith('zh-hant') else 'warn', '語言標記 zh-Hant-TW',
+                  lang.group(1) if lang else '沒有 lang'))
+    body = strip_comments(s)
+    h1 = len(re.findall(r'<h1[\s>]', body))
+    C.append(_chk('SEO', 'pass' if h1 == 1 else 'fail', '只有一個 H1', '%d 個' % h1))
+    og = [k for k in ('og:title', 'og:description', 'og:image', 'og:url') if 'property="%s"' % k not in head]
+    C.append(_chk('SEO', 'pass' if not og else 'warn', '社群分享資訊（Open Graph）', '缺：' + '、'.join(og) if og else ''))
+    imgs = re.findall(r'<img\b[^>]*>', body)
+    noalt = [i for i in imgs if not re.search(r'\balt="[^"]+"', i)]
+    C.append(_chk('SEO', 'pass' if not noalt else 'warn', '圖片都有替代文字（alt）',
+                  '%d 張缺 alt' % len(noalt) if noalt else '%d 張圖' % len(imgs)))
+    broken = []
+    base = os.path.dirname(os.path.join(ROOT, rel))
+    for h in re.findall(r'href="([^"#?:]+\.html)(?:[#?][^"]*)?"', body):
+        if not os.path.exists(os.path.normpath(os.path.join(base, h))):
+            broken.append(h)
+    C.append(_chk('SEO', 'pass' if not broken else 'fail', '站內連結都有效', '、'.join(sorted(set(broken))[:5])))
+    blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
+    types, bad = [], 0
+    for b in blocks:
+        try:
+            d = json.loads(b)
+            for n in d.get('@graph', [d]):
+                t = n.get('@type')
+                types += t if isinstance(t, list) else [t]
+        except ValueError:
+            bad += 1
+    C.append(_chk('GEO', 'fail' if bad else ('pass' if blocks else 'warn'), '結構化資料（JSON-LD）',
+                  '有 %d 段無法解析' % bad if bad else ('、'.join(sorted(set(filter(None, types)))) if blocks else '沒有結構化資料')))
+    C.append(_chk('GEO', 'pass' if 'Organization' in types or '"@id": "%s/#organization"' % SITE in s else 'warn',
+                  '結構化資料標明奧洛（Organization）'))
+    has_faq_html = bool(re.search(r'常見問題|FAQ', s))
+    C.append(_chk('GEO', 'pass' if (not has_faq_html or 'FAQPage' in types) else 'warn', '頁面上的常見問題有 FAQPage 結構化資料'))
+    sm = read(os.path.join(ROOT, 'sitemap.xml'))
+    C.append(_chk('全站', 'pass' if ('<loc>%s</loc>' % want) in sm or ('<loc>%s/%s</loc>' % (SITE, rel)) in sm else 'warn',
+                  'sitemap.xml 收錄這一頁'))
+    llms = read(os.path.join(ROOT, 'llms.txt'))
+    C.append(_chk('全站', 'pass' if '(%s)' % rel in llms or rel == 'index.html' else 'warn', 'llms.txt 收錄這一頁'))
+    score = {}
+    for g in ('SEO', 'GEO', '全站'):
+        rows = [c for c in C if c['group'] == g]
+        score[g] = [sum(c['status'] == 'pass' for c in rows), len(rows)]
+    return {'page': rel, 'title': title, 'checks': C, 'score': score}
+
+
+def site_audit():
+    return [page_audit(rel) for rel in site_pages()]
+
+
 def audit_report():
     """給 GitHub Action 與命令列看的文字報告。"""
     mods, pf = load_modules(), load_platform()
@@ -919,7 +995,103 @@ def audit_report():
         for c in a['checks']:
             if c['status'] in ('fail', 'warn'):
                 lines.append('    %s %s %s' % ('✗' if c['status'] == 'fail' else '△', c['label'], c['detail']))
+    lines.append('')
+    lines.append('── 全站逐頁 ──')
+    for a in site_audit():
+        sc = '  '.join('%s %d/%d' % (g, *v) for g, v in a['score'].items())
+        lines.append('%-34s %s' % (a['page'], sc))
+        for c in a['checks']:
+            if c['status'] in ('fail', 'warn'):
+                lines.append('    %s %s %s' % ('✗' if c['status'] == 'fail' else '△', c['label'], c['detail']))
     return '\n'.join(lines)
+
+
+# ── 手寫頁：依 _pages.json 補搜尋摘要、結構化資料與單一 H1 ──
+
+LD_BEGIN, LD_END = '<!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->', '<!-- SITE-LD:END -->'
+LOGO_H1_RE = re.compile(r'<h1>(\s*<a href="(?:\.\./)?index\.html">\s*<img[^>]*>\s*</a>\s*)</h1>', re.S)
+BLOG_BANNER_RE = re.compile(r'<h1 style="color:#d9e0e7;">新聞中心</h1>')
+
+
+def strip_comments(s):
+    return re.sub(r'<!--.*?-->', '', s, flags=re.S)
+
+
+def static_ld(rel, cfg, s):
+    url = SITE + '/' + ('' if rel == 'index.html' else rel)
+    title = html.unescape(re.search(r'<title>(.*?)</title>', s, re.S).group(1).strip())
+    desc = html.unescape((re.search(r'<meta name="description" content="([^"]*)"', s) or [None, ''])[1])
+    page = {'@type': 'WebPage', '@id': url + '#webpage', 'url': url, 'name': title, 'description': desc,
+            'inLanguage': 'zh-Hant-TW', 'isPartOf': {'@type': 'WebSite', '@id': SITE + '/#website', 'name': '奧洛 Aurobase', 'url': SITE + '/'},
+            'publisher': {'@id': ORG['@id']}}
+    graph = [page, ORG]
+    t = cfg.get('type', 'WebPage')
+    if t == 'ContactPage':
+        page['@type'] = 'ContactPage'
+        page['about'] = {'@id': ORG['@id']}
+    elif t == 'Service':
+        graph.append({'@type': 'Service', 'name': cfg['name'], 'serviceType': cfg.get('service_type', cfg['name']),
+                      'description': desc, 'provider': {'@id': ORG['@id']}, 'areaServed': {'@type': 'Country', 'name': '台灣'},
+                      'url': url, **({'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': cfg['name'], 'itemListElement': [
+                          {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': x}} for x in cfg['items']]}} if cfg.get('items') else {})})
+    elif t == 'ItemList':
+        graph.append({'@type': 'ItemList', 'name': cfg['name'], 'itemListElement': [
+            {'@type': 'ListItem', 'position': i, 'name': x} for i, x in enumerate(cfg['items'], 1)]})
+    elif t == 'Blog':
+        posts = []
+        for r, c in sorted(load_pages_cfg().items()):
+            if c.get('type') == 'BlogPosting' and os.path.exists(os.path.join(ROOT, r)):
+                ps = read(os.path.join(ROOT, r))
+                posts.append({'@type': 'BlogPosting', 'headline': re.sub(r'｜.*$', '', html.unescape(re.search(r'<title>(.*?)</title>', ps, re.S).group(1).strip())),
+                              'url': SITE + '/' + r, 'datePublished': c['date']})
+        graph.append({'@type': 'Blog', 'name': cfg['name'], 'url': url, 'publisher': {'@id': ORG['@id']}, 'blogPost': posts})
+    elif t == 'BlogPosting':
+        img = re.search(r'<meta property="og:image" content="([^"]*)"', s)
+        graph.append({'@type': 'BlogPosting', 'headline': re.sub(r'｜.*$', '', title), 'description': desc,
+                      'datePublished': cfg['date'], 'inLanguage': 'zh-Hant-TW', 'mainEntityOfPage': url,
+                      'author': {'@id': ORG['@id']}, 'publisher': {'@id': ORG['@id']},
+                      **({'image': img.group(1)} if img else {})})
+    return json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2)
+
+
+def load_pages_cfg():
+    p = os.path.join(SRC, '_pages.json')
+    return json.loads(read(p))['pages'] if os.path.exists(p) else {}
+
+
+def update_static_pages():
+    changed = []
+    for rel, cfg in load_pages_cfg().items():
+        p = os.path.join(ROOT, rel)
+        if not os.path.exists(p):
+            continue
+        s = read(p)
+        t = s
+        if cfg.get('description'):
+            d = attr(cfg['description'])
+            t = re.sub(r'(<meta name="description" content=")[^"]*', lambda x: x.group(1) + d, t, count=1)
+            t = re.sub(r'(<meta property="og:description" content=")[^"]*', lambda x: x.group(1) + d, t, count=1)
+        if cfg.get('og_image') and 'property="og:image"' not in t:
+            t = t.replace('<meta property="og:url"', '<meta property="og:image" content="%s/%s">\n    <meta property="og:url"' % (SITE, cfg['og_image']), 1)
+        t = LOGO_H1_RE.sub(lambda x: '<div class="aside-logo">%s</div>' % x.group(1), t)
+        t = BLOG_BANNER_RE.sub('<p class="h1" style="color:#d9e0e7;">新聞中心</p>', t)
+        # 標誌不再是 H1 後，沒有 H1 的頁面把橫幅標題升為 H1（加 .h2 / .h3 保留原本大小）
+        if not re.search(r'<h1[\s>]', strip_comments(t)):
+            t, n = re.subn(r'<h2 style="color:#d9e0e7;">(.*?)</h2>', r'<h1 class="h2" style="color:#d9e0e7;">\1</h1>', t, count=1)
+            if not n:
+                t = re.sub(r'<h3 (style="color:#28282c; text-indent: 0\.35em;")>(.*?)</h3>', r'<h1 class="h3" \1>\2</h1>', t, count=1)
+        if cfg.get('type') == 'BlogPosting':
+            alt = attr(re.sub(r'｜.*$', '', re.search(r'<title>(.*?)</title>', t, re.S).group(1)))
+            t = re.sub(r'(<img loading="lazy" src="\.\./images/[^"]+") alt=""', lambda x: '%s alt="%s"' % (x.group(1), alt), t)
+        block = LD_BEGIN + '\n    <script type="application/ld+json">\n' + static_ld(rel, cfg, t) + '\n</script>\n    ' + LD_END
+        if LD_BEGIN in t:
+            t = t[:t.index(LD_BEGIN)] + block + t[t.index(LD_END) + len(LD_END):]
+        else:
+            t = t.replace('</head>', '    %s\n  </head>' % block, 1)
+        if t != s:
+            io.open(p, 'w', encoding='utf-8').write(t)
+            changed.append(rel)
+    return changed
 
 
 GENERATED_MARK = '（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）'
@@ -947,7 +1119,7 @@ def build_all():
     errors = check_all(mods, pf)
     if errors:
         return {'errors': errors, 'written': [], 'removed': []}
-    nav_changed = update_nav(mods, pf)
+    nav_changed = update_nav(mods, pf) + update_static_pages()
     top, bottom = load_chrome()
     written, removed = [], []
     for m in mods.values():

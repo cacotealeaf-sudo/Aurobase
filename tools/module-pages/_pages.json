@@ -1,0 +1,78 @@
+{
+  "_說明": "手寫頁（不是由產品 JSON 產生的頁面）的 SEO / GEO 設定。產生器會套用搜尋摘要、寫入結構化資料、把側欄標誌的 <h1> 改成 <div>。改完跑 python3 tools/build-module-pages.py。",
+  "pages": {
+    "index.html": {
+      "type": "WebPage"
+    },
+    "marketing.html": {
+      "type": "Service",
+      "name": "數位行銷服務",
+      "service_type": "數位行銷",
+      "items": [
+        "廣告投放",
+        "社群服務",
+        "數據分析"
+      ]
+    },
+    "solution.html": {
+      "type": "ItemList",
+      "name": "代理產品",
+      "items": [
+        "CXA 行銷自動化",
+        "CDP 客戶數據平台",
+        "HCL Unica 行銷自動化",
+        "HCL Discover 數位體驗分析",
+        "Magnolia CMS 內容管理系統"
+      ],
+      "description": "奧洛代理並導入企業行銷科技產品：CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，協助企業看見顧客行為並自動化行銷流程。"
+    },
+    "ai-companion.html": {
+      "type": "Service",
+      "name": "AI 智慧語伴",
+      "service_type": "AI 語音陪伴與健康關懷",
+      "description": "AI 智慧語伴是奧洛（Aurobase）以 AI 語音為核心的智慧陪伴方案：透過語音互動主動陪伴長者，結合健康監測與情緒分析，即時掌握長者的健康與情緒變化，並提供主動關懷提醒。"
+    },
+    "blog.html": {
+      "type": "Blog",
+      "name": "奧洛新聞中心",
+      "description": "奧洛新聞中心收錄數位行銷、CDP 客戶數據平台、IBM Tealeaf 顧客行為分析與社群經營等文章，整理行銷科技的觀念與實務做法，協助企業規劃數位行銷策略。"
+    },
+    "contact.html": {
+      "type": "ContactPage",
+      "name": "聯絡奧洛",
+      "description": "聯絡奧洛（Aurobase）：台北市內湖區洲子街101號2樓，電話 +886-2-5568-4688，Email ad@aurocore.com。填寫線上諮詢表單，由專人回覆數位行銷、行銷科技與 AURO NEXUS AI 治理平台的相關需求。"
+    },
+    "privacypolicy.html": {
+      "type": "WebPage",
+      "name": "隱私權政策",
+      "description": "奧洛數位整合行銷的隱私權政策，說明本網站如何蒐集、處理與利用您透過諮詢表單提供的個人資料，Cookie 的使用方式，以及個人資料的刪除與聯絡方式。"
+    },
+    "nexus-saga.html": {
+      "type": "WebPage"
+    },
+    "nexus-geo.html": {
+      "type": "WebPage",
+      "og_image": "images/nexus-chat.webp"
+    },
+    "blogpost/single-2023-10-6.html": {
+      "type": "BlogPosting",
+      "date": "2023-10-06",
+      "description": "企業為什麼需要數位行銷？即使有街坊鄰里口耳相傳的口碑，仍需要網路行銷推波助瀾。本文比較數位行銷與傳統行銷的差異，說明選擇數位行銷的優點與起步關鍵。"
+    },
+    "blogpost/single-2023-11-10.html": {
+      "type": "BlogPosting",
+      "date": "2023-11-10",
+      "description": "IBM Tealeaf 能記錄並重現顧客在網站與 App 上的操作過程。本文介紹 Tealeaf 的功能、導入後可掌握的優勢，以及如何協助企業改善數位體驗與客戶滿意度。"
+    },
+    "blogpost/single-2023-12-4.html": {
+      "type": "BlogPosting",
+      "date": "2023-12-04",
+      "description": "CDP（客戶數據平台）是什麼？本文說明 CDP 如何整合分散在各系統的客戶資料，並以個人化與精準行銷提升客戶體驗，幫助企業找到真正的目標客群。"
+    },
+    "blogpost/single-2024-1-8.html": {
+      "type": "BlogPosting",
+      "date": "2024-01-08",
+      "description": "社群媒體讓品牌與消費者的溝通從單向推送變成雙向對話。本文說明社群經營對品牌的意義，以及 Aurocore 如何協助企業經營社群、提升與消費者的互動。"
+    }
+  }
+}
