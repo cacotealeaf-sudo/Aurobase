@@ -86,8 +86,8 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 
 ### 產業解決方案（由平台模組組成）
 - [警詢筆錄 AI 輔助](solution-police-record.html): 警詢筆錄 AI 輔助是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：詢問錄音轉成標好時間碼的逐字稿，預擬問答體筆錄草稿，依罪名檢查構成要件並提示追問，檢查告知事項等法定程序，員警審閱後套印；可部署在機關內部。
-- [AI OCR 財報智慧辨識](solution-financial-ocr.html): AI OCR 財報智慧辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：辨認財務報表的四大主表與續頁，擷取會計科目、金額、期別、幣別與單位，依版本化的勾稽規則檢查，每個數值都附原始影像座標供人工核對；金額不由生成式模型自行產生，可部署在機房內。
 - [電話與視訊銷售對話智能](solution-telesales.html): SUADA 是奧洛（Aurobase）以 AURO NEXUS 平台組成的電話行銷與視訊銷售對話智能方案：辨識客戶意向與異議並提示業務員回應話術，逐項檢核告知與紀錄要件，以確定性禁語閘門擋下不當用語，並對每一通通話評分，紀錄寫入雜湊鏈。
+- [AI OCR 智慧文件辨識](solution-ai-ocr.html): AI OCR 智慧文件辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：用欄位定義描述要擷取的內容，免訓練就能處理表單、證明文件與理賠附件等不同格式；印刷字由 OCR 讀取，手寫與信心不足的欄位轉人工覆核，修正結果下一份即生效；內建財務報表辨識與勾稽，可部署在機房內。
 - [數位軌跡行銷資料整合](solution-digital-trail.html): AURA Connect 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡資料整合方案：讀取 HCL Discover 記錄的網站與 App 行為軌跡，切成工作階段，回溯同一裝置登入前後的身分，計算行銷標籤，依排程以 SFTP 交付資料倉儲，並提供行銷平台即時查詢的 API。
 <!-- MODULES:END -->
 

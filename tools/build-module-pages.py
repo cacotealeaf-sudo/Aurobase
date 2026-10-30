@@ -666,7 +666,7 @@ def overview_html(pf, mods):
 
 
 def solutions(mods):
-    order = {'公部門': 0, '金融保險': 1}
+    order = {'公部門': 0, '金融保險': 1, '跨產業': 2}
     return sorted((m for m in mods.values() if is_solution(m)), key=lambda m: (order.get(m['industry'], 9), m['name_zh']))
 
 
@@ -767,6 +767,11 @@ def update_sitemap(mods):
             t = re.sub(r'<url><loc>%s</loc>.*?</url>' % re.escape(loc), entry, t)
         else:
             t = t.replace('</urlset>', '  %s\n</urlset>' % entry)
+    # 移除已不存在（刪除或改回草稿）的產品頁與解決方案頁
+    def gone(mo):
+        f = mo.group(1)
+        return '' if not os.path.exists(os.path.join(ROOT, f)) else mo.group(0)
+    t = re.sub(r'[ \t]*<url><loc>%s/((?:nexus|solution)-[a-z0-9-]+\.html)</loc>.*?</url>\n?' % re.escape(SITE), gone, t)
     io.open(p, 'w', encoding='utf-8').write(t)
 
 

@@ -88,6 +88,7 @@ class GeneratorTest(SiteCopy):
         self.assertFalse(os.path.exists(os.path.join(self.root, 'nexus-library.html')))
         self.assertNotIn('href="nexus-library.html"', self.page('nexus.html'))
         self.assertNotIn('nexus-library.html', self.page('llms.txt'))
+        self.assertNotIn('nexus-library.html', self.page('sitemap.xml'))
 
 
 class AuditTest(SiteCopy):

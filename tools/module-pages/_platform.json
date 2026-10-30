@@ -217,8 +217,8 @@
         "solution-digital-trail"
       ],
       [
-        "擷取財務報表的科目與金額並檢查勾稽",
-        "solution-financial-ocr"
+        "擷取表單、證明文件與財報欄位，手寫轉人工覆核",
+        "solution-ai-ocr"
       ]
     ]
   },
