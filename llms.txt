@@ -53,7 +53,7 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 平台總覽：[AURO NEXUS](nexus.html)
 
 ### 治理底座
-- [Forge 治理化 AI 閘道](nexus-forge.html): Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。
+- [Forge 治理化 AI 閘道](nexus-forge.html): Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 AI 模型（地端 LLM），並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。
 
 ### AI 編排
 - [Auro AI 任務編排](nexus-auro.html): Auro 是奧洛（Aurobase）的企業級 AI Agent 平台：每個 AI 任務都有步數、token 與時限上限，每一步先經四態治理閘門判定放行、警示、送審或阻擋，可暫停交人審核、可緊急停止，全程留下稽核紀錄。
@@ -81,7 +81,7 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 - [LISA 主機程式現代化](nexus-lisa.html): LISA 是奧洛（Aurobase）的大型主機（mainframe）現代化工具：讀取 COBOL、PL/I、JCL、COPYBOOK 與 IMS 原始碼，以確定性解析產出繁體中文規格書，每一項都標明原始碼行號，作為 COBOL 轉 Java 等現代化專案的現況基準。
 
 ### 安全
-- [Scanner 源碼檢測與弱點掃描](nexus-scanner.html): Scanner 是奧洛（Aurobase）的源碼檢測與弱點掃描平台：涵蓋源碼檢測（SAST）、網站弱點掃描（DAST）、第三方套件分析（SCA）、機密外洩、容器與 IaC 掃描，產出 SARIF 報告與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、EPSS、CISA KEV、TWCERT 情資排序修補。
+- [Scanner 源碼檢測與弱點掃描](nexus-scanner.html): Scanner 是奧洛（Aurobase）的源碼檢測與弱點掃描平台：涵蓋源碼檢測（SAST）、網站弱點掃描（DAST）、第三方套件分析（SCA）、機密外洩、容器與 IaC 掃描，產出 SARIF 報告與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、EPSS、CISA KEV、TWCERT 情資排序。
 - [Cardea SSL 憑證管理與機器身分治理](nexus-cardea.html): Cardea 是奧洛（Aurobase）的 SSL 憑證管理與機器身分治理平台：自動盤點 TLS 憑證與 SSH 金鑰、依政策檢查弱金鑰與效期、到期前預警，以 ACME 自動更新並部署至 Nginx、Apache、IIS，產出後量子密碼（PQC）遷移所需的密碼盤點報告，可單機離線運作。
 <!-- MODULES:END -->
 

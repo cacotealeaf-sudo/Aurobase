@@ -40,6 +40,12 @@ jobs:
       - name: Build pages
         run: python3 tools/build-module-pages.py
 
+      - name: SEO / GEO report
+        run: |
+          python3 tools/build-module-pages.py --audit | tee audit.txt
+          { echo '## SEO / GEO 檢查'; echo '```'; cat audit.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          rm audit.txt
+
       - name: Rebuild font and icon subsets
         run: |
           bash tools/build-font-subset.sh

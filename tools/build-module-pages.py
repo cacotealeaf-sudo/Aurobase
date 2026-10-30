@@ -176,8 +176,8 @@ def validate(m, mods, pf):
     used += [c.get('icon') for sec in ('capabilities', 'diff') for c in g(m, sec, 'cards') or []]
     for ic in sorted(set(filter(None, used)) - icons):
         warnings.append('圖示「%s」不在目前的圖示子集，發布時 GitHub Action 會重建；若名稱打錯則不會顯示' % ic)
-    if len(m.get('title', '')) > 45:
-        warnings.append('頁面標題 %d 字，搜尋結果大約只顯示前 30～40 個中文字' % len(m['title']))
+    if disp_width(m.get('title', '')) > 32:
+        warnings.append('頁面標題約 %.0f 個全形字寬，搜尋結果只顯示約 32 個' % disp_width(m['title']))
     dl = len(plain(m.get('description', '')))
     if dl and not 70 <= dl <= 160:
         warnings.append('搜尋摘要 %d 字，建議 70～160 字' % dl)
@@ -686,6 +686,149 @@ def update_sitemap(mods):
     io.open(p, 'w', encoding='utf-8').write(t)
 
 
+# ── SEO / GEO 稽核：編輯器的檢查面板與 GitHub Action 的報告共用 ──
+
+AI_BOTS = ('GPTBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended')
+
+
+def disp_width(text):
+    """搜尋結果的顯示寬度：中文字算 1，英數與半形標點算 0.5。Google 標題約顯示 32 個全形字寬。"""
+    return sum(0.5 if ord(ch) < 0x2E80 else 1 for ch in text)
+
+
+def _chk(group, status, label, detail=''):
+    return {'group': group, 'status': status, 'label': label, 'detail': detail}
+
+
+def site_checks(file):
+    out = []
+    robots = read(os.path.join(ROOT, 'robots.txt')) if os.path.exists(os.path.join(ROOT, 'robots.txt')) else ''
+    blocked = [b for b in AI_BOTS if re.search(r'User-agent:\s*%s\s*\n(?:[^\n]*\n)*?Disallow:\s*/\s*$' % b, robots, re.M)]
+    missing = [b for b in AI_BOTS if b not in robots]
+    if blocked:
+        out.append(_chk('全站', 'fail', 'robots.txt 擋住了 AI 爬蟲', '、'.join(blocked)))
+    else:
+        out.append(_chk('全站', 'pass' if not missing else 'warn', 'robots.txt 允許 AI 爬蟲',
+                        '未明確列出：' + '、'.join(missing) if missing else '、'.join(AI_BOTS)))
+    llms = os.path.join(ROOT, 'llms.txt')
+    out.append(_chk('全站', 'pass' if os.path.exists(llms) and '(%s)' % file in read(llms) else 'warn',
+                    'llms.txt 收錄這一頁', '儲存並產頁後會自動加入'))
+    sm = os.path.join(ROOT, 'sitemap.xml')
+    out.append(_chk('全站', 'pass' if os.path.exists(sm) and '/%s</loc>' % file in read(sm) else 'warn',
+                    'sitemap.xml 收錄這一頁', '儲存並產頁後會自動加入'))
+    return out
+
+
+def audit(m, mods, pf):
+    """回傳 {'checks': [...], 'score': {...}, 'serp': {...}, 'jsonld': str, 'llms': str}。"""
+    C = []
+    kws = [k for k in m.get('keywords') or [] if k != 'AURO NEXUS']
+    kw = kws[0] if kws else ''
+    code = m.get('code', '')
+    title, desc = m.get('title', ''), plain(m.get('description', ''))
+    h1 = plain((m.get('hero') or {}).get('h1', ''))
+    low = lambda x: x.lower()
+
+    # SEO
+    w = disp_width(title)
+    C.append(_chk('SEO', 'pass' if 0 < w <= 32 else 'warn', '頁面標題長度',
+                  '%.0f 個全形字寬（搜尋結果約顯示 32 個，超過的會被截成…）' % w))
+    if not kw:
+        C.append(_chk('SEO', 'fail', '設定主關鍵字', '目標關鍵字的第一個就是主關鍵字'))
+    else:
+        pos = low(title).find(low(kw))
+        C.append(_chk('SEO', 'pass' if 0 <= pos <= 12 else ('warn' if pos > 12 else 'fail'),
+                      '主關鍵字「%s」放在標題前段' % kw, '目前在第 %d 字' % (pos + 1) if pos >= 0 else '標題裡沒有主關鍵字'))
+        C.append(_chk('SEO', 'pass' if low(kw) in low(h1) else 'fail', '主關鍵字出現在 H1', h1))
+        C.append(_chk('SEO', 'pass' if low(kw) in low(desc) else 'fail', '主關鍵字出現在搜尋摘要'))
+        twins = [x['code'] for x in mods.values() if x.get('slug') != m.get('slug')
+                 and [k for k in x.get('keywords') or [] if k != 'AURO NEXUS'][:1] == [kw]]
+        C.append(_chk('SEO', 'warn' if twins else 'pass', '主關鍵字不和其他頁重複',
+                      '和 %s 搶同一個主關鍵字' % '、'.join(twins) if twins else ''))
+    C.append(_chk('SEO', 'pass' if 70 <= len(desc) <= 160 else 'warn', '搜尋摘要長度', '%d 字（建議 70～160）' % len(desc)))
+    C.append(_chk('SEO', 'pass' if 5 <= len(kws) <= 15 else 'warn', '目標關鍵字數量', '%d 個（建議 5～15）' % len(kws)))
+    rel = len((m.get('platform') or {}).get('related') or [])
+    C.append(_chk('SEO', 'pass' if rel >= 2 else 'warn', '連到其他產品頁（內部連結）', '%d 個' % rel))
+
+    # GEO
+    df = m.get('definition') or {}
+    answers = [plain(x) for x in df.get('a') or []]
+    entity = re.compile(r'%s[^。]{0,12}是[^。]{0,6}奧洛' % re.escape(code)) if code else None
+    C.append(_chk('GEO', 'pass' if df.get('q', '').strip().endswith(('？', '?')) else 'warn', '定義區用問句開頭',
+                  df.get('q', '')))
+    C.append(_chk('GEO', 'pass' if entity and any(entity.search(a) for a in answers) else 'fail',
+                  '定義區有「%s 是奧洛（Aurobase）…」的實體句' % code, 'AI 引擎靠這句把產品和公司連起來'))
+    C.append(_chk('GEO', 'pass' if code and desc.startswith(code) else 'warn', '搜尋摘要以產品名開頭定義',
+                  desc[:30] + '…' if desc else ''))
+    faq = m.get('faq') or []
+    C.append(_chk('GEO', 'pass' if len(faq) >= 4 else 'warn', '常見問題至少 4 題', '%d 題' % len(faq)))
+    bad_len = [i + 1 for i, f in enumerate(faq) if not 40 <= len(plain(f.get('a', ''))) <= 220]
+    C.append(_chk('GEO', 'pass' if faq and not bad_len else 'warn', '回答長度適合被引用（40～220 字）',
+                  '第 %s 題需調整' % '、'.join(map(str, bad_len)) if bad_len else ''))
+    names = [low(x) for x in [code, kw] + (m.get('aliases') or []) if x]
+    ctx = [i + 1 for i, f in enumerate(faq) if not any(n in low(plain(f.get('a', '') + f.get('q', ''))) for n in names)]
+    C.append(_chk('GEO', 'pass' if faq and len(ctx) <= len(faq) // 2 else 'warn', '問答單獨被引用時看得懂（提到產品名或關鍵字）',
+                  '第 %s 題沒提到' % '、'.join(map(str, ctx)) if ctx else ''))
+    C.append(_chk('GEO', 'pass' if m.get('compare') or m.get('regulation') else 'warn', '有比較表或法規對照表',
+                  'AI 引擎常直接引用表格'))
+    srcs = [x for x in (m.get('regulation') or {}).get('sources') or [] if x.get('url')]
+    C.append(_chk('GEO', 'pass' if srcs else 'info', '引用可查證的外部來源', '%d 個' % len(srcs)))
+    try:
+        age = (datetime.date.today() - datetime.date.fromisoformat(m.get('updated', ''))).days
+        C.append(_chk('GEO', 'pass' if age <= 180 else 'warn', '內容更新日期', '%s（%d 天前）' % (m['updated'], age)))
+    except ValueError:
+        C.append(_chk('GEO', 'warn', '內容更新日期', '未設定'))
+    C.append(_chk('GEO', 'pass' if len(m.get('audience') or []) >= 2 else 'warn', '「適合誰」至少 2 種對象'))
+    C += site_checks(m.get('file', ''))
+
+    score = {}
+    for g in ('SEO', 'GEO', '全站'):
+        rows = [c for c in C if c['group'] == g and c['status'] != 'info']
+        score[g] = [sum(c['status'] == 'pass' for c in rows), len(rows)]
+    try:
+        ld = jsonld(m)
+    except Exception as e:  # 草稿缺欄位時
+        ld = '（結構化資料暫時無法產生：%r）' % e
+    return {'checks': C, 'score': score, 'jsonld': ld,
+            'serp': {'title': title, 'url': 'aurobase.com › %s' % m.get('file', ''), 'description': desc},
+            'llms': '- [%s %s](%s): %s' % (code, m.get('name_zh', ''), m.get('file', ''), desc)}
+
+
+def audit_platform(pf):
+    C = []
+    kw = (pf.get('keywords') or [''])[0]
+    title, desc, h1 = pf.get('title', ''), plain(pf.get('description', '')), plain(pf.get('h1', ''))
+    C.append(_chk('SEO', 'pass' if disp_width(title) <= 32 else 'warn', '頁面標題長度', '%.0f 個全形字寬（建議 32 內）' % disp_width(title)))
+    C.append(_chk('SEO', 'pass' if kw and title.startswith(kw) else 'warn', '主關鍵字「%s」放在標題開頭' % kw))
+    C.append(_chk('SEO', 'pass' if kw and kw in h1 else 'fail', '主關鍵字出現在 H1'))
+    C.append(_chk('SEO', 'pass' if 70 <= len(desc) <= 200 else 'warn', '搜尋摘要長度', '%d 字' % len(desc)))
+    answers = ''.join(plain(x) for x in (pf.get('definition') or {}).get('a') or [])
+    C.append(_chk('GEO', 'pass' if re.search(r'AURO NEXUS[^。]{0,4}是[^。]{0,6}奧洛', answers) else 'fail',
+                  '定義區有「AURO NEXUS 是奧洛（Aurobase）…」的實體句'))
+    C.append(_chk('GEO', 'pass' if len(pf.get('faq') or []) >= 4 else 'warn', '常見問題至少 4 題', '%d 題' % len(pf.get('faq') or [])))
+    C.append(_chk('GEO', 'pass' if (pf.get('needs') or {}).get('rows') else 'warn', '「依需求找模組」表格'))
+    C += site_checks('nexus.html')
+    score = {}
+    for g in ('SEO', 'GEO', '全站'):
+        rows = [c for c in C if c['group'] == g and c['status'] != 'info']
+        score[g] = [sum(c['status'] == 'pass' for c in rows), len(rows)]
+    return {'checks': C, 'score': score, 'jsonld': '', 'llms': '',
+            'serp': {'title': title, 'url': 'aurobase.com › nexus.html', 'description': desc}}
+
+
+def audit_report():
+    """給 GitHub Action 與命令列看的文字報告。"""
+    mods, pf = load_modules(), load_platform()
+    lines = []
+    for name, a in [('平台總覽', audit_platform(pf))] + [(m['code'], audit(m, mods, pf)) for m in mods.values()]:
+        sc = '  '.join('%s %d/%d' % (g, *v) for g, v in a['score'].items())
+        lines.append('%-18s %s' % (name, sc))
+        for c in a['checks']:
+            if c['status'] in ('fail', 'warn'):
+                lines.append('    %s %s %s' % ('✗' if c['status'] == 'fail' else '△', c['label'], c['detail']))
+    return '\n'.join(lines)
+
+
 GENERATED_MARK = '（由 tools/build-module-pages.py 產生，請改 JSON 不要直接改本檔）'
 
 
@@ -801,6 +944,9 @@ def update_nav(mods, pf=None):
 
 
 def main():
+    if '--audit' in sys.argv:
+        print(audit_report())
+        return
     r = build_all()
     if r['errors']:
         print('內容有錯，未產生任何檔案：', file=sys.stderr)

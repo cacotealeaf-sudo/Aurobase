@@ -16,9 +16,9 @@ window.MODULE_SCHEMA = [
     { k: 'fullname', label: '縮寫全稱（選填）', type: 'str', help: '例如 CARDEA = Certificate Automation…，會顯示在首屏最上方。' },
     { k: 'aliases', label: '舊名／別名', type: 'tags', help: '只放進結構化資料，讓搜尋引擎知道是同一個產品。' },
     { k: 'leg', label: '能力分類（頁面上顯示）', type: 'str' },
-    { k: 'title', label: '頁面標題（搜尋結果的藍字）', type: 'str', max: 45, help: '主關鍵字放最前面。' },
+    { k: 'title', label: '頁面標題（搜尋結果的藍字）', type: 'str', max: 32, width: true, help: '主關鍵字放最前面。英數字算半格。' },
     { k: 'description', label: '搜尋摘要', type: 'text', min: 70, max: 160, help: '第一句寫「X 是奧洛（Aurobase）的…」，AI 引擎最常直接引用這段。' },
-    { k: 'keywords', label: '目標關鍵字', type: 'tags' },
+    { k: 'keywords', label: '目標關鍵字（第一個是主關鍵字）', type: 'tags', help: '右側「SEO / GEO」分頁可以查 Google 台灣的搜尋建議，點一下就加進來。' },
     { k: 'eyebrow', label: '英文副名', type: 'str', help: '例如 Cardea — Machine Identity & Certificate Governance。' },
     { k: 'inquiry_chip', label: '諮詢表單預設勾選', type: 'select', options: 'chips' },
   ]},
@@ -99,7 +99,7 @@ window.MODULE_SCHEMA = [
 window.PLATFORM_SCHEMA = [
   { sec: '名稱與搜尋', fields: [
     { k: 'updated', label: '最後更新（儲存時自動更新）', type: 'readonly' },
-    { k: 'title', label: '頁面標題', type: 'str', max: 45 },
+    { k: 'title', label: '頁面標題', type: 'str', max: 32, width: true },
     { k: 'description', label: '搜尋摘要', type: 'text', min: 70, max: 160 },
     { k: 'keywords', label: '目標關鍵字', type: 'tags' },
   ]},

@@ -5,7 +5,7 @@
   "name_zh": "治理化 AI 閘道",
   "leg": "治理底座",
   "eyebrow": "Forge — Governed AI Gateway",
-  "description": "Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 LLM，並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。",
+  "description": "Forge 是奧洛（Aurobase）的治理化 AI 閘道，也是 AURO NEXUS AI 治理平台的底座：以 OpenAI 相容 API 統一企業內所有 AI 呼叫，推論前先做權限與政策檢查，可只用地端 AI 模型（地端 LLM），並把每次推論、知識庫查詢與工具呼叫寫入可離線驗證的稽核軌跡。",
   "keywords": [
     "地端 AI",
     "地端 LLM",

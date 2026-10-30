@@ -114,7 +114,8 @@ def preview(doc_id, body):
     if doc_id == '_platform':
         mods = gen.load_modules()
         errors = gen.validate_platform(body, mods)
-        return {'html': with_base(gen.build_overview(mods, body, write=False)), 'errors': errors, 'warnings': []}
+        return {'html': with_base(gen.build_overview(mods, body, write=False)), 'errors': errors, 'warnings': [],
+                'audit': gen.audit_platform(body)}
     mods = gen.load_modules()
     pf = gen.load_platform()
     m = copy.deepcopy(body)
@@ -126,7 +127,37 @@ def preview(doc_id, body):
     except Exception as e:  # 欄位還沒填完時，渲染可能失敗；錯誤清單已說明缺什麼
         page = '<!doctype html><meta charset="utf-8"><body style="font:15px sans-serif;padding:2rem;color:#555">' \
                '預覽暫時無法產生：%s</body>' % gen.html.escape(repr(e))
-    return {'html': with_base(page), 'errors': errors, 'warnings': warnings}
+    return {'html': with_base(page), 'errors': errors, 'warnings': warnings, 'audit': gen.audit(m, mods, pf)}
+
+
+SUGGEST_URL = 'https://suggestqueries.google.com/complete/search?client=firefox&hl=zh-TW&gl=tw&ie=utf-8&oe=utf-8&q='
+QUESTION_PATTERNS = ['{q}', '{q} 是什麼', '什麼是 {q}', '{q} 推薦', '{q} 比較', '{q} 費用', '{q} 導入', '{q} 優缺點']
+
+
+def google_suggest(q):
+    """Google 台灣的搜尋建議。用 curl 取，避開部分 Python 安裝缺少根憑證的問題。"""
+    url = SUGGEST_URL + urllib.parse.quote(q)
+    try:
+        out = subprocess.run(['curl', '-s', '--max-time', '6', url], capture_output=True, timeout=10).stdout
+        return json.loads(out.decode('utf-8'))[1]
+    except Exception:
+        return []
+
+
+def suggest(q, mode):
+    q = q.strip()[:60]
+    if not q:
+        return 400, {'errors': ['請輸入關鍵字']}
+    patterns = QUESTION_PATTERNS if mode == 'questions' else ['{q}', '{q} ']
+    seen, out = set(), []
+    for pat in patterns:
+        for s in google_suggest(pat.format(q=q)):
+            if s not in seen:
+                seen.add(s)
+                out.append(s)
+    if not out:
+        return 502, {'errors': ['沒有取得搜尋建議（可能是網路連不到 Google）']}
+    return 200, {'suggestions': out[:40]}
 
 
 def save(doc_id, body):
@@ -245,6 +276,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self.static(gen.ROOT, p[len('/site/'):] or 'index.html')
             if p == '/api/state':
                 return self.send(200, state())
+            if p == '/api/suggest':
+                qs = urllib.parse.parse_qs(url.query)
+                return self.send(*suggest(qs.get('q', [''])[0], qs.get('mode', ['keywords'])[0]))
             m = re.match(r'^/api/doc/([\w-]+)$', p)
             if m:
                 path = doc_path(m.group(1))

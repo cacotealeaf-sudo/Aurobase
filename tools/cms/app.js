@@ -105,12 +105,16 @@
     return w;
   }
 
+  // 搜尋結果的顯示寬度：中文字算 1，英數與半形標點算 0.5（與產生器的 disp_width 相同）
+  const dispWidth = (t) => [...t].reduce((n, ch) => n + (ch.codePointAt(0) < 0x2E80 ? 0.5 : 1), 0);
+
   function counter(f, el, getText) {
     if (!f.max && !f.min) return null;
     const c = document.createElement('span'); c.className = 'count';
     const upd = () => {
-      const n = getText().replace(/<[^>]+>/g, '').length;
-      c.textContent = `${n} 字` + (f.max ? ` / 建議 ${f.min ? f.min + '～' : ''}${f.max}` : '');
+      const t = getText().replace(/<[^>]+>/g, '');
+      const n = f.width ? Math.round(dispWidth(t)) : t.length;
+      c.textContent = `${n} ${f.width ? '格' : '字'}` + (f.max ? ` / 建議 ${f.min ? f.min + '～' : ''}${f.max}` : '');
       c.classList.toggle('warn', (f.max && n > f.max) || (f.min && n > 0 && n < f.min));
     };
     el.addEventListener('input', upd); upd(); return c;
@@ -272,7 +276,8 @@
     const r = await api('POST', '/api/preview/' + state.id, state.doc);
     if (seq !== state.seq) return; // 有更新的請求在路上
     state.errors = r.data.errors || []; state.warnings = r.data.warnings || [];
-    showIssues(); refreshDirty();
+    state.audit = r.data.audit || null;
+    showIssues(); refreshDirty(); renderSeo();
     const frame = $('#frame');
     let y = 0; try { y = frame.contentWindow.scrollY; } catch (e) { /* 首次載入 */ }
     frame.onload = () => {
@@ -308,6 +313,76 @@
     if (r.data.removed.length) parts.push(`移除 ${r.data.removed.join('、')}`);
     if (r.data.font) parts.push(r.data.font);
     toast(parts.join('；'));
+  }
+
+  // ── SEO / GEO 面板 ──
+  const ICONS = { pass: '✓', warn: '△', fail: '✗', info: 'ℹ' };
+  function renderSeo() {
+    const a = state.audit; const badge = $('#seoBadge');
+    if (!a) { badge.textContent = ''; return; }
+    const bad = a.checks.filter((c) => c.status === 'fail' || c.status === 'warn').length;
+    badge.textContent = bad ? String(bad) : '✓';
+    badge.className = bad ? (a.checks.some((c) => c.status === 'fail') ? 'b-fail' : 'b-warn') : 'b-pass';
+    const panel = $('#seoPanel');
+    if (panel.hidden) return;
+    const keepQ = panel.querySelector('#kwInput')?.value;
+    const keepOut = panel.querySelector('#kwOut')?.innerHTML || '';
+    const groups = ['SEO', 'GEO', '全站'];
+    const kw = ((state.doc.keywords || []).filter((k) => k !== 'AURO NEXUS')[0]) || state.doc.code || '';
+    panel.innerHTML = `
+      <div class="scores">${groups.map((g) => { const [p, t] = a.score[g] || [0, 0];
+        return `<div class="score ${p === t ? 'full' : ''}"><b>${p}<small>/${t}</small></b><span>${g}</span></div>`; }).join('')}</div>
+      <section class="serp" aria-label="搜尋結果預覽">
+        <p class="serp-h">Google 搜尋結果預覽</p>
+        <div class="serp-url">${esc(a.serp.url)}</div>
+        <div class="serp-title">${esc(cut(a.serp.title, 32))}</div>
+        <div class="serp-desc">${esc(cut(a.serp.description, 78))}</div>
+      </section>
+      ${groups.map((g) => `<section class="checks"><h3>${g}</h3><ul>${a.checks.filter((c) => c.group === g).map((c) =>
+        `<li class="c-${c.status}"><i>${ICONS[c.status]}</i><div><b>${esc(c.label)}</b>${c.detail ? `<span>${esc(c.detail)}</span>` : ''}</div></li>`).join('')}</ul></section>`).join('')}
+      <section class="kwtool">
+        <h3>找關鍵字與常見問法（Google 台灣搜尋建議）</h3>
+        <div class="kw-row"><input id="kwInput" type="text" value="${esc(keepQ ?? kw)}" aria-label="種子關鍵字">
+          <button type="button" data-mode="keywords">搜尋建議</button><button type="button" data-mode="questions">常見問法</button></div>
+        <p class="help">點「搜尋建議」的結果會加進目標關鍵字；點「常見問法」的結果會新增一題常見問題（回答再自己寫）。</p>
+        <div id="kwOut" class="chips">${keepOut}</div>
+      </section>
+      ${a.llms ? `<section><h3>llms.txt 裡的這一行</h3><pre>${esc(a.llms)}</pre></section>` : ''}
+      ${a.jsonld ? `<details><summary>結構化資料（JSON-LD）</summary><pre>${esc(a.jsonld)}</pre></details>` : ''}`;
+    panel.querySelectorAll('.kw-row button').forEach((b) => b.onclick = () => lookup(b.dataset.mode));
+    panel.querySelectorAll('#kwOut button').forEach(bindChip);
+  }
+  // 依顯示寬度截斷，模擬搜尋結果的「…」
+  function cut(t, max) { let w = 0; let out = ''; for (const ch of t) { w += ch.codePointAt(0) < 0x2E80 ? 0.5 : 1; if (w > max) return out + ' …'; out += ch; } return out; }
+
+  async function lookup(mode) {
+    const q = $('#kwInput').value.trim(); const out = $('#kwOut');
+    out.innerHTML = '<span class="help">查詢中…</span>';
+    const r = await api('GET', `/api/suggest?mode=${mode}&q=${encodeURIComponent(q)}`);
+    if (!r.ok) { out.innerHTML = `<span class="help">${esc((r.data.errors || ['查詢失敗']).join('、'))}</span>`; return; }
+    out.innerHTML = r.data.suggestions.map((x) => `<button type="button" data-mode="${mode}" data-v="${esc(x)}">${esc(x)}</button>`).join('');
+    out.querySelectorAll('button').forEach(bindChip);
+  }
+  function bindChip(b) {
+    const v = b.dataset.v; const doc = state.doc;
+    const has = b.dataset.mode === 'keywords' ? (doc.keywords || []).includes(v) : (doc.faq || []).some((f) => f.q.startsWith(v));
+    b.classList.toggle('on', has);
+    b.onclick = () => {
+      if (b.dataset.mode === 'keywords') {
+        doc.keywords = doc.keywords || [];
+        if (doc.keywords.includes(v)) doc.keywords = doc.keywords.filter((k) => k !== v);
+        else {
+          // 新關鍵字放在品牌詞「AURO NEXUS」之前（品牌詞固定排最後）
+          const brand = doc.keywords.indexOf('AURO NEXUS');
+          doc.keywords.splice(brand === -1 ? doc.keywords.length : brand, 0, v);
+        }
+      } else {
+        doc.faq = doc.faq || [];
+        if (!has) doc.faq.push({ q: /[？?]$/.test(v) ? v : v + '？', a: '' });
+      }
+      changed(true);
+      toast(b.dataset.mode === 'keywords' ? '已更新目標關鍵字' : '已新增一題常見問題，記得寫回答', 'ok', 2200);
+    };
   }
 
   // ── 新增產品精靈 ──
@@ -348,10 +423,16 @@
     frame.style.transform = `scale(${k})`; frame.style.transformOrigin = '0 0';
   }
   window.addEventListener('resize', fitFrame);
-  document.querySelectorAll('.seg button').forEach((b) => b.onclick = () => {
-    document.querySelectorAll('.seg button').forEach((x) => x.classList.toggle('on', x === b));
+  document.querySelectorAll('#devSeg button').forEach((b) => b.onclick = () => {
+    document.querySelectorAll('#devSeg button').forEach((x) => x.classList.toggle('on', x === b));
     $('.frame-wrap').classList.toggle('mobile', b.dataset.w === 'mobile');
     fitFrame();
+  });
+  document.querySelectorAll('#viewTabs button').forEach((b) => b.onclick = () => {
+    document.querySelectorAll('#viewTabs button').forEach((x) => x.classList.toggle('on', x === b));
+    const seo = b.dataset.view === 'seo';
+    $('#seoPanel').hidden = !seo; $('.frame-wrap').hidden = seo; $('#devSeg').hidden = seo;
+    if (seo) renderSeo(); else fitFrame();
   });
   fitFrame();
   $('#btnSave').onclick = save;

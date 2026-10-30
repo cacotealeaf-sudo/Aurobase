@@ -90,6 +90,33 @@ class GeneratorTest(SiteCopy):
         self.assertNotIn('nexus-library.html', self.page('llms.txt'))
 
 
+class AuditTest(SiteCopy):
+    def test_current_content_has_no_failing_checks(self):
+        mods, pf = gen.load_modules(), gen.load_platform()
+        for m in mods.values():
+            fails = [c['label'] for c in gen.audit(m, mods, pf)['checks'] if c['status'] == 'fail']
+            self.assertEqual(fails, [], m['slug'])
+        self.assertEqual([c for c in gen.audit_platform(pf)['checks'] if c['status'] == 'fail'], [])
+
+    def test_audit_flags_missing_keyword_and_entity_sentence(self):
+        mods, pf = gen.load_modules(), gen.load_platform()
+        m = self.doc('nexus-cardea')
+        m['hero']['h1'] = 'Cardea｜機器身分'
+        m['definition']['a'] = ['沒有實體句的回答。']
+        bad = {c['label'] for c in gen.audit(m, mods, pf)['checks'] if c['status'] == 'fail'}
+        self.assertIn('主關鍵字出現在 H1', bad)
+        self.assertTrue(any('實體句' in b for b in bad))
+
+    def test_title_width_counts_latin_as_half(self):
+        self.assertEqual(gen.disp_width('AI 治理'), 3.5)
+
+    def test_robots_blocking_ai_bots_fails_site_check(self):
+        with open(os.path.join(self.root, 'robots.txt'), 'w') as f:
+            f.write('User-agent: GPTBot\nDisallow: /\n')
+        checks = gen.site_checks('nexus-forge.html')
+        self.assertEqual(checks[0]['status'], 'fail')
+
+
 class EditorTest(SiteCopy):
     def test_new_product_starts_as_draft_and_publishes_into_overview(self):
         code, body = server.create({'slug': 'nexus-vault', 'code': 'Vault', 'name_zh': '金鑰管理',

@@ -5,7 +5,7 @@
   "name_zh": "源碼檢測與弱點掃描",
   "leg": "安全",
   "eyebrow": "Scanner — Governed Vulnerability Scanning",
-  "description": "Scanner 是奧洛（Aurobase）的源碼檢測與弱點掃描平台：涵蓋源碼檢測（SAST）、網站弱點掃描（DAST）、第三方套件分析（SCA）、機密外洩、容器與 IaC 掃描，產出 SARIF 報告與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、EPSS、CISA KEV、TWCERT 情資排序修補。",
+  "description": "Scanner 是奧洛（Aurobase）的源碼檢測與弱點掃描平台：涵蓋源碼檢測（SAST）、網站弱點掃描（DAST）、第三方套件分析（SCA）、機密外洩、容器與 IaC 掃描，產出 SARIF 報告與 CycloneDX／SPDX 格式的 SBOM，並以 NVD、EPSS、CISA KEV、TWCERT 情資排序。",
   "keywords": [
     "源碼檢測",
     "源碼檢測工具",

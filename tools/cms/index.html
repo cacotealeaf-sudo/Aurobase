@@ -36,13 +36,18 @@
 
   <section class="preview">
     <header class="bar">
-      <div class="seg" role="group" aria-label="預覽寬度">
+      <div class="seg" id="viewTabs" role="tablist" aria-label="右側面板">
+        <button type="button" data-view="preview" class="on" role="tab">預覽</button>
+        <button type="button" data-view="seo" role="tab">SEO / GEO <b id="seoBadge"></b></button>
+      </div>
+      <div class="seg" id="devSeg" role="group" aria-label="預覽寬度">
         <button type="button" data-w="desktop" class="on">桌機</button>
         <button type="button" data-w="mobile">手機</button>
       </div>
       <a id="openLive" target="_blank" rel="noopener">在新分頁開啟已產生的頁面 ↗</a>
     </header>
     <div class="frame-wrap"><iframe id="frame" title="即時預覽"></iframe></div>
+    <div id="seoPanel" class="seo" hidden></div>
   </section>
 
   <dialog id="wizard">
