@@ -1,0 +1,30 @@
+/* 全站左側選單的「AI 治理平台」產品子選單（由 tools/build-module-pages.py 產生選單結構） */
+#colorlib-aside { overflow-y: auto; scrollbar-width: thin; }
+#colorlib-aside #colorlib-main-menu .nav-row { display: flex; align-items: center; gap: 0.4rem; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle {
+    border: 0; background: none; padding: 0.2rem 0.35rem; line-height: 1; cursor: pointer;
+    color: #8a8a8f; font-size: 0.9rem; border-radius: 4px; transition: transform 0.25s, color 0.2s;
+}
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover { color: #E63109; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle[aria-expanded="true"] { transform: rotate(180deg); }
+#colorlib-aside #colorlib-main-menu ul.nav-sub {
+    margin: 0.15rem 0 0.7rem; padding: 0.35rem 0 0.35rem 0.9rem; border-left: 2px solid #f0d5cc;
+}
+#colorlib-aside #colorlib-main-menu ul.nav-sub li { font-size: 14px; line-height: 1.55; margin: 0.18rem 0; font-weight: 400; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub li a { padding: 1px 0; font-family: inherit; color: #3a3a3f; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub li a:after { bottom: -1px; height: 1px; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-all a { font-weight: 600; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg { display: grid; grid-template-columns: 4.4em 1fr; gap: 0 0.5rem; align-items: baseline; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-name { font-size: 12px; line-height: 1.4; color: #9a9aa0; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links { display: flex; flex-wrap: wrap; gap: 0 0.6rem; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub li a[aria-current="page"] { color: #E63109; font-weight: 600; }
+#colorlib-aside #colorlib-main-menu .nav-ext { font-size: 0.6em; color: #9a9aa0; margin-left: 0.15em; }
+
+/* 目前所在頁面：沿用原本滑過時的橘色底線 */
+#colorlib-aside #colorlib-main-menu > ul > li.active > a:after,
+#colorlib-aside #colorlib-main-menu > ul > li.active > .nav-row > a:after { visibility: visible; transform: scaleX(1); }
+
+/* 矮螢幕：子選單展開後會碰到固定在底部的標誌，改成接在選單後面 */
+@media (max-height: 880px) {
+    #colorlib-aside .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }
+}

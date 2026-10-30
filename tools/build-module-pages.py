@@ -502,6 +502,7 @@ def build(m, mods, top, bottom):
         assert needle in t, '%s: inquiry_chip「%s」不在諮詢表單選項裡' % (m['slug'], chip)
         t = t.replace(needle, f'value="{chip}" checked>', 1)
     t = t.replace('  <body>', f'  <body style="{theme_style(m["theme"])}">', 1)
+    t = NAV_RE.sub(lambda x: x.group(1) + nav_html(m['file'], '', load_platform(), mods), t, count=1)
     b = bottom.replace('  </body>', SMOOTH + '  </body>', 1)
     return head(m) + '    ' + t.lstrip() + body(m, mods) + b
 
@@ -710,6 +711,7 @@ def build_all():
     errors = check_all(mods, pf)
     if errors:
         return {'errors': errors, 'written': [], 'removed': []}
+    nav_changed = update_nav(mods, pf)
     top, bottom = load_chrome()
     written, removed = [], []
     for m in mods.values():
@@ -723,12 +725,79 @@ def build_all():
     build_overview(mods, pf)
     update_llms(mods, pf)
     update_sitemap(mods)
-    written += ['nexus.html', 'llms.txt', 'sitemap.xml']
+    written += ['nexus.html', 'llms.txt', 'sitemap.xml'] + [f for f in nav_changed if f not in written]
     return {'errors': [], 'written': written, 'removed': removed}
 
 
 def today():
     return datetime.date.today().isoformat()
+
+
+# ── 全站左側選單：所有頁面（含部落格文章與產品頁外框）共用同一份結構 ──
+
+NAV_BEGIN, NAV_END = '<!-- SITE-NAV:BEGIN（由 tools/build-module-pages.py 依 _nav.json 產生）-->', '<!-- SITE-NAV:END -->'
+NAV_TOGGLE_JS = ("<script>document.querySelectorAll('.nav-sub-toggle').forEach(function(b){b.addEventListener('click',function(){"
+                 "var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);"
+                 "document.getElementById(b.getAttribute('aria-controls')).hidden=!o;});});</script>")
+NAV_RE = re.compile(r'(<nav id="colorlib-main-menu"[^>]*>\s*)(?:' + re.escape(NAV_BEGIN) + r'.*?' + re.escape(NAV_END) + r'|<ul>.*?</ul>)', re.S)
+
+
+def nav_html(page, prefix, pf, mods):
+    """page：目前頁面檔名（決定哪一項是 active、子選單是否展開）；prefix：部落格文章頁為 '../'。"""
+    nav = json.loads(read(os.path.join(SRC, '_nav.json')))
+    get = overview_mods(pf, mods)
+    out = ['<ul>']
+    for it in nav['items']:
+        if it.get('type') == 'platform':
+            here = page == 'nexus.html' or page.startswith('nexus-')
+            cur = lambda f: ' aria-current="page"' if f == page else ''
+            legs = []
+            for lg in pf['legs']:
+                slugs = live(pf, mods, lg['modules'])
+                if slugs:
+                    links = ''.join('<a href="%s%s"%s>%s</a>' % (prefix, get(s)['file'], cur(get(s)['file']), get(s)['code']) for s in slugs)
+                    legs.append('<li class="nav-leg"><span class="nav-leg-name">%s</span><span class="nav-leg-links">%s</span></li>' % (lg['name'], links))
+            out.append(
+                '<li class="has-sub%s"><div class="nav-row"><a href="%s%s">%s</a>'
+                '<button type="button" class="nav-sub-toggle" aria-expanded="%s" aria-controls="nav-sub-platform" '
+                'aria-label="展開%s的產品">▾</button></div>'
+                '<ul class="nav-sub" id="nav-sub-platform"%s><li class="nav-all"><a href="%snexus.html#platform"%s>%s</a></li>%s</ul></li>'
+                % (' active' if here else '', prefix, it['href'], it['label'], 'true' if here else 'false', it['label'],
+                   '' if here else ' hidden', prefix, cur('nexus.html'), it['overview_label'], ''.join(legs)))
+        elif it.get('external'):
+            out.append('<li><a href="%s" target="_blank" rel="noopener">%s<span class="nav-ext" aria-hidden="true">↗</span></a></li>'
+                       % (it['href'], it['label']))
+        else:
+            out.append('<li%s><a href="%s%s">%s</a></li>' % (' class="active"' if it['href'] == page else '', prefix, it['href'], it['label']))
+    out.append('</ul>')
+    return NAV_BEGIN + '\n' + ''.join(out) + '\n' + NAV_TOGGLE_JS + '\n' + NAV_END
+
+
+def nav_pages():
+    pages = sorted(glob.glob(os.path.join(ROOT, '*.html'))) + sorted(glob.glob(os.path.join(ROOT, 'blogpost', '*.html')))
+    return pages + [os.path.join(SRC, 'chrome-top.html')]
+
+
+def update_nav(mods, pf=None):
+    """改寫每一頁的左側選單，並確保載入 css/site-nav.css。回傳有變動的檔案。"""
+    pf = pf or load_platform()
+    changed = []
+    for p in nav_pages():
+        s = read(p)
+        if 'id="colorlib-main-menu"' not in s:
+            continue
+        in_blog = os.path.basename(os.path.dirname(p)) == 'blogpost'
+        prefix = '../' if in_blog else ''
+        # 產品頁外框（chrome-top）只放通用版本；build() 產頁時再換成標出該產品的版本
+        block = nav_html(os.path.basename(p), prefix, pf, mods)
+        t = NAV_RE.sub(lambda m: m.group(1) + block, s, count=1)
+        link = '<link rel="stylesheet" href="%scss/site-nav.css">' % prefix
+        if link not in t and '</head>' in t:
+            t = t.replace('</head>', '    %s\n  </head>' % link, 1)
+        if t != s:
+            io.open(p, 'w', encoding='utf-8').write(t)
+            changed.append(os.path.relpath(p, ROOT))
+    return changed
 
 
 def main():
