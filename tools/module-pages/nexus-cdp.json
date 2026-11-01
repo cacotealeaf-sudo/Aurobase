@@ -78,7 +78,7 @@
     ],
     [
       "所屬",
-      "AURO NEXUS 平台「客戶資料」能力，與 <a href=\"nexus-abm.html\">NEXUS ABM</a> 共用客戶圖譜。"
+      "AURO NEXUS 平台「客戶資料」能力，NEXUS ABM 以 CDP 客戶識別碼參照人物，不另存個資。"
     ]
   ],
   "pain": {
@@ -109,6 +109,15 @@
           "多段式比對：確定性規則與機率式比對並用。",
           "依信心值<b>自動合併</b>或<b>送人工審核</b>，合併依據可查。",
           "匿名瀏覽與登入後身分的串接。"
+        ]
+      },
+      {
+        "icon": "user-badge-check",
+        "title": "身分解析規則",
+        "items": [
+          "確定式比對（會員卡號、外部系統 ID、手機）完全相符時直接歸戶。",
+          "機率式比對依裝置與行為訊號計分：0.85 以上自動合併、0.60 至 0.84 送人工審核，低於 0.60 另建檔案。",
+          "每筆識別碼都標示來源與歸戶方式。"
         ]
       },
       {
@@ -149,6 +158,23 @@
           "同意管理：記錄客戶的同意與撤回。",
           "刪除請求審批流程，<b>刪除帳本只能附加</b>，處理過程可追溯。"
         ]
+      },
+      {
+        "icon": "lock",
+        "title": "個資存取控管",
+        "items": [
+          "查看完整個資須提出申請並寫明目的，由另一位法遵人員核准；核准後開放 5 分鐘、只能用一次。",
+          "欄位遮罩依角色與資料條件設定，可全遮、部分遮或雜湊；跨模組回傳預設遮罩。"
+        ]
+      },
+      {
+        "icon": "stats-up-square",
+        "title": "分析與通路",
+        "items": [
+          "六種歸因模型：首次、末次、線性、位置、時間衰減、Shapley；另有漏斗分析與 A/B 實驗。",
+          "LINE 官方帳號：訊息推送與群發、5 種圖文訊息範本、圖文選單綁定分群。",
+          "通路寄送紀錄依租戶寫入雜湊鏈，失敗時自動重試；未設定憑證時標示失敗，不會假裝已送出。"
+        ]
       }
     ]
   },
@@ -174,7 +200,7 @@
   },
   "platform": {
     "heading": "在 AURO NEXUS 平台上的位置",
-    "text": "AURA CDP 是平台的<b>客戶資料</b>能力。<a href=\"nexus-abm.html\">NEXUS ABM</a> 在 CDP 的客戶圖譜之上做企業帳號層的分析；<a href=\"nexus-auro.html\">Auro</a> 可由 CDP 的分群事件觸發工作流程；<a href=\"nexus-geo.html\">NEXUS GEO</a> 會把生成式搜尋的洞察回寫為 CDP 標籤；<a href=\"nexus-mira.html\">MIRA</a> 可從 CDP 同步受眾。",
+    "text": "AURA CDP 是平台的<b>客戶資料</b>能力。<a href=\"nexus-abm.html\">NEXUS ABM</a> 以 CDP 的客戶識別碼參照人物，做企業帳號層的分析，ABM 的意圖分數也會回存為 CDP 客戶特徵；<a href=\"nexus-auro.html\">Auro</a> 可由 CDP 的分群事件觸發工作流程；<a href=\"nexus-geo.html\">NEXUS GEO</a> 會把生成式搜尋的洞察回寫為 CDP 標籤；<a href=\"nexus-mira.html\">MIRA</a> 可從 CDP 同步受眾。",
     "related": [
       "nexus-abm",
       "nexus-auro",
@@ -223,7 +249,7 @@
     },
     {
       "q": "可以接哪些通路？",
-      "a": "目前提供 LINE 官方帳號事件回流、App 推播與 WhatsApp 範本訊息；其他通路依導入專案規劃介接。"
+      "a": "目前提供 LINE 官方帳號（訊息推送、圖文選單、分群同步）、App 推播與 WhatsApp 範本訊息；各通路需在導入時設定官方帳號憑證，其他通路依專案規劃介接。"
     }
   ],
   "cta": {
@@ -311,5 +337,64 @@
     "客戶輪廓",
     "貼標",
     "customer data platform"
-  ]
+  ],
+  "shots": {
+    "heading": "實機畫面",
+    "intro": "以下畫面擷取自展示環境，客戶資料為虛構的示範資料，聯絡資訊以遮罩顯示。",
+    "items": [
+      {
+        "src": "images/nexus-cdp/identity.webp",
+        "alt": "AURA CDP 身分歸戶依據",
+        "title": "身分歸戶依據",
+        "caption": "每筆識別碼都標示來源與歸戶方式；機率式合併的門檻（0.85 以上自動合併、0.60 至 0.84 送審）直接寫在畫面上。"
+      },
+      {
+        "src": "images/nexus-cdp/segment-debugger.webp",
+        "alt": "AURA CDP 分群規則與樣本成員",
+        "title": "分群可解釋",
+        "caption": "展開任一分群，可看到規則、編譯後的查詢條件與依預估 CLV 排序的樣本成員。"
+      },
+      {
+        "src": "images/nexus-cdp/journey-templates.webp",
+        "alt": "AURA CDP 旅程範本",
+        "title": "旅程範本",
+        "caption": "常見的金融旅程範本可一鍵套用，例如申請中斷挽回、新戶開卡、定存到期提醒，每張標示類別與節點數。"
+      },
+      {
+        "src": "images/nexus-cdp/approvals.webp",
+        "alt": "AURA CDP 審核中心",
+        "title": "雙人審核",
+        "caption": "個資存取與資料抹除申請集中審核；申請人不能核准自己的申請。"
+      },
+      {
+        "src": "images/nexus-cdp/audit-log.webp",
+        "alt": "AURA CDP 稽核日誌",
+        "title": "稽核日誌",
+        "caption": "每個 API 操作都寫入稽核軌跡，畫面直接顯示整條軌跡的驗證結果，可匯出 CSV。"
+      },
+      {
+        "src": "images/nexus-cdp/data-quality.webp",
+        "alt": "AURA CDP 資料品質規則",
+        "title": "資料品質",
+        "caption": "完整性、唯一性、時效性等規則逐條執行，沒過的直接標示未通過。"
+      },
+      {
+        "src": "images/nexus-cdp/funnel.webp",
+        "alt": "AURA CDP 漏斗分析",
+        "title": "漏斗分析",
+        "caption": "指定事件步驟與時間窗，計算每一段的留存、流失人數與整體轉換率。"
+      }
+    ]
+  },
+  "limits": [
+    {
+      "title": "機率式比對以裝置訊號為主",
+      "text": "機率式身分比對目前使用裝置與行為訊號，不做姓名或地址的模糊比對。"
+    },
+    {
+      "title": "各通路需先取得官方憑證",
+      "text": "LINE、App 推播與 WhatsApp 需由貴機構提供官方帳號憑證，導入時逐一驗證寄送。"
+    }
+  ],
+  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。"
 }

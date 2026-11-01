@@ -71,7 +71,8 @@
         "資料共享治理",
         "AI 治理",
         "品質與施行",
-        "權責與流程"
+        "權責與流程",
+        "企業環境整合"
       ],
       "isRelatedTo": [
         {
@@ -140,6 +141,16 @@
           "@type": "ImageObject",
           "url": "https://aurobase.com/images/nexus-saga/program.webp",
           "caption": "治理計畫量測：跨模組的治理指標彙整，每次量測都寫入稽核紀錄；沒有樣本的指標顯示「無樣本」，不算成滿分。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-saga/policy-dryrun.webp",
+          "caption": "政策試算：政策發布前先試算影響範圍，畫面顯示受影響的紀錄與租戶數，確認後才生效。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-saga/matters.webp",
+          "caption": "案件調閱匯出：案件依識別、保全、收集、匯出四步處理，匯出的資料附簽章清單與逐筆雜湊，可離線驗證。"
         }
       ]
     },
@@ -502,7 +513,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。</dd><dt>資料來源</dt><dd>Oracle、SQL Server、MySQL 唯讀收割元資料；NAS／檔案系統只讀檔案屬性。</dd><dt>治理構面</dt><dd>盤點與目錄、生命週期與保存、稽核鏈、資料共享、AI 治理、品質、權責與流程。</dd><dt>稽核紀錄</dt><dd>雜湊鏈加資料庫層只能附加的觸發器，竄改可被偵測。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「合規治理」能力，與 <a href="nexus-forge.html">Forge</a> 共用治理底座。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。</dd><dt>資料來源</dt><dd>Oracle、SQL Server、MySQL、PostgreSQL、Hive 唯讀收割元資料；NAS、SMB 只讀檔案屬性。</dd><dt>治理構面</dt><dd>盤點與目錄、生命週期與保存、稽核鏈、資料共享、AI 治理、品質、權責與流程。</dd><dt>稽核紀錄</dt><dd>雜湊鏈加資料庫層只能附加的觸發器，竄改可被偵測。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「合規治理」能力，與 <a href="nexus-forge.html">Forge</a> 共用治理底座。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -556,27 +567,30 @@
                             <h2 class="section-heading">七個治理構面</h2>
                             <p class="section-intro">每一項都有對應的操作畫面、API 與測試，下方「實機畫面」可逐頁對照。</p>
                             <div class="row">
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
-                                        <h3>資料盤點與目錄</h3><ul><li>從 Oracle、SQL Server、MySQL <b>唯讀</b>收割表、欄位、型別、主鍵、外鍵、註解與檢視表定義。</li><li>NAS／檔案系統只讀檔名、副檔名、大小與修改時間，<b>不開啟檔案內容</b>。</li><li>血緣由外鍵、檢視表定義、來源系統、AI 使用紀錄與資料共享五種訊號推導。</li><li>業務詞彙表、欄位級對應與當責矩陣。</li></ul></div></div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                        <h3>資料盤點與目錄</h3><ul><li>從 Oracle、SQL Server、MySQL、PostgreSQL、Hive <b>唯讀</b>收割表、欄位、型別、主鍵、外鍵、註解與檢視表定義。</li><li>NAS／檔案系統只讀檔名、副檔名、大小與修改時間，<b>不開啟檔案內容</b>。</li><li>血緣由外鍵、檢視表定義、預存程序相依、來源系統、AI 使用紀錄與資料共享推導，並可匯入 Apache Atlas 與接收 OpenLineage 事件。</li><li>業務詞彙表、欄位級對應與當責矩陣。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-hourglass"></i></div>
                                         <h3>生命週期與保存</h3><ul><li>分媒體設定保存期限，預設值依機構政策調整。</li><li>保存期限未到，伺服器拒絕銷毀。</li><li>法律保全中的紀錄無法銷毀。</li><li>銷毀證明含簽核鏈與雜湊，可離線驗證。</li></ul></div></div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
                                         <h3>稽核鏈</h3><ul><li>雜湊鏈稽核紀錄，資料庫層以只能附加的觸發器擋下修改與刪除。</li><li>完整性驗證逐筆重算雜湊，斷鏈時指出斷在第幾筆。</li></ul></div></div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-share-android"></i></div>
                                         <h3>資料共享治理</h3><ul><li>對手方評估、再識別風險分級、同意管理與當事人權利（查詢、更正、停止使用）。</li><li>利益衝突隔離：同一衝突類別內存取過 A 公司，就不能再存取 B 公司；隔離範圍於導入時設定。</li></ul></div></div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-brain"></i></div>
                                         <h3>AI 治理</h3><ul><li>AI 使用溯源：一次 AI 決策引用了哪些來源、當下的密級。</li><li>反向影響分析：資料被銷毀或降級後，找出過去引用過它的 AI 決策。</li><li>模型登錄：公平性與穩健性評估，未評估的模型不能用在高風險用途。</li></ul></div></div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-check-circle"></i></div>
-                                        <h3>品質與施行</h3><ul><li>完整、唯一、時效、有效、準確、一致六類品質規則與計分卡。</li><li>品質判定接在共享閘上，未達標的資料無法分享出去。</li><li>把核定的遮罩規則推到執行點，再回讀實況比對核定與實際。</li></ul></div></div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                        <h3>品質與施行</h3><ul><li>完整、唯一、時效、有效、準確、一致六類品質規則與計分卡。</li><li>品質判定接在共享閘上，未達標的資料無法分享出去。</li><li>把核定的遮罩規則推到執行點（例如 Apache Ranger），再回讀實況比對核定與實際。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-user-badge-check"></i></div>
                                         <h3>權責與流程</h3><ul><li>六種角色，稽核員唯讀；其餘角色依權限矩陣逐項控制。</li><li>敏感變更需第二人簽核，提案人不能自己核准。</li><li>治理流程可組裝成例行作業，每次執行都留下紀錄。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-key"></i></div>
+                                        <h3>企業環境整合</h3><ul><li>支援 Kerberos／SPNEGO 登入與 LDAP 目錄群組綁定（含中文群組名稱）。</li><li>案件調閱：依識別、保全、收集、匯出四步處理，匯出附簽章清單與逐筆雜湊。</li><li>政策發布前先試算影響範圍，確認後才生效，每個版本都保留。</li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -589,7 +603,7 @@
                         <div class="col-md-12">
                             <p class="section-label">PLATFORM SCREENS</p>
                             <h2 class="section-heading">實機畫面</h2>
-                            <p class="section-intro">以下畫面於 2026 年 9 月 9 日擷取自實際運作的展示站，租戶與資料均為虛構的產險情境（1,802 筆資料資產），不含任何真實客戶資料。</p>
+                            <p class="section-intro">以下畫面於 2026 年 9 月 9 日擷取自實際運作的展示站，租戶與資料均為虛構的產險情境（1,802 筆資料資產），不含任何真實客戶資料。政策試算與案件調閱兩張取自另一個虛構的銀行示範租戶。</p>
                             <div class="nm-shot-grid">
                                 <figure class="nm-shot"><a href="images/nexus-saga/posture.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/posture.webp" alt="SAGA 治理態勢儀表板，未達標的指標以紅色標示" loading="lazy"></a>
                                     <figcaption><b>治理態勢</b>主控台首頁。未達標的指標直接標成紅色，頁尾註明平台只量測與報告，不自動修復。</figcaption></figure>
@@ -611,6 +625,10 @@
                                     <figcaption><b>AI 溯源與模型治理</b>公平性未通過門檻的模型標為「不足」，不能用在高風險用途。</figcaption></figure>
                                 <figure class="nm-shot"><a href="images/nexus-saga/program.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/program.webp" alt="SAGA 治理計畫量測儀表板" loading="lazy"></a>
                                     <figcaption><b>治理計畫量測</b>跨模組的治理指標彙整，每次量測都寫入稽核紀錄；沒有樣本的指標顯示「無樣本」，不算成滿分。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/policy-dryrun.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/policy-dryrun.webp" alt="SAGA 政策試算" loading="lazy"></a>
+                                    <figcaption><b>政策試算</b>政策發布前先試算影響範圍，畫面顯示受影響的紀錄與租戶數，確認後才生效。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-saga/matters.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/matters.webp" alt="SAGA 案件調閱匯出" loading="lazy"></a>
+                                    <figcaption><b>案件調閱匯出</b>案件依識別、保全、收集、匯出四步處理，匯出的資料附簽章清單與逐筆雜湊，可離線驗證。</figcaption></figure>
                             </div>
                             <p class="nm-source">稽核鏈筆數在各張圖上不完全相同，因為每一次讀取敏感資料本身就是一筆稽核事件，截圖的動作也會讓鏈變長。點圖可開啟原尺寸畫面。</p>
                         </div>
@@ -626,7 +644,7 @@
                             <h2 class="section-heading">實際跑出來的數字</h2>
                             <p class="section-intro">以下為實機量測結果。規模測試環境為數十萬張表、PostgreSQL 16、單機容器。</p>
                             <div class="nm-metrics"><div class="nm-metric"><b>133 毫秒</b><span>目錄搜尋</span><p>數十萬張表規模下的搜尋回應時間。</p></div><div class="nm-metric"><b>1.27 秒</b><span>血緣名稱解析</span><p>一次解析 600 個名稱的耗時。</p></div><div class="nm-metric"><b>1.35 秒</b><span>稽核鏈驗證</span><p>20 萬筆事件逐筆重算雜湊，峰值記憶體 67 MB。</p></div><div class="nm-metric"><b>2 種</b><span>資料庫實機驗證</span><p>Oracle XE 與 SQL Server 2022 的元資料收割與血緣擷取已實機跑通。</p></div></div>
-                            <div class="nm-proofs"><div class="nm-proof"><h3>提案人自己核准會被擋下</h3><p>提案人送出核准時，伺服器回 409 並說明不得由提案人核准；身分比對前先做正規化，大小寫、全形＠與零寬字元都繞不過去。</p></div><div class="nm-proof"><h3>門檻閘拿不到指標就不放行</h3><p>流程裡的門檻閘讀不到上游指標時，該段直接失敗並寫明原因，不會預設通過。</p></div><div class="nm-proof"><h3>去識別化用帶金鑰的雜湊</h3><p>不帶金鑰的雜湊可被暴力回推：實測單執行緒約每秒 195 萬組，10 億組的空間約 9 分鐘就能窮舉。SAGA 用依租戶設定金鑰的 HMAC，沒有金鑰時拒絕建立規則。</p></div></div>
+                            <div class="nm-proofs"><div class="nm-proof"><h3>提案人自己核准會被擋下</h3><p>提案人送出核准時，伺服器回 409 並說明不得由提案人核准；身分比對前先做正規化，大小寫、全形＠與零寬字元都繞不過去。</p></div><div class="nm-proof"><h3>門檻閘拿不到指標就不放行</h3><p>流程裡的門檻閘讀不到上游指標時，該段直接失敗並寫明原因，不會預設通過。</p></div><div class="nm-proof"><h3>去識別化用帶金鑰的雜湊</h3><p>不帶金鑰的雜湊可被暴力回推：實測單執行緒約每秒 195 萬組，10 億組的空間約 9 分鐘就能窮舉。SAGA 用依租戶設定金鑰的 HMAC，沒有金鑰時拒絕建立規則。</p></div><div class="nm-proof"><h3>大型血緣匯入不漏筆</h3><p>由 Apache Atlas 匯入 1,250 張表的血緣，分頁後全數匯入；也修正經過處理節點的血緣會整條遺失的問題。</p></div></div>
                         </div>
                     </div>
                 </div>
@@ -723,6 +741,8 @@
                                         <div><h3>不宣稱符合任何法規</h3><p>SAGA 對應的是規範要求的做法（分級、保存、當事人權利、利益衝突隔離），是否合規由主管機關與貴機構法遵認定。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">5</div>
                                         <div><h3>尚未實測的項目</h3><p>客戶叢集上的 Helm 部署、CIFS/NFS 實際掛載與授權到期行為尚未實測，導入時列為驗收項目。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">6</div>
+                                        <div><h3>大數據元件為容器環境實測</h3><p>Kerberos、Apache Atlas、Hive 的整合在容器環境實測，客戶叢集上的設定於導入時驗證。</p></div></div>
                             </div></div>
                         </div>
                     </div>

@@ -331,7 +331,7 @@ a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none;
 .nm-shots { background: #fff; padding: 4rem 0; }
 .nm-shot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.4rem; }
 .nm-shot { margin: 0; background: #f8f9fa; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
-.nm-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.nm-shot img { display: block; width: 100%; height: auto; max-height: 440px; object-fit: cover; object-position: top left; border-bottom: 1px solid rgba(0,0,0,0.06); background: #fff; }
 .nm-shot figcaption { padding: 0.9rem 1.1rem 1.1rem; font-size: 0.86rem; color: #555; line-height: 1.75; }
 .nm-shot figcaption b { display: block; color: #28282c; font-size: 0.95rem; margin-bottom: 0.25rem; }
 

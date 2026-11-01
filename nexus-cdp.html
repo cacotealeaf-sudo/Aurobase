@@ -66,11 +66,14 @@
       "dateModified": "2026-10-30",
       "featureList": [
         "身分解析",
+        "身分解析規則",
         "單一客戶檔案",
         "分群",
         "旅程編排",
         "ML 評分",
-        "同意與刪除"
+        "同意與刪除",
+        "個資存取控管",
+        "分析與通路"
       ],
       "isRelatedTo": [
         {
@@ -87,6 +90,43 @@
         },
         {
           "@id": "https://aurobase.com/nexus-forge.html#software"
+        }
+      ],
+      "screenshot": [
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/identity.webp",
+          "caption": "身分歸戶依據：每筆識別碼都標示來源與歸戶方式；機率式合併的門檻（0.85 以上自動合併、0.60 至 0.84 送審）直接寫在畫面上。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/segment-debugger.webp",
+          "caption": "分群可解釋：展開任一分群，可看到規則、編譯後的查詢條件與依預估 CLV 排序的樣本成員。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/journey-templates.webp",
+          "caption": "旅程範本：常見的金融旅程範本可一鍵套用，例如申請中斷挽回、新戶開卡、定存到期提醒，每張標示類別與節點數。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/approvals.webp",
+          "caption": "雙人審核：個資存取與資料抹除申請集中審核；申請人不能核准自己的申請。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/audit-log.webp",
+          "caption": "稽核日誌：每個 API 操作都寫入稽核軌跡，畫面直接顯示整條軌跡的驗證結果，可匯出 CSV。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/data-quality.webp",
+          "caption": "資料品質：完整性、唯一性、時效性等規則逐條執行，沒過的直接標示未通過。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-cdp/funnel.webp",
+          "caption": "漏斗分析：指定事件步驟與時間窗，計算每一段的留存、流失人數與整體轉換率。"
         }
       ]
     },
@@ -273,7 +313,7 @@
           "name": "可以接哪些通路？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "目前提供 LINE 官方帳號事件回流、App 推播與 WhatsApp 範本訊息；其他通路依導入專案規劃介接。"
+            "text": "目前提供 LINE 官方帳號（訊息推送、圖文選單、分群同步）、App 推播與 WhatsApp 範本訊息；各通路需在導入時設定官方帳號憑證，其他通路依專案規劃介接。"
           }
         }
       ]
@@ -457,7 +497,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。</dd><dt>身分解析</dt><dd>多段式比對，依信心值自動合併或送人工審核。</dd><dt>應用</dt><dd>分群（含自然語言建分群）、旅程編排、ML 評分。</dd><dt>個資</dt><dd>同意管理、刪除請求審批，刪除帳本只能附加。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「客戶資料」能力，與 <a href="nexus-abm.html">NEXUS ABM</a> 共用客戶圖譜。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。</dd><dt>身分解析</dt><dd>多段式比對，依信心值自動合併或送人工審核。</dd><dt>應用</dt><dd>分群（含自然語言建分群）、旅程編排、ML 評分。</dd><dt>個資</dt><dd>同意管理、刪除請求審批，刪除帳本只能附加。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「客戶資料」能力，NEXUS ABM 以 CDP 客戶識別碼參照人物，不另存個資。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -513,6 +553,9 @@
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-user"></i></div>
                                         <h3>身分解析</h3><ul><li>多段式比對：確定性規則與機率式比對並用。</li><li>依信心值<b>自動合併</b>或<b>送人工審核</b>，合併依據可查。</li><li>匿名瀏覽與登入後身分的串接。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-user-badge-check"></i></div>
+                                        <h3>身分解析規則</h3><ul><li>確定式比對（會員卡號、外部系統 ID、手機）完全相符時直接歸戶。</li><li>機率式比對依裝置與行為訊號計分：0.85 以上自動合併、0.60 至 0.84 送人工審核，低於 0.60 另建檔案。</li><li>每筆識別碼都標示來源與歸戶方式。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
                                         <h3>單一客戶檔案</h3><ul><li>客戶時間軸：跨系統事件依時間呈現。</li><li>批次查詢 API 供其他系統取用。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
@@ -527,6 +570,40 @@
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-privacy-policy"></i></div>
                                         <h3>同意與刪除</h3><ul><li>同意管理：記錄客戶的同意與撤回。</li><li>刪除請求審批流程，<b>刪除帳本只能附加</b>，處理過程可追溯。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
+                                        <h3>個資存取控管</h3><ul><li>查看完整個資須提出申請並寫明目的，由另一位法遵人員核准；核准後開放 5 分鐘、只能用一次。</li><li>欄位遮罩依角色與資料條件設定，可全遮、部分遮或雜湊；跨模組回傳預設遮罩。</li></ul></div></div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-stats-up-square"></i></div>
+                                        <h3>分析與通路</h3><ul><li>六種歸因模型：首次、末次、線性、位置、時間衰減、Shapley；另有漏斗分析與 A/B 實驗。</li><li>LINE 官方帳號：訊息推送與群發、5 種圖文訊息範本、圖文選單綁定分群。</li><li>通路寄送紀錄依租戶寫入雜湊鏈，失敗時自動重試；未設定憑證時標示失敗，不會假裝已送出。</li></ul></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screens" class="nm-shots nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">PLATFORM SCREENS</p>
+                            <h2 class="section-heading">實機畫面</h2>
+                            <p class="section-intro">以下畫面擷取自展示環境，客戶資料為虛構的示範資料，聯絡資訊以遮罩顯示。</p>
+                            <div class="nm-shot-grid">
+                                <figure class="nm-shot"><a href="images/nexus-cdp/identity.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/identity.webp" alt="AURA CDP 身分歸戶依據" loading="lazy"></a>
+                                    <figcaption><b>身分歸戶依據</b>每筆識別碼都標示來源與歸戶方式；機率式合併的門檻（0.85 以上自動合併、0.60 至 0.84 送審）直接寫在畫面上。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-cdp/segment-debugger.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/segment-debugger.webp" alt="AURA CDP 分群規則與樣本成員" loading="lazy"></a>
+                                    <figcaption><b>分群可解釋</b>展開任一分群，可看到規則、編譯後的查詢條件與依預估 CLV 排序的樣本成員。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-cdp/journey-templates.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/journey-templates.webp" alt="AURA CDP 旅程範本" loading="lazy"></a>
+                                    <figcaption><b>旅程範本</b>常見的金融旅程範本可一鍵套用，例如申請中斷挽回、新戶開卡、定存到期提醒，每張標示類別與節點數。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-cdp/approvals.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/approvals.webp" alt="AURA CDP 審核中心" loading="lazy"></a>
+                                    <figcaption><b>雙人審核</b>個資存取與資料抹除申請集中審核；申請人不能核准自己的申請。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-cdp/audit-log.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/audit-log.webp" alt="AURA CDP 稽核日誌" loading="lazy"></a>
+                                    <figcaption><b>稽核日誌</b>每個 API 操作都寫入稽核軌跡，畫面直接顯示整條軌跡的驗證結果，可匯出 CSV。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-cdp/data-quality.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/data-quality.webp" alt="AURA CDP 資料品質規則" loading="lazy"></a>
+                                    <figcaption><b>資料品質</b>完整性、唯一性、時效性等規則逐條執行，沒過的直接標示未通過。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-cdp/funnel.webp" target="_blank" rel="noopener"><img src="images/nexus-cdp/funnel.webp" alt="AURA CDP 漏斗分析" loading="lazy"></a>
+                                    <figcaption><b>漏斗分析</b>指定事件步驟與時間窗，計算每一段的留存、流失人數與整體轉換率。</figcaption></figure>
                             </div>
                         </div>
                     </div>
@@ -575,7 +652,7 @@
                         <div class="col-md-12">
                             <p class="section-label">ON THE PLATFORM</p>
                             <h2 class="section-heading">在 AURO NEXUS 平台上的位置</h2>
-                            <div class="platform-text">AURA CDP 是平台的<b>客戶資料</b>能力。<a href="nexus-abm.html">NEXUS ABM</a> 在 CDP 的客戶圖譜之上做企業帳號層的分析；<a href="nexus-auro.html">Auro</a> 可由 CDP 的分群事件觸發工作流程；<a href="nexus-geo.html">NEXUS GEO</a> 會把生成式搜尋的洞察回寫為 CDP 標籤；<a href="nexus-mira.html">MIRA</a> 可從 CDP 同步受眾。</div>
+                            <div class="platform-text">AURA CDP 是平台的<b>客戶資料</b>能力。<a href="nexus-abm.html">NEXUS ABM</a> 以 CDP 的客戶識別碼參照人物，做企業帳號層的分析，ABM 的意圖分數也會回存為 CDP 客戶特徵；<a href="nexus-auro.html">Auro</a> 可由 CDP 的分群事件觸發工作流程；<a href="nexus-geo.html">NEXUS GEO</a> 會把生成式搜尋的洞察回寫為 CDP 標籤；<a href="nexus-mira.html">MIRA</a> 可從 CDP 同步受眾。</div>
                             <div class="nm-links"><a class="nm-link" href="nexus-abm.html"><b>NEXUS ABM</b><span>企業客戶帳號經營</span></a><a class="nm-link" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span></a><a class="nm-link" href="nexus-geo.html"><b>NEXUS GEO</b><span>生成式搜尋能見度</span></a><a class="nm-link" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span></a><a class="nm-link" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span></a><a class="nm-link" href="nexus.html#platform"><b>AURO NEXUS</b><span>平台總覽與全部模組</span></a></div>
                         </div>
                     </div>
@@ -605,6 +682,24 @@
                 </div>
             </section>
 
+            <section class="nm-limits nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">SCOPE</p>
+                            <h2 class="section-heading">範圍界定</h2>
+                            <p class="section-intro">以下是目前版本的範圍，導入前會在規劃階段逐項確認。</p>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="limit-item"><div class="limit-index">1</div>
+                                        <div><h3>機率式比對以裝置訊號為主</h3><p>機率式身分比對目前使用裝置與行為訊號，不做姓名或地址的模糊比對。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">2</div>
+                                        <div><h3>各通路需先取得官方憑證</h3><p>LINE、App 推播與 WhatsApp 需由貴機構提供官方帳號憑證，導入時逐一驗證寄送。</p></div></div>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="nm-faq nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
@@ -617,7 +712,7 @@
                                     <div class="faq-item"><h3>AURA CDP 可以部署在自己的機房嗎？</h3><p>可以。AURA CDP 可部署於企業自有的 Kubernetes 環境（含高可用設定），也可以用單機虛擬機起試點環境。</p></div>
                                     <div class="faq-item"><h3>身分解析會不會把不同的人併在一起？</h3><p>AURA CDP 依信心值分級處理：信心值高的自動合併，介於門檻之間的送人工審核，每一次合併都保留比對依據。</p></div>
                                     <div class="faq-item"><h3>客戶要求刪除資料時怎麼處理？</h3><p>刪除請求經審批流程執行，處理紀錄寫入只能附加的刪除帳本，可追溯每一筆請求的處理過程。</p></div>
-                                    <div class="faq-item"><h3>可以接哪些通路？</h3><p>目前提供 LINE 官方帳號事件回流、App 推播與 WhatsApp 範本訊息；其他通路依導入專案規劃介接。</p></div>
+                                    <div class="faq-item"><h3>可以接哪些通路？</h3><p>目前提供 LINE 官方帳號（訊息推送、圖文選單、分群同步）、App 推播與 WhatsApp 範本訊息；各通路需在導入時設定官方帳號憑證，其他通路依專案規劃介接。</p></div>
                             </div></div>
                         </div>
                     </div>

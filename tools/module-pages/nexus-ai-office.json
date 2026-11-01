@@ -35,15 +35,11 @@
     "badges": [
       {
         "icon": "page",
-        "text": "DOCX"
+        "text": "DOCX・XLSX"
       },
       {
         "icon": "page",
-        "text": "PDF"
-      },
-      {
-        "icon": "page",
-        "text": "PPTX"
+        "text": "PDF・PPTX"
       },
       {
         "icon": "edit-pencil",
@@ -63,11 +59,11 @@
     ],
     [
       "內建範本",
-      "提案書、報價單、週報，另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報等範本。"
+      "提案書、報價單、週報，另有服務合約書、會議紀錄、工作說明書、月報、專案結案報告、保密協議書、請款單、法遵簽核意見書、風險評估報告、商業信函與簡報，共 14 種範本。"
     ],
     [
       "輸出格式",
-      "DOCX、PDF、PPTX。"
+      "DOCX、XLSX、PDF、PPTX、HTML。"
     ],
     [
       "編修",
@@ -103,8 +99,9 @@
         "icon": "page",
         "title": "範本產製",
         "items": [
-          "內建提案書、報價單、週報三種主範本。",
-          "另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報等範本。"
+          "內建提案書、報價單、週報三種主範本，共 14 種範本。",
+          "另有服務合約書、會議紀錄、工作說明書、月報、專案結案報告、保密協議書、請款單、法遵簽核意見書、風險評估報告、商業信函與簡報。",
+          "報價單自動計算小計、稅額與總計。"
         ]
       },
       {
@@ -119,29 +116,32 @@
         "icon": "edit-pencil",
         "title": "線上編修",
         "items": [
-          "在瀏覽器內直接編修產出的文件。",
-          "輸出 <b>DOCX、PDF、PPTX</b>。"
+          "在瀏覽器內直接編修產出的文件，右側 AI 助理可協助改寫選取的段落。",
+          "輸出 <b>DOCX、XLSX、PDF、PPTX</b> 與 HTML；中文 PDF 以 LibreOffice 轉檔，字型正確。"
         ]
       },
       {
         "icon": "chat-bubble",
         "title": "文稿審閱",
         "items": [
-          "檢視文稿的冗詞與重複，提供精簡建議。"
+          "檢查文稿的自我重複與冗長，離線運算、不需呼叫 AI。",
+          "需要時可再經 Forge 產出精簡改寫建議。"
         ]
       },
       {
         "icon": "database",
-        "title": "知識檔參照",
+        "title": "來源文件延伸產出",
         "items": [
-          "上傳參考資料，由 Insight 解析後供產製引用。"
+          "上傳或貼上來源文件，加上指示，產出 DOCX、PDF 或 PPTX。",
+          "參考資料也可交給 Insight 建立知識圖譜。"
         ]
       },
       {
         "icon": "lock",
         "title": "稽核紀錄",
         "items": [
-          "每份文件的產出寫入只能附加、竄改可被偵測的稽核紀錄。"
+          "每次請求經授權與政策檢查，稽核紀錄附決策編號。",
+          "稽核表只能附加，資料庫層拒絕修改與刪除。"
         ]
       }
     ]
@@ -168,7 +168,7 @@
   },
   "platform": {
     "heading": "在 AURO NEXUS 平台上的位置",
-    "text": "NEXUS AI-Office 是平台的<b>生產力</b>能力。生成經 <a href=\"nexus-forge.html\">Forge</a> 治理；參考資料的解析與知識圖譜由 <a href=\"nexus-insight.html\">Insight</a> 提供；也可作為 <a href=\"nexus-auro.html\">Auro</a> 工作流程的執行節點。",
+    "text": "NEXUS AI-Office 是平台的<b>生產力</b>能力。生成經 <a href=\"nexus-forge.html\">Forge</a> 治理；參考資料可交由 <a href=\"nexus-insight.html\">Insight</a> 建立知識圖譜；也可作為 <a href=\"nexus-auro.html\">Auro</a> 工作流程的執行節點。",
     "related": [
       "nexus-forge",
       "nexus-insight",
@@ -196,15 +196,15 @@
   "faq": [
     {
       "q": "AI 可以幫忙寫提案書嗎？",
-      "a": "可以。NEXUS AI-Office 依企業範本以 AI 產出提案書初稿，人員在瀏覽器內編修後輸出 DOCX、PDF 或 PPTX。"
+      "a": "可以。NEXUS AI-Office 依企業範本以 AI 產出提案書初稿，人員在瀏覽器內編修後輸出 DOCX、XLSX、PDF 或 PPTX。"
     },
     {
       "q": "NEXUS AI-Office 可以產出哪些文件？",
-      "a": "內建提案書、報價單、週報三種主範本，另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報等範本；企業也可以建立自己的範本。"
+      "a": "內建 提案書、報價單、週報，另有服務合約書、會議紀錄、工作說明書、月報、專案結案報告、保密協議書、請款單、法遵簽核意見書、風險評估報告、商業信函與簡報，共 14 種範本；企業也可以建立自己的範本。"
     },
     {
       "q": "產出的文件可以再修改嗎？",
-      "a": "可以。產出的文件可直接在瀏覽器內編修，並輸出為 DOCX、PDF 或 PPTX。"
+      "a": "可以。產出的文件可直接在瀏覽器內編修，並輸出為 DOCX、XLSX、PDF 或 PPTX。"
     },
     {
       "q": "客戶資料會被送到外部 AI 嗎？",
@@ -220,7 +220,7 @@
     "q": "企業怎麼用 AI 產生提案書與報價單？",
     "a": [
       "做法是把<b>企業範本</b>與<b>受治理的 AI</b> 結合：範本固定格式與必要欄位，AI 依資料產出初稿，人員在線上編修後定稿。",
-      "<b>NEXUS AI-Office</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的 AI 文件產生平台。內建提案書、報價單、週報等範本，另有保密協議、工作說明書、請款單、法遵備忘、風險評估、簡報範本；輸出 DOCX、PDF、PPTX，並可在瀏覽器內編修。AI 生成經 Forge 治理，每份文件的產出都留有稽核紀錄。"
+      "<b>NEXUS AI-Office</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的 AI 文件產生平台。內建提案書、報價單、週報等 14 種範本；輸出 DOCX、XLSX、PDF、PPTX，並可在瀏覽器內編修。AI 生成經 Forge 治理，每份文件的產出都留有稽核紀錄。"
     ]
   },
   "audience": [
@@ -280,5 +280,34 @@
     "Word",
     "報告",
     "寫文件"
+  ],
+  "shots": {
+    "heading": "實機畫面",
+    "intro": "以下畫面擷取自展示環境，文件內容為示範資料。",
+    "items": [
+      {
+        "src": "images/nexus-ai-office/09-template-library.webp",
+        "alt": "NEXUS AI-Office 範本庫",
+        "title": "範本庫",
+        "caption": "選擇範本即建立新文件並帶入內容；提案書、週報輸出 DOCX，報價單輸出 XLSX，投影片輸出 PPTX。"
+      },
+      {
+        "src": "images/nexus-ai-office/13-ai-assistant.webp",
+        "alt": "NEXUS AI-Office 線上編修與 AI 助理",
+        "title": "線上編修與 AI 助理",
+        "caption": "在瀏覽器內編修文件，右側 AI 助理協助撰寫或修改選取的文字；狀態列顯示已儲存與協作連線。"
+      }
+    ]
+  },
+  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",
+  "limits": [
+    {
+      "title": "AI 生成需經 Forge",
+      "text": "未接上 Forge 時，產出的是預覽用的範本內容；實際內容由經治理的模型產生。"
+    },
+    {
+      "title": "文稿審閱是寫作建議",
+      "text": "文稿審閱只檢查重複與冗長，提供修改建議，不判斷作者身分，也不是 AI 偵測工具。"
+    }
   ]
 }

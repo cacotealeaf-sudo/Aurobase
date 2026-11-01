@@ -87,6 +87,18 @@
         {
           "@id": "https://aurobase.com/nexus-pulse.html#software"
         }
+      ],
+      "screenshot": [
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-auro/04-skills.webp",
+          "caption": "技能目錄：只列出執行環境目前實際掛載、可派發的技能；每張卡標示執行環境、進入點與逾時設定。"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://aurobase.com/images/nexus-auro/03-review.webp",
+          "caption": "審核工作台：被治理閘判為送審的任務在此等候人工決定；建立者不得審核自己的任務，核可後恢復執行，駁回則標記失敗。"
+        }
       ]
     },
     {
@@ -256,7 +268,7 @@
           "name": "Auro 可以在沒有網路的環境使用嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以。Auro 提供完全離線的模型設定，只使用部署在企業內部的地端模型，預算上限、治理閘門與人工審核在離線環境中同樣運作。"
+            "text": "可以。Auro 的 AI 呼叫都經 Forge 送出，Forge 可限定只使用部署在企業內部的地端模型；預算上限、治理閘門與人工審核在離線環境中同樣運作。"
           }
         }
       ]
@@ -440,7 +452,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</dd><dt>治理閘門</dt><dd>每一步判定為放行、警示、送審或阻擋四種結果。</dd><dt>失效處理</dt><dd>治理服務無法回應時一律阻擋（fail-closed）。</dd><dt>部署情境</dt><dd>依環境選用模型組合：預設、完全離線、混合三種設定。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「AI 編排」能力，AI 呼叫經 <a href="nexus-forge.html">Forge</a>。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</dd><dt>治理閘門</dt><dd>每一步判定為放行、警示、送審或阻擋四種結果。</dd><dt>失效處理</dt><dd>治理服務無法回應時一律阻擋（fail-closed）。</dd><dt>部署情境</dt><dd>依環境選用模型組合；搭配 Forge 限定地端路由，可在隔離網路運作。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「AI 編排」能力，AI 呼叫經 <a href="nexus-forge.html">Forge</a>。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -494,23 +506,55 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-hourglass"></i></div>
-                                        <h3>有界執行</h3><ul><li>每個任務設定<b>步數、token 與時限</b>上限，超出即停止。</li><li>每一步依序檢查：停止旗標 → 預算 → 政策 → 治理閘門 → 寫入稽核。</li></ul></div></div>
+                                        <h3>有界執行</h3><ul><li>每個任務設定<b>步數、token 與時限</b>上限，超出即停止。</li><li>每一步依序檢查：停止旗標 → 預算 → 政策 → 治理閘門 → 寫入稽核。</li><li>預算由租戶設定上限，呼叫端只能調低、不能調高。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
                                         <h3>四態治理閘門</h3><ul><li>每一步判定為<b>放行、警示、送審、阻擋</b>。</li><li>治理服務無法回應時<b>一律阻擋</b>，不會默默放行。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-group"></i></div>
-                                        <h3>人工審核與緊急停止</h3><ul><li>判定送審的步驟進入審核佇列，核准後才繼續。</li><li>任何時候都可由人員緊急停止任務。</li><li>任務進度以串流即時回報。</li></ul></div></div>
+                                        <h3>人工審核與緊急停止</h3><ul><li>判定送審的步驟進入審核佇列，核准後才繼續；建立任務的人不能審核自己的任務。</li><li>任何時候都可由人員緊急停止任務，並記錄由誰、為何停止。</li><li>任務進度以串流即時回報。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-git-branch"></i></div>
-                                        <h3>代理間委派</h3><ul><li>任務可委派子任務給其他代理。</li><li>委派有<b>深度上限</b>，父子任務<b>共用預算</b>。</li></ul></div></div>
+                                        <h3>代理間委派</h3><ul><li>任務可委派子任務給其他代理，委派深度上限 3 層，超過即拒絕並留下紀錄。</li><li>子任務繼承租戶、身分與關聯編號；子任務用量計入父任務，超支時父子一起停止。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-brain"></i></div>
-                                        <h3>受治理的長期記憶</h3><ul><li>記憶寫入需經政策判定，並設有保存期限。</li><li>記憶帳本只能附加，不能改寫。</li></ul></div></div>
+                                        <h3>受治理的長期記憶</h3><ul><li>記憶寫入需經政策判定，並設有保存期限。</li><li>記憶可見範圍分為任務、代理、租戶三層。</li><li>記憶帳本只能附加；刪除以雜湊墓碑處理並保留紀錄。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-grid-plus"></i></div>
-                                        <h3>技能登錄與執行</h3><ul><li>技能集中登錄管理。</li><li>程式型技能在沙箱中執行，限制執行時間與可見的環境變數。</li></ul></div></div>
+                                        <h3>技能登錄與執行</h3><ul><li>技能集中登錄，只列出執行環境實際掛載、可派發的技能。</li><li>程式型技能有執行時限與環境變數白名單。</li></ul></div></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screens" class="nm-shots nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">PLATFORM SCREENS</p>
+                            <h2 class="section-heading">實機畫面</h2>
+                            <p class="section-intro">以下畫面擷取自展示環境，任務與技能為示範資料。</p>
+                            <div class="nm-shot-grid">
+                                <figure class="nm-shot"><a href="images/nexus-auro/04-skills.webp" target="_blank" rel="noopener"><img src="images/nexus-auro/04-skills.webp" alt="Auro 技能目錄" loading="lazy"></a>
+                                    <figcaption><b>技能目錄</b>只列出執行環境目前實際掛載、可派發的技能；每張卡標示執行環境、進入點與逾時設定。</figcaption></figure>
+                                <figure class="nm-shot"><a href="images/nexus-auro/03-review.webp" target="_blank" rel="noopener"><img src="images/nexus-auro/03-review.webp" alt="Auro 審核工作台" loading="lazy"></a>
+                                    <figcaption><b>審核工作台</b>被治理閘判為送審的任務在此等候人工決定；建立者不得審核自己的任務，核可後恢復執行，駁回則標記失敗。</figcaption></figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-evidence nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">MEASURED</p>
+                            <h2 class="section-heading">實際跑出來的數字</h2>
+                            <p class="section-intro">以下為真實 PostgreSQL 環境的實跑結果；政策服務以介面相同的模擬服務代替。</p>
+                            <div class="nm-metrics"><div class="nm-metric"><b>29／29</b><span>有界迴圈與記憶</span><p>步數上限、緊急停止、政策服務斷線時停止、稽核鏈禁止刪除等檢查全數通過。</p></div><div class="nm-metric"><b>37／37</b><span>代理間委派</span><p>委派深度上限、父子預算、退回時扣住結果、租戶鏈連續等檢查全數通過。</p></div></div>
+                            <div class="nm-proofs"><div class="nm-proof"><h3>超出步數就停在原地</h3><p>設定最多 1 步的 3 步任務，在第 2 步前停止，第 2、3 步的工具都沒有被呼叫。</p></div><div class="nm-proof"><h3>政策服務斷線一律停止</h3><p>政策服務連不上時，任務直接失敗，不會呼叫任何工具。</p></div></div>
                         </div>
                     </div>
                 </div>
@@ -524,7 +568,7 @@
                             <h2 class="section-heading">自行串接 AI Agent 與 Auro 的差異</h2>
                             <div class="nm-table-wrap"><table class="nm-table nm-table-compare">
                                 <thead><tr><th scope="col"></th><th scope="col">自行串接 AI Agent 框架</th><th scope="col" class=is-us>Auro</th></tr></thead>
-                                <tbody><tr><th scope="row">成本與時間上限</th><td data-label="自行串接 AI Agent 框架">需自行實作</td><td data-label="Auro" class=is-us>步數、token、時限為執行環境強制的硬上限</td></tr><tr><th scope="row">每一步的檢查</th><td data-label="自行串接 AI Agent 框架">依開發者實作</td><td data-label="Auro" class=is-us>停止旗標 → 預算 → 政策 → 治理閘門 → 稽核，逐步執行</td></tr><tr><th scope="row">治理服務故障時</th><td data-label="自行串接 AI Agent 框架">依開發者實作</td><td data-label="Auro" class=is-us>一律阻擋（fail-closed）</td></tr><tr><th scope="row">人工審核</th><td data-label="自行串接 AI Agent 框架">需自行開發</td><td data-label="Auro" class=is-us>送審步驟進入審核佇列，核准後才繼續</td></tr><tr><th scope="row">子任務委派</th><td data-label="自行串接 AI Agent 框架">依框架而定</td><td data-label="Auro" class=is-us>有深度上限，父子任務共用預算</td></tr><tr><th scope="row">離線環境</th><td data-label="自行串接 AI Agent 框架">依部署方式</td><td data-label="Auro" class=is-us>提供只用地端模型的離線設定</td></tr></tbody></table></div>
+                                <tbody><tr><th scope="row">成本與時間上限</th><td data-label="自行串接 AI Agent 框架">需自行實作</td><td data-label="Auro" class=is-us>步數、token、時限為執行環境強制的硬上限</td></tr><tr><th scope="row">每一步的檢查</th><td data-label="自行串接 AI Agent 框架">依開發者實作</td><td data-label="Auro" class=is-us>停止旗標 → 預算 → 政策 → 治理閘門 → 稽核，逐步執行</td></tr><tr><th scope="row">治理服務故障時</th><td data-label="自行串接 AI Agent 框架">依開發者實作</td><td data-label="Auro" class=is-us>一律阻擋（fail-closed）</td></tr><tr><th scope="row">人工審核</th><td data-label="自行串接 AI Agent 框架">需自行開發</td><td data-label="Auro" class=is-us>送審步驟進入審核佇列，核准後才繼續</td></tr><tr><th scope="row">子任務委派</th><td data-label="自行串接 AI Agent 框架">依框架而定</td><td data-label="Auro" class=is-us>深度上限 3 層，子任務用量計入父任務</td></tr><tr><th scope="row">離線環境</th><td data-label="自行串接 AI Agent 框架">依部署方式</td><td data-label="Auro" class=is-us>搭配 Forge 限定地端模型</td></tr></tbody></table></div>
                         </div>
                     </div>
                 </div>
@@ -542,10 +586,10 @@
                                         <h3>治理服務缺席時一律阻擋</h3><p>治理服務缺席或無法回應時，Auro 一律暫停任務，未經檢查的動作不會執行。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-hourglass diff-icon"></i>
-                                        <h3>預算是硬上限</h3><p>步數、token 與時限是執行環境強制的上限，連委派出去的子任務也共用同一份預算。</p></div></div>
+                                        <h3>預算是硬上限</h3><p>步數、token 與時限是執行環境強制的上限；委派出去的子任務用量也計入父任務，超支時一起停止。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-server diff-icon"></i>
-                                        <h3>離線情境可用</h3><p>提供完全離線的模型設定，只使用地端模型，適合隔離網路環境。</p></div></div>
+                                        <h3>離線情境可用</h3><p>Auro 產生文字的技能都經 Forge 送出，搭配 Forge 限定只走地端模型，即可在隔離網路運作。</p></div></div>
                             </div>
                         </div>
                     </div>
@@ -578,11 +622,29 @@
                                         <h3>公有雲 Kubernetes</h3><p>以 Helm chart 部署於公有雲的台灣區域（例如 Google Cloud 台灣區域），與 Forge 部署在同一個環境。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="deploy-card"><span class="deploy-tag">地端</span>
-                                        <h3>自有機房與離線設定</h3><p>部署於企業自有機房；完全離線的設定只使用地端模型，適合隔離網路。</p></div></div>
+                                        <h3>自有機房與離線設定</h3><p>部署於企業自有機房；搭配 Forge 限定只走地端模型，可用於隔離網路。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="deploy-card"><span class="deploy-tag">客製</span>
                                         <h3>流程與審核點</h3><p>依貴機構的作業流程設計任務、技能與審核關卡，由奧洛團隊協助串接既有系統。</p></div></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="nm-limits nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">SCOPE</p>
+                            <h2 class="section-heading">範圍界定</h2>
+                            <p class="section-intro">以下是目前版本的範圍，導入前會在規劃階段逐項確認。</p>
+                            <div class="row"><div class="col-lg-10">
+                                    <div class="limit-item"><div class="limit-index">1</div>
+                                        <div><h3>技能不是行程隔離</h3><p>程式型技能與執行環境在同一個行程中執行，以執行時限與環境變數白名單控管。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">2</div>
+                                        <div><h3>服務之間共用一把服務密鑰</h3><p>目前模組之間的呼叫共用同一把服務密鑰，導入時依環境規劃更細的身分。</p></div></div>
+                            </div></div>
                         </div>
                     </div>
                 </div>
@@ -598,7 +660,7 @@
                                     <div class="faq-item"><h3>企業導入 AI Agent 最需要注意什麼？</h3><p>三件事：成本與執行時間要有硬上限、會影響外部的動作要先經人審、每一步都要能事後重建。Auro 以預算上限、四態治理閘門、人工審核佇列與逐步稽核處理這三件事。</p></div>
                                     <div class="faq-item"><h3>Auro 怎麼避免 AI Agent 失控？</h3><p>每個任務都有步數、token 與時限上限；每一步先經治理閘門判定放行、警示、送審或阻擋；人員可隨時緊急停止任務，全程寫入稽核紀錄。</p></div>
                                     <div class="faq-item"><h3>治理服務當機時會怎樣？</h3><p>Auro 採 fail-closed 設計：治理服務無法回應時，任務一律被阻擋，不會在沒有檢查的情況下繼續執行。</p></div>
-                                    <div class="faq-item"><h3>Auro 可以在沒有網路的環境使用嗎？</h3><p>可以。Auro 提供完全離線的模型設定，只使用部署在企業內部的地端模型，預算上限、治理閘門與人工審核在離線環境中同樣運作。</p></div>
+                                    <div class="faq-item"><h3>Auro 可以在沒有網路的環境使用嗎？</h3><p>可以。Auro 的 AI 呼叫都經 Forge 送出，Forge 可限定只使用部署在企業內部的地端模型；預算上限、治理閘門與人工審核在離線環境中同樣運作。</p></div>
                             </div></div>
                         </div>
                     </div>

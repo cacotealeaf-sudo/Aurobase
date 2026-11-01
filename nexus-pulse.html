@@ -479,7 +479,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-network"></i></div>
-                                        <h3>訊號串流登錄</h3><ul><li>依訊號類型登錄串流。</li><li>三種保存等級：<b>30 天、1 年、永久</b>。</li></ul></div></div>
+                                        <h3>訊號串流登錄</h3><ul><li>依訊號類型登錄串流：Twitter、LinkedIn、Reddit、新聞、論壇、RSS 與通用格式。</li><li>三種保存等級：<b>30 天、1 年、永久</b>。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-brain"></i></div>
                                         <h3>批次 AI 分析</h3><ul><li>情緒、摘要、敘事走向、趨勢預估四種分析。</li><li>以批次方式執行，成本與負載可預期。</li></ul></div></div>
@@ -488,10 +488,10 @@
                                         <h3>告警規則</h3><ul><li>自訂告警規則：條件、門檻、通知對象。</li><li>告警紀錄可追溯到觸發的訊號。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-stats-up-square"></i></div>
-                                        <h3>熱圖與相關性</h3><ul><li>情緒熱圖：依時間與主題呈現情緒變化。</li><li>相關性分析：找出同時起落的主題。</li></ul></div></div>
+                                        <h3>熱圖與相關性</h3><ul><li>情緒熱圖：依日期與主題呈現平均情緒，沒有資料的格子留白，不補零。</li><li>相關性分析：依作者、共同主題、串流與情緒計分，找出同時起落的主題。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-user"></i></div>
-                                        <h3>影響者評分</h3><ul><li>依規則計算影響者的觸及與影響力，評分依據清楚可查。</li></ul></div></div>
+                                        <h3>影響者評分</h3><ul><li>依觸及與互動（讚、回覆、轉發加權）計算 0 到 10 分，公式公開、可查。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-privacy-policy"></i></div>
                                         <h3>個資刪除與稽核</h3><ul><li>收到個資刪除請求時，回溯遮蔽相關訊號。</li><li>處理過程寫入只能附加、竄改可被偵測的稽核紀錄。</li></ul></div></div>
@@ -585,6 +585,8 @@
                                         <div><h3>訊號來源由客戶既有管道提供</h3><p>Pulse 專注在分析、告警與成效回算；社群與新聞訊號由客戶既有的輿情來源或資料管線透過 API 推入。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">2</div>
                                         <div><h3>以批次分析為主</h3><p>分析採批次執行，適合每日或每小時的週期性判讀；秒級即時分析不在設計範圍。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">3</div>
+                                        <div><h3>熱圖、相關性與影響者為規則計算</h3><p>情緒熱圖、主題相關性與影響者評分以公開規則計算，未使用機器學習模型。</p></div></div>
                             </div></div>
                         </div>
                     </div>

@@ -209,7 +209,7 @@
           "name": "LISA 支援哪些主機語言？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "COBOL、PL/I、JCL、COPYBOOK，以及 IMS 的 PSB 與 DL/I 呼叫。"
+            "text": "COBOL、PL/I、組合語言（HLASM）、JCL、COPYBOOK、IMS 的 PSB 與 DL/I 呼叫，以及 CICS、BMS／MFS 畫面與內嵌 SQL。"
           }
         },
         {
@@ -225,7 +225,7 @@
           "name": "規格書是 AI 寫的嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不是。解析採確定性方法，不使用生成式 AI；規格書上的每一項都標明出自原始碼哪個檔案、第幾行，可以逐行查證。"
+            "text": "結構事實不是。欄位、邏輯與批次關係由確定性解析產生，每一項都標明出自原始碼哪個檔案、第幾行；若啟用 AI 撰寫敘述段，會經 Forge 治理並標示待複核。"
           }
         },
         {
@@ -411,13 +411,13 @@
                                 <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約產品簡報</a>
                                 <a href="#capabilities" class="btn-nm-outline">看核心能力</a>
                             </div>
-                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-page"></i> COBOL</span><span class="nm-badge"><i class="iconoir-page"></i> PL/I</span><span class="nm-badge"><i class="iconoir-page"></i> JCL・COPYBOOK</span><span class="nm-badge"><i class="iconoir-database"></i> IMS PSB・DL/I</span><span class="nm-badge"><i class="iconoir-lock"></i> 解析不使用生成式 AI</span></div>
+                            <div class="nm-badges"><span class="nm-badge"><i class="iconoir-page"></i> COBOL</span><span class="nm-badge"><i class="iconoir-page"></i> PL/I</span><span class="nm-badge"><i class="iconoir-page"></i> JCL・COPYBOOK</span><span class="nm-badge"><i class="iconoir-database"></i> IMS PSB・DL/I</span><span class="nm-badge"><i class="iconoir-lock"></i> 確定性解析・逐行出處</span></div>
                             <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
                         </div>
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>讀取主機原始碼、產出繁體中文規格書的現代化工具。</dd><dt>支援語言</dt><dd>COBOL、PL/I、JCL、COPYBOOK、IMS PSB 與 DL/I 呼叫。</dd><dt>可追溯性</dt><dd>規格書每一項都標明原始碼檔案與行號。</dd><dt>解析方式</dt><dd>確定性解析：同一份原始碼，每次產出相同結果。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「現代化」能力。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>讀取主機原始碼、產出繁體中文規格書的現代化工具。</dd><dt>支援語言</dt><dd>COBOL、PL/I、組合語言（HLASM）、JCL、COPYBOOK、IMS PSB 與 DL/I、CICS、BMS／MFS 畫面、內嵌 SQL。</dd><dt>可追溯性</dt><dd>規格書每一項都標明原始碼檔案與行號。</dd><dt>解析方式</dt><dd>結構事實由確定性解析產生，同一份原始碼每次產出相同結果。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「現代化」能力。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -431,7 +431,7 @@
                             <p class="section-label">DEFINITION</p>
                             <h2 class="section-heading">大型主機現代化，第一步該做什麼？</h2>
                             <div class="row">
-                                <div class="col-lg-7 mb-4"><div class="define-answer"><p>第一步是<b>產出可信的現況規格</b>：說清楚現在的程式在做什麼、資料結構長什麼樣子、批次作業怎麼串。不論後續是 COBOL 轉 Java、轉平台還是上雲，都需要這份基準。</p><p><b>LISA</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的大型主機現代化工具。它讀取 COBOL、PL/I、JCL、COPYBOOK 與 IMS 原始碼，以確定性解析產出繁體中文規格書，每一個欄位與每一段邏輯都標明原始碼檔案與行號；解析不使用生成式 AI，同一份原始碼每次產出相同結果。</p></div></div>
+                                <div class="col-lg-7 mb-4"><div class="define-answer"><p>第一步是<b>產出可信的現況規格</b>：說清楚現在的程式在做什麼、資料結構長什麼樣子、批次作業怎麼串。不論後續是 COBOL 轉 Java、轉平台還是上雲，都需要這份基準。</p><p><b>LISA</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的大型主機現代化工具。它讀取 COBOL、PL/I、組合語言、JCL、COPYBOOK 與 IMS 原始碼，以確定性解析產出繁體中文規格書，每一個欄位與每一段邏輯都標明原始碼檔案與行號，同一份原始碼每次產出相同結果。</p></div></div>
                                 <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>銀行、保險與公部門資訊單位</b><span>主機系統仍在運作，但文件過時、熟悉的人員陸續退休。</span></li><li><b>現代化專案的 PM 與架構師</b><span>改寫或轉換之前，需要一份可驗收的現況規格。</span></li><li><b>稽核與風控</b><span>要確認系統文件與實際程式一致。</span></li></ul></div></div>
                             </div>
                         </div>
@@ -473,7 +473,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
-                                        <h3>多語言解析</h3><ul><li><b>COBOL</b> 與 <b>PL/I</b> 程式流程解析。</li><li><b>COPYBOOK</b> 資料結構：欄位、層級、型別、長度。</li><li><b>JCL</b> 批次作業：步驟、程式、資料集。</li></ul></div></div>
+                                        <h3>多語言解析</h3><ul><li><b>COBOL</b>、<b>PL/I</b> 與<b>組合語言（HLASM）</b>程式流程解析。</li><li><b>COPYBOOK</b> 資料結構：欄位、層級、型別、長度。</li><li><b>JCL</b> 批次作業：步驟、程式、資料集；另解析 CICS、BMS／MFS 畫面與內嵌 SQL。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
                                         <h3>IMS 資料庫存取</h3><ul><li><b>PSB</b> 程式規格區塊解析。</li><li><b>DL/I</b> 呼叫擷取：程式對哪些區段做了哪些存取。</li></ul></div></div>
@@ -482,10 +482,10 @@
                                         <h3>逐項出處</h3><ul><li>中介模型為每個欄位、每段邏輯記錄<b>原始碼檔案與行號</b>。</li><li>規格書上的任何一項都能對回原文查證。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-edit-pencil"></i></div>
-                                        <h3>繁體中文規格書</h3><ul><li>自動產出繁體中文規格書，章節依程式、資料結構、批次作業組織。</li><li>可作為現代化專案的現況基準與驗收依據。</li></ul></div></div>
+                                        <h3>繁體中文規格書</h3><ul><li>自動產出繁體中文規格書，章節依程式、資料結構、批次作業組織，可匯出 Word。</li><li>提供影響分析與資料血緣，可作為現代化專案的現況基準與驗收依據。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
-                                        <h3>確定性、可重現</h3><ul><li>解析路徑<b>不使用生成式 AI</b>，同一份原始碼每次產出相同結果。</li><li>編碼處理涵蓋 EBCDIC 等主機字元集。</li></ul></div></div>
+                                        <h3>確定性、可重現</h3><ul><li>結構事實由確定性解析產生，同一份原始碼每次產出相同結果。</li><li>若啟用 AI 撰寫敘述段，經 Forge 治理並標示「待複核」。</li><li>支援 EBCDIC 主機字元集（CCSID 037、500、1140）。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-network"></i></div>
                                         <h3>API 介接</h3><ul><li>以 API 提供解析與產出規格書，可納入既有的盤點或文件流程。</li></ul></div></div>
@@ -521,7 +521,7 @@
                                         <h3>可追溯的規格，不是 AI 摘要</h3><p>規格書由解析結果結構化產出，每一項都附原始碼位置。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-lock diff-icon"></i>
-                                        <h3>原始碼不離開機房</h3><p>解析不需呼叫外部 AI 服務，原始碼可以留在客戶環境內處理。</p></div></div>
+                                        <h3>原始碼不離開機房</h3><p>結構解析不需呼叫外部 AI 服務，原始碼可以留在客戶環境內處理。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-edit-pencil diff-icon"></i>
                                         <h3>繁體中文為第一語言</h3><p>規格書以繁體中文產出，用語貼近台灣金融與公部門的文件習慣。</p></div></div>
@@ -578,7 +578,9 @@
                                     <div class="limit-item"><div class="limit-index">1</div>
                                         <div><h3>第一階段聚焦在「讀懂」</h3><p>LISA 目前交付的是解析與規格書；自動改寫為其他語言不在本階段範圍。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">2</div>
-                                        <div><h3>繁體中文主機碼頁依實際環境設定</h3><p>含繁體中文的主機碼頁（例如 CCSID 937）會在導入時依客戶實際環境設定與驗證。</p></div></div>
+                                        <div><h3>繁體中文主機碼頁尚未支援</h3><p>含繁體中文的主機碼頁（CCSID 937）尚未支援，需以客戶實際樣本開發與驗證。</p></div></div>
+                                    <div class="limit-item"><div class="limit-index">3</div>
+                                        <div><h3>尚未有正式部署</h3><p>LISA 已完成解析與規格書產出，尚未在客戶正式環境部署，導入時以 POC 驗證。</p></div></div>
                             </div></div>
                         </div>
                     </div>
@@ -592,9 +594,9 @@
                             <p class="section-label">FAQ</p>
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
-                                    <div class="faq-item"><h3>LISA 支援哪些主機語言？</h3><p>COBOL、PL/I、JCL、COPYBOOK，以及 IMS 的 PSB 與 DL/I 呼叫。</p></div>
+                                    <div class="faq-item"><h3>LISA 支援哪些主機語言？</h3><p>COBOL、PL/I、組合語言（HLASM）、JCL、COPYBOOK、IMS 的 PSB 與 DL/I 呼叫，以及 CICS、BMS／MFS 畫面與內嵌 SQL。</p></div>
                                     <div class="faq-item"><h3>LISA 會把 COBOL 轉成 Java 嗎？</h3><p>目前階段聚焦在「讀懂」：產出可逐行查證的繁體中文規格書，作為 COBOL 轉 Java 或其他現代化方案的現況基準與驗收依據。</p></div>
-                                    <div class="faq-item"><h3>規格書是 AI 寫的嗎？</h3><p>不是。解析採確定性方法，不使用生成式 AI；規格書上的每一項都標明出自原始碼哪個檔案、第幾行，可以逐行查證。</p></div>
+                                    <div class="faq-item"><h3>規格書是 AI 寫的嗎？</h3><p>結構事實不是。欄位、邏輯與批次關係由確定性解析產生，每一項都標明出自原始碼哪個檔案、第幾行；若啟用 AI 撰寫敘述段，會經 Forge 治理並標示待複核。</p></div>
                                     <div class="faq-item"><h3>原始碼需要上傳到雲端嗎？</h3><p>不需要。LISA 可部署在企業自有環境，部署設定預設封鎖對外連線，原始碼不離開機房。</p></div>
                             </div></div>
                         </div>
