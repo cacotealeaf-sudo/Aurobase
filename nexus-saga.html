@@ -100,7 +100,7 @@
         {
           "@type": "ImageObject",
           "url": "https://aurobase.com/images/nexus-saga/worm.webp",
-          "caption": "稽核鏈驗證：整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時另行加上。"
+          "caption": "稽核鏈驗證：整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時設定。"
         },
         {
           "@type": "ImageObject",
@@ -608,7 +608,7 @@
                                 <figure class="nm-shot"><a href="images/nexus-saga/posture.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/posture.webp" alt="SAGA 治理態勢儀表板，未達標的指標以紅色標示" loading="lazy"></a>
                                     <figcaption><b>治理態勢</b>主控台首頁。未達標的指標直接標成紅色，頁尾註明平台只量測與報告，不自動修復。</figcaption></figure>
                                 <figure class="nm-shot"><a href="images/nexus-saga/worm.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/worm.webp" alt="SAGA 稽核鏈完整性驗證畫面" loading="lazy"></a>
-                                    <figcaption><b>稽核鏈驗證</b>整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時另行加上。</figcaption></figure>
+                                    <figcaption><b>稽核鏈驗證</b>整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時設定。</figcaption></figure>
                                 <figure class="nm-shot"><a href="images/nexus-saga/catalog.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/catalog.webp" alt="SAGA 資料目錄與業務詞彙表" loading="lazy"></a>
                                     <figcaption><b>資料目錄與血緣</b>資料資產與受控的業務詞彙表，每個詞彙標示對應到幾個資產、幾個欄位。</figcaption></figure>
                                 <figure class="nm-shot"><a href="images/nexus-saga/lifecycle.webp" target="_blank" rel="noopener"><img src="images/nexus-saga/lifecycle.webp" alt="SAGA 紀錄生命週期與時間軸" loading="lazy"></a>
@@ -727,9 +727,9 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">SAGA 的定位是治理與稽核，以下邊界在導入前會逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
                                         <div><h3>竄改可被偵測，不是不可竄改</h3><p>雜湊鏈能證明資料被動過，但無法阻止擁有資料庫最高權限的人修改；要在物理上阻止，需加上儲存層的 Object Lock。</p></div></div>
@@ -739,10 +739,6 @@
                                         <div><h3>不是通用流程引擎</h3><p>治理流程組裝的是既有的治理動作，資料搬運與一般業務流程不在範圍內。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">4</div>
                                         <div><h3>不宣稱符合任何法規</h3><p>SAGA 對應的是規範要求的做法（分級、保存、當事人權利、利益衝突隔離），是否合規由主管機關與貴機構法遵認定。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">5</div>
-                                        <div><h3>尚未實測的項目</h3><p>客戶叢集上的 Helm 部署、CIFS/NFS 實際掛載與授權到期行為尚未實測，導入時列為驗收項目。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">6</div>
-                                        <div><h3>大數據元件為容器環境實測</h3><p>Kerberos、Apache Atlas、Hive 的整合在容器環境實測，客戶叢集上的設定於導入時驗證。</p></div></div>
                             </div></div>
                         </div>
                     </div>

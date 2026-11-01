@@ -219,7 +219,7 @@
         "src": "images/nexus-saga/worm.webp",
         "alt": "SAGA 稽核鏈完整性驗證畫面",
         "title": "稽核鏈驗證",
-        "caption": "整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時另行加上。"
+        "caption": "整條鏈即時重算後回報「完好」，畫面上寫明驗證方法；儲存層的 WORM（例如 Object Lock）於部署時設定。"
       },
       {
         "src": "images/nexus-saga/catalog.webp",
@@ -410,7 +410,7 @@
       "text": "依貴機構的保存政策、角色分工與來源系統設定，資料庫可指向既有的 PostgreSQL。"
     }
   ],
-  "limits_intro": "SAGA 的定位是治理與稽核，以下邊界在導入前會逐項確認。",
+  "limits_intro": "以下事項會在導入前，依貴機構的環境與需求逐項確認。",
   "limits": [
     {
       "title": "竄改可被偵測，不是不可竄改",
@@ -427,14 +427,6 @@
     {
       "title": "不宣稱符合任何法規",
       "text": "SAGA 對應的是規範要求的做法（分級、保存、當事人權利、利益衝突隔離），是否合規由主管機關與貴機構法遵認定。"
-    },
-    {
-      "title": "尚未實測的項目",
-      "text": "客戶叢集上的 Helm 部署、CIFS/NFS 實際掛載與授權到期行為尚未實測，導入時列為驗收項目。"
-    },
-    {
-      "title": "大數據元件為容器環境實測",
-      "text": "Kerberos、Apache Atlas、Hive 的整合在容器環境實測，客戶叢集上的設定於導入時驗證。"
     }
   ],
   "faq": [

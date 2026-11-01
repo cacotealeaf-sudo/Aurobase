@@ -260,7 +260,7 @@
           "name": "AURA Connect 支援哪些行為資料來源？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
+            "text": "讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
           }
         },
         {
@@ -468,7 +468,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供查詢 API 的方案。</dd><dt>來源</dt><dd>HCL Discover 記錄的行為軌跡檔案，欄位順序可設定。</dd><dt>交付</dt><dd>ETL 匯出、筆數勾稽、SFTP 金鑰傳輸；行銷平台查詢 API。</dd><dt>資料庫</dt><dd>PostgreSQL；SQL Server 於導入時驗證。</dd><dt>組成</dt><dd>行為軌跡處理、身分對應、標籤引擎與 ETL 交付，與 <a href="nexus-cdp.html">AURA CDP</a> 同屬 AURA 家族。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供查詢 API 的方案。</dd><dt>來源</dt><dd>HCL Discover 記錄的行為軌跡檔案，欄位順序可設定。</dd><dt>交付</dt><dd>ETL 匯出、筆數勾稽、SFTP 金鑰傳輸；行銷平台查詢 API。</dd><dt>資料庫</dt><dd>SQL Server 或 PostgreSQL。</dd><dt>組成</dt><dd>行為軌跡處理、身分對應、標籤引擎與 ETL 交付，與 <a href="nexus-cdp.html">AURA CDP</a> 同屬 AURA 家族。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -562,7 +562,7 @@
                                         <h3>標籤查詢 API</h3><ul><li>行銷平台隨時查詢前一日批次算出的客戶標籤。</li><li>含限流與降級保護。</li></ul></div></div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-server"></i></div>
-                                        <h3>資料庫</h3><ul><li>支援 PostgreSQL；SQL Server 於導入時驗證。</li></ul></div></div>
+                                        <h3>資料庫</h3><ul><li>支援 SQL Server 與 PostgreSQL。</li></ul></div></div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-user"></i></div>
                                         <h3>工作階段與身分</h3><ul><li>沿用 HCL Discover 自己的工作階段編號，數字可與 Discover 對帳；缺編號時才依「同裝置、閒置 30 分鐘」推導並標示。</li><li>身分回補只在同一裝置、回溯 24 小時內進行，不跨子公司串接。</li><li>標籤分事實型與推論型，推論型附推論依據。</li></ul></div></div>
@@ -648,9 +648,9 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">以下是目前版本的範圍，導入前會在評估階段逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
                                         <div><h3>行銷活動由既有系統執行</h3><p>AURA Connect 負責整理與交付行為資料、提供標籤查詢；行銷活動的設定與發送由貴公司既有的行銷系統負責。</p></div></div>
@@ -671,7 +671,7 @@
                             <p class="section-label">FAQ</p>
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
-                                    <div class="faq-item"><h3>AURA Connect 支援哪些行為資料來源？</h3><p>目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。</p></div>
+                                    <div class="faq-item"><h3>AURA Connect 支援哪些行為資料來源？</h3><p>讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。</p></div>
                                     <div class="faq-item"><h3>AURA Connect 怎麼確保交付的資料正確？</h3><p>AURA Connect 每一批交付前都做筆數勾稽，對不上就不交付；檔案以 SFTP 金鑰傳輸，檔案傳完才上架，下游不會讀到不完整的檔案。</p></div>
                                     <div class="faq-item"><h3>AURA Connect 會把不同裝置的行為合併到同一人嗎？</h3><p>不會。只在同一裝置登入後回溯登入前的匿名行為，不做跨裝置推測；跨裝置的身分整合需搭配 AURA CDP。</p></div>
                                     <div class="faq-item"><h3>AURA Connect 可以裝在自己的機房嗎？</h3><p>可以。可安裝在企業自有機房的單一虛擬機並離線安裝，也可以 Helm chart 部署於公有雲台灣區域的 Kubernetes。</p></div>

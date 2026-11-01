@@ -74,6 +74,17 @@ class GeneratorTest(SiteCopy):
         for needle in ('是什麼', 'nexus-nope', 'inquiry_chip', 'theme.deep'):
             self.assertIn(needle, joined)
 
+    def test_validation_rejects_progress_wording(self):
+        # 對外頁面不寫進度：計畫中的能力寫成提供的功能
+        mods, pf = gen.load_modules(), gen.load_platform()
+        m = self.doc('nexus-library')
+        m['limits'] = [{'title': '瀏覽器擴充套件為原型', 'text': '團隊空間規劃中，SQL Server 於導入時驗證。'}]
+        m['faq'][0]['a'] = '目前版本尚未支援。'
+        errors, _ = gen.validate(m, mods, pf)
+        joined = '\n'.join(errors)
+        for needle in ('limits.0.title', '原型', '規劃中', '於導入時驗證', 'faq.0.a', '目前版本', '尚未支援'):
+            self.assertIn(needle, joined)
+
     def test_build_refuses_to_write_when_content_is_broken(self):
         m = self.doc('nexus-forge')
         m['hero']['h1'] = ''
@@ -139,6 +150,21 @@ class AuditTest(SiteCopy):
         bad = {c['label'] for c in gen.audit(m, mods, pf)['checks'] if c['status'] == 'fail'}
         self.assertIn('主關鍵字出現在 H1', bad)
         self.assertTrue(any('實體句' in b for b in bad))
+
+    def test_site_audit_flags_progress_wording_on_hand_written_page(self):
+        p = os.path.join(self.root, 'ai-companion.html')
+        with open(p, encoding='utf-8') as f:
+            page = f.read()
+        with open(p, 'w', encoding='utf-8') as f:
+            f.write(page.replace('</h2>', '（建置中）</h2>', 1))
+        c = [c for c in gen.page_audit('ai-companion.html')['checks'] if c['label'].startswith('內容不寫開發進度')][0]
+        self.assertEqual((c['status'], c['detail']), ('fail', '建置中'))
+
+    def test_site_pages_have_no_progress_wording(self):
+        for a in gen.site_audit():
+            for c in a['checks']:
+                if c['label'].startswith('內容不寫開發進度'):
+                    self.assertEqual(c['status'], 'pass', (a['page'], c['detail']))
 
     def test_title_width_counts_latin_as_half(self):
         self.assertEqual(gen.disp_width('AI 治理'), 3.5)

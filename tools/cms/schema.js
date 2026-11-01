@@ -77,7 +77,7 @@ window.MODULE_SCHEMA = [
     { k: 'deploy_intro', label: '引言（空白則用預設文字）', type: 'text' },
     { k: 'deploy', label: '部署卡片（標籤用「雲端」「地端」「客製」，三種都要有）', type: 'objlist', item: [{ k: 'tag', label: '標籤', type: 'str' }, { k: 'title', label: '標題', type: 'str' }, { k: 'text', label: '說明', type: 'text' }] },
   ]},
-  { sec: '範圍界定', fields: [
+  { sec: '導入前提', fields: [
     { k: 'limits_intro', label: '引言', type: 'text' },
     { k: 'limits', label: '項目', type: 'objlist', item: [{ k: 'title', label: '標題', type: 'str' }, { k: 'text', label: '說明', type: 'text' }] },
   ]},

@@ -584,7 +584,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-badge-check diff-icon"></i>
-                                        <h3>能力清單照實回報</h3><p>平台內建能力登錄：尚未完整實作的掃描規則不計入宣稱的覆蓋範圍，報告上看到的就是實際有跑的。</p></div></div>
+                                        <h3>能力清單照實回報</h3><p>平台內建能力登錄，只把實際執行的掃描規則計入覆蓋範圍，報告上看到的就是實際有跑的。</p></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="diff-card"><i class="iconoir-copy diff-icon"></i>
                                         <h3>標準格式，不綁平台</h3><p>結果以 SARIF、CycloneDX、SPDX 輸出，可以交給任何支援這些標準的工具，不被單一廠商格式鎖住。</p></div></div>
@@ -637,18 +637,16 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">以下是目前版本的範圍，導入前會在規劃階段逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
-                                        <div><h3>威脅情資需要連線更新</h3><p>NVD、CISA KEV、EPSS 等情資以網路同步；完全隔離網路的環境目前只有容器弱點資料庫提供離線更新包，其餘需另行規劃。</p></div></div>
+                                        <div><h3>威脅情資需要連線更新</h3><p>NVD、CISA KEV、EPSS 等情資以網路同步；完全隔離網路的環境以離線更新包匯入，更新週期依貴機構規定設定。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">2</div>
                                         <div><h3>部分第三方掃描工具依授權條款另行提供</h3><p>個別開源掃描工具的授權條款不允許隨商用產品散布，此類工具依客戶環境與授權另行安裝。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">3</div>
                                         <div><h3>主機 CVE 為版本比對推論</h3><p>主機掃描的 CVE 依服務版本推論，未經實際利用驗證；發行版已向後移植修補的套件可能誤報，報告會調降可信度。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">4</div>
-                                        <div><h3>資料流分析限 Python 與 JavaScript</h3><p>原始碼檢測支援 42 種語言的規則比對，來源到匯點的資料流分析目前限 Python 與 JavaScript／TypeScript。</p></div></div>
                             </div></div>
                         </div>
                     </div>

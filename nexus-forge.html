@@ -550,7 +550,7 @@
                                         <h3>依資料敏感度路由</h3><ul><li>提示中含身分證字號、電話、電子郵件或密鑰時，自動提高敏感等級，只能送往地端模型；送雲端會被拒絕並留下紀錄。</li><li>呼叫端宣告的敏感等級只能往上調，不能往下降。</li><li>模型的回覆也經政策檢查；串流回覆先收齊再檢查，不合規即改為遮蔽。</li></ul></div></div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
-                                        <h3>知識庫 RAG</h3><ul><li>上傳 PDF、DOCX、PPTX、XLSX、CSV、Markdown、純文字；單檔預設上限 10 MB，壓縮檔有解壓大小與壓縮比上限。</li><li>知識庫預設不公開，可依擁有者、使用者、角色、服務分別授權；跨租戶一律拒絕。</li><li>撤銷權限在下一次檢索就生效，不靠快取過期。</li><li>資料庫列級安全（RLS）做租戶隔離；以超級使用者或可略過 RLS 的身分連線時，服務拒絕啟動。</li></ul></div></div>
+                                        <h3>知識庫 RAG</h3><ul><li>上傳 PDF、DOCX、PPTX、XLSX、CSV、Markdown、純文字；單檔預設上限 10 MB，壓縮檔有解壓大小與壓縮比上限。</li><li>知識庫與段落可設定密級，依擁有者、使用者、角色、服務分別授權；跨租戶一律拒絕。</li><li>撤銷權限在下一次檢索就生效，不靠快取過期。</li><li>資料庫列級安全（RLS）做租戶隔離；以超級使用者或可略過 RLS 的身分連線時，服務拒絕啟動。</li></ul></div></div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-grid-plus"></i></div>
                                         <h3>MCP 工具閘道</h3><ul><li>平台內部模組與外部 MCP 伺服器的工具呼叫，都先經政策決策。</li><li>每一次工具呼叫寫入稽核帳。</li></ul></div></div>
@@ -701,17 +701,15 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">以下是目前版本的範圍，導入前會在規劃階段逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
-                                        <div><h3>段落層級的權限尚未提供</h3><p>目前授權以知識庫為單位，尚未做到段落層級的密級控管。</p></div></div>
+                                        <div><h3>自然語言查資料需另外部署查詢引擎</h3><p>自然語言查資料需在導入時部署查詢引擎。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">2</div>
-                                        <div><h3>自然語言查資料需另外部署查詢引擎</h3><p>自然語言查資料需要另外部署查詢引擎，未設定時此功能不提供。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">3</div>
                                         <div><h3>證據包單次匯出有筆數上限</h3><p>每個帳本單次最多匯出 2,000 筆，超過時會標示為部分匯出。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">4</div>
+                                    <div class="limit-item"><div class="limit-index">3</div>
                                         <div><h3>對抗式驗證是紀錄，不是放行閘</h3><p>多位審查者反駁同一主張的結果會留下紀錄，但不會自動阻擋或放行。</p></div></div>
                             </div></div>
                         </div>

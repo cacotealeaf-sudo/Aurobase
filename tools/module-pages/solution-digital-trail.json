@@ -78,7 +78,7 @@
     ],
     [
       "資料庫",
-      "PostgreSQL；SQL Server 於導入時驗證。"
+      "SQL Server 或 PostgreSQL。"
     ],
     [
       "組成",
@@ -217,7 +217,7 @@
         "icon": "server",
         "title": "資料庫",
         "items": [
-          "支援 PostgreSQL；SQL Server 於導入時驗證。"
+          "支援 SQL Server 與 PostgreSQL。"
         ]
       },
       {
@@ -305,7 +305,7 @@
       "text": "依貴公司的行為事件、標籤定義、資料倉儲格式與交付排程客製。"
     }
   ],
-  "limits_intro": "以下是目前版本的範圍，導入前會在評估階段逐項確認。",
+  "limits_intro": "以下事項會在導入前，依貴機構的環境與需求逐項確認。",
   "limits": [
     {
       "title": "行銷活動由既有系統執行",
@@ -323,7 +323,7 @@
   "faq": [
     {
       "q": "AURA Connect 支援哪些行為資料來源？",
-      "a": "目前讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
+      "a": "讀取 HCL Discover 記錄的網站與 App 行為軌跡檔案，欄位順序可以設定；其他來源依導入專案評估。"
     },
     {
       "q": "AURA Connect 怎麼確保交付的資料正確？",

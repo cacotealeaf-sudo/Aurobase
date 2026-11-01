@@ -207,7 +207,7 @@
           "@type": "HowToStep",
           "position": 2,
           "name": "語音轉寫",
-          "text": "國語語音轉成逐字稿並逐句標註時間碼；辨識信心低的句子只標記、不刪除；多聲道錄音依聲道區分講者。",
+          "text": "國語與台語語音轉成逐字稿並逐句標註時間碼；辨識信心低的句子只標記、不刪除；多聲道錄音依聲道區分講者。",
           "url": "https://aurobase.com/solution-police-record.html#flow"
         },
         {
@@ -272,7 +272,7 @@
           "name": "警詢筆錄 AI 輔助支援台語或客語嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "目前以國語語音辨識為主，採台灣開發的開源模型；台語、客語需要依案場的錄音條件另行評估。"
+            "text": "提供國語與台語語音辨識，採台灣開發的開源模型 Breeze ASR，在機關內部執行；客語依案場的錄音條件評估導入。"
           }
         },
         {
@@ -464,7 +464,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>把詢問錄音整理成筆錄草稿，並檢查構成要件與法定程序的解決方案。</dd><dt>語音</dt><dd>國語語音辨識，採台灣開發的開源模型（Breeze ASR）；逐句標註時間碼。</dd><dt>筆錄</dt><dd>問答體草稿，每一段附錄音時間碼與來源句，可套印警詢筆錄格式。</dd><dt>稽核</dt><dd>錄音雜湊寫入事件鏈；AI 原稿、修改軌跡與定稿三者並存。</dd><dt>組成</dt><dd><a href="nexus-forge.html">Forge</a>、<a href="nexus-ai-office.html">AI-Office</a>，加上語音辨識、構成要件與程序檢核元件。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>把詢問錄音整理成筆錄草稿，並檢查構成要件與法定程序的解決方案。</dd><dt>語音</dt><dd>國語與台語語音辨識，採台灣開發的開源模型（Breeze ASR）；逐句標註時間碼。</dd><dt>筆錄</dt><dd>問答體草稿，每一段附錄音時間碼與來源句，可套印警詢筆錄格式。</dd><dt>稽核</dt><dd>錄音雜湊寫入事件鏈；AI 原稿、修改軌跡與定稿三者並存。</dd><dt>組成</dt><dd><a href="nexus-forge.html">Forge</a>、<a href="nexus-ai-office.html">AI-Office</a>，加上語音辨識、構成要件與程序檢核元件。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -496,7 +496,7 @@
                             <ol class="flow">
                                 <li class="flow-step"><span class="flow-n">01</span><h3>上傳錄音</h3><p>詢問結束後上傳錄音，錄音檔的雜湊值寫入案件事件鏈。</p>
                                     <div class="flow-mods"><span class="nm-chip">案件事件鏈</span></div></li>
-                                <li class="flow-step"><span class="flow-n">02</span><h3>語音轉寫</h3><p>國語語音轉成逐字稿並逐句標註時間碼；辨識信心低的句子只標記、不刪除；多聲道錄音依聲道區分講者。</p>
+                                <li class="flow-step"><span class="flow-n">02</span><h3>語音轉寫</h3><p>國語與台語語音轉成逐字稿並逐句標註時間碼；辨識信心低的句子只標記、不刪除；多聲道錄音依聲道區分講者。</p>
                                     <div class="flow-mods"><span class="nm-chip">語音辨識</span><a class="nm-chip" href="nexus-forge.html">Forge</a></div></li>
                                 <li class="flow-step"><span class="flow-n">03</span><h3>整理與草稿</h3><p>清除贅字但不改語意，預擬問答體筆錄草稿與案情摘要，每一段附來源句。</p>
                                     <div class="flow-mods"><a class="nm-chip" href="nexus-ai-office.html">NEXUS AI-Office</a><a class="nm-chip" href="nexus-forge.html">Forge</a></div></li>
@@ -541,11 +541,11 @@
                         <div class="col-md-12">
                             <p class="section-label">CAPABILITIES</p>
                             <h2 class="section-heading">已提供的功能</h2>
-                            <p class="section-intro">依案場需要調整的部分，列在下方「部署」與「範圍界定」。</p>
+                            <p class="section-intro">依案場需要調整的部分，列在下方「部署」與「導入前提」。</p>
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-voice"></i></div>
-                                        <h3>語音轉寫</h3><ul><li>國語語音辨識，採台灣開發的開源模型 <b>Breeze ASR</b>。</li><li>逐句標註時間碼；辨識信心低的句子只標記、不刪除。</li><li>多聲道錄音依聲道區分講者。</li></ul></div></div>
+                                        <h3>語音轉寫</h3><ul><li>國語與台語語音辨識，採台灣開發的開源模型 <b>Breeze ASR</b>。</li><li>逐句標註時間碼；辨識信心低的句子只標記、不刪除。</li><li>多聲道錄音依聲道區分講者。</li></ul></div></div>
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
                                         <h3>筆錄草稿</h3><ul><li>預擬<b>問答體</b>筆錄草稿。</li><li>案情摘要的每一點都附來源句。</li><li>清除贅字但不改變語意。</li></ul></div></div>
@@ -667,20 +667,18 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">以下是目前版本的範圍，導入前會在評估階段逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
-                                        <div><h3>以錄音完成後轉寫為主</h3><p>提供分段即時轉錄；即時轉錄的速度取決於機關內部署的 GPU，導入時依設備實測。</p></div></div>
+                                        <div><h3>即時轉錄速度依 GPU 規格</h3><p>提供錄音轉寫與分段即時轉錄；即時轉錄的速度依機關內部署的 GPU 規格而定。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">2</div>
-                                        <div><h3>語音以國語為主</h3><p>台語、客語的辨識需依案場錄音條件另行評估。</p></div></div>
+                                        <div><h3>客語依案場錄音條件設定</h3><p>提供國語與台語辨識；客語依案場的錄音條件設定導入。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">3</div>
                                         <div><h3>程序與要件檢核是提示</h3><p>檢核結果協助員警發現缺漏，筆錄內容與程序是否合法仍由製作人員與機關認定。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">4</div>
-                                        <div><h3>檢核規則待機關法制審定</h3><p>構成要件檢核包與程序規則依法條整理，導入時須經機關法制單位審定。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">5</div>
-                                        <div><h3>台語與客語</h3><p>台語辨識尚在驗證，客語目前沒有對應模型。</p></div></div>
+                                        <div><h3>檢核規則經機關法制審定</h3><p>構成要件檢核包與程序規則依法條整理，導入時須經機關法制單位審定。</p></div></div>
                             </div></div>
                         </div>
                     </div>
@@ -697,7 +695,7 @@
                                     <div class="faq-item"><h3>警詢筆錄 AI 輔助會自動寫好筆錄嗎？</h3><p>不會自動定稿。系統先把錄音轉成逐字稿並預擬筆錄草稿，每一段附錄音時間碼與來源句；員警審閱、修改後才套印，修改軌跡完整留存。</p></div>
                                     <div class="faq-item"><h3>警詢筆錄的錄音會傳到外部雲端嗎？</h3><p>不會。整套系統可部署在機關內部機房並在隔離網路運作，語音辨識與語言模型都在內部執行，AI 呼叫經 Forge 留下稽核紀錄。</p></div>
                                     <div class="faq-item"><h3>警詢筆錄 AI 輔助怎麼檢查法定程序？</h3><p>系統依刑事訴訟法的告知事項、全程錄音與夜間詢問等規定，檢查詢問內容與時段；轉寫出現同音錯字時，仍能比對出告知用語。檢查結果作為提示，由員警確認。</p></div>
-                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助支援台語或客語嗎？</h3><p>目前以國語語音辨識為主，採台灣開發的開源模型；台語、客語需要依案場的錄音條件另行評估。</p></div>
+                                    <div class="faq-item"><h3>警詢筆錄 AI 輔助支援台語或客語嗎？</h3><p>提供國語與台語語音辨識，採台灣開發的開源模型 Breeze ASR，在機關內部執行；客語依案場的錄音條件評估導入。</p></div>
                                     <div class="faq-item"><h3>構成要件檢核包可以新增罪名嗎？</h3><p>可以。檢核包依罪名整理構成要件與常見追問；新增或修改的檢核包由機關法制人員審定後啟用。</p></div>
                             </div></div>
                         </div>

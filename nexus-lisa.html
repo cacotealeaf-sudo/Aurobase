@@ -70,7 +70,8 @@
         "逐項出處",
         "繁體中文規格書",
         "確定性、可重現",
-        "API 介接"
+        "API 介接",
+        "轉換與等價驗證"
       ],
       "isRelatedTo": [
         {
@@ -217,7 +218,7 @@
           "name": "LISA 會把 COBOL 轉成 Java 嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "目前階段聚焦在「讀懂」：產出可逐行查證的繁體中文規格書，作為 COBOL 轉 Java 或其他現代化方案的現況基準與驗收依據。"
+            "text": "會。LISA 先產出可逐行查證的繁體中文規格書作為現況基準，再把 COBOL 批次程式轉為 Java，並以逐位元組比對確認轉換前後的輸出一致。"
           }
         },
         {
@@ -471,24 +472,27 @@
                             <h2 class="section-heading">從原始碼到規格書</h2>
                             <p class="section-intro">原始碼以文字檔交付即可，不需連線到主機環境。</p>
                             <div class="row">
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
                                         <h3>多語言解析</h3><ul><li><b>COBOL</b>、<b>PL/I</b> 與<b>組合語言（HLASM）</b>程式流程解析。</li><li><b>COPYBOOK</b> 資料結構：欄位、層級、型別、長度。</li><li><b>JCL</b> 批次作業：步驟、程式、資料集；另解析 CICS、BMS／MFS 畫面與內嵌 SQL。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-database"></i></div>
                                         <h3>IMS 資料庫存取</h3><ul><li><b>PSB</b> 程式規格區塊解析。</li><li><b>DL/I</b> 呼叫擷取：程式對哪些區段做了哪些存取。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-link"></i></div>
                                         <h3>逐項出處</h3><ul><li>中介模型為每個欄位、每段邏輯記錄<b>原始碼檔案與行號</b>。</li><li>規格書上的任何一項都能對回原文查證。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-edit-pencil"></i></div>
                                         <h3>繁體中文規格書</h3><ul><li>自動產出繁體中文規格書，章節依程式、資料結構、批次作業組織，可匯出 Word。</li><li>提供影響分析與資料血緣，可作為現代化專案的現況基準與驗收依據。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-lock"></i></div>
-                                        <h3>確定性、可重現</h3><ul><li>結構事實由確定性解析產生，同一份原始碼每次產出相同結果。</li><li>若啟用 AI 撰寫敘述段，經 Forge 治理並標示「待複核」。</li><li>支援 EBCDIC 主機字元集（CCSID 037、500、1140）。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                        <h3>確定性、可重現</h3><ul><li>結構事實由確定性解析產生，同一份原始碼每次產出相同結果。</li><li>若啟用 AI 撰寫敘述段，經 Forge 治理並標示「待複核」。</li><li>支援 EBCDIC 主機字元集（CCSID 037、500、1140 與繁體中文 937）。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-network"></i></div>
                                         <h3>API 介接</h3><ul><li>以 API 提供解析與產出規格書，可納入既有的盤點或文件流程。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-refresh-double"></i></div>
+                                        <h3>轉換與等價驗證</h3><ul><li>COBOL 批次程式可轉為 Java，並以參考編譯器逐位元組比對輸出，確認轉換前後結果一致。</li><li>COBOL 與 PL/I 依規則重構，同樣附等價驗證。</li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -571,16 +575,12 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">以下是目前版本的範圍，導入前會在規劃階段逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
-                                        <div><h3>第一階段聚焦在「讀懂」</h3><p>LISA 目前交付的是解析與規格書；自動改寫為其他語言不在本階段範圍。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">2</div>
-                                        <div><h3>繁體中文主機碼頁尚未支援</h3><p>含繁體中文的主機碼頁（CCSID 937）尚未支援，需以客戶實際樣本開發與驗證。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">3</div>
-                                        <div><h3>尚未有正式部署</h3><p>LISA 已完成解析與規格書產出，尚未在客戶正式環境部署，導入時以 POC 驗證。</p></div></div>
+                                        <div><h3>繁體中文主機碼頁依實際樣本設定</h3><p>含繁體中文的主機碼頁（CCSID 937）依貴機構的實際樣本設定與驗證。</p></div></div>
                             </div></div>
                         </div>
                     </div>
@@ -595,7 +595,7 @@
                             <h2 class="section-heading">常見問題</h2>
                             <div class="row"><div class="col-lg-10">
                                     <div class="faq-item"><h3>LISA 支援哪些主機語言？</h3><p>COBOL、PL/I、組合語言（HLASM）、JCL、COPYBOOK、IMS 的 PSB 與 DL/I 呼叫，以及 CICS、BMS／MFS 畫面與內嵌 SQL。</p></div>
-                                    <div class="faq-item"><h3>LISA 會把 COBOL 轉成 Java 嗎？</h3><p>目前階段聚焦在「讀懂」：產出可逐行查證的繁體中文規格書，作為 COBOL 轉 Java 或其他現代化方案的現況基準與驗收依據。</p></div>
+                                    <div class="faq-item"><h3>LISA 會把 COBOL 轉成 Java 嗎？</h3><p>會。LISA 先產出可逐行查證的繁體中文規格書作為現況基準，再把 COBOL 批次程式轉為 Java，並以逐位元組比對確認轉換前後的輸出一致。</p></div>
                                     <div class="faq-item"><h3>規格書是 AI 寫的嗎？</h3><p>結構事實不是。欄位、邏輯與批次關係由確定性解析產生，每一項都標明出自原始碼哪個檔案、第幾行；若啟用 AI 撰寫敘述段，會經 Forge 治理並標示待複核。</p></div>
                                     <div class="faq-item"><h3>原始碼需要上傳到雲端嗎？</h3><p>不需要。LISA 可部署在企業自有環境，部署設定預設封鎖對外連線，原始碼不離開機房。</p></div>
                             </div></div>

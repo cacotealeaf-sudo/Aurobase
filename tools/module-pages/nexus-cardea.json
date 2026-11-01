@@ -5,7 +5,7 @@
   "name_zh": "SSL 憑證管理與機器身分治理",
   "leg": "安全",
   "eyebrow": "Cardea — Machine Identity & Certificate Governance",
-  "description": "Cardea 是奧洛（Aurobase）的 SSL 憑證管理與機器身分治理平台：自動盤點 TLS 憑證與 SSH 金鑰、依政策檢查弱金鑰與效期、到期前預警，以 ACME 自動更新並部署至 Nginx 等網站伺服器，產出後量子密碼（PQC）遷移所需的密碼盤點報告，核心功能可單機離線運作。",
+  "description": "Cardea 是奧洛（Aurobase）的 SSL 憑證管理與機器身分治理平台：自動盤點 TLS 憑證與 SSH 金鑰、依政策檢查弱金鑰與效期、到期前預警，以 ACME 自動更新並部署至 Nginx、Apache、IIS，產出後量子密碼（PQC）遷移所需的密碼盤點報告，核心功能可單機離線運作。",
   "keywords": [
     "SSL 憑證管理",
     "SSL 憑證到期",
@@ -69,7 +69,7 @@
     ],
     [
       "自動化",
-      "ACME 簽發，部署至 Nginx 並比對線上序號驗證；IIS 部署邏輯已在 Windows Server 實測。"
+      "ACME 簽發，部署至 Nginx、Apache 與 IIS，部署後比對線上序號驗證。"
     ],
     [
       "部署",
@@ -141,7 +141,7 @@
         "icon": "hourglass",
         "title": "到期預警與漂移偵測",
         "items": [
-          "到期前依門檻預警，通知可接 ServiceNow、Jira 或 Webhook（導入時驗證送達）。",
+          "到期前依門檻預警，可通知 ServiceNow、Jira 或 Webhook。",
           "<b>漂移偵測</b>：線上服務的憑證與最後一次部署的不一致時告警。"
         ]
       },
@@ -150,7 +150,7 @@
         "title": "簽發、部署、驗證",
         "items": [
           "透過 ACME 協定簽發，可接內部 ACME CA。",
-          "部署至 Nginx（SSH），私鑰不落地中繼主機；無法先備份就不換證。",
+          "部署至 Nginx、Apache（SSH）與 IIS（WinRM），私鑰不落地中繼主機；無法先備份就不換證。",
           "部署後自動驗證線上憑證。"
         ]
       },
@@ -197,7 +197,7 @@
     {
       "tag": "雲端",
       "title": "雲端虛擬機或 Kubernetes",
-      "text": "可部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）的虛擬機，或以容器部署（容器版提供唯讀查詢介面，簽發與部署在主機上執行）。"
+      "text": "可部署於公有雲的台灣區域（例如 Google Cloud 台灣區域）的虛擬機，或以容器與 Helm chart 部署於 Kubernetes。"
     },
     {
       "tag": "地端",
@@ -207,14 +207,14 @@
     {
       "tag": "客製",
       "title": "部署目標與通知",
-      "text": "依貴機構的設備與 CA 調整簽發與部署方式；預警可接 ServiceNow、Jira 或 Webhook，導入時驗證送達。"
+      "text": "依貴機構的設備與 CA 調整簽發與部署方式；預警可接 ServiceNow、Jira 或 Webhook。"
     }
   ],
-  "limits_intro": "以下是目前版本的範圍，導入前會在規劃階段逐項確認。",
+  "limits_intro": "以下事項會在導入前，依貴機構的環境與需求逐項確認。",
   "limits": [
     {
       "title": "部署目標依設備逐一驗證",
-      "text": "目前已在實機跑通內部 CA 簽發與 Nginx 部署；IIS 的遠端傳輸、負載平衡器（例如 F5）與公開 CA 簽發，會在導入時依客戶實際設備與 CA 逐一驗證。"
+      "text": "負載平衡器（例如 F5）等網站伺服器以外的設備，以及向公開 CA 簽發，依貴機構實際的設備與 CA 設定。"
     },
     {
       "title": "稽核軌跡偵測竄改，不防止竄改",
@@ -232,7 +232,7 @@
     },
     {
       "q": "憑證可以自動更新嗎？IIS 也可以嗎？",
-      "a": "可以。Cardea 透過 ACME 協定簽發，部署至 Nginx 並在部署後比對線上憑證序號；IIS 的匯入與綁定已在 Windows Server 2022 實測，遠端傳輸方式於導入時依環境驗證。"
+      "a": "可以。Cardea 透過 ACME 協定簽發，部署至 Nginx、Apache（SSH）與 IIS（WinRM），並在部署後比對線上憑證序號。"
     },
     {
       "q": "後量子密碼遷移要從哪裡開始？",
@@ -252,7 +252,7 @@
     "q": "企業的 SSL 憑證該怎麼管理？",
     "a": [
       "三件事：<b>找得到</b>（完整清冊）、<b>檢查得了</b>（弱金鑰、效期、信任狀態）、<b>換得過去</b>（到期前自動更新並驗證）。公開憑證的效期正逐步縮短，人工追蹤已經跟不上。",
-      "<b>Cardea</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的 SSL 憑證管理與機器身分治理平台。它自動盤點 TLS 憑證與 SSH 金鑰，依政策檢查並在到期前預警，以 ACME 自動更新並部署至網站伺服器，產出密碼演算法分布報告作為後量子密碼遷移的盤點基礎；核心功能可單機、離線運作。"
+      "<b>Cardea</b> 是奧洛（Aurobase）AURO NEXUS 產品家族的 SSL 憑證管理與機器身分治理平台。它自動盤點 TLS 憑證與 SSH 金鑰，依政策檢查並在到期前預警，以 ACME 自動更新並部署至 Nginx、Apache、IIS，產出密碼演算法分布報告作為後量子密碼遷移的盤點基礎；核心功能可單機、離線運作。"
     ]
   },
   "audience": [

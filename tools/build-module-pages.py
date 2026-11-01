@@ -137,8 +137,23 @@ def known_slugs(mods, pf):
     return set(mods) | set(pf.get('extra_modules', {}))
 
 
+# 對外頁面不寫進度：計畫中的能力寫成「提供」，環境依賴寫成導入前提（Roger 2026-11-01）
+STATUS_RE = re.compile(r'建置中|規劃中|開發中|調校中|驗證中|測試中|實測中|試營運|原型|即將推出|敬請期待|目前版本|目前階段|'
+                       r'POC 階段|尚未(?:提供|支援|實作|上線|實測|部署|開放|驗證)|(?:於|在)導入時驗證|roadmap', re.I)
+
+
+def status_words(d, path=''):
+    """回傳 [(欄位路徑, 命中的字)]：產品 JSON 裡描述開發進度的字眼。"""
+    if isinstance(d, str):
+        return [(path, x.group(0)) for x in STATUS_RE.finditer(d)]
+    items = d.items() if isinstance(d, dict) else enumerate(d) if isinstance(d, list) else []
+    return [hit for k, v in items if not str(k).startswith('_') for hit in status_words(v, '%s.%s' % (path, k) if path else str(k))]
+
+
 def validate(m, mods, pf):
     errors, warnings = [], []
+    for path, w in status_words(m):
+        errors.append('%s 寫了進度字眼「%s」：計畫中的能力請寫成提供的功能，環境依賴寫成導入前提' % (path, w))
 
     def need(path, v):
         if v is None or (isinstance(v, (str, list)) and not (v.strip() if isinstance(v, str) else v)):
@@ -238,7 +253,7 @@ def validate(m, mods, pf):
 
 
 def validate_platform(pf, mods):
-    errors = []
+    errors = ['平台總覽 %s 寫了進度字眼「%s」' % hit for hit in status_words(pf)]
     known = known_slugs(mods, pf)
     drafts = set(load_modules(include_drafts=True)) - set(mods)
     for lg in pf.get('legs') or []:
@@ -611,7 +626,7 @@ def body(m, mods):
             f'''                                    <div class="limit-item"><div class="limit-index">{i}</div>
                                         <div><h3>{it['title']}</h3><p>{it['text']}</p></div></div>'''
             for i, it in enumerate(m['limits'], 1))
-        out.append(section('nm-limits', 'SCOPE', '範圍界定',
+        out.append(section('nm-limits', 'BEFORE YOU START', '導入前提',
             f'                            <div class="row"><div class="col-lg-10">\n{items}\n                            </div></div>',
             intro=m.get('limits_intro')))
 
@@ -1016,7 +1031,7 @@ def llms_full(mods, pf):
             out += ['', '### ' + plain(cp['heading'])] + ['- %s：%s' % (plain(r[0]), '｜'.join('%s：%s' % (plain(cp['cols'][i]), plain(v)) for i, v in enumerate(r[1:]))) for r in cp['rows']]
         out += ['', '### 部署：可雲、可地、可客製'] + ['- %s｜%s：%s' % (d['tag'], plain(d['title']), plain(d['text'])) for d in m['deploy']]
         if m.get('limits'):
-            out += ['', '### 範圍界定'] + ['- **%s**：%s' % (plain(x['title']), plain(x['text'])) for x in m['limits']]
+            out += ['', '### 導入前提'] + ['- **%s**：%s' % (plain(x['title']), plain(x['text'])) for x in m['limits']]
         if m.get('faq'):
             out += ['', '### 常見問題'] + sum([['**問：%s**' % plain(f['q']), '答：%s' % plain(f['a']), ''] for f in m['faq']], [])
     out += ['', '## 其他服務與代理產品', '']
@@ -1367,6 +1382,10 @@ def page_audit(rel):
                   'sitemap.xml 收錄這一頁'))
     llms = read(os.path.join(ROOT, 'llms.txt'))
     C.append(_chk('全站', 'pass' if '(%s)' % rel in llms or rel == 'index.html' else 'warn', 'llms.txt 收錄這一頁'))
+    if not rel.startswith('blogpost/'):   # 新聞稿是當時的紀錄，不改寫
+        txt = html.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'<(script|style)\b.*?</\1>', '', body, flags=re.S)))
+        hits = sorted(set(x.group(0) for x in STATUS_RE.finditer(txt)))
+        C.append(_chk('全站', 'fail' if hits else 'pass', '內容不寫開發進度（建置中、規劃中…）', '、'.join(hits)))
     score = {}
     for g in ('SEO', 'GEO', '全站'):
         rows = [c for c in C if c['group'] == g]

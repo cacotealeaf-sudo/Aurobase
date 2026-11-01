@@ -69,7 +69,8 @@
         "收藏時的安全檢查",
         "搜尋與標籤",
         "內容雜湊與稽核",
-        "個資刪除與稽核"
+        "個資刪除與稽核",
+        "瀏覽器擴充套件"
       ],
       "isRelatedTo": [
         {
@@ -88,7 +89,7 @@
         {
           "@type": "ImageObject",
           "url": "https://aurobase.com/images/nexus-library/04-item-detail.webp",
-          "caption": "收藏詳情：單筆收藏的儲存時間、大小、內容雜湊與儲存層級；尚未加標籤、尚未由 Insight 索引都直接標示。"
+          "caption": "收藏詳情：單筆收藏的儲存時間、大小、內容雜湊與儲存層級；標籤與 Insight 索引狀態也直接標示。"
         }
       ]
     },
@@ -443,7 +444,7 @@
                         <div class="col-lg-5 mt-5 mt-lg-0">
                             <aside class="nm-summary">
                                 <h2>重點摘要</h2>
-                                <dl><dt>是什麼</dt><dd>每位員工的個人知識收藏、標籤與搜尋空間。</dd><dt>收藏類型</dt><dd>文字、Markdown、網址、檔案、網頁剪輯、筆記。</dd><dt>收藏方式</dt><dd>單一入口存入：貼上網址存為網址，其餘存為文字或檔案。</dd><dt>介面語言</dt><dd>繁體中文、簡體中文、英文、日文（部分管理頁面為英文）。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「知識」能力，語意索引由 <a href="nexus-insight.html">Insight</a> 提供。</dd></dl>
+                                <dl><dt>是什麼</dt><dd>每位員工的個人知識收藏、標籤與搜尋空間。</dd><dt>收藏類型</dt><dd>文字、Markdown、網址、檔案、網頁剪輯、筆記。</dd><dt>收藏方式</dt><dd>單一入口存入，另有 Chrome 瀏覽器擴充套件。</dd><dt>介面語言</dt><dd>繁體中文、簡體中文、英文、日文（部分管理頁面為英文）。</dd><dt>所屬</dt><dd>AURO NEXUS 平台「知識」能力，語意索引由 <a href="nexus-insight.html">Insight</a> 提供。</dd></dl>
                             </aside>
                         </div>
                     </div>
@@ -495,24 +496,27 @@
                             <p class="section-label">CAPABILITIES</p>
                             <h2 class="section-heading">核心能力</h2>
                             <div class="row">
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-folder"></i></div>
                                         <h3>每人一個空間</h3><ul><li>依租戶與人員劃分獨立空間，彼此不可見。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-page"></i></div>
                                         <h3>單一入口收藏</h3><ul><li>文字、Markdown、網址、檔案、網頁剪輯、筆記，都從同一個入口存入。</li><li>文字類每筆上限 10 MB、網址 4,096 字元、檔案 100 MB。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
                                         <h3>收藏時的安全檢查</h3><ul><li>阻擋 <code>javascript:</code>、<code>data:</code>、<code>file:</code> 等危險網址格式。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-search"></i></div>
                                         <h3>搜尋與標籤</h3><ul><li>全文比對搜尋。</li><li>標籤新增、刪除、改名與使用統計。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-shield-check"></i></div>
                                         <h3>內容雜湊與稽核</h3><ul><li>每筆收藏記錄 SHA-256 內容雜湊與儲存層級。</li><li>稽核紀錄為雜湊鏈，資料庫層只能附加。</li></ul></div></div>
-                                <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-privacy-policy"></i></div>
                                         <h3>個資刪除與稽核</h3><ul><li>個資刪除請求以雜湊墓碑處理：內容移除，紀錄可追溯。</li><li>處理過程寫入只能附加、竄改可被偵測的稽核紀錄。</li></ul></div></div>
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="cap-card"><div class="icon-wrap"><i class="iconoir-internet"></i></div>
+                                        <h3>瀏覽器擴充套件</h3><ul><li>Chrome 擴充套件，瀏覽網頁時一鍵收藏，可由企業統一派送。</li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -530,7 +534,7 @@
                                 <figure class="nm-shot"><a href="images/nexus-library/03-search-result.webp" target="_blank" rel="noopener"><img src="images/nexus-library/03-search-result.webp" alt="Library 搜尋個人收藏，命中處以黃底標示" loading="lazy"></a>
                                     <figcaption><b>搜尋收藏</b>在個人收藏中搜尋「金檢」，命中的標題與內文以黃底標示；下方是收藏數、儲存量與標籤統計。</figcaption></figure>
                                 <figure class="nm-shot"><a href="images/nexus-library/04-item-detail.webp" target="_blank" rel="noopener"><img src="images/nexus-library/04-item-detail.webp" alt="Library 收藏詳情，含內容雜湊與儲存層級" loading="lazy"></a>
-                                    <figcaption><b>收藏詳情</b>單筆收藏的儲存時間、大小、內容雜湊與儲存層級；尚未加標籤、尚未由 Insight 索引都直接標示。</figcaption></figure>
+                                    <figcaption><b>收藏詳情</b>單筆收藏的儲存時間、大小、內容雜湊與儲存層級；標籤與 Insight 索引狀態也直接標示。</figcaption></figure>
                             </div>
                         </div>
                     </div>
@@ -613,16 +617,14 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">SCOPE</p>
-                            <h2 class="section-heading">範圍界定</h2>
-                            <p class="section-intro">以下是目前版本的範圍，導入前會在規劃階段逐項確認。</p>
+                            <p class="section-label">BEFORE YOU START</p>
+                            <h2 class="section-heading">導入前提</h2>
+                            <p class="section-intro">以下事項會在導入前，依貴機構的環境與需求逐項確認。</p>
                             <div class="row"><div class="col-lg-10">
                                     <div class="limit-item"><div class="limit-index">1</div>
                                         <div><h3>語意搜尋由 Insight 提供</h3><p>Library 本身提供全文比對搜尋；依語意的搜尋與問答需搭配 Insight。</p></div></div>
                                     <div class="limit-item"><div class="limit-index">2</div>
-                                        <div><h3>以個人空間為主</h3><p>目前版本以個人收藏為主；團隊共享空間依專案需求另行規劃。</p></div></div>
-                                    <div class="limit-item"><div class="limit-index">3</div>
-                                        <div><h3>瀏覽器擴充套件為原型</h3><p>瀏覽器擴充套件目前是原型，需以開發者模式載入，尚未上架商店，導入時另行評估。</p></div></div>
+                                        <div><h3>以個人空間為主</h3><p>收藏以個人空間為主；需要團隊共享的知識，交由 Insight 管理或依專案開通團隊空間。</p></div></div>
                             </div></div>
                         </div>
                     </div>
