@@ -10,6 +10,8 @@ on:
       - 'llms.txt'
       - 'sitemap.xml'
       - 'css/**'
+      - 'js/site-search.js'
+      - 'search-index.json'
       - 'tools/module-pages/**'
       - 'tools/build-module-pages.py'
       - 'tools/cms/**'
@@ -46,6 +48,13 @@ jobs:
       - name: Build pages
         run: python3 tools/build-module-pages.py
 
+      # 模擬潛在客戶的搜尋考題：命中率低於門檻就停在這裡，不發布
+      - name: Site search quality
+        run: |
+          node tools/search-eval/run.js | tee search.txt
+          { echo '## 網站搜尋考題'; echo '```'; cat search.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          rm search.txt
+
       - name: SEO / GEO report
         run: |
           python3 tools/build-module-pages.py --audit | tee audit.txt
@@ -60,7 +69,7 @@ jobs:
           import glob, io, sys
           from fontTools.ttLib import TTFont
           chars = set()
-          for f in glob.glob('*.html') + glob.glob('blogpost/*.html') + glob.glob('*.txt') + glob.glob('css/*.css') + glob.glob('js/*.js'):
+          for f in glob.glob('*.html') + glob.glob('blogpost/*.html') + glob.glob('*.txt') + glob.glob('css/*.css') + glob.glob('js/*.js') + glob.glob('search-index.json'):
               chars |= set(io.open(f, encoding='utf-8', errors='ignore').read())
           full = set(TTFont('WOFF2/LINESeedTW_OTF_Rg.woff2').getBestCmap())
           cmap = set(TTFont('WOFF2/LINESeedTW_OTF_Rg.subset.woff2').getBestCmap())
@@ -75,7 +84,7 @@ jobs:
       - name: Commit regenerated files
         id: commit
         run: |
-          git add -A -- '*.html' llms.txt sitemap.xml css/line-seed-font.css css/iconoir-subset.css WOFF2
+          git add -A -- '*.html' llms.txt sitemap.xml search-index.json css/line-seed-font.css css/iconoir-subset.css WOFF2
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "產出與 repo 內容一致，不需要 commit"

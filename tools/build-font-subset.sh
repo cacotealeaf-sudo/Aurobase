@@ -13,7 +13,7 @@ python3 - <<'PY'
 import glob, io
 chars = set()
 for f in glob.glob('*.html') + glob.glob('blogpost/*.html') + glob.glob('*.txt') \
-       + glob.glob('css/*.css') + glob.glob('js/*.js'):
+       + glob.glob('css/*.css') + glob.glob('js/*.js') + glob.glob('search-index.json'):
     try:
         chars |= set(io.open(f, encoding='utf-8', errors='ignore').read())
     except Exception:

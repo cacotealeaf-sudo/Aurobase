@@ -78,3 +78,39 @@
 @media (min-width: 992px) {
     #colorlib-main .row.justify-content-end > .col-md-10 { padding-right: 48px; }
 }
+
+/* ── 側欄「搜尋產品與服務」與搜尋視窗（js/site-search.js）── */
+.nav-search-btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; max-width: 230px; margin: 0 0 1.2rem;
+    padding: 0.55rem 0.85rem; border: 1px solid rgba(0,0,0,0.14); border-radius: 999px; background: rgba(255,255,255,0.85);
+    color: #555; font-size: 0.88rem; text-align: left; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.nav-search-btn span { font-size: 1.05rem; line-height: 1; }
+.nav-search-btn:hover { border-color: #E63109; color: #E63109; }
+.nav-search-btn:focus-visible { outline: 2px solid #E63109; outline-offset: 2px; }
+html.ss-open, html.ss-open body { overflow: hidden; }
+.ss-overlay { position: fixed; inset: 0; z-index: 3000; background: rgba(20,22,30,0.55); display: flex; align-items: flex-start;
+    justify-content: center; padding: 8vh 16px 16px; }
+.ss-overlay[hidden] { display: none !important; }
+.ss-dialog { width: 100%; max-width: 680px; max-height: 84vh; overflow-y: auto; background: #fff; border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25); padding: 1.4rem 1.5rem 1.2rem; }
+.ss-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
+.ss-head h2 { font-size: 1.05rem; font-weight: 700; color: #28282c; margin: 0; }
+.ss-close { border: 0; background: none; font-size: 1.6rem; line-height: 1; color: #888; cursor: pointer; padding: 0 0.2rem; }
+.ss-input { width: 100%; font-size: 1.05rem; padding: 0.85rem 1rem; border: 1px solid rgba(0,0,0,0.18); border-radius: 10px; color: #28282c; }
+.ss-input:focus { outline: none; border-color: #E63109; box-shadow: 0 0 0 3px rgba(230,49,9,0.15); }
+.ss-msg { font-size: 0.84rem; color: #666; margin: 0.6rem 0 0.4rem; min-height: 1.2em; }
+.ss-results { list-style: none; padding: 0; margin: 0; }
+.ss-results a { display: block; padding: 0.75rem 0.9rem; border-radius: 10px; text-decoration: none; border: 1px solid transparent; }
+.ss-results a:hover, .ss-results a:focus { background: #fff5f2; border-color: rgba(230,49,9,0.25); outline: none; }
+.ss-results b { display: block; color: #28282c; font-size: 0.98rem; margin: 0.1rem 0 0.2rem; }
+.ss-cat { font-size: 0.72rem; letter-spacing: 0.06em; color: #E63109; font-weight: 700; }
+.ss-desc { display: block; font-size: 0.85rem; color: #666; line-height: 1.65; }
+.ss-none { border: 1px dashed rgba(0,0,0,0.18); border-radius: 12px; padding: 1rem 1.1rem; margin-top: 0.6rem; }
+.ss-none p { color: #444; line-height: 1.75; margin-bottom: 0.8rem; font-size: 0.92rem; }
+.ss-ask { display: inline-block; background: #E63109; color: #fff !important; border-radius: 8px; padding: 0.55rem 1rem; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+.ss-hint { font-size: 0.78rem; color: #999; margin: 0.9rem 0 0; }
+@media (max-width: 767.98px) { .ss-overlay { padding-top: 16px; } .ss-dialog { max-height: calc(100vh - 32px); padding: 1.1rem; } }
+
+/* 手機選單：「AI 治理平台」「產業解決方案」與展開箭頭維持同一行 */
+@media (max-width: 991.98px) {
+    #colorlib-main-menu .nav-row { white-space: nowrap; }
+}

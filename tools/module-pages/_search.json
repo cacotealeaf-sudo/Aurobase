@@ -1,0 +1,320 @@
+{
+  "_說明": "全站搜尋的手寫條目：平台模組與產業解決方案由產品 JSON 自動產生，這裡只放其他頁面的服務與產品。terms 是客戶描述需求時常用的說法，只用於比對、不顯示在頁面上；desc 會顯示在搜尋結果。",
+  "entries": [
+    {
+      "title": "AURO NEXUS AI 治理平台總覽",
+      "url": "nexus.html",
+      "cat": "AI 治理平台",
+      "desc": "以 Forge 治理底座串起 AI 編排、客戶資料、知識、內容產製與資安等模組，可雲、可地、可客製。",
+      "terms": [
+        "AI 治理平台",
+        "AURO NEXUS",
+        "企業 AI 平台",
+        "全部模組",
+        "金融業 AI",
+        "治理化 AI",
+        "生成式 AI 導入",
+        "AI governance platform",
+        "enterprise AI"
+      ]
+    },
+    {
+      "title": "部署方式：可雲、可地、可客製",
+      "url": "nexus.html#deploy",
+      "cat": "AI 治理平台",
+      "desc": "可部署於公有雲台灣區域、企業自有機房或隔離網路，也可依需求客製。",
+      "terms": [
+        "地端部署",
+        "地端",
+        "私有雲",
+        "離線",
+        "隔離網路",
+        "air-gap",
+        "雲端部署",
+        "公有雲",
+        "Google Cloud",
+        "GCP",
+        "資料不出機房",
+        "客製開發",
+        "on-premise",
+        "on-prem"
+      ]
+    },
+    {
+      "title": "數位廣告投放",
+      "url": "marketing.html#advertising",
+      "cat": "數位行銷服務",
+      "desc": "Google 關鍵字廣告、GDN 聯播網、YouTube 影音廣告、Yahoo 原生廣告、LINE 廣告與 Facebook、Instagram 廣告投放。",
+      "terms": [
+        "廣告投放",
+        "廣告代操",
+        "數位廣告",
+        "關鍵字廣告",
+        "Google 廣告",
+        "Google Ads",
+        "GDN",
+        "YouTube 廣告",
+        "Yahoo 原生廣告",
+        "LINE 廣告",
+        "Facebook 廣告",
+        "FB 廣告",
+        "Instagram 廣告",
+        "IG 廣告",
+        "SEM",
+        "導流",
+        "曝光",
+        "增加業績",
+        "打廣告",
+        "網路廣告",
+        "digital advertising",
+        "被找到",
+        "搜尋曝光",
+        "在 Google 上"
+      ]
+    },
+    {
+      "title": "社群經營與 LINE 官方帳號",
+      "url": "marketing.html#community",
+      "cat": "數位行銷服務",
+      "desc": "Facebook、Instagram 社群經營與貼文廣告、LINE 官方帳號建置與分眾標籤，以及社群輿情監測。",
+      "terms": [
+        "社群經營",
+        "社群代操",
+        "小編",
+        "粉絲專頁",
+        "粉專",
+        "Facebook",
+        "Instagram",
+        "LINE 官方帳號",
+        "LINE OA",
+        "集點卡",
+        "優惠券",
+        "輿情監測",
+        "網友討論",
+        "口碑"
+      ]
+    },
+    {
+      "title": "網站數據分析",
+      "url": "marketing.html#data_analysis",
+      "cat": "數位行銷服務",
+      "desc": "以網站分析工具了解流量來源、使用者在網站上的行為與轉換狀況。",
+      "terms": [
+        "數據分析",
+        "網站分析",
+        "Google Analytics",
+        "GA4",
+        "GA",
+        "網站流量",
+        "轉換率",
+        "流量來源",
+        "網頁行為分析"
+      ]
+    },
+    {
+      "title": "數位行銷服務總覽",
+      "url": "marketing.html",
+      "cat": "數位行銷服務",
+      "desc": "廣告投放、社群經營與數據分析的整合行銷服務。",
+      "terms": [
+        "數位行銷",
+        "整合行銷",
+        "行銷代理",
+        "行銷公司",
+        "網路行銷",
+        "SEO 優化",
+        "SEO",
+        "digital marketing"
+      ]
+    },
+    {
+      "title": "CXA 顧客體驗分析",
+      "url": "solution.html#cxa",
+      "cat": "代理產品",
+      "desc": "以影像回放、表單分析、熱點圖與警示通知，掌握顧客在網站與 App 上的操作行為。",
+      "terms": [
+        "CXA",
+        "顧客體驗分析",
+        "影像回放",
+        "Session Replay",
+        "表單分析",
+        "熱點圖",
+        "關注圖",
+        "使用者行為",
+        "顧客旅程",
+        "Tealeaf",
+        "Acoustic",
+        "customer experience analytics",
+        "卡住",
+        "操作困難"
+      ]
+    },
+    {
+      "title": "HCL Discover 數位體驗分析",
+      "url": "solution.html#hcl_discover",
+      "cat": "代理產品",
+      "desc": "工作階段回放、掙扎偵測、熱圖與旅程漏斗，找出顧客在網站與 App 上卡關與放棄的原因。",
+      "terms": [
+        "HCL Discover",
+        "Discover",
+        "數位體驗分析",
+        "DXA",
+        "工作階段回放",
+        "Session Replay",
+        "掙扎偵測",
+        "暴怒點擊",
+        "熱圖",
+        "表單放棄",
+        "漏斗",
+        "開戶流失",
+        "線上申辦",
+        "客戶卡關",
+        "網站體驗",
+        "App 體驗",
+        "digital experience analytics",
+        "轉換率",
+        "轉換很差",
+        "卡住",
+        "卡在哪",
+        "流失",
+        "放棄率",
+        "中途離開"
+      ]
+    },
+    {
+      "title": "CDP 客戶數據平台（代理產品）",
+      "url": "solution.html#auro_cdp",
+      "cat": "代理產品",
+      "desc": "整合線上、企業與第三方資料，搭配分群與貼標，建立 360 度客戶輪廓。",
+      "terms": [
+        "CDP",
+        "客戶數據平台",
+        "360 度",
+        "客戶輪廓",
+        "貼標",
+        "分群",
+        "customer data platform"
+      ]
+    },
+    {
+      "title": "HCL Unica 行銷自動化",
+      "url": "solution.html#hcl_unica",
+      "cat": "代理產品",
+      "desc": "跨通路行銷活動、接觸策略最佳化、客戶旅程、即時個人化推薦與電子郵件、簡訊發送。",
+      "terms": [
+        "HCL Unica",
+        "Unica",
+        "行銷自動化",
+        "Campaign",
+        "活動管理",
+        "接觸疲勞",
+        "即時推薦",
+        "電子郵件行銷",
+        "EDM",
+        "簡訊行銷",
+        "名單行銷",
+        "客戶旅程",
+        "marketing automation"
+      ]
+    },
+    {
+      "title": "Magnolia CMS 內容管理",
+      "url": "solution.html#magnolia_cms",
+      "cat": "代理產品",
+      "desc": "以視覺化方式建置網站與 App 內容，跨通路重複使用，並與電商、行銷自動化與分析工具整合。",
+      "terms": [
+        "Magnolia",
+        "CMS",
+        "內容管理系統",
+        "官網改版",
+        "網站建置",
+        "架設網站",
+        "多語系網站",
+        "Headless CMS",
+        "網站內容",
+        "content management"
+      ]
+    },
+    {
+      "title": "AI 智慧語伴",
+      "url": "ai-companion.html",
+      "cat": "AI 智慧語伴",
+      "desc": "以 AI 語音陪伴長者、提供用藥提醒與關懷報告，協助社工掌握狀況。",
+      "terms": [
+        "AI 智慧語伴",
+        "語音陪伴",
+        "長者陪伴",
+        "獨居老人",
+        "長照",
+        "老人照護",
+        "社工",
+        "用藥提醒",
+        "服藥提醒",
+        "藥單",
+        "關懷報告",
+        "偏鄉",
+        "情緒陪伴",
+        "AI voice companion"
+      ]
+    },
+    {
+      "title": "客服中心（AUROCORE）",
+      "url": "https://aurocore.com/",
+      "cat": "客服中心",
+      "desc": "客服中心系統建置與外包服務，整合 CTI、CRM 與智慧客服機器人。",
+      "terms": [
+        "客服中心",
+        "客服外包",
+        "客服系統",
+        "Call Center",
+        "電話客服",
+        "CTI",
+        "CRM",
+        "智慧客服",
+        "客服機器人",
+        "聊天機器人",
+        "contact center",
+        "來電",
+        "來電帶出客戶資料",
+        "打電話來",
+        "進線"
+      ]
+    },
+    {
+      "title": "聯絡我們",
+      "url": "contact.html",
+      "cat": "聯絡我們",
+      "desc": "填寫諮詢表單，或來電 02-5568-4688、寄信至 ad@aurocore.com。",
+      "terms": [
+        "聯絡",
+        "聯繫",
+        "電話",
+        "地址",
+        "報價",
+        "詢價",
+        "預約",
+        "諮詢",
+        "簡報",
+        "Demo",
+        "試用",
+        "POC",
+        "價格",
+        "費用",
+        "多少錢",
+        "索取報價",
+        "我要報價"
+      ]
+    },
+    {
+      "title": "隱私權政策",
+      "url": "privacypolicy.html",
+      "cat": "公司資訊",
+      "desc": "本網站蒐集、處理與利用個人資料的方式。",
+      "terms": [
+        "隱私權",
+        "個資",
+        "Cookie"
+      ]
+    }
+  ]
+}

@@ -39,6 +39,14 @@ python3 tools/cms/server.py
 
 想暫時下架某個產品：勾回「草稿」再儲存，頁面會被移除，其他頁面連到它的連結也會暫時隱藏。
 
+## 網站搜尋
+
+每頁側欄的「搜尋產品與服務」與平台總覽的「依需求找模組」用同一份索引 `search-index.json`，產頁時自動重建：
+
+- 平台模組與產業解決方案：取自產品 JSON。表單裡的「需求搜尋用詞」放客戶描述需求時常用的說法（例如「憑證過期」「COBOL」），只用於比對，不會顯示在頁面上。
+- 其他頁面的服務與代理產品：在 `tools/module-pages/_search.json` 增減。
+- 考題：`tools/search-eval/queries.json` 是模擬潛在客戶的搜尋說法，`node tools/search-eval/run.js --verbose` 會列出每題的前三名。GitHub Action 發布前會跑一次，命中率低於門檻就不發布。新增產品或服務時，順手補幾題。
+
 ## 發布
 
 編輯器只改本機檔案。發布方式：

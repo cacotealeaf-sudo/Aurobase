@@ -57,7 +57,7 @@ class GeneratorTest(SiteCopy):
 
     def test_build_is_idempotent(self):
         gen.build_all()
-        first = {f: self.page(f) for f in ('nexus.html', 'nexus-forge.html', 'llms.txt', 'sitemap.xml')}
+        first = {f: self.page(f) for f in ('nexus.html', 'nexus-forge.html', 'llms.txt', 'sitemap.xml', 'search-index.json')}
         gen.build_all()
         for f, text in first.items():
             self.assertEqual(self.page(f), text, f)
@@ -97,6 +97,30 @@ class GeneratorTest(SiteCopy):
         self.assertNotIn('href="nexus-library.html"', self.page('nexus.html'))
         self.assertNotIn('nexus-library.html', self.page('llms.txt'))
         self.assertNotIn('nexus-library.html', self.page('sitemap.xml'))
+
+
+class SearchTest(SiteCopy):
+    def test_index_covers_every_published_page(self):
+        gen.build_all()
+        idx = json.loads(self.page('search-index.json'))
+        urls = {e['u'] for e in idx}
+        for m in gen.load_modules().values():
+            self.assertIn(m['file'], urls)
+        for e in json.loads(open(os.path.join(gen.SRC, '_search.json'), encoding='utf-8').read())['entries']:
+            self.assertIn(e['url'], urls)
+
+    def test_draft_product_is_left_out_of_search(self):
+        m = self.doc('nexus-library')
+        m['draft'] = True
+        with open(os.path.join(gen.SRC, 'nexus-library.json'), 'w', encoding='utf-8') as f:
+            json.dump(m, f, ensure_ascii=False)
+        gen.build_all()
+        self.assertNotIn('nexus-library.html', self.page('search-index.json'))
+
+    def test_every_page_has_the_search_button(self):
+        gen.build_all()
+        for f in ('index.html', 'nexus-forge.html', 'contact.html'):
+            self.assertIn('nav-search-btn', self.page(f), f)
 
 
 class AuditTest(SiteCopy):

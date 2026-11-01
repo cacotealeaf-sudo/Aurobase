@@ -1,50 +1,47 @@
-# Aurobase (奧洛) - 數位整合行銷公司
+# Aurobase（奧洛）— AI 治理平台與數位行銷服務
 
-> 奧洛科技致力於數位行銷、數據分析、行銷自動化、AI 智慧語伴、客服中心系統建置與外包服務。
+> 奧洛股份有限公司（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，並代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，另有數位廣告投放、社群經營、AI 智慧語伴與客服中心服務。平台可部署於公有雲台灣區域、企業自有機房或隔離網路，也可依需求客製。
 
 ## 公司資訊
 
-- 公司名稱: 奧洛科技 (Aurobase / Aurocore)
-- 地址: 台北市內湖區洲子街101號2樓
+- 公司名稱: 奧洛股份有限公司（Aurobase）
+- 地址: 114 台北市內湖區洲子街101號2樓
 - 電話: +886-2-5568-4688
 - Email: ad@aurocore.com
 - 語言: 繁體中文 (zh-Hant-TW)
 
 ## 網站頁面
 
-- [首頁](index.html): 公司介紹、核心服務總覽、合作夥伴、解決方案與產品
-- [數位行銷](marketing.html): 廣告投放、社群經營、SEO、內容行銷等數位行銷服務
-- [代理產品](solution.html): CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 顧客數據平台、HCL Unica、Magnolia CMS
-- [AI 智慧語伴](ai-companion.html): AI 語音陪伴與健康守護解決方案，結合語音互動與智慧分析
-- [AURO NEXUS](nexus.html): AI 治理平台總覽 — 以 NEXUS Forge 為治理底座的 14 個模組，另含 NEXUS OS、NEXUS Voice 產品介紹
-- [NEXUS GEO](nexus-geo.html): 生成式引擎優化（GEO），提升品牌在 ChatGPT／Perplexity／Gemini 等 AI 答案中的曝光
-- [NEXUS SAGA](nexus-saga.html): 金融機構的非結構化資料治理層 — 稽核鏈（WORM）、生命週期與保存、資料共享治理、AI 使用溯源
-- [新聞中心](blog.html): 公司部落格文章列表
-- [聯絡我們](contact.html): 諮詢表單與 Google Maps 位置
-- [隱私權政策](privacypolicy.html): 個人資料保護與 Cookie 使用政策
-- [客服中心](https://cti.aurocore.com/index.html): 客服系統 (外部連結)
+- [首頁](index.html): 公司介紹、服務總覽與合作夥伴
+- [AURO NEXUS AI 治理平台](nexus.html): 平台總覽、部署方式、全部模組、產業解決方案，以及「依需求找模組」搜尋
+- [數位行銷服務](marketing.html): 數位廣告投放、社群經營與 LINE 官方帳號、網站數據分析
+- [代理產品](solution.html): CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化、Magnolia CMS 內容管理
+- [AI 智慧語伴](ai-companion.html): 以 AI 語音陪伴長者，提供用藥提醒與關懷報告，協助社工掌握狀況
+- [新聞中心](blog.html): 行銷科技文章
+- [聯絡我們](contact.html): 諮詢表單、電話與地址
+- [隱私權政策](privacypolicy.html): 個人資料蒐集、處理與利用方式
+- [客服中心](https://aurocore.com/): 客服中心系統建置與外包服務（外部網站）
 
-## 部落格文章
+## 新聞中心文章
 
 - [「數位行銷」當真非做不可嗎？](blogpost/single-2023-10-6.html) - 2023/10/06
 - [洞察顧客的超能力 - Tealeaf](blogpost/single-2023-11-10.html) - 2023/11/10
-- [CDP到底是什麼？](blogpost/single-2023-12-4.html) - 2023/12/04
-- [社群經營超easy!](blogpost/single-2024-1-8.html) - 2024/01/08
+- [CDP到底是什麼？你不能不知道的關鍵！](blogpost/single-2023-12-4.html) - 2023/12/04
+- [社群經營超easy! Aurocore來助您](blogpost/single-2024-1-8.html) - 2024/01/08
 
-## 核心服務
+## 數位行銷服務
 
-### 數位行銷
-廣告投放 (Google Ads, Facebook Ads)、社群經營、SEO 搜尋引擎優化、內容行銷、數據分析與成效追蹤。
+- **數位廣告投放**: Google 關鍵字廣告、GDN 聯播網、YouTube 影音廣告、Yahoo 原生廣告、LINE 廣告，以及 Facebook、Instagram 廣告。
+- **社群經營**: Facebook、Instagram 社群經營與貼文廣告、LINE 官方帳號建置與分眾標籤、社群輿情監測。
+- **網站數據分析**: 以網站分析工具了解流量來源、使用者行為與轉換狀況。
 
-### 解決方案與產品
-- **CXA 顧客體驗分析**: 影像回放、表格分析、熱點圖、關注圖、行為分析與警示通知，掌握顧客線上操作行為
-- **HCL Discover 數位體驗分析**: HCLSoftware 的企業級數位體驗分析平台；工作階段回放、掙扎與異常偵測、熱圖與表單分析、事件與旅程漏斗、儀表板與告警、AI 工作階段洞察；可部署於企業自有機房，奧洛負責轉售、建置與維護
-- **CDP 顧客數據平台**: 整合多渠道顧客數據，建立統一客戶視圖，精準分眾行銷
-- **HCL Unica**: 企業級行銷自動化解決方案
-- **Magnolia CMS**: 企業內容管理系統，支援多語言、多通路內容發布
+## 代理產品
 
-### AURO NEXUS
-AI 企業平台，包含 NEXUS OS（工作自動化）、AURA CDP（客戶數據平台）、NEXUS Voice（AI 語音平台）、NEXUS GEO（生成式引擎優化）與 SAGA（資料治理層）。
+- **CXA 顧客體驗分析**: 影像回放、表單分析、熱點圖、關注圖、行為分析與警示通知。
+- **HCL Discover 數位體驗分析**: 工作階段回放、掙扎與異常偵測、熱圖與表單分析、事件與旅程漏斗、儀表板與告警；可部署於企業自有機房。
+- **CDP 客戶數據平台**: 整合線上、企業與第三方資料，以分群與貼標建立 360 度客戶輪廓。
+- **HCL Unica 行銷自動化**: Plan、Campaign、Optimize、Journey、Interact、Deliver、Link 等模組，涵蓋行銷資源管理、跨通路活動、接觸策略最佳化、客戶旅程、即時個人化推薦與電子郵件、簡訊發送。
+- **Magnolia CMS 內容管理**: 視覺化建置網站與 App 內容，跨通路重複使用，並與電商、行銷自動化、數位資產管理與分析工具整合。
 
 <!-- MODULES:BEGIN（由 tools/build-module-pages.py 產生）-->
 ## AURO NEXUS 產品一覽
@@ -90,46 +87,34 @@ AURO NEXUS 是奧洛（Aurobase）推出的AI 治理平台，讓企業在自有�
 - [電話與視訊銷售對話智能](solution-telesales.html): SUADA 是奧洛（Aurobase）以 AURO NEXUS 平台組成的電話行銷與視訊銷售對話智能方案：辨識客戶意向與異議並提示業務員回應話術，逐項檢核告知與紀錄要件，以確定性禁語閘門擋下不當用語，並對每一通通話評分，紀錄寫入雜湊鏈。
 - [AI OCR 智慧文件辨識](solution-ai-ocr.html): AI OCR 智慧文件辨識是奧洛（Aurobase）以 AURO NEXUS 平台組成的解決方案：用欄位定義描述要擷取的內容，免訓練就能處理表單、證明文件與理賠附件等不同格式；印刷字由 OCR 讀取，手寫與信心不足的欄位轉人工覆核，修正結果下一份即生效；內建財務報表辨識與勾稽，可部署在機房內。
 - [數位軌跡行銷資料整合](solution-digital-trail.html): AURA Connect 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡資料整合方案：讀取 HCL Discover 記錄的網站與 App 行為軌跡，切成工作階段，回溯同一裝置登入前後的身分，計算行銷標籤，依排程以 SFTP 交付資料倉儲，並提供行銷平台即時查詢的 API。
+
+### 依需求找模組
+
+- 統一管理企業內的 AI 使用，並留下稽核紀錄 → [Forge 治理化 AI 閘道](nexus-forge.html)
+- 讓 AI Agent 自動執行工作，但保留人工審核 → [Auro AI 任務編排](nexus-auro.html)
+- 整合客戶資料，建立單一客戶視圖 → [AURA CDP 客戶數據平台](nexus-cdp.html)
+- 經營 B2B 目標客戶，評估購買意圖 → [NEXUS ABM 企業客戶帳號經營](nexus-abm.html)
+- 建立可追溯出處的企業知識庫與 RAG 問答 → [Insight 企業知識萃取與治理](nexus-insight.html)
+- 讓員工的知識收藏留在企業環境內 → [Library 個人知識收藏空間](nexus-library.html)
+- 用 AI 產製金融宣傳內容或衛教文章，並經審核 → [MIRA 受監理產業內容產製與審核](nexus-mira.html)
+- 分析輿情的情緒與敘事走向 → [Pulse 輿情訊號分析](nexus-pulse.html)
+- 提升品牌在 AI 搜尋中的能見度 → [NEXUS GEO 生成式搜尋能見度](nexus-geo.html)
+- 治理非結構化資料的分級、保存與處分 → [SAGA 非結構化資料治理](nexus-saga.html)
+- 用 AI 產出提案書、報價單與週報 → [NEXUS AI-Office 商業文件產製](nexus-ai-office.html)
+- 盤點大型主機程式，產出繁體中文規格書 → [LISA 主機程式現代化](nexus-lisa.html)
+- 源碼檢測、弱點掃描與 SBOM → [Scanner 源碼檢測與弱點掃描](nexus-scanner.html)
+- SSL 憑證管理與後量子密碼盤點 → [Cardea SSL 憑證管理與機器身分治理](nexus-cardea.html)
+- 把詢問錄音整理成警詢筆錄草稿並檢查程序 → [警詢筆錄 AI 輔助](solution-police-record.html)
+- 分析電話行銷通話、檢核告知與品質 → [SUADA 電話與視訊銷售對話智能](solution-telesales.html)
+- 把網站與 App 行為軌跡整理成行銷標籤 → [AURA Connect 數位軌跡行銷資料整合](solution-digital-trail.html)
+- 擷取表單、證明文件與財報欄位，手寫轉人工覆核 → [AI OCR 智慧文件辨識](solution-ai-ocr.html)
 <!-- MODULES:END -->
 
-### NEXUS SAGA（資料治理）
-金融機構的非結構化資料治理層：讓「誰在什麼時候、依哪一條規定、對哪一份資料做了什麼」變成可查驗的紀錄。
-- **稽核鏈（WORM）**: 雜湊鏈稽核軌跡，資料庫層以 append-only 觸發器擋掉 UPDATE／DELETE；完整性驗證逐筆重算雜湊。用詞為「竄改可被偵測」，非「不可竄改」——雜湊鏈不能物理阻止具資料庫最高權限者，物理阻擋需儲存層 Object Lock。
-- **生命週期與保存**: 分媒體保存期限（依機構政策設定的預設值）、法律保全（legal hold）、含簽核鏈與雜湊的處分證書。保存期限未到不得處分為伺服器強制。
-- **資料盤點與目錄**: Oracle／SQL Server／MySQL 唯讀收割元數據；NAS／檔案系統盤點只讀檔名、副檔名、大小、修改時間，不開啟檔案內容；血緣自五種訊號推導。
-- **資料共享治理**: 再識別風險分級、同意管理、當事人權利、中國牆利益衝突隔離。
-- **AI 治理**: AI 使用溯源、反向影響分析、模型治理登錄簿（未評估的模型在高風險用途上被擋下）。
-- **品質與施行**: 品質規則與計分卡，低品質資料無法通過共享閘；施行證明比對「核定 vs 實際」。
-- **權責與流程**: 六種角色（admin / steward / records_manager / dpo / auditor / analyst，其中 auditor 唯讀），五種可寫角色的權限矩陣；四眼原則（不可自核）、治理流程建構器。
-- **實測數字**: 數十萬張表、PostgreSQL 16、單機容器環境下，目錄搜尋 133 毫秒（強化前 48.4 秒）、血緣名稱解析 ×600 為 1.27 秒（強化前約 9 小時）；20 萬筆事件的整鏈完整性驗證 1.35 秒、峰值記憶體 67 MB。Oracle XE 與 SQL Server 2022 實機跑通過元數據收割與血緣擷取。
-- **部署**: docker compose 單機／POC、離線映像包（tar 現場 load，不需連外）、Helm chart（尚未在客戶叢集實跑）。可指向既有 PostgreSQL。
-- **邊界**: 不做內容擷取與 NER、不做通用流程引擎、不宣稱「符合」任何法規（對應的是規範要求的做法，合規與否由主管機關與客戶法遵認定）。
+## 其他服務
 
-### AI 智慧語伴
-以 AI 語音為核心的智慧陪伴解決方案，主動陪伴長者、即時掌握健康與情緒變化。功能包含語音互動、健康監測、情緒分析、主動關懷提醒。
+- **AI 智慧語伴**: 以 AI 語音陪伴長者，主動關懷並掌握健康與情緒變化；提供用藥提醒、關懷報告與語音轉文字，協助社工減輕工作負擔。
+- **客服中心**: 客服中心系統建置與外包服務，整合 CTI、CRM 與智慧客服機器人。
 
-### 客服中心
-客服中心系統建置與外包服務，提供專業客服解決方案。
+## 諮詢方式
 
-## 技術堆疊
-
-- 前端: HTML5, CSS3, Bootstrap 4, jQuery, Owl Carousel, AOS 動畫, Particles.js
-- 表單: SweetAlert2 提示、前端驗證 (FormValidator)、Rate Limiter
-- 後端 API: PHP (表單提交代理至 Google Forms)
-- 追蹤: Google Tag Manager (GTM-MB9RNG8)
-
-## 諮詢服務類型
-
-可透過網站表單諮詢以下服務:
-1. 廣告投放
-2. 社群服務
-3. 客服中心
-4. CXA 顧客體驗分析
-5. CDP 顧客數據
-6. HCL Unica
-7. Magnolia CMS
-8. AI 智慧語伴
-9. NEXUS AI 自動化平台
-10. AI Voice Studio
-11. NEXUS GEO 生成式搜尋優化
-12. NEXUS SAGA 資料治理
+網站各頁右下角「免費諮詢」或[聯絡我們](contact.html)頁面的表單，可選擇的諮詢類型：數位廣告投放、社群媒體經營、CXA 顧客體驗分析、HCL Unica、CDP 客戶數據平台、AURO NEXUS AI 治理平台、AI Voice Studio、NEXUS SAGA 資料治理、AI 智慧語伴、其他。

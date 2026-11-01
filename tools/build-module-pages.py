@@ -608,39 +608,69 @@ def need_index(need, slug, mods, primary):
     其餘：搜尋摘要、產品定義、適合對象與能力標題。"""
     m = mods.get(slug) or {}
     if primary:
-        parts = [need, m.get('code', ''), m.get('name_zh', '')] + m.get('aliases', []) + m.get('keywords', []) + m.get('search_terms', [])
+        parts = [need, m.get('code', ''), m.get('name_zh', ''), m.get('eyebrow', ''), m.get('fullname', '')]
+        parts += m.get('aliases', []) + m.get('keywords', []) + m.get('search_terms', [])
     else:
         parts = [plain(m.get('description', '')), plain(dict(m.get('summary', [])).get('是什麼', ''))]
         parts += [a['who'] + a['why'] for a in m.get('audience', [])]
         parts += [c['title'] for c in (m.get('capabilities') or {}).get('cards', [])]
+        parts += [plain(f['q']) for f in m.get('faq', [])]
     return ' '.join(p for p in parts if p and p != 'AURO NEXUS').lower()
 
 
-# 需求搜尋：中文切成兩字一組、英數字取整個詞，與每列的索引文字比對計分，依分數排序。
-# 搜尋框裡打的字會在「把這個需求告訴我們」時帶進詢問表單。
-FINDER_JS = r"""(function(){
-var box=document.getElementById('finder');if(!box)return;
+SEARCH_INDEX = 'search-index.json'
+
+
+def search_entries(mods, pf):
+    """全站搜尋索引：已發布的產品與解決方案自動產生，其他頁面的服務取自 _search.json，新聞取自各篇標題。"""
+    needs = {}
+    for need, slug in pf['needs']['rows']:
+        needs.setdefault(slug, []).append(need)
+    out = []
+    for slug, m in mods.items():
+        out.append({'t': full_name(m), 'u': m['file'], 'c': '產業解決方案' if is_solution(m) else '平台模組',
+                    'd': plain(dict(m['summary'])['是什麼']),
+                    'k': need_index(' '.join(needs.get(slug, [])), slug, mods, True),
+                    's': need_index('', slug, mods, False)})
+    for e in json.loads(read(os.path.join(SRC, '_search.json')))['entries']:
+        out.append({'t': e['title'], 'u': e['url'], 'c': e['cat'], 'd': e['desc'],
+                    'k': ' '.join([e['title']] + e['terms']).lower(), 's': e['desc'].lower()})
+    for rel, cfg in sorted(load_pages_cfg().items()):
+        if cfg.get('type') != 'BlogPosting' or not os.path.exists(os.path.join(ROOT, rel)):
+            continue
+        h1 = re.search(r'<h1[^>]*>(.*?)</h1>', read(os.path.join(ROOT, rel)), re.S)
+        title = plain(h1.group(1)) if h1 else rel
+        out.append({'t': title, 'u': rel, 'c': '新聞中心', 'd': cfg['description'],
+                    'k': title.lower(), 's': cfg['description'].lower()})
+    return out
+
+
+def update_search_index(mods, pf):
+    p = os.path.join(ROOT, SEARCH_INDEX)
+    text = json.dumps(search_entries(mods, pf), ensure_ascii=False, separators=(',', ':')) + '\n'
+    if not os.path.exists(p) or read(p) != text:
+        io.open(p, 'w', encoding='utf-8').write(text)
+
+
+# 需求搜尋：比對交給 js/site-search.js（與側欄全站搜尋同一套），這裡只負責顯示與排序表格列。
+# 搜尋框裡打的字會在「把這個需求告訴我們」時帶進詢問表單；網址帶 ?q= 時直接帶入搜尋。
+FINDER_JS = r"""document.addEventListener('DOMContentLoaded',function(){
+var box=document.getElementById('finder'),S=window.AuroSearch;if(!box||!S)return;
 var q=box.querySelector('#nm-finder-q'),clr=box.querySelector('.nm-finder-clear'),msg=box.querySelector('.nm-finder-msg'),
 none=box.querySelector('.nm-finder-none'),tb=box.querySelector('.nm-table-needs tbody'),wrap=box.querySelector('.nm-table-wrap');
 var rows=[].slice.call(tb.rows),order=rows.slice();
-var STOP='我們 我想 想要 需要 希望 如何 怎麼 可以 能夠 一個 這個 那個 公司 企業 我們的 幫我 協助 有沒 沒有 什麼 系統 平台 工具 方案 解決'.split(' ');
-function terms(s){s=s.toLowerCase();var out=[],m,re=/[a-z0-9][a-z0-9.+#-]*/g;
- while((m=re.exec(s)))if(m[0].length>1)out.push(m[0]);
- s.split(/[^\u3400-\u9fff]+/).forEach(function(r){if(r.length===1)out.push(r);for(var i=0;i+1<r.length;i++){var b=r.substr(i,2);if(STOP.indexOf(b)<0)out.push(b);}});
- return out.filter(function(t,i,a){return a.indexOf(t)===i;});}
+var entries=rows.map(function(r){return {k:S.norm(r.getAttribute('data-key')),s:S.norm(r.getAttribute('data-search'))};});
 function run(){var v=q.value.trim();clr.hidden=!v;
  if(!v){order.forEach(function(r){r.hidden=false;tb.appendChild(r);});msg.textContent='';none.hidden=true;wrap.hidden=false;return;}
- var ts=terms(v),need=ts.length>2?3:2,hits=[];
- rows.forEach(function(r){var key=r.getAttribute('data-key'),txt=r.getAttribute('data-search'),sc=0;
-  ts.forEach(function(t){var w=t.length>2?2:1;if(key.indexOf(t)>=0)sc+=2*w;else if(txt.indexOf(t)>=0)sc+=w;});
-  r.hidden=sc<need;if(!r.hidden)hits.push([sc,r]);});
- hits.sort(function(a,b){return b[0]-a[0];}).forEach(function(h){tb.appendChild(h[1]);});
- msg.textContent=hits.length?'找到 '+hits.length+' 個相關的模組或方案，最相關的排在前面。':'';
- none.hidden=hits.length>0;wrap.hidden=!hits.length;}
+ var res=S.rank(v,entries);rows.forEach(function(r){r.hidden=true;});
+ res.forEach(function(x){rows[x.i].hidden=false;tb.appendChild(rows[x.i]);});
+ msg.textContent=res.length?'找到 '+res.length+' 個相關的模組或方案，最相關的排在前面。':'';
+ none.hidden=res.length>0;wrap.hidden=!res.length;}
 q.addEventListener('input',run);
 clr.addEventListener('click',function(){q.value='';run();q.focus();});
 box.querySelector('.nm-finder-ask').addEventListener('click',function(){var t=document.getElementById('f06');if(t&&q.value.trim()&&!t.value)t.value=q.value.trim();});
-})();"""
+var m=/[?&]q=([^&#]*)/.exec(location.search);if(m){q.value=decodeURIComponent(m[1].replace(/\+/g,' '));run();}
+});"""
 
 
 def full_name(x):
@@ -824,6 +854,10 @@ def update_llms(mods, pf=None):
         for m in sols:
             b.append('- [%s](%s): %s' % (m['name_zh'], m['file'], plain(m['description'])))
         b.append('')
+    # 需求對照：讓 AI 引擎直接回答「我要做 X，該看哪一個」——與平台總覽「依需求找模組」同一份資料
+    b += ['### 依需求找模組', '']
+    b += ['- %s → [%s](%s)' % (need, full_name(get(s)), get(s)['file']) for need, s in pf['needs']['rows'] if get(s)]
+    b.append('')
     block = LLMS_BEGIN + '\n' + '\n'.join(b) + LLMS_END
     p = os.path.join(ROOT, 'llms.txt')
     t = read(p)
@@ -1210,7 +1244,8 @@ def build_all():
     build_overview(mods, pf)
     update_llms(mods, pf)
     update_sitemap(mods)
-    written += ['nexus.html', 'llms.txt', 'sitemap.xml'] + [f for f in nav_changed if f not in written]
+    update_search_index(mods, pf)
+    written += ['nexus.html', 'llms.txt', 'sitemap.xml', SEARCH_INDEX] + [f for f in nav_changed if f not in written]
     return {'errors': [], 'written': written, 'removed': removed}
 
 
@@ -1272,7 +1307,10 @@ def nav_html(page, prefix, pf, mods):
         else:
             out.append('<li%s><a href="%s%s">%s</a></li>' % (' class="active"' if it['href'] == page else '', prefix, it['href'], it['label']))
     out.append('</ul>')
-    return NAV_BEGIN + '\n' + ''.join(out) + '\n' + NAV_TOGGLE_JS + '\n' + NAV_END
+    search = ('<button type="button" class="nav-search-btn" aria-haspopup="dialog">'
+              '<span aria-hidden="true">⌕</span> 搜尋產品與服務</button>'
+              '<script defer src="%sjs/site-search.js"></script>' % prefix)
+    return NAV_BEGIN + '\n' + search + ''.join(out) + '\n' + NAV_TOGGLE_JS + '\n' + NAV_END
 
 
 def nav_pages():
