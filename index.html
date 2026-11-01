@@ -331,7 +331,7 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
 }
 .idx-partners > div { background: var(--idx-bg); padding: 28px 24px; display: flex; flex-direction: column; gap: 6px; }
 .idx-partners strong { font-family: var(--idx-display); font-size: 21px; font-weight: 700; color: var(--idx-ink); }
-@media (max-width: 575.98px) { .idx-partners strong { font-size: 17px; white-space: nowrap; } }
+@media (max-width: 575.98px) { .idx-partners { grid-template-columns: 1fr; } .idx-partners strong { font-size: 17px; white-space: nowrap; } }
 .idx-partners span { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); }
 
 /* ── FAQ ── */
@@ -790,7 +790,6 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
     <div class="idx-partners">
       <div><strong>Magnolia</strong><span>CMS 企業夥伴</span></div>
       <div><strong>HCL Software</strong><span>數位體驗分析與行銷自動化夥伴</span></div>
-      <div><strong>朋昶數位</strong><span>數位科技夥伴</span></div>
       <div><strong>Google</strong><span>廣告認證夥伴</span></div>
     </div>
   </section>
