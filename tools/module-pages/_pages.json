@@ -85,21 +85,19 @@
       "type": "ItemList",
       "name": "代理產品",
       "items": [
-        "CXA 行銷自動化",
+        "HCL Discover 數位體驗分析",
         "CDP 客戶數據平台",
         "HCL Unica 行銷自動化",
-        "HCL Discover 數位體驗分析",
         "Magnolia CMS 內容管理系統"
       ],
-      "description": "奧洛代理並導入企業行銷科技產品：CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，協助企業看見顧客行為並自動化行銷流程。",
+      "description": "奧洛代理並導入企業行銷科技產品：HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，協助企業看見顧客在網站與 App 上的行為，並自動化行銷流程。",
       "og_card": {
         "kicker": "代理產品",
         "title": "行銷科技產品",
         "sub": "導入與維護",
-        "tag": "CXA 顧客體驗分析・HCL Discover・CDP 客戶數據平台・HCL Unica・Magnolia CMS"
+        "tag": "HCL Discover・CDP 客戶數據平台・HCL Unica・Magnolia CMS"
       },
       "keywords": [
-        "CXA 顧客體驗分析",
         "HCL Discover",
         "數位體驗分析",
         "Session Replay",
@@ -112,7 +110,7 @@
       "faq": [
         {
           "q": "奧洛代理哪些行銷科技產品？",
-          "a": "奧洛代理 CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。"
+          "a": "奧洛代理 HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。"
         },
         {
           "q": "HCL Discover 可以部署在企業自有機房嗎？",
@@ -130,7 +128,8 @@
           "q": "網站行為軌跡可以串到 CDP 或行銷自動化嗎？",
           "a": "可以。HCL Discover 與 HCL Unica、HCL CDP 原生整合並提供 REST API；行為軌跡也可以交給 AURA Connect 整理成行銷標籤，再交給 CDP 使用。"
         }
-      ]
+      ],
+      "title": "代理產品｜HCL Discover、HCL Unica、CDP 與 Magnolia CMS"
     },
     "ai-companion.html": {
       "type": "Service",
@@ -250,14 +249,10 @@
         "Tealeaf",
         "顧客體驗分析",
         "影像回放",
-        "CXA",
+        "HCL Discover",
         "數位體驗"
       ],
       "related": [
-        {
-          "label": "CXA 顧客體驗分析",
-          "url": "solution.html#cxa"
-        },
         {
           "label": "HCL Discover 數位體驗分析",
           "url": "solution.html#hcl_discover"
@@ -265,6 +260,10 @@
         {
           "label": "AURA Connect 數位軌跡行銷資料整合",
           "url": "solution-digital-trail.html"
+        },
+        {
+          "label": "網站數據分析",
+          "url": "marketing.html#data_analysis"
         }
       ]
     },

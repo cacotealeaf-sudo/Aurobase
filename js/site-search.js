@@ -147,7 +147,7 @@
     if (m && !document.getElementById('finder')) open(null, decodeURIComponent(m[1].replace(/\+/g, ' ')));
   });
   document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('.nav-search-btn');
+    var b = e.target.closest && e.target.closest('.nav-search-btn, [data-site-search]');
     if (b) { e.preventDefault(); open(b); }
   });
   document.addEventListener('keydown', function (e) {

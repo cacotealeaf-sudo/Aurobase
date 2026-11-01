@@ -128,28 +128,6 @@
       ]
     },
     {
-      "title": "CXA 顧客體驗分析",
-      "url": "solution.html#cxa",
-      "cat": "代理產品",
-      "desc": "以影像回放、表單分析、熱點圖與警示通知，掌握顧客在網站與 App 上的操作行為。",
-      "terms": [
-        "CXA",
-        "顧客體驗分析",
-        "影像回放",
-        "Session Replay",
-        "表單分析",
-        "熱點圖",
-        "關注圖",
-        "使用者行為",
-        "顧客旅程",
-        "Tealeaf",
-        "Acoustic",
-        "customer experience analytics",
-        "卡住",
-        "操作困難"
-      ]
-    },
-    {
       "title": "HCL Discover 數位體驗分析",
       "url": "solution.html#hcl_discover",
       "cat": "代理產品",
@@ -178,7 +156,19 @@
         "卡在哪",
         "流失",
         "放棄率",
-        "中途離開"
+        "中途離開",
+        "CXA",
+        "顧客體驗分析",
+        "customer experience analytics",
+        "Tealeaf",
+        "Acoustic",
+        "影像回放",
+        "表單分析",
+        "熱點圖",
+        "關注圖",
+        "使用者行為",
+        "顧客旅程",
+        "操作困難"
       ]
     },
     {

@@ -238,22 +238,19 @@
       [
         "網路銀行開戶流程很多人中途放棄",
         [
-          "solution.html#hcl_discover",
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [
         "看顧客在 App 上卡在哪一步",
         [
-          "solution.html#hcl_discover",
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [
         "Session Replay",
         [
-          "solution.html#hcl_discover",
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [
@@ -666,13 +663,13 @@
       [
         "CXA",
         [
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [
         "Tealeaf",
         [
-          "solution.html#cxa",
+          "solution.html#hcl_discover",
           "blogpost/single-2023-11-10.html"
         ]
       ],
@@ -716,7 +713,6 @@
         "網站做好了但是轉換很差，不知道客人在哪裡卡住",
         [
           "solution.html#hcl_discover",
-          "solution.html#cxa",
           "marketing.html#data_analysis"
         ]
       ],
@@ -828,15 +824,13 @@
       [
         "網站轉換很差，不知道客人卡在哪",
         [
-          "solution.html#hcl_discover",
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [
         "申辦流程很多人做到一半就離開",
         [
-          "solution.html#hcl_discover",
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [
@@ -892,8 +886,7 @@
       [
         "session replay",
         [
-          "solution.html#hcl_discover",
-          "solution.html#cxa"
+          "solution.html#hcl_discover"
         ]
       ],
       [

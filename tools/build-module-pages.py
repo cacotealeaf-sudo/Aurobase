@@ -1039,6 +1039,86 @@ def update_llms_full(mods, pf):
         io.open(p, 'w', encoding='utf-8').write(text)
 
 
+HOME_BEGIN, HOME_END = '<!-- HOME-CATALOG:BEGIN -->', '<!-- HOME-CATALOG:END -->'
+ARROW = ('<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" '
+         'stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>')
+
+
+def home_catalog(mods, pf):
+    """首頁的全產品、全服務目錄：平台模組依能力分組、產業解決方案、代理產品、服務。新產品上架會自動出現。"""
+    get = overview_mods(pf, mods)
+    entries = json.loads(read(os.path.join(SRC, '_search.json')))['entries']
+
+    def sec(num, sid, eyebrow, title, more, inner, intro=''):
+        more_html = ('<a href="%s" class="idx-more">%s%s</a>' % (more[0], more[1], ARROW)) if more else ''
+        intro_html = '\n    <p class="hc-intro">%s</p>' % intro if intro else ''
+        return f'''
+  <section id="{sid}" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">{num}</span>
+        <div>
+          <div class="idx-eyebrow">// {num} — {eyebrow}</div>
+          <h2 class="idx-sec-title">{title}</h2>
+        </div>
+      </div>
+      {more_html}
+    </div>
+    <div class="idx-rule"></div>{intro_html}
+{inner}
+  </section>
+'''
+
+    def card(meta, title, href, desc, cta='了解更多', external=False):
+        ext = ' target="_blank" rel="noopener"' if external else ''
+        return (f'      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// {meta}</span></div>'
+                f'<h3 class="idx-card-title"><a href="{href}" class="idx-card-link"{ext}>{title}</a></h3>'
+                f'<p class="idx-card-desc">{desc}</p><span class="idx-card-cta" aria-hidden="true">{cta}{ARROW}</span></article>')
+
+    legs = []
+    for lg in pf['legs']:
+        slugs = live(pf, mods, lg['modules'])
+        if not slugs:
+            continue
+        links = ''.join(f'<a class="hc-mod" href="{get(x)["file"]}"><b>{get(x)["code"]}</b><span>{get(x)["name_zh"]}</span>'
+                        f'<small>{get(x)["what"]}</small></a>' for x in slugs)
+        legs.append(f'      <div class="hc-leg"><p class="hc-leg-name">{lg["name"]}</p>{links}</div>')
+    n = sum(len(live(pf, mods, lg['modules'])) for lg in pf['legs'])
+    out = [HOME_BEGIN, sec('01', 'idx-catalog', '自有產品', 'AURO NEXUS AI 治理平台', ('nexus.html', '平台總覽'),
+                           '    <div class="hc-legs">\n' + '\n'.join(legs) + '\n    </div>',
+                           '以 Forge 治理底座串起 %d 個模組：每一次 AI 呼叫都經過權限與政策檢查並留下紀錄，可部署於雲端、地端，也可依需求客製。' % n)]
+    sols = solutions(mods)
+    if sols:
+        out.append(sec('02', 'idx-solutions', '由平台模組組成', '產業解決方案', ('nexus.html#solutions', '全部方案'),
+                       '    <div class="idx-grid">\n' + '\n'.join(card(m['industry'], full_name(m), m['file'], plain(dict(m['summary'])['是什麼'])) for m in sols) + '\n    </div>'))
+    agency = [e for e in entries if e['cat'] == '代理產品']
+    out.append(sec('03', 'idx-agency', '代理與導入', '代理產品', ('solution.html', '代理產品總覽'),
+                   '    <div class="idx-grid">\n' + '\n'.join(card('代理產品', e['title'], e['url'], e['desc']) for e in agency) + '\n    </div>'))
+    mk = [e for e in entries if e['cat'] == '數位行銷服務' and '#' in e['url']]
+    svc = [card('數位行銷服務', '數位行銷', 'marketing.html',
+                '廣告投放、社群經營與網站數據分析的整合行銷服務。').replace(
+               '<span class="idx-card-cta"', '<div class="hc-sublinks">%s</div><span class="idx-card-cta"' %
+               ''.join('<a href="%s">%s</a>' % (e['url'], e['title']) for e in mk), 1)]
+    for e in entries:
+        if e['cat'] in ('AI 智慧語伴', '客服中心'):
+            ext = e['url'].startswith('http')
+            svc.append(card(e['cat'], e['title'], e['url'], e['desc'], '前往 AUROCORE' if ext else '了解更多', ext))
+    out.append(sec('04', 'idx-services', '服務', '數位行銷、AI 語伴與客服中心', ('marketing.html', '數位行銷服務'),
+                   '    <div class="idx-grid">\n' + '\n'.join(svc) + '\n    </div>'))
+    out.append(HOME_END)
+    return '\n'.join(out)
+
+
+def update_home(mods, pf):
+    p = os.path.join(ROOT, 'index.html')
+    s = read(p)
+    if HOME_BEGIN not in s:
+        return
+    t = s[:s.index(HOME_BEGIN)] + home_catalog(mods, pf) + s[s.index(HOME_END) + len(HOME_END):]
+    if t != s:
+        io.open(p, 'w', encoding='utf-8').write(t)
+
+
 def update_sitemap(mods):
     p = os.path.join(ROOT, 'sitemap.xml')
     t = read(p)
@@ -1519,6 +1599,7 @@ def build_all():
     update_sitemap(mods)
     update_search_index(mods, pf)
     update_llms_full(mods, pf)
+    update_home(mods, pf)
     written += ['nexus.html', 'llms.txt', 'sitemap.xml', SEARCH_INDEX, LLMS_FULL] + [f for f in nav_changed if f not in written]
     return {'errors': [], 'written': written, 'removed': removed}
 

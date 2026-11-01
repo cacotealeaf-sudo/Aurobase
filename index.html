@@ -53,7 +53,7 @@
       "name": "行銷自動化能為企業帶來什麼效益？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "行銷自動化可提升潛在客戶轉換率、減少行銷人力成本，從潛客培育到客戶留存全面優化行銷流程。奧洛提供 HCL Unica 等企業級行銷自動化解決方案，並以 CXA 與 HCL Discover 分析顧客的數位體驗。"
+        "text": "行銷自動化可提升潛在客戶轉換率、減少行銷人力成本，從潛客培育到客戶留存全面優化行銷流程。奧洛提供 HCL Unica 等企業級行銷自動化解決方案，並以 HCL Discover 分析顧客的數位體驗。"
       }
     }
   ]
@@ -563,7 +563,7 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
                  <div class="qf-chips">
                    <div class="qf-chip"><input type="checkbox" id="f05-1" name="entry.1863307942" value="廣告投放"><label for="f05-1">廣告投放</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-2" name="entry.1863307942" value="社群服務"><label for="f05-2">社群服務</label></div>
-                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">CXA 顧客體驗分析</label></div>
+                   <div class="qf-chip"><input type="checkbox" id="f05-3" name="entry.1863307942" value="ACOUSTIC CXA"><label for="f05-3">HCL Discover 數位體驗分析</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-4" name="entry.1863307942" value="CDP 顧客數據"><label for="f05-4">CDP 顧客數據</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-5" name="entry.1863307942" value="HCL UNICA"><label for="f05-5">HCL Unica</label></div>
                    <div class="qf-chip"><input type="checkbox" id="f05-6" name="entry.1863307942" value="MAGNOLIA CMS"><label for="f05-6">Magnolia CMS</label></div>
@@ -645,67 +645,23 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
         
 		<div id="colorlib-main">
 
-  <!-- ╔══ ENTRY OVERLAY ══╗ -->
-  <div id="entryOverlay">
-    <button class="entry-skip" onclick="skipEntry()">略過 <i class="ion-ios-arrow-forward"></i></button>
-
-    <!-- Boot -->
-    <div id="bootScreen">
-      <div class="boot-logo"><img src="images/logo.svg" alt="AUROBASE" style="max-width: 280px; height: auto;"></div>
-      <div class="boot-tagline">數位整合行銷 &middot; AI 智慧解決方案</div>
-      <div class="boot-lines" id="bootLines"></div>
-      <div class="boot-bar-wrap"><div class="boot-bar" id="bootBar"></div></div>
-      <div class="boot-pct" id="bootPct">0%</div>
-      <button class="boot-cta" id="bootCta" onclick="startQuiz()">開始診斷您的需求 <i class="ion-ios-arrow-forward"></i></button>
-    </div>
-
-    <!-- Quiz -->
-    <div id="quizScreen">
-      <div class="q-progress" id="qProgress">
-        <div class="q-dot active" id="qd0"></div>
-        <div class="q-dot" id="qd1"></div>
-        <div class="q-dot" id="qd2"></div>
-      </div>
-      <div class="q-step" id="qStep"></div>
-      <div class="q-title" id="qTitle"></div>
-      <div class="q-sub" id="qSub"></div>
-      <div class="q-opts" id="qOpts"></div>
-      <div class="q-actions">
-        <button class="q-back" id="qBack" onclick="prevQ()" style="display:none;"><i class="ion-ios-arrow-back"></i> 上一題</button>
-        <button class="q-next" id="qNext" onclick="nextQ()"></button>
-      </div>
-    </div>
-
-    <!-- Result Map -->
-    <div id="mapScreen">
-      <div class="map-eyebrow">// 為您推薦的解決方案</div>
-      <div class="map-title" id="mapTitle">您的專屬推薦</div>
-      <div id="mapTerritories"></div>
-      <div class="map-actions">
-        <button class="map-enter" id="mapEnter" onclick="goRecommended()">前往推薦頁面 <i class="ion-ios-arrow-forward"></i></button>
-        <button class="map-reset" onclick="resetQuiz()">重新診斷</button>
-        <button class="map-home" onclick="skipEntry()">進入首頁</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ╔══ HOMEPAGE CONTENT ══╗ -->
   <div id="idx-home" class="idx-page">
 
   <!-- Section 1: Hero (ASCII aurora canvas — js/aurora.js) -->
   <section id="idx-hero" class="idx-aurora idx-hero">
     <canvas data-aurora="hero" aria-hidden="true"></canvas>
     <div class="idx-aurora-body idx-wrap">
-      <div class="idx-tagpair"><span>AUROBASE</span><span>數位整合行銷 · AI 智慧解決方案</span></div>
+      <div class="idx-tagpair"><span>AUROBASE</span><span>AI 治理平台 · 行銷科技 · 數位行銷</span></div>
       <h1 class="idx-hero-title">
-        <span>數位整合行銷</span>
-        <span>解決方案<em>.</em></span>
+        <span>AI 治理平台</span>
+        <span>與行銷科技<em>.</em></span>
       </h1>
       <div class="idx-rule"></div>
-      <p class="idx-hero-desc">您最專業的行銷科技顧問。結合數位廣告、行銷自動化、AI 智慧技術，協助企業精準觸及目標客群，從數據洞察到客戶體驗，全面提升品牌競爭力。</p>
+      <p class="idx-hero-desc">奧洛提供自有的 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並有數位廣告投放、社群經營、AI 智慧語伴與客服中心服務；可部署於雲端、地端，也可依需求客製。</p>
       <div class="idx-hero-actions">
         <a href="contact.html" class="idx-btn idx-btn-primary">填寫諮詢表單<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
-        <a href="#idx-services" class="idx-btn idx-btn-ghost">了解服務</a>
+        <a href="#idx-catalog" class="idx-btn idx-btn-ghost">看全部產品與服務</a>
+        <button type="button" class="idx-btn idx-btn-ghost" data-site-search>搜尋產品與服務</button>
       </div>
     </div>
   </section>
@@ -713,52 +669,104 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
   <!-- Section 2: Ticker -->
   <div class="idx-ticker" aria-label="服務項目">
     <div class="idx-ticker-track">
-      <span>// 數位廣告投放</span><span>// 行銷自動化</span><span>// 顧客數據平台 CDP</span><span>// AI 智慧語伴</span><span>// 客服中心系統</span><span>// SEO 優化</span><span>// HCL Unica</span><span>// Magnolia CMS</span><span>// CXA 顧客體驗分析</span><span>// HCL Discover</span><span>// 社群經營</span>
-      <span aria-hidden="true">// 數位廣告投放</span><span aria-hidden="true">// 行銷自動化</span><span aria-hidden="true">// 顧客數據平台 CDP</span><span aria-hidden="true">// AI 智慧語伴</span><span aria-hidden="true">// 客服中心系統</span><span aria-hidden="true">// SEO 優化</span><span aria-hidden="true">// HCL Unica</span><span aria-hidden="true">// Magnolia CMS</span><span aria-hidden="true">// CXA 顧客體驗分析</span><span aria-hidden="true">// HCL Discover</span><span aria-hidden="true">// 社群經營</span>
+      <span>// AI 治理平台</span><span>// 地端 AI</span><span>// AI Agent</span><span>// 客戶數據平台</span><span>// 企業知識庫</span><span>// 資料治理</span><span>// 資安弱點掃描</span><span>// HCL Discover</span><span>// HCL Unica</span><span>// Magnolia CMS</span><span>// 數位廣告投放</span><span>// 社群經營</span><span>// AI 智慧語伴</span><span>// 客服中心</span>
+      <span aria-hidden="true">// AI 治理平台</span><span aria-hidden="true">// 地端 AI</span><span aria-hidden="true">// AI Agent</span><span aria-hidden="true">// 客戶數據平台</span><span aria-hidden="true">// 企業知識庫</span><span aria-hidden="true">// 資料治理</span><span aria-hidden="true">// 資安弱點掃描</span><span aria-hidden="true">// HCL Discover</span><span aria-hidden="true">// HCL Unica</span><span aria-hidden="true">// Magnolia CMS</span><span aria-hidden="true">// 數位廣告投放</span><span aria-hidden="true">// 社群經營</span><span aria-hidden="true">// AI 智慧語伴</span><span aria-hidden="true">// 客服中心</span>
     </div>
   </div>
 
-  <!-- Section 3: Core Services -->
-  <section id="idx-services" class="idx-section idx-wrap">
+<!-- HOME-CATALOG:BEGIN -->
+
+  <section id="idx-catalog" class="idx-section idx-wrap">
     <div class="idx-sec-head">
       <div class="idx-sec-title-group">
         <span class="idx-sec-num">01</span>
         <div>
-          <div class="idx-eyebrow">// 01 — 核心服務</div>
-          <h2 class="idx-sec-title">全方位數位行銷解決方案</h2>
+          <div class="idx-eyebrow">// 01 — 自有產品</div>
+          <h2 class="idx-sec-title">AURO NEXUS AI 治理平台</h2>
         </div>
       </div>
-      <a href="marketing.html" class="idx-more">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+      <a href="nexus.html" class="idx-more">平台總覽<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
     </div>
     <div class="idx-rule"></div>
-
-    <div class="idx-grid">
-      <article class="idx-card">
-        <div class="idx-card-meta"><span>// 主力服務</span><span class="idx-badge">CORE</span></div>
-        <h3 class="idx-card-title"><a href="marketing.html" class="idx-card-link">數位行銷</a></h3>
-        <div class="idx-card-sub">Digital Advertising · SRM · Automated Marketing</div>
-        <p class="idx-card-desc">提供全方位數位行銷解決方案，從 Google 關鍵字廣告、Facebook 廣告投放到社群經營、SEO 優化，協助企業精準觸及目標客群，提升品牌曝光與轉換率。</p>
-        <div class="idx-chips"><span>Google Ads</span><span>Facebook Ads</span><span>SEO 優化</span><span>社群經營</span><span>數據分析</span></div>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card">
-        <div class="idx-card-meta"><span>// 客戶服務</span></div>
-        <h3 class="idx-card-title"><a href="https://aurocore.com/" class="idx-card-link" target="_blank" rel="noopener">客服中心</a></h3>
-        <div class="idx-card-sub">CTI · CRM · 智慧客服建置</div>
-        <p class="idx-card-desc">專業客服中心系統建置與外包服務，整合 CTI 系統、CRM、智慧客服機器人，提供完整客戶服務解決方案，提升滿意度與服務效率。</p>
-        <div class="idx-chips"><span>CTI 系統</span><span>CRM 整合</span><span>智慧客服機器人</span><span>系統外包</span></div>
-        <span class="idx-card-cta" aria-hidden="true">前往 AUROCORE<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card">
-        <div class="idx-card-meta"><span>// 創新服務</span></div>
-        <h3 class="idx-card-title"><a href="ai-companion.html" class="idx-card-link">AI 智慧語伴</a></h3>
-        <div class="idx-card-sub">智慧陪伴 · 健康守護新世代</div>
-        <p class="idx-card-desc">以 AI 語音為核心，打造智慧陪伴與健康守護。結合語音互動與智慧分析，主動陪伴長者、即時掌握健康與情緒變化，協助社工快速掌握狀況。</p>
-        <div class="idx-chips"><span>AI 語音</span><span>情感互動</span><span>健康監測</span><span>關懷報告</span></div>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
+    <p class="hc-intro">以 Forge 治理底座串起 14 個模組：每一次 AI 呼叫都經過權限與政策檢查並留下紀錄，可部署於雲端、地端，也可依需求客製。</p>
+    <div class="hc-legs">
+      <div class="hc-leg"><p class="hc-leg-name">治理底座</p><a class="hc-mod" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span><small>企業內部 AI 的治理閘道：模型路由、知識庫、工具閘道與稽核帳。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">AI 編排</p><a class="hc-mod" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span><small>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">客戶資料</p><a class="hc-mod" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span><small>整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。</small></a><a class="hc-mod" href="nexus-abm.html"><b>NEXUS ABM</b><span>企業客戶帳號經營</span><small>B2B 目標客戶經營引擎：帳號解析、意圖評分、歸因與分群。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">知識</p><a class="hc-mod" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span><small>企業文件的知識萃取、審核、檢索與圖譜平台。</small></a><a class="hc-mod" href="nexus-library.html"><b>Library</b><span>個人知識收藏空間</span><small>每位員工的個人知識收藏、標籤與搜尋空間。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">內容與行銷智能</p><a class="hc-mod" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span><small>受監理產業的 AI 內容產製、合規檢查與審核平台。</small></a><a class="hc-mod" href="nexus-pulse.html"><b>Pulse</b><span>輿情訊號分析</span><small>外部輿情訊號的批次 AI 分析、告警與成效回算平台。</small></a><a class="hc-mod" href="nexus-geo.html"><b>NEXUS GEO</b><span>生成式搜尋能見度</span><small>量測品牌在生成式搜尋中被提及與引用程度，並提出網站優化建議的平台。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">合規治理</p><a class="hc-mod" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span><small>金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">生產力</p><a class="hc-mod" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span><small>依範本產出商業文件、並可線上編修的文件產製平台。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">現代化</p><a class="hc-mod" href="nexus-lisa.html"><b>LISA</b><span>主機程式現代化</span><small>讀取主機原始碼、產出繁體中文規格書的現代化工具。</small></a></div>
+      <div class="hc-leg"><p class="hc-leg-name">安全</p><a class="hc-mod" href="nexus-scanner.html"><b>Scanner</b><span>源碼檢測與弱點掃描</span><small>涵蓋 SAST、DAST、SCA、機密外洩、容器與 IaC 的弱點掃描平台。</small></a><a class="hc-mod" href="nexus-cardea.html"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span><small>TLS 憑證與 SSH 金鑰的盤點、政策檢查、預警與更新自動化。</small></a></div>
     </div>
+  </section>
 
+
+  <section id="idx-solutions" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">02</span>
+        <div>
+          <div class="idx-eyebrow">// 02 — 由平台模組組成</div>
+          <h2 class="idx-sec-title">產業解決方案</h2>
+        </div>
+      </div>
+      <a href="nexus.html#solutions" class="idx-more">全部方案<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+    </div>
+    <div class="idx-rule"></div>
+    <div class="idx-grid">
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 公部門</span></div><h3 class="idx-card-title"><a href="solution-police-record.html" class="idx-card-link">警詢筆錄 AI 輔助</a></h3><p class="idx-card-desc">把詢問錄音整理成筆錄草稿，並檢查構成要件與法定程序的解決方案。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 金融保險</span></div><h3 class="idx-card-title"><a href="solution-telesales.html" class="idx-card-link">SUADA 電話與視訊銷售對話智能</a></h3><p class="idx-card-desc">電話行銷與視訊銷售的對話分析、話術提示與品質稽核方案。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 跨產業</span></div><h3 class="idx-card-title"><a href="solution-ai-ocr.html" class="idx-card-link">AI OCR 智慧文件辨識</a></h3><p class="idx-card-desc">免訓練擷取各種文件欄位，手寫與信心不足的轉人工覆核的 AI OCR 解決方案。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 數位行銷</span></div><h3 class="idx-card-title"><a href="solution-digital-trail.html" class="idx-card-link">AURA Connect 數位軌跡行銷資料整合</a></h3><p class="idx-card-desc">把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供即時查詢的方案。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+    </div>
+  </section>
+
+
+  <section id="idx-agency" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">03</span>
+        <div>
+          <div class="idx-eyebrow">// 03 — 代理與導入</div>
+          <h2 class="idx-sec-title">代理產品</h2>
+        </div>
+      </div>
+      <a href="solution.html" class="idx-more">代理產品總覽<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+    </div>
+    <div class="idx-rule"></div>
+    <div class="idx-grid">
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 代理產品</span></div><h3 class="idx-card-title"><a href="solution.html#hcl_discover" class="idx-card-link">HCL Discover 數位體驗分析</a></h3><p class="idx-card-desc">工作階段回放、掙扎偵測、熱圖與旅程漏斗，找出顧客在網站與 App 上卡關與放棄的原因。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 代理產品</span></div><h3 class="idx-card-title"><a href="solution.html#auro_cdp" class="idx-card-link">CDP 客戶數據平台（代理產品）</a></h3><p class="idx-card-desc">整合線上、企業與第三方資料，搭配分群與貼標，建立 360 度客戶輪廓。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 代理產品</span></div><h3 class="idx-card-title"><a href="solution.html#hcl_unica" class="idx-card-link">HCL Unica 行銷自動化</a></h3><p class="idx-card-desc">跨通路行銷活動、接觸策略最佳化、客戶旅程、即時個人化推薦與電子郵件、簡訊發送。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 代理產品</span></div><h3 class="idx-card-title"><a href="solution.html#magnolia_cms" class="idx-card-link">Magnolia CMS 內容管理</a></h3><p class="idx-card-desc">以視覺化方式建置網站與 App 內容，跨通路重複使用，並與電商、行銷自動化與分析工具整合。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+    </div>
+  </section>
+
+
+  <section id="idx-services" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">04</span>
+        <div>
+          <div class="idx-eyebrow">// 04 — 服務</div>
+          <h2 class="idx-sec-title">數位行銷、AI 語伴與客服中心</h2>
+        </div>
+      </div>
+      <a href="marketing.html" class="idx-more">數位行銷服務<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+    </div>
+    <div class="idx-rule"></div>
+    <div class="idx-grid">
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 數位行銷服務</span></div><h3 class="idx-card-title"><a href="marketing.html" class="idx-card-link">數位行銷</a></h3><p class="idx-card-desc">廣告投放、社群經營與網站數據分析的整合行銷服務。</p><div class="hc-sublinks"><a href="marketing.html#advertising">數位廣告投放</a><a href="marketing.html#community">社群經營與 LINE 官方帳號</a><a href="marketing.html#data_analysis">網站數據分析</a></div><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// AI 智慧語伴</span></div><h3 class="idx-card-title"><a href="ai-companion.html" class="idx-card-link">AI 智慧語伴</a></h3><p class="idx-card-desc">以 AI 語音陪伴長者、提供用藥提醒與關懷報告，協助社工掌握狀況。</p><span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+      <article class="idx-card is-compact"><div class="idx-card-meta"><span>// 客服中心</span></div><h3 class="idx-card-title"><a href="https://aurocore.com/" class="idx-card-link" target="_blank" rel="noopener">客服中心（AUROCORE）</a></h3><p class="idx-card-desc">客服中心系統建置與外包服務，整合 CTI、CRM 與智慧客服機器人。</p><span class="idx-card-cta" aria-hidden="true">前往 AUROCORE<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span></article>
+    </div>
+  </section>
+
+<!-- HOME-CATALOG:END -->
+
+  <section id="idx-values" class="idx-section idx-wrap" aria-label="合作方式">
     <div class="idx-values">
       <div>
         <div class="idx-eyebrow">01 / Collisions</div>
@@ -778,83 +786,6 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
     </div>
   </section>
 
-  <!-- Section 4: Solutions & Products -->
-  <section id="idx-solutions" class="idx-section idx-wrap">
-    <div class="idx-sec-head">
-      <div class="idx-sec-title-group">
-        <span class="idx-sec-num">02</span>
-        <div>
-          <div class="idx-eyebrow">// 02 — 解決方案 &amp; 產品</div>
-          <h2 class="idx-sec-title">企業級 MarTech 平台</h2>
-        </div>
-      </div>
-      <a href="solution.html" class="idx-more">查看全部<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
-    </div>
-    <div class="idx-rule"></div>
-
-    <article class="idx-feature">
-      <div class="idx-feature-copy">
-        <div class="idx-tagpair"><span>AI 平台</span><span>自有產品</span></div>
-        <h3 class="idx-feature-title">AURO NEXUS</h3>
-        <div class="idx-feature-lead">治理化 AI 平台</div>
-        <p>以 Forge 治理底座串起 AI 編排、客戶資料、知識、內容產製與資安等模組，每一次 AI 呼叫都經過權限檢查並留下紀錄；可部署於雲端、地端，也可依需求客製。</p>
-        <a href="nexus.html" class="idx-more">看全部模組<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
-      </div>
-      <div class="idx-modules">
-        <div><strong>Forge</strong><span>治理化 AI 閘道</span></div>
-        <div><strong>Auro</strong><span>AI 任務編排</span></div>
-        <div><strong>AURA CDP</strong><span>客戶數據平台</span></div>
-        <div><strong>Insight</strong><span>企業知識萃取與治理</span></div>
-      </div>
-    </article>
-
-    <div class="idx-grid">
-      <article class="idx-card is-compact">
-        <div class="idx-card-meta"><span>// 資料治理</span></div>
-        <h3 class="idx-card-title"><a href="nexus-saga.html" class="idx-card-link">SAGA 資料治理</a></h3>
-        <p class="idx-card-desc">金融機構的非結構化資料治理平台。讓「誰在什麼時候、依哪一條規定、對哪一份資料做了什麼」變成可查驗的紀錄。</p>
-        <ul class="idx-list"><li>雜湊鏈稽核與完整性驗證</li><li>保存期限與法律保全</li><li>四眼簽核與權限矩陣</li><li>AI 使用溯源與模型治理</li></ul>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card is-compact">
-        <div class="idx-card-meta"><span>// 數據整合</span></div>
-        <h3 class="idx-card-title"><a href="solution.html#auro_cdp" class="idx-card-link">CDP 客戶數據平台</a></h3>
-        <p class="idx-card-desc">整合各通路的客戶資料，建立單一客戶視圖，再以分群與預測支援精準行銷。</p>
-        <ul class="idx-list"><li>多源數據整合</li><li>統一客戶檔案管理</li><li>AI 分群與預測</li><li>即時數據同步</li></ul>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card is-compact">
-        <div class="idx-card-meta"><span>// 顧客體驗</span></div>
-        <h3 class="idx-card-title"><a href="solution.html#cxa" class="idx-card-link">CXA 顧客體驗分析</a></h3>
-        <p class="idx-card-desc">深入了解客戶行為，優化使用者體驗。透過先進分析工具，掌握客戶旅程中的每個接觸點。</p>
-        <ul class="idx-list"><li>即時行為分析與追蹤</li><li>客戶旅程視覺化</li><li>個人化內容推薦</li><li>A/B 測試與優化</li></ul>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card is-compact">
-        <div class="idx-card-meta"><span>// 行銷自動化</span></div>
-        <h3 class="idx-card-title"><a href="solution.html#hcl_unica" class="idx-card-link">HCL Unica</a></h3>
-        <p class="idx-card-desc">企業級行銷自動化方案，把各通路的行銷活動放在同一套流程裡規劃、執行與追蹤。</p>
-        <ul class="idx-list"><li>跨通路行銷編排</li><li>活動排程與管理</li><li>個人化內容投放</li><li>效果追蹤與分析</li></ul>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card is-compact">
-        <div class="idx-card-meta"><span>// 內容管理</span></div>
-        <h3 class="idx-card-title"><a href="solution.html#magnolia_cms" class="idx-card-link">Magnolia CMS</a></h3>
-        <p class="idx-card-desc">強大的企業級內容管理系統，提供靈活的內容創建與管理能力，支援多語言、多網站管理。</p>
-        <ul class="idx-list"><li>直覺式內容編輯</li><li>多語言多網站支援</li><li>RESTful API 整合</li><li>Headless CMS 架構</li></ul>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-      <article class="idx-card is-compact">
-        <div class="idx-card-meta"><span>// 智慧照護</span></div>
-        <h3 class="idx-card-title"><a href="ai-companion.html" class="idx-card-link">AI 智慧語伴</a></h3>
-        <p class="idx-card-desc">以 AI 語音為核心，打造智慧陪伴與健康守護平台。結合語音互動與智慧分析，主動陪伴長者、即時掌握健康與情緒變化。</p>
-        <ul class="idx-list"><li>AI 語音情感互動</li><li>健康與情緒監測</li><li>自動關懷報告生成</li><li>用藥提醒與語音回報</li></ul>
-        <span class="idx-card-cta" aria-hidden="true">了解更多<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></span>
-      </article>
-    </div>
-  </section>
-
-  <!-- Section 5: Partners -->
   <section class="idx-partners-sec idx-wrap">
     <div class="idx-eyebrow is-accent">// 事業夥伴</div>
     <div class="idx-partners">
@@ -882,7 +813,7 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
       </details>
       <details>
         <summary>行銷自動化能為企業帶來什麼效益？<span class="idx-faq-plus" aria-hidden="true">+</span></summary>
-        <p>行銷自動化可提升潛在客戶轉換率、減少行銷人力成本，從潛客培育到客戶留存全面優化行銷流程。奧洛提供 HCL Unica 等企業級行銷自動化解決方案，並以 CXA 與 HCL Discover 分析顧客的數位體驗。</p>
+        <p>行銷自動化可提升潛在客戶轉換率、減少行銷人力成本，從潛客培育到客戶留存全面優化行銷流程。奧洛提供 HCL Unica 等企業級行銷自動化解決方案，並以 HCL Discover 分析顧客的數位體驗。</p>
       </details>
     </div>
   </section>
@@ -922,263 +853,11 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
   </div><!-- END #idx-home -->
 
   <!-- Re-trigger button (hidden when overlay is visible) -->
-  <button type="button" id="entryRetrigger" class="entry-retrigger" style="display:none;" onclick="openEntryOverlay()" title="需求診斷" aria-label="重新進行需求診斷">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-  </button>
 	         </div><!-- END COLORLIB-MAIN -->
 	         </div><!-- END COLORLIB-PAGE -->
       
      
   <!-- ✅ Phase 3 優化: 移除未使用的 JS 庫 (節省 70KB) -->
-  <script>
-// ══ ENTRY OVERLAY ══
-
-// -- localStorage check --
-(function() {
-  if (localStorage.getItem('aurobase_entry_done') === 'true') {
-    var ov = document.getElementById('entryOverlay');
-    if (ov) { ov.classList.add('closed'); }
-    var rb = document.getElementById('entryRetrigger');
-    if (rb) { rb.style.display = 'flex'; }
-  }
-})();
-
-// -- Boot sequence --
-var bootMessages = [
-  { text: '系統初始化...', delay: 200 },
-  { text: '載入數位行銷模組', delay: 500 },
-  { text: '連接 MarTech 平台', delay: 800 },
-  { text: '啟動 AI 分析引擎', delay: 1100 },
-  { text: '掛載資料治理層', delay: 1400 },
-  { text: '版圖資料庫就緒', delay: 1700 },
-  { text: '準備診斷系統', delay: 2000 }
-];
-
-var bootLines = document.getElementById('bootLines');
-var bootBar = document.getElementById('bootBar');
-var bootPct = document.getElementById('bootPct');
-var bootCta = document.getElementById('bootCta');
-
-if (bootLines && !document.getElementById('entryOverlay').classList.contains('closed')) {
-  bootMessages.forEach(function(m, i) {
-    var el = document.createElement('div');
-    el.className = 'boot-line';
-    el.innerHTML = '<em>//</em> ' + m.text;
-    bootLines.appendChild(el);
-    setTimeout(function() {
-      el.classList.add('visible');
-      var pct = Math.round(((i + 1) / bootMessages.length) * 100);
-      bootBar.style.width = pct + '%';
-      bootPct.textContent = pct + '%';
-      if (i > 0) bootLines.children[i - 1].classList.add('done');
-      if (i === bootMessages.length - 1) {
-        setTimeout(function() { bootCta.classList.add('ready'); }, 300);
-      }
-    }, m.delay);
-  });
-}
-
-// -- Quiz --
-var questions = [
-  {
-    step: '// 01 — 核心挑戰', title: '您目前最大的挑戰是？',
-    sub: '根據您的選擇，我們將為您推薦最相關的解決方案',
-    opts: [
-      { code: '01', label: '廣告效益', desc: '投放成本高，難以精準觸及目標客群', key: 'ads' },
-      { code: '02', label: '客戶數據', desc: '數據分散，無法建立完整客戶視圖', key: 'data' },
-      { code: '03', label: '服務效率', desc: '客服量大，人力成本居高不下', key: 'service' },
-      { code: '04', label: 'AI 應用', desc: '想導入 AI，但不知道從何開始', key: 'ai' },
-      { code: '05', label: '資料治理', desc: '稽核軌跡、保存期限、AI 資料來源說不清楚', key: 'governance', wide: true }
-    ]
-  },
-  {
-    step: '// 02 — 企業規模', title: '您的組織規模？',
-    sub: '幫助我們推薦最適合的方案規格與導入深度',
-    opts: [
-      { code: 'A', label: '中型企業', desc: '100 人以下，快速成長中', key: 'sme' },
-      { code: 'B', label: '大型企業', desc: '500 人以上，流程較為複雜', key: 'enterprise' },
-      { code: 'C', label: '集團組織', desc: '多品牌或跨國經營需求', key: 'group' },
-      { code: 'D', label: '新創公司', desc: '快速驗證市場，需靈活方案', key: 'startup' }
-    ]
-  },
-  {
-    step: '// 03 — 成效期望', title: '您希望多快看到成效？',
-    sub: '這將決定我們為您規劃的導入策略與節奏',
-    opts: [
-      { code: 'I', label: '立即見效', desc: '一個月內，優先廣告優化與流量提升', key: 'fast' },
-      { code: 'II', label: '中期布局', desc: '三至六個月，系統性建立數位能力', key: 'mid' },
-      { code: 'III', label: '長期戰略', desc: '一年以上，打造完整數位生態系', key: 'long' },
-      { code: 'IV', label: '尚在評估', desc: '希望先了解各方案後再決定', key: 'explore' }
-    ]
-  }
-];
-
-var redirectMap = {
-  ads: 'marketing.html',
-  data: 'solution.html',
-  service: 'contact.html',
-  ai: 'nexus.html',
-  governance: 'nexus-saga.html'
-};
-
-var territoryData = {
-  ads:     { code: '主力服務', name: '數位行銷', sub: 'Google · Facebook · SEO · 社群', tag: 'CORE', href: 'marketing.html' },
-  data:    { code: '企業解決方案', name: 'MarTech', sub: 'CDP · CXA · Unica · CMS', tag: 'PLATFORM', href: 'solution.html' },
-  service: { code: '客戶服務', name: '客服中心', sub: 'CTI · CRM · 智慧客服', tag: 'SERVICE', href: 'contact.html' },
-  ai:      { code: 'AI 平台', name: 'AURO NEXUS', sub: 'AI 治理 · 模組化 · 可雲可地', tag: 'AI', href: 'nexus.html' },
-  governance: { code: '資料治理', name: 'SAGA', sub: '稽核鏈 · 保存期限 · AI 溯源', tag: 'GOVERNANCE', href: 'nexus-saga.html' }
-};
-
-var secondaryMap = {
-  sme: 'ads', enterprise: 'governance', group: 'service', startup: 'ai',
-  fast: 'ads', mid: 'data', long: 'ai', explore: 'data'
-};
-
-var curQ = 0, answers = [], sel = null;
-
-function startQuiz() {
-  document.getElementById('bootScreen').style.display = 'none';
-  document.getElementById('quizScreen').classList.add('active');
-  renderQ();
-}
-
-function renderQ() {
-  var q = questions[curQ];
-  document.getElementById('qStep').textContent = q.step;
-  document.getElementById('qTitle').textContent = q.title;
-  document.getElementById('qSub').textContent = q.sub;
-  document.getElementById('qOpts').innerHTML = q.opts.map(function(o) {
-    return '<div class="q-opt' + (o.wide ? ' wide' : '') + '" onclick="pickOpt(\'' + o.key + '\',this)">' +
-      '<div class="q-opt-code">' + o.code + '</div>' +
-      '<div class="q-opt-label">' + o.label + '</div>' +
-      '<div class="q-opt-desc">' + o.desc + '</div></div>';
-  }).join('');
-  for (var i = 0; i < 3; i++) {
-    document.getElementById('qd' + i).className = 'q-dot' + (i < curQ ? ' done' : i === curQ ? ' active' : '');
-  }
-  var btn = document.getElementById('qNext');
-  btn.textContent = curQ < 2 ? '下一題' : '查看推薦方案';
-  btn.classList.remove('ready');
-  document.getElementById('qBack').style.display = curQ > 0 ? 'inline-block' : 'none';
-  sel = null;
-}
-
-function prevQ() {
-  if (curQ > 0) {
-    answers.pop();
-    curQ--;
-    renderQ();
-  }
-}
-
-function pickOpt(key, el) {
-  var opts = document.querySelectorAll('.q-opt');
-  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
-  el.classList.add('selected');
-  sel = key;
-  document.getElementById('qNext').classList.add('ready');
-}
-
-function nextQ() {
-  if (!sel) return;
-  answers.push(sel);
-  if (curQ < 2) { curQ++; renderQ(); }
-  else showMap();
-}
-
-function showMap() {
-  document.getElementById('quizScreen').classList.remove('active');
-  var ms = document.getElementById('mapScreen');
-  ms.classList.add('active');
-
-  var primary = answers[0];
-  var secKey2 = secondaryMap[answers[1]];
-  var secKey3 = secondaryMap[answers[2]];
-  var secondary = (secKey2 !== primary) ? secKey2 : (secKey3 !== primary ? secKey3 : null);
-
-  var container = document.getElementById('mapTerritories');
-  container.innerHTML = '';
-
-  container.appendChild(buildTerritory(primary, true));
-  if (secondary && secondary !== primary) {
-    container.appendChild(buildTerritory(secondary, false));
-  }
-
-  document.getElementById('mapEnter').setAttribute('data-href', redirectMap[primary]);
-}
-
-function buildTerritory(key, isRec) {
-  var d = territoryData[key];
-  var div = document.createElement('div');
-  div.className = 'territory' + (isRec ? ' recommended' : '');
-  div.innerHTML =
-    '<div class="t-flex"><div>' +
-    '<div class="t-code">' + d.code + '</div>' +
-    '<div class="t-name">' + d.name + '</div>' +
-    '<div class="t-sub">' + d.sub + '</div>' +
-    '</div><div class="t-right">' +
-    '<div class="rec-badge">' + (isRec ? '推薦' : '') + '</div>' +
-    '<div class="t-tag">' + d.tag + '</div>' +
-    '</div></div>';
-  div.style.cursor = 'pointer';
-  div.onclick = function() { window.location.href = d.href; };
-  return div;
-}
-
-function goRecommended() {
-  var href = document.getElementById('mapEnter').getAttribute('data-href');
-  if (href) {
-    localStorage.setItem('aurobase_entry_done', 'true');
-    window.location.href = href;
-  }
-}
-
-function skipEntry() {
-  var ov = document.getElementById('entryOverlay');
-  ov.classList.add('closing');
-  localStorage.setItem('aurobase_entry_done', 'true');
-  setTimeout(function() {
-    ov.classList.add('closed');
-    var rb = document.getElementById('entryRetrigger');
-    if (rb) rb.style.display = 'flex';
-  }, 650);
-}
-
-function openEntryOverlay() {
-  localStorage.removeItem('aurobase_entry_done');
-  var ov = document.getElementById('entryOverlay');
-  ov.classList.remove('closing', 'closed');
-  document.getElementById('entryRetrigger').style.display = 'none';
-  resetQuiz();
-}
-
-function resetQuiz() {
-  curQ = 0; answers = []; sel = null;
-  document.getElementById('mapScreen').classList.remove('active');
-  document.getElementById('quizScreen').classList.remove('active');
-  document.getElementById('bootScreen').style.display = 'flex';
-  bootLines.innerHTML = '';
-  bootBar.style.width = '0%';
-  bootPct.textContent = '0%';
-  bootCta.classList.remove('ready');
-  bootMessages.forEach(function(m, i) {
-    var el = document.createElement('div');
-    el.className = 'boot-line';
-    el.innerHTML = '<em>//</em> ' + m.text;
-    bootLines.appendChild(el);
-    setTimeout(function() {
-      el.classList.add('visible');
-      var pct = Math.round(((i + 1) / bootMessages.length) * 100);
-      bootBar.style.width = pct + '%';
-      bootPct.textContent = pct + '%';
-      if (i > 0) bootLines.children[i - 1].classList.add('done');
-      if (i === bootMessages.length - 1) {
-        setTimeout(function() { bootCta.classList.add('ready'); }, 300);
-      }
-    }, m.delay);
-  });
-}
-</script>
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

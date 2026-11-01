@@ -1097,7 +1097,6 @@ AURA Connect 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡�
 - [社群經營與 LINE 官方帳號](https://aurobase.com/marketing.html#community)（數位行銷服務）：Facebook、Instagram 社群經營與貼文廣告、LINE 官方帳號建置與分眾標籤，以及社群輿情監測。
 - [網站數據分析](https://aurobase.com/marketing.html#data_analysis)（數位行銷服務）：以網站分析工具了解流量來源、使用者在網站上的行為與轉換狀況。
 - [數位行銷服務總覽](https://aurobase.com/marketing.html)（數位行銷服務）：廣告投放、社群經營與數據分析的整合行銷服務。
-- [CXA 顧客體驗分析](https://aurobase.com/solution.html#cxa)（代理產品）：以影像回放、表單分析、熱點圖與警示通知，掌握顧客在網站與 App 上的操作行為。
 - [HCL Discover 數位體驗分析](https://aurobase.com/solution.html#hcl_discover)（代理產品）：工作階段回放、掙扎偵測、熱圖與旅程漏斗，找出顧客在網站與 App 上卡關與放棄的原因。
 - [CDP 客戶數據平台（代理產品）](https://aurobase.com/solution.html#auro_cdp)（代理產品）：整合線上、企業與第三方資料，搭配分群與貼標，建立 360 度客戶輪廓。
 - [HCL Unica 行銷自動化](https://aurobase.com/solution.html#hcl_unica)（代理產品）：跨通路行銷活動、接觸策略最佳化、客戶旅程、即時個人化推薦與電子郵件、簡訊發送。
@@ -1125,7 +1124,7 @@ AURA Connect 是奧洛（Aurobase）以 AURO NEXUS 平台組成的數位軌跡�
 ### 代理產品：常見問題（https://aurobase.com/solution.html）
 
 **問：奧洛代理哪些行銷科技產品？**
-答：奧洛代理 CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。
+答：奧洛代理 HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。
 
 **問：HCL Discover 可以部署在企業自有機房嗎？**
 答：可以。HCL Discover 可部署於企業自有機房（Windows／RHEL 虛擬機或容器），也提供雲端與 HCL 代管選項，金融機構可讓顧客行為資料全程留在境內。
