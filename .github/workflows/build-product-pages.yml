@@ -12,6 +12,7 @@ on:
       - 'css/**'
       - 'js/site-search.js'
       - 'search-index.json'
+      - 'tools/build-og-images.py'
       - 'tools/module-pages/**'
       - 'tools/build-module-pages.py'
       - 'tools/cms/**'
@@ -40,10 +41,14 @@ jobs:
           python-version: '3.12'
 
       - name: Install font tools
-        run: pip install fonttools brotli
+        run: pip install fonttools brotli pillow
 
       - name: Test the generator and editor
         run: CMS_SKIP_FONTS=1 python3 tools/cms/test_cms.py
+
+      # 每頁的社群分享圖：只畫內容有變的，Runner 內建 Chrome
+      - name: Share images
+        run: python3 tools/build-og-images.py
 
       - name: Build pages
         run: python3 tools/build-module-pages.py
@@ -84,7 +89,7 @@ jobs:
       - name: Commit regenerated files
         id: commit
         run: |
-          git add -A -- '*.html' llms.txt sitemap.xml search-index.json css/line-seed-font.css css/iconoir-subset.css WOFF2
+          git add -A -- '*.html' llms.txt llms-full.txt sitemap.xml search-index.json images/og css/line-seed-font.css css/iconoir-subset.css WOFF2
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "產出與 repo 內容一致，不需要 commit"

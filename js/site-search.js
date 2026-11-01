@@ -128,18 +128,24 @@
       close();
       window.jQuery(modal).modal('show');
     });
-    return function open(trigger) {
+    return function open(trigger, value) {
       last = trigger || document.activeElement;
       d.hidden = false;
       document.documentElement.classList.add('ss-open');
       load();
+      if (value) { input.value = value; run(); }
       input.focus();
       input.select();
     };
   }
 
   var opener = null;
-  function open(t) { if (!opener) opener = build(); opener(t); }
+  function open(t, v) { if (!opener) opener = build(); opener(t, v); }
+  // 網址帶 ?q=：直接打開搜尋（平台總覽的「依需求找模組」自己處理，不重複開視窗）
+  document.addEventListener('DOMContentLoaded', function () {
+    var m = /[?&]q=([^&#]*)/.exec(location.search);
+    if (m && !document.getElementById('finder')) open(null, decodeURIComponent(m[1].replace(/\+/g, ' ')));
+  });
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.nav-search-btn');
     if (b) { e.preventDefault(); open(b); }

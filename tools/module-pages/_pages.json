@@ -2,7 +2,30 @@
   "_說明": "手寫頁（不是由產品 JSON 產生的頁面）的 SEO / GEO 設定。產生器會套用搜尋摘要、寫入結構化資料、把側欄標誌的 <h1> 改成 <div>。改完跑 python3 tools/build-module-pages.py。",
   "pages": {
     "index.html": {
-      "type": "WebPage"
+      "type": "WebPage",
+      "og_card": {
+        "kicker": "AI 治理平台・數位行銷・行銷科技",
+        "title": "奧洛 Aurobase",
+        "sub": "",
+        "tag": "AURO NEXUS AI 治理平台、HCL Discover 與 HCL Unica 等行銷科技，以及數位廣告與社群經營服務。"
+      },
+      "keywords": [
+        "奧洛",
+        "Aurobase",
+        "AI 治理平台",
+        "企業 AI 平台",
+        "數位行銷",
+        "廣告投放",
+        "社群經營",
+        "HCL Discover",
+        "HCL Unica",
+        "CDP 客戶數據平台",
+        "行銷自動化",
+        "AI 智慧語伴",
+        "客服中心"
+      ],
+      "description": "奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並有 Google、Facebook 廣告投放、社群經營、AI 智慧語伴與客服中心服務；可部署於雲端、地端或依需求客製。",
+      "title": "奧洛 Aurobase｜AI 治理平台・數位整合行銷・行銷科技"
     },
     "marketing.html": {
       "type": "Service",
@@ -12,6 +35,28 @@
         "廣告投放",
         "社群服務",
         "數據分析"
+      ],
+      "og_card": {
+        "kicker": "數位行銷服務",
+        "title": "廣告投放・社群經營",
+        "sub": "數據分析",
+        "tag": "Google、Facebook、Instagram、YouTube、LINE 廣告投放，LINE 官方帳號建置與網站數據分析。"
+      },
+      "keywords": [
+        "數位行銷",
+        "廣告投放",
+        "廣告代操",
+        "Google 關鍵字廣告",
+        "GDN",
+        "YouTube 廣告",
+        "Yahoo 原生廣告",
+        "LINE 廣告",
+        "Facebook 廣告",
+        "Instagram 廣告",
+        "社群經營",
+        "LINE 官方帳號",
+        "GA4",
+        "網站數據分析"
       ]
     },
     "solution.html": {
@@ -24,48 +69,142 @@
         "HCL Discover 數位體驗分析",
         "Magnolia CMS 內容管理系統"
       ],
-      "description": "奧洛代理並導入企業行銷科技產品：CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，協助企業看見顧客行為並自動化行銷流程。"
+      "description": "奧洛代理並導入企業行銷科技產品：CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，協助企業看見顧客行為並自動化行銷流程。",
+      "og_card": {
+        "kicker": "代理產品",
+        "title": "行銷科技產品",
+        "sub": "導入與維護",
+        "tag": "CXA 顧客體驗分析・HCL Discover・CDP 客戶數據平台・HCL Unica・Magnolia CMS"
+      },
+      "keywords": [
+        "CXA 顧客體驗分析",
+        "HCL Discover",
+        "數位體驗分析",
+        "Session Replay",
+        "CDP 客戶數據平台",
+        "HCL Unica",
+        "行銷自動化",
+        "Magnolia CMS",
+        "內容管理系統"
+      ]
     },
     "ai-companion.html": {
       "type": "Service",
       "name": "AI 智慧語伴",
       "service_type": "AI 語音陪伴與健康關懷",
-      "description": "AI 智慧語伴是奧洛（Aurobase）以 AI 語音為核心的智慧陪伴方案：透過語音互動主動陪伴長者，結合健康監測與情緒分析，即時掌握長者的健康與情緒變化，並提供主動關懷提醒。"
+      "description": "AI 智慧語伴是奧洛（Aurobase）以 AI 語音為核心的智慧陪伴方案：透過語音互動主動陪伴長者，結合健康監測與情緒分析，即時掌握長者的健康與情緒變化，並提供主動關懷提醒。",
+      "og_card": {
+        "kicker": "AI 智慧語伴",
+        "title": "AI 溫情守護",
+        "sub": "智慧陪伴新世代",
+        "tag": "以 AI 語音陪伴長者，提供用藥提醒與關懷報告，協助社工掌握狀況。"
+      },
+      "keywords": [
+        "AI 智慧語伴",
+        "AI 語音陪伴",
+        "長者陪伴",
+        "獨居長者",
+        "用藥提醒",
+        "社工",
+        "長照",
+        "關懷報告"
+      ]
     },
     "blog.html": {
       "type": "Blog",
       "name": "奧洛新聞中心",
-      "description": "奧洛新聞中心收錄數位行銷、CDP 客戶數據平台、IBM Tealeaf 顧客行為分析與社群經營等文章，整理行銷科技的觀念與實務做法，協助企業規劃數位行銷策略。"
+      "description": "奧洛新聞中心收錄數位行銷、CDP 客戶數據平台、IBM Tealeaf 顧客行為分析與社群經營等文章，整理行銷科技的觀念與實務做法，協助企業規劃數位行銷策略。",
+      "og_card": {
+        "kicker": "新聞中心",
+        "title": "行銷科技文章",
+        "sub": "",
+        "tag": "數位行銷、CDP 客戶數據平台、顧客體驗分析與社群經營的觀念與實務。"
+      },
+      "keywords": [
+        "奧洛新聞中心",
+        "數位行銷",
+        "CDP",
+        "顧客體驗分析",
+        "社群經營",
+        "行銷科技"
+      ]
     },
     "contact.html": {
       "type": "ContactPage",
       "name": "聯絡奧洛",
-      "description": "聯絡奧洛（Aurobase）：台北市內湖區洲子街101號2樓，電話 +886-2-5568-4688，Email ad@aurocore.com。填寫線上諮詢表單，由專人回覆數位行銷、行銷科技與 AURO NEXUS AI 治理平台的相關需求。"
+      "description": "聯絡奧洛（Aurobase）：台北市內湖區洲子街101號2樓，電話 +886-2-5568-4688，Email ad@aurocore.com。填寫線上諮詢表單，由專人回覆數位行銷、行銷科技與 AURO NEXUS AI 治理平台的相關需求。",
+      "og_card": {
+        "kicker": "聯絡我們",
+        "title": "告訴我們您的需求",
+        "sub": "",
+        "tag": "02-5568-4688・ad@aurocore.com・台北市內湖區洲子街101號2樓"
+      },
+      "keywords": [
+        "奧洛",
+        "Aurobase",
+        "聯絡我們",
+        "諮詢",
+        "報價",
+        "產品簡報",
+        "台北內湖"
+      ]
     },
     "privacypolicy.html": {
       "type": "WebPage",
       "name": "隱私權政策",
-      "description": "奧洛數位整合行銷的隱私權政策，說明本網站如何蒐集、處理與利用您透過諮詢表單提供的個人資料，Cookie 的使用方式，以及個人資料的刪除與聯絡方式。"
+      "description": "奧洛數位整合行銷的隱私權政策，說明本網站如何蒐集、處理與利用您透過諮詢表單提供的個人資料，Cookie 的使用方式，以及個人資料的刪除與聯絡方式。",
+      "keywords": [
+        "隱私權政策",
+        "個人資料保護",
+        "Cookie"
+      ]
     },
     "blogpost/single-2023-10-6.html": {
       "type": "BlogPosting",
       "date": "2023-10-06",
-      "description": "企業為什麼需要數位行銷？即使有街坊鄰里口耳相傳的口碑，仍需要網路行銷推波助瀾。本文比較數位行銷與傳統行銷的差異，說明選擇數位行銷的優點與起步關鍵。"
+      "description": "企業為什麼需要數位行銷？即使有街坊鄰里口耳相傳的口碑，仍需要網路行銷推波助瀾。本文比較數位行銷與傳統行銷的差異，說明選擇數位行銷的優點與起步關鍵。",
+      "keywords": [
+        "數位行銷",
+        "網路行銷",
+        "品牌經營",
+        "數位廣告"
+      ]
     },
     "blogpost/single-2023-11-10.html": {
       "type": "BlogPosting",
       "date": "2023-11-10",
-      "description": "IBM Tealeaf 能記錄並重現顧客在網站與 App 上的操作過程。本文介紹 Tealeaf 的功能、導入後可掌握的優勢，以及如何協助企業改善數位體驗與客戶滿意度。"
+      "description": "IBM Tealeaf 能記錄並重現顧客在網站與 App 上的操作過程。本文介紹 Tealeaf 的功能、導入後可掌握的優勢，以及如何協助企業改善數位體驗與客戶滿意度。",
+      "keywords": [
+        "Tealeaf",
+        "顧客體驗分析",
+        "影像回放",
+        "CXA",
+        "數位體驗"
+      ]
     },
     "blogpost/single-2023-12-4.html": {
       "type": "BlogPosting",
       "date": "2023-12-04",
-      "description": "CDP（客戶數據平台）是什麼？本文說明 CDP 如何整合分散在各系統的客戶資料，並以個人化與精準行銷提升客戶體驗，幫助企業找到真正的目標客群。"
+      "description": "CDP（客戶數據平台）是什麼？本文說明 CDP 如何整合分散在各系統的客戶資料，並以個人化與精準行銷提升客戶體驗，幫助企業找到真正的目標客群。",
+      "keywords": [
+        "CDP",
+        "客戶數據平台",
+        "個人化行銷",
+        "精準行銷",
+        "客戶資料整合"
+      ]
     },
     "blogpost/single-2024-1-8.html": {
       "type": "BlogPosting",
       "date": "2024-01-08",
-      "description": "社群媒體讓品牌與消費者的溝通從單向推送變成雙向對話。本文說明社群經營對品牌的意義，以及 Aurocore 如何協助企業經營社群、提升與消費者的互動。"
+      "description": "社群媒體讓品牌與消費者的溝通從單向推送變成雙向對話。本文說明社群經營對品牌的意義，以及 Aurocore 如何協助企業經營社群、提升與消費者的互動。",
+      "keywords": [
+        "社群經營",
+        "社群行銷",
+        "Facebook",
+        "Instagram",
+        "LINE 官方帳號"
+      ]
     }
   }
 }

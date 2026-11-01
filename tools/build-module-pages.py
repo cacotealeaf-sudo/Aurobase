@@ -47,7 +47,38 @@ ORG = {
     'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'telephone': '+886-2-5568-4688',
                      'email': 'ad@aurocore.com', 'areaServed': 'TW', 'availableLanguage': ['zh-Hant', 'en']},
     'sameAs': ['https://www.facebook.com/AurobaseTW/'],
+    'legalName': '奧洛股份有限公司',
+    'description': '奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營、AI 智慧語伴與客服中心服務。',
+    'areaServed': {'@type': 'Country', 'name': '台灣'},
+    'knowsAbout': ['AI 治理', '生成式 AI', '地端 AI', '企業知識庫', '客戶數據平台', '行銷自動化', '數位體驗分析',
+                   '資料治理', '資安弱點掃描', '數位廣告投放', '社群經營'],
 }
+WEBSITE = {
+    '@type': 'WebSite',
+    '@id': SITE + '/#website',
+    'name': '奧洛 Aurobase',
+    'alternateName': ['Aurobase', '奧洛'],
+    'url': SITE + '/',
+    'inLanguage': 'zh-Hant-TW',
+    'publisher': {'@id': SITE + '/#organization'},
+    # 任何頁面網址帶 ?q= 會直接打開網站搜尋（js/site-search.js）
+    'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': SITE + '/?q={search_term_string}'},
+                        'query-input': 'required name=search_term_string'},
+}
+
+
+OG_W, OG_H = 1200, 630
+
+
+def og_key(rel_or_slug):
+    """分享圖檔名：nexus-forge.html → nexus-forge、index.html → index、blogpost/x.html → blogpost-x。"""
+    return re.sub(r'\.html$', '', rel_or_slug).replace('/', '-')
+
+
+def og_image(key):
+    """該頁的分享圖（tools/build-og-images.py 產生）；還沒畫的頁面用預設圖。"""
+    p = 'images/og/%s.jpg' % key
+    return p if os.path.exists(os.path.join(ROOT, p)) else 'images/og/default.jpg'
 
 
 def read(p):
@@ -229,20 +260,30 @@ def url_of(m):
 
 def jsonld(m):
     page_url = url_of(m)
-    main = {
+    img = {'@type': 'ImageObject', 'url': '%s/%s' % (SITE, og_image_of(m)), 'width': OG_W, 'height': OG_H}
+    published = load_modules()
+    related = [{'@id': '%s/%s.html#software' % (SITE, r)} for r in m['platform']['related'] if r in published]
+    audience = {'@type': 'BusinessAudience', 'audienceType': '、'.join(a['who'] for a in m['audience'])}
+    keywords = ', '.join(k for k in m['keywords'] if k != 'AURO NEXUS')
+    if is_solution(m):
+        main = {
             '@type': 'Service',
             '@id': page_url + '#software',
-            'name': '%s %s' % (m['code'], m['name_zh']) if m['code'] != m['name_zh'] else m['name_zh'],
-            'alternateName': [m['eyebrow']] + m.get('aliases', []),
+            'name': full_name(m),
+            'alternateName': [m['eyebrow']] + m.get('aliases', []) + ([m['fullname']] if m.get('fullname') else []),
             'serviceType': m['name_zh'],
+            'category': m['industry'],
             'description': plain(m['description']),
-            'audience': {'@type': 'Audience', 'audienceType': m.get('industry', '')},
+            'audience': audience,
             'areaServed': {'@type': 'Country', 'name': '台灣'},
             'provider': {'@id': ORG['@id']},
             'url': page_url,
-        } if is_solution(m) else None
-    graph = [
-        main or {
+            'image': img,
+            'keywords': keywords,
+            'isRelatedTo': related,
+        }
+    else:
+        main = {
             '@type': 'SoftwareApplication',
             '@id': page_url + '#software',
             'name': '%s %s' % (m['code'], m['name_zh']),
@@ -253,10 +294,23 @@ def jsonld(m):
             'operatingSystem': 'Linux（容器化部署）',
             'inLanguage': 'zh-Hant-TW',
             'url': page_url,
+            'image': img,
             'isPartOf': {'@id': SITE + '/nexus.html#platform'},
             'publisher': {'@id': ORG['@id']},
+            'audience': audience,
+            'keywords': keywords,
+            'dateModified': m['updated'],
             'featureList': [plain(c['title']) for c in m['capabilities']['cards']],
-        },
+            'isRelatedTo': related,
+        }
+        shots = (m.get('shots') or {}).get('items')
+        if shots:
+            main['screenshot'] = [{'@type': 'ImageObject', 'url': '%s/%s' % (SITE, x['src']), 'caption': plain(x['title'] + '：' + x['caption'])} for x in shots]
+    if not related:
+        del main['isRelatedTo']
+    term = defined_term(m)
+    graph = [
+        main,
         {
             '@type': 'WebPage',
             '@id': page_url + '#webpage',
@@ -265,12 +319,19 @@ def jsonld(m):
             'description': plain(m['description']),
             'inLanguage': 'zh-Hant-TW',
             'dateModified': m['updated'],
-            'about': {'@id': page_url + '#software'},
+            'about': [{'@id': page_url + '#software'}] + ([{'@id': term['@id']}] if term else []),
+            'mainEntity': {'@id': page_url + '#software'},
+            'primaryImageOfPage': img,
+            'keywords': keywords,
+            # 語音助理與 AI 摘要優先朗讀的段落：定義與重點摘要
+            'speakable': {'@type': 'SpeakableSpecification', 'cssSelector': ['#what-is .define-answer', '.nm-summary']},
+            'breadcrumb': {'@id': page_url + '#breadcrumb'},
             'isPartOf': {'@type': 'WebSite', '@id': SITE + '/#website', 'name': '奧洛 Aurobase', 'url': SITE + '/'},
             'publisher': {'@id': ORG['@id']},
         },
         {
             '@type': 'BreadcrumbList',
+            '@id': page_url + '#breadcrumb',
             'itemListElement': [
                 {'@type': 'ListItem', 'position': 1, 'name': '首頁', 'item': SITE + '/'},
                 {'@type': 'ListItem', 'position': 2, 'name': '產業解決方案' if is_solution(m) else 'AURO NEXUS',
@@ -280,6 +341,18 @@ def jsonld(m):
         },
         ORG,
     ]
+    if term:
+        graph.insert(2, term)
+    if m.get('flow'):
+        # 解決方案的運作流程：每一步做什麼、由哪些元件負責
+        graph.append({
+            '@type': 'HowTo',
+            '@id': page_url + '#flow',
+            'name': '%s的運作流程' % m['name_zh'],
+            'description': plain(m.get('flow_intro') or m['description']),
+            'step': [{'@type': 'HowToStep', 'position': i, 'name': plain(st['title']), 'text': plain(st.get('text', '')),
+                      'url': page_url + '#flow'} for i, st in enumerate(m['flow'], 1)],
+        })
     if m.get('faq'):
         graph.append({
             '@type': 'FAQPage',
@@ -296,7 +369,8 @@ def jsonld(m):
 def head(m):
     title = m['title']
     page_url = url_of(m)
-    og_image = m.get('og_image', 'images/nexus-chat.webp')
+    og_image = og_image_of(m)
+    og_alt = attr('%s｜%s' % (full_name(m), plain(m['hero'].get('slogan', '')).replace(' ', '')))
     return f'''<!DOCTYPE html>
 <html lang="zh-Hant-TW">
   <head>
@@ -314,7 +388,16 @@ def head(m):
     <meta property="og:locale" content="zh_TW">
     <meta property="og:site_name" content="奧洛 Aurobase">
     <meta property="og:image" content="{SITE}/{og_image}">
+    <meta property="og:image:width" content="{OG_W}">
+    <meta property="og:image:height" content="{OG_H}">
+    <meta property="og:image:alt" content="{og_alt}">
+    <meta property="article:modified_time" content="{m['updated']}">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{attr(title)}">
+    <meta name="twitter:description" content="{attr(m.get('og_description', m['description']))}">
+    <meta name="twitter:image" content="{SITE}/{og_image}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="theme-color" content="{m['theme']['deep']}">
 
     <script type="application/ld+json">
 {jsonld(m)}
@@ -342,6 +425,23 @@ def head(m):
 DEPLOY_INTRO = '以容器交付，同一套系統可以放在公有雲的台灣區域、企業自有機房或私有雲；流程、規則與既有系統的介接，可依貴機構需求客製。'
 DEPLOY_STRIP = ('<a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製">'
                 '<span>雲端</span><span>地端</span><span>客製</span></a>')
+
+
+def og_image_of(m):
+    """產品頁的分享圖：JSON 指定的 og_image 優先（例如 SAGA 用實機畫面），否則用 build-og-images.py 畫的卡片。"""
+    return m.get('og_image') or og_image(og_key(m['slug']))
+
+
+def defined_term(m):
+    """把「什麼是 X？」的定義段落做成 DefinedTerm，讓 AI 引擎拿得到名詞與一句話定義。"""
+    q = plain(m['definition']['q'])
+    hit = re.match(r'^(?:什麼是|何謂)(.+?)[？?]$', q) or re.match(r'^(.+?)\s*是什麼[？?]$', q)
+    if not hit:
+        return None   # 問題不是在定義名詞（例如「第一步該做什麼？」），就不硬做詞條
+    name = hit.group(1).strip()
+    return {'@type': 'DefinedTerm', '@id': url_of(m) + '#term', 'name': name,
+            'description': plain(m['definition']['a'][0]), 'url': url_of(m) + '#what-is',
+            'inDefinedTermSet': {'@type': 'DefinedTermSet', '@id': SITE + '/nexus.html#glossary', 'name': 'AURO NEXUS 名詞解釋'}}
 
 
 def theme_style(t):
@@ -790,8 +890,12 @@ def overview_jsonld(pf, mods, old_faq):
          'alternateName': ['AURO NEXUS AI 治理平台', 'NEXUS'], 'description': plain(pf['description']),
          'applicationCategory': 'BusinessApplication', 'operatingSystem': 'Linux（容器化部署）',
          'inLanguage': 'zh-Hant-TW', 'url': url, 'publisher': {'@id': ORG['@id']},
+         'image': {'@type': 'ImageObject', 'url': '%s/%s' % (SITE, og_image('nexus')), 'width': OG_W, 'height': OG_H},
          'hasPart': [{'@type': 'SoftwareApplication', 'name': '%s %s' % (get(s)['code'], get(s)['name_zh']),
                       'url': '%s/%s' % (SITE, get(s)['file'])} for s in slugs]},
+        # 各產品頁「什麼是…」的定義彙整成名詞集，讓 AI 引擎知道這些名詞在哪裡被定義
+        {'@type': 'DefinedTermSet', '@id': SITE + '/nexus.html#glossary', 'name': 'AURO NEXUS 名詞解釋',
+         'hasDefinedTerm': [{'@id': t['@id']} for t in (defined_term(m) for m in mods.values()) if t]},
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': '首頁', 'item': SITE + '/'},
             {'@type': 'ListItem', 'position': 2, 'name': 'AURO NEXUS', 'item': url}]},
@@ -817,6 +921,7 @@ def build_overview(mods, pf=None, write=True):
     s = re.sub(r'(<meta name="keywords" content=")[^"]*', lambda x: x.group(1) + attr(','.join(pf['keywords'])), s, count=1)
     s = re.sub(r'(<meta property="og:title" content=")[^"]*', lambda x: x.group(1) + title, s, count=1)
     s = re.sub(r'(<meta property="og:description" content=")[^"]*', lambda x: x.group(1) + attr(pf['description']), s, count=1)
+    s = apply_social(s, 'nexus.html', og_image('nexus'))
     block = overview_html(pf, mods)
     if BEGIN in s:
         s = s[:s.index(BEGIN)] + block + s[s.index(END) + len(END):]
@@ -869,6 +974,54 @@ def update_llms(mods, pf=None):
     io.open(p, 'w', encoding='utf-8').write(t)
 
 
+LLMS_FULL = 'llms-full.txt'
+
+
+def llms_full(mods, pf):
+    """llms-full.txt：每個產品與解決方案的完整內容（定義、能力、運作流程、範圍、部署、常見問題），給 AI 引擎一次讀完。"""
+    def li(items):
+        return ['- ' + plain(x) for x in items]
+    out = ['# 奧洛 Aurobase — AURO NEXUS 產品與解決方案完整說明', '',
+           '> ' + ''.join(plain(x) for x in pf['definition']['a']), '',
+           '公司：奧洛股份有限公司（Aurobase）｜網站：%s｜電話：+886-2-5568-4688｜Email：ad@aurocore.com' % SITE,
+           '本檔由網站內容自動產生，與各產品頁一致。精簡索引見 %s/llms.txt。' % SITE, '']
+    order = [s for lg in pf['legs'] for s in live(pf, mods, lg['modules'])] + [m['slug'] for m in solutions(mods)]
+    for slug in order:
+        m = mods[slug]
+        out += ['', '## %s' % full_name(m), '', '網址：%s' % url_of(m),
+                ('類別：產業解決方案（%s）' % m['industry']) if is_solution(m) else ('類別：平台模組（%s）' % m['leg']),
+                '最後更新：%s' % m['updated'], '', plain(m['description']), '',
+                '### %s' % plain(m['definition']['q'])] + [plain(x) for x in m['definition']['a']]
+        out += ['', '### 適合誰'] + ['- %s：%s' % (a['who'], a['why']) for a in m['audience']]
+        if m.get('flow'):
+            out += ['', '### 運作流程'] + ['%d. %s：%s' % (i, plain(st['title']), plain(st.get('text', ''))) for i, st in enumerate(m['flow'], 1)]
+        out += ['', '### ' + plain(m['capabilities']['heading'])]
+        for c in m['capabilities']['cards']:
+            out += ['- **%s**：%s。' % (plain(c['title']), '；'.join(plain(x).rstrip('。') for x in c['items']))]
+        out += ['', '### ' + plain(m['diff']['heading'])] + ['- **%s**：%s' % (plain(c['title']), plain(c['text'])) for c in m['diff']['cards']]
+        if m.get('compare'):
+            cp = m['compare']
+            out += ['', '### ' + plain(cp['heading'])] + ['- %s：%s' % (plain(r[0]), '｜'.join('%s：%s' % (plain(cp['cols'][i]), plain(v)) for i, v in enumerate(r[1:]))) for r in cp['rows']]
+        out += ['', '### 部署：可雲、可地、可客製'] + ['- %s｜%s：%s' % (d['tag'], plain(d['title']), plain(d['text'])) for d in m['deploy']]
+        if m.get('limits'):
+            out += ['', '### 範圍界定'] + ['- **%s**：%s' % (plain(x['title']), plain(x['text'])) for x in m['limits']]
+        if m.get('faq'):
+            out += ['', '### 常見問題'] + sum([['**問：%s**' % plain(f['q']), '答：%s' % plain(f['a']), ''] for f in m['faq']], [])
+    out += ['', '## 其他服務與代理產品', '']
+    for e in json.loads(read(os.path.join(SRC, '_search.json')))['entries']:
+        if e['cat'] in ('數位行銷服務', '代理產品', 'AI 智慧語伴', '客服中心'):
+            u = e['url'] if e['url'].startswith('http') else '%s/%s' % (SITE, e['url'])
+            out.append('- [%s](%s)（%s）：%s' % (e['title'], u, e['cat'], e['desc']))
+    return '\n'.join(re.sub(r'\n{3,}', '\n\n', '\n'.join(out)).split('\n')).rstrip() + '\n'
+
+
+def update_llms_full(mods, pf):
+    p = os.path.join(ROOT, LLMS_FULL)
+    text = llms_full(mods, pf)
+    if not os.path.exists(p) or read(p) != text:
+        io.open(p, 'w', encoding='utf-8').write(text)
+
+
 def update_sitemap(mods):
     p = os.path.join(ROOT, 'sitemap.xml')
     t = read(p)
@@ -884,6 +1037,26 @@ def update_sitemap(mods):
         f = mo.group(1)
         return '' if not os.path.exists(os.path.join(ROOT, f)) else mo.group(0)
     t = re.sub(r'[ \t]*<url><loc>%s/((?:nexus|solution)-[a-z0-9-]+\.html)</loc>.*?</url>\n?' % re.escape(SITE), gone, t)
+
+    # 每一頁附上分享圖與實機畫面（圖片搜尋與 AI 摘要用），新聞文章補上日期
+    pages = load_pages_cfg()
+    by_file = {m['file']: m for m in mods.values()}
+
+    def enrich(mo):
+        loc, rest = mo.group(1), mo.group(2)
+        rest = re.sub(r'<image:image>.*?</image:image>', '', rest)
+        rel = loc[len(SITE) + 1:] or 'index.html'
+        m, cfg = by_file.get(rel), pages.get(rel, {})
+        if cfg.get('type') == 'BlogPosting' and '<lastmod>' not in rest:
+            rest = '<lastmod>%s</lastmod>' % cfg.get('modified', cfg['date']) + rest
+        imgs = [og_image_of(m) if m else og_image(og_key(rel))]
+        imgs += [x['src'] for x in ((m or {}).get('shots') or {}).get('items', [])]
+        tags = ''.join('<image:image><image:loc>%s/%s</image:loc></image:image>' % (SITE, i) for i in imgs if not i.endswith('default.jpg'))
+        return '<url><loc>%s</loc>%s%s</url>' % (loc, rest, tags)
+    t = re.sub(r'<url><loc>([^<]+)</loc>(.*?)</url>', enrich, t)
+    if 'xmlns:image=' not in t:
+        t = t.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">', 1)
     io.open(p, 'w', encoding='utf-8').write(t)
 
 
@@ -1054,6 +1227,15 @@ def page_audit(rel):
     C.append(_chk('SEO', 'pass' if h1 == 1 else 'fail', '只有一個 H1', '%d 個' % h1))
     og = [k for k in ('og:title', 'og:description', 'og:image', 'og:url') if 'property="%s"' % k not in head]
     C.append(_chk('SEO', 'pass' if not og else 'warn', '社群分享資訊（Open Graph）', '缺：' + '、'.join(og) if og else ''))
+    m = re.search(r'<meta property="og:image" content="([^"]*)"', head)
+    ogi = m.group(1) if m else ''
+    local = ogi[len(SITE) + 1:] if ogi.startswith(SITE + '/') else ''
+    prob = ('沒有分享圖' if not ogi else 'SVG 在 Facebook、LINE 不會顯示' if ogi.lower().endswith('.svg')
+            else '圖檔不存在：' + local if local and not os.path.exists(os.path.join(ROOT, local))
+            else '缺 og:image:width／height' if 'og:image:width' not in head else '')
+    C.append(_chk('SEO', 'pass' if not prob else 'warn', '社群分享圖（點陣圖、附尺寸）', prob or local))
+    C.append(_chk('SEO', 'pass' if 'name="twitter:card"' in head and 'max-image-preview:large' in head else 'warn',
+                  'Twitter 卡片與大圖預覽'))
     imgs = re.findall(r'<img\b[^>]*>', body)
     noalt = [i for i in imgs if not re.search(r'\balt="[^"]+"', i)]
     C.append(_chk('SEO', 'pass' if not noalt else 'warn', '圖片都有替代文字（alt）',
@@ -1136,6 +1318,11 @@ def static_ld(rel, cfg, s):
             'inLanguage': 'zh-Hant-TW', 'isPartOf': {'@type': 'WebSite', '@id': SITE + '/#website', 'name': '奧洛 Aurobase', 'url': SITE + '/'},
             'publisher': {'@id': ORG['@id']}}
     graph = [page, ORG]
+    if rel == 'index.html':
+        graph.append(WEBSITE)
+    page['primaryImageOfPage'] = {'@type': 'ImageObject', 'url': '%s/%s' % (SITE, og_image(og_key(rel))), 'width': OG_W, 'height': OG_H}
+    if cfg.get('keywords'):
+        page['keywords'] = ', '.join(cfg['keywords'])
     t = cfg.get('type', 'WebPage')
     if t == 'ContactPage':
         page['@type'] = 'ContactPage'
@@ -1155,14 +1342,49 @@ def static_ld(rel, cfg, s):
                 ps = read(os.path.join(ROOT, r))
                 posts.append({'@type': 'BlogPosting', 'headline': re.sub(r'｜.*$', '', html.unescape(re.search(r'<title>(.*?)</title>', ps, re.S).group(1).strip())),
                               'url': SITE + '/' + r, 'datePublished': c['date']})
-        graph.append({'@type': 'Blog', 'name': cfg['name'], 'url': url, 'publisher': {'@id': ORG['@id']}, 'blogPost': posts})
+        graph.append({'@type': 'Blog', '@id': url + '#blog', 'name': cfg['name'], 'url': url, 'publisher': {'@id': ORG['@id']}, 'blogPost': posts})
     elif t == 'BlogPosting':
-        img = re.search(r'<meta property="og:image" content="([^"]*)"', s)
-        graph.append({'@type': 'BlogPosting', 'headline': re.sub(r'｜.*$', '', title), 'description': desc,
-                      'datePublished': cfg['date'], 'inLanguage': 'zh-Hant-TW', 'mainEntityOfPage': url,
-                      'author': {'@id': ORG['@id']}, 'publisher': {'@id': ORG['@id']},
-                      **({'image': img.group(1)} if img else {})})
+        cat = re.search(r'<a class="color-orange">([^<]+)</a>', s)
+        graph.append({'@type': 'BlogPosting', '@id': url + '#article', 'headline': re.sub(r'｜.*$', '', title), 'description': desc,
+                      'datePublished': cfg['date'], 'dateModified': cfg.get('modified', cfg['date']), 'inLanguage': 'zh-Hant-TW',
+                      'mainEntityOfPage': {'@id': url + '#webpage'}, 'author': {'@id': ORG['@id']}, 'publisher': {'@id': ORG['@id']},
+                      'image': page['primaryImageOfPage'], 'isPartOf': {'@id': SITE + '/blog.html#blog'},
+                      **({'articleSection': cat.group(1).strip()} if cat else {}),
+                      **({'keywords': ', '.join(cfg['keywords'])} if cfg.get('keywords') else {})})
     return json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2)
+
+
+SOCIAL_BEGIN, SOCIAL_END = '<!-- SOCIAL-META:BEGIN（由 tools/build-module-pages.py 產生）-->', '<!-- SOCIAL-META:END -->'
+SOCIAL_STRIP = re.compile(r'[ \t]*<meta (?:property="og:(?:image[^"]*|locale|type)"|name="(?:twitter:[^"]*|robots|theme-color|article-[^"]*)"|property="article:[^"]*")[^>]*>\n?')
+
+
+def apply_social(t, rel, image, og_type='website', date=None, modified=None):
+    """手寫頁面的社群與搜尋 meta：分享圖、Twitter 卡片、語系、大圖預覽，集中在一個區塊由產生器維護。"""
+    title = html.unescape(re.search(r'<title>(.*?)</title>', t, re.S).group(1).strip())
+    desc = html.unescape((re.search(r'<meta name="description" content="([^"]*)"', t) or [None, ''])[1])
+    url = SITE + '/' + ('' if rel == 'index.html' else rel)
+    lines = ['<meta property="og:type" content="%s">' % og_type,
+             '<meta property="og:locale" content="zh_TW">',
+             '<meta property="og:image" content="%s/%s">' % (SITE, image),
+             '<meta property="og:image:width" content="%d">' % OG_W,
+             '<meta property="og:image:height" content="%d">' % OG_H,
+             '<meta property="og:image:alt" content="%s">' % attr(re.sub(r'｜.*$', '', title)),
+             '<meta name="twitter:card" content="summary_large_image">',
+             '<meta name="twitter:title" content="%s">' % attr(title),
+             '<meta name="twitter:description" content="%s">' % attr(desc),
+             '<meta name="twitter:image" content="%s/%s">' % (SITE, image),
+             '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">',
+             '<link rel="alternate" hreflang="zh-Hant-TW" href="%s">' % url]
+    if og_type == 'article':
+        lines += ['<meta property="article:published_time" content="%s">' % date,
+                  '<meta property="article:modified_time" content="%s">' % (modified or date),
+                  '<meta property="article:author" content="奧洛 Aurobase">']
+    block = SOCIAL_BEGIN + '\n    ' + '\n    '.join(lines) + '\n    ' + SOCIAL_END
+    if SOCIAL_BEGIN in t:
+        return t[:t.index(SOCIAL_BEGIN)] + block + t[t.index(SOCIAL_END) + len(SOCIAL_END):]
+    t = SOCIAL_STRIP.sub('', t)
+    t = re.sub(r'[ \t]*<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n?', '', t)
+    return re.sub(r'(<link rel="canonical" href="[^"]*">)', lambda x: x.group(1) + '\n    ' + block, t, count=1)
 
 
 def load_pages_cfg():
@@ -1182,8 +1404,19 @@ def update_static_pages():
             d = attr(cfg['description'])
             t = re.sub(r'(<meta name="description" content=")[^"]*', lambda x: x.group(1) + d, t, count=1)
             t = re.sub(r'(<meta property="og:description" content=")[^"]*', lambda x: x.group(1) + d, t, count=1)
-        if cfg.get('og_image') and 'property="og:image"' not in t:
-            t = t.replace('<meta property="og:url"', '<meta property="og:image" content="%s/%s">\n    <meta property="og:url"' % (SITE, cfg['og_image']), 1)
+        if cfg.get('title'):
+            ti = html.escape(cfg['title'], quote=False)
+            t = re.sub(r'<title>.*?</title>', lambda x: '<title>%s</title>' % ti, t, count=1, flags=re.S)
+            t = re.sub(r'(<meta property="og:title" content=")[^"]*', lambda x: x.group(1) + attr(cfg['title']), t, count=1)
+        if cfg.get('keywords'):
+            kw = attr(','.join(cfg['keywords']))
+            t = re.sub(r'(<meta name="keywords" content=")[^"]*', lambda x: x.group(1) + kw, t, count=1)
+        if cfg.get('type') == 'BlogPosting':
+            t = apply_social(t, rel, og_image(og_key(rel)), 'article', cfg['date'], cfg.get('modified'))
+        else:
+            t = apply_social(t, rel, og_image(og_key(rel)))
+        # 舊版手寫的 Organization／Article 結構化資料與產生的版本重複，拿掉
+        t = re.sub(r'[ \t]*<script type="application/ld\+json">\s*\{\s*"@context": "https://schema\.org",\s*"@type": "(?:Organization|Article)".*?</script>\n?', '', t, flags=re.S)
         t = LOGO_H1_RE.sub(lambda x: '<div class="aside-logo">%s</div>' % x.group(1), t)
         t = BLOG_BANNER_RE.sub('<p class="h1" style="color:#d9e0e7;">新聞中心</p>', t)
         # 標誌不再是 H1 後，沒有 H1 的頁面把橫幅標題升為 H1（加 .h2 / .h3 保留原本大小）
@@ -1245,7 +1478,8 @@ def build_all():
     update_llms(mods, pf)
     update_sitemap(mods)
     update_search_index(mods, pf)
-    written += ['nexus.html', 'llms.txt', 'sitemap.xml', SEARCH_INDEX] + [f for f in nav_changed if f not in written]
+    update_llms_full(mods, pf)
+    written += ['nexus.html', 'llms.txt', 'sitemap.xml', SEARCH_INDEX, LLMS_FULL] + [f for f in nav_changed if f not in written]
     return {'errors': [], 'written': written, 'removed': removed}
 
 

@@ -47,6 +47,11 @@ python3 tools/cms/server.py
 - 其他頁面的服務與代理產品：在 `tools/module-pages/_search.json` 增減。
 - 考題：`tools/search-eval/queries.json` 是模擬潛在客戶的搜尋說法，`node tools/search-eval/run.js --verbose` 會列出每題的前三名。GitHub Action 發布前會跑一次，命中率低於門檻就不發布。新增產品或服務時，順手補幾題。
 
+## 社群分享圖與給 AI 引擎的檔案
+
+- 每頁的分享圖（Facebook、LINE、X 預覽用，1200×630）由 `python3 tools/build-og-images.py` 畫在 `images/og/`，內容取自產品名稱與主張；手寫頁面的卡片文字在 `_pages.json` 的 `og_card`。只重畫內容有變的圖，GitHub Action 也會自動補畫。
+- `llms-full.txt` 由產頁程式產生，收錄每個產品的完整內容，給 AI 引擎一次讀完；`llms.txt` 是精簡索引。
+
 ## 發布
 
 編輯器只改本機檔案。發布方式：
