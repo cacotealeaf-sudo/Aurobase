@@ -603,6 +603,46 @@ def overview_mods(pf, mods):
     return get
 
 
+def need_index(need, slug, mods, primary):
+    """「依需求找模組」搜尋框比對用的文字。primary：需求敘述、產品名、關鍵字與搜尋用詞（命中加倍計分）；
+    其餘：搜尋摘要、產品定義、適合對象與能力標題。"""
+    m = mods.get(slug) or {}
+    if primary:
+        parts = [need, m.get('code', ''), m.get('name_zh', '')] + m.get('aliases', []) + m.get('keywords', []) + m.get('search_terms', [])
+    else:
+        parts = [plain(m.get('description', '')), plain(dict(m.get('summary', [])).get('是什麼', ''))]
+        parts += [a['who'] + a['why'] for a in m.get('audience', [])]
+        parts += [c['title'] for c in (m.get('capabilities') or {}).get('cards', [])]
+    return ' '.join(p for p in parts if p and p != 'AURO NEXUS').lower()
+
+
+# 需求搜尋：中文切成兩字一組、英數字取整個詞，與每列的索引文字比對計分，依分數排序。
+# 搜尋框裡打的字會在「把這個需求告訴我們」時帶進詢問表單。
+FINDER_JS = r"""(function(){
+var box=document.getElementById('finder');if(!box)return;
+var q=box.querySelector('#nm-finder-q'),clr=box.querySelector('.nm-finder-clear'),msg=box.querySelector('.nm-finder-msg'),
+none=box.querySelector('.nm-finder-none'),tb=box.querySelector('.nm-table-needs tbody'),wrap=box.querySelector('.nm-table-wrap');
+var rows=[].slice.call(tb.rows),order=rows.slice();
+var STOP='我們 我想 想要 需要 希望 如何 怎麼 可以 能夠 一個 這個 那個 公司 企業 我們的 幫我 協助 有沒 沒有 什麼 系統 平台 工具 方案 解決'.split(' ');
+function terms(s){s=s.toLowerCase();var out=[],m,re=/[a-z0-9][a-z0-9.+#-]*/g;
+ while((m=re.exec(s)))if(m[0].length>1)out.push(m[0]);
+ s.split(/[^\u3400-\u9fff]+/).forEach(function(r){if(r.length===1)out.push(r);for(var i=0;i+1<r.length;i++){var b=r.substr(i,2);if(STOP.indexOf(b)<0)out.push(b);}});
+ return out.filter(function(t,i,a){return a.indexOf(t)===i;});}
+function run(){var v=q.value.trim();clr.hidden=!v;
+ if(!v){order.forEach(function(r){r.hidden=false;tb.appendChild(r);});msg.textContent='';none.hidden=true;wrap.hidden=false;return;}
+ var ts=terms(v),need=ts.length>2?3:2,hits=[];
+ rows.forEach(function(r){var key=r.getAttribute('data-key'),txt=r.getAttribute('data-search'),sc=0;
+  ts.forEach(function(t){var w=t.length>2?2:1;if(key.indexOf(t)>=0)sc+=2*w;else if(txt.indexOf(t)>=0)sc+=w;});
+  r.hidden=sc<need;if(!r.hidden)hits.push([sc,r]);});
+ hits.sort(function(a,b){return b[0]-a[0];}).forEach(function(h){tb.appendChild(h[1]);});
+ msg.textContent=hits.length?'找到 '+hits.length+' 個相關的模組或方案，最相關的排在前面。':'';
+ none.hidden=hits.length>0;wrap.hidden=!hits.length;}
+q.addEventListener('input',run);
+clr.addEventListener('click',function(){q.value='';run();q.focus();});
+box.querySelector('.nm-finder-ask').addEventListener('click',function(){var t=document.getElementById('f06');if(t&&q.value.trim()&&!t.value)t.value=q.value.trim();});
+})();"""
+
+
 def full_name(x):
     """代號加中文名；解決方案的代號常常就是中文名，不重複寫兩次。"""
     return x['name_zh'] if x['code'] in x['name_zh'] else f"{x['code']} {x['name_zh']}"
@@ -676,11 +716,21 @@ def overview_html(pf, mods):
             cards(sols, sol_card, cols='col-lg-6 mb-4'), intro=pf.get('solutions_intro'), sid='solutions'))
 
     nd = pf['needs']
-    rows = ''.join(f'<tr><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{full_name(get(s))}</a></td></tr>' for need, s in nd['rows'] if get(s))
+    rows = ''.join(f'<tr data-key="{attr(need_index(need, s, mods, True))}" data-search="{attr(need_index(need, s, mods, False))}"><th scope="row">{need}</th><td><a href="{get(s)["file"]}">{full_name(get(s))}</a></td></tr>'
+                   for need, s in nd['rows'] if get(s))
     out.append(section('nm-compare', 'WHERE TO START', nd['heading'],
-        f'''                            <div class="nm-table-wrap"><table class="nm-table">
+        f'''                            <form class="nm-finder" role="search" onsubmit="return false">
+                                <label for="nm-finder-q">用一句話描述您的需求</label>
+                                <div class="nm-finder-row"><input id="nm-finder-q" type="search" autocomplete="off" placeholder="例如：想讓員工安全地使用 ChatGPT、把會員資料整合起來、掃描程式弱點">
+                                <button type="button" class="nm-finder-clear" hidden>清除</button></div>
+                                <p class="nm-finder-msg" aria-live="polite"></p>
+                            </form>
+                            <div class="nm-table-wrap"><table class="nm-table nm-table-needs">
                                 <thead><tr><th scope="col">您的需求</th><th scope="col">對應模組</th></tr></thead>
-                                <tbody>{rows}</tbody></table></div>''', intro=nd['intro']))
+                                <tbody>{rows}</tbody></table></div>
+                            <div class="nm-finder-none" hidden><p>沒有找到直接對應的模組。您的需求可能需要組合幾個模組或客製，直接告訴我們，我們會回覆建議的做法。</p>
+                                <a href="contact.html" class="btn-nm-primary nm-finder-ask" data-toggle="modal" data-target="#myModal">把這個需求告訴我們</a></div>
+                            <script>{FINDER_JS}</script>''', intro=nd['intro'], sid='finder'))
 
     out.append(section('nm-diff', "WHAT'S DIFFERENT", '平台的三個設計',
         cards(pf['diff'], lambda it: f'''

@@ -351,3 +351,15 @@ a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none;
     .nm-metrics { grid-template-columns: 1fr 1fr; }
     .nm-metric b { font-size: 1.35rem; }
 }
+
+/* ── 依需求找模組：搜尋框 ── */
+.nm-finder { margin: 0 0 1.2rem; padding: 0; max-width: 760px; }
+.nm-finder label { display: block; font-weight: 700; color: #28282c; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.nm-finder-row { display: flex; gap: 0.5rem; }
+.nm-finder input { flex: 1; min-width: 0; font-size: 1rem; padding: 0.8rem 1rem; border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; background: #fff; color: #28282c; }
+.nm-finder input:focus { outline: none; border-color: var(--m-bright); box-shadow: 0 0 0 3px color-mix(in srgb, var(--m-bright) 20%, transparent); }
+.nm-finder-clear { border: 1px solid rgba(0,0,0,0.15); background: #fff; border-radius: 10px; padding: 0 1rem; color: #555; font-size: 0.9rem; cursor: pointer; }
+.nm-finder-msg { font-size: 0.86rem; color: #666; margin: 0.5rem 0 0; min-height: 1.3em; }
+.nm-finder-none { background: #fff; border: 1px dashed rgba(0,0,0,0.18); border-radius: 12px; padding: 1.4rem 1.5rem; }
+.nm-finder-none p { color: #444; line-height: 1.8; margin-bottom: 1rem; }
+.nm-table-needs tbody th { width: 55%; }

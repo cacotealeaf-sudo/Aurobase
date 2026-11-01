@@ -301,5 +301,15 @@
     "NEXUS Cardea",
     "AURO NEXUS Cardea"
   ],
-  "fullname": "CARDEA = Certificate Automation: Renewal, Discovery, Enrollment & Attestation"
+  "fullname": "CARDEA = Certificate Automation: Renewal, Discovery, Enrollment & Attestation",
+  "search_terms": [
+    "憑證",
+    "SSL",
+    "TLS",
+    "憑證過期",
+    "HTTPS",
+    "後量子",
+    "PQC",
+    "金鑰"
+  ]
 }

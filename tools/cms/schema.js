@@ -19,6 +19,7 @@ window.MODULE_SCHEMA = [
     { k: 'title', label: '頁面標題（搜尋結果的藍字）', type: 'str', max: 32, width: true, help: '主關鍵字放最前面。英數字算半格。' },
     { k: 'description', label: '搜尋摘要', type: 'text', min: 70, max: 160, help: '第一句寫「X 是奧洛（Aurobase）的…」，AI 引擎最常直接引用這段。' },
     { k: 'keywords', label: '目標關鍵字（第一個是主關鍵字）', type: 'tags', help: '右側「SEO / GEO」分頁可以查 Google 台灣的搜尋建議，點一下就加進來。' },
+    { k: 'search_terms', label: '需求搜尋用詞', type: 'tags', help: '平台總覽「依需求找模組」的搜尋框會比對這些詞；放客戶描述需求時常用的說法，不會顯示在頁面上。' },
     { k: 'eyebrow', label: '英文副名', type: 'str', help: '例如 Cardea — Machine Identity & Certificate Governance。' },
     { k: 'inquiry_chip', label: '諮詢表單預設勾選', type: 'select', options: 'chips' },
   ]},
