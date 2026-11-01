@@ -185,23 +185,20 @@
       [
         "整合會員資料建立單一客戶視圖",
         [
-          "nexus-cdp.html",
-          "solution.html#auro_cdp"
+          "nexus-cdp.html"
         ]
       ],
       [
         "客戶分群做精準行銷",
         [
           "nexus-cdp.html",
-          "solution.html#auro_cdp",
           "solution.html#hcl_unica"
         ]
       ],
       [
         "CDP 客戶數據平台",
         [
-          "nexus-cdp.html",
-          "solution.html#auro_cdp"
+          "nexus-cdp.html"
         ]
       ],
       [
@@ -677,8 +674,7 @@
         "CDP 是什麼",
         [
           "nexus-cdp.html",
-          "blogpost/single-2023-12-4.html",
-          "solution.html#auro_cdp"
+          "blogpost/single-2023-12-4.html"
         ]
       ]
     ],
@@ -805,8 +801,7 @@
       [
         "客戶資料散在好幾個系統",
         [
-          "nexus-cdp.html",
-          "solution.html#auro_cdp"
+          "nexus-cdp.html"
         ]
       ],
       [
@@ -859,8 +854,7 @@
       [
         "customer data platform",
         [
-          "nexus-cdp.html",
-          "solution.html#auro_cdp"
+          "nexus-cdp.html"
         ]
       ],
       [
