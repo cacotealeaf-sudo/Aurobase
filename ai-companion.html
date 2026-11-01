@@ -32,7 +32,6 @@
 
     <!-- ✅ LINE Seed 字體家族 (與 index.php 一致) -->
     <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/line-seed-font.css">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
@@ -630,6 +629,36 @@
       ]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://aurobase.com/ai-companion.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI 智慧語伴提供哪些功能？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI 智慧語伴提供三類功能：主動關懷（語音陪伴、了解健康與情緒、自動產生關懷報告）、用藥提醒（掃描藥單建檔、定時語音提醒與服藥回報），以及社工輔助（語音轉文字、分析長者需求）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 智慧語伴適合哪些單位使用？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合需要關懷偏鄉或獨居長者、社工人力有限的社福與照護單位；系統自動產生關懷報告與用藥提醒，協助社工掌握狀況、減輕工作負擔。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 智慧語伴如何協助社工？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "語伴把對話自動轉成文字並產生關懷報告，社工不必逐一記錄；系統也會分析長者需求，協助社工安排資源，新進社工也能較快上手。"
+          }
+        }
+      ]
+    },
+    {
       "@type": "Service",
       "name": "AI 智慧語伴",
       "serviceType": "AI 語音陪伴與健康關懷",
@@ -1010,6 +1039,9 @@
                 </div>
             </section>
 
+<!-- PAGE-FAQ:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+<section id="faq" class="ftco-section pg-faq"><div class="row justify-content-end"><div class="col-md-10"><div class="pg-faq-wrap"><p class="pg-faq-label">FAQ</p><h2>常見問題</h2><div class="pg-faq-item"><h3>AI 智慧語伴提供哪些功能？</h3><p>AI 智慧語伴提供三類功能：主動關懷（語音陪伴、了解健康與情緒、自動產生關懷報告）、用藥提醒（掃描藥單建檔、定時語音提醒與服藥回報），以及社工輔助（語音轉文字、分析長者需求）。</p></div><div class="pg-faq-item"><h3>AI 智慧語伴適合哪些單位使用？</h3><p>適合需要關懷偏鄉或獨居長者、社工人力有限的社福與照護單位；系統自動產生關懷報告與用藥提醒，協助社工掌握狀況、減輕工作負擔。</p></div><div class="pg-faq-item"><h3>AI 智慧語伴如何協助社工？</h3><p>語伴把對話自動轉成文字並產生關懷報告，社工不必逐一記錄；系統也會分析長者需求，協助社工安排資源，新進社工也能較快上手。</p></div></div></div></div></section>
+<!-- PAGE-FAQ:END -->
             <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
 <div class="container px-md-4">
 <div class="footer-legal text-center">
@@ -1026,13 +1058,6 @@ Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span cla
         </div><!-- END COLORLIB-MAIN -->
     </div><!-- END COLORLIB-PAGE -->
 
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen">
-        <svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#E63109"/>
-        </svg>
-    </div>
 
 <!-- ✅ 優化後的 JS 載入 -->
     <script src="js/jquery.min.js"></script>

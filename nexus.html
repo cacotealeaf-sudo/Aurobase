@@ -326,7 +326,6 @@
 
     <!-- LINE Seed 字體 -->
     <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/line-seed-font.css">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
@@ -1156,6 +1155,19 @@ var m=/[?&]q=([^&#]*)/.exec(location.search);if(m){q.value=decodeURIComponent(m[
                 </div>
             </section>
 
+            <section id="glossary" class="nm-glossary nm-section">
+                <div class="container-fluid px-3 px-md-0">
+                    <div class="row justify-content-start">
+                        <div class="col-md-12">
+                            <p class="section-label">GLOSSARY</p>
+                            <h2 class="section-heading">AURO NEXUS 名詞解釋</h2>
+                            <p class="section-intro">平台上常見的名詞，一句話說明；完整說明在各產品頁。</p>
+                            <dl class="gl-list"><div class="gl-item"><dt><a href="nexus-abm.html#what-is">ABM</a></dt><dd>ABM（Account-Based Marketing，帳號式行銷）是 B2B 行銷策略：以目標企業為單位（不以個別名單為單位），集中資源經營最有價值的客戶。<span class="gl-src">見 <a href="nexus-abm.html">NEXUS ABM 企業客戶帳號經營</a></span></dd></div><div class="gl-item"><dt><a href="solution-ai-ocr.html#what-is">AI OCR</a></dt><dd>AI OCR 在文字辨識之外，還會判斷每段文字屬於哪個欄位、可信度多高，並整理成系統可以直接使用的資料。<span class="gl-src">見 <a href="solution-ai-ocr.html">AI OCR 智慧文件辨識</a></span></dd></div><div class="gl-item"><dt><a href="nexus-forge.html#what-is">AI 閘道（LLM Gateway）</a></dt><dd>AI 閘道（LLM Gateway）是企業內所有 AI 請求的必經入口：在請求送到模型之前檢查權限與政策，把請求路由到經核准的模型，並記錄推論、資料存取與工具使用。<span class="gl-src">見 <a href="nexus-forge.html">Forge 治理化 AI 閘道</a></span></dd></div><div class="gl-item"><dt><a href="nexus-cdp.html#what-is">CDP 客戶數據平台</a></dt><dd>CDP（Customer Data Platform，客戶數據平台）把分散在會員、交易、官網、App、客服等系統的客戶資料整合成單一客戶檔案，供分群、個人化與行銷自動化使用。<span class="gl-src">見 <a href="nexus-cdp.html">AURA CDP 客戶數據平台</a></span></dd></div><div class="gl-item"><dt><a href="nexus-library.html#what-is">企業版個人知識管理</a></dt><dd>個人知識管理（PKM）是把工作上讀到、想到的資訊有系統地收藏、整理與找回。<span class="gl-src">見 <a href="nexus-library.html">Library 個人知識收藏空間</a></span></dd></div><div class="gl-item"><dt><a href="nexus-insight.html#what-is">企業知識庫 AI</a></dt><dd>企業知識庫 AI 讓員工用自然語言查詢內部文件，由系統以 RAG（檢索增強生成）先找出相關段落、再產生答案。<span class="gl-src">見 <a href="nexus-insight.html">Insight 企業知識萃取與治理</a></span></dd></div><div class="gl-item"><dt><a href="nexus-auro.html#what-is">企業級 AI Agent 平台</a></dt><dd>企業級 AI Agent 平台讓 AI 代理能拆解任務、呼叫工具、委派子任務，同時由平台強制執行預算、權限與人工審核，使自動化在受控範圍內運作。<span class="gl-src">見 <a href="nexus-auro.html">Auro AI 任務編排</a></span></dd></div><div class="gl-item"><dt><a href="solution-digital-trail.html#what-is">數位軌跡資料整合</a></dt><dd>數位軌跡是客戶在網站與 App 上留下的瀏覽、點擊與操作紀錄。<span class="gl-src">見 <a href="solution-digital-trail.html">AURA Connect 數位軌跡行銷資料整合</a></span></dd></div><div class="gl-item"><dt><a href="nexus-geo.html#what-is">生成式引擎優化（GEO）</a></dt><dd>生成式引擎優化（Generative Engine Optimization，GEO）是讓品牌的網站與內容更容易被 ChatGPT、Gemini、Perplexity 這類生成式 AI 讀懂、採信與引用的做法。<span class="gl-src">見 <a href="nexus-geo.html">NEXUS GEO 生成式搜尋能見度</a></span></dd></div><div class="gl-item"><dt><a href="nexus-saga.html#what-is">非結構化資料治理</a></dt><dd>非結構化資料治理是對文件、錄音、影像、電子郵件與資料表等資料，做分級、保存期限、存取權限與銷毀的管理，並留下能證明「誰在什麼時候依哪一條規定做了什麼」的紀錄。<span class="gl-src">見 <a href="nexus-saga.html">SAGA 非結構化資料治理</a></span></dd></div></dl>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="nm-faq nm-section">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
@@ -1609,13 +1621,6 @@ var m=/[?&]q=([^&#]*)/.exec(location.search);if(m){q.value=decodeURIComponent(m[
         </div><!-- END COLORLIB-MAIN -->
     </div><!-- END COLORLIB-PAGE -->
 
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen">
-        <svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#E63109"/>
-        </svg>
-    </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>

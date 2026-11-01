@@ -80,7 +80,7 @@
 }
 
 /* ── 側欄「搜尋產品與服務」與搜尋視窗（js/site-search.js）── */
-.nav-search-btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; max-width: 230px; margin: 0 0 1.2rem;
+.nav-search-btn { display: flex; align-items: center; gap: 0.5rem; width: 100%; max-width: 200px; margin: 0 0 1.2rem;
     padding: 0.55rem 0.85rem; border: 1px solid rgba(0,0,0,0.14); border-radius: 999px; background: rgba(255,255,255,0.85);
     color: #555; font-size: 0.88rem; text-align: left; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
 .nav-search-btn span { font-size: 1.05rem; line-height: 1; }
@@ -114,3 +114,25 @@ html.ss-open, html.ss-open body { overflow: hidden; }
 @media (max-width: 991.98px) {
     #colorlib-main-menu .nav-row { white-space: nowrap; }
 }
+
+/* ── 手寫頁面的常見問題（由 _pages.json 產生）── */
+.pg-faq { padding-top: 2rem; }
+.pg-faq-wrap { max-width: 860px; padding-right: 48px; }
+.pg-faq-label { font-size: 0.78rem; letter-spacing: 0.15em; color: #E63109; font-weight: 600; margin-bottom: 0.3rem; }
+.pg-faq h2 { font-size: 1.8rem; font-weight: 700; color: #28282c; margin-bottom: 1.4rem; }
+.pg-faq-item { background: #fff; border-radius: 12px; padding: 1.3rem 1.5rem; margin-bottom: 0.9rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+.pg-faq-item h3 { font-size: 1.02rem; font-weight: 700; color: #28282c; margin: 0 0 0.5rem; line-height: 1.6; }
+.pg-faq-item p { font-size: 0.92rem; color: #555; line-height: 1.85; margin: 0; }
+@media (max-width: 767.98px) { .pg-faq-wrap { padding: 0 15px; } .pg-faq h2 { font-size: 1.5rem; } }
+
+/* ── 新聞文章：延伸閱讀 ── */
+.pg-related { margin: 2.4rem 0 1rem; padding: 1.2rem 1.4rem; border-radius: 12px; background: #fff7f4; border-left: 4px solid #E63109; }
+.pg-related h2 { font-size: 1.05rem; font-weight: 700; color: #28282c; margin: 0 0 0.6rem; }
+.pg-related ul { margin: 0; padding-left: 1.1rem; }
+.pg-related li { margin: 0.25rem 0; line-height: 1.7; }
+.pg-related a { color: #E63109; }
+
+/* 不用全螢幕載入轉圈，也不讓段落等程式跑完才淡入：內容在 HTML 裡，載到就顯示 */
+#ftco-loader { display: none !important; }
+.ftco-animate { opacity: 1 !important; visibility: visible !important; }
+.ftco-animate.ftco-animated { animation: none !important; }

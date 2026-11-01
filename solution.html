@@ -32,7 +32,6 @@
     
 	<!-- ✅ LINE Seed 字體家族 -->
     <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/line-seed-font.css">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
@@ -141,6 +140,52 @@
         "資安弱點掃描",
         "數位廣告投放",
         "社群經營"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://aurobase.com/solution.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "奧洛代理哪些行銷科技產品？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "奧洛代理 CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "HCL Discover 可以部署在企業自有機房嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。HCL Discover 可部署於企業自有機房（Windows／RHEL 虛擬機或容器），也提供雲端與 HCL 代管選項，金融機構可讓顧客行為資料全程留在境內。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "HCL Discover 會記錄密碼或身分證字號嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會留下明文。密碼、OTP、身分證字號、帳號、卡號等欄位在瀏覽器端就遮罩或不擷取，伺服器端再遮罩一次，資料庫與回放畫面都沒有明文。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "HCL Unica 包含哪些模組？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HCL Unica 包含 Plan、Campaign、Optimize、Journey、Interact、Deliver、Link 等模組，以及 Unica COM、Director、Insights 附加元件，涵蓋行銷資源管理、跨通路活動、客戶旅程與即時個人化推薦。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "網站行為軌跡可以串到 CDP 或行銷自動化嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。HCL Discover 與 HCL Unica、HCL CDP 原生整合並提供 REST API；行為軌跡也可以交給 AURA Connect 整理成行銷標籤，再交給 CDP 使用。"
+          }
+        }
       ]
     },
     {
@@ -478,6 +523,9 @@
   </div>
 </section>
 		
+<!-- PAGE-FAQ:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+<section id="faq" class="ftco-section pg-faq"><div class="row justify-content-end"><div class="col-md-10"><div class="pg-faq-wrap"><p class="pg-faq-label">FAQ</p><h2>常見問題</h2><div class="pg-faq-item"><h3>奧洛代理哪些行銷科技產品？</h3><p>奧洛代理 CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。</p></div><div class="pg-faq-item"><h3>HCL Discover 可以部署在企業自有機房嗎？</h3><p>可以。HCL Discover 可部署於企業自有機房（Windows／RHEL 虛擬機或容器），也提供雲端與 HCL 代管選項，金融機構可讓顧客行為資料全程留在境內。</p></div><div class="pg-faq-item"><h3>HCL Discover 會記錄密碼或身分證字號嗎？</h3><p>不會留下明文。密碼、OTP、身分證字號、帳號、卡號等欄位在瀏覽器端就遮罩或不擷取，伺服器端再遮罩一次，資料庫與回放畫面都沒有明文。</p></div><div class="pg-faq-item"><h3>HCL Unica 包含哪些模組？</h3><p>HCL Unica 包含 Plan、Campaign、Optimize、Journey、Interact、Deliver、Link 等模組，以及 Unica COM、Director、Insights 附加元件，涵蓋行銷資源管理、跨通路活動、客戶旅程與即時個人化推薦。</p></div><div class="pg-faq-item"><h3>網站行為軌跡可以串到 CDP 或行銷自動化嗎？</h3><p>可以。HCL Discover 與 HCL Unica、HCL CDP 原生整合並提供 REST API；行為軌跡也可以交給 AURA Connect 整理成行銷標籤，再交給 CDP 使用。</p></div></div></div></div></section>
+<!-- PAGE-FAQ:END -->
 	        <footer id="footer-sec" class="ftco-footer ftco-bg-dark ftco-section">
 <div class="container px-md-4">
 <div class="footer-legal text-center">
@@ -494,8 +542,6 @@ Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved. | <span cla
 		    </div><!-- END COLORLIB-MAIN -->
 	        </div><!-- END COLORLIB-PAGE -->
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#E63109"/></svg></div>
 
     <!-- ✅ 優化後的 JS 載入 -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>

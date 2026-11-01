@@ -57,6 +57,28 @@
         "LINE 官方帳號",
         "GA4",
         "網站數據分析"
+      ],
+      "faq": [
+        {
+          "q": "奧洛提供哪些數位廣告投放服務？",
+          "a": "奧洛提供 Google 關鍵字廣告、GDN 聯播網、YouTube 影音廣告、Yahoo 原生廣告、LINE 廣告，以及 Facebook、Instagram 廣告的投放服務。"
+        },
+        {
+          "q": "奧洛可以協助建置 LINE 官方帳號嗎？",
+          "a": "可以。奧洛協助建置 LINE 官方帳號並建立顧客分眾標籤，也可規劃集點卡、優惠券、互動遊戲等行銷活動，留住既有顧客並開發新客。"
+        },
+        {
+          "q": "社群經營包含哪些內容？",
+          "a": "包含 Facebook、Instagram 的社群經營與貼文廣告，以及社群輿情監測：找出網友對品牌、產品或服務的討論內容與出現的地方。"
+        },
+        {
+          "q": "網站數據分析可以看到什麼？",
+          "a": "以 Google Analytics 等網站分析工具，了解網站流量從哪裡來、使用者在網站上做了什麼、去了哪裡，以及是否完成購買或填表等轉換。"
+        },
+        {
+          "q": "要怎麼開始和奧洛合作數位行銷？",
+          "a": "填寫網站上的諮詢表單或來電 02-5568-4688，說明產品、目標客群與預算，奧洛會回覆建議的投放與經營方式。"
+        }
       ]
     },
     "solution.html": {
@@ -86,6 +108,28 @@
         "行銷自動化",
         "Magnolia CMS",
         "內容管理系統"
+      ],
+      "faq": [
+        {
+          "q": "奧洛代理哪些行銷科技產品？",
+          "a": "奧洛代理 CXA 顧客體驗分析、HCL Discover 數位體驗分析、CDP 客戶數據平台、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。"
+        },
+        {
+          "q": "HCL Discover 可以部署在企業自有機房嗎？",
+          "a": "可以。HCL Discover 可部署於企業自有機房（Windows／RHEL 虛擬機或容器），也提供雲端與 HCL 代管選項，金融機構可讓顧客行為資料全程留在境內。"
+        },
+        {
+          "q": "HCL Discover 會記錄密碼或身分證字號嗎？",
+          "a": "不會留下明文。密碼、OTP、身分證字號、帳號、卡號等欄位在瀏覽器端就遮罩或不擷取，伺服器端再遮罩一次，資料庫與回放畫面都沒有明文。"
+        },
+        {
+          "q": "HCL Unica 包含哪些模組？",
+          "a": "HCL Unica 包含 Plan、Campaign、Optimize、Journey、Interact、Deliver、Link 等模組，以及 Unica COM、Director、Insights 附加元件，涵蓋行銷資源管理、跨通路活動、客戶旅程與即時個人化推薦。"
+        },
+        {
+          "q": "網站行為軌跡可以串到 CDP 或行銷自動化嗎？",
+          "a": "可以。HCL Discover 與 HCL Unica、HCL CDP 原生整合並提供 REST API；行為軌跡也可以交給 AURA Connect 整理成行銷標籤，再交給 CDP 使用。"
+        }
       ]
     },
     "ai-companion.html": {
@@ -108,6 +152,20 @@
         "社工",
         "長照",
         "關懷報告"
+      ],
+      "faq": [
+        {
+          "q": "AI 智慧語伴提供哪些功能？",
+          "a": "AI 智慧語伴提供三類功能：主動關懷（語音陪伴、了解健康與情緒、自動產生關懷報告）、用藥提醒（掃描藥單建檔、定時語音提醒與服藥回報），以及社工輔助（語音轉文字、分析長者需求）。"
+        },
+        {
+          "q": "AI 智慧語伴適合哪些單位使用？",
+          "a": "適合需要關懷偏鄉或獨居長者、社工人力有限的社福與照護單位；系統自動產生關懷報告與用藥提醒，協助社工掌握狀況、減輕工作負擔。"
+        },
+        {
+          "q": "AI 智慧語伴如何協助社工？",
+          "a": "語伴把對話自動轉成文字並產生關懷報告，社工不必逐一記錄；系統也會分析長者需求，協助社工安排資源，新進社工也能較快上手。"
+        }
       ]
     },
     "blog.html": {
@@ -168,6 +226,20 @@
         "網路行銷",
         "品牌經營",
         "數位廣告"
+      ],
+      "related": [
+        {
+          "label": "數位廣告投放服務",
+          "url": "marketing.html#advertising"
+        },
+        {
+          "label": "社群經營與 LINE 官方帳號",
+          "url": "marketing.html#community"
+        },
+        {
+          "label": "網站數據分析",
+          "url": "marketing.html#data_analysis"
+        }
       ]
     },
     "blogpost/single-2023-11-10.html": {
@@ -180,6 +252,20 @@
         "影像回放",
         "CXA",
         "數位體驗"
+      ],
+      "related": [
+        {
+          "label": "CXA 顧客體驗分析",
+          "url": "solution.html#cxa"
+        },
+        {
+          "label": "HCL Discover 數位體驗分析",
+          "url": "solution.html#hcl_discover"
+        },
+        {
+          "label": "AURA Connect 數位軌跡行銷資料整合",
+          "url": "solution-digital-trail.html"
+        }
       ]
     },
     "blogpost/single-2023-12-4.html": {
@@ -192,6 +278,20 @@
         "個人化行銷",
         "精準行銷",
         "客戶資料整合"
+      ],
+      "related": [
+        {
+          "label": "AURA CDP 客戶數據平台",
+          "url": "nexus-cdp.html"
+        },
+        {
+          "label": "CDP 客戶數據平台（代理產品）",
+          "url": "solution.html#auro_cdp"
+        },
+        {
+          "label": "HCL Unica 行銷自動化",
+          "url": "solution.html#hcl_unica"
+        }
       ]
     },
     "blogpost/single-2024-1-8.html": {
@@ -204,6 +304,20 @@
         "Facebook",
         "Instagram",
         "LINE 官方帳號"
+      ],
+      "related": [
+        {
+          "label": "社群經營與 LINE 官方帳號",
+          "url": "marketing.html#community"
+        },
+        {
+          "label": "Pulse 輿情訊號分析",
+          "url": "nexus-pulse.html"
+        },
+        {
+          "label": "數位廣告投放服務",
+          "url": "marketing.html#advertising"
+        }
       ]
     }
   }

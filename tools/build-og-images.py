@@ -145,7 +145,9 @@ def main():
         if '--all' not in sys.argv and seen.get(key) == h and os.path.exists(dest):
             continue
         if card.get('photo'):
-            h = hashlib.sha1((h + str(os.path.getmtime(os.path.join(ROOT, card['photo'])))).encode()).hexdigest()[:12]
+            # 用配圖的內容雜湊判斷要不要重裁（檔案時間在每次 checkout 都不同，不能用）
+            with open(os.path.join(ROOT, card['photo']), 'rb') as f:
+                h = hashlib.sha1(h.encode() + f.read()).hexdigest()[:12]
             done[key] = h
             if '--all' not in sys.argv and seen.get(key) == h and os.path.exists(dest):
                 continue

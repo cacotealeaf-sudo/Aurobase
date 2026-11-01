@@ -405,7 +405,6 @@ def head(m):
 
     <link href="images/favicon.ico" rel="shortcut icon">
     <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="WOFF2/LINESeedTW_OTF_Rg.subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/line-seed-font.css">
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -867,6 +866,19 @@ def overview_html(pf, mods):
                                     <div class="diff-card"><i class="iconoir-{it['icon']} diff-icon"></i>
                                         <h3>{it['title']}</h3><p>{it['text']}</p></div>'''), dark=True))
 
+    # 名詞解釋：各產品頁「什麼是…」的第一句定義，連回該頁（結構化資料的 DefinedTermSet 指向這裡）
+    terms = [(t, m) for t, m in ((defined_term(m), m) for m in mods.values()) if t]
+    if terms:
+        def first_sentence(x):
+            x = plain(x)
+            return x[:x.index('。') + 1] if '。' in x else x
+        rows = ''.join(f'<div class="gl-item"><dt><a href="{m["file"]}#what-is">{t["name"]}</a></dt>'
+                       f'<dd>{first_sentence(m["definition"]["a"][0])}<span class="gl-src">見 <a href="{m["file"]}">{full_name(m)}</a></span></dd></div>'
+                       for t, m in sorted(terms, key=lambda x: x[0]['name']))
+        out.append(section('nm-glossary', 'GLOSSARY', 'AURO NEXUS 名詞解釋',
+            f'                            <dl class="gl-list">{rows}</dl>',
+            intro='平台上常見的名詞，一句話說明；完整說明在各產品頁。', sid='glossary'))
+
     items = '\n'.join(f'''                                    <div class="faq-item"><h3>{f['q']}</h3><p>{f['a']}</p></div>''' for f in pf['faq'])
     out.append(section('nm-faq', 'FAQ', '關於 AURO NEXUS 的常見問題',
         f'                            <div class="row"><div class="col-lg-10">\n{items}\n                            </div></div>'))
@@ -1012,6 +1024,11 @@ def llms_full(mods, pf):
         if e['cat'] in ('數位行銷服務', '代理產品', 'AI 智慧語伴', '客服中心'):
             u = e['url'] if e['url'].startswith('http') else '%s/%s' % (SITE, e['url'])
             out.append('- [%s](%s)（%s）：%s' % (e['title'], u, e['cat'], e['desc']))
+    for rel, cfg in load_pages_cfg().items():
+        if cfg.get('faq'):
+            title = html.unescape(re.search(r'<title>(.*?)</title>', read(os.path.join(ROOT, rel)), re.S).group(1)) if os.path.exists(os.path.join(ROOT, rel)) else rel
+            out += ['', '### %s：常見問題（%s/%s）' % (re.sub(r'\s*[｜|].*$', '', title), SITE, rel), '']
+            out += sum([['**問：%s**' % f['q'], '答：%s' % f['a'], ''] for f in cfg['faq']], [])
     return '\n'.join(re.sub(r'\n{3,}', '\n\n', '\n'.join(out)).split('\n')).rstrip() + '\n'
 
 
@@ -1196,9 +1213,12 @@ def audit_platform(pf):
             'serp': {'title': title, 'url': 'aurobase.com › nexus.html', 'description': desc}}
 
 
+NOT_INDEXED = ('404.html',)   # 不收錄、不稽核的頁面（404 頁標 noindex）
+
+
 def site_pages():
     pages = sorted(glob.glob(os.path.join(ROOT, '*.html'))) + sorted(glob.glob(os.path.join(ROOT, 'blogpost', '*.html')))
-    return [os.path.relpath(p, ROOT) for p in pages]
+    return [r for r in (os.path.relpath(p, ROOT) for p in pages) if r not in NOT_INDEXED]
 
 
 def page_audit(rel):
@@ -1320,6 +1340,9 @@ def static_ld(rel, cfg, s):
     graph = [page, ORG]
     if rel == 'index.html':
         graph.append(WEBSITE)
+    if cfg.get('faq'):
+        graph.append({'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': [
+            {'@type': 'Question', 'name': f['q'], 'acceptedAnswer': {'@type': 'Answer', 'text': f['a']}} for f in cfg['faq']]})
     page['primaryImageOfPage'] = {'@type': 'ImageObject', 'url': '%s/%s' % (SITE, og_image(og_key(rel))), 'width': OG_W, 'height': OG_H}
     if cfg.get('keywords'):
         page['keywords'] = ', '.join(cfg['keywords'])
@@ -1354,6 +1377,8 @@ def static_ld(rel, cfg, s):
     return json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, indent=2)
 
 
+REL_BEGIN, REL_END = '<!-- RELATED:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->', '<!-- RELATED:END -->'
+FAQ_BEGIN, FAQ_END = '<!-- PAGE-FAQ:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->', '<!-- PAGE-FAQ:END -->'
 SOCIAL_BEGIN, SOCIAL_END = '<!-- SOCIAL-META:BEGIN（由 tools/build-module-pages.py 產生）-->', '<!-- SOCIAL-META:END -->'
 SOCIAL_STRIP = re.compile(r'[ \t]*<meta (?:property="og:(?:image[^"]*|locale|type)"|name="(?:twitter:[^"]*|robots|theme-color|article-[^"]*)"|property="article:[^"]*")[^>]*>\n?')
 
@@ -1427,6 +1452,21 @@ def update_static_pages():
         if cfg.get('type') == 'BlogPosting':
             alt = attr(re.sub(r'｜.*$', '', re.search(r'<title>(.*?)</title>', t, re.S).group(1)))
             t = re.sub(r'(<img loading="lazy" src="\.\./images/[^"]+") alt=""', lambda x: '%s alt="%s"' % (x.group(1), alt), t)
+        if cfg.get('related'):
+            links = ''.join('<li><a href="../%s">%s</a></li>' % (attr(x['url']), html.escape(x['label'])) for x in cfg['related'])
+            rb = (REL_BEGIN + '\n<aside class="pg-related" aria-label="延伸閱讀"><h2>延伸閱讀</h2><ul>%s</ul></aside>\n' % links + REL_END)
+            if REL_BEGIN in t:
+                t = t[:t.index(REL_BEGIN)] + rb + t[t.index(REL_END) + len(REL_END):]
+            else:
+                t = t.replace('<!-- <div class="tag-widget post-tag-container', rb + '\n<!-- <div class="tag-widget post-tag-container', 1)
+        if cfg.get('faq'):
+            items = ''.join('<div class="pg-faq-item"><h3>%s</h3><p>%s</p></div>' % (html.escape(f['q']), html.escape(f['a'])) for f in cfg['faq'])
+            fb = (FAQ_BEGIN + '\n<section id="faq" class="ftco-section pg-faq"><div class="row justify-content-end"><div class="col-md-10">'
+                  '<div class="pg-faq-wrap"><p class="pg-faq-label">FAQ</p><h2>常見問題</h2>%s</div></div></div></section>\n' % items + FAQ_END)
+            if FAQ_BEGIN in t:
+                t = t[:t.index(FAQ_BEGIN)] + fb + t[t.index(FAQ_END) + len(FAQ_END):]
+            else:
+                t = re.sub(r'([ \t]*<footer id="footer-sec")', lambda x: fb + '\n' + x.group(1), t, count=1)
         block = LD_BEGIN + '\n    <script type="application/ld+json">\n' + static_ld(rel, cfg, t) + '\n</script>\n    ' + LD_END
         if LD_BEGIN in t:
             t = t[:t.index(LD_BEGIN)] + block + t[t.index(LD_END) + len(LD_END):]
@@ -1549,7 +1589,11 @@ def nav_html(page, prefix, pf, mods):
 
 def nav_pages():
     pages = sorted(glob.glob(os.path.join(ROOT, '*.html'))) + sorted(glob.glob(os.path.join(ROOT, 'blogpost', '*.html')))
-    return pages + [os.path.join(SRC, 'chrome-top.html')]
+    return [p for p in pages if os.path.basename(p) not in NOT_INDEXED] + [os.path.join(SRC, 'chrome-top.html')]
+
+
+CJK_PRELOAD_RE = re.compile(r'[ \t]*<link rel="preload" href="[./]*WOFF2/LINESeedTW_OTF_(?:Rg|Bd)\.subset\.woff2"[^>]*>\n?')
+LOADER_RE = re.compile(r'[ \t]*(?:<!-- loader -->\s*)?<div id="ftco-loader"[^>]*>.*?</svg>\s*</div>\n?', re.S)
 
 
 def update_nav(mods, pf=None):
@@ -1565,6 +1609,11 @@ def update_nav(mods, pf=None):
         # 產品頁外框（chrome-top）只放通用版本；build() 產頁時再換成標出該產品的版本
         block = nav_html(os.path.basename(p), prefix, pf, mods)
         t = NAV_RE.sub(lambda m: m.group(1) + block, s, count=1)
+        # 全螢幕載入轉圈：內容本來就在 HTML 裡，轉圈只會讓訪客多等到所有程式載完才看得到頁面
+        t = LOADER_RE.sub('', t)
+        # 中文字型子集約 300 KB：預先載入會和畫面需要的 CSS 搶頻寬，首次繪製在慢速網路慢 1 秒以上；
+        # 字型已設 font-display: swap，不預載也會先用系統字顯示、載到再換
+        t = CJK_PRELOAD_RE.sub('', t)
         link = '<link rel="stylesheet" href="%scss/site-nav.css">' % prefix
         if link not in t and '</head>' in t:
             t = t.replace('</head>', '    %s\n  </head>' % link, 1)
