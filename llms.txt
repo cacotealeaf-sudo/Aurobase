@@ -31,6 +31,10 @@
 - [CDP到底是什麼？你不能不知道的關鍵！](blogpost/single-2023-12-4.html) - 2023/12/04
 - [社群經營超easy! Aurocore來助您](blogpost/single-2024-1-8.html) - 2024/01/08
 
+## 事業夥伴
+
+Google、Meta、LINE（廣告投放）、HCL Software（HCL Discover、HCL Unica）、Magnolia（CMS）、精誠資訊（系統整合與通路）、零壹科技。
+
 ## 數位行銷服務
 
 - **數位廣告投放**: Google 關鍵字廣告、GDN 聯播網、YouTube 影音廣告、Yahoo 原生廣告、LINE 廣告，以及 Facebook、Instagram 廣告。
