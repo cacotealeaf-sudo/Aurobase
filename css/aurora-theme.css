@@ -91,7 +91,11 @@
 .idx-hero-title span { display: block; }
 .idx-hero-title em { font-style: normal; color: var(--idx-accent); }
 .idx-hero .idx-rule { max-width: 520px; }
-.idx-hero-desc { max-width: 520px; font-size: 17px; line-height: 1.85; color: var(--idx-text-2); }
+/* 說明文字壓在極光字元上：主文字色＋一圈邊緣漸淡的深色光暈，讓背景字元不穿過文字（不是硬框，極光在周圍仍看得到） */
+.idx-hero-desc {
+  max-width: 520px; font-size: 17px; line-height: 1.85; color: var(--idx-ink);
+  background: rgba(11, 11, 13, 0.82); box-shadow: 0 0 32px 26px rgba(11, 11, 13, 0.82); border-radius: 2px;
+}
 .idx-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── TICKER ── */
