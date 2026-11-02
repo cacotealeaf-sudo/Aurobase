@@ -3,11 +3,13 @@
  * Phase 1 優化後 + Particles.js 性能優化
  */
 
-// AOS 滾動動畫初始化
-AOS.init({
-  duration: 800,
-  easing: "slide"
-});
+// AOS 滾動動畫初始化（只有載入 aos.js 的頁面才有）
+if (window.AOS) {
+  AOS.init({
+    duration: 800,
+    easing: "slide"
+  });
+}
 
 (function($) {
   "use strict";
@@ -109,8 +111,11 @@ AOS.init({
     });
   }
 
+  // 下列外掛只在用得到的頁面載入；沒載入就略過，不讓後面的程式跟著中斷
+  var hasWaypoint = !!$.fn.waypoint, hasPopup = !!$.fn.magnificPopup;
+
   // Waypoints 動畫
-  $(".ftco-animate").waypoint(
+  if (hasWaypoint) $(".ftco-animate").waypoint(
     function(direction) {
       if (direction === "down" && !$(this.element).hasClass("ftco-animated")) {
         counter++;
@@ -143,7 +148,7 @@ AOS.init({
   );
 
   // 數字計數動畫 (如果存在)
-  if ($("#section-counter").length > 0) {
+  if (hasWaypoint && $("#section-counter").length > 0) {
     $("#section-counter").waypoint(
       function(direction) {
         if (direction === "down" && !$(this.element).hasClass("ftco-animated")) {
@@ -166,7 +171,7 @@ AOS.init({
   }
 
   // 圖片彈窗
-  $(".image-popup").magnificPopup({
+  if (hasPopup) $(".image-popup").magnificPopup({
     type: "image",
     closeOnContentClick: true,
     closeBtnInside: false,
@@ -186,7 +191,7 @@ AOS.init({
   });
 
   // 影片彈窗
-  $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
+  if (hasPopup) $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
     disableOn: 700,
     type: "iframe",
     mainClass: "mfp-fade",

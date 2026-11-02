@@ -34,6 +34,19 @@ function checkedConsultationTypes() {
         .join(',');
 }
 
+// 送出後的下一步：依勾選的諮詢類型告訴客戶接下來會發生什麼，並給一頁可以先看的內容。
+// 比對的是 checkbox 的 value（Google 表單的選項值，不能改），不是畫面上的標籤。
+const NEXT_STEPS = [
+    { match: /NEXUS|AI 智慧語伴|AI Voice Studio/, text: '業務會與您聯繫，安排一場線上簡報或需求訪談，先了解您的環境與要導入的情境。', link: 'nexus.html#platform', label: '先看 AURO NEXUS 平台總覽' },
+    { match: /CDP/, text: '業務會與您聯繫，安排一場線上簡報或需求訪談，先了解您的資料來源與要經營的客戶旅程。', link: 'nexus-cdp.html', label: '先看 AURA CDP 介紹' },
+    { match: /ACOUSTIC CXA|HCL UNICA|MAGNOLIA/i, text: '業務會與您聯繫，依您的系統環境提供產品規格與導入方式說明。', link: 'solution.html', label: '先看代理產品介紹' },
+    { match: /廣告投放|社群/, text: '業務會與您聯繫，請教您的行銷目標、目標客群與預算範圍，再提出投放或經營建議。', link: 'marketing.html', label: '先看數位行銷服務' }
+];
+
+function nextStepFor(types) {
+    return NEXT_STEPS.find(function(step) { return step.match.test(types); });
+}
+
 // 提交按鈕事件
 document.getElementById("submitButton").addEventListener("click", async function() {
     // 1. 檢查 Rate Limiting
@@ -100,11 +113,18 @@ document.getElementById("submitButton").addEventListener("click", async function
         // 記錄提交成功
         RateLimiter.recordSubmit();
 
-        // 顯示成功訊息
+        if (window.auroTrack) window.auroTrack('generate_lead', { consultation_type: cleanData.consultationType || '未勾選' });
+
+        // 顯示成功訊息與下一步
+        const next = nextStepFor(cleanData.consultationType);
+        const nextHtml = next
+            ? '<p>' + next.text + '</p><p><a href="' + next.link + '">' + next.label + '</a></p>'
+            : '<p>業務會與您聯繫，了解您的需求後回覆建議的做法。</p>';
         Swal.fire({
             icon: 'success',
-            title: '提交成功',
-            text: '感謝您的諮詢，我們將盡快與您聯繫',
+            title: '已收到您的諮詢',
+            html: nextHtml,
+            confirmButtonText: '好',
             confirmButtonColor: '#E63109'
         }).then(() => {
             // 關閉 modal (如果有)

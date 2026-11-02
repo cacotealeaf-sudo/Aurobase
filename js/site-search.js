@@ -96,7 +96,7 @@
       '<p class="ss-hint">可以直接打一句話，例如「想讓員工安全地使用 ChatGPT」。</p></div>';
     document.body.appendChild(d);
     var input = d.querySelector('.ss-input'), list = d.querySelector('.ss-results'), msg = d.querySelector('.ss-msg'),
-      none = d.querySelector('.ss-none'), ask = d.querySelector('.ss-ask'), last = null, timer;
+      none = d.querySelector('.ss-none'), ask = d.querySelector('.ss-ask'), last = null, timer, reportTimer, reported;
 
     function close() { d.hidden = true; document.documentElement.classList.remove('ss-open'); if (last) last.focus(); }
     function run() {
@@ -111,6 +111,11 @@
         }).join('');
         msg.textContent = res.length ? '找到 ' + res.length + ' 個相關結果，最相關的排在前面。' : '';
         none.hidden = res.length > 0;
+        // 停止輸入 1.5 秒才記一筆，避免每個字都送；找不到結果的字詞就是網站還沒回答的需求
+        clearTimeout(reportTimer);
+        reportTimer = setTimeout(function () {
+          if (window.auroTrack && v !== reported) { reported = v; window.auroTrack('search', { search_term: v, result_count: res.length }); }
+        }, 1500);
       });
     }
     input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(run, 80); });

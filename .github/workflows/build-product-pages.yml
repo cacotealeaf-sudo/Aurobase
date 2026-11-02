@@ -81,7 +81,14 @@ jobs:
           # 只算完整字型有、子集沒有的字（完整字型本來就沒有的字，例如簡體字，重建也補不進來）
           missing = sorted(c for c in chars if ord(c) in full and ord(c) not in cmap)
           print('字型子集缺 %d 字' % len(missing), ''.join(missing[:40]))
-          sys.exit(0 if missing else 1)
+          # 完整字型沒有、但落在它 unicode-range 裡的字：每頁會為了找它多載 3.3 MB，要重算 range
+          import re
+          css = io.open('css/line-seed-font.css', encoding='utf-8').read()
+          ur = re.search(r"LINESeedTW_OTF_Rg\.woff2'\) format\('woff2'\);\n  unicode-range: ([^;]+);", css).group(1)
+          spans = [tuple(int(x, 16) for x in r.strip()[2:].split('-')) for r in ur.split(',')]
+          claimed = [c for c in chars if ord(c) not in full and any(s[0] <= ord(c) <= s[-1] for s in spans)]
+          print('完整字型 range 誤含 %d 字' % len(claimed), ''.join(sorted(claimed)[:40]))
+          sys.exit(0 if missing or claimed else 1)
           PY
           then bash tools/build-font-subset.sh; fi
           bash tools/build-iconoir-subset.sh

@@ -136,3 +136,6 @@ html.ss-open, html.ss-open body { overflow: hidden; }
 #ftco-loader { display: none !important; }
 .ftco-animate { opacity: 1 !important; visibility: visible !important; }
 .ftco-animate.ftco-animated { animation: none !important; }
+
+/* 手機版的選單按鈕固定在左上角（top 32px、高 48px），舊版型頁面的麵包屑會被壓住：往下讓出按鈕的高度 */
+@media (max-width: 991.98px) { p.breadcrumbs { padding-top: 28px; } }

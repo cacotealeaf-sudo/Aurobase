@@ -937,6 +937,28 @@
           "nexus-lisa.html"
         ]
       ]
+    ],
+    "資安與採購窗口": [
+      [
+        "供應商資安評鑑要看哪些資料",
+        [
+          "security.html"
+        ]
+      ],
+      [
+        "你們怎麼處理資安與個資",
+        [
+          "security.html",
+          "nexus-forge.html"
+        ]
+      ],
+      [
+        "有沒有提供 SBOM",
+        [
+          "security.html",
+          "nexus-scanner.html"
+        ]
+      ]
     ]
   },
   "no_match": [

@@ -17,15 +17,15 @@
   var counter = modal.querySelector('[data-qf-count]');
   var current = 1;
 
-  // Required step-2 fields → error text ('' when valid). Rules mirror FormValidator.validateForm.
+  // Step-2 fields that are checked → error text ('' when valid). Rules mirror FormValidator.validateForm.
   var RULES = {
     f01: function (v) { var r = FormValidator.validateName(v); return r.valid ? '' : r.error; },
     f02: function (v) {
       if (!v.trim()) return '請輸入 Email';
       return FormValidator.validateEmail(v.trim()) ? '' : 'Email 格式不正確，例如 name@company.com';
     },
-    f03: function (v) {
-      if (!v.trim()) return '請輸入聯絡電話';
+    f03: function (v) {   // optional: only a filled-in number is checked
+      if (!v.trim()) return '';
       return FormValidator.validatePhone(v) ? '' : '請輸入電話號碼，例如 0912-345-678、02-5568-4688 或 +886 912 345 678';
     }
   };
@@ -108,7 +108,10 @@
   form.addEventListener('submit', function (event) { event.preventDefault(); });
 
   $(modal)
-    .on('shown.bs.modal', focusStep)
+    .on('shown.bs.modal', function () {
+      focusStep();
+      if (window.auroTrack) window.auroTrack('inquiry_open', { form_location: location.pathname });
+    })
     .on('hidden.bs.modal', function () {
       // qform.js clears the values after a successful send; start the next visit at step 1.
       if (!document.getElementById('f01').value) resetForm();

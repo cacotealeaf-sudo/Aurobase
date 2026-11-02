@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <title>資安與資料處理｜奧洛 Aurobase</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="奧洛（Aurobase）AURO NEXUS 的資安與資料處理做法：資料留在台灣或企業機房、推論前的權限與政策檢查、個資遮罩、雜湊鏈稽核軌跡與離線驗證、資料保存與銷毀控制、SBOM 與弱點通報方式。">
+    <meta name="keywords" content="資安,資料處理,資料不出機房,地端 AI,AI 稽核軌跡,個資保護,SBOM,弱點通報,AI 治理,奧洛,Aurobase"> 
+      
+    
+    <link rel="canonical" href="https://aurobase.com/security.html">
+    <!-- SOCIAL-META:BEGIN（由 tools/build-module-pages.py 產生）-->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:image" content="https://aurobase.com/images/og/security.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="資安與資料處理">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="資安與資料處理｜奧洛 Aurobase">
+    <meta name="twitter:description" content="奧洛（Aurobase）AURO NEXUS 的資安與資料處理做法：資料留在台灣或企業機房、推論前的權限與政策檢查、個資遮罩、雜湊鏈稽核軌跡與離線驗證、資料保存與銷毀控制、SBOM 與弱點通報方式。">
+    <meta name="twitter:image" content="https://aurobase.com/images/og/security.jpg">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/security.html">
+    <!-- SOCIAL-META:END -->
+    <meta property="og:title" content="資安與資料處理｜奧洛 Aurobase">
+    <meta property="og:description" content="奧洛（Aurobase）AURO NEXUS 的資安與資料處理做法：資料留在台灣或企業機房、推論前的權限與政策檢查、個資遮罩、雜湊鏈稽核軌跡與離線驗證、資料保存與銷毀控制、SBOM 與弱點通報方式。">
+    <meta property="og:url" content="https://aurobase.com/security.html">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+<!-- Favicon -->
+	<link href="images/favicon.ico" rel="shortcut icon">
+    
+    <!-- ✅ LINE Seed 字體家族 -->
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+
+    
+
+    <!--<link rel="stylesheet" href="css/aos.css">-->
+
+
+    <!--<link rel="stylesheet" href="css/bootstrap-datepicker.css">-->
+    <!--<link rel="stylesheet" href="css/jquery.timepicker.css">-->
+
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/aurora-theme.css">
+    <style>
+/* ══════════════════════════════════════════════
+   SECURITY PAGE — Scoped Styles
+   Shared tokens/base/sections/cards/footer: css/aurora-theme.css
+   ══════════════════════════════════════════════ */
+#sec-hero .idx-aurora-body { padding-top: 140px; padding-bottom: 150px; }
+.sec-card .idx-list { font-size: 14px; color: var(--idx-text-2); }
+.sec-card .idx-list li + li { margin-top: 6px; }
+.sec-card-links { margin-top: auto; padding-top: 8px; font-family: var(--idx-mono); font-size: 12px; display: flex; flex-wrap: wrap; gap: 14px; }
+.sec-note { max-width: 880px; font-size: 15px; line-height: 1.9; }
+.sec-note + .sec-note { margin-top: 14px; }
+.idx-section.sec-last { padding-bottom: 110px; }
+@media (max-width: 991.98px) { #sec-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 120px; } }
+</style>
+    <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
+        })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+    <!-- End Google Tag Manager -->
+      <link rel="stylesheet" href="css/site-nav.css">
+      <!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/security.html#webpage",
+      "url": "https://aurobase.com/security.html",
+      "name": "資安與資料處理｜奧洛 Aurobase",
+      "description": "奧洛（Aurobase）AURO NEXUS 的資安與資料處理做法：資料留在台灣或企業機房、推論前的權限與政策檢查、個資遮罩、雜湊鏈稽核軌跡與離線驗證、資料保存與銷毀控制、SBOM 與弱點通報方式。",
+      "inLanguage": "zh-Hant-TW",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://aurobase.com/images/og/security.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "keywords": "資安, 資料處理, 資料不出機房, 地端 AI, AI 稽核軌跡, 個資保護, SBOM, 弱點通報, AI 治理, 奧洛, Aurobase"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "email": "ad@aurocore.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+886-2-5568-4688",
+        "email": "ad@aurocore.com",
+        "areaServed": "TW",
+        "availableLanguage": [
+          "zh-Hant",
+          "en"
+        ]
+      },
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ],
+      "legalName": "奧洛股份有限公司",
+      "description": "奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營、AI 智慧語伴與客服中心服務。",
+      "areaServed": {
+        "@type": "Country",
+        "name": "台灣"
+      },
+      "knowsAbout": [
+        "AI 治理",
+        "生成式 AI",
+        "地端 AI",
+        "企業知識庫",
+        "客戶數據平台",
+        "行銷自動化",
+        "數位體驗分析",
+        "資料治理",
+        "資安弱點掃描",
+        "數位廣告投放",
+        "社群經營"
+      ]
+    }
+  ]
+}
+</script>
+    <!-- SITE-LD:END -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+<nav id="colorlib-main-menu" role="navigation">
+  	<!-- SITE-NAV:BEGIN（由 tools/build-module-pages.py 依 _nav.json 產生）-->
+<button type="button" class="nav-search-btn" aria-haspopup="dialog"><span aria-hidden="true">⌕</span> 搜尋產品與服務</button><script defer src="js/site-search.js"></script><script defer src="js/site-events.js"></script><ul><li class="has-sub"><div class="nav-row"><a href="nexus.html">AI 治理平台</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-platform" aria-label="展開AI 治理平台的產品">▾</button></div><ul class="nav-sub" id="nav-sub-platform" hidden><li class="nav-all"><a href="nexus.html#platform">平台總覽</a></li><li class="nav-leg"><span class="nav-leg-name">治理底座</span><span class="nav-leg-links"><a href="nexus-forge.html">Forge</a></span></li><li class="nav-leg"><span class="nav-leg-name">AI 編排</span><span class="nav-leg-links"><a href="nexus-auro.html">Auro</a></span></li><li class="nav-leg"><span class="nav-leg-name">客戶資料</span><span class="nav-leg-links"><a href="nexus-cdp.html">AURA CDP</a><a href="nexus-abm.html">ABM</a></span></li><li class="nav-leg"><span class="nav-leg-name">知識</span><span class="nav-leg-links"><a href="nexus-insight.html">Insight</a><a href="nexus-library.html">Library</a></span></li><li class="nav-leg"><span class="nav-leg-name">內容與行銷智能</span><span class="nav-leg-links"><a href="nexus-mira.html">MIRA</a><a href="nexus-pulse.html">Pulse</a><a href="nexus-geo.html">GEO</a></span></li><li class="nav-leg"><span class="nav-leg-name">合規治理</span><span class="nav-leg-links"><a href="nexus-saga.html">SAGA</a></span></li><li class="nav-leg"><span class="nav-leg-name">生產力</span><span class="nav-leg-links"><a href="nexus-ai-office.html">AI-Office</a></span></li><li class="nav-leg"><span class="nav-leg-name">現代化</span><span class="nav-leg-links"><a href="nexus-lisa.html">LISA</a></span></li><li class="nav-leg"><span class="nav-leg-name">安全</span><span class="nav-leg-links"><a href="nexus-scanner.html">Scanner</a><a href="nexus-cardea.html">Cardea</a></span></li></ul></li><li class="has-sub"><div class="nav-row"><a href="nexus.html#solutions">產業解決方案</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-solutions" aria-label="展開產業解決方案">▾</button></div><ul class="nav-sub" id="nav-sub-solutions" hidden><li class="nav-leg"><span class="nav-leg-name">公部門</span><span class="nav-leg-links"><a href="solution-police-record.html">AI 警詢筆錄</a></span></li><li class="nav-leg"><span class="nav-leg-name">金融保險</span><span class="nav-leg-links"><a href="solution-telesales.html">電銷對話智能</a></span></li><li class="nav-leg"><span class="nav-leg-name">跨產業</span><span class="nav-leg-links"><a href="solution-ai-ocr.html">AI OCR 文件辨識</a></span></li><li class="nav-leg"><span class="nav-leg-name">數位行銷</span><span class="nav-leg-links"><a href="solution-digital-trail.html">數位軌跡整合</a></span></li></ul></li><li><a href="ai-companion.html">AI 智慧語伴</a></li><li><a href="solution.html">代理產品</a></li><li><a href="marketing.html">數位行銷服務</a></li><li><a href="https://aurocore.com/" target="_blank" rel="noopener">客服中心<span class="nav-ext" aria-hidden="true">↗</span></a></li><li><a href="contact.html">聯絡我們</a></li></ul>
+<script>document.querySelectorAll('.nav-sub-toggle').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);document.getElementById(b.getAttribute('aria-controls')).hidden=!o;});});</script>
+<!-- SITE-NAV:END -->
+  	<p class="social">
+          <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+          </svg> 粉絲專頁</a></span>
+  	</p>
+  </nav>
+  
+  <div class="colorlib-footer">
+  	<div class="aside-logo"><a href="index.html">
+          <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+      </a></div>
+  </div>
+</aside>
+        <!-- END COLORLIB-ASIDE -->
+        <div id="colorlib-main">
+  <div class="idx-page">
+
+  <!-- Section 1: Hero (ASCII aurora canvas — js/aurora.js) -->
+  <section id="sec-hero" class="idx-aurora idx-hero">
+    <canvas data-aurora="hero" aria-hidden="true"></canvas>
+    <div class="idx-aurora-body idx-wrap">
+      <div class="idx-tagpair"><span>AUROBASE</span><span>資安與資料處理</span></div>
+      <h1 class="idx-hero-title">
+        <span>資料留在您手上</span>
+        <span>每一步都查得到<em>.</em></span>
+      </h1>
+      <div class="idx-rule"></div>
+      <p class="idx-hero-desc">金融與受監理產業評估 AURO NEXUS 時，資訊、資安與法遵單位最常問六件事：資料放在哪裡、誰能存取、個資怎麼保護、紀錄能不能被改、資料保存到何時，以及軟體元件從哪裡來。以下逐項說明做法，並連到對應的產品頁。</p>
+      <div class="idx-hero-actions">
+        <a href="#sec-items" class="idx-btn idx-btn-primary">看六項做法<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        <a href="contact.html" class="idx-btn idx-btn-ghost">詢問資安細節</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-items" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">01</span>
+        <div>
+          <div class="idx-eyebrow">// 01 — 六項做法</div>
+          <h2 class="idx-sec-title">平台怎麼處理資料</h2>
+        </div>
+      </div>
+    </div>
+    <div class="idx-rule"></div>
+    <div class="idx-grid">
+      <article class="idx-card sec-card"><div class="idx-card-meta"><span>// 部署</span></div><h3 class="idx-card-title">資料留在哪裡</h3><ul class="idx-list"><li>可部署於公有雲的台灣區域、企業自有機房或隔離網路，三種方式使用同一套權限、模型路由與稽核軌跡。</li><li>模型路由可限定只使用地端模型，資料不需送出企業環境。</li><li>隔離網路中，弱點情資等需要更新的資料以離線更新包匯入。</li></ul><div class="sec-card-links"><a href="nexus.html#platform">平台部署方式</a><a href="nexus-forge.html">Forge</a></div></article>
+      <article class="idx-card sec-card"><div class="idx-card-meta"><span>// 存取控管</span></div><h3 class="idx-card-title">誰能用、能查什麼</h3><ul class="idx-list"><li>每一次 AI 請求在送往模型之前先做權限與政策檢查，不符合的請求不會到達模型。</li><li>知識庫與段落可設定密級，依擁有者、使用者、角色、服務分別授權；跨租戶一律拒絕。</li><li>撤銷權限在下一次檢索就生效，不靠快取過期；資料庫以列級安全（RLS）做租戶隔離。</li><li>Scanner 支援 SAML 2.0 單一登入與 SCIM 帳號同步，SAGA 支援 Kerberos 與 LDAP 群組綁定；與貴機構既有身分系統的介接由奧洛團隊配合調整。</li></ul><div class="sec-card-links"><a href="nexus-forge.html">Forge</a><a href="nexus-scanner.html">Scanner</a><a href="nexus-saga.html">SAGA</a></div></article>
+      <article class="idx-card sec-card"><div class="idx-card-meta"><span>// 個資保護</span></div><h3 class="idx-card-title">個資不外流</h3><ul class="idx-list"><li>提示中含身分證字號、電話、電子郵件或密鑰時，自動提高敏感等級，只能送往地端模型；送雲端會被拒絕並留下紀錄。</li><li>模型的回覆也經政策檢查，不合規即改為遮蔽。</li><li>以自然語言查詢資料時以唯讀身分執行，結果做個資遮罩後才回傳。</li><li>個資刪除請求在稽核紀錄中就地遮罩，雜湊鏈仍可驗證。</li></ul><div class="sec-card-links"><a href="nexus-forge.html">Forge</a></div></article>
+      <article class="idx-card sec-card"><div class="idx-card-meta"><span>// 稽核軌跡</span></div><h3 class="idx-card-title">紀錄有沒有被改過</h3><ul class="idx-list"><li>每一次推論、知識庫查詢與工具呼叫寫入雜湊鏈稽核軌跡，資料庫層拒絕修改與刪除。</li><li>證據包可依關聯編號或審批編號匯出，附離線驗證工具，稽核人員不需連上平台就能重算雜湊。</li><li>匯出權限只給稽核人員與管理者，每次匯出本身也寫入稽核帳。</li><li>雜湊鏈能偵測竄改；要在物理上阻止擁有資料庫最高權限的人修改，需在儲存層加上 Object Lock。</li></ul><div class="sec-card-links"><a href="nexus-forge.html">Forge</a><a href="nexus-saga.html">SAGA</a></div></article>
+      <article class="idx-card sec-card"><div class="idx-card-meta"><span>// 保存與銷毀</span></div><h3 class="idx-card-title">資料保存到哪一天</h3><ul class="idx-list"><li>依媒體類型設定保存期限，預設值依貴機構政策調整；保存期限未到，伺服器拒絕銷毀。</li><li>法律保全中的紀錄只能釋放保全，不能直接銷毀。</li><li>敏感變更需第二人簽核，提案人不能自己核准。</li><li>銷毀證明含簽核鏈與雜湊，可離線驗證。</li></ul><div class="sec-card-links"><a href="nexus-saga.html">SAGA</a></div></article>
+      <article class="idx-card sec-card"><div class="idx-card-meta"><span>// 軟體供應鏈</span></div><h3 class="idx-card-title">用了哪些元件、怎麼通報</h3><ul class="idx-list"><li>交付的平台元件可附 CycloneDX 與 SPDX 格式的軟體物料清單（SBOM）。</li><li>貴機構自有系統可用 Scanner 做源碼檢測、弱點掃描與第三方套件分析，輸出 SARIF 報告與 SBOM。</li><li>發現本網站或奧洛產品的資安問題，請透過聯絡表單或電話 02-5568-4688 通知我們，我們確認後回覆處理方式。</li></ul><div class="sec-card-links"><a href="nexus-scanner.html">Scanner</a><a href="contact.html">聯絡表單</a></div></article>
+    </div>
+  </section>
+
+  <section id="sec-regulation" class="idx-section idx-wrap sec-last">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">02</span>
+        <div>
+          <div class="idx-eyebrow">// 02 — 法規對應</div>
+          <h2 class="idx-sec-title">對應主管機關的要求</h2>
+        </div>
+      </div>
+      <a href="nexus.html#platform" class="idx-more">平台總覽<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+    </div>
+    <div class="idx-rule"></div>
+    <p class="sec-note">金管會〈金融業運用人工智慧（AI）指引〉以治理與問責、隱私與客戶權益、系統穩健與安全、透明與可解釋等原則為架構。AURO NEXUS 以推論前檢查、地端模型、雜湊鏈稽核軌跡與可離線驗證的證據包對應這些原則。</p>
+    <p class="sec-note">平台提供的是這些做法的執行與紀錄；是否符合法規，由主管機關與貴機構法遵認定。</p>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer-sec" class="idx-footer">
+    <div class="idx-wrap">
+      <div class="idx-footer-col">
+        <img src="images/logo.svg" alt="AUROBASE 奧洛" class="idx-footer-logo" width="92" height="20">
+        <span>Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved.</span>
+      </div>
+      <div class="idx-footer-col">
+        <span>台北市內湖區洲子街101號2樓</span>
+        <div class="idx-footer-links">
+          <a href="https://www.facebook.com/AurobaseTW/" target="_blank" rel="noopener">粉絲專頁</a>
+          <a href="security.html">資安與資料處理</a>
+          <a href="blog.html">新聞中心</a>
+          <a href="privacypolicy.html">隱私權政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- END .idx-page -->
+            </div><!-- END COLORLIB-MAIN -->
+	        </div><!-- END COLORLIB-PAGE -->
+
+    
+  <!-- ✅ 優化後的 JS 載入 -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/external-link-warning.js" defer></script>
+  <script src="js/sweetalert2-11.26.25.all.min.js"></script>
+  <script src="js/main_optimized.js" defer></script>
+  <script src="js/aurora.js" defer></script>
+ </body>
+</html>

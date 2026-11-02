@@ -21,6 +21,7 @@
 - [AI 智慧語伴](ai-companion.html): 以 AI 語音陪伴長者，提供用藥提醒與關懷報告，協助社工掌握狀況
 - [新聞中心](blog.html): 行銷科技文章
 - [聯絡我們](contact.html): 諮詢表單、電話與地址
+- [資安與資料處理](security.html): 部署位置、存取控管、個資保護、稽核軌跡、保存與銷毀、SBOM 與弱點通報
 - [隱私權政策](privacypolicy.html): 個人資料蒐集、處理與利用方式
 - [客服中心](https://aurocore.com/): 客服中心系統建置與外包服務（外部網站）
 

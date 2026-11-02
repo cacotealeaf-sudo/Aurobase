@@ -166,6 +166,19 @@ class AuditTest(SiteCopy):
                 if c['label'].startswith('內容不寫開發進度'):
                     self.assertEqual(c['status'], 'pass', (a['page'], c['detail']))
 
+    def test_every_chinese_font_face_declares_unicode_range(self):
+        # 沒宣告 unicode-range 的完整字型檔，會在網頁出現它沒有的符號時被整支下載（3.3 MB）
+        import re
+        css = open(os.path.join(REPO, 'css', 'line-seed-font.css'), encoding='utf-8').read()
+        faces = re.findall(r"@font-face \{[^}]*font-family: 'LINE Seed TW';[^}]*\}", css)
+        self.assertEqual(len(faces), 6)
+        for face in faces:
+            self.assertIn('unicode-range:', face, face)
+        full = re.search(r"OTF_Rg\.woff2'\) format\('woff2'\);\n  unicode-range: ([^;]+);", css).group(1)
+        spans = [[int(x, 16) for x in r[2:].split('-')] for r in full.split(',')]
+        for ch in '⌕▾・为':   # 完整字型沒有、站上用到的字，不能落在它的 range 裡
+            self.assertFalse(any(s[0] <= ord(ch) <= s[-1] for s in spans), ch)
+
     def test_title_width_counts_latin_as_half(self):
         self.assertEqual(gen.disp_width('AI 治理'), 3.5)
 

@@ -421,13 +421,6 @@ def head(m):
     <link href="images/favicon.ico" rel="shortcut icon">
     <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/line-seed-font.css">
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/inquiry-modal.css">
     <link rel="stylesheet" href="css/iconoir-subset.css">
@@ -1683,7 +1676,7 @@ def nav_html(page, prefix, pf, mods):
     out.append('</ul>')
     search = ('<button type="button" class="nav-search-btn" aria-haspopup="dialog">'
               '<span aria-hidden="true">⌕</span> 搜尋產品與服務</button>'
-              '<script defer src="%sjs/site-search.js"></script>' % prefix)
+              '<script defer src="%sjs/site-search.js"></script><script defer src="%sjs/site-events.js"></script>' % (prefix, prefix))
     return NAV_BEGIN + '\n' + search + ''.join(out) + '\n' + NAV_TOGGLE_JS + '\n' + NAV_END
 
 

@@ -155,7 +155,7 @@ const FormValidator = {
    * @param {object} formData - 表單數據
    * @param {string} formData.name - 姓名
    * @param {string} formData.email - Email
-   * @param {string} formData.phone - 電話
+   * @param {string} formData.phone - 電話 (選填)
    * @param {string} formData.company - 公司名稱 (選填)
    * @param {string} formData.message - 訊息 (選填)
    * @returns {array} 錯誤訊息陣列 (空陣列表示驗證通過)
@@ -176,10 +176,8 @@ const FormValidator = {
       errors.push('Email 格式不正確');
     }
     
-    // 3. 驗證電話
-    if (!formData.phone || !formData.phone.trim()) {
-      errors.push('聯絡電話不能為空');
-    } else if (!this.validatePhone(formData.phone)) {
+    // 3. 驗證電話 (選填，但有填就要是正確的電話)
+    if (formData.phone && formData.phone.trim() && !this.validatePhone(formData.phone)) {
       errors.push('電話號碼格式不正確，例如 0912-345-678、02-5568-4688 或 +886 912 345 678');
     }
     
