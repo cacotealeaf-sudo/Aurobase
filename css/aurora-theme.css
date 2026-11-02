@@ -206,3 +206,21 @@
 .idx-page .hc-sublinks a { font-family: var(--idx-mono); font-size: 12px; border: 1px solid var(--idx-line-2); border-radius: 4px; padding: 5px 10px; }
 .idx-page .hc-sublinks a:hover { border-color: var(--idx-accent); }
 @media (max-width: 576px) { .hc-legs { grid-template-columns: 1fr; } }
+
+/* ── FAQ（首頁、資安與指南頁共用的展開式問答）── */
+.idx-faq-sec { max-width: 880px; padding-top: 40px; padding-bottom: 110px; display: flex; flex-direction: column; gap: 28px; }
+.idx-faq-head { display: flex; flex-direction: column; gap: 12px; }
+.idx-faq-head h2 { font-size: 36px; font-weight: 700; letter-spacing: -0.015em; }
+.idx-faq { border-top: 2px solid var(--idx-line-2); }
+.idx-faq details { border-bottom: 1px solid var(--idx-line); }
+.idx-faq summary {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  min-height: 66px; font-size: 18px; font-weight: 500; color: var(--idx-ink);
+  cursor: pointer; list-style: none; outline: none;
+}
+.idx-faq summary::-webkit-details-marker { display: none; }
+.idx-faq summary:hover { color: var(--idx-accent-hover); }
+.idx-faq-plus { display: inline-block; font-family: var(--idx-mono); font-size: 22px; color: var(--idx-accent); transition: transform 0.2s ease; }
+.idx-faq details[open] .idx-faq-plus { transform: rotate(45deg); }
+.idx-page .idx-faq p { margin: 0 0 22px; font-size: 15px; line-height: 1.85; }
+@media (max-width: 576px) { .idx-faq summary { font-size: 16px; } }

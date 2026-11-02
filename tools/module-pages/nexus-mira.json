@@ -303,10 +303,10 @@
     "sources": [
       {
         "name": "金管會〈金融業運用人工智慧（AI）指引〉（2024 年 6 月 20 日發布）",
-        "url": "https://www.fsc.gov.tw/"
+        "url": "https://law.fsc.gov.tw/LawContent.aspx?id=GL003920"
       }
     ],
-    "note": "指引屬行政指導；本表列出的是對應做法，是否符合由主管機關與貴機構法遵認定。"
+    "note": "指引屬行政指導；本表列出的是對應做法，是否符合由主管機關與貴機構法遵認定。六章重點與控制清單見<a href=\"fsc-ai-guideline.html\">金融業運用 AI 指引怎麼落實</a>。"
   },
   "updated": "2026-10-30",
   "aliases": [

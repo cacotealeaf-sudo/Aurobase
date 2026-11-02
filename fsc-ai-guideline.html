@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <title>金融業運用 AI 指引怎麼落實｜六章重點與控制清單｜奧洛 Aurobase</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。">
+    <meta name="keywords" content="金融業運用AI指引,金管會 AI 指引,金融業 AI 治理,AI 六大核心原則,AI 風險評估,金融 AI 稽核,生成式 AI 金融,AI 治理平台,奧洛,Aurobase"> 
+      
+    
+    <link rel="canonical" href="https://aurobase.com/fsc-ai-guideline.html">
+    <!-- SOCIAL-META:BEGIN（由 tools/build-module-pages.py 產生）-->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:image" content="https://aurobase.com/images/og/fsc-ai-guideline.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="金融業運用 AI 指引怎麼落實">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="金融業運用 AI 指引怎麼落實｜六章重點與控制清單｜奧洛 Aurobase">
+    <meta name="twitter:description" content="金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。">
+    <meta name="twitter:image" content="https://aurobase.com/images/og/fsc-ai-guideline.jpg">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/fsc-ai-guideline.html">
+    <meta property="article:published_time" content="2026-11-02">
+    <meta property="article:modified_time" content="2026-11-02">
+    <meta property="article:author" content="奧洛 Aurobase">
+    <!-- SOCIAL-META:END -->
+    <meta property="og:title" content="金融業運用 AI 指引怎麼落實｜六章重點與控制清單｜奧洛 Aurobase">
+    <meta property="og:description" content="金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。">
+    <meta property="og:url" content="https://aurobase.com/fsc-ai-guideline.html">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+<!-- Favicon -->
+	<link href="images/favicon.ico" rel="shortcut icon">
+    
+    <!-- ✅ LINE Seed 字體家族 -->
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+
+    
+
+    <!--<link rel="stylesheet" href="css/aos.css">-->
+
+
+    <!--<link rel="stylesheet" href="css/bootstrap-datepicker.css">-->
+    <!--<link rel="stylesheet" href="css/jquery.timepicker.css">-->
+
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/aurora-theme.css">
+    <style>
+/* ══════════════════════════════════════════════
+   GUIDE PAGE — Scoped Styles（指南頁共用）
+   Shared tokens/base/sections/cards/footer: css/aurora-theme.css
+   ══════════════════════════════════════════════ */
+.gd-hero .idx-aurora-body { padding-top: 140px; padding-bottom: 130px; }
+.gd-meta { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin-top: 18px; }
+.gd-answer { border: 1px solid var(--idx-line-2); border-left: 3px solid var(--idx-accent); background: var(--idx-surface); padding: 28px 32px; max-width: 920px; }
+.gd-answer p { font-size: 16px; line-height: 1.95; margin: 0 0 12px; }
+.gd-answer ol, .gd-answer ul { margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.95; color: var(--idx-text-2); }
+.gd-tag { display: inline-block; font-family: var(--idx-mono); font-size: 11px; color: var(--idx-accent); border: 1px solid var(--idx-accent); border-radius: 3px; padding: 1px 6px; margin-right: 6px; vertical-align: 2px; }
+.gd-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.gd-block h3 { font-size: 18px; margin: 0 0 10px; }
+.gd-block ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.9; color: var(--idx-text-2); }
+.gd-card .gd-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin: 6px 0 2px; }
+.gd-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.85; color: var(--idx-text-2); }
+.gd-card ul li + li { margin-top: 4px; }
+.gd-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.8; }
+.gd-table th, .gd-table td { border-bottom: 1px solid var(--idx-line); padding: 14px 12px; text-align: left; vertical-align: top; }
+.gd-table th { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); border-bottom: 2px solid var(--idx-line-2); }
+.gd-table td:first-child { color: var(--idx-ink); min-width: 180px; }
+.gd-note { max-width: 920px; font-size: 15px; line-height: 1.9; }
+.gd-note + .gd-note { margin-top: 12px; }
+.gd-src { font-size: 14px; line-height: 2; padding-left: 18px; color: var(--idx-text-2); }
+.gd-check { counter-reset: gd; display: grid; gap: 16px; }
+.gd-check article { counter-increment: gd; }
+.gd-check .idx-card-title::before { content: counter(gd, decimal-leading-zero) ' '; font-family: var(--idx-mono); color: var(--idx-accent); margin-right: 6px; }
+@media (max-width: 991.98px) { .gd-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 110px; } }
+@media (max-width: 767.98px) {
+  .gd-answer { padding: 22px 20px; }
+  .gd-table thead { display: none; }
+  .gd-table tr { display: block; border-bottom: 1px solid var(--idx-line); padding: 10px 0; }
+  .gd-table td { display: block; border: 0; padding: 4px 0; }
+}
+</style>
+    <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
+        })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+    <!-- End Google Tag Manager -->
+      <link rel="stylesheet" href="css/site-nav.css">
+      <!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/fsc-ai-guideline.html#webpage",
+      "url": "https://aurobase.com/fsc-ai-guideline.html",
+      "name": "金融業運用 AI 指引怎麼落實｜六章重點與控制清單｜奧洛 Aurobase",
+      "description": "金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。",
+      "inLanguage": "zh-Hant-TW",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://aurobase.com/images/og/fsc-ai-guideline.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "keywords": "金融業運用AI指引, 金管會 AI 指引, 金融業 AI 治理, AI 六大核心原則, AI 風險評估, 金融 AI 稽核, 生成式 AI 金融, AI 治理平台, 奧洛, Aurobase"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "email": "ad@aurocore.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+886-2-5568-4688",
+        "email": "ad@aurocore.com",
+        "areaServed": "TW",
+        "availableLanguage": [
+          "zh-Hant",
+          "en"
+        ]
+      },
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ],
+      "legalName": "奧洛股份有限公司",
+      "description": "奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營、AI 智慧語伴與客服中心服務。",
+      "areaServed": {
+        "@type": "Country",
+        "name": "台灣"
+      },
+      "knowsAbout": [
+        "AI 治理",
+        "生成式 AI",
+        "地端 AI",
+        "企業知識庫",
+        "客戶數據平台",
+        "行銷自動化",
+        "數位體驗分析",
+        "資料治理",
+        "資安弱點掃描",
+        "數位廣告投放",
+        "社群經營"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://aurobase.com/fsc-ai-guideline.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "金融業運用 AI 指引有法律拘束力嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "屬行政指導性質。金管會表示，金融業相關公會訂有 AI 自律規範者，可參考指引納入相關重點；未訂定者，建議金融機構參考指引導入、使用及管理 AI 系統。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "金融業運用 AI 指引是什麼時候發布的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "金管會於 113 年（2024 年）6 月 20 日發布〈金融業運用人工智慧(AI)指引〉；六項核心原則則先於 112 年 10 月 17 日隨「金融業運用人工智慧(AI)之核心原則與相關推動政策」公布。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "金管會 AI 指引的六項核心原則是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建立治理及問責機制、重視公平性及以人為本的價值觀、保護隱私及客戶權益、確保系統穩健性與安全性、落實透明性與可解釋性、促進永續發展。指引的六章依序對應這六項原則。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "依金融業運用 AI 指引，怎麼判斷 AI 系統是不是高風險？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "指引列出六項考量因素：是否直接服務客戶或對營運有重大影響、使用個資的程度、AI 自主決策程度、系統複雜性、影響利害關係人的程度與廣度、救濟選項的完整程度；風險高低由金融機構綜合判斷。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "金融機構的行員可以把客戶資料貼進生成式 AI 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "金管會 AI 指引第三章指出，在無適當管控機制下，金融機構人員不得向生成式 AI 提供未經客戶同意提供的資訊；適當管控機制例如採用封閉型部署的生成式 AI 模型、確認系統環境安全性。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "金融機構委託廠商導入 AI，指引要求注意什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "評估廠商專業與集中度風險、以書面契約明定責任與追索途徑、涉及客戶資料時簽訂資料保護條款、訂定停止委託時的資料或系統遷移機制，並要求廠商留存受託作業的書面或數位紀錄。"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://aurobase.com/fsc-ai-guideline.html#article",
+      "headline": "金融業運用 AI 指引怎麼落實：六章重點與控制清單",
+      "description": "金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "zh-Hant-TW",
+      "mainEntityOfPage": {
+        "@id": "https://aurobase.com/fsc-ai-guideline.html#webpage"
+      },
+      "author": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://aurobase.com/images/og/fsc-ai-guideline.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "金融業運用人工智慧(AI)指引"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI 治理"
+        },
+        {
+          "@type": "Thing",
+          "name": "金融監理"
+        }
+      ],
+      "citation": [
+        {
+          "@type": "CreativeWork",
+          "name": "金融監督管理委員會〈金融業運用人工智慧(AI)指引〉（113 年 6 月 20 日）",
+          "url": "https://law.fsc.gov.tw/LawContent.aspx?id=GL003920"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "金管會新聞稿〈金管會發布「金融業運用人工智慧(AI)指引」〉",
+          "url": "https://www.fsc.gov.tw/ch/home.jsp?id=96&parentpath=0%2C2&mcustomize=news_view.jsp&dataserno=202406200001&dtable=News"
+        }
+      ],
+      "keywords": "金融業運用AI指引, 金管會 AI 指引, 金融業 AI 治理, AI 六大核心原則, AI 風險評估, 金融 AI 稽核, 生成式 AI 金融, AI 治理平台, 奧洛, Aurobase"
+    }
+  ]
+}
+</script>
+    <!-- SITE-LD:END -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+<nav id="colorlib-main-menu" role="navigation">
+  	<!-- SITE-NAV:BEGIN（由 tools/build-module-pages.py 依 _nav.json 產生）-->
+<button type="button" class="nav-search-btn" aria-haspopup="dialog"><span aria-hidden="true">⌕</span> 搜尋產品與服務</button><script defer src="js/site-search.js"></script><script defer src="js/site-events.js"></script><ul><li class="has-sub"><div class="nav-row"><a href="nexus.html">AI 治理平台</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-platform" aria-label="展開AI 治理平台的產品">▾</button></div><ul class="nav-sub" id="nav-sub-platform" hidden><li class="nav-all"><a href="nexus.html#platform">平台總覽</a></li><li class="nav-leg"><span class="nav-leg-name">治理底座</span><span class="nav-leg-links"><a href="nexus-forge.html">Forge</a></span></li><li class="nav-leg"><span class="nav-leg-name">AI 編排</span><span class="nav-leg-links"><a href="nexus-auro.html">Auro</a></span></li><li class="nav-leg"><span class="nav-leg-name">客戶資料</span><span class="nav-leg-links"><a href="nexus-cdp.html">AURA CDP</a><a href="nexus-abm.html">ABM</a></span></li><li class="nav-leg"><span class="nav-leg-name">知識</span><span class="nav-leg-links"><a href="nexus-insight.html">Insight</a><a href="nexus-library.html">Library</a></span></li><li class="nav-leg"><span class="nav-leg-name">內容與行銷智能</span><span class="nav-leg-links"><a href="nexus-mira.html">MIRA</a><a href="nexus-pulse.html">Pulse</a><a href="nexus-geo.html">GEO</a></span></li><li class="nav-leg"><span class="nav-leg-name">合規治理</span><span class="nav-leg-links"><a href="nexus-saga.html">SAGA</a></span></li><li class="nav-leg"><span class="nav-leg-name">生產力</span><span class="nav-leg-links"><a href="nexus-ai-office.html">AI-Office</a></span></li><li class="nav-leg"><span class="nav-leg-name">現代化</span><span class="nav-leg-links"><a href="nexus-lisa.html">LISA</a></span></li><li class="nav-leg"><span class="nav-leg-name">安全</span><span class="nav-leg-links"><a href="nexus-scanner.html">Scanner</a><a href="nexus-cardea.html">Cardea</a></span></li></ul></li><li class="has-sub"><div class="nav-row"><a href="nexus.html#solutions">產業解決方案</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-solutions" aria-label="展開產業解決方案">▾</button></div><ul class="nav-sub" id="nav-sub-solutions" hidden><li class="nav-leg"><span class="nav-leg-name">公部門</span><span class="nav-leg-links"><a href="solution-police-record.html">AI 警詢筆錄</a></span></li><li class="nav-leg"><span class="nav-leg-name">金融保險</span><span class="nav-leg-links"><a href="solution-telesales.html">電銷對話智能</a></span></li><li class="nav-leg"><span class="nav-leg-name">跨產業</span><span class="nav-leg-links"><a href="solution-ai-ocr.html">AI OCR 文件辨識</a></span></li><li class="nav-leg"><span class="nav-leg-name">數位行銷</span><span class="nav-leg-links"><a href="solution-digital-trail.html">數位軌跡整合</a></span></li></ul></li><li><a href="ai-companion.html">AI 智慧語伴</a></li><li><a href="solution.html">代理產品</a></li><li><a href="marketing.html">數位行銷服務</a></li><li><a href="https://aurocore.com/" target="_blank" rel="noopener">客服中心<span class="nav-ext" aria-hidden="true">↗</span></a></li><li><a href="contact.html">聯絡我們</a></li></ul>
+<script>document.querySelectorAll('.nav-sub-toggle').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);document.getElementById(b.getAttribute('aria-controls')).hidden=!o;});});</script>
+<!-- SITE-NAV:END -->
+  	<p class="social">
+          <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+          </svg> 粉絲專頁</a></span>
+  	</p>
+  </nav>
+  
+  <div class="colorlib-footer">
+  	<div class="aside-logo"><a href="index.html">
+          <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+      </a></div>
+  </div>
+</aside>
+        <!-- END COLORLIB-ASIDE -->
+        <div id="colorlib-main">
+  <div class="idx-page">
+
+  <section class="idx-aurora idx-hero gd-hero">
+    <canvas data-aurora="hero" aria-hidden="true"></canvas>
+    <div class="idx-aurora-body idx-wrap">
+      <div class="idx-tagpair"><span>AUROBASE 指南</span><span>金融業運用 AI 指引</span></div>
+      <h1 class="idx-hero-title"><span>AI 指引</span><span>怎麼落實<em>.</em></span></h1>
+      <div class="idx-rule"></div>
+      <p class="idx-hero-desc">金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉。本文依原文整理總則與六章的重點，每一章對照「要做的控制」與「要留下的紀錄」，最後說明 AURO NEXUS 能協助的部分與仍需由貴機構負責的部分。</p>
+      <div class="idx-hero-actions">
+        <a href="#gd-chapters" class="idx-btn idx-btn-primary">看六章重點<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        <a href="contact.html" class="idx-btn idx-btn-ghost">詢問導入做法</a>
+      </div>
+      <p class="gd-meta">最後更新：2026-11-02 ・ 依金管會公布的指引原文整理</p>
+    </div>
+  </section>
+
+  <section id="gd-answer" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">01</span>
+        <div>
+          <div class="idx-eyebrow">// 01 — 一段話看懂</div>
+          <h2 class="idx-sec-title">指引是什麼、從哪裡開始</h2>
+        </div>
+      </div>
+      
+    </div>
+    <div class="idx-rule"></div>
+    <div class="gd-answer">
+      <p>〈金融業運用人工智慧（AI）指引〉由金管會於 113 年 6 月 20 日發布，屬<b>行政指導</b>性質，由總則與六章組成，六章分別對應六項核心原則。金融機構依自身 AI 系統的風險高低，自行決定控管措施與程度。</p>
+      <p><span class="gd-tag">實務建議</span>落實時可依下列順序進行：</p>
+      <ol>
+        <li>盤點全行 AI 系統，依指引的六項風險評估因素分級。</li>
+        <li>對高風險系統加強四件事：較完整的紀錄、較頻繁的監控、較嚴格的審查核准、必要時第三方獨立驗證。</li>
+        <li>把六章的措施整合進現有的風險管理與內部控制，不另起爐灶。</li>
+        <li>檢視委外與採購合約，補上資料保護、作業紀錄留存與停止委託時的遷移條款。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="gd-general" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">02</span>
+        <div>
+          <div class="idx-eyebrow">// 02 — 總則</div>
+          <h2 class="idx-sec-title">先分級，再決定控管程度</h2>
+        </div>
+      </div>
+      
+    </div>
+    <div class="idx-rule"></div>
+    <div class="gd-cols">
+      <div class="gd-block"><h3>AI 系統生命週期四階段</h3><ul><li>系統規劃及設計</li><li>資料蒐集及輸入</li><li>模型建立及驗證</li><li>系統部署及監控</li></ul></div>
+      <div class="gd-block"><h3>風險評估六項考量因素</h3><ul><li>是否直接服務客戶，或對營運有重大影響</li><li>使用個人資料的程度</li><li>AI 自主決策的程度</li><li>AI 系統的複雜性</li><li>影響利害關係人的程度與廣度</li><li>救濟選項的完整程度</li></ul></div>
+      <div class="gd-block"><h3>高風險系統的加強措施</h3><ul><li>較完整的書面或數位紀錄</li><li>較高頻率、較廣層面的監控</li><li>較嚴格的審查與核准，提高決策層級</li><li>必要時由第三方進行獨立驗證</li></ul></div>
+      <div class="gd-block"><h3>委託第三方業者</h3><ul><li>評估業者專業與集中度風險</li><li>書面契約明定範圍、責任與追索途徑</li><li>涉及客戶資料時簽訂資料保護條款，含加密傳輸、存儲安全與服務終止後的處置</li><li>訂定停止委託時的資料或系統遷移機制</li><li>要求業者留存受託作業的書面或數位紀錄</li></ul></div>
+    </div>
+    <p class="gd-note" style="margin-top:24px">風險高低由金融機構綜合各項因素自行判斷；指引所舉例子僅供說明，不是分級規範。</p>
+  </section>
+
+  <section id="gd-chapters" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">03</span>
+        <div>
+          <div class="idx-eyebrow">// 03 — 六章重點</div>
+          <h2 class="idx-sec-title">每一章要做什麼、留下什麼</h2>
+        </div>
+      </div>
+      
+    </div>
+    <div class="idx-rule"></div>
+    <div class="idx-grid">
+      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 第一章</span></div><h3 class="idx-card-title">建立治理及問責機制</h3><p class="gd-sub">指引重點</p><ul><li>指定高階主管或委員會監督 AI 運用，明確界定各單位職責</li><li>AI 風險管理整合進現有的風險管理與內部控制</li><li>部署前記錄模型目的與用途並進行測試</li><li>建立 AI 模型清單，含各版本、輸入來源、輸出與預期用途</li><li>持續監控與定期審查；高風險系統必要時由獨立第三人審查</li></ul><p class="gd-sub">落實做法</p><ul><li>建立 AI 系統與模型清冊，每個應用指定負責人</li><li>上線前的測試與核准流程</li></ul><p class="gd-sub">該留下的紀錄</p><ul><li>清冊與版本歷程、測試報告、核准與審查紀錄</li></ul></article>
+      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 第二章</span></div><h3 class="idx-card-title">重視公平性及以人為本的價值觀</h3><p class="gd-sub">指引重點</p><ul><li>評估是否對特定群體產生偏見或歧視</li><li>影響程度高的應用採「人在指揮」或「人在迴圈內」的監督</li><li>關鍵系統保留人員審查、核准或最終決策的權利，必要時能安全關閉 AI 系統</li><li>使用第三方生成式 AI 而無法掌握訓練過程時，仍須由人員對產出進行風險管控</li></ul><p class="gd-sub">落實做法</p><ul><li>依影響程度設定人工覆核點與停止機制</li><li>生成內容對外使用前送審</li></ul><p class="gd-sub">該留下的紀錄</p><ul><li>公平性評估結果、作法與理由</li><li>覆核、核准與停用紀錄</li></ul></article>
+      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 第三章</span></div><h3 class="idx-card-title">保護隱私及客戶權益</h3><p class="gd-sub">指引重點</p><ul><li>遵循資料最小化原則，以加密與存取控管保護個人資料</li><li>記錄資料蒐集來源，確認合法取得</li><li>無適當管控機制時，人員不得向生成式 AI 提供未經客戶同意提供的資訊；管控例如採用封閉型部署的模型</li><li>告知客戶服務由 AI 提供，並提醒是否有替代方案</li></ul><p class="gd-sub">落實做法</p><ul><li>送往模型前偵測個資，含個資的請求只能使用封閉或地端模型</li><li>只送任務所需的欄位</li><li>客戶告知與選擇不使用 AI 的流程</li></ul><p class="gd-sub">該留下的紀錄</p><ul><li>資料來源紀錄、個資偵測與攔截紀錄、告知文字的版本</li></ul></article>
+      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 第四章</span></div><h3 class="idx-card-title">確保系統穩健性與安全性</h3><p class="gd-sub">指引重點</p><ul><li>定義穩健性指標與門檻，進行對抗性測試，監控效度偏移</li><li>建立資安防護，部署前進行安全評估</li><li>辨識、追蹤及保護模型、資料、提示等 AI 資產，並留下紀錄</li><li>控管 API、模型與資料的使用；在符合隱私的前提下記錄並監控輸入</li><li>評估並定期檢視 AI 相關廠商的安全性</li></ul><p class="gd-sub">落實做法</p><ul><li>所有 AI 呼叫經單一入口，集中控管金鑰與權限</li><li>程式與元件的弱點掃描、軟體物料清單（SBOM）</li><li>模型供應商的安全評估</li></ul><p class="gd-sub">該留下的紀錄</p><ul><li>模型與提示的版本、遮罩後的輸入輸出紀錄、安全評估與掃描報告</li></ul></article>
+      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 第五章</span></div><h3 class="idx-card-title">落實透明性與可解釋性</h3><p class="gd-sub">指引重點</p><ul><li>使用 AI 與消費者互動前主動告知</li><li>依系統重要性決定可解釋的程度，自行或委託研發者宜備置架構文件與可解釋性報告</li><li>記錄訓練資料的來源、時間點、消費者同意等資訊</li><li>依客戶需求說明 AI 產出背後的邏輯；必要時主動揭露 AI 運用做法</li></ul><p class="gd-sub">落實做法</p><ul><li>揭露文字與服務條款更新</li><li>每一次 AI 產出都能追到使用的模型與引用的資料</li></ul><p class="gd-sub">該留下的紀錄</p><ul><li>技術文件、可解釋性報告、每次推論的模型與引用紀錄</li></ul></article>
+      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 第六章</span></div><h3 class="idx-card-title">促進永續發展</h3><p class="gd-sub">指引重點</p><ul><li>辨識 AI 系統對環境與社會的影響</li><li>採用高能效硬體，以資源共享與虛擬化減少重複的硬體設置</li><li>降低數位焦慮與落差，例如保留面對面服務的選擇</li><li>對員工提供教育與培訓</li></ul><p class="gd-sub">落實做法</p><ul><li>多個 AI 應用共用同一套推論資源與治理層</li><li>員工培訓計畫</li></ul><p class="gd-sub">該留下的紀錄</p><ul><li>資源與能耗監控、培訓紀錄</li></ul></article>
+    </div>
+  </section>
+
+  <section id="gd-platform" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">04</span>
+        <div>
+          <div class="idx-eyebrow">// 04 — 平台對應</div>
+          <h2 class="idx-sec-title">AURO NEXUS 能協助的部分</h2>
+        </div>
+      </div>
+      <a href="nexus.html#platform" class="idx-more">平台總覽<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+    </div>
+    <div class="idx-rule"></div>
+    <table class="gd-table"><thead><tr><th>平台能力</th><th>對應指引</th><th>模組</th></tr></thead><tbody><tr><td>推論前的權限與政策檢查、審批與雙人覆核</td><td>第一章 核准；第四章 控管 API 與模型使用</td><td><a href="nexus-forge.html">Forge</a></td></tr><tr><td>含個資的請求只能送往地端模型，模型回覆也經政策檢查</td><td>第三章 封閉型部署與資料保護</td><td><a href="nexus-forge.html">Forge</a></td></tr><tr><td>每次推論、知識庫查詢與工具呼叫寫入雜湊鏈稽核軌跡，證據包可離線驗證</td><td>總則 高風險系統的紀錄；第四章 記錄輸入；第五章 可追溯</td><td><a href="nexus-forge.html">Forge</a></td></tr><tr><td>AI 任務可暫停交人審核、可緊急停止</td><td>第二章 人員介入與安全關閉</td><td><a href="nexus-auro.html">Auro</a></td></tr><tr><td>資料分級、保存期限與 AI 使用溯源</td><td>第三章 資料治理；第五章 資料來源</td><td><a href="nexus-saga.html">SAGA</a></td></tr><tr><td>源碼檢測、弱點掃描與 SBOM</td><td>第四章 資安與 AI 資產追蹤</td><td><a href="nexus-scanner.html">Scanner</a></td></tr><tr><td>多個 AI 應用共用同一套平台與推論資源</td><td>第六章 資源共享</td><td><a href="nexus.html#platform">AURO NEXUS</a></td></tr><tr><td>自有機房與公有雲台灣區域使用同一套平台，日後可搬移</td><td>總則 停止委託時的遷移機制</td><td><a href="nexus.html#platform">AURO NEXUS</a></td></tr></tbody></table>
+    <p class="gd-note" style="margin-top:24px">AI 治理架構與負責主管、公平性評估方法、對客戶的揭露內容、替代方案與員工培訓，由貴機構依自身情況決定。平台提供的是控管措施的執行與紀錄；是否符合指引，由主管機關與貴機構法遵認定。</p>
+    <p class="gd-note">延伸閱讀：<a href="llm-gateway-guide.html">地端 LLM 閘道選型清單</a>・<a href="security.html">資安與資料處理</a></p>
+  </section>
+
+  <section id="gd-sources" class="idx-section idx-wrap sec-last">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">05</span>
+        <div>
+          <div class="idx-eyebrow">// 05 — 資料來源</div>
+          <h2 class="idx-sec-title">出處</h2>
+        </div>
+      </div>
+      
+    </div>
+    <div class="idx-rule"></div>
+    <ol class="gd-src"><li>金融監督管理委員會，〈金融業運用人工智慧(AI)指引〉，113 年 6 月 20 日，<a href="https://law.fsc.gov.tw/LawContent.aspx?id=GL003920" target="_blank" rel="noopener">金管會主管法規共用系統</a>。</li><li>金融監督管理委員會新聞稿，〈金管會發布「金融業運用人工智慧(AI)指引」〉，113 年 6 月 20 日，<a href="https://www.fsc.gov.tw/ch/home.jsp?id=96&amp;parentpath=0%2C2&amp;mcustomize=news_view.jsp&amp;dataserno=202406200001&amp;dtable=News" target="_blank" rel="noopener">金管會全球資訊網</a>。</li></ol>
+    <p class="gd-note">本文依指引原文整理並改寫，條文以金管會公布的版本為準；標示「實務建議」的段落為奧洛的建議做法。</p>
+  </section>
+
+  <!-- Footer -->
+<!-- PAGE-FAQ:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+  <section id="faq" class="idx-faq-sec idx-wrap"><div class="idx-faq-head"><div class="idx-eyebrow is-accent">// FAQ</div><h2>常見問題</h2></div><div class="idx-faq"><details><summary>金融業運用 AI 指引有法律拘束力嗎？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>屬行政指導性質。金管會表示，金融業相關公會訂有 AI 自律規範者，可參考指引納入相關重點；未訂定者，建議金融機構參考指引導入、使用及管理 AI 系統。</p></details><details><summary>金融業運用 AI 指引是什麼時候發布的？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>金管會於 113 年（2024 年）6 月 20 日發布〈金融業運用人工智慧(AI)指引〉；六項核心原則則先於 112 年 10 月 17 日隨「金融業運用人工智慧(AI)之核心原則與相關推動政策」公布。</p></details><details><summary>金管會 AI 指引的六項核心原則是什麼？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>建立治理及問責機制、重視公平性及以人為本的價值觀、保護隱私及客戶權益、確保系統穩健性與安全性、落實透明性與可解釋性、促進永續發展。指引的六章依序對應這六項原則。</p></details><details><summary>依金融業運用 AI 指引，怎麼判斷 AI 系統是不是高風險？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>指引列出六項考量因素：是否直接服務客戶或對營運有重大影響、使用個資的程度、AI 自主決策程度、系統複雜性、影響利害關係人的程度與廣度、救濟選項的完整程度；風險高低由金融機構綜合判斷。</p></details><details><summary>金融機構的行員可以把客戶資料貼進生成式 AI 嗎？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>金管會 AI 指引第三章指出，在無適當管控機制下，金融機構人員不得向生成式 AI 提供未經客戶同意提供的資訊；適當管控機制例如採用封閉型部署的生成式 AI 模型、確認系統環境安全性。</p></details><details><summary>金融機構委託廠商導入 AI，指引要求注意什麼？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>評估廠商專業與集中度風險、以書面契約明定責任與追索途徑、涉及客戶資料時簽訂資料保護條款、訂定停止委託時的資料或系統遷移機制，並要求廠商留存受託作業的書面或數位紀錄。</p></details></div></section>
+  <!-- PAGE-FAQ:END -->
+  <footer id="footer-sec" class="idx-footer">
+    <div class="idx-wrap">
+      <div class="idx-footer-col">
+        <img src="images/logo.svg" alt="AUROBASE 奧洛" class="idx-footer-logo" width="92" height="20">
+        <span>Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved.</span>
+      </div>
+      <div class="idx-footer-col">
+        <span>台北市內湖區洲子街101號2樓</span>
+        <div class="idx-footer-links">
+          <a href="https://www.facebook.com/AurobaseTW/" target="_blank" rel="noopener">粉絲專頁</a>
+          <a href="security.html">資安與資料處理</a>
+          <a href="blog.html">新聞中心</a>
+          <a href="privacypolicy.html">隱私權政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- END .idx-page -->
+            </div><!-- END COLORLIB-MAIN -->
+	        </div><!-- END COLORLIB-PAGE -->
+
+    
+  <!-- ✅ 優化後的 JS 載入 -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/external-link-warning.js" defer></script>
+  <script src="js/sweetalert2-11.26.25.all.min.js"></script>
+  <script src="js/main_optimized.js" defer></script>
+  <script src="js/aurora.js" defer></script>
+ </body>
+</html>

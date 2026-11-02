@@ -179,6 +179,20 @@ class AuditTest(SiteCopy):
         for ch in '⌕▾・为':   # 完整字型沒有、站上用到的字，不能落在它的 range 裡
             self.assertFalse(any(s[0] <= ord(ch) <= s[-1] for s in spans), ch)
 
+    def test_guides_reach_ai_engines(self):
+        # 指南頁：Article 結構化資料附出處，全文進 llms-full.txt，常見問題用深色版型的展開式問答
+        gen.build_all()
+        full = open(os.path.join(self.root, 'llms-full.txt'), encoding='utf-8').read()
+        for rel, cfg in gen.load_pages_cfg().items():
+            if cfg.get('type') != 'Article':
+                continue
+            page = open(os.path.join(self.root, rel), encoding='utf-8').read()
+            self.assertIn('"@type": "Article"', page, rel)
+            self.assertIn('<details><summary>', page, rel)
+            self.assertIn(cfg['headline'], full, rel)
+        self.assertIn('【實務建議】', full)
+        self.assertIn('"citation"', open(os.path.join(self.root, 'fsc-ai-guideline.html'), encoding='utf-8').read())
+
     def test_title_width_counts_latin_as_half(self):
         self.assertEqual(gen.disp_width('AI 治理'), 3.5)
 

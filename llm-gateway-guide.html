@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+  <head>
+    <title>地端 LLM 閘道選型清單｜10 項確認重點｜奧洛 Aurobase</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="企業導入生成式 AI 時，所有請求應先經過 AI 閘道（LLM Gateway）。本文整理地端 LLM 閘道選型要確認的 10 件事，每一項附 POC 的驗證方法，適用要在自有環境導入 AI 的金融、醫療與公部門。">
+    <meta name="keywords" content="LLM Gateway,AI 閘道,地端 LLM,地端 AI,LLM 閘道選型,企業導入生成式 AI,AI 稽核軌跡,私有化 AI,奧洛,Aurobase"> 
+      
+    
+    <link rel="canonical" href="https://aurobase.com/llm-gateway-guide.html">
+    <!-- SOCIAL-META:BEGIN（由 tools/build-module-pages.py 產生）-->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:image" content="https://aurobase.com/images/og/llm-gateway-guide.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="地端 LLM 閘道選型清單">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="地端 LLM 閘道選型清單｜10 項確認重點｜奧洛 Aurobase">
+    <meta name="twitter:description" content="企業導入生成式 AI 時，所有請求應先經過 AI 閘道（LLM Gateway）。本文整理地端 LLM 閘道選型要確認的 10 件事，每一項附 POC 的驗證方法，適用要在自有環境導入 AI 的金融、醫療與公部門。">
+    <meta name="twitter:image" content="https://aurobase.com/images/og/llm-gateway-guide.jpg">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="alternate" hreflang="zh-Hant-TW" href="https://aurobase.com/llm-gateway-guide.html">
+    <meta property="article:published_time" content="2026-11-02">
+    <meta property="article:modified_time" content="2026-11-02">
+    <meta property="article:author" content="奧洛 Aurobase">
+    <!-- SOCIAL-META:END -->
+    <meta property="og:title" content="地端 LLM 閘道選型清單｜10 項確認重點｜奧洛 Aurobase">
+    <meta property="og:description" content="企業導入生成式 AI 時，所有請求應先經過 AI 閘道（LLM Gateway）。本文整理地端 LLM 閘道選型要確認的 10 件事，每一項附 POC 的驗證方法，適用要在自有環境導入 AI 的金融、醫療與公部門。">
+    <meta property="og:url" content="https://aurobase.com/llm-gateway-guide.html">
+    <meta property="og:site_name" content="奧洛 Aurobase">
+<!-- Favicon -->
+	<link href="images/favicon.ico" rel="shortcut icon">
+    
+    <!-- ✅ LINE Seed 字體家族 -->
+    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/line-seed-font.css">
+
+    
+
+    <!--<link rel="stylesheet" href="css/aos.css">-->
+
+
+    <!--<link rel="stylesheet" href="css/bootstrap-datepicker.css">-->
+    <!--<link rel="stylesheet" href="css/jquery.timepicker.css">-->
+
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/aurora-theme.css">
+    <style>
+/* ══════════════════════════════════════════════
+   GUIDE PAGE — Scoped Styles（指南頁共用）
+   Shared tokens/base/sections/cards/footer: css/aurora-theme.css
+   ══════════════════════════════════════════════ */
+.gd-hero .idx-aurora-body { padding-top: 140px; padding-bottom: 130px; }
+.gd-meta { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin-top: 18px; }
+.gd-answer { border: 1px solid var(--idx-line-2); border-left: 3px solid var(--idx-accent); background: var(--idx-surface); padding: 28px 32px; max-width: 920px; }
+.gd-answer p { font-size: 16px; line-height: 1.95; margin: 0 0 12px; }
+.gd-answer ol, .gd-answer ul { margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.95; color: var(--idx-text-2); }
+.gd-tag { display: inline-block; font-family: var(--idx-mono); font-size: 11px; color: var(--idx-accent); border: 1px solid var(--idx-accent); border-radius: 3px; padding: 1px 6px; margin-right: 6px; vertical-align: 2px; }
+.gd-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.gd-block h3 { font-size: 18px; margin: 0 0 10px; }
+.gd-block ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.9; color: var(--idx-text-2); }
+.gd-card .gd-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin: 6px 0 2px; }
+.gd-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.85; color: var(--idx-text-2); }
+.gd-card ul li + li { margin-top: 4px; }
+.gd-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.8; }
+.gd-table th, .gd-table td { border-bottom: 1px solid var(--idx-line); padding: 14px 12px; text-align: left; vertical-align: top; }
+.gd-table th { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); border-bottom: 2px solid var(--idx-line-2); }
+.gd-table td:first-child { color: var(--idx-ink); min-width: 180px; }
+.gd-note { max-width: 920px; font-size: 15px; line-height: 1.9; }
+.gd-note + .gd-note { margin-top: 12px; }
+.gd-src { font-size: 14px; line-height: 2; padding-left: 18px; color: var(--idx-text-2); }
+.gd-check { counter-reset: gd; display: grid; gap: 16px; }
+.gd-check article { counter-increment: gd; }
+.gd-check .idx-card-title::before { content: counter(gd, decimal-leading-zero) ' '; font-family: var(--idx-mono); color: var(--idx-accent); margin-right: 6px; }
+@media (max-width: 991.98px) { .gd-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 110px; } }
+@media (max-width: 767.98px) {
+  .gd-answer { padding: 22px 20px; }
+  .gd-table thead { display: none; }
+  .gd-table tr { display: block; border-bottom: 1px solid var(--idx-line); padding: 10px 0; }
+  .gd-table td { display: block; border: 0; padding: 4px 0; }
+}
+</style>
+    <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
+        })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
+    <!-- End Google Tag Manager -->
+      <link rel="stylesheet" href="css/site-nav.css">
+      <!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://aurobase.com/llm-gateway-guide.html#webpage",
+      "url": "https://aurobase.com/llm-gateway-guide.html",
+      "name": "地端 LLM 閘道選型清單｜10 項確認重點｜奧洛 Aurobase",
+      "description": "企業導入生成式 AI 時，所有請求應先經過 AI 閘道（LLM Gateway）。本文整理地端 LLM 閘道選型要確認的 10 件事，每一項附 POC 的驗證方法，適用要在自有環境導入 AI 的金融、醫療與公部門。",
+      "inLanguage": "zh-Hant-TW",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://aurobase.com/#website",
+        "name": "奧洛 Aurobase",
+        "url": "https://aurobase.com/"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://aurobase.com/images/og/llm-gateway-guide.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "keywords": "LLM Gateway, AI 閘道, 地端 LLM, 地端 AI, LLM 閘道選型, 企業導入生成式 AI, AI 稽核軌跡, 私有化 AI, 奧洛, Aurobase"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aurobase.com/#organization",
+      "name": "奧洛股份有限公司",
+      "alternateName": [
+        "Aurobase",
+        "奧洛"
+      ],
+      "url": "https://aurobase.com/",
+      "logo": "https://aurobase.com/images/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "洲子街101號2樓",
+        "addressLocality": "內湖區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-5568-4688",
+      "email": "ad@aurocore.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+886-2-5568-4688",
+        "email": "ad@aurocore.com",
+        "areaServed": "TW",
+        "availableLanguage": [
+          "zh-Hant",
+          "en"
+        ]
+      },
+      "sameAs": [
+        "https://www.facebook.com/AurobaseTW/"
+      ],
+      "legalName": "奧洛股份有限公司",
+      "description": "奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營、AI 智慧語伴與客服中心服務。",
+      "areaServed": {
+        "@type": "Country",
+        "name": "台灣"
+      },
+      "knowsAbout": [
+        "AI 治理",
+        "生成式 AI",
+        "地端 AI",
+        "企業知識庫",
+        "客戶數據平台",
+        "行銷自動化",
+        "數位體驗分析",
+        "資料治理",
+        "資安弱點掃描",
+        "數位廣告投放",
+        "社群經營"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://aurobase.com/llm-gateway-guide.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI 閘道和 API 閘道有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "API 閘道處理一般服務呼叫的路由、流量與認證；AI 閘道另外看懂提示與回覆內容，在推論前檢查權限與資料敏感度、決定送往哪個模型，並逐筆記錄推論、知識庫查詢與工具呼叫。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "已經在機房建好地端 LLM，還需要 AI 閘道嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "需要。地端 LLM 解決的是資料不出機房；誰能用哪個模型、能查哪些知識庫、回覆是否含個資、紀錄能否證明沒被改過，仍需要放在模型前面的 AI 閘道處理。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "LLM 閘道可以用開源元件自己組嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，但要自行補上推論前的政策檢查、個資路由、段落級權限、撤權即時生效與防竄改的稽核紀錄，並長期維護。可以用本文的 10 項 POC 驗證方法，比較自建與採購的方案。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "LLM 閘道的 POC 要準備什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一個代表性的應用（例如內部知識問答）、一組測試帳號與權限、含假個資的測試提示、一台可放地端模型的主機，並請稽核或法遵人員一起驗證稽核紀錄。"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://aurobase.com/llm-gateway-guide.html#article",
+      "headline": "地端 LLM 閘道選型清單：導入生成式 AI 前要確認的 10 件事",
+      "description": "企業導入生成式 AI 時，所有請求應先經過 AI 閘道（LLM Gateway）。本文整理地端 LLM 閘道選型要確認的 10 件事，每一項附 POC 的驗證方法，適用要在自有環境導入 AI 的金融、醫療與公部門。",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "zh-Hant-TW",
+      "mainEntityOfPage": {
+        "@id": "https://aurobase.com/llm-gateway-guide.html#webpage"
+      },
+      "author": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://aurobase.com/#organization"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://aurobase.com/images/og/llm-gateway-guide.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "LLM Gateway"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI 閘道"
+        },
+        {
+          "@type": "Thing",
+          "name": "地端 LLM"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI 治理"
+        }
+      ],
+      "keywords": "LLM Gateway, AI 閘道, 地端 LLM, 地端 AI, LLM 閘道選型, 企業導入生成式 AI, AI 稽核軌跡, 私有化 AI, 奧洛, Aurobase"
+    }
+  ]
+}
+</script>
+    <!-- SITE-LD:END -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MB9RNG8"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="colorlib-page">
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" aria-label="Toggle navigation menu"><i></i></a>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+<nav id="colorlib-main-menu" role="navigation">
+  	<!-- SITE-NAV:BEGIN（由 tools/build-module-pages.py 依 _nav.json 產生）-->
+<button type="button" class="nav-search-btn" aria-haspopup="dialog"><span aria-hidden="true">⌕</span> 搜尋產品與服務</button><script defer src="js/site-search.js"></script><script defer src="js/site-events.js"></script><ul><li class="has-sub"><div class="nav-row"><a href="nexus.html">AI 治理平台</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-platform" aria-label="展開AI 治理平台的產品">▾</button></div><ul class="nav-sub" id="nav-sub-platform" hidden><li class="nav-all"><a href="nexus.html#platform">平台總覽</a></li><li class="nav-leg"><span class="nav-leg-name">治理底座</span><span class="nav-leg-links"><a href="nexus-forge.html">Forge</a></span></li><li class="nav-leg"><span class="nav-leg-name">AI 編排</span><span class="nav-leg-links"><a href="nexus-auro.html">Auro</a></span></li><li class="nav-leg"><span class="nav-leg-name">客戶資料</span><span class="nav-leg-links"><a href="nexus-cdp.html">AURA CDP</a><a href="nexus-abm.html">ABM</a></span></li><li class="nav-leg"><span class="nav-leg-name">知識</span><span class="nav-leg-links"><a href="nexus-insight.html">Insight</a><a href="nexus-library.html">Library</a></span></li><li class="nav-leg"><span class="nav-leg-name">內容與行銷智能</span><span class="nav-leg-links"><a href="nexus-mira.html">MIRA</a><a href="nexus-pulse.html">Pulse</a><a href="nexus-geo.html">GEO</a></span></li><li class="nav-leg"><span class="nav-leg-name">合規治理</span><span class="nav-leg-links"><a href="nexus-saga.html">SAGA</a></span></li><li class="nav-leg"><span class="nav-leg-name">生產力</span><span class="nav-leg-links"><a href="nexus-ai-office.html">AI-Office</a></span></li><li class="nav-leg"><span class="nav-leg-name">現代化</span><span class="nav-leg-links"><a href="nexus-lisa.html">LISA</a></span></li><li class="nav-leg"><span class="nav-leg-name">安全</span><span class="nav-leg-links"><a href="nexus-scanner.html">Scanner</a><a href="nexus-cardea.html">Cardea</a></span></li></ul></li><li class="has-sub"><div class="nav-row"><a href="nexus.html#solutions">產業解決方案</a><button type="button" class="nav-sub-toggle" aria-expanded="false" aria-controls="nav-sub-solutions" aria-label="展開產業解決方案">▾</button></div><ul class="nav-sub" id="nav-sub-solutions" hidden><li class="nav-leg"><span class="nav-leg-name">公部門</span><span class="nav-leg-links"><a href="solution-police-record.html">AI 警詢筆錄</a></span></li><li class="nav-leg"><span class="nav-leg-name">金融保險</span><span class="nav-leg-links"><a href="solution-telesales.html">電銷對話智能</a></span></li><li class="nav-leg"><span class="nav-leg-name">跨產業</span><span class="nav-leg-links"><a href="solution-ai-ocr.html">AI OCR 文件辨識</a></span></li><li class="nav-leg"><span class="nav-leg-name">數位行銷</span><span class="nav-leg-links"><a href="solution-digital-trail.html">數位軌跡整合</a></span></li></ul></li><li><a href="ai-companion.html">AI 智慧語伴</a></li><li><a href="solution.html">代理產品</a></li><li><a href="marketing.html">數位行銷服務</a></li><li><a href="https://aurocore.com/" target="_blank" rel="noopener">客服中心<span class="nav-ext" aria-hidden="true">↗</span></a></li><li><a href="contact.html">聯絡我們</a></li></ul>
+<script>document.querySelectorAll('.nav-sub-toggle').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);document.getElementById(b.getAttribute('aria-controls')).hidden=!o;});});</script>
+<!-- SITE-NAV:END -->
+  	<p class="social">
+          <span><a href="https://www.facebook.com/AurobaseTW/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+          </svg> 粉絲專頁</a></span>
+  	</p>
+  </nav>
+  
+  <div class="colorlib-footer">
+  	<div class="aside-logo"><a href="index.html">
+          <img src="images/logo.svg" style="max-width: 185px" alt="AUROBASE" width="185" height="40" />
+      </a></div>
+  </div>
+</aside>
+        <!-- END COLORLIB-ASIDE -->
+        <div id="colorlib-main">
+  <div class="idx-page">
+
+  <section class="idx-aurora idx-hero gd-hero">
+    <canvas data-aurora="hero" aria-hidden="true"></canvas>
+    <div class="idx-aurora-body idx-wrap">
+      <div class="idx-tagpair"><span>AUROBASE 指南</span><span>LLM 閘道選型</span></div>
+      <h1 class="idx-hero-title"><span>LLM 閘道</span><span>選型清單<em>.</em></span></h1>
+      <div class="idx-rule"></div>
+      <p class="idx-hero-desc">企業導入生成式 AI 時，所有請求都應先經過 AI 閘道。本文整理選型時要確認的 10 件事，每一項附上 POC 時的驗證方法，讓資訊、資安與法遵單位用同一份清單比較方案。</p>
+      <div class="idx-hero-actions">
+        <a href="#gd-check" class="idx-btn idx-btn-primary">看 10 項清單<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        <a href="contact.html" class="idx-btn idx-btn-ghost">安排 POC</a>
+      </div>
+      <p class="gd-meta">最後更新：2026-11-02</p>
+    </div>
+  </section>
+
+  <section id="gd-answer" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">01</span>
+        <div>
+          <div class="idx-eyebrow">// 01 — 一段話看懂</div>
+          <h2 class="idx-sec-title">AI 閘道是什麼、選型先看什麼</h2>
+        </div>
+      </div>
+      
+    </div>
+    <div class="idx-rule"></div>
+    <div class="gd-answer">
+      <p><b>AI 閘道（LLM Gateway）</b>是企業內所有 AI 請求的必經入口：在請求送到模型之前檢查權限與政策，把請求送往經核准的模型，並記錄每一次推論、知識庫查詢與工具呼叫。</p>
+      <p><span class="gd-tag">實務建議</span>選型時，能接多少種模型是次要的，先確認三件事：</p>
+      <ul>
+        <li><b>擋得住</b>：不符合權限或含個資的請求，在送出前就被攔下。</li>
+        <li><b>查得到</b>：每一次使用都有紀錄，而且能證明紀錄沒被改過。</li>
+        <li><b>搬得走</b>：可放在自有機房或隔離網路，日後更換模型或部署位置不必重做。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="gd-check" class="idx-section idx-wrap">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">02</span>
+        <div>
+          <div class="idx-eyebrow">// 02 — 選型清單</div>
+          <h2 class="idx-sec-title">要確認的 10 件事</h2>
+        </div>
+      </div>
+      
+    </div>
+    <div class="idx-rule"></div>
+    <div class="gd-check idx-grid">
+      <article class="idx-card gd-card"><h3 class="idx-card-title">推論前就檢查權限與政策</h3><p class="gd-sub">為什麼重要</p><ul><li>不符合的請求應在送出前被擋下，不能等模型回覆後才記錄。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>用沒有權限的帳號呼叫受限的模型：應被拒絕、模型端收到 0 次請求，並留下一筆拒絕紀錄。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">含個資的請求自動限定地端模型</h3><p class="gd-sub">為什麼重要</p><ul><li>身分證字號、電話、電子郵件或密鑰不應離開企業環境。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>以測試用的假身分證字號送往雲端模型：應被拒絕且雲端端點收到 0 次請求；同一段提示改送地端模型應正常回應。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">模型的回覆也要檢查</h3><p class="gd-sub">為什麼重要</p><ul><li>個資外洩也可能發生在回覆，串流回覆同樣要檢查。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>讓模型回覆一段含個資的內容：使用者看到的應是遮蔽後的結果，並留下紀錄。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">可限定只用地端模型，並支援多種推論服務</h3><p class="gd-sub">為什麼重要</p><ul><li>模型會換代；閘道不應綁定單一模型或廠商。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>設定為只用地端後指定雲端模型，應被拒絕；更換推論服務時，應用程式不需修改。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">相容既有的 API 呼叫方式</h3><p class="gd-sub">為什麼重要</p><ul><li>既有工具與應用程式應能改連線位址就接入，不必重寫。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>挑一個使用 OpenAI 相容 API 的既有應用，只改連線位址，確認功能正常。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">知識庫權限到段落，撤權立即生效</h3><p class="gd-sub">為什麼重要</p><ul><li>同一份文件的不同段落可能有不同密級；人員異動時，權限必須當下失效。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>撤銷某位使用者對一份文件的權限，下一次檢索就應查不到，不需等快取過期。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">稽核紀錄防竄改、可離線驗證</h3><p class="gd-sub">為什麼重要</p><ul><li>稽核人員要能證明紀錄寫入後沒有被修改，而且不必連上系統也能查驗。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>以資料庫管理員身分修改一筆稽核紀錄：應被拒絕，或在驗證時被指出；匯出證據包，在不連網的電腦上重算雜湊。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">工具呼叫也要經政策檢查並留痕</h3><p class="gd-sub">為什麼重要</p><ul><li>AI Agent 會呼叫內部 API 與 MCP 工具，風險不只在模型本身。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>讓 AI 呼叫一個未授權的工具：應被拒絕並留下紀錄。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">部署選項與更新方式</h3><p class="gd-sub">為什麼重要</p><ul><li>金融、醫療與公部門常需要隔離網路；雲端與地端最好是同一套。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>確認在隔離網路中的安裝與更新方式（例如以離線映像包現場載入），以及搬移到其他環境時要重做哪些設定。</li></ul></article>
+      <article class="idx-card gd-card"><h3 class="idx-card-title">與既有身分系統整合、租戶與部門隔離</h3><p class="gd-sub">為什麼重要</p><ul><li>權限應沿用企業既有的帳號與群組，跨部門或跨租戶的資料不能互通。</li></ul><p class="gd-sub">POC 怎麼驗證</p><ul><li>用 AD／LDAP 或單一登入帳號登入；以 A 部門帳號查詢 B 部門的知識庫，應被拒絕。</li></ul></article>
+    </div>
+  </section>
+
+  <section id="gd-forge" class="idx-section idx-wrap sec-last">
+    <div class="idx-sec-head">
+      <div class="idx-sec-title-group">
+        <span class="idx-sec-num">03</span>
+        <div>
+          <div class="idx-eyebrow">// 03 — 奧洛的做法</div>
+          <h2 class="idx-sec-title">Forge 怎麼對應這份清單</h2>
+        </div>
+      </div>
+      <a href="nexus-forge.html" class="idx-more">Forge 產品頁<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+    </div>
+    <div class="idx-rule"></div>
+    <p class="gd-note">奧洛的 <a href="nexus-forge.html">Forge</a> 是 AURO NEXUS 平台的治理化 AI 閘道，對應做法如下：推論前做權限與政策檢查；含個資的提示只能送往地端模型；回覆也經政策檢查；支援地端 Ollama、OpenAI 相容服務與 Anthropic，並可限定只用地端；以 OpenAI 相容 API 提供服務；知識庫與段落可設定密級，撤權在下一次檢索就生效；雜湊鏈稽核軌跡可匯出證據包離線驗證；工具呼叫先經政策決策並寫入稽核帳。</p>
+    <p class="gd-note">Forge 產品頁列有本機實測結果與實機畫面。若要在貴機構環境跑一次上述驗證，可以從一個部門、一個模型開始。</p>
+    <p class="gd-note">延伸閱讀：<a href="fsc-ai-guideline.html">金融業運用 AI 指引怎麼落實</a>・<a href="security.html">資安與資料處理</a></p>
+  </section>
+
+  <!-- Footer -->
+<!-- PAGE-FAQ:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
+  <section id="faq" class="idx-faq-sec idx-wrap"><div class="idx-faq-head"><div class="idx-eyebrow is-accent">// FAQ</div><h2>常見問題</h2></div><div class="idx-faq"><details><summary>AI 閘道和 API 閘道有什麼不同？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>API 閘道處理一般服務呼叫的路由、流量與認證；AI 閘道另外看懂提示與回覆內容，在推論前檢查權限與資料敏感度、決定送往哪個模型，並逐筆記錄推論、知識庫查詢與工具呼叫。</p></details><details><summary>已經在機房建好地端 LLM，還需要 AI 閘道嗎？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>需要。地端 LLM 解決的是資料不出機房；誰能用哪個模型、能查哪些知識庫、回覆是否含個資、紀錄能否證明沒被改過，仍需要放在模型前面的 AI 閘道處理。</p></details><details><summary>LLM 閘道可以用開源元件自己組嗎？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>可以，但要自行補上推論前的政策檢查、個資路由、段落級權限、撤權即時生效與防竄改的稽核紀錄，並長期維護。可以用本文的 10 項 POC 驗證方法，比較自建與採購的方案。</p></details><details><summary>LLM 閘道的 POC 要準備什麼？<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>一個代表性的應用（例如內部知識問答）、一組測試帳號與權限、含假個資的測試提示、一台可放地端模型的主機，並請稽核或法遵人員一起驗證稽核紀錄。</p></details></div></section>
+  <!-- PAGE-FAQ:END -->
+  <footer id="footer-sec" class="idx-footer">
+    <div class="idx-wrap">
+      <div class="idx-footer-col">
+        <img src="images/logo.svg" alt="AUROBASE 奧洛" class="idx-footer-logo" width="92" height="20">
+        <span>Copyright &copy; 2026 奧洛股份有限公司, All Rights Reserved.</span>
+      </div>
+      <div class="idx-footer-col">
+        <span>台北市內湖區洲子街101號2樓</span>
+        <div class="idx-footer-links">
+          <a href="https://www.facebook.com/AurobaseTW/" target="_blank" rel="noopener">粉絲專頁</a>
+          <a href="security.html">資安與資料處理</a>
+          <a href="blog.html">新聞中心</a>
+          <a href="privacypolicy.html">隱私權政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- END .idx-page -->
+            </div><!-- END COLORLIB-MAIN -->
+	        </div><!-- END COLORLIB-PAGE -->
+
+    
+  <!-- ✅ 優化後的 JS 載入 -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/external-link-warning.js" defer></script>
+  <script src="js/sweetalert2-11.26.25.all.min.js"></script>
+  <script src="js/main_optimized.js" defer></script>
+  <script src="js/aurora.js" defer></script>
+ </body>
+</html>

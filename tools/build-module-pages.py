@@ -1032,12 +1032,37 @@ def llms_full(mods, pf):
         if e['cat'] in ('數位行銷服務', '代理產品', 'AI 智慧語伴', '客服中心'):
             u = e['url'] if e['url'].startswith('http') else '%s/%s' % (SITE, e['url'])
             out.append('- [%s](%s)（%s）：%s' % (e['title'], u, e['cat'], e['desc']))
+    guides = [(rel, cfg) for rel, cfg in load_pages_cfg().items() if cfg.get('type') == 'Article' and os.path.exists(os.path.join(ROOT, rel))]
+    if guides:
+        out += ['', '## 指南', '']
+    for rel, cfg in guides:
+        out += ['', '### %s（%s/%s，%s 更新）' % (cfg.get('headline', cfg['name']), SITE, rel, cfg.get('modified', cfg['date'])), '']
+        out += article_text(read(os.path.join(ROOT, rel)))
     for rel, cfg in load_pages_cfg().items():
         if cfg.get('faq'):
             title = html.unescape(re.search(r'<title>(.*?)</title>', read(os.path.join(ROOT, rel)), re.S).group(1)) if os.path.exists(os.path.join(ROOT, rel)) else rel
             out += ['', '### %s：常見問題（%s/%s）' % (re.sub(r'\s*[｜|].*$', '', title), SITE, rel), '']
             out += sum([['**問：%s**' % f['q'], '答：%s' % f['a'], ''] for f in cfg['faq']], [])
     return '\n'.join(re.sub(r'\n{3,}', '\n\n', '\n'.join(out)).split('\n')).rstrip() + '\n'
+
+
+def article_text(s):
+    """指南頁內文轉成 Markdown 段落：H2 成小標、清單成條列，選單、首屏與頁尾不收。"""
+    body = s[s.index('<div class="idx-page">'):]
+    body = body[body.index('</section>') + len('</section>'):]          # 跳過首屏
+    for end in ('<!-- PAGE-FAQ:BEGIN', '<!-- Footer -->'):
+        if end in body:
+            body = body[:body.index(end)]
+    body = re.sub(r'<(script|style)\b.*?</\1>', '', body, flags=re.S)
+    body = re.sub(r'<span class="gd-tag">(.*?)</span>', r'【\1】', body)
+    body = re.sub(r'<div class="idx-eyebrow">.*?</div>|<span class="idx-sec-num">.*?</span>|<a [^>]*class="idx-more"[^>]*>.*?</a>', '', body, flags=re.S)
+    body = re.sub(r'<h2[^>]*>(.*?)</h2>', lambda m: '\n#### ' + plain(m.group(1)) + '\n', body, flags=re.S)
+    body = re.sub(r'<h3[^>]*>(.*?)</h3>', lambda m: '\n**' + plain(m.group(1)) + '**\n', body, flags=re.S)
+    body = re.sub(r'<li[^>]*>(.*?)</li>', lambda m: '\n- ' + plain(m.group(1)), body, flags=re.S)
+    body = re.sub(r'<tr[^>]*>(.*?)</tr>', lambda m: '\n- ' + '｜'.join(plain(c) for c in re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', m.group(1), re.S)), body, flags=re.S)
+    body = re.sub(r'</p>|<p class="gd-sub">', '\n', body)
+    text = html.unescape(re.sub(r'<[^>]+>', '', body))
+    return [ln.strip() for ln in text.split('\n') if ln.strip()] + ['']
 
 
 def update_llms_full(mods, pf):
@@ -1152,7 +1177,7 @@ def update_sitemap(mods):
         rest = re.sub(r'<image:image>.*?</image:image>', '', rest)
         rel = loc[len(SITE) + 1:] or 'index.html'
         m, cfg = by_file.get(rel), pages.get(rel, {})
-        if cfg.get('type') == 'BlogPosting' and '<lastmod>' not in rest:
+        if cfg.get('type') in ('BlogPosting', 'Article') and '<lastmod>' not in rest:
             rest = '<lastmod>%s</lastmod>' % cfg.get('modified', cfg['date']) + rest
         imgs = [og_image_of(m) if m else og_image(og_key(rel))]
         imgs += [x['src'] for x in ((m or {}).get('shots') or {}).get('items', [])]
@@ -1458,6 +1483,16 @@ def static_ld(rel, cfg, s):
                 posts.append({'@type': 'BlogPosting', 'headline': re.sub(r'｜.*$', '', html.unescape(re.search(r'<title>(.*?)</title>', ps, re.S).group(1).strip())),
                               'url': SITE + '/' + r, 'datePublished': c['date']})
         graph.append({'@type': 'Blog', '@id': url + '#blog', 'name': cfg['name'], 'url': url, 'publisher': {'@id': ORG['@id']}, 'blogPost': posts})
+    elif t == 'Article':
+        # 指南類文章：不屬於新聞中心，附出處（citation）讓 AI 引擎知道內容依據
+        graph.append({'@type': 'Article', '@id': url + '#article', 'headline': cfg.get('headline', re.sub(r'｜.*$', '', title)),
+                      'description': desc, 'datePublished': cfg['date'], 'dateModified': cfg.get('modified', cfg['date']),
+                      'inLanguage': 'zh-Hant-TW', 'mainEntityOfPage': {'@id': url + '#webpage'},
+                      'author': {'@id': ORG['@id']}, 'publisher': {'@id': ORG['@id']}, 'image': page['primaryImageOfPage'],
+                      **({'about': [{'@type': 'Thing', 'name': x} for x in cfg['about']]} if cfg.get('about') else {}),
+                      **({'citation': [{'@type': 'CreativeWork', 'name': c['name'], 'url': c['url']} for c in cfg['citations']]}
+                         if cfg.get('citations') else {}),
+                      **({'keywords': ', '.join(cfg['keywords'])} if cfg.get('keywords') else {})})
     elif t == 'BlogPosting':
         cat = re.search(r'<a class="color-orange">([^<]+)</a>', s)
         graph.append({'@type': 'BlogPosting', '@id': url + '#article', 'headline': re.sub(r'｜.*$', '', title), 'description': desc,
@@ -1528,7 +1563,7 @@ def update_static_pages():
         if cfg.get('keywords'):
             kw = attr(','.join(cfg['keywords']))
             t = re.sub(r'(<meta name="keywords" content=")[^"]*', lambda x: x.group(1) + kw, t, count=1)
-        if cfg.get('type') == 'BlogPosting':
+        if cfg.get('type') in ('BlogPosting', 'Article'):
             t = apply_social(t, rel, og_image(og_key(rel)), 'article', cfg['date'], cfg.get('modified'))
         else:
             t = apply_social(t, rel, og_image(og_key(rel)))
@@ -1552,9 +1587,15 @@ def update_static_pages():
             else:
                 t = t.replace('<!-- <div class="tag-widget post-tag-container', rb + '\n<!-- <div class="tag-widget post-tag-container', 1)
         if cfg.get('faq'):
-            items = ''.join('<div class="pg-faq-item"><h3>%s</h3><p>%s</p></div>' % (html.escape(f['q']), html.escape(f['a'])) for f in cfg['faq'])
-            fb = (FAQ_BEGIN + '\n<section id="faq" class="ftco-section pg-faq"><div class="row justify-content-end"><div class="col-md-10">'
-                  '<div class="pg-faq-wrap"><p class="pg-faq-label">FAQ</p><h2>常見問題</h2>%s</div></div></div></section>\n' % items + FAQ_END)
+            if 'class="idx-page"' in t:   # 深色極光版型（首頁、聯絡、資安、指南）用首頁同款的展開式問答
+                items = ''.join('<details><summary>%s<span class="idx-faq-plus" aria-hidden="true">+</span></summary><p>%s</p></details>'
+                                % (html.escape(f['q']), html.escape(f['a'])) for f in cfg['faq'])
+                fb = (FAQ_BEGIN + '\n  <section id="faq" class="idx-faq-sec idx-wrap"><div class="idx-faq-head"><div class="idx-eyebrow is-accent">// FAQ</div>'
+                      '<h2>常見問題</h2></div><div class="idx-faq">%s</div></section>\n  ' % items + FAQ_END)
+            else:
+                items = ''.join('<div class="pg-faq-item"><h3>%s</h3><p>%s</p></div>' % (html.escape(f['q']), html.escape(f['a'])) for f in cfg['faq'])
+                fb = (FAQ_BEGIN + '\n<section id="faq" class="ftco-section pg-faq"><div class="row justify-content-end"><div class="col-md-10">'
+                      '<div class="pg-faq-wrap"><p class="pg-faq-label">FAQ</p><h2>常見問題</h2>%s</div></div></div></section>\n' % items + FAQ_END)
             if FAQ_BEGIN in t:
                 t = t[:t.index(FAQ_BEGIN)] + fb + t[t.index(FAQ_END) + len(FAQ_END):]
             else:
