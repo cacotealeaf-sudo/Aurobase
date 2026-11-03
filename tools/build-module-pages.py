@@ -48,7 +48,7 @@ ORG = {
                      'email': 'ad@aurocore.com', 'areaServed': 'TW', 'availableLanguage': ['zh-Hant', 'en']},
     'sameAs': ['https://www.facebook.com/AurobaseTW/'],
     'legalName': '奧洛股份有限公司',
-    'description': '奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案，代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營、AI 智慧語伴與客服中心服務。',
+    'description': '奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案（含 AI 智慧語伴），代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營與客服中心服務。',
     'areaServed': {'@type': 'Country', 'name': '台灣'},
     'knowsAbout': ['AI 治理', '生成式 AI', '地端 AI', '企業知識庫', '客戶數據平台', '行銷自動化', '數位體驗分析',
                    '資料治理', '資安弱點掃描', '數位廣告投放', '社群經營'],
@@ -841,14 +841,15 @@ def overview_html(pf, mods):
                             <div class="leg-base"><p class="leg-name">{base['name']}</p><p class="leg-text">{base['text']}所有模組的 AI 呼叫都經過這一層。</p>{''.join(mod_link(s) for s in live(pf, mods, base['modules']))}</div>''',
         intro='上層的每一個模組各自解決一類問題；下層的治理底座讓它們共用同一套權限、模型與稽核軌跡。', sid='modules'))
 
-    sols = solutions(mods)
+    sols = solution_list(mods, pf)
     if sols:
-        def sol_card(m):
-            # 卡片上的模組標籤取自「由哪些平台模組組成」，每張卡的依據一致
-            used = [x for x in m['platform']['related'] if x in mods and not is_solution(mods[x])]
-            return (f'<div class="sol-card"><span class="sol-ind">{m["industry"]}</span>'
-                    f'<h3><a href="{m["file"]}">{m["name_zh"]}</a></h3><p>{plain(dict(m["summary"])["是什麼"])}</p>'
-                    f'<div class="flow-mods">{"".join(module_chip(x, mods) for x in used)}</div></div>')
+        def sol_card(x):
+            # 卡片上的模組標籤取自「由哪些平台模組組成」，每張卡的依據一致；手寫方案頁沒有登錄組成模組就不列
+            m = x['mod']
+            used = [k for k in m['platform']['related'] if k in mods and not is_solution(mods[k])] if m else []
+            return (f'<div class="sol-card"><span class="sol-ind">{x["industry"]}</span>'
+                    f'<h3><a href="{x["file"]}">{x["name"]}</a></h3><p>{x["what"]}</p>'
+                    f'<div class="flow-mods">{"".join(module_chip(k, mods) for k in used)}</div></div>')
         out.append(section('nm-cap', 'SOLUTIONS', pf.get('solutions_heading', '產業解決方案'),
             cards(sols, sol_card, cols='col-lg-6 mb-4'), intro=pf.get('solutions_intro'), sid='solutions'))
 
@@ -893,9 +894,20 @@ def overview_html(pf, mods):
     return BEGIN + '\n<div class="nm-overview" style="--m-deep:#2B3A8C;--m-bright:#4659C9;--m-soft:#8FA0F0;--m-tint:#ECEFFC;--m-ink1:#0C0F1F;--m-ink2:#141A35">' + ''.join(out) + '</div>\n' + END
 
 
+SOLUTION_ORDER = {'公部門': 0, '金融保險': 1, '社福長照': 2, '跨產業': 3}
+
+
 def solutions(mods):
-    order = {'公部門': 0, '金融保險': 1, '跨產業': 2}
-    return sorted((m for m in mods.values() if is_solution(m)), key=lambda m: (order.get(m['industry'], 9), m['name_zh']))
+    return sorted((m for m in mods.values() if is_solution(m)), key=lambda m: (SOLUTION_ORDER.get(m['industry'], 9), m['name_zh']))
+
+
+def solution_list(mods, pf):
+    """選單、首頁、平台總覽用的產業解決方案：產品 JSON 產生的方案頁，加上 _platform.json solution_pages 列的手寫頁。"""
+    out = [{'file': m['file'], 'name': m['name_zh'], 'nav': m.get('nav_label') or m['name_zh'], 'title': full_name(m),
+            'industry': m['industry'], 'what': plain(dict(m['summary'])['是什麼']), 'mod': m} for m in solutions(mods)]
+    out += [{'file': x['file'], 'name': x['name_zh'], 'nav': x.get('nav_label', x['name_zh']), 'title': x['name_zh'],
+             'industry': x['industry'], 'what': x['what'], 'mod': None} for x in pf.get('solution_pages', [])]
+    return sorted(out, key=lambda x: SOLUTION_ORDER.get(x['industry'], 9))
 
 
 def overview_jsonld(pf, mods, old_faq):
@@ -973,11 +985,11 @@ def update_llms(mods, pf=None):
             desc = plain(mods[slug]['description']) if slug in mods else x['what']
             b.append('- [%s %s](%s): %s' % (x['code'], x['name_zh'], x['file'], desc))
         b.append('')
-    sols = solutions(mods)
+    sols = solution_list(mods, pf)
     if sols:
         b.append('### 產業解決方案（由平台模組組成）')
-        for m in sols:
-            b.append('- [%s](%s): %s' % (m['name_zh'], m['file'], plain(m['description'])))
+        for x in sols:
+            b.append('- [%s](%s): %s' % (x['name'], x['file'], plain(x['mod']['description']) if x['mod'] else x['what']))
         b.append('')
     # 需求對照：讓 AI 引擎直接回答「我要做 X，該看哪一個」——與平台總覽「依需求找模組」同一份資料
     b += ['### 依需求找模組', '']
@@ -1029,7 +1041,7 @@ def llms_full(mods, pf):
             out += ['', '### 常見問題'] + sum([['**問：%s**' % plain(f['q']), '答：%s' % plain(f['a']), ''] for f in m['faq']], [])
     out += ['', '## 其他服務與代理產品', '']
     for e in json.loads(read(os.path.join(SRC, '_search.json')))['entries']:
-        if e['cat'] in ('數位行銷服務', '代理產品', 'AI 智慧語伴', '客服中心'):
+        if e['cat'] in ('數位行銷服務', '代理產品', '產業解決方案', '客服中心'):
             u = e['url'] if e['url'].startswith('http') else '%s/%s' % (SITE, e['url'])
             out.append('- [%s](%s)（%s）：%s' % (e['title'], u, e['cat'], e['desc']))
     guides = [(rel, cfg) for rel, cfg in load_pages_cfg().items() if cfg.get('type') == 'Article' and os.path.exists(os.path.join(ROOT, rel))]
@@ -1120,10 +1132,10 @@ def home_catalog(mods, pf):
     out = [HOME_BEGIN, sec('01', 'idx-catalog', '自有產品', 'AURO NEXUS AI 治理平台', ('nexus.html', '平台總覽'),
                            '    <div class="hc-legs">\n' + '\n'.join(legs) + '\n    </div>',
                            '以 Forge 治理底座串起 %d 個模組：每一次 AI 呼叫都經過權限與政策檢查並留下紀錄，可部署於雲端、地端，也可依需求客製。' % n)]
-    sols = solutions(mods)
+    sols = solution_list(mods, pf)
     if sols:
         out.append(sec('02', 'idx-solutions', '由平台模組組成', '產業解決方案', ('nexus.html#solutions', '全部方案'),
-                       '    <div class="idx-grid">\n' + '\n'.join(card(m['industry'], full_name(m), m['file'], plain(dict(m['summary'])['是什麼'])) for m in sols) + '\n    </div>'))
+                       '    <div class="idx-grid">\n' + '\n'.join(card(x['industry'], x['title'], x['file'], x['what']) for x in sols) + '\n    </div>'))
     agency = [e for e in entries if e['cat'] == '代理產品']
     out.append(sec('03', 'idx-agency', '代理與導入', '代理產品', ('solution.html', '代理產品總覽'),
                    '    <div class="idx-grid">\n' + '\n'.join(card('代理產品', e['title'], e['url'], e['desc']) for e in agency) + '\n    </div>'))
@@ -1133,10 +1145,10 @@ def home_catalog(mods, pf):
                '<span class="idx-card-cta"', '<div class="hc-sublinks">%s</div><span class="idx-card-cta"' %
                ''.join('<a href="%s">%s</a>' % (e['url'], e['title']) for e in mk), 1)]
     for e in entries:
-        if e['cat'] in ('AI 智慧語伴', '客服中心'):
+        if e['cat'] == '客服中心':
             ext = e['url'].startswith('http')
             svc.append(card(e['cat'], e['title'], e['url'], e['desc'], '前往 AUROCORE' if ext else '了解更多', ext))
-    out.append(sec('04', 'idx-services', '服務', '數位行銷、AI 語伴與客服中心', ('marketing.html', '數位行銷服務'),
+    out.append(sec('04', 'idx-services', '服務', '數位行銷與客服中心', ('marketing.html', '數位行銷服務'),
                    '    <div class="idx-grid">\n' + '\n'.join(svc) + '\n    </div>'))
     out.append(HOME_END)
     return '\n'.join(out)
@@ -1694,15 +1706,15 @@ def nav_html(page, prefix, pf, mods):
                 % (' active' if here else '', prefix, it['href'], it['label'], 'true' if here else 'false', it['label'],
                    '' if here else ' hidden', prefix, cur('nexus.html'), it['overview_label'], ''.join(legs)))
         elif it.get('type') == 'solutions':
-            sols = solutions(mods)
-            here = page.startswith('solution-')
+            sols = solution_list(mods, pf)
+            here = page.startswith('solution-') or page in [x['file'] for x in sols]
             cur = lambda f: ' aria-current="page"' if f == page else ''
             groups = {}
-            for m in sols:
-                groups.setdefault(m['industry'], []).append(m)
+            for x in sols:
+                groups.setdefault(x['industry'], []).append(x)
             rows = ''.join('<li class="nav-leg"><span class="nav-leg-name">%s</span><span class="nav-leg-links">%s</span></li>'
-                           % (ind, ''.join('<a href="%s%s"%s>%s</a>' % (prefix, m['file'], cur(m['file']), m['nav_label'] if m.get('nav_label') else m['name_zh']) for m in ms))
-                           for ind, ms in groups.items())
+                           % (ind, ''.join('<a href="%s%s"%s>%s</a>' % (prefix, x['file'], cur(x['file']), x['nav']) for x in xs))
+                           for ind, xs in groups.items())
             out.append(
                 '<li class="has-sub%s"><div class="nav-row"><a href="%s%s">%s</a>'
                 '<button type="button" class="nav-sub-toggle" aria-expanded="%s" aria-controls="nav-sub-solutions" '

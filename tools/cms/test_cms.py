@@ -193,6 +193,19 @@ class AuditTest(SiteCopy):
         self.assertIn('【實務建議】', full)
         self.assertIn('"citation"', open(os.path.join(self.root, 'fsc-ai-guideline.html'), encoding='utf-8').read())
 
+    def test_hand_written_solution_pages_join_solutions(self):
+        # _platform.json solution_pages 列的手寫頁（AI 智慧語伴）要出現在選單的產業解決方案與首頁方案區，不在服務區
+        gen.build_all()
+        home = open(os.path.join(self.root, 'index.html'), encoding='utf-8').read()
+        nav = home[home.index('id="nav-sub-solutions"'):]
+        nav = nav[:nav.index('</ul>')]
+        self.assertIn('社福長照', nav)
+        self.assertIn('ai-companion.html', nav)
+        sol = home[home.index('id="idx-solutions"'):home.index('id="idx-agency"')]
+        svc = home[home.index('id="idx-services"'):]
+        self.assertIn('ai-companion.html', sol)
+        self.assertNotIn('ai-companion.html', svc[:svc.index('</section>')])
+
     def test_title_width_counts_latin_as_half(self):
         self.assertEqual(gen.disp_width('AI 治理'), 3.5)
 
