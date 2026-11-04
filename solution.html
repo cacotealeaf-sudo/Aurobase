@@ -208,22 +208,158 @@
 </script>
     <!-- SITE-LD:END -->
       <style>
-    /* HCL Discover 段落（文字版，供搜尋引擎與 AI 引擎讀取） */
+    /* 代理產品頁：為什麼透過奧洛、三個產品怎麼接、每個產品的「現在／導入後」對照與可查證的事實 */
     .dsc .dsc-wrap { padding: 3rem 3rem 3rem 0; max-width: 1100px; }
-    .dsc-eyebrow { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: #E63109; font-weight: 600; margin-bottom: 0.4rem; }
-    .dsc h2 { font-size: 2rem; font-weight: 700; color: #28282c; margin-bottom: 1rem; }
-    .dsc h3 { font-size: 1.15rem; font-weight: 700; color: #28282c; margin: 2.2rem 0 1rem; }
-    .dsc-lead { font-size: 1rem; color: #4a4a4a; line-height: 1.9; max-width: 70ch; }
-    .dsc-note { border-left: 4px solid #E63109; background: #fff7f4; padding: 1rem 1.3rem; border-radius: 0 10px 10px 0; color: #28282c; line-height: 1.8; margin-top: 1.2rem; }
-    .dsc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
-    .dsc-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.3rem 1.4rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-    .dsc-card h4 { font-size: 1rem; font-weight: 700; color: #28282c; margin-bottom: 0.5rem; }
+    .ftco-section.dsc { padding: 4.5em 0; }
+    .ftco-section.dsc.rs-product { padding-top: 0; }
+    .rs-product .dsc-wrap { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 3.8rem; }
+    .dsc h2 { font-size: 2rem; font-weight: 700; color: #28282c; margin-bottom: 0.9rem; line-height: 1.3; }
+    .dsc h3 { font-size: 1.15rem; font-weight: 700; color: #28282c; margin: 2.6rem 0 1rem; }
+    .rs-h4 { font-size: 1rem; font-weight: 700; color: #28282c; margin: 1.6rem 0 0.8rem; }
+    .rs-vendor { font-size: 0.9rem; color: #6b6b70; margin: 0 0 0.3rem; }
+    .dsc-lead { font-size: 1.02rem; color: #4a4a4a; line-height: 1.9; max-width: 68ch; margin-bottom: 0; }
+    .rs-kicker { font-size: 1.05rem; color: #4a4a4a; line-height: 1.9; max-width: 60ch; margin: 0 0 0.6rem; }
+
+    /* 資料來源：12px 淺灰小字 */
+    .rs-src { font-size: 12px; line-height: 1.7; color: #8a8a90; margin: 0.45rem 0 0; }
+    .rs-src a { color: #8a8a90; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
+    .rs-src a:hover { color: #E63109; }
+
+    /* 為什麼透過奧洛：四個事實，上緣細線，不做卡片 */
+    .rs-facts { list-style: none; padding: 0; margin: 1.8rem 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 2rem; }
+    .rs-facts li { border-top: 2px solid #28282c; padding-top: 1rem; }
+    .rs-facts b { display: block; font-size: 1.02rem; color: #28282c; margin-bottom: 0.4rem; }
+    .rs-facts span { display: block; font-size: 0.9rem; color: #4a4a4a; line-height: 1.8; }
+    .rs-facts img { display: block; width: 72px; height: 72px; margin: 0 0 0.7rem; }
+
+    /* 三個產品怎麼接：四個節點一列，箭頭是流程本身 */
+    .rs-flow { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: none; }
+    .rs-flow li { position: relative; padding: 0 2.2rem 0 0; }
+    .rs-flow li + li { padding-left: 1.2rem; }
+    .rs-flow li:not(:last-child)::after { content: ''; position: absolute; right: 0.6rem; top: 1.1rem; width: 1.1rem; height: 1.1rem; border-top: 2px solid #E63109; border-right: 2px solid #E63109; transform: rotate(45deg); }
+    .rs-flow a { display: block; color: inherit; }
+    .rs-flow a:hover .rs-flow-name { color: #E63109; }
+    .rs-flow-name { display: block; font-size: 1.15rem; font-weight: 700; color: #28282c; line-height: 1.4; }
+    .rs-flow-role { display: block; font-size: 0.92rem; color: #4a4a4a; line-height: 1.7; margin-top: 0.3rem; }
+    .rs-flow-mine { display: inline-block; font-size: 12px; color: #E63109; border: 1px solid rgba(230,49,9,0.4); border-radius: 999px; padding: 0 0.5rem; margin-top: 0.5rem; line-height: 1.6; }
+
+    /* 現在／導入後 + 示意圖 */
+    .rs-split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 2.4rem; align-items: start; margin-top: 2.2rem; }
+    .rs-compare { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+    .rs-now, .rs-after { padding-left: 1.1rem; border-left: 3px solid rgba(0,0,0,0.15); }
+    .rs-after { border-left-color: #E63109; }
+    .rs-tag { display: block; font-size: 0.82rem; font-weight: 700; color: #6b6b70; margin-bottom: 0.3rem; }
+    .rs-after .rs-tag { color: #E63109; }
+    .rs-now p, .rs-after p { font-size: 1.05rem; line-height: 1.85; color: #28282c; margin: 0; }
+    .rs-now p { color: #4a4a4a; }
+
+    .rs-fig { margin: 0; }
+    .rs-fig figcaption { font-size: 12px; color: #8a8a90; line-height: 1.7; margin-top: 0.6rem; }
+    .rs-frame { position: relative; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(40,40,44,0.08); font-size: 12px; color: #4a4a4a; }
+    .rs-frame-bar { height: 26px; background: #f1f1f3; border-bottom: 1px solid rgba(0,0,0,0.08); display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+    .rs-frame-bar i { width: 8px; height: 8px; border-radius: 50%; background: #d0d0d5; display: block; }
+    .rs-frame-bar span { margin-left: auto; font-size: 11px; color: #8a8a90; }
+    .rs-frame-body { padding: 14px 16px 16px; }
+
+    /* 示意圖一：表單上的點擊熱區與欄位放棄 */
+    .rs-heat { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; }
+    .rs-heat-form { position: relative; }
+    .rs-field { margin-bottom: 10px; }
+    .rs-field small { display: block; font-size: 11px; color: #8a8a90; margin-bottom: 3px; }
+    .rs-field div { height: 26px; border: 1px solid #d8d8dd; border-radius: 5px; background: #fafafa; }
+    .rs-field.is-hot div { border-color: #E63109; background: #fff5f2; }
+    .rs-blob { position: absolute; width: 54px; height: 54px; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(230,49,9,0.55) 0%, rgba(255,160,0,0.35) 40%, rgba(255,220,0,0) 70%); }
+    .rs-heat-side { border-left: 1px solid rgba(0,0,0,0.08); padding-left: 14px; }
+    .rs-heat-side b { display: block; font-size: 11px; color: #28282c; margin-bottom: 8px; }
+    .rs-bar { display: grid; grid-template-columns: 66px 1fr; gap: 6px; align-items: center; margin-bottom: 7px; font-size: 11px; color: #4a4a4a; white-space: nowrap; }
+    .rs-bar i { display: block; height: 8px; border-radius: 4px; background: #e2e2e6; position: relative; overflow: hidden; }
+    .rs-bar i::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: #E63109; border-radius: 4px; }
+    .rs-replay { margin-top: 14px; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #6b6b70; }
+    .rs-replay i { width: 18px; height: 18px; border-radius: 50%; background: #28282c; position: relative; flex: none; }
+    .rs-replay i::after { content: ''; position: absolute; left: 7px; top: 5px; border-left: 6px solid #fff; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+    .rs-replay span { flex: 1; height: 4px; background: #e2e2e6; border-radius: 2px; position: relative; }
+    .rs-replay span::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 62%; background: #28282c; border-radius: 2px; }
+
+    /* 示意圖二：一份名單、多個通路、接觸頻率的閘門 */
+    .rs-journey { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .rs-aud { border: 1px solid #d8d8dd; border-radius: 8px; padding: 10px 12px; background: #fafafa; }
+    .rs-aud b { display: block; font-size: 12px; color: #28282c; }
+    .rs-aud small { display: block; font-size: 11px; color: #8a8a90; margin-top: 2px; }
+    .rs-gate { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #6b6b70; padding-left: 4px; }
+    .rs-gate::before { content: ''; width: 2px; height: 22px; background: #d8d8dd; margin-left: 14px; }
+    .rs-gate b { display: inline-block; border: 1px dashed #E63109; color: #E63109; border-radius: 6px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }
+    .rs-chan { display: grid; gap: 7px; }
+    .rs-chan div { display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid #d8d8dd; border-radius: 6px; padding: 6px 10px; font-size: 12px; color: #28282c; background: #fff; }
+    .rs-chan em { font-style: normal; font-size: 11px; color: #fff; background: #28282c; border-radius: 999px; padding: 1px 7px; white-space: nowrap; }
+    .rs-chan div.is-hold { border-style: dashed; color: #8a8a90; }
+    .rs-chan div.is-hold em { background: transparent; color: #E63109; border: 1px solid rgba(230,49,9,0.5); }
+    .rs-journey-foot { margin-top: 12px; font-size: 11px; color: #6b6b70; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+    /* 示意圖三：行銷人員在視覺編輯器裡改前端元件，同一份內容到每個通路 */
+    .rs-editor { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 14px; }
+    .rs-canvas { border: 1px solid #d8d8dd; border-radius: 6px; padding: 10px; background: #fafafa; }
+    .rs-block { position: relative; background: #fff; border: 1px solid #e2e2e6; border-radius: 4px; padding: 10px 10px 10px 12px; margin-bottom: 8px; }
+    .rs-block::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #6fb14d; border-radius: 4px 0 0 4px; }
+    .rs-block small { position: absolute; right: 6px; top: -7px; font-size: 10px; color: #fff; background: #6fb14d; border-radius: 3px; padding: 0 5px; line-height: 14px; }
+    .rs-block.is-active { border-color: #6fb14d; box-shadow: 0 0 0 2px rgba(111,177,77,0.2); }
+    .rs-block .t1 { height: 10px; width: 55%; background: #28282c; border-radius: 2px; margin-bottom: 6px; }
+    .rs-block .t2 { height: 6px; width: 85%; background: #d8d8dd; border-radius: 2px; margin-bottom: 4px; }
+    .rs-block .t2.s { width: 60%; margin-bottom: 0; }
+    .rs-block .img { height: 34px; background: linear-gradient(135deg, #d9e0e7, #f1f1f3); border-radius: 3px; margin-bottom: 6px; }
+    .rs-devices { display: grid; gap: 8px; align-content: start; }
+    .rs-device { border: 1px solid #d8d8dd; border-radius: 6px; padding: 7px 8px; font-size: 11px; color: #6b6b70; }
+    .rs-device b { display: block; font-size: 11px; color: #28282c; margin-bottom: 4px; }
+    .rs-device .mini { height: 5px; background: #28282c; border-radius: 2px; width: 50%; margin-bottom: 3px; }
+    .rs-device .mini.s { background: #d8d8dd; width: 80%; margin: 0; }
+
+    /* 可查證的事實 */
+    .rs-proof { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem 2rem; }
+    .rs-proof li { border-top: 1px solid rgba(0,0,0,0.12); padding-top: 0.9rem; }
+    .rs-proof p { font-size: 0.95rem; line-height: 1.8; color: #28282c; margin: 0; }
+
+    /* 摺疊的功能清單 */
+    .rs-more { margin-top: 1.2rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; background: #fff; }
+    .rs-more summary { cursor: pointer; list-style: none; padding: 0.9rem 1.2rem; font-weight: 700; color: #28282c; display: flex; justify-content: space-between; align-items: center; }
+    .rs-more summary::-webkit-details-marker { display: none; }
+    .rs-more summary::after { content: '+'; font-size: 1.3rem; color: #E63109; line-height: 1; }
+    .rs-more[open] summary::after { content: '−'; }
+    .rs-more[open] summary { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .rs-more-body { padding: 0.4rem 1.2rem 1.3rem; }
+    .rs-more-body .dsc-grid { margin-top: 0.8rem; }
+    .dsc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.9rem; }
+    .dsc-card { background: #f7f7f9; border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; padding: 1.1rem 1.2rem; }
+    .dsc-card h4 { font-size: 0.98rem; font-weight: 700; color: #28282c; margin-bottom: 0.4rem; }
     .dsc-card p { font-size: 0.88rem; color: #666; line-height: 1.75; margin: 0; }
-    .dsc-list { padding-left: 1.2rem; color: #4a4a4a; line-height: 1.9; }
+    .dsc-list { padding-left: 1.2rem; color: #4a4a4a; line-height: 1.9; margin: 0.8rem 0 0; }
     .dsc-list li { margin-bottom: 0.4rem; }
     .dsc-list a { color: #E63109; }
-    .dsc-source { font-size: 0.8rem; color: #555; margin-top: 1.2rem; }
-    @media (max-width: 767.98px) { .dsc .dsc-wrap { padding: 2rem 15px; } }
+
+    /* 預約展示 */
+    .rs-cta { margin-top: 1.8rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .rs-btn { background: #E63109; color: #fff; border: 0; border-radius: 8px; padding: 0.7rem 1.3rem; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .rs-btn:hover { background: #c92a06; }
+    .rs-btn:focus-visible { outline: 2px solid #28282c; outline-offset: 2px; }
+    .rs-cta .rs-src { margin: 0; }
+
+    @media (max-width: 1199.98px) { .rs-facts { grid-template-columns: 1fr 1fr; gap: 1.6rem 2rem; } }
+    @media (max-width: 991.98px) {
+      .rs-split { grid-template-columns: 1fr; }
+      .rs-proof { grid-template-columns: 1fr; gap: 1rem; }
+      .rs-flow { grid-template-columns: 1fr; }
+      .rs-flow li { padding: 0 0 2.1rem 0; }
+      .rs-flow li + li { padding-left: 0; }
+      .rs-flow li:not(:last-child)::after { right: auto; left: 0.3rem; top: auto; bottom: 0.55rem; transform: rotate(135deg); }
+    }
+    @media (max-width: 767.98px) {
+      .dsc .dsc-wrap { padding: 2rem 15px; }
+      .rs-product .dsc-wrap { padding-top: 2.6rem; }
+      .rs-facts { grid-template-columns: 1fr; }
+      .dsc h2 { font-size: 1.6rem; }
+      .rs-now p, .rs-after p { font-size: 1rem; }
+      .rs-heat { grid-template-columns: 1fr; }
+      .rs-heat-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
+    }
     </style>
   </head>
   <body>
@@ -351,7 +487,8 @@
         
         <!-- Anchor manu start --> 
         <div class="btn fixed-top text-right">
-<a href="#hcl_discover" class="btn btn-primary btn-sm">HCL Discover</a>
+<a href="#rs-why" class="btn btn-primary btn-sm">為什麼找奧洛</a>
+          <a href="#hcl_discover" class="btn btn-primary btn-sm">HCL Discover</a>
           <a href="#hcl_unica" class="btn btn-primary btn-sm">HCL Unica</a>
           <a href="#magnolia_cms" class="btn btn-primary btn-sm">Magnolia CMS</a>    
         </div>
@@ -371,17 +508,84 @@
 				</div>
 			</section>
             			
-<!-- HCL Discover：內容取自奧洛 HCL Discover 標準簡報（顧客行為觀測透析 v4） -->
-<section id="hcl_discover" class="ftco-section dsc">
+<!-- 代理產品：為什麼透過奧洛、三個產品怎麼接、各產品的現在／導入後對照與可查證的事實（資料來源見 docs/reviews/solution-evidence-20261104.md） -->
+<section id="rs-why" class="ftco-section dsc">
   <div class="row justify-content-end">
     <div class="col-md-10">
       <div class="dsc-wrap">
-        <p class="dsc-eyebrow">HCL Discover · Digital Experience Analytics</p>
-        <h2>HCL Discover 數位體驗分析</h2>
-        <p class="dsc-lead">HCL Discover 是 HCLSoftware 的企業級數位體驗分析平台。它用工作階段回放、掙扎偵測與熱圖，讓您看見顧客在網站與 App 上每一次卡關、放棄與成交的原因。奧洛負責 HCL Discover 的轉售、建置與維護。</p>
-        <div class="dsc-note">流量分析工具（例如 GA4）回答「多少人、在哪一頁」；HCL Discover 回答「那個人在那一頁做了什麼、為什麼離開」。兩者並用，才看得到完整的顧客行為。</div>
+        <p class="rs-kicker">HCL Discover、HCL Unica 與 Magnolia 都是行銷部門熟悉的產品。差別在導入的人：奧洛在台灣負責這三個產品的銷售、建置與維護。</p>
+        <h2>為什麼透過奧洛導入</h2>
+        <ul class="rs-facts">
+          <li><img src="images/hcl-unica-partner.webp" alt="HCL Unica 認證夥伴徽章" width="72" height="72" loading="lazy"><b>HCL 認證合作夥伴</b><span>直接與原廠技術團隊協作。導入期間的產品問題由奧洛處理，您不必自己找原廠窗口。</span></li>
+          <li><b>資料可以留在境內</b><span>三個產品都能部署在貴機構自有機房或台灣的雲端區域。顧客行為、名單與內容不必出境，金融與公部門的資安審查比較好過。</span><p class="rs-src">Discover 與 Unica 的地端與容器部署依 HCLSoftware 產品文件；Magnolia 提供自行架設版本。</p></li>
+          <li><b>和您既有的資料接起來</b><span>Discover 看到的行為可以進 <a href="nexus-cdp.html">AURA CDP</a> 變成標籤，名單回到 Unica 發送；要加 AI 判斷時由 <a href="nexus.html">AURO NEXUS</a> 接手。三個產品不是各自孤島。</span></li>
+          <li><b>中文團隊，從導入到維運</b><span>需求訪談、建置、教育訓練與日常維護都由台灣團隊用中文進行，行銷人員有問題不必透過翻譯等原廠回覆。</span></li>
+        </ul>
 
-        <h3>六項核心能力</h3>
+        <h3>三個產品怎麼接在一起</h3>
+        <ol class="rs-flow">
+          <li><a href="#hcl_discover"><span class="rs-flow-name">HCL Discover</span><span class="rs-flow-role">看見顧客在網站與 App 的哪一步卡住、為什麼離開。</span></a></li>
+          <li><a href="nexus-cdp.html"><span class="rs-flow-name">AURA CDP</span><span class="rs-flow-role">把行為、交易與名單整理成同一個人，貼上標籤。</span><span class="rs-flow-mine">奧洛自有產品</span></a></li>
+          <li><a href="#hcl_unica"><span class="rs-flow-name">HCL Unica</span><span class="rs-flow-role">決定何時、用哪個通路、給哪一群人什麼內容。</span></a></li>
+          <li><a href="#magnolia_cms"><span class="rs-flow-name">Magnolia CMS</span><span class="rs-flow-role">讓每個通路看到一致、可隨時改的內容，成效再回到 Discover。</span></a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="hcl_discover" class="ftco-section dsc rs-product">
+  <div class="row justify-content-end">
+    <div class="col-md-10">
+      <div class="dsc-wrap">
+        <p class="rs-vendor">HCLSoftware 的數位體驗分析平台</p>
+        <h2>HCL Discover</h2>
+        <p class="dsc-lead">記錄顧客在網站與 App 上的每一段操作，讓您回放卡關的那一刻，而不是只看到流失的數字。</p>
+
+        <div class="rs-split">
+          <div class="rs-compare">
+            <div class="rs-now"><span class="rs-tag">現在</span><p>GA4 告訴您多少人在哪一頁離開，但看不到那個人做了什麼。它沒有工作階段錄影，標準版的事件明細也只保留 14 個月。</p><p class="rs-src">資料保留：Google Analytics 說明文件〈資料保留〉，標準資源的事件資料最長 14 個月。<a href="https://support.google.com/analytics/answer/7667196" target="_blank" rel="noopener">support.google.com</a>。沒有錄影：Microsoft Clarity 官方部落格，「GA4 does not offer the ability to view actual user sessions」。<a href="https://clarity.microsoft.com/blog/?p=5482" target="_blank" rel="noopener">clarity.microsoft.com</a>。2026 年 11 月查閱。</p></div>
+            <div class="rs-after"><span class="rs-tag">導入 Discover 後</span><p>每一段操作都留下來。您可以回放那位顧客在哪一格重填了幾次、錯誤訊息出現在哪裡、最後為什麼放棄，再決定要改版面，還是讓專員當下介入。</p></div>
+          </div>
+          <figure class="rs-fig">
+            <div class="rs-frame" aria-hidden="true">
+              <div class="rs-frame-bar"><i></i><i></i><i></i><span>線上開戶 · 第 3 步</span></div>
+              <div class="rs-frame-body">
+                <div class="rs-heat">
+                  <div class="rs-heat-form">
+                    <div class="rs-field"><small>姓名</small><div></div></div>
+                    <div class="rs-field"><small>手機號碼</small><div></div></div>
+                    <div class="rs-field is-hot"><small>身分證字號</small><div></div></div>
+                    <div class="rs-field is-hot"><small>簡訊驗證碼</small><div></div></div>
+                    <span class="rs-blob" style="left:58%;top:44%"></span>
+                    <span class="rs-blob" style="left:22%;top:72%;width:40px;height:40px"></span>
+                    <span class="rs-blob" style="left:70%;top:70%;width:46px;height:46px"></span>
+                  </div>
+                  <div class="rs-heat-side">
+                    <b>放棄最多的欄位</b>
+                    <div class="rs-bar">身分證字號<i style="--w:78%"></i></div>
+                    <div class="rs-bar">驗證碼<i style="--w:55%"></i></div>
+                    <div class="rs-bar">手機<i style="--w:18%"></i></div>
+                    <div class="rs-bar">姓名<i style="--w:6%"></i></div>
+                  </div>
+                </div>
+                <div class="rs-replay"><i></i><span></span>回放：第 3 次重填身分證字號</div>
+              </div>
+            </div>
+            <figcaption>示意圖：表單上的點擊熱區、各欄位的放棄比例，以及單一工作階段的回放。畫面與比例為示意，不是實際客戶資料。</figcaption>
+          </figure>
+        </div>
+
+        <h3>可以查證的事實</h3>
+        <ul class="rs-proof">
+          <li><p>2025 年 IDC MarketScape 全球客戶分析應用評估，HCLSoftware 以 HCL Discover+ 被列為 Major Player。</p><p class="rs-src">IDC MarketScape: Worldwide Customer Analytics Applications 2025 Vendor Assessment，引自 HCLSoftware 官網 <a href="https://www.hcl-software.com/discover-plus/idc-marketscape-for-customer-analytics-2025" target="_blank" rel="noopener">hcl-software.com</a>。</p></li>
+          <li><p>敏感欄位在瀏覽器端就被清掉。原廠文件寫明，經前端框架清洗的敏感資料永遠不會到達 HCL Discover；遮罩方式有清空、固定字元、保留字元型態與自訂函式四種。</p><p class="rs-src">HCL Discover 12.2.2 文件〈Data Privacy and Blocking Sensitive Data〉 <a href="https://help.hcl-software.com/HCLDiscover/12.2.2/en/DC/UISDK/data_privacy_and_blocking_sensitive_data.html" target="_blank" rel="noopener">help.hcl-software.com</a>。</p></li>
+          <li><p>指定的工作階段可以長期封存，作為合規與爭議處理的證據。原廠 2020 年發布時就把稽核與不可否認性列為受監理產業的用途。</p><p class="rs-src">HCL Discover 12.2.2〈HCL Discover capabilities〉Session Archiving <a href="https://help.hcl-software.com/HCLDiscover/12.2.2/en/DCI/DiscDC/discover_components.html" target="_blank" rel="noopener">help.hcl-software.com</a>；HCLSoftware 新聞稿 2020-09-30 <a href="https://www.hcl-software.com/news/20200930-hcl-software-releases-new-unica-discover-delivering-deep-behavioral-insight-analytics" target="_blank" rel="noopener">hcl-software.com</a>。</p></li>
+        </ul>
+
+        <details class="rs-more">
+          <summary>六項核心能力與常見應用</summary>
+          <div class="rs-more-body">
+<h4 class="rs-h4">六項核心能力</h4>
         <div class="dsc-grid">
           <div class="dsc-card"><h4>工作階段回放</h4><p>逐頁重現顧客的點擊、輸入、捲動與錯誤，可依客戶、時間、頁面與事件搜尋，從指標異常一路找到行為原因。</p></div>
           <div class="dsc-card"><h4>掙扎與異常偵測</h4><p>自動標記暴怒點擊、無效點擊、表單放棄與頁面迴圈，並偵測轉換率與錯誤率的異常波動。</p></div>
@@ -391,36 +595,77 @@
           <div class="dsc-card"><h4>AI 工作階段洞察</h4><p>HCL Discover+ 為每段工作階段產生自然語言摘要，標出高風險旅程與原因，不必逐段人工檢視。</p></div>
         </div>
 
-        <h3>常見應用</h3>
+        <h4 class="rs-h4">常見應用</h4>
         <div class="dsc-grid">
           <div class="dsc-card"><h4>線上開戶與申辦卡在哪一步</h4><p>以漏斗找出流失的步驟，用回放重現卡關的瞬間，例如文件上傳失敗、身分驗證逾時或提示看不懂，排出修正的優先順序。</p></div>
           <div class="dsc-card"><h4>專員即時介入</h4><p>設定「停留超過一段時間」「同一欄位重複點擊」「出現錯誤訊息」等告警條件，觸發後由專員或客服主動協助顧客完成。</p></div>
           <div class="dsc-card"><h4>行銷管道真的有效嗎</h4><p>比較搜尋、LINE、EDM、社群等來源進站後的行為深度與轉換，而不只看流量，找出把顧客導出站外的內容。</p></div>
         </div>
-
-        <h3>部署與隱私</h3>
-        <ul class="dsc-list">
+          </div>
+        </details>
+        <details class="rs-more">
+          <summary>部署與隱私</summary>
+          <div class="rs-more-body">
+            <ul class="dsc-list">
           <li>可部署於企業自有機房（Windows／RHEL 虛擬機或容器），也提供雲端與 HCL 代管選項；金融機構可讓顧客行為資料全程留在境內。</li>
           <li>網路被動側錄搭配前端擷取：網站不必改程式就能取得完整的請求與回應，前端互動由自行代管的擷取腳本補上。</li>
           <li>密碼、OTP、身分證字號、帳號、卡號等欄位在瀏覽器端就遮罩或不擷取，伺服器端再遮罩一次，資料庫與回放畫面都沒有明文。</li>
           <li>以 AD（SAML 2.0）登入並區分管理、分析與唯讀權限，查詢、回放與匯出都留有日誌。</li>
           <li>與 HCL Unica、HCL CDP 原生整合，並提供 REST API 供既有系統串接；行為軌跡也可以交給 <a href="solution-digital-trail.html">AURA Connect</a> 整理成行銷標籤。</li>
         </ul>
-        <p class="dsc-source">產品功能依 HCLSoftware 公開文件整理。</p>
+            <p class="rs-src">產品功能依 HCLSoftware 公開文件整理。</p>
+          </div>
+        </details>
+
+        <div class="rs-cta"><button type="button" class="rs-btn" data-rs-chip="HCL Discover 數位體驗分析">預約 HCL Discover 展示</button><p class="rs-src">會打開諮詢表單，並先幫您勾好 HCL Discover。</p></div>
       </div>
     </div>
   </div>
 </section>
-<section id="hcl_unica" class="ftco-section dsc">
+<section id="hcl_unica" class="ftco-section dsc rs-product">
   <div class="row justify-content-end">
     <div class="col-md-10">
       <div class="dsc-wrap">
-        <p class="dsc-eyebrow">HCL Unica · Marketing Automation</p>
-        <h2>HCL Unica 行銷自動化</h2>
-        <p class="dsc-lead">HCL Unica 是 HCLSoftware 的企業級行銷自動化平台：依規則控制每位客戶的接觸頻率、選擇客戶偏好的通路，在合適的時間把合適的活動內容送到目標客群。奧洛代理 HCL Unica，並提供導入與維護服務。</p>
+        <p class="rs-vendor">HCLSoftware 的行銷自動化平台</p>
+        <h2>HCL Unica</h2>
+        <p class="dsc-lead">一份名單跨所有通路，由規則決定誰在什麼時候、用哪個通路、收到哪個活動，而不是每個通路各自排程。</p>
 
-        <h3>主要模組</h3>
-        <div class="dsc-grid">
+        <div class="rs-split">
+          <div class="rs-compare">
+            <div class="rs-now"><span class="rs-tag">現在</span><p>EDM、簡訊、LINE 各用一套名單和排程。同一位顧客可能在一週內被三個活動找上，哪個先出、哪個該緩，靠人盯 Excel 協調。</p></div>
+            <div class="rs-after"><span class="rs-tag">導入 Unica 後</span><p>名單只有一份，跨通路共用。接觸頻率、通路偏好與活動優先順序由 Optimize 依規則決定，每一次接觸與回應都記在同一位顧客身上，下一波活動直接用。</p></div>
+          </div>
+          <figure class="rs-fig">
+            <div class="rs-frame" aria-hidden="true">
+              <div class="rs-frame-bar"><i></i><i></i><i></i><span>活動：信用卡到期續卡</span></div>
+              <div class="rs-frame-body">
+                <div class="rs-journey">
+                  <div class="rs-aud"><b>本月到期的信用卡客戶</b><small>一份名單，來自 CDP 分群</small></div>
+                  <div class="rs-gate"><b>每人每週最多 2 次</b>接觸頻率規則</div>
+                  <div class="rs-chan">
+                    <div><span>Email</span><em>已排程 · 週二</em></div>
+                    <div><span>LINE</span><em>已排程 · 週四</em></div>
+                    <div class="is-hold"><span>簡訊</span><em>暫緩：本週已接觸 2 次</em></div>
+                  </div>
+                </div>
+                <div class="rs-journey-foot"><span>回應寫回同一位顧客</span><span>下一波活動沿用</span></div>
+              </div>
+            </div>
+            <figcaption>示意圖：同一份名單進入三個通路，由接觸頻率規則決定哪一個先出、哪一個暫緩。規則數字為示意。</figcaption>
+          </figure>
+        </div>
+
+        <h3>可以查證的事實</h3>
+        <ul class="rs-proof">
+          <li><p>Forrester 2025 年《The State of AI for Cross-Channel Marketing Hubs》報告：回覆問卷的 14 家供應商中，HCLSoftware 對報告列出的 26 個 AI 使用情境全部有回覆，涵蓋客戶洞察、內容、成效衡量與助理介面。</p><p class="rs-src">Forrester Research 報告（2025 年 6 月問卷），引自 HCLSoftware 部落格 <a href="https://www.hcl-software.com/blog/unica/hcl-unica-named-strong-performer-in-forrester-enterprise-marketing-suites-q3-2022" target="_blank" rel="noopener">hcl-software.com</a>。報告把各情境的狀態分成三類，每一項的實際狀態請看報告原文。</p></li>
+          <li><p>同一套產品有地端安裝版與容器版。容器版以 Docker、Kubernetes 與 Helm 實作，支援 OpenShift，並提供從地端版遷移到容器版的路徑。</p><p class="rs-src">HCL Unica 12.1.5 文件〈Cloud Native Unica〉 <a href="https://help.hcl-software.com/unica/CloudNativeUnica/en/12.1.5/CloudNativeUnica/SharedTopics/overview.html" target="_blank" rel="noopener">help.hcl-software.com</a>。</p></li>
+          <li><p>印度國家銀行（State Bank of India）與 HCLSoftware 合作，以 Unica 進行客戶互動的數位轉型，是公開的大型金融業案例。</p><p class="rs-src">HCLTech 新聞稿 <a href="https://www.hcltech.com/en-us/press-releases/state-bank-india-partners-hclsoftware-digitally-transform-customer-engagement" target="_blank" rel="noopener">hcltech.com</a>。</p></li>
+        </ul>
+
+        <details class="rs-more">
+          <summary>主要模組</summary>
+          <div class="rs-more-body">
+            <div class="dsc-grid">
           <div class="dsc-card"><h4>Unica Plan｜行銷資源管理</h4><p>管理行銷計畫、專案與需求、人力與任務、核准流程與預算，團隊可在同一處協作創意素材與數位資產。</p></div>
           <div class="dsc-card"><h4>Unica Campaign｜跨通路行銷活動</h4><p>從多個來源取得客戶資料、精確建立客群，跨通路共用名單，並整合活動接觸與回應追蹤，形成完整的行銷閉環。</p></div>
           <div class="dsc-card"><h4>Unica Optimize｜接觸策略最佳化</h4><p>兼顧接觸疲勞與客戶偏好，避免不同活動的優惠互相衝突或重複，並依業務目標分配行銷預算與聯繫通路。</p></div>
@@ -430,21 +675,61 @@
           <div class="dsc-card"><h4>Unica Link｜系統整合</h4><p>以點選方式設定資料來源與目標端點的欄位對應，支援驗證、流量限制與重試，可連接常用的電子郵件、簡訊與 CRM 服務。</p></div>
           <div class="dsc-card"><h4>附加元件</h4><p>集中式優惠管理（Unica COM）、部署監控（Unica Director）與即時洞察（Unica Insights）。</p></div>
         </div>
-        <p class="dsc-source">產品功能依 HCLSoftware 公開資料整理。行為軌跡可搭配 <a href="#hcl_discover">HCL Discover</a>，客戶資料可搭配 <a href="nexus-cdp.html">AURA CDP</a>。</p>
+            <p class="rs-src">產品功能依 HCLSoftware 公開資料整理。行為軌跡可搭配 <a href="#hcl_discover">HCL Discover</a>，客戶資料可搭配 <a href="nexus-cdp.html">AURA CDP</a>。</p>
+          </div>
+        </details>
+
+        <div class="rs-cta"><button type="button" class="rs-btn" data-rs-chip="HCL Unica 行銷自動化">預約 HCL Unica 展示</button><p class="rs-src">會打開諮詢表單，並先幫您勾好 HCL Unica。</p></div>
       </div>
     </div>
   </div>
 </section>
-<section id="magnolia_cms" class="ftco-section dsc">
+<section id="magnolia_cms" class="ftco-section dsc rs-product">
   <div class="row justify-content-end">
     <div class="col-md-10">
       <div class="dsc-wrap">
-        <p class="dsc-eyebrow">Magnolia · Content Management</p>
-        <h2>Magnolia CMS 內容管理</h2>
-        <p class="dsc-lead">Magnolia 是企業級內容管理平台：以視覺化方式建置網站與 App 的內容，同一份內容可跨網站與通路重複使用，並與電商、行銷自動化、數位資產管理與分析工具整合。奧洛代理 Magnolia，並提供導入與維護服務。</p>
+        <p class="rs-vendor">Magnolia 的企業級內容管理平台</p>
+        <h2>Magnolia CMS</h2>
+        <p class="dsc-lead">行銷人員在視覺化編輯器裡直接改網站與 App 的內容，同一份內容發到每個通路，不用每改一次就排工程師時程。</p>
 
-        <h3>主要功能</h3>
-        <div class="dsc-grid">
+        <div class="rs-split">
+          <div class="rs-compare">
+            <div class="rs-now"><span class="rs-tag">現在</span><p>改一張活動頁要等工程師排程。多品牌、多語言的網站各自維護，同一則公告要貼五次，貼完還會不一樣。</p></div>
+            <div class="rs-after"><span class="rs-tag">導入 Magnolia 後</span><p>行銷人員在視覺編輯器裡直接改前端元件、即時預覽、送審發布。內容只有一份，網站、App 與其他通路取同一份，一處更新到處生效。</p></div>
+          </div>
+          <figure class="rs-fig">
+            <div class="rs-frame" aria-hidden="true">
+              <div class="rs-frame-bar"><i></i><i></i><i></i><span>頁面編輯器 · 春季活動頁</span></div>
+              <div class="rs-frame-body">
+                <div class="rs-editor">
+                  <div class="rs-canvas">
+                    <div class="rs-block"><small>主視覺</small><div class="img"></div><div class="t1"></div><div class="t2 s"></div></div>
+                    <div class="rs-block is-active"><small>編輯中：活動卡</small><div class="t1" style="width:40%"></div><div class="t2"></div><div class="t2 s"></div></div>
+                    <div class="rs-block"><small>常見問題</small><div class="t2"></div><div class="t2 s"></div></div>
+                  </div>
+                  <div class="rs-devices">
+                    <div class="rs-device"><b>網站</b><div class="mini"></div><div class="mini s"></div></div>
+                    <div class="rs-device"><b>App</b><div class="mini"></div><div class="mini s"></div></div>
+                    <div class="rs-device"><b>門市 Kiosk</b><div class="mini"></div><div class="mini s"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <figcaption>示意圖：在頁面編輯器裡直接編輯前端元件，同一份內容同步到網站、App 與其他通路。</figcaption>
+          </figure>
+        </div>
+
+        <h3>可以查證的事實</h3>
+        <ul class="rs-proof">
+          <li><p>2025 年 Gartner 數位體驗平台魔力象限，Magnolia 列為 Visionary，連續第五年入選；該年共評比 16 家供應商。</p><p class="rs-src">Magnolia 新聞稿 2025-01-30（報告日期 2025-01-28） <a href="https://www.magnolia-cms.com/about/press/story/magnolia-named-as-a-visionary-in-the-2025-gartner-magic-quadrant-for-dxps.html" target="_blank" rel="noopener">magnolia-cms.com</a>；供應商數依 CX Today 報導 <a href="https://www.cxtoday.com/contact-centre/gartner-magic-quadrant-for-digital-experience-platforms-2025-the-rundown/" target="_blank" rel="noopener">cxtoday.com</a>。</p></li>
+          <li><p>1997 年於瑞士巴塞爾創立，2003 年推出 Java 開源 CMS，全球 200 多家認證夥伴，客戶包括 Toyota、Nissan、Generali、Sanofi 與 American Express。</p><p class="rs-src">Magnolia 官網 About 頁 <a href="https://www.magnolia-cms.com/about.html" target="_blank" rel="noopener">magnolia-cms.com</a>。客戶名單為官網所列。</p></li>
+          <li><p>Visual SPA Editor 讓編輯人員在視覺化頁面編輯器裡直接編輯 React、Angular、Vue 前端的內容；內容經 Delivery API 輸出，前端可放在 Magnolia 以外的 CDN 或應用伺服器。</p><p class="rs-src">Magnolia 官方文件〈Visual SPA Editor〉 <a href="https://docs.magnolia-cms.com/headless/visual-spa-editor/" target="_blank" rel="noopener">docs.magnolia-cms.com</a>、〈SPA development〉 <a href="https://docs.magnolia-cms.com/product-docs/developing/headless/spa-development/" target="_blank" rel="noopener">docs.magnolia-cms.com</a>。</p></li>
+        </ul>
+
+        <details class="rs-more">
+          <summary>主要功能</summary>
+          <div class="rs-more-body">
+            <div class="dsc-grid">
           <div class="dsc-card"><h4>視覺化建置</h4><p>以視覺化方式編排頁面與體驗，編輯工具容易上手。</p></div>
           <div class="dsc-card"><h4>集中管理內容</h4><p>內容中心彙整多個來源的內容、資料與應用程式，依貴機構的內部流程與審核步驟管理。</p></div>
           <div class="dsc-card"><h4>全通路發布</h4><p>透過同一個介面把內容發布到網站、App 與其他通路，讓顧客在每個接觸點看到一致的內容。</p></div>
@@ -452,12 +737,26 @@
           <div class="dsc-card"><h4>AI 輔助內容創作</h4><p>以 AI 協助撰寫與調整內容。</p></div>
           <div class="dsc-card"><h4>整合框架</h4><p>提供商務、行銷自動化、數位資產管理與分析四類整合框架，可接上既有系統與未來新增的資料來源。</p></div>
         </div>
-        <p class="dsc-source">產品功能依 Magnolia 原廠公開資料整理。</p>
+            <p class="rs-src">產品功能依 Magnolia 原廠公開資料整理。</p>
+          </div>
+        </details>
+
+        <div class="rs-cta"><button type="button" class="rs-btn" data-rs-chip="Magnolia CMS">預約 Magnolia 展示</button><p class="rs-src">會打開諮詢表單，並先幫您勾好 Magnolia CMS。</p></div>
+<script>
+// 「預約展示」：先勾好該產品的諮詢類型，再打開諮詢表單（jQuery 與 Bootstrap 在頁尾載入，點擊時已可用）
+document.querySelectorAll('[data-rs-chip]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var v = b.getAttribute('data-rs-chip');
+    document.querySelectorAll('#myModal input[name="entry.1863307942"]').forEach(function (i) { i.checked = (i.value === v); });
+    if (window.jQuery && jQuery.fn.modal) jQuery('#myModal').modal('show');
+  });
+});
+</script>
       </div>
     </div>
   </div>
 </section>
-		
+
 <!-- PAGE-FAQ:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
 <section id="faq" class="ftco-section pg-faq"><div class="row justify-content-end"><div class="col-md-10"><div class="pg-faq-wrap"><p class="pg-faq-label">FAQ</p><h2>常見問題</h2><div class="pg-faq-item"><h3>奧洛代理哪些行銷科技產品？</h3><p>奧洛代理 HCL Discover 數位體驗分析、HCL Unica 行銷自動化與 Magnolia CMS 內容管理，並提供導入與維護服務。客戶數據平台則是奧洛自有的 AURA CDP。</p></div><div class="pg-faq-item"><h3>HCL Discover 可以部署在企業自有機房嗎？</h3><p>可以。HCL Discover 可部署於企業自有機房（Windows／RHEL 虛擬機或容器），也提供雲端與 HCL 代管選項，金融機構可讓顧客行為資料全程留在境內。</p></div><div class="pg-faq-item"><h3>HCL Discover 會記錄密碼或身分證字號嗎？</h3><p>不會留下明文。密碼、OTP、身分證字號、帳號、卡號等欄位在瀏覽器端就遮罩或不擷取，伺服器端再遮罩一次，資料庫與回放畫面都沒有明文。</p></div><div class="pg-faq-item"><h3>HCL Unica 包含哪些模組？</h3><p>HCL Unica 包含 Plan、Campaign、Optimize、Journey、Interact、Deliver、Link 等模組，以及 Unica COM、Director、Insights 附加元件，涵蓋行銷資源管理、跨通路活動、客戶旅程與即時個人化推薦。</p></div><div class="pg-faq-item"><h3>網站行為軌跡可以串到 CDP 或行銷自動化嗎？</h3><p>可以。HCL Discover 與 HCL Unica、HCL CDP 原生整合並提供 REST API；行為軌跡也可以交給 AURA Connect 整理成行銷標籤，再交給 AURA CDP 使用。</p></div></div></div></div></section>
 <!-- PAGE-FAQ:END -->
