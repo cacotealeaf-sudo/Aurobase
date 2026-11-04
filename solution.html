@@ -209,7 +209,7 @@
     <!-- SITE-LD:END -->
       <style>
     /* 代理產品頁：為什麼透過奧洛、三個產品怎麼接、每個產品的「現在／導入後」對照與可查證的事實 */
-    .dsc .dsc-wrap { padding: 3rem 3rem 3rem 0; max-width: 1100px; }
+    .dsc .dsc-wrap { padding: 3rem 0; max-width: 1100px; }
     .ftco-section.dsc { padding: 4.5em 0; }
     .ftco-section.dsc.rs-product { padding-top: 0; }
     .rs-product .dsc-wrap { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 3.8rem; }
@@ -352,7 +352,7 @@
       .rs-flow li:not(:last-child)::after { right: auto; left: 0.3rem; top: auto; bottom: 0.55rem; transform: rotate(135deg); }
     }
     @media (max-width: 767.98px) {
-      .dsc .dsc-wrap { padding: 2rem 15px; }
+      .dsc .dsc-wrap { padding: 2rem 0; }
       .rs-product .dsc-wrap { padding-top: 2.6rem; }
       .rs-facts { grid-template-columns: 1fr; }
       .dsc h2 { font-size: 1.6rem; }
@@ -360,6 +360,21 @@
       .rs-heat { grid-template-columns: 1fr; }
       .rs-heat-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
     }
+
+    /* 內容貼齊側欄：不再保留舊版 col-md-10 留下的左側 1/6 空白；標題、內文與 FAQ 都從側欄右邊 48px 開始（手機 16px） */
+    #colorlib-main .ftco-bread { padding-left: 48px !important; padding-right: 48px !important; }
+    #colorlib-main .ftco-bread .container-fluid { padding-left: 0; padding-right: 0; }
+    #colorlib-main .row.justify-content-end { margin-left: 0; margin-right: 0; }
+    #colorlib-main .row.justify-content-end > .col-md-10 { flex: 0 0 100%; max-width: 100%; padding-left: 48px; padding-right: 48px; }
+    #colorlib-main .ftco-bread .row.justify-content-end > .col-md-10 { padding-left: 0; padding-right: 0; }
+    @media (max-width: 767.98px) {
+      #colorlib-main .ftco-bread { padding-left: 0 !important; padding-right: 0 !important; } /* .container-fluid 的 px-3 提供 16px */
+      #colorlib-main .row.justify-content-end > .col-md-10 { padding-left: 16px; padding-right: 16px; }
+    }
+    /* 第一段與頁面標題的距離比照數位行銷服務頁 */
+    #rs-why.ftco-section { padding-top: 3.2em; }
+    #rs-why .dsc-wrap { padding-top: 0; }
+    @media (max-width: 767.98px) { #rs-why.ftco-section { padding-top: 2.2em; } }
     </style>
   </head>
   <body>
