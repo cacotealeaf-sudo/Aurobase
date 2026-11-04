@@ -53,7 +53,7 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
         })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
     <!-- End Google Tag Manager -->
-      <link rel="stylesheet" href="css/site-nav.css?v=9301c60a">
+      <link rel="stylesheet" href="css/site-nav.css?v=969fa91e">
       <!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
     <script type="application/ld+json">
 {
@@ -361,16 +361,6 @@
       .rs-heat-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
     }
 
-    /* 內容貼齊側欄：不再保留舊版 col-md-10 留下的左側 1/6 空白；標題、內文與 FAQ 都從側欄右邊 48px 開始（手機 16px） */
-    #colorlib-main .ftco-bread { padding-left: 48px !important; padding-right: 48px !important; }
-    #colorlib-main .ftco-bread .container-fluid { padding-left: 0; padding-right: 0; }
-    #colorlib-main .row.justify-content-end { margin-left: 0; margin-right: 0; }
-    #colorlib-main .row.justify-content-end > .col-md-10 { flex: 0 0 100%; max-width: 100%; padding-left: 48px; padding-right: 48px; }
-    #colorlib-main .ftco-bread .row.justify-content-end > .col-md-10 { padding-left: 0; padding-right: 0; }
-    @media (max-width: 767.98px) {
-      #colorlib-main .ftco-bread { padding-left: 0 !important; padding-right: 0 !important; } /* .container-fluid 的 px-3 提供 16px */
-      #colorlib-main .row.justify-content-end > .col-md-10 { padding-left: 16px; padding-right: 16px; }
-    }
     /* 第一段與頁面標題的距離比照數位行銷服務頁 */
     #rs-why.ftco-section { padding-top: 3.2em; }
     #rs-why .dsc-wrap { padding-top: 0; }
@@ -509,7 +499,7 @@
         </div>
         <!-- END Anchor manu -->
         
-        <div id="colorlib-main">
+        <div id="colorlib-main" class="pg-flush">
             <!-- particles.js container
             <div id="particles-js"></div> -->
 			<section class="ftco-section ftco-bread ftco-extend-mb">

@@ -99,6 +99,21 @@
 .ftco-bread + .ftco-section { padding-top: 2em; }
 @media (max-width: 767.98px) { .ftco-bread .pg-title { font-size: 1.5rem; } }
 
+/* 舊版淺色頁（代理產品、數位行銷、AI 智慧語伴、隱私權政策）：<div id="colorlib-main" class="pg-flush">
+   取消 col-md-10 在左側留下的 1/6 空白，標題、內文與 FAQ 從側欄右邊 48px 開始（手機 16px，由 .container-fluid 的 px-3 提供） */
+#colorlib-main.pg-flush .ftco-bread { padding-left: 48px !important; padding-right: 48px !important; }
+#colorlib-main.pg-flush .row.justify-content-end { margin-left: 0; margin-right: 0; }
+#colorlib-main.pg-flush .row.justify-content-end > .col-md-10 { flex: 0 0 100%; max-width: 100%; padding-left: 48px; padding-right: 48px; }
+#colorlib-main.pg-flush .ftco-bread .row.justify-content-end > .col-md-10,
+#colorlib-main.pg-flush .container-fluid > .row.justify-content-end > .col-md-10 { padding-left: 0; padding-right: 0; }
+#colorlib-main.pg-flush > section:not(.ftco-bread) > .container-fluid { padding-left: 48px !important; padding-right: 48px !important; }
+#colorlib-main.pg-flush .ftco-bread .container-fluid { padding-left: 0 !important; padding-right: 0 !important; }
+@media (max-width: 767.98px) {
+    #colorlib-main.pg-flush .ftco-bread { padding-left: 16px !important; padding-right: 16px !important; }
+    #colorlib-main.pg-flush .row.justify-content-end > .col-md-10 { padding-left: 16px; padding-right: 16px; }
+    #colorlib-main.pg-flush > section:not(.ftco-bread) > .container-fluid { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
 /* 矮螢幕：子選單展開後會碰到固定在底部的標誌，改成接在選單後面 */
 @media (max-height: 880px) {
     #colorlib-aside .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }

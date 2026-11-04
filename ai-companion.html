@@ -41,494 +41,56 @@
     <link rel="stylesheet" href="css/iconoir-subset.css">
     
     <style>
-    /* AI 智慧語伴專屬樣式 - 強化毛玻璃與漸層紋理 */
-    
-    /* 增加右側內容區與左側選單間距 */
-    #colorlib-main {
-        margin-left: 340px; /* 原本 300px + 40px */
-    }
-    
-    @media (max-width: 1199px) {
-        #colorlib-main {
-            margin-left: 0;
-        }
-    }
-    
-    /* 移除 Section Title 下方橘色線條 */
-    .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 50px;
-        text-align: left;
-    }
-    
-    .section-title::after {
-        display: none;
-    }
-    
-    /* 影片上方文案區塊 */
-    .video-intro {
-        padding: 60px 0 40px 0;
-    }
-    
-    .video-intro-content h3 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #5a6c7d;
-        margin-bottom: 15px;
-    }
-    
-    .video-intro-content h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 20px;
-        line-height: 1.4;
-    }
-    
-    .video-intro-content p {
-        font-size: 1.2rem;
-        color: #555;
-        line-height: 1.8;
-    }
-    
-    /* 影片區塊 */
-    .video-section {
-        padding: 0 0 80px 0;
-    }
-    
-    .video-wrapper {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%; /* 16:9 比例 */
-        height: 0;
-        overflow: hidden;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    }
-    
-    .video-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    
-    /* 問題與解決方案區塊 - 強化毛玻璃效果 + 漸層紋理 */
-    .problem-solution {
-        padding: 80px 0;
-    }
-    
-    .problem-card,
-    .solution-card {
-        position: relative;
-        background: linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.9) 0%, 
-            rgba(255, 255, 255, 0.7) 50%, 
-            rgba(240, 245, 250, 0.8) 100%);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        padding: 40px;
-        border-radius: 16px;
-        margin-bottom: 30px;
-        box-shadow: 0 8px 32px rgba(90, 108, 125, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        height: 100%;
-        overflow: hidden;
-    }
-    
-    .problem-card::before,
-    .solution-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(145deg,
-            rgba(90, 108, 125, 0.03) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(90, 108, 125, 0.02) 100%);
-        pointer-events: none;
-        z-index: 0;
-    }
-    
-    .problem-card > *,
-    .solution-card > * {
-        position: relative;
-        z-index: 1;
-    }
-    
-    .problem-card h3,
-    .solution-card h3 {
-        color: #5a6c7d;
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
-    
-    .problem-card ul,
-    .solution-card ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    .problem-card li,
-    .solution-card li {
-        padding: 10px 0;
-        padding-left: 30px;
-        position: relative;
-        font-size: 1.1rem;
-        color: #555;
-    }
-    
-    .problem-card li:before {
-        content: "▸";
-        position: absolute;
-        left: 0;
-        color: #5a6c7d;
-        font-size: 1.3rem;
-    }
-    
-    .solution-card li:before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #5a6c7d;
-        font-weight: bold;
-        font-size: 1.3rem;
-    }
-    
-    .solution-card p {
-        color: #555;
-        margin-bottom: 15px;
-        line-height: 1.8;
-    }
-    
-    /* 功能模組區塊 - 滿版背景圖 + 深色遮罩 */
-    .features-section {
-        padding: 80px 0;
-    }
-    
-    .feature-box {
-        position: relative;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: 40px 30px;
-        border-radius: 16px;
-        margin-bottom: 30px;
-        text-align: center;
-        transition: all 0.4s ease;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        height: 100%;
-        overflow: hidden;
-        min-height: 320px;
-    }
-    
-    /* 深色遮罩層 */
-    .feature-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg,
-            rgba(0, 0, 0, 0.6) 0%,
-            rgba(0, 0, 0, 0.5) 50%,
-            rgba(0, 0, 0, 0.65) 100%);
-        pointer-events: none;
-        z-index: 1;
-        transition: all 0.4s ease;
-    }
-    
-    .feature-box:hover::before {
-        background: linear-gradient(135deg,
-            rgba(0, 0, 0, 0.5) 0%,
-            rgba(0, 0, 0, 0.4) 50%,
-            rgba(0, 0, 0, 0.55) 100%);
-    }
-    
-    .feature-box:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-    }
-    
-    /* 為三張卡片設定不同的背景圖 */
-    /* 主動關懷 */
-    .col-md-4:nth-child(1) .feature-box {
-        background-image: url('images/feature-care-bg.jpg');
-    }
-    
-    /* 用藥提醒 */
-    .col-md-4:nth-child(2) .feature-box {
-        background-image: url('images/feature-medicine-bg.jpg');
-    }
-    
-    /* 社工輔助 */
-    .col-md-4:nth-child(3) .feature-box {
-        background-image: url('images/feature-social-bg.jpg');
-    }
-    
-    .feature-box > * {
-        position: relative;
-        z-index: 2;
-    }
-    
-    /* Iconoir 圖標樣式 - 改為白色 */
-    .feature-icon {
-        font-size: 4rem;
-        color: #ffffff;
-        margin-bottom: 20px;
-        display: inline-block;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    }
-    
-    .feature-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #ffffff;
-        margin-bottom: 20px;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    }
-    
-    .feature-list {
-        list-style: none;
-        padding: 0;
-        text-align: left;
-    }
-    
-    .feature-list li {
-        padding: 8px 0;
-        padding-left: 25px;
-        position: relative;
-        color: #e0e0e0;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    }
-    
-    .feature-list li:before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        color: #ffffff;
-        font-weight: bold;
-    }
-    
-    /* 未來應用區塊 - 移除白色底色與陰影，對齊數字 */
-    .future-section {
-        padding: 80px 0;
-    }
-    
-    .future-content {
-        padding: 0 20px; /* 增加左右內距以對齊數字 */
-    }
-    
-    .future-content h3 {
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 20px;
-        color: #5a6c7d;
-    }
-    
-    .future-content p {
-        font-size: 1.2rem;
-        line-height: 1.8;
-        margin-bottom: 15px;
-        color: #555;
-    }
-    
-    /* 效益區塊 - 強化毛玻璃效果 + 漸層紋理 */
-    .benefits-section {
-        padding: 80px 0;
-    }
-    
-    .benefit-card {
-        position: relative;
-        background: linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.9) 0%, 
-            rgba(255, 255, 255, 0.7) 50%, 
-            rgba(240, 245, 250, 0.8) 100%);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        padding: 40px;
-        border-radius: 16px;
-        margin-bottom: 30px;
-        box-shadow: 0 8px 32px rgba(90, 108, 125, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-    
-    .benefit-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(145deg,
-            rgba(90, 108, 125, 0.03) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(90, 108, 125, 0.02) 100%);
-        pointer-events: none;
-        z-index: 0;
-    }
-    
-    .benefit-card > * {
-        position: relative;
-        z-index: 1;
-    }
-    
-    /* 右下角淺色 icon 裝飾 */
-    .benefit-icon-decoration {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        font-size: 5rem;
-        color: rgba(90, 108, 125, 0.08);
-        z-index: 0;
-        pointer-events: none;
-        transition: all 0.3s ease;
-    }
-    
-    .benefit-card:hover .benefit-icon-decoration {
-        color: rgba(90, 108, 125, 0.12);
-        transform: scale(1.05);
-    }
-    
-    .benefit-card h4 {
-        color: #5a6c7d;
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-    
-    .benefit-card p {
-        color: #555;
-        font-size: 1.1rem;
-        line-height: 1.8;
-        margin: 0;
-        flex: 1;
-    }
-    
-    /* 服務成效區塊 - 桌機/平板橫向，手機直向 */
-    .results-section {
-        padding: 80px 0;
-    }
-    
-    .results-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-    
-    .result-item {
-        flex: 1;
-        text-align: center;
-        padding: 0 20px;
-    }
-    
-    .result-number {
-        font-size: 4rem;
-        font-weight: 700;
-        color: #5a6c7d;
-        display: block;
-        margin-bottom: 15px;
-    }
-    
-    .results-lead { font-size: 1.05rem; color: #555; line-height: 1.8; margin-bottom: 2rem; }
-    .result-number.result-word { font-size: 2rem; }
-    .result-text {
-        font-size: 1.3rem;
-        color: #333;
-        font-weight: 500;
-        display: block;
-    }
-    
-    /* 響應式設計 */
-    @media (max-width: 768px) {
-        .section-title {
-            font-size: 1.8rem;
-        }
-        
-        .video-intro-content h2 {
-            font-size: 1.5rem;
-        }
-        
-        .video-intro-content h3 {
-            font-size: 1.2rem;
-        }
-        
-        .video-intro-content p {
-            font-size: 1rem;
-        }
-        
-        .problem-card,
-        .solution-card {
-            padding: 30px 20px;
-        }
-        
-        /* ✅ 手機版卡片間距 30px */
-        .problem-solution .row .col-md-6 {
-            padding-bottom: 30px;
-        }
-        
-        .problem-solution .row .col-md-6:last-child {
-            padding-bottom: 0;
-        }
-        
-        /* ✅ 功能模組卡片間距 */
-        .features-section .row .col-md-4 {
-            padding-bottom: 30px;
-        }
-        
-        .features-section .row .col-md-4:last-child {
-            padding-bottom: 0;
-        }
-        
-        /* ✅ 效益卡片間距 */
-        .benefits-section .row .col-md-6 {
-            padding-bottom: 30px;
-        }
-        
-        .benefits-section .row .col-md-6:last-child {
-            padding-bottom: 0;
-        }
-        
-        .future-content {
-            padding: 0;
-        }
-        
-        /* 手機板改為直向排列 */
-        .results-container {
-            flex-direction: column;
-        }
-        
-        .result-item {
-            margin-bottom: 50px;
-            padding: 0;
-        }
-        
-        .result-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .result-number {
-            font-size: 3rem;
-        }
-        
-        .result-text {
-            font-size: 1.1rem;
-        }
+    /* AI 智慧語伴：版型比照代理產品頁（solution.html 的 rs-*）——深灰標題、細線分段、上緣線條代替卡片 */
+    .ftco-section.ac { padding: 3.2em 0; }
+    /* 第一段（小標）離頁面標題的距離比照代理產品頁 */
+    #intro.ftco-section.ac { padding-top: calc(2em + 20px); }
+    .ftco-section.ac + .ftco-section.ac .ac-wrap { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 3.4rem; }
+    .ac-wrap { max-width: 1100px; }
+    .ac h2 { font-size: 2rem; font-weight: 700; color: #28282c; margin: 0 0 0.9rem; line-height: 1.3; }
+    .ac h3 { font-size: 1.15rem; font-weight: 700; color: #28282c; margin: 0 0 0.6rem; line-height: 1.5; }
+    .ac-vendor { font-size: 0.9rem; color: #6b6b70; margin: 0 0 0.3rem; letter-spacing: 0.04em; }
+    .ac-lead { font-size: 1.02rem; color: #4a4a4a; line-height: 1.9; max-width: 68ch; margin: 0; }
+
+    .ac-video { display: block; position: relative; max-width: 720px; margin-top: 1.8rem; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(40,40,44,0.08); }
+    .ac-video img { display: block; width: 100%; height: auto; }
+    .ac-video i { position: absolute; top: 50%; left: 50%; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; background: rgba(0,0,0,0.65); transition: background 0.2s; }
+    .ac-video i::after { content: ''; position: absolute; left: 28px; top: 20px; border-left: 26px solid #fff; border-top: 16px solid transparent; border-bottom: 16px solid transparent; }
+    .ac-video:hover i, .ac-video:focus-visible i { background: #E63109; }
+    .ac-video:focus-visible { outline: 2px solid #28282c; outline-offset: 3px; }
+
+    /* 現在／導入後：左邊灰線、右邊橘線，同代理產品頁 */
+    .ac-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem; margin-top: 1.6rem; }
+    .ac-now, .ac-after { padding-left: 1.1rem; border-left: 3px solid rgba(0,0,0,0.15); }
+    .ac-after { border-left-color: #E63109; }
+    .ac-tag { display: block; font-size: 0.82rem; font-weight: 700; color: #6b6b70; margin-bottom: 0.4rem; }
+    .ac-after .ac-tag { color: #E63109; }
+    .ac-now ul { list-style: none; padding: 0; margin: 0; }
+    .ac-now li { position: relative; padding-left: 1rem; font-size: 1rem; line-height: 1.85; color: #4a4a4a; }
+    .ac-now li + li { margin-top: 0.5rem; }
+    .ac-now li::before { content: ''; position: absolute; left: 0; top: 0.8em; width: 5px; height: 5px; border-radius: 50%; background: #8a8a90; }
+    .ac-after p { font-size: 1rem; line-height: 1.85; color: #28282c; margin: 0 0 0.7rem; }
+    .ac-after p:last-child { margin-bottom: 0; font-weight: 700; }
+
+    /* 三欄：上緣粗線，不做卡片 */
+    .ac-cols { list-style: none; padding: 0; margin: 1.8rem 0 0; display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 0 2rem; }
+    .ac-cols > li { border-top: 2px solid #28282c; padding-top: 1rem; }
+    .ac-cols .ac-icon { display: block; font-size: 28px; color: #E63109; margin-bottom: 0.6rem; }
+    .ac-cols ul { list-style: none; padding: 0; margin: 0; }
+    .ac-cols ul li { font-size: 0.95rem; line-height: 1.8; color: #4a4a4a; }
+    .ac-cols ul li + li { margin-top: 0.35rem; }
+    .ac-cols p { font-size: 0.95rem; line-height: 1.85; color: #4a4a4a; margin: 0; }
+
+    .ac-future p { font-size: 1rem; line-height: 1.9; color: #4a4a4a; max-width: 68ch; margin: 0 0 0.8rem; }
+    .ac-future .ac-closing { margin-top: 1.4rem; padding-left: 1.1rem; border-left: 3px solid #E63109; font-size: 1.1rem; font-weight: 700; color: #28282c; }
+
+    @media (max-width: 767.98px) {
+      .ftco-section.ac { padding: 2.2em 0; }
+      #intro.ftco-section.ac { padding-top: calc(2em + 4px); }
+      .ftco-section.ac + .ftco-section.ac .ac-wrap { padding-top: 2.4rem; }
+      .ac h2 { font-size: 1.6rem; }
+      .ac-compare { grid-template-columns: 1fr; gap: 1.6rem; }
+      .ac-cols { grid-template-columns: 1fr; gap: 1.6rem; }
     }
     </style>
     
@@ -539,7 +101,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);    
     })(window,document,'script','dataLayer','GTM-MB9RNG8');</script>
     <!-- End Google Tag Manager -->
-      <link rel="stylesheet" href="css/site-nav.css?v=9301c60a">
+      <link rel="stylesheet" href="css/site-nav.css?v=969fa91e">
       <!-- SITE-LD:BEGIN（由 tools/build-module-pages.py 依 _pages.json 產生）-->
     <script type="application/ld+json">
 {
@@ -802,7 +364,7 @@
             <a href="#results" class="btn btn-primary btn-sm">服務成效</a>
         </div>
         
-        <div id="colorlib-main">
+        <div id="colorlib-main" class="pg-flush">
             <!-- Breadcrumb -->
             <section class="ftco-section ftco-bread ftco-extend-mb">
                 <div class="container-fluid px-3 px-md-0">
@@ -818,32 +380,18 @@
                 </div>
             </section>
 
-            <!-- Video Intro Section -->
-            <section class="video-intro">
+            <!-- AI 智慧語伴：版型比照代理產品頁 -->
+            <section id="intro" class="ftco-section ac">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-end">
                         <div class="col-md-10">
-                            <div class="video-intro-content ftco-animate">
-                                <h3>AI VOICE COMPANION</h3>
+                            <div class="ac-wrap">
+                                <p class="ac-vendor">AI VOICE COMPANION</p>
                                 <h2>創新研發 AI 溫情守護・智慧陪伴新世代</h2>
-                                <p>以 AI 語音為核心，打造智慧陪伴與健康守護。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Video Section -->
-            <section class="video-section">
-                <div class="container-fluid px-3 px-md-0">
-                    <div class="row justify-content-end">
-                        <div class="col-md-10">
-                            <div class="video-wrapper ftco-animate" style="padding-bottom: 0; height: auto; max-width: 75%; margin: 0 auto;">
-                                <a href="https://www.youtube.com/watch?v=ev1YYi0tps8" target="_blank" rel="noopener noreferrer" style="display: block; position: relative;">
-                                    <img loading="lazy" src="images/ai-companion-video-cover.webp" alt="AI 智慧語伴 介紹影片" style="width: 100%; border-radius: 12px; display: block;">
-                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(0,0,0,0.65); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
-                                        <div style="width: 0; height: 0; border-style: solid; border-width: 18px 0 18px 32px; border-color: transparent transparent transparent #fff; margin-left: 6px;"></div>
-                                    </div>
+                                <p class="ac-lead">以 AI 語音為核心，打造智慧陪伴與健康守護。</p>
+                                <a class="ac-video" href="https://www.youtube.com/watch?v=ev1YYi0tps8" target="_blank" rel="noopener noreferrer" aria-label="在 YouTube 觀看 AI 智慧語伴介紹影片">
+                                    <img loading="lazy" src="images/ai-companion-video-cover.webp" alt="AI 智慧語伴 介紹影片">
+                                    <i aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -851,39 +399,26 @@
                 </div>
             </section>
 
-            <!-- Problem & Solution Section -->
-            <section id="problem" class="problem-solution">
+            <section id="problem" class="ftco-section ac">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-end">
                         <div class="col-md-10">
-                            <div class="mb-5">
-                                <h2 class="section-title ftco-animate">▏優先應用背景</h2>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6 ftco-animate">
-                                    <div class="problem-card">
-                                        <h3>優先應用背景</h3>
+                            <div class="ac-wrap">
+                                <h2>優先應用背景</h2>
+                                <div class="ac-compare">
+                                    <div class="ac-now">
+                                        <span class="ac-tag">現在</span>
                                         <ul>
                                             <li>偏鄉長者面臨孤獨與資源不足，社工人力有限，難以即時關懷</li>
                                             <li>醫療與交通條件不足，使照護更加困難</li>
                                             <li>隨著高齡化加劇，獨居老人比例不斷上升，社會關懷與照護壓力日益增加</li>
                                         </ul>
                                     </div>
-                                </div>
-                                
-                                <div class="col-md-6 ftco-animate">
-                                    <div class="solution-card">
-                                        <h3>我們的解決方案</h3>
-                                        <p>
-                                            「AI 智慧語伴」以語音科技為核心，結合情感互動與智慧分析，主動陪伴長者、即時掌握健康與情緒變化。
-                                        </p>
-                                        <p>
-                                            系統能自動生成關懷報告、提供用藥提醒與語音回報，協助社工快速掌握狀況，減輕工作負擔。
-                                        </p>
-                                        <p style="font-weight: 600; color: #5a6c7d;">
-                                            透過AI輔助，讓照護更高效、更貼心，實現溫情不間斷的智慧關懷。
-                                        </p>
+                                    <div class="ac-after">
+                                        <span class="ac-tag">我們的解決方案</span>
+                                        <p>「AI 智慧語伴」以語音科技為核心，結合情感互動與智慧分析，主動陪伴長者、即時掌握健康與情緒變化。</p>
+                                        <p>系統能自動生成關懷報告、提供用藥提醒與語音回報，協助社工快速掌握狀況，減輕工作負擔。</p>
+                                        <p>透過 AI 輔助，讓照護更高效、更貼心，實現溫情不間斷的智慧關懷。</p>
                                     </div>
                                 </div>
                             </div>
@@ -892,144 +427,95 @@
                 </div>
             </section>
 
-            <!-- Features Section -->
-            <section id="features" class="features-section">
+            <section id="features" class="ftco-section ac">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-end">
                         <div class="col-md-10">
-                            <div class="mb-5">
-                                <h2 class="section-title ftco-animate">▏功能模組</h2>
-                            </div>
-                            
-                            <div class="row">
-                                <!-- 主動關懷 -->
-                                <div class="col-md-4 ftco-animate">
-                                    <div class="feature-box">
-                                        <i class="iconoir-chat-bubble feature-icon"></i>
-                                        <h4 class="feature-title">主動關懷</h4>
-                                        <ul class="feature-list">
+                            <div class="ac-wrap">
+                                <h2>功能模組</h2>
+                                <ul class="ac-cols">
+                                    <li>
+                                        <i class="ac-icon iconoir-chat-bubble" aria-hidden="true"></i>
+                                        <h3>主動關懷</h3>
+                                        <ul>
                                             <li>智慧語音陪伴，了解健康與情緒</li>
                                             <li>自動生成關懷報告，回應社工決策</li>
                                         </ul>
-                                    </div>
-                                </div>
-                                
-                                <!-- 用藥提醒 -->
-                                <div class="col-md-4 ftco-animate">
-                                    <div class="feature-box">
-                                        <i class="iconoir-healthcare feature-icon"></i>
-                                        <h4 class="feature-title">用藥提醒</h4>
-                                        <ul class="feature-list">
-                                            <li>OCR掃描藥單，自動建檔</li>
+                                    </li>
+                                    <li>
+                                        <i class="ac-icon iconoir-healthcare" aria-hidden="true"></i>
+                                        <h3>用藥提醒</h3>
+                                        <ul>
+                                            <li>OCR 掃描藥單，自動建檔</li>
                                             <li>定時語音提醒與服藥回報</li>
                                         </ul>
-                                    </div>
-                                </div>
-                                
-                                <!-- 社工輔助 -->
-                                <div class="col-md-4 ftco-animate">
-                                    <div class="feature-box">
-                                        <i class="iconoir-group feature-icon"></i>
-                                        <h4 class="feature-title">社工輔助</h4>
-                                        <ul class="feature-list">
+                                    </li>
+                                    <li>
+                                        <i class="ac-icon iconoir-group" aria-hidden="true"></i>
+                                        <h3>社工輔助</h3>
+                                        <ul>
                                             <li>自動語音轉文字，節省工時</li>
                                             <li>智慧分析老人需求，優化資源配置</li>
                                             <li>新手社工快速上手，降低培訓成本</li>
                                         </ul>
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Future Application Section -->
-            <section class="future-section">
+            <section id="future" class="ftco-section ac">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-end">
                         <div class="col-md-10">
-                            <div class="mb-5">
-                                <h2 class="section-title ftco-animate">未來應用：以智慧科技打造陪伴生態圈</h2>
-                            </div>
-                            
-                            <div class="future-content ftco-animate">
+                            <div class="ac-wrap ac-future">
+                                <h2>未來應用：以智慧科技打造陪伴生態圈</h2>
                                 <h3>從「理解人」走向「成為人性化關懷的夥伴」</h3>
-                                <p>
-                                    結合語音互動、情緒辨識與生成式AI技術，打造能傾聽、理解、並主動回應需求的智慧陪伴系統。
-                                </p>
-                                <p>
-                                    從偏鄉長者到都會居住者，從教育情緒輔導到企業員工支持，AI 關懷系統皆能依使用者的情緒與語境動態調整互動策略，協助機構提升服務溫度、情緒照護精準度與工作效率。
-                                </p>
-                                <p style="margin-top: 30px; font-size: 1.3rem; font-weight: 600;">
-                                    未來，我們將持續擴展應用場域，讓AI從「理解人」走向「成為人性化關懷的夥伴」，推動智慧社會向共融、共享、共好的方向邁進。
-                                </p>
+                                <p>結合語音互動、情緒辨識與生成式 AI 技術，打造能傾聽、理解、並主動回應需求的智慧陪伴系統。</p>
+                                <p>從偏鄉長者到都會居住者，從教育情緒輔導到企業員工支持，AI 關懷系統皆能依使用者的情緒與語境動態調整互動策略，協助機構提升服務溫度、情緒照護精準度與工作效率。</p>
+                                <p class="ac-closing">未來，我們將持續擴展應用場域，讓 AI 從「理解人」走向「成為人性化關懷的夥伴」，推動智慧社會向共融、共享、共好的方向邁進。</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Benefits Section -->
-            <section id="benefits" class="benefits-section">
+            <section id="benefits" class="ftco-section ac">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-end">
                         <div class="col-md-10">
-                            <div class="mb-5">
-                                <h2 class="section-title ftco-animate">▏整合效益</h2>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6 ftco-animate">
-                                    <div class="benefit-card">
-                                        <i class="iconoir-heart benefit-icon-decoration"></i>
-                                        <h4>社會與經濟效益</h4>
-                                        <p>
-                                            透過多語情感語音 AI，打造兼具溫度與效率的智慧照護系統，減少孤獨長者、提升照護公平與品質，協助社工降低人力負擔，推動台灣邁向低成本、高覆蓋率的智慧關懷新時代。
-                                        </p>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6 ftco-animate">
-                                    <div class="benefit-card">
-                                        <i class="iconoir-grid-plus benefit-icon-decoration"></i>
-                                        <h4>整合效益</h4>
-                                        <p>
-                                            「AI 智慧語伴」不僅減輕長者的孤獨感，提升生活品質與安全感，也讓社工能以更高效率服務更多人，優化決策與工作流程。透過AI分析與資料整合，實現資源的公平分配與永續照護，並建立健康數據庫，推動智慧醫療的長遠發展，為社會帶來溫度與科技並進的新範疇。
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="ac-wrap">
+                                <h2>整合效益</h2>
+                                <ul class="ac-cols" style="--n:2">
+                                    <li>
+                                        <h3>社會與經濟效益</h3>
+                                        <p>透過多語情感語音 AI，打造兼具溫度與效率的智慧照護系統，減少孤獨長者、提升照護公平與品質，協助社工降低人力負擔，推動台灣邁向低成本、高覆蓋率的智慧關懷新時代。</p>
+                                    </li>
+                                    <li>
+                                        <h3>整合效益</h3>
+                                        <p>「AI 智慧語伴」不僅減輕長者的孤獨感，提升生活品質與安全感，也讓社工能以更高效率服務更多人，優化決策與工作流程。透過 AI 分析與資料整合，實現資源的公平分配與永續照護，並建立健康數據庫，推動智慧醫療的長遠發展，為社會帶來溫度與科技並進的新範疇。</p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Results Section -->
-            <section id="results" class="results-section">
+            <section id="results" class="ftco-section ac">
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-end">
                         <div class="col-md-10">
-                            <div class="mb-5">
-                                <h2 class="section-title ftco-animate">▏服務成效</h2>
-                            </div>
-                            
-                            <p class="results-lead ftco-animate">語伴在以下三個面向協助長者與社工。</p>
-                            <div class="results-container ftco-animate">
-                                <div class="result-item">
-                                    <span class="result-number result-word">情感回應</span>
-                                    <span class="result-text">語伴能依長者的情緒調整回應方式</span>
-                                </div>
-                                
-                                <div class="result-item">
-                                    <span class="result-number result-word">服藥提醒</span>
-                                    <span class="result-text">定時語音提醒，協助長者按時服藥</span>
-                                </div>
-                                
-                                <div class="result-item">
-                                    <span class="result-number result-word">社工工時</span>
-                                    <span class="result-text">例行關懷由語伴分擔，社工能把時間留給需要的個案</span>
-                                </div>
+                            <div class="ac-wrap">
+                                <h2>服務成效</h2>
+                                <p class="ac-lead">語伴在以下三個面向協助長者與社工。</p>
+                                <ul class="ac-cols">
+                                    <li><h3>情感回應</h3><p>語伴能依長者的情緒調整回應方式</p></li>
+                                    <li><h3>服藥提醒</h3><p>定時語音提醒，協助長者按時服藥</p></li>
+                                    <li><h3>社工工時</h3><p>例行關懷由語伴分擔，社工能把時間留給需要的個案</p></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
