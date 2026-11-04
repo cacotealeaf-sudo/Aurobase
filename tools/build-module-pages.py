@@ -2033,7 +2033,10 @@ def nav_html(page, prefix, pf, mods):
     search = ('<button type="button" class="nav-search-btn" aria-haspopup="dialog">'
               '<span aria-hidden="true">⌕</span> 搜尋產品與服務</button>'
               '<script defer src="%sjs/site-search.js"></script><script defer src="%sjs/site-events.js"></script>' % (prefix, prefix))
-    return NAV_BEGIN + '\n' + search + ''.join(out) + '\n' + NAV_TOGGLE_JS + '\n' + NAV_END
+    # 標誌放在側欄最上方（連回首頁），不再固定在側欄底部
+    logo = ('<a class="nav-logo" href="%sindex.html"><img src="%simages/logo.svg" alt="AUROBASE 奧洛" width="185" height="40"></a>'
+            % (prefix, prefix))
+    return NAV_BEGIN + '\n' + logo + search + ''.join(out) + '\n' + NAV_TOGGLE_JS + '\n' + NAV_END
 
 
 def nav_pages():
@@ -2042,6 +2045,7 @@ def nav_pages():
 
 
 CJK_PRELOAD_RE = re.compile(r'[ \t]*<link rel="preload" href="[./]*WOFF2/LINESeedTW_OTF_(?:Rg|Bd)\.subset\.woff2"[^>]*>\n?')
+ASIDE_FOOTER_LOGO_RE = re.compile(r'[ \t]*<div class="colorlib-footer">\s*<div class="aside-logo">.*?</div>\s*</div>[ \t]*\n?', re.S)
 LOADER_RE = re.compile(r'[ \t]*(?:<!-- loader -->\s*)?<div id="ftco-loader"[^>]*>.*?</svg>\s*</div>\n?', re.S)
 
 
@@ -2066,6 +2070,8 @@ def update_nav(mods, pf=None):
         t = NAV_RE.sub(lambda m: m.group(1) + block, s, count=1)
         # 全螢幕載入轉圈：內容本來就在 HTML 裡，轉圈只會讓訪客多等到所有程式載完才看得到頁面
         t = LOADER_RE.sub('', t)
+        # 側欄底部的舊標誌：標誌已改由選單區塊放在最上方
+        t = ASIDE_FOOTER_LOGO_RE.sub('', t)
         # 中文字型子集約 300 KB：預先載入會和畫面需要的 CSS 搶頻寬，首次繪製在慢速網路慢 1 秒以上；
         # 字型已設 font-display: swap，不預載也會先用系統字顯示、載到再換
         t = CJK_PRELOAD_RE.sub('', t)

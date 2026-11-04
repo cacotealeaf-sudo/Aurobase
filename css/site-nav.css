@@ -114,11 +114,6 @@
     #colorlib-main.pg-flush > section:not(.ftco-bread) > .container-fluid { padding-left: 16px !important; padding-right: 16px !important; }
 }
 
-/* 矮螢幕：子選單展開後會碰到固定在底部的標誌，改成接在選單後面 */
-@media (max-height: 880px) {
-    #colorlib-aside .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }
-}
-
 /* 手機：頁首錨點按鈕列可橫向滑動並讓開漢堡選單（nexus.html、solution.html 等） */
 @media (max-width: 991.98px) {
     .btn.fixed-top.text-right { white-space: nowrap; overflow-x: auto; padding-left: 72px; scrollbar-width: none;
@@ -135,9 +130,6 @@
         -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
     .btn.fixed-top.text-right .btn { margin: 0; }
 }
-
-/* 子選單展開時，固定在底部的標誌改接在選單後面，避免蓋到選單 */
-#colorlib-aside:has(.nav-sub:not([hidden])) .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }
 
 /* 手機：右下浮動「免費諮詢」鈕不要蓋到頁尾的版權與聯絡資訊 */
 @media (max-width: 767.98px) {
@@ -211,3 +203,13 @@ html.ss-open, html.ss-open body { overflow: hidden; }
 
 /* 手機版的選單按鈕固定在左上角（top 32px、高 48px），舊版型頁面的麵包屑會被壓住：往下讓出按鈕的高度 */
 @media (max-width: 991.98px) { p.breadcrumbs { padding-top: 28px; } }
+
+/* 側欄最上方的標誌（含小字版），連回首頁 */
+#colorlib-aside .nav-logo { display: block; width: 168px; margin: 0 0 1.6rem; line-height: 0; }
+#colorlib-aside .nav-logo img { display: block; width: 100%; height: auto; }
+#colorlib-aside .nav-logo:focus-visible { outline: 2px solid #E63109; outline-offset: 4px; }
+@media (max-width: 991.98px) {
+    #colorlib-aside .nav-logo { width: 150px; margin-bottom: 1.2rem; }
+    /* 選單打開時收起頁首的錨點按鈕列，否則會蓋住側欄最上方的標誌 */
+    body.offcanvas .btn.fixed-top.text-right { display: none; }
+}
