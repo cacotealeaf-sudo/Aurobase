@@ -927,6 +927,16 @@ def arch_groups(pf):
     return out
 
 
+def mod_relations(mods, shown):
+    """模組彼此的關聯：related 取聯集（A 列了 B 或 B 列了 A 都算），只留畫面上有的模組。"""
+    rel = {x: set() for x in shown}
+    for x in shown:
+        for y in mods[x].get('platform', {}).get('related', []) if x in mods else []:
+            if y in shown and y != x:
+                rel[x].add(y); rel[y].add(x)
+    return rel
+
+
 def arch_html(pf, mods):
     get = overview_mods(pf, mods)
     short = lambda c: re.sub(r'^NEXUS ', '', c)
@@ -935,12 +945,8 @@ def arch_html(pf, mods):
     groups = [(g['name'], live(pf, mods, g['modules'])) for g in arch_groups(pf)]
     groups = [(n, ms) for n, ms in groups if ms]
     shown = {x for _, ms in groups for x in ms}
-    # 關聯：模組彼此的 related 取聯集（A 列了 B 或 B 列了 A 都算），再加上用到它的方案
-    rel = {x: set() for x in shown}
-    for x in shown:
-        for y in mods[x].get('platform', {}).get('related', []) if x in mods else []:
-            if y in shown and y != x:
-                rel[x].add(y); rel[y].add(x)
+    rel = mod_relations(mods, shown)
+    # 再加上用到它的方案
     sol_uses = {}
     for sx in sols:
         used = [k for k in (sx['mod']['platform'].get('related', []) if sx['mod'] else []) if k in mods and not is_solution(mods[k])]
@@ -1291,6 +1297,85 @@ ARROW = ('<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill
          'stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>')
 
 
+HOME_ARCH_CSS = '''<style>
+/* 首頁版平台架構：能力分組一列一組，模組卡撐滿整列（不留空格），Forge 底座橫跨在下 */
+.ha { display: flex; flex-direction: column; gap: 10px; }
+.ha-group { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; }
+.ha .ha-group-name { margin: 0; padding: 14px 0 0; border-top: 2px solid var(--idx-accent); font-size: 15px; font-weight: 700; color: var(--idx-ink); }
+.ha-group-name small { display: block; margin-top: 2px; font-size: 12px; font-weight: 400; color: var(--idx-muted); }
+.ha-mods { display: flex; flex-wrap: wrap; gap: 10px; }
+.idx-page a.ha-mod {
+  flex: 1 1 240px; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px;
+  background: var(--idx-surface); border: 1px solid var(--idx-line-2); transition: border-color .2s, opacity .2s;
+}
+.ha-mod b { font-size: 17px; color: var(--idx-ink); }
+.ha-mod span { font-size: 13px; color: var(--idx-text-2); }
+.ha-mod small { margin-top: 4px; font-size: 12.5px; line-height: 1.7; color: var(--idx-muted); }
+.ha .ha-join { display: flex; align-items: center; gap: 10px; margin: 6px 0 0 160px; font-size: 13px; color: var(--idx-muted); }
+.ha-join::before { content: ""; width: 1px; height: 22px; background: var(--idx-accent); }
+.idx-page a.ha-forge {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 20px; align-items: center; padding: 20px 22px;
+  background: linear-gradient(90deg, rgba(232, 75, 34, .16), rgba(232, 75, 34, .04)); border: 1px solid rgba(232, 75, 34, .55);
+  transition: border-color .2s, opacity .2s;
+}
+.ha-forge-head small { display: block; font-size: 12px; color: var(--idx-accent); }
+.ha-forge-head b { font-size: 20px; color: var(--idx-ink); }
+.ha-forge-head span { margin-left: 8px; font-size: 14px; color: var(--idx-text-2); }
+.ha-forge ol { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: ha; }
+.ha-forge li { flex: 1; counter-increment: ha; padding: 10px 12px; background: rgba(11, 11, 13, .55); font-size: 13.5px; color: var(--idx-ink); }
+.ha-forge li::before { content: counter(ha); margin-right: 8px; font-family: var(--idx-mono); color: var(--idx-accent); }
+.idx-page a.ha-mod:hover, .idx-page a.ha-mod:focus-visible, .idx-page a.ha-forge:hover, .idx-page a.ha-forge:focus-visible { border-color: var(--idx-accent); color: inherit; }
+.ha.is-focus [data-id] { opacity: .32; }
+.ha.is-focus [data-id].is-on { opacity: 1; border-color: var(--idx-accent); }
+.ha .ha-hint { margin: 0 0 4px; font-size: 12.5px; color: var(--idx-muted); }
+@media (hover: none) { .ha-hint { display: none; } }
+@media (max-width: 767.98px) {
+  .ha-group { grid-template-columns: 1fr; }
+  .ha .ha-group-name { padding-top: 10px; }
+  .ha-group-name small { display: inline; margin-left: 8px; }
+  .ha .ha-join { margin-left: 0; }
+  .idx-page a.ha-forge { grid-template-columns: 1fr; }
+  .ha-forge ol { flex-direction: column; }
+}
+</style>'''
+
+HOME_ARCH_JS = ('document.querySelectorAll(".ha").forEach(function(a){var ns=a.querySelectorAll("[data-id]");'
+                'function on(e){var t=e.currentTarget,id=t.getAttribute("data-id"),r=(t.getAttribute("data-rel")||"").split(" ");'
+                'a.classList.add("is-focus");ns.forEach(function(n){var k=n.getAttribute("data-id");n.classList.toggle("is-on",k===id||r.indexOf(k)>-1)})}'
+                'function off(){a.classList.remove("is-focus");ns.forEach(function(n){n.classList.remove("is-on")})}'
+                'ns.forEach(function(n){n.addEventListener("mouseenter",on);n.addEventListener("focus",on);'
+                'n.addEventListener("mouseleave",off);n.addEventListener("blur",off)})});')
+
+
+def home_arch(pf, mods):
+    """首頁的簡化架構圖：能力分組（同側欄）＋ Forge 底座，保留每個模組的一句話介紹；不畫部署框與方案層（下一段就是方案）。"""
+    get = overview_mods(pf, mods)
+    groups = [(g['name'], live(pf, mods, g['modules'])) for g in arch_groups(pf)]
+    groups = [(n, ms) for n, ms in groups if ms]
+    fx = pf['legs'][0]['modules'][0]
+    shown = {x for _, ms in groups for x in ms} | {fx}
+    rel = mod_relations(mods, shown)
+    rel[fx] = shown - {fx}  # 每個模組的 AI 呼叫都經過 Forge
+    for x in shown - {fx}:
+        rel[x].add(fx)
+    tile = lambda x: (f'<a class="ha-mod" href="{get(x)["file"]}" data-id="{x}" data-rel="{" ".join(sorted(rel[x]))}">'
+                      f'<b>{get(x)["code"]}</b><span>{get(x)["name_zh"]}</span><small>{get(x)["what"]}</small></a>')
+    rows = '\n'.join(f'      <div class="ha-group"><p class="ha-group-name">{n}<small>{len(ms)} 個模組</small></p>'
+                     f'<div class="ha-mods">{"".join(tile(x) for x in ms)}</div></div>' for n, ms in groups)
+    f = get(fx)
+    return f'''    {HOME_ARCH_CSS}
+    <div class="ha">
+      <p class="ha-hint">滑過任一模組，會標出和它相連的模組。</p>
+{rows}
+      <p class="ha-join">每一個 AI 呼叫都先經過 Forge</p>
+      <a class="ha-forge" href="{f['file']}" data-id="{fx}" data-rel="{" ".join(sorted(rel[fx]))}">
+        <div class="ha-forge-head"><small>治理底座・所有模組共用</small><b>{f['code']}</b><span>{f['name_zh']}</span></div>
+        <ol><li>檢查權限與政策</li><li>送往核准的模型</li><li>寫入稽核軌跡</li></ol>
+      </a>
+    </div>
+    <script>{HOME_ARCH_JS}</script>'''
+
+
 def home_catalog(mods, pf):
     """首頁的全產品、全服務目錄：平台模組依能力分組、產業解決方案、代理產品、服務。新產品上架會自動出現。"""
     get = overview_mods(pf, mods)
@@ -1322,17 +1407,9 @@ def home_catalog(mods, pf):
                 f'<h3 class="idx-card-title"><a href="{href}" class="idx-card-link"{ext}>{title}</a></h3>'
                 f'<p class="idx-card-desc">{desc}</p><span class="idx-card-cta" aria-hidden="true">{cta}{ARROW}</span></article>')
 
-    legs = []
-    for lg in pf['legs']:
-        slugs = live(pf, mods, lg['modules'])
-        if not slugs:
-            continue
-        links = ''.join(f'<a class="hc-mod" href="{get(x)["file"]}"><b>{get(x)["code"]}</b><span>{get(x)["name_zh"]}</span>'
-                        f'<small>{get(x)["what"]}</small></a>' for x in slugs)
-        legs.append(f'      <div class="hc-leg"><p class="hc-leg-name">{lg["name"]}</p>{links}</div>')
     n = sum(len(live(pf, mods, lg['modules'])) for lg in pf['legs'])
     out = [HOME_BEGIN, sec('01', 'idx-catalog', '自有產品', 'AURO NEXUS AI 治理平台', ('nexus.html', '平台總覽'),
-                           '    <div class="hc-legs">\n' + '\n'.join(legs) + '\n    </div>',
+                           home_arch(pf, mods),
                            '以 Forge 治理底座串起 %d 個模組：每一次 AI 呼叫都經過權限與政策檢查並留下紀錄，可部署於雲端、地端，也可依需求客製。' % n)]
     sols = solution_list(mods, pf)
     if sols:

@@ -711,17 +711,61 @@ body:has(#entryOverlay:not(.closed)) .qf-fab { display: none; }
     </div>
     <div class="idx-rule"></div>
     <p class="hc-intro">以 Forge 治理底座串起 14 個模組：每一次 AI 呼叫都經過權限與政策檢查並留下紀錄，可部署於雲端、地端，也可依需求客製。</p>
-    <div class="hc-legs">
-      <div class="hc-leg"><p class="hc-leg-name">治理底座</p><a class="hc-mod" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span><small>企業內部 AI 的治理閘道：模型路由、知識庫、工具閘道與稽核帳。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">AI 編排</p><a class="hc-mod" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span><small>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">客戶資料</p><a class="hc-mod" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span><small>整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。</small></a><a class="hc-mod" href="nexus-abm.html"><b>NEXUS ABM</b><span>企業客戶帳號經營</span><small>B2B 目標客戶經營引擎：帳號解析、意圖評分、歸因與分群。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">知識</p><a class="hc-mod" href="nexus-insight.html"><b>Insight</b><span>企業知識萃取與治理</span><small>企業文件的知識萃取、審核、檢索與圖譜平台。</small></a><a class="hc-mod" href="nexus-library.html"><b>Library</b><span>個人知識收藏空間</span><small>每位員工的個人知識收藏、標籤與搜尋空間。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">內容與行銷智能</p><a class="hc-mod" href="nexus-mira.html"><b>MIRA</b><span>受監理產業內容產製與審核</span><small>受監理產業的 AI 內容產製、合規檢查與審核平台。</small></a><a class="hc-mod" href="nexus-pulse.html"><b>Pulse</b><span>輿情訊號分析</span><small>外部輿情訊號的批次 AI 分析、告警與成效回算平台。</small></a><a class="hc-mod" href="nexus-geo.html"><b>NEXUS GEO</b><span>生成式搜尋能見度</span><small>量測品牌在生成式搜尋中被提及與引用程度，並提出網站優化建議的平台。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">合規治理</p><a class="hc-mod" href="nexus-saga.html"><b>SAGA</b><span>非結構化資料治理</span><small>金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">生產力</p><a class="hc-mod" href="nexus-ai-office.html"><b>NEXUS AI-Office</b><span>商業文件產製</span><small>依範本產出商業文件、並可線上編修的文件產製平台。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">現代化</p><a class="hc-mod" href="nexus-lisa.html"><b>LISA</b><span>主機程式現代化</span><small>讀取主機原始碼、產出繁體中文規格書的現代化工具。</small></a></div>
-      <div class="hc-leg"><p class="hc-leg-name">安全</p><a class="hc-mod" href="nexus-scanner.html"><b>Scanner</b><span>源碼檢測與弱點掃描</span><small>涵蓋 SAST、DAST、SCA、機密外洩、容器與 IaC 的弱點掃描平台。</small></a><a class="hc-mod" href="nexus-cardea.html"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span><small>TLS 憑證與 SSH 金鑰的盤點、政策檢查、預警與更新自動化。</small></a></div>
+    <style>
+/* 首頁版平台架構：能力分組一列一組，模組卡撐滿整列（不留空格），Forge 底座橫跨在下 */
+.ha { display: flex; flex-direction: column; gap: 10px; }
+.ha-group { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; }
+.ha .ha-group-name { margin: 0; padding: 14px 0 0; border-top: 2px solid var(--idx-accent); font-size: 15px; font-weight: 700; color: var(--idx-ink); }
+.ha-group-name small { display: block; margin-top: 2px; font-size: 12px; font-weight: 400; color: var(--idx-muted); }
+.ha-mods { display: flex; flex-wrap: wrap; gap: 10px; }
+.idx-page a.ha-mod {
+  flex: 1 1 240px; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px;
+  background: var(--idx-surface); border: 1px solid var(--idx-line-2); transition: border-color .2s, opacity .2s;
+}
+.ha-mod b { font-size: 17px; color: var(--idx-ink); }
+.ha-mod span { font-size: 13px; color: var(--idx-text-2); }
+.ha-mod small { margin-top: 4px; font-size: 12.5px; line-height: 1.7; color: var(--idx-muted); }
+.ha .ha-join { display: flex; align-items: center; gap: 10px; margin: 6px 0 0 160px; font-size: 13px; color: var(--idx-muted); }
+.ha-join::before { content: ""; width: 1px; height: 22px; background: var(--idx-accent); }
+.idx-page a.ha-forge {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 20px; align-items: center; padding: 20px 22px;
+  background: linear-gradient(90deg, rgba(232, 75, 34, .16), rgba(232, 75, 34, .04)); border: 1px solid rgba(232, 75, 34, .55);
+  transition: border-color .2s, opacity .2s;
+}
+.ha-forge-head small { display: block; font-size: 12px; color: var(--idx-accent); }
+.ha-forge-head b { font-size: 20px; color: var(--idx-ink); }
+.ha-forge-head span { margin-left: 8px; font-size: 14px; color: var(--idx-text-2); }
+.ha-forge ol { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: ha; }
+.ha-forge li { flex: 1; counter-increment: ha; padding: 10px 12px; background: rgba(11, 11, 13, .55); font-size: 13.5px; color: var(--idx-ink); }
+.ha-forge li::before { content: counter(ha); margin-right: 8px; font-family: var(--idx-mono); color: var(--idx-accent); }
+.idx-page a.ha-mod:hover, .idx-page a.ha-mod:focus-visible, .idx-page a.ha-forge:hover, .idx-page a.ha-forge:focus-visible { border-color: var(--idx-accent); color: inherit; }
+.ha.is-focus [data-id] { opacity: .32; }
+.ha.is-focus [data-id].is-on { opacity: 1; border-color: var(--idx-accent); }
+.ha .ha-hint { margin: 0 0 4px; font-size: 12.5px; color: var(--idx-muted); }
+@media (hover: none) { .ha-hint { display: none; } }
+@media (max-width: 767.98px) {
+  .ha-group { grid-template-columns: 1fr; }
+  .ha .ha-group-name { padding-top: 10px; }
+  .ha-group-name small { display: inline; margin-left: 8px; }
+  .ha .ha-join { margin-left: 0; }
+  .idx-page a.ha-forge { grid-template-columns: 1fr; }
+  .ha-forge ol { flex-direction: column; }
+}
+</style>
+    <div class="ha">
+      <p class="ha-hint">滑過任一模組，會標出和它相連的模組。</p>
+      <div class="ha-group"><p class="ha-group-name">AI 編排<small>1 個模組</small></p><div class="ha-mods"><a class="ha-mod" href="nexus-auro.html" data-id="nexus-auro" data-rel="nexus-ai-office nexus-cdp nexus-forge nexus-insight nexus-mira nexus-pulse"><b>Auro</b><span>AI 任務編排</span><small>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</small></a></div></div>
+      <div class="ha-group"><p class="ha-group-name">客戶資料<small>2 個模組</small></p><div class="ha-mods"><a class="ha-mod" href="nexus-cdp.html" data-id="nexus-cdp" data-rel="nexus-abm nexus-auro nexus-forge nexus-geo nexus-mira nexus-saga"><b>AURA CDP</b><span>客戶數據平台</span><small>整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。</small></a><a class="ha-mod" href="nexus-abm.html" data-id="nexus-abm" data-rel="nexus-cdp nexus-forge nexus-insight"><b>NEXUS ABM</b><span>企業客戶帳號經營</span><small>B2B 目標客戶經營引擎：帳號解析、意圖評分、歸因與分群。</small></a></div></div>
+      <div class="ha-group"><p class="ha-group-name">知識與內容<small>5 個模組</small></p><div class="ha-mods"><a class="ha-mod" href="nexus-insight.html" data-id="nexus-insight" data-rel="nexus-abm nexus-ai-office nexus-auro nexus-forge nexus-geo nexus-library nexus-lisa nexus-pulse nexus-saga"><b>Insight</b><span>企業知識萃取與治理</span><small>企業文件的知識萃取、審核、檢索與圖譜平台。</small></a><a class="ha-mod" href="nexus-library.html" data-id="nexus-library" data-rel="nexus-ai-office nexus-forge nexus-insight"><b>Library</b><span>個人知識收藏空間</span><small>每位員工的個人知識收藏、標籤與搜尋空間。</small></a><a class="ha-mod" href="nexus-mira.html" data-id="nexus-mira" data-rel="nexus-auro nexus-cdp nexus-forge nexus-geo nexus-pulse"><b>MIRA</b><span>受監理產業內容產製與審核</span><small>受監理產業的 AI 內容產製、合規檢查與審核平台。</small></a><a class="ha-mod" href="nexus-pulse.html" data-id="nexus-pulse" data-rel="nexus-auro nexus-forge nexus-geo nexus-insight nexus-mira"><b>Pulse</b><span>輿情訊號分析</span><small>外部輿情訊號的批次 AI 分析、告警與成效回算平台。</small></a><a class="ha-mod" href="nexus-geo.html" data-id="nexus-geo" data-rel="nexus-cdp nexus-forge nexus-insight nexus-mira nexus-pulse"><b>NEXUS GEO</b><span>生成式搜尋能見度</span><small>量測品牌在生成式搜尋中被提及與引用程度，並提出網站優化建議的平台。</small></a></div></div>
+      <div class="ha-group"><p class="ha-group-name">合規與安全<small>3 個模組</small></p><div class="ha-mods"><a class="ha-mod" href="nexus-saga.html" data-id="nexus-saga" data-rel="nexus-cardea nexus-cdp nexus-forge nexus-insight"><b>SAGA</b><span>非結構化資料治理</span><small>金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。</small></a><a class="ha-mod" href="nexus-scanner.html" data-id="nexus-scanner" data-rel="nexus-cardea nexus-forge"><b>Scanner</b><span>源碼檢測與弱點掃描</span><small>涵蓋 SAST、DAST、SCA、機密外洩、容器與 IaC 的弱點掃描平台。</small></a><a class="ha-mod" href="nexus-cardea.html" data-id="nexus-cardea" data-rel="nexus-forge nexus-saga nexus-scanner"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span><small>TLS 憑證與 SSH 金鑰的盤點、政策檢查、預警與更新自動化。</small></a></div></div>
+      <div class="ha-group"><p class="ha-group-name">生產力與現代化<small>2 個模組</small></p><div class="ha-mods"><a class="ha-mod" href="nexus-ai-office.html" data-id="nexus-ai-office" data-rel="nexus-auro nexus-forge nexus-insight nexus-library"><b>NEXUS AI-Office</b><span>商業文件產製</span><small>依範本產出商業文件、並可線上編修的文件產製平台。</small></a><a class="ha-mod" href="nexus-lisa.html" data-id="nexus-lisa" data-rel="nexus-forge nexus-insight"><b>LISA</b><span>主機程式現代化</span><small>讀取主機原始碼、產出繁體中文規格書的現代化工具。</small></a></div></div>
+      <p class="ha-join">每一個 AI 呼叫都先經過 Forge</p>
+      <a class="ha-forge" href="nexus-forge.html" data-id="nexus-forge" data-rel="nexus-abm nexus-ai-office nexus-auro nexus-cardea nexus-cdp nexus-geo nexus-insight nexus-library nexus-lisa nexus-mira nexus-pulse nexus-saga nexus-scanner">
+        <div class="ha-forge-head"><small>治理底座・所有模組共用</small><b>Forge</b><span>治理化 AI 閘道</span></div>
+        <ol><li>檢查權限與政策</li><li>送往核准的模型</li><li>寫入稽核軌跡</li></ol>
+      </a>
     </div>
+    <script>document.querySelectorAll(".ha").forEach(function(a){var ns=a.querySelectorAll("[data-id]");function on(e){var t=e.currentTarget,id=t.getAttribute("data-id"),r=(t.getAttribute("data-rel")||"").split(" ");a.classList.add("is-focus");ns.forEach(function(n){var k=n.getAttribute("data-id");n.classList.toggle("is-on",k===id||r.indexOf(k)>-1)})}function off(){a.classList.remove("is-focus");ns.forEach(function(n){n.classList.remove("is-on")})}ns.forEach(function(n){n.addEventListener("mouseenter",on);n.addEventListener("focus",on);n.addEventListener("mouseleave",off);n.addEventListener("blur",off)})});</script>
   </section>
 
 
