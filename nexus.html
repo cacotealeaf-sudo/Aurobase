@@ -988,24 +988,124 @@
         <div id="colorlib-main">
 <!-- NEXUS-OVERVIEW:BEGIN（由 tools/build-module-pages.py 產生）-->
 <div class="nm-overview" style="--m-deep:#2B3A8C;--m-bright:#4659C9;--m-soft:#8FA0F0;--m-tint:#ECEFFC;--m-ink1:#0C0F1F;--m-ink2:#141A35">
-            <section id="platform" class="nm-hero nm-section nm-dark">
+            <section id="platform" class="nm-hero nm-hero-arch nm-section nm-dark">
                 <div class="container-fluid px-3 px-md-5">
-                    <div class="row align-items-center">
+                    <div class="row align-items-end">
                         <div class="col-lg-7">
                             <h1 class="eyebrow">AURO NEXUS｜AI 治理平台・企業 AI 平台</h1>
                             <p class="hero-slogan">企業用 AI<br>要<em>用得了，也交代得清楚</em></p>
+                        </div>
+                        <div class="col-lg-5 mt-4 mt-lg-0">
                             <p class="hero-sub">AURO NEXUS 是奧洛的企業 AI 平台。所有模組共用同一個治理底座：AI 請求先檢查、再推論、全程留痕；模型可以只用地端，資料可以不離開機房。從 AI Agent、客戶數據、企業知識庫到資安與憑證管理，每一個模組都在同一套規則下運作。</p>
-                            <p class="hero-tagline">先從一個模組開始，之後新增的模組都共用同一套權限、模型與稽核軌跡。</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約平台簡報</a>
-                                <a href="#modules" class="btn-nm-outline">看全部模組</a>
+                                <a href="#finder" class="btn-nm-outline">依需求找模組</a>
                             </div>
-                            <a class="nm-modes" href="#deploy" aria-label="部署方式：雲端、地端、客製"><span>雲端</span><span>地端</span><span>客製</span></a>
-                        </div>
-                        <div class="col-lg-5 mt-5 mt-lg-0">
-                            <aside class="nm-summary"><h2>重點摘要</h2><dl><dt>是什麼</dt><dd>以治理底座串起 14 個模組的企業 AI 平台。</dd><dt>治理底座</dt><dd><a href="nexus-forge.html">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。</dd><dt>部署</dt><dd>可雲、可地、可客製：公有雲台灣區域、企業自有機房或隔離網路，流程與規則可依需求調整。</dd><dt>適用</dt><dd>金融、醫療、公部門等受監理產業，以及重視資料主權的企業。</dd></dl></aside>
                         </div>
                     </div>
+                    <style>
+/* 平台架構圖（tools/build-module-pages.py 產生） */
+.nm-hero-arch { padding: 4.5rem 0 3.4rem; }
+.nm-hero-arch .hero-slogan { margin-bottom: 0; }
+.nm-hero-arch .hero-sub { font-size: 0.95rem; line-height: 1.85; margin: 0; }
+.nm-hero-arch .hero-actions { margin-top: 1.3rem; }
+.arch { margin: 2.6rem 0 0; }
+.arch-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 0.3rem; }
+.arch-read { font-size: 0.9rem; color: rgba(255,255,255,0.62); line-height: 1.8; margin: 0 0 1.1rem; max-width: 72ch; }
+.arch-deploy { border: 1.5px dashed color-mix(in srgb, var(--m-soft) 60%, transparent); border-radius: 16px; padding: 1.1rem 1.2rem 1.3rem; }
+.arch-deploy-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.8rem; margin: 0 0 1.2rem; }
+.arch-deploy-head b { font-size: 0.95rem; color: #fff; }
+.arch-deploy-head > span { font-size: 0.85rem; color: rgba(255,255,255,0.62); }
+.arch-deploy-head ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; }
+.arch-deploy-head li { font-size: 12px; color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.1rem 0.7rem; line-height: 1.7; }
+.nm-hero .arch-deploy-head a { font-size: 12px; color: var(--m-soft); text-decoration: underline; text-underline-offset: 3px; margin-left: auto; }
+.arch-layer-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; margin: 0 0 0.6rem; }
+.arch-layer-head b { font-size: 0.95rem; color: #fff; }
+.arch-layer-head span { font-size: 0.82rem; color: rgba(255,255,255,0.58); }
+.arch-sols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; }
+.arch-groups { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: 0.8rem; }
+.arch-group-name { font-size: 0.85rem; font-weight: 700; color: var(--m-soft); border-top: 2px solid var(--m-soft); padding-top: 0.5rem; margin: 0 0 0.5rem; }
+.nm-hero a.arch-node { display: block; border: 1px solid rgba(255,255,255,0.13); border-radius: 9px; background: rgba(255,255,255,0.045); color: #fff; text-decoration: none;
+  transition: opacity 0.2s, border-color 0.2s, background 0.2s; }
+.nm-hero a.arch-node:hover { color: #fff; text-decoration: none; border-color: var(--m-soft); }
+.nm-hero a.arch-node:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.arch-sol { padding: 0.65rem 0.8rem 0.7rem; }
+.arch-sol small { display: block; font-size: 12px; color: var(--m-soft); }
+.arch-sol b { display: block; font-size: 0.95rem; font-weight: 700; margin: 0.1rem 0 0.2rem; line-height: 1.45; }
+.arch-sol span { display: block; font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.arch-mod { padding: 0.5rem 0.65rem; margin-bottom: 0.45rem; }
+.arch-mod b { display: block; font-size: 0.92rem; line-height: 1.4; }
+.arch-mod span { display: block; font-size: 12px; color: rgba(255,255,255,0.62); line-height: 1.55; margin-top: 0.1rem; }
+.arch-join { display: flex; align-items: center; gap: 0.7rem; margin: 0.9rem 0; font-size: 12px; color: rgba(255,255,255,0.6); }
+.arch-join::before, .arch-join::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.15); }
+.arch-join i { width: 8px; height: 8px; border-right: 1.5px solid var(--m-soft); border-bottom: 1.5px solid var(--m-soft); transform: rotate(45deg); margin-top: -4px; flex: none; }
+.arch-join.is-up i { transform: rotate(-135deg); margin: 4px 0 0; }
+.arch-info { min-height: 1.6em; font-size: 0.85rem; color: rgba(255,255,255,0.78); line-height: 1.7; margin: 0.5rem 0 0; }
+@media (hover: none) { .arch-info { display: none; } }
+.arch-forge { border-radius: 12px; padding: 1rem 1.2rem 1.15rem; background: linear-gradient(135deg, var(--m-deep), var(--m-bright)); }
+.arch-forge-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; margin: 0 0 0.8rem; }
+.nm-hero .arch-forge-head a { font-size: 1.05rem; font-weight: 700; color: #fff; text-decoration: none; }
+.nm-hero .arch-forge-head a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.arch-forge-head span { font-size: 0.85rem; color: rgba(255,255,255,0.78); }
+.arch-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem 2rem; counter-reset: arch; }
+.arch-steps li { position: relative; counter-increment: arch; padding-left: 2rem; }
+.arch-steps li::before { content: counter(arch); position: absolute; left: 0; top: 0.05rem; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: #fff; color: var(--m-deep);
+  font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.arch-steps li:not(:last-child)::after { content: ''; position: absolute; right: -1.25rem; top: 0.45rem; width: 8px; height: 8px; border-top: 1.5px solid rgba(255,255,255,0.7); border-right: 1.5px solid rgba(255,255,255,0.7); transform: rotate(45deg); }
+.arch-steps b { display: block; font-size: 0.95rem; color: #fff; line-height: 1.5; }
+.arch-steps span { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.7; margin-top: 0.15rem; }
+.arch.is-focus a.arch-node { opacity: 0.3; }
+.arch.is-focus a.arch-node.is-on { opacity: 1; border-color: var(--m-soft); background: color-mix(in srgb, var(--m-soft) 16%, transparent); }
+.arch.is-focus a.arch-node.is-self { border-color: #fff; }
+.nm-define .nm-summary { background: #fff; border: 1px solid color-mix(in srgb, var(--m-deep) 16%, transparent); margin-bottom: 1rem; }
+.nm-define .nm-summary h2 { color: var(--m-deep); }
+.nm-define .nm-summary dt { color: var(--m-deep); }
+.nm-define .nm-summary dd { color: #3a3a3a; }
+.nm-define .nm-summary dd a { color: var(--m-deep); }
+.leg-more > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--m-deep); padding: 0.6rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--m-deep) 25%, transparent); border-radius: 999px; background: #fff; margin-bottom: 1.2rem; }
+.leg-more > summary::-webkit-details-marker { display: none; }
+.leg-more > summary::after { content: '+'; font-size: 1.1rem; line-height: 1; }
+.leg-more[open] > summary::after { content: '−'; }
+@media (max-width: 1199.98px) { .arch-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 767.98px) {
+  .arch-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arch-steps { grid-template-columns: 1fr; }
+  .arch-steps li:not(:last-child)::after { right: auto; left: 0.5rem; top: auto; bottom: -0.55rem; transform: rotate(135deg); }
+  .arch-deploy { padding: 0.9rem 0.8rem 1rem; }
+  .nm-hero .arch-deploy-head a { margin-left: 0; }
+}
+</style>
+                    <figure class="arch" aria-labelledby="arch-title">
+                        <h2 class="arch-title" id="arch-title">AURO NEXUS 平台架構</h2>
+                        <p class="arch-read">由上往下讀：產業解決方案由能力模組組成，每個模組的 AI 呼叫都先經過 Forge 治理底座；整套平台部署在您選的環境裡，14 個模組共用同一套權限、模型與稽核軌跡。</p>
+                        <div class="arch-deploy">
+                            <div class="arch-deploy-head"><b>部署範圍</b><span>同一套平台與規則，三種放置方式：</span><ul><li>公有雲台灣區域</li><li>企業自有機房</li><li>隔離網路</li></ul><a href="#deploy">看部署方式</a></div>
+                            <div class="arch-layer-head"><b>產業解決方案</b><span>把模組組合成特定產業的流程；流程與既有系統介接可依需求客製</span></div>
+                            <div class="arch-sols"><a class="arch-node arch-sol" href="solution-police-record.html" data-id="solution-police-record" data-rel="nexus-forge nexus-ai-office" data-info="警詢筆錄 AI 輔助：把詢問錄音整理成筆錄草稿，並檢查構成要件與法定程序的解決方案。用到 Forge、AI-Office。"><small>公部門</small><b>AI 警詢筆錄</b><span>用到 Forge、AI-Office</span></a><a class="arch-node arch-sol" href="solution-telesales.html" data-id="solution-telesales" data-rel="nexus-forge nexus-mira nexus-cdp" data-info="電話與視訊銷售對話智能：電話行銷與視訊銷售的對話分析、話術提示與品質稽核方案。用到 Forge、MIRA、AURA CDP。"><small>金融保險</small><b>電銷對話智能</b><span>用到 Forge、MIRA、AURA CDP</span></a><a class="arch-node arch-sol" href="ai-companion.html" data-id="ai-companion" data-rel="" data-info="AI 智慧語伴：以 AI 語音陪伴長者、提供用藥提醒與關懷報告，協助社工掌握狀況的解決方案。"><small>社福長照</small><b>AI 智慧語伴</b></a><a class="arch-node arch-sol" href="solution-ai-ocr.html" data-id="solution-ai-ocr" data-rel="nexus-insight nexus-saga nexus-forge nexus-auro" data-info="AI OCR 智慧文件辨識：免訓練擷取各種文件欄位，手寫與信心不足的轉人工覆核的 AI OCR 解決方案。用到 Insight、SAGA、Forge、Auro。"><small>跨產業</small><b>AI OCR 文件辨識</b><span>用到 Insight、SAGA、Forge、Auro</span></a><a class="arch-node arch-sol" href="solution-digital-trail.html" data-id="solution-digital-trail" data-rel="nexus-cdp" data-info="數位軌跡行銷資料整合：把網站與 App 行為軌跡整理成行銷標籤，交付資料倉儲並提供查詢 API 的方案。用到 AURA CDP。"><small>數位行銷</small><b>數位軌跡整合</b><span>用到 AURA CDP</span></a></div>
+                            <p class="arch-join is-up"><i aria-hidden="true"></i>方案由下方的能力模組組成</p>
+                            <div class="arch-layer-head"><b>能力模組</b><span>先從一個模組開始，之後新增的模組都共用同一套權限、模型與稽核軌跡。</span></div>
+                            <div class="arch-groups" style="--n:5"><div class="arch-group"><p class="arch-group-name">AI 編排</p><a class="arch-node arch-mod" href="nexus-auro.html" data-id="nexus-auro" data-rel="nexus-ai-office nexus-cdp nexus-insight nexus-mira nexus-pulse solution-ai-ocr" data-info="Auro AI 任務編排：AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。相連：AI-Office、AURA CDP、Insight、MIRA、Pulse、AI OCR 文件辨識。"><b>Auro</b><span>AI 任務編排</span></a></div><div class="arch-group"><p class="arch-group-name">客戶資料</p><a class="arch-node arch-mod" href="nexus-cdp.html" data-id="nexus-cdp" data-rel="nexus-abm nexus-auro nexus-geo nexus-mira nexus-saga solution-digital-trail solution-telesales" data-info="AURA CDP 客戶數據平台：整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。相連：ABM、Auro、GEO、MIRA、SAGA、數位軌跡整合、電銷對話智能。"><b>AURA CDP</b><span>客戶數據平台</span></a><a class="arch-node arch-mod" href="nexus-abm.html" data-id="nexus-abm" data-rel="nexus-cdp nexus-insight" data-info="NEXUS ABM 企業客戶帳號經營：B2B 目標客戶經營引擎：帳號解析、意圖評分、歸因與分群。相連：AURA CDP、Insight。"><b>ABM</b><span>企業客戶帳號經營</span></a></div><div class="arch-group"><p class="arch-group-name">知識與內容</p><a class="arch-node arch-mod" href="nexus-insight.html" data-id="nexus-insight" data-rel="nexus-abm nexus-ai-office nexus-auro nexus-geo nexus-library nexus-lisa nexus-pulse nexus-saga solution-ai-ocr" data-info="Insight 企業知識萃取與治理：企業文件的知識萃取、審核、檢索與圖譜平台。相連：ABM、AI-Office、Auro、GEO、Library、LISA、Pulse、SAGA、AI OCR 文件辨識。"><b>Insight</b><span>企業知識萃取與治理</span></a><a class="arch-node arch-mod" href="nexus-library.html" data-id="nexus-library" data-rel="nexus-ai-office nexus-insight" data-info="Library 個人知識收藏空間：每位員工的個人知識收藏、標籤與搜尋空間。相連：AI-Office、Insight。"><b>Library</b><span>個人知識收藏空間</span></a><a class="arch-node arch-mod" href="nexus-mira.html" data-id="nexus-mira" data-rel="nexus-auro nexus-cdp nexus-geo nexus-pulse solution-telesales" data-info="MIRA 受監理產業內容產製與審核：受監理產業的 AI 內容產製、合規檢查與審核平台。相連：Auro、AURA CDP、GEO、Pulse、電銷對話智能。"><b>MIRA</b><span>受監理產業內容產製與審核</span></a><a class="arch-node arch-mod" href="nexus-pulse.html" data-id="nexus-pulse" data-rel="nexus-auro nexus-geo nexus-insight nexus-mira" data-info="Pulse 輿情訊號分析：外部輿情訊號的批次 AI 分析、告警與成效回算平台。相連：Auro、GEO、Insight、MIRA。"><b>Pulse</b><span>輿情訊號分析</span></a><a class="arch-node arch-mod" href="nexus-geo.html" data-id="nexus-geo" data-rel="nexus-cdp nexus-insight nexus-mira nexus-pulse" data-info="NEXUS GEO 生成式搜尋能見度：量測品牌在生成式搜尋中被提及與引用程度，並提出網站優化建議的平台。相連：AURA CDP、Insight、MIRA、Pulse。"><b>GEO</b><span>生成式搜尋能見度</span></a></div><div class="arch-group"><p class="arch-group-name">合規與安全</p><a class="arch-node arch-mod" href="nexus-saga.html" data-id="nexus-saga" data-rel="nexus-cardea nexus-cdp nexus-insight solution-ai-ocr" data-info="SAGA 非結構化資料治理：金融機構的非結構化資料治理平台，治理控制由伺服器強制執行。相連：Cardea、AURA CDP、Insight、AI OCR 文件辨識。"><b>SAGA</b><span>非結構化資料治理</span></a><a class="arch-node arch-mod" href="nexus-scanner.html" data-id="nexus-scanner" data-rel="nexus-cardea" data-info="Scanner 源碼檢測與弱點掃描：涵蓋 SAST、DAST、SCA、機密外洩、容器與 IaC 的弱點掃描平台。相連：Cardea。"><b>Scanner</b><span>源碼檢測與弱點掃描</span></a><a class="arch-node arch-mod" href="nexus-cardea.html" data-id="nexus-cardea" data-rel="nexus-saga nexus-scanner" data-info="Cardea SSL 憑證管理與機器身分治理：TLS 憑證與 SSH 金鑰的盤點、政策檢查、預警與更新自動化。相連：SAGA、Scanner。"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span></a></div><div class="arch-group"><p class="arch-group-name">生產力與現代化</p><a class="arch-node arch-mod" href="nexus-ai-office.html" data-id="nexus-ai-office" data-rel="nexus-auro nexus-insight nexus-library solution-police-record" data-info="NEXUS AI-Office 商業文件產製：依範本產出商業文件、並可線上編修的文件產製平台。相連：Auro、Insight、Library、AI 警詢筆錄。"><b>AI-Office</b><span>商業文件產製</span></a><a class="arch-node arch-mod" href="nexus-lisa.html" data-id="nexus-lisa" data-rel="nexus-insight" data-info="LISA 主機程式現代化：讀取主機原始碼、產出繁體中文規格書的現代化工具。相連：Insight。"><b>LISA</b><span>主機程式現代化</span></a></div></div>
+                            <p class="arch-info" aria-live="polite">滑過任一模組或方案，會標出和它相連的部分。</p>
+                            <p class="arch-join"><i aria-hidden="true"></i>每一個 AI 呼叫都先經過 Forge</p>
+                            <div class="arch-forge">
+                                <div class="arch-forge-head"><a href="nexus-forge.html">Forge 治理化 AI 閘道</a><span>治理底座：所有模組共用</span></div>
+                                <ol class="arch-steps">
+                                    <li><b>先檢查權限與政策</b><span>不符合的請求在這裡就被擋下，不會到達模型。</span></li>
+                                    <li><b>送往核准的模型</b><span>地端模型或經核准的雲端模型，可以設定只用地端。</span></li>
+                                    <li><b>寫入稽核軌跡</b><span>以雜湊鏈保護；證據包附驗證工具，稽核人員不必連上平台就能查驗。</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </figure>
+                    <script>(function(){var a=document.querySelector('.arch');if(!a)return;
+var nodes=a.querySelectorAll('a.arch-node'),info=a.querySelector('.arch-info'),def=info?info.textContent:'';
+function on(n){var me=n.getAttribute('data-id'),rel=(n.getAttribute('data-rel')||'').split(' ');a.classList.add('is-focus');
+nodes.forEach(function(x){var id=x.getAttribute('data-id');x.classList.toggle('is-on',id===me||rel.indexOf(id)>-1);x.classList.toggle('is-self',x===n);});
+if(info)info.textContent=n.getAttribute('data-info')||def;}
+function off(){a.classList.remove('is-focus');nodes.forEach(function(x){x.classList.remove('is-on','is-self');});if(info)info.textContent=def;}
+nodes.forEach(function(n){n.addEventListener('mouseenter',function(){on(n);});n.addEventListener('focus',function(){on(n);});
+n.addEventListener('mouseleave',off);n.addEventListener('blur',off);});})();</script>
                 </div>
             </section>
 
@@ -1017,7 +1117,7 @@
                             <h2 class="section-heading">什麼是 AURO NEXUS？</h2>
                             <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AURO NEXUS</b> 是奧洛（Aurobase）推出的<b>AI 治理平台</b>，讓企業在自有環境裡導入生成式 AI，並保留可稽核的證據。</p><p>平台以 <b>Forge</b> 為治理底座：各模組的 AI 呼叫都經 Forge 做權限與政策檢查、送往經核准的模型（可限定地端），並寫入雜湊鏈稽核軌跡。其上是 AI 編排、客戶資料、知識、內容與行銷智能、合規治理、生產力、現代化與安全等能力，共 14 個模組，可依需求分階段導入。</p></div></div>
-                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul><li><b>金融與受監理產業</b><span>要在私有或離線環境導入 AI，並對主管機關交代得清楚。</span></li><li><b>資訊長與數位轉型負責人</b><span>要用一個平台收斂各部門的 AI 使用，不再各自採購、各自串接。</span></li><li><b>資安、法遵與稽核</b><span>要看得到每一次 AI 使用的權限、資料與核准紀錄。</span></li></ul></div></div>
+                                <div class="col-lg-5 mb-4"><aside class="nm-summary"><h2>重點摘要</h2><dl><dt>是什麼</dt><dd>以治理底座串起 14 個模組的企業 AI 平台。</dd><dt>治理底座</dt><dd><a href="nexus-forge.html">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。</dd><dt>部署</dt><dd>可雲、可地、可客製：公有雲台灣區域、企業自有機房或隔離網路，流程與規則可依需求調整。</dd><dt>適用</dt><dd>金融、醫療、公部門等受監理產業，以及重視資料主權的企業。</dd></dl></aside><div class="audience"><h3>適合誰</h3><ul><li><b>金融與受監理產業</b><span>要在私有或離線環境導入 AI，並對主管機關交代得清楚。</span></li><li><b>資訊長與數位轉型負責人</b><span>要用一個平台收斂各部門的 AI 使用，不再各自採購、各自串接。</span></li><li><b>資安、法遵與稽核</b><span>要看得到每一次 AI 使用的權限、資料與核准紀錄。</span></li></ul></div></div>
                             </div>
                         </div>
                     </div>
@@ -1051,9 +1151,10 @@
                 <div class="container-fluid px-3 px-md-0">
                     <div class="row justify-content-start">
                         <div class="col-md-12">
-                            <p class="section-label">ARCHITECTURE</p>
-                            <h2 class="section-heading">一個治理底座，14 個模組</h2>
-                            <p class="section-intro">上層的每一個模組各自解決一類問題；下層的治理底座讓它們共用同一套權限、模型與稽核軌跡。</p>
+                            <p class="section-label">MODULES</p>
+                            <h2 class="section-heading">14 個模組各做什麼</h2>
+                            <p class="section-intro">架構圖裡每一個模組的一句話說明，依能力分組；點名稱進入產品頁。</p>
+                            <details class="leg-more"><summary>展開全部模組的說明</summary>
                             <div class="row">
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">AI 編排</p><p class="leg-text">有預算、有閘門、可人工審核的 AI Agent。</p><a class="leg-mod" href="nexus-auro.html"><b>Auro</b><span>AI 任務編排</span><small>AI 任務的編排與執行環境，內建預算、治理閘門與人工審核。</small></a></div></div>
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">客戶資料</p><p class="leg-text">身分解析、單一客戶視圖與 B2B 帳號經營。</p><a class="leg-mod" href="nexus-cdp.html"><b>AURA CDP</b><span>客戶數據平台</span><small>整合客戶資料、建立單一客戶檔案，並驅動分群與旅程的客戶數據平台。</small></a><a class="leg-mod" href="nexus-abm.html"><b>NEXUS ABM</b><span>企業客戶帳號經營</span><small>B2B 目標客戶經營引擎：帳號解析、意圖評分、歸因與分群。</small></a></div></div>
@@ -1065,6 +1166,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">安全</p><p class="leg-text">源碼檢測、弱點掃描與憑證治理。</p><a class="leg-mod" href="nexus-scanner.html"><b>Scanner</b><span>源碼檢測與弱點掃描</span><small>涵蓋 SAST、DAST、SCA、機密外洩、容器與 IaC 的弱點掃描平台。</small></a><a class="leg-mod" href="nexus-cardea.html"><b>Cardea</b><span>SSL 憑證管理與機器身分治理</span><small>TLS 憑證與 SSH 金鑰的盤點、政策檢查、預警與更新自動化。</small></a></div></div>
                             </div>
                             <div class="leg-base"><p class="leg-name">治理底座</p><p class="leg-text">所有 AI 呼叫的必經入口與稽核軌跡。所有模組的 AI 呼叫都經過這一層。</p><a class="leg-mod" href="nexus-forge.html"><b>Forge</b><span>治理化 AI 閘道</span><small>企業內部 AI 的治理閘道：模型路由、知識庫、工具閘道與稽核帳。</small></a></div>
+                            </details>
                         </div>
                     </div>
                 </div>

@@ -824,28 +824,195 @@ def live(pf, mods, slugs):
     return [s for s in slugs if get(s)]
 
 
+# ── 平台總覽第一屏的架構圖：部署範圍包住「產業解決方案 → 能力模組 → Forge 治理底座」三層 ──
+# 上層分組與側欄選單相同（_nav.json groups），Forge 獨立成底座；模組與方案的關聯取自各 JSON 的 platform.related。
+
+ARCH_CSS = """<style>
+/* 平台架構圖（tools/build-module-pages.py 產生） */
+.nm-hero-arch { padding: 4.5rem 0 3.4rem; }
+.nm-hero-arch .hero-slogan { margin-bottom: 0; }
+.nm-hero-arch .hero-sub { font-size: 0.95rem; line-height: 1.85; margin: 0; }
+.nm-hero-arch .hero-actions { margin-top: 1.3rem; }
+.arch { margin: 2.6rem 0 0; }
+.arch-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 0.3rem; }
+.arch-read { font-size: 0.9rem; color: rgba(255,255,255,0.62); line-height: 1.8; margin: 0 0 1.1rem; max-width: 72ch; }
+.arch-deploy { border: 1.5px dashed color-mix(in srgb, var(--m-soft) 60%, transparent); border-radius: 16px; padding: 1.1rem 1.2rem 1.3rem; }
+.arch-deploy-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.8rem; margin: 0 0 1.2rem; }
+.arch-deploy-head b { font-size: 0.95rem; color: #fff; }
+.arch-deploy-head > span { font-size: 0.85rem; color: rgba(255,255,255,0.62); }
+.arch-deploy-head ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; }
+.arch-deploy-head li { font-size: 12px; color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.1rem 0.7rem; line-height: 1.7; }
+.nm-hero .arch-deploy-head a { font-size: 12px; color: var(--m-soft); text-decoration: underline; text-underline-offset: 3px; margin-left: auto; }
+.arch-layer-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; margin: 0 0 0.6rem; }
+.arch-layer-head b { font-size: 0.95rem; color: #fff; }
+.arch-layer-head span { font-size: 0.82rem; color: rgba(255,255,255,0.58); }
+.arch-sols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; }
+.arch-groups { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: 0.8rem; }
+.arch-group-name { font-size: 0.85rem; font-weight: 700; color: var(--m-soft); border-top: 2px solid var(--m-soft); padding-top: 0.5rem; margin: 0 0 0.5rem; }
+.nm-hero a.arch-node { display: block; border: 1px solid rgba(255,255,255,0.13); border-radius: 9px; background: rgba(255,255,255,0.045); color: #fff; text-decoration: none;
+  transition: opacity 0.2s, border-color 0.2s, background 0.2s; }
+.nm-hero a.arch-node:hover { color: #fff; text-decoration: none; border-color: var(--m-soft); }
+.nm-hero a.arch-node:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.arch-sol { padding: 0.65rem 0.8rem 0.7rem; }
+.arch-sol small { display: block; font-size: 12px; color: var(--m-soft); }
+.arch-sol b { display: block; font-size: 0.95rem; font-weight: 700; margin: 0.1rem 0 0.2rem; line-height: 1.45; }
+.arch-sol span { display: block; font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.arch-mod { padding: 0.5rem 0.65rem; margin-bottom: 0.45rem; }
+.arch-mod b { display: block; font-size: 0.92rem; line-height: 1.4; }
+.arch-mod span { display: block; font-size: 12px; color: rgba(255,255,255,0.62); line-height: 1.55; margin-top: 0.1rem; }
+.arch-join { display: flex; align-items: center; gap: 0.7rem; margin: 0.9rem 0; font-size: 12px; color: rgba(255,255,255,0.6); }
+.arch-join::before, .arch-join::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.15); }
+.arch-join i { width: 8px; height: 8px; border-right: 1.5px solid var(--m-soft); border-bottom: 1.5px solid var(--m-soft); transform: rotate(45deg); margin-top: -4px; flex: none; }
+.arch-join.is-up i { transform: rotate(-135deg); margin: 4px 0 0; }
+.arch-info { min-height: 1.6em; font-size: 0.85rem; color: rgba(255,255,255,0.78); line-height: 1.7; margin: 0.5rem 0 0; }
+@media (hover: none) { .arch-info { display: none; } }
+.arch-forge { border-radius: 12px; padding: 1rem 1.2rem 1.15rem; background: linear-gradient(135deg, var(--m-deep), var(--m-bright)); }
+.arch-forge-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; margin: 0 0 0.8rem; }
+.nm-hero .arch-forge-head a { font-size: 1.05rem; font-weight: 700; color: #fff; text-decoration: none; }
+.nm-hero .arch-forge-head a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.arch-forge-head span { font-size: 0.85rem; color: rgba(255,255,255,0.78); }
+.arch-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem 2rem; counter-reset: arch; }
+.arch-steps li { position: relative; counter-increment: arch; padding-left: 2rem; }
+.arch-steps li::before { content: counter(arch); position: absolute; left: 0; top: 0.05rem; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: #fff; color: var(--m-deep);
+  font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.arch-steps li:not(:last-child)::after { content: ''; position: absolute; right: -1.25rem; top: 0.45rem; width: 8px; height: 8px; border-top: 1.5px solid rgba(255,255,255,0.7); border-right: 1.5px solid rgba(255,255,255,0.7); transform: rotate(45deg); }
+.arch-steps b { display: block; font-size: 0.95rem; color: #fff; line-height: 1.5; }
+.arch-steps span { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.7; margin-top: 0.15rem; }
+.arch.is-focus a.arch-node { opacity: 0.3; }
+.arch.is-focus a.arch-node.is-on { opacity: 1; border-color: var(--m-soft); background: color-mix(in srgb, var(--m-soft) 16%, transparent); }
+.arch.is-focus a.arch-node.is-self { border-color: #fff; }
+.nm-define .nm-summary { background: #fff; border: 1px solid color-mix(in srgb, var(--m-deep) 16%, transparent); margin-bottom: 1rem; }
+.nm-define .nm-summary h2 { color: var(--m-deep); }
+.nm-define .nm-summary dt { color: var(--m-deep); }
+.nm-define .nm-summary dd { color: #3a3a3a; }
+.nm-define .nm-summary dd a { color: var(--m-deep); }
+.leg-more > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--m-deep); padding: 0.6rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--m-deep) 25%, transparent); border-radius: 999px; background: #fff; margin-bottom: 1.2rem; }
+.leg-more > summary::-webkit-details-marker { display: none; }
+.leg-more > summary::after { content: '+'; font-size: 1.1rem; line-height: 1; }
+.leg-more[open] > summary::after { content: '−'; }
+@media (max-width: 1199.98px) { .arch-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 767.98px) {
+  .arch-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arch-steps { grid-template-columns: 1fr; }
+  .arch-steps li:not(:last-child)::after { right: auto; left: 0.5rem; top: auto; bottom: -0.55rem; transform: rotate(135deg); }
+  .arch-deploy { padding: 0.9rem 0.8rem 1rem; }
+  .nm-hero .arch-deploy-head a { margin-left: 0; }
+}
+</style>"""
+
+ARCH_JS = """(function(){var a=document.querySelector('.arch');if(!a)return;
+var nodes=a.querySelectorAll('a.arch-node'),info=a.querySelector('.arch-info'),def=info?info.textContent:'';
+function on(n){var me=n.getAttribute('data-id'),rel=(n.getAttribute('data-rel')||'').split(' ');a.classList.add('is-focus');
+nodes.forEach(function(x){var id=x.getAttribute('data-id');x.classList.toggle('is-on',id===me||rel.indexOf(id)>-1);x.classList.toggle('is-self',x===n);});
+if(info)info.textContent=n.getAttribute('data-info')||def;}
+function off(){a.classList.remove('is-focus');nodes.forEach(function(x){x.classList.remove('is-on','is-self');});if(info)info.textContent=def;}
+nodes.forEach(function(n){n.addEventListener('mouseenter',function(){on(n);});n.addEventListener('focus',function(){on(n);});
+n.addEventListener('mouseleave',off);n.addEventListener('blur',off);});})();"""
+
+
+def arch_groups(pf):
+    """架構圖上層的能力分組：沿用側欄選單的 groups，但治理底座（legs[0]）拉出來當底層。"""
+    nav = json.loads(read(os.path.join(SRC, '_nav.json')))
+    item = next((it for it in nav['items'] if it.get('type') == 'platform'), {})
+    base = pf['legs'][0]['name']
+    by = {lg['name']: lg for lg in pf['legs']}
+    out, used = [], {base}
+    for g in item.get('groups', []):
+        legs = [ln for ln in g['legs'] if ln in by and ln != base]
+        used.update(g['legs'])
+        if legs:
+            out.append({'name': g['name'] if len(legs) > 1 else legs[0], 'modules': [x for ln in legs for x in by[ln]['modules']]})
+    out += [{'name': lg['name'], 'modules': lg['modules']} for lg in pf['legs'] if lg['name'] not in used]
+    return out
+
+
+def arch_html(pf, mods):
+    get = overview_mods(pf, mods)
+    short = lambda c: re.sub(r'^NEXUS ', '', c)
+    sols = solution_list(mods, pf)
+    sol_id = lambda x: re.sub(r'\.html$', '', x['file'])
+    groups = [(g['name'], live(pf, mods, g['modules'])) for g in arch_groups(pf)]
+    groups = [(n, ms) for n, ms in groups if ms]
+    shown = {x for _, ms in groups for x in ms}
+    # 關聯：模組彼此的 related 取聯集（A 列了 B 或 B 列了 A 都算），再加上用到它的方案
+    rel = {x: set() for x in shown}
+    for x in shown:
+        for y in mods[x].get('platform', {}).get('related', []) if x in mods else []:
+            if y in shown and y != x:
+                rel[x].add(y); rel[y].add(x)
+    sol_uses = {}
+    for sx in sols:
+        used = [k for k in (sx['mod']['platform'].get('related', []) if sx['mod'] else []) if k in mods and not is_solution(mods[k])]
+        sol_uses[sol_id(sx)] = used
+        for k in used:
+            if k in rel:
+                rel[k].add(sol_id(sx))
+    forge = get(pf['legs'][0]['modules'][0])
+
+    def sol_tile(sx):
+        used = sol_uses[sol_id(sx)]
+        names = '、'.join(short(get(k)['code']) for k in used)
+        info = '%s：%s%s' % (sx['name'], plain(sx['what']), ('用到 ' + names + '。') if names else '')
+        return (f'<a class="arch-node arch-sol" href="{sx["file"]}" data-id="{sol_id(sx)}" data-rel="{" ".join(used)}" data-info="{attr(info)}">'
+                f'<small>{sx["industry"]}</small><b>{sx["nav"]}</b>' + (f'<span>用到 {names}</span>' if names else '') + '</a>')
+
+    def mod_tile(x):
+        m = get(x)
+        names = '、'.join(short(get(y)['code']) if y in shown else next((s['nav'] for s in sols if sol_id(s) == y), y) for y in sorted(rel[x], key=lambda y: (y not in shown, y)))
+        info = '%s %s：%s%s' % (m['code'], m['name_zh'], plain(m['what']), ('相連：' + names + '。') if names else '')
+        return (f'<a class="arch-node arch-mod" href="{m["file"]}" data-id="{x}" data-rel="{" ".join(sorted(rel[x]))}" data-info="{attr(info)}">'
+                f'<b>{short(m["code"])}</b><span>{m["name_zh"]}</span></a>')
+
+    dep = '、'.join(['公有雲台灣區域', '企業自有機房', '隔離網路'])
+    cols = ''.join(f'<div class="arch-group"><p class="arch-group-name">{n}</p>{"".join(mod_tile(x) for x in ms)}</div>' for n, ms in groups)
+    n_mod = len(shown) + 1
+    return f'''
+                    {ARCH_CSS}
+                    <figure class="arch" aria-labelledby="arch-title">
+                        <h2 class="arch-title" id="arch-title">AURO NEXUS 平台架構</h2>
+                        <p class="arch-read">由上往下讀：產業解決方案由能力模組組成，每個模組的 AI 呼叫都先經過 Forge 治理底座；整套平台部署在您選的環境裡，{n_mod} 個模組共用同一套權限、模型與稽核軌跡。</p>
+                        <div class="arch-deploy">
+                            <div class="arch-deploy-head"><b>部署範圍</b><span>同一套平台與規則，三種放置方式：</span><ul>{''.join('<li>%s</li>' % x for x in dep.split('、'))}</ul><a href="#deploy">看部署方式</a></div>
+                            <div class="arch-layer-head"><b>產業解決方案</b><span>把模組組合成特定產業的流程；流程與既有系統介接可依需求客製</span></div>
+                            <div class="arch-sols">{''.join(sol_tile(sx) for sx in sols)}</div>
+                            <p class="arch-join is-up"><i aria-hidden="true"></i>方案由下方的能力模組組成</p>
+                            <div class="arch-layer-head"><b>能力模組</b><span>{pf['tagline']}</span></div>
+                            <div class="arch-groups" style="--n:{len(groups)}">{cols}</div>
+                            <p class="arch-info" aria-live="polite">滑過任一模組或方案，會標出和它相連的部分。</p>
+                            <p class="arch-join"><i aria-hidden="true"></i>每一個 AI 呼叫都先經過 Forge</p>
+                            <div class="arch-forge">
+                                <div class="arch-forge-head"><a href="{forge['file']}">{forge['code']} {forge['name_zh']}</a><span>治理底座：所有模組共用</span></div>
+                                <ol class="arch-steps">
+                                    <li><b>先檢查權限與政策</b><span>不符合的請求在這裡就被擋下，不會到達模型。</span></li>
+                                    <li><b>送往核准的模型</b><span>地端模型或經核准的雲端模型，可以設定只用地端。</span></li>
+                                    <li><b>寫入稽核軌跡</b><span>以雜湊鏈保護；證據包附驗證工具，稽核人員不必連上平台就能查驗。</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </figure>
+                    <script>{ARCH_JS}</script>'''
+
+
 def overview_html(pf, mods):
     get = overview_mods(pf, mods)
     summary = ''.join(f'<dt>{k}</dt><dd>{v}</dd>' for k, v in pf['summary'])
     out = [f'''
-            <section id="platform" class="nm-hero nm-section nm-dark">
+            <section id="platform" class="nm-hero nm-hero-arch nm-section nm-dark">
                 <div class="container-fluid px-3 px-md-5">
-                    <div class="row align-items-center">
+                    <div class="row align-items-end">
                         <div class="col-lg-7">
                             <h1 class="eyebrow">{pf['h1']}</h1>
                             <p class="hero-slogan">{pf['slogan']}</p>
+                        </div>
+                        <div class="col-lg-5 mt-4 mt-lg-0">
                             <p class="hero-sub">{pf['sub']}</p>
-                            <p class="hero-tagline">{pf['tagline']}</p>
                             <div class="hero-actions">
                                 <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約平台簡報</a>
-                                <a href="#modules" class="btn-nm-outline">看全部模組</a>
+                                <a href="#finder" class="btn-nm-outline">依需求找模組</a>
                             </div>
-                            {DEPLOY_STRIP}
                         </div>
-                        <div class="col-lg-5 mt-5 mt-lg-0">
-                            <aside class="nm-summary"><h2>重點摘要</h2><dl>{summary}</dl></aside>
-                        </div>
-                    </div>
+                    </div>{arch_html(pf, mods)}
                 </div>
             </section>
 ''']
@@ -854,7 +1021,7 @@ def overview_html(pf, mods):
     out.append(section('nm-define', 'DEFINITION', df['q'],
         f'''                            <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer">{''.join('<p>%s</p>' % x for x in df['a'])}</div></div>
-                                <div class="col-lg-5 mb-4"><div class="audience"><h3>適合誰</h3><ul>{aud}</ul></div></div>
+                                <div class="col-lg-5 mb-4"><aside class="nm-summary"><h2>重點摘要</h2><dl>{summary}</dl></aside><div class="audience"><h3>適合誰</h3><ul>{aud}</ul></div></div>
                             </div>'''))
 
     if pf.get('deploy'):
@@ -868,11 +1035,13 @@ def overview_html(pf, mods):
                                 <div class="col-xl-3 col-lg-4 col-md-6 mb-4"><div class="leg-card"><p class="leg-name">{lg['name']}</p><p class="leg-text">{lg['text']}</p>{''.join(mod_link(s) for s in live(pf, mods, lg['modules']))}</div></div>'''
         for lg in pf['legs'][1:] if live(pf, mods, lg['modules']))
     n = sum(len(live(pf, mods, lg['modules'])) for lg in pf['legs'])
-    out.append(section('nm-legs', 'ARCHITECTURE', f'一個治理底座，{n} 個模組',
-        f'''                            <div class="row">{legs}
+    out.append(section('nm-legs', 'MODULES', f'{n} 個模組各做什麼',
+        f'''                            <details class="leg-more"><summary>展開全部模組的說明</summary>
+                            <div class="row">{legs}
                             </div>
-                            <div class="leg-base"><p class="leg-name">{base['name']}</p><p class="leg-text">{base['text']}所有模組的 AI 呼叫都經過這一層。</p>{''.join(mod_link(s) for s in live(pf, mods, base['modules']))}</div>''',
-        intro='上層的每一個模組各自解決一類問題；下層的治理底座讓它們共用同一套權限、模型與稽核軌跡。', sid='modules'))
+                            <div class="leg-base"><p class="leg-name">{base['name']}</p><p class="leg-text">{base['text']}所有模組的 AI 呼叫都經過這一層。</p>{''.join(mod_link(s) for s in live(pf, mods, base['modules']))}</div>
+                            </details>''',
+        intro='架構圖裡每一個模組的一句話說明，依能力分組；點名稱進入產品頁。', sid='modules'))
 
     sols = solution_list(mods, pf)
     if sols:
