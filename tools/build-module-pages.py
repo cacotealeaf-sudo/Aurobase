@@ -455,9 +455,9 @@ def head(m):
     <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/line-seed-font.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css?v={css_version('inquiry-modal.css')}">
     <link rel="stylesheet" href="css/iconoir-subset.css">
-    <link rel="stylesheet" href="css/nexus-module.css">
+    <link rel="stylesheet" href="css/nexus-module.css?v={css_version('nexus-module.css')}">
 
 '''
 
@@ -509,9 +509,10 @@ def section(cls, label, heading, inner, intro=None, dark=False, sid=None):
 
 
 def cards(items, render, cols='col-lg-4 col-md-6 mb-4'):
+    """cols 可以是一個字串（每張卡相同），或每張卡各自的欄寬清單。"""
     out = ['                            <div class="row">']
-    for it in items:
-        out.append(f'                                <div class="{cols}">{render(it)}</div>')
+    for i, it in enumerate(items):
+        out.append(f'                                <div class="{cols if isinstance(cols, str) else cols[i]}">{render(it)}</div>')
     out.append('                            </div>')
     return '\n'.join(out)
 
@@ -578,8 +579,11 @@ def body(m, mods):
         intro=p.get('intro')))
 
     c = m['capabilities']
-    # 3 欄排到最後一列只剩一張時（4、7 張），大螢幕改排 4 欄
-    cap_cols = 'col-xl-3 col-lg-4 col-md-6 mb-4' if len(c['cards']) % 3 == 1 and len(c['cards']) > 3 else 'col-lg-4 col-md-6 mb-4'
+    # 最多 3 欄（4 欄時每欄只剩約 11 個字寬，太擠）；3 欄排不滿時，最後幾張改 2 欄，不留單獨一張：
+    # 4 張 → 2+2、7 張 → 3+2+2、5 張 → 3+2
+    n_cap = len(c['cards'])
+    wide = {1: 4, 2: 2}.get(n_cap % 3, 0) if n_cap > 2 else n_cap
+    cap_cols = ['col-lg-6 col-md-6 mb-4' if i >= n_cap - wide else 'col-lg-4 col-md-6 mb-4' for i in range(n_cap)]
     out.append(section('nm-cap', 'CAPABILITIES', c['heading'],
         cards(c['cards'], cols=cap_cols, render=lambda it: f'''
                                     <div class="cap-card"><div class="icon-wrap"><i class="iconoir-{it['icon']}"></i></div>
@@ -882,6 +886,10 @@ ARCH_CSS = """<style>
 .arch.is-focus a.arch-node.is-on { opacity: 1; border-color: var(--m-soft); background: color-mix(in srgb, var(--m-soft) 16%, transparent); }
 .arch.is-focus a.arch-node.is-self { border-color: #fff; }
 .nm-define .nm-summary { background: #fff; border: 1px solid color-mix(in srgb, var(--m-deep) 16%, transparent); margin-bottom: 1rem; }
+/* 「適合誰」橫跨整列、三個對象並排，左欄定義下方不再留一大塊空白 */
+.audience.is-wide { padding: 1.6rem 1.8rem; }
+.audience.is-wide ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem 2.2rem; }
+.audience.is-wide li, .audience.is-wide li:first-child { border-top: 0; padding: 0 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--m-deep) 22%, transparent); }
 .nm-define .nm-summary h2 { color: var(--m-deep); }
 .nm-define .nm-summary dt { color: var(--m-deep); }
 .nm-define .nm-summary dd { color: #3a3a3a; }
@@ -1027,8 +1035,9 @@ def overview_html(pf, mods):
     out.append(section('nm-define', 'DEFINITION', df['q'],
         f'''                            <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer">{''.join('<p>%s</p>' % x for x in df['a'])}</div></div>
-                                <div class="col-lg-5 mb-4"><aside class="nm-summary"><h2>重點摘要</h2><dl>{summary}</dl></aside><div class="audience"><h3>適合誰</h3><ul>{aud}</ul></div></div>
-                            </div>'''))
+                                <div class="col-lg-5 mb-4"><aside class="nm-summary"><h2>重點摘要</h2><dl>{summary}</dl></aside></div>
+                            </div>
+                            <div class="audience is-wide"><h3>適合誰</h3><ul>{aud}</ul></div>'''))
 
     if pf.get('deploy'):
         out.append(deploy_section(pf['deploy'], pf.get('deploy_intro', DEPLOY_INTRO)))
@@ -2049,10 +2058,27 @@ ASIDE_FOOTER_LOGO_RE = re.compile(r'[ \t]*<div class="colorlib-footer">\s*<div c
 LOADER_RE = re.compile(r'[ \t]*(?:<!-- loader -->\s*)?<div id="ftco-loader"[^>]*>.*?</svg>\s*</div>\n?', re.S)
 
 
-def site_nav_version():
-    """css/site-nav.css 內容的短雜湊，當作連結的版本參數。"""
+def css_version(name):
+    """css/<name> 內容的短雜湊，當作連結的版本參數。"""
     import hashlib
-    return hashlib.sha1(io.open(os.path.join(ROOT, 'css', 'site-nav.css'), 'rb').read()).hexdigest()[:8]
+    return hashlib.sha1(io.open(os.path.join(ROOT, 'css', name), 'rb').read()).hexdigest()[:8]
+
+
+def site_nav_version():
+    return css_version('site-nav.css')
+
+
+# 連結帶內容雜湊的共用樣式表：GitHub Pages 的 CSS 快取 10 分鐘，改了樣式後頁面才不會配到舊 CSS。
+# 字型與圖示子集（line-seed-font.css、iconoir-subset.css）由 CI 在產生頁面之後才重建，不放進來，否則雜湊會落後一版。
+VERSIONED_CSS = ('nexus-module.css', 'aurora-theme.css', 'inquiry-modal.css')
+
+
+def css_link_versions(t, prefix=''):
+    """把 VERSIONED_CSS 的 <link> 換成帶目前雜湊的版本（已帶舊雜湊的也更新）。"""
+    for name in VERSIONED_CSS:
+        href = '%scss/%s?v=%s' % (prefix, name, css_version(name))
+        t = re.sub(r'href="(?:\.\./)?css/%s(?:\?v=[0-9a-f]+)?"' % re.escape(name), lambda x: 'href="%s"' % href, t)
+    return t
 
 
 def update_nav(mods, pf=None):
@@ -2080,6 +2106,7 @@ def update_nav(mods, pf=None):
         t, n = re.subn(r'<link rel="stylesheet" href="(?:\.\./)?css/site-nav\.css(?:\?v=[0-9a-f]+)?">', lambda x: link, t, count=1)
         if not n and '</head>' in t:
             t = t.replace('</head>', '    %s\n  </head>' % link, 1)
+        t = css_link_versions(t, prefix)
         if t != s:
             io.open(p, 'w', encoding='utf-8').write(t)
             changed.append(os.path.relpath(p, ROOT))

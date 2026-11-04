@@ -6,6 +6,7 @@
 import glob
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -301,7 +302,10 @@ class EditorTest(SiteCopy):
                                          headers={'Content-Type': 'application/json'})
             out = json.loads(urllib.request.urlopen(req).read())
             self.assertEqual(out['errors'], [])
-            self.assertIn('href="/site/css/nexus-module.css"', out['html'])
+            # 共用樣式表帶內容雜湊（?v=…）；預覽伺服器取檔時忽略查詢字串
+            mo = re.search(r'href="/site/(css/nexus-module\.css\?v=[0-9a-f]{8})"', out['html'])
+            self.assertIsNotNone(mo)
+            self.assertEqual(urllib.request.urlopen('http://127.0.0.1:%d/site/%s' % (port, mo.group(1))).status, 200)
             self.assertNotIn('googletagmanager', out['html'])
             page = urllib.request.urlopen('http://127.0.0.1:%d/site/nexus-forge.html' % port).read().decode('utf-8')
             self.assertNotIn('googletagmanager', page)

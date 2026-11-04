@@ -45,7 +45,7 @@
 
     
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css?v=023ead92">
 	<!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -212,9 +212,9 @@
     .dsc .dsc-wrap { padding: 3rem 0; max-width: 1100px; }
     .ftco-section.dsc { padding: 4.5em 0; }
     .ftco-section.dsc.rs-product { padding-top: 0; }
-    .rs-product .dsc-wrap { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 3.8rem; }
+    .rs-product .dsc-wrap { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 4.6rem; }
     .dsc h2 { font-size: 2rem; font-weight: 700; color: #28282c; margin-bottom: 0.9rem; line-height: 1.3; }
-    .dsc h3 { font-size: 1.15rem; font-weight: 700; color: #28282c; margin: 2.6rem 0 1rem; }
+    .dsc h3 { font-size: 1.15rem; font-weight: 700; color: #28282c; margin: 3.2rem 0 1.2rem; }
     .rs-h4 { font-size: 1rem; font-weight: 700; color: #28282c; margin: 1.6rem 0 0.8rem; }
     .rs-vendor { font-size: 0.9rem; color: #6b6b70; margin: 0 0 0.3rem; }
     .dsc-lead { font-size: 1.02rem; color: #4a4a4a; line-height: 1.9; max-width: 68ch; margin-bottom: 0; }
@@ -314,8 +314,8 @@
     .rs-device .mini.s { background: #d8d8dd; width: 80%; margin: 0; }
 
     /* 可查證的事實 */
-    .rs-proof { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem 2rem; }
-    .rs-proof li { border-top: 1px solid rgba(0,0,0,0.12); padding-top: 0.9rem; }
+    .rs-proof { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 2.4rem; }
+    .rs-proof li { border-top: 1px solid rgba(0,0,0,0.12); padding-top: 1.1rem; }
     .rs-proof p { font-size: 0.95rem; line-height: 1.8; color: #28282c; margin: 0; }
 
     /* 摺疊的功能清單 */
@@ -365,6 +365,8 @@
     #rs-why.ftco-section { padding-top: 3.2em; }
     #rs-why .dsc-wrap { padding-top: 0; }
     @media (max-width: 767.98px) { #rs-why.ftco-section { padding-top: 2.2em; } }
+    /* 資料來源小字：.rs-proof p、.rs-now p 的權重比 .rs-src 高，原本被蓋成 15–17px 深色字且沒有間距 */
+    .dsc p.rs-src { font-size: 12px; line-height: 1.7; color: #8a8a90; margin-top: 0.6rem; }
     </style>
   </head>
   <body>

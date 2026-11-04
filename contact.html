@@ -44,7 +44,7 @@
 
     
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/aurora-theme.css">
+    <link rel="stylesheet" href="css/aurora-theme.css?v=72b75c74">
     <style>
 /* ══════════════════════════════════════════════
    CONTACT PAGE — Scoped Styles
@@ -85,15 +85,15 @@
 
 .ct-form {
   border: 1px solid var(--idx-line); background: var(--idx-surface);
-  padding: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;
+  padding: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px;
 }
 .ct-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .ct-field.is-full { grid-column: 1 / -1; }
 .ct-field > label, .ct-field legend {
-  font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted);
+  font-size: 13px; color: var(--idx-text-2);
   margin: 0; padding: 0; width: auto;
 }
-.ct-field legend { margin-bottom: 8px; }
+.ct-field legend { margin-bottom: 12px; }
 .ct-field fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .ct-req { color: var(--idx-accent); }
 .ct-opt { font-size: 12px; font-weight: 400; color: var(--idx-muted); }
@@ -109,10 +109,10 @@
 .idx-page .ct-form .form-control.is-invalid { border-color: #ff6b6b; }
 
 /* 諮詢類型 — checkboxes rendered as toggle chips; ids/names are read by js/qform.js */
-.ct-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.ct-chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .ct-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .ct-chip label {
-  display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 0; padding: 0 14px;
+  display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 0; padding: 0 16px; white-space: nowrap;
   border: 1px solid var(--idx-line-2); background: var(--idx-bg);
   font-size: 14px; color: var(--idx-text-2); cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
@@ -164,7 +164,7 @@
 
 @media (max-width: 576px) {
   .ct-form { grid-template-columns: 1fr; padding: 24px; }
-  .ct-chips { grid-template-columns: 1fr 1fr; }
+  .ct-chip label { white-space: normal; }
   .idx-page .btn-form { width: 100%; justify-content: center; }
 }
 </style>

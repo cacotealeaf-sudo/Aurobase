@@ -329,9 +329,9 @@
     <link rel="stylesheet" href="css/line-seed-font.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/inquiry-modal.css">
+    <link rel="stylesheet" href="css/inquiry-modal.css?v=023ead92">
     <link rel="stylesheet" href="css/iconoir-subset.css">
-    <link rel="stylesheet" href="css/nexus-module.css">
+    <link rel="stylesheet" href="css/nexus-module.css?v=136acc88">
 
     <style>
     /* NEXUS 專屬樣式 */
@@ -1053,6 +1053,10 @@
 .arch.is-focus a.arch-node.is-on { opacity: 1; border-color: var(--m-soft); background: color-mix(in srgb, var(--m-soft) 16%, transparent); }
 .arch.is-focus a.arch-node.is-self { border-color: #fff; }
 .nm-define .nm-summary { background: #fff; border: 1px solid color-mix(in srgb, var(--m-deep) 16%, transparent); margin-bottom: 1rem; }
+/* 「適合誰」橫跨整列、三個對象並排，左欄定義下方不再留一大塊空白 */
+.audience.is-wide { padding: 1.6rem 1.8rem; }
+.audience.is-wide ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem 2.2rem; }
+.audience.is-wide li, .audience.is-wide li:first-child { border-top: 0; padding: 0 0 0 1rem; border-left: 2px solid color-mix(in srgb, var(--m-deep) 22%, transparent); }
 .nm-define .nm-summary h2 { color: var(--m-deep); }
 .nm-define .nm-summary dt { color: var(--m-deep); }
 .nm-define .nm-summary dd { color: #3a3a3a; }
@@ -1112,8 +1116,9 @@ n.addEventListener('mouseleave',off);n.addEventListener('blur',off);});})();</sc
                             <h2 class="section-heading">什麼是 AURO NEXUS？</h2>
                             <div class="row">
                                 <div class="col-lg-7 mb-4"><div class="define-answer"><p><b>AURO NEXUS</b> 是奧洛（Aurobase）推出的<b>AI 治理平台</b>，讓企業在自有環境裡導入生成式 AI，並保留可稽核的證據。</p><p>平台以 <b>Forge</b> 為治理底座：各模組的 AI 呼叫都經 Forge 做權限與政策檢查、送往經核准的模型（可限定地端），並寫入雜湊鏈稽核軌跡。其上是 AI 編排、客戶資料、知識、內容與行銷智能、合規治理、生產力、現代化與安全等能力，共 14 個模組，可依需求分階段導入。</p></div></div>
-                                <div class="col-lg-5 mb-4"><aside class="nm-summary"><h2>重點摘要</h2><dl><dt>是什麼</dt><dd>以治理底座串起 14 個模組的企業 AI 平台。</dd><dt>治理底座</dt><dd><a href="nexus-forge.html">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。</dd><dt>部署</dt><dd>可雲、可地、可客製：公有雲台灣區域、企業自有機房或隔離網路，流程與規則可依需求調整。</dd><dt>適用</dt><dd>金融、醫療、公部門等受監理產業，以及重視資料主權的企業。</dd></dl></aside><div class="audience"><h3>適合誰</h3><ul><li><b>金融與受監理產業</b><span>要在私有或離線環境導入 AI，並對主管機關交代得清楚。</span></li><li><b>資訊長與數位轉型負責人</b><span>要用一個平台收斂各部門的 AI 使用，不再各自採購、各自串接。</span></li><li><b>資安、法遵與稽核</b><span>要看得到每一次 AI 使用的權限、資料與核准紀錄。</span></li></ul></div></div>
+                                <div class="col-lg-5 mb-4"><aside class="nm-summary"><h2>重點摘要</h2><dl><dt>是什麼</dt><dd>以治理底座串起 14 個模組的企業 AI 平台。</dd><dt>治理底座</dt><dd><a href="nexus-forge.html">Forge</a>：權限與政策檢查、模型路由、可離線驗證的稽核軌跡。</dd><dt>部署</dt><dd>可雲、可地、可客製：公有雲台灣區域、企業自有機房或隔離網路，流程與規則可依需求調整。</dd><dt>適用</dt><dd>金融、醫療、公部門等受監理產業，以及重視資料主權的企業。</dd></dl></aside></div>
                             </div>
+                            <div class="audience is-wide"><h3>適合誰</h3><ul><li><b>金融與受監理產業</b><span>要在私有或離線環境導入 AI，並對主管機關交代得清楚。</span></li><li><b>資訊長與數位轉型負責人</b><span>要用一個平台收斂各部門的 AI 使用，不再各自採購、各自串接。</span></li><li><b>資安、法遵與稽核</b><span>要看得到每一次 AI 使用的權限、資料與核准紀錄。</span></li></ul></div>
                         </div>
                     </div>
                 </div>
