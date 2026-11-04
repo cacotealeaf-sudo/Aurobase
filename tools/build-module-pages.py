@@ -1676,10 +1676,36 @@ def today():
 # ── 全站左側選單：所有頁面（含部落格文章與產品頁外框）共用同一份結構 ──
 
 NAV_BEGIN, NAV_END = '<!-- SITE-NAV:BEGIN（由 tools/build-module-pages.py 依 _nav.json 產生）-->', '<!-- SITE-NAV:END -->'
-NAV_TOGGLE_JS = ("<script>document.querySelectorAll('.nav-sub-toggle').forEach(function(b){b.addEventListener('click',function(){"
-                 "var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);"
-                 "document.getElementById(b.getAttribute('aria-controls')).hidden=!o;});});</script>")
+NAV_TOGGLE_JS = ("<script>(function(){var m=window.matchMedia('(max-width: 991.98px)').matches;"
+                 "document.querySelectorAll('.nav-sub-toggle').forEach(function(b){var u=document.getElementById(b.getAttribute('aria-controls'));"
+                 "if(m){b.setAttribute('aria-expanded','false');u.hidden=true;}"   # 手機：選單窄又長，預設收合
+                 "b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);u.hidden=!o;});});})();</script>")
 NAV_RE = re.compile(r'(<nav id="colorlib-main-menu"[^>]*>\s*)(?:' + re.escape(NAV_BEGIN) + r'.*?' + re.escape(NAV_END) + r'|<ul>.*?</ul>)', re.S)
+
+
+def nav_groups(nav_item, pf):
+    """選單用的產品分組：_nav.json groups 把 _platform.json 的 legs 合併成較少的組；沒列到的 leg 自成一組。"""
+    by_name = {lg['name']: lg for lg in pf['legs']}
+    groups, used = [], set()
+    for g in nav_item.get('groups', []):
+        slugs = [s for ln in g['legs'] if ln in by_name for s in by_name[ln]['modules']]
+        used.update(ln for ln in g['legs'] if ln in by_name)
+        if slugs:
+            groups.append({'name': g['name'], 'modules': slugs})
+    groups += [{'name': lg['name'], 'modules': lg['modules']} for lg in pf['legs'] if lg['name'] not in used]
+    return groups
+
+
+def nav_sub_link(href, cur, title, sub):
+    """子選單的一列：粗體名稱 + 灰色說明，整列可點。"""
+    return '<a href="%s"%s><b>%s</b><span>%s</span></a>' % (href, cur, title, sub)
+
+
+def nav_toggle(label, sub_id, expanded):
+    """整列都是展開鈕（點文字也會展開），不再和連結搶同一列；要進總覽頁走子選單第一項。"""
+    return ('<button type="button" class="nav-sub-toggle" aria-expanded="%s" aria-controls="%s">'
+            '<span class="nav-label">%s</span><span class="nav-caret" aria-hidden="true"></span></button>'
+            % ('true' if expanded else 'false', sub_id, label))
 
 
 def nav_html(page, prefix, pf, mods):
@@ -1691,41 +1717,36 @@ def nav_html(page, prefix, pf, mods):
         if it.get('type') == 'platform':
             here = page == 'nexus.html' or page.startswith('nexus-')
             cur = lambda f: ' aria-current="page"' if f == page else ''
-            legs = []
-            for lg in pf['legs']:
-                slugs = live(pf, mods, lg['modules'])
+            groups = []
+            for g in nav_groups(it, pf):
+                slugs = live(pf, mods, g['modules'])
                 if slugs:
                     # 選單空間有限：拿掉「NEXUS 」前綴（ABM、GEO、AI-Office），頁面本身的名稱不變
-                    links = ''.join('<a href="%s%s"%s>%s</a>' % (prefix, get(s)['file'], cur(get(s)['file']), re.sub(r'^NEXUS ', '', get(s)['code'])) for s in slugs)
-                    legs.append('<li class="nav-leg"><span class="nav-leg-name">%s</span><span class="nav-leg-links">%s</span></li>' % (lg['name'], links))
+                    links = ''.join(nav_sub_link(prefix + get(s)['file'], cur(get(s)['file']),
+                                                 re.sub(r'^NEXUS ', '', get(s)['code']), get(s)['name_zh']) for s in slugs)
+                    groups.append('<li class="nav-leg"><span class="nav-leg-name">%s</span><div class="nav-leg-links">%s</div></li>' % (g['name'], links))
             out.append(
-                '<li class="has-sub%s"><div class="nav-row"><a href="%s%s">%s</a>'
-                '<button type="button" class="nav-sub-toggle" aria-expanded="%s" aria-controls="nav-sub-platform" '
-                'aria-label="展開%s的產品">▾</button></div>'
-                '<ul class="nav-sub" id="nav-sub-platform"%s><li class="nav-all"><a href="%snexus.html#platform"%s>%s</a></li>%s</ul></li>'
-                % (' active' if here else '', prefix, it['href'], it['label'], 'true' if here else 'false', it['label'],
-                   '' if here else ' hidden', prefix, cur('nexus.html'), it['overview_label'], ''.join(legs)))
+                '<li class="has-sub%s">%s<ul class="nav-sub" id="nav-sub-platform"%s>'
+                '<li class="nav-all"><a href="%snexus.html#platform"%s>%s</a></li>%s</ul></li>'
+                % (' active' if here else '', nav_toggle(it['label'], 'nav-sub-platform', here), '' if here else ' hidden',
+                   prefix, cur('nexus.html'), it['overview_label'], ''.join(groups)))
         elif it.get('type') == 'solutions':
             sols = solution_list(mods, pf)
             here = page.startswith('solution-') or page in [x['file'] for x in sols]
             cur = lambda f: ' aria-current="page"' if f == page else ''
-            groups = {}
-            for x in sols:
-                groups.setdefault(x['industry'], []).append(x)
-            rows = ''.join('<li class="nav-leg"><span class="nav-leg-name">%s</span><span class="nav-leg-links">%s</span></li>'
-                           % (ind, ''.join('<a href="%s%s"%s>%s</a>' % (prefix, x['file'], cur(x['file']), x['nav']) for x in xs))
-                           for ind, xs in groups.items())
+            # 方案數少、每個產業多半只有一個：不分組，一列一個方案，產業寫在名稱後面
+            rows = ''.join(nav_sub_link(prefix + x['file'], cur(x['file']), x['nav'], x['industry']) for x in sols)
             out.append(
-                '<li class="has-sub%s"><div class="nav-row"><a href="%s%s">%s</a>'
-                '<button type="button" class="nav-sub-toggle" aria-expanded="%s" aria-controls="nav-sub-solutions" '
-                'aria-label="展開%s">▾</button></div><ul class="nav-sub" id="nav-sub-solutions"%s>%s</ul></li>'
-                % (' active' if here else '', prefix, it['href'], it['label'], 'true' if here else 'false', it['label'],
-                   '' if here else ' hidden', rows))
+                '<li class="has-sub%s">%s<ul class="nav-sub" id="nav-sub-solutions"%s>'
+                '<li class="nav-all"><a href="%s%s">%s</a></li><li class="nav-leg"><div class="nav-leg-links">%s</div></li></ul></li>'
+                % (' active' if here else '', nav_toggle(it['label'], 'nav-sub-solutions', here), '' if here else ' hidden',
+                   prefix, it['href'], it.get('overview_label', '全部方案'), rows))
         elif it.get('external'):
             out.append('<li><a href="%s" target="_blank" rel="noopener">%s<span class="nav-ext" aria-hidden="true">↗</span></a></li>'
                        % (it['href'], it['label']))
         else:
-            out.append('<li%s><a href="%s%s">%s</a></li>' % (' class="active"' if it['href'] == page else '', prefix, it['href'], it['label']))
+            cls = ' '.join(c for c in ['active' if it['href'] == page else '', 'nav-pin' if it.get('mobile_pin') else ''] if c)
+            out.append('<li%s><a href="%s%s">%s</a></li>' % (' class="%s"' % cls if cls else '', prefix, it['href'], it['label']))
     out.append('</ul>')
     search = ('<button type="button" class="nav-search-btn" aria-haspopup="dialog">'
               '<span aria-hidden="true">⌕</span> 搜尋產品與服務</button>'

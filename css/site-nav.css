@@ -1,42 +1,84 @@
-/* 全站左側選單的「AI 治理平台」產品子選單（由 tools/build-module-pages.py 產生選單結構） */
+/* 全站左側選單（結構由 tools/build-module-pages.py 依 _nav.json 產生）
+   「AI 治理平台」「產業解決方案」整列是展開鈕；要進總覽頁走子選單第一項。 */
 #colorlib-aside { overflow-y: auto; scrollbar-width: thin; }
-/* 有子選單的項目：連結維持行內排版，高度與其他項目一致；展開鈕是置於文字後的小箭頭 */
-#colorlib-aside #colorlib-main-menu .nav-row { display: block; }
+
+/* 主選單：字級比舊版 28px 收斂一點，和子選單的層級落差不要太大 */
+#colorlib-aside #colorlib-main-menu > ul > li { font-size: 24px; line-height: 1.45; }
+#colorlib-aside #colorlib-main-menu > ul > li > a { padding: 8px 0; }
+#colorlib-aside #colorlib-main-menu > ul > li > a:after { bottom: 5px; }
+
+/* 展開鈕：整列可點，高度至少 44px，文字和箭頭兩端對齊 */
 #colorlib-aside #colorlib-main-menu .nav-sub-toggle {
-    display: inline-block; vertical-align: middle; width: 26px; height: 26px; margin: -4px 0 0 0.3rem; padding: 0;
-    border: 0; border-radius: 50%; background: transparent; color: #9a9aa0; font-size: 0; line-height: 0; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+    width: 100%; min-height: 44px; margin: 0; padding: 6px 0; border: 0; background: transparent;
+    font: inherit; color: #28282c; text-align: left; cursor: pointer; white-space: nowrap;
+}
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle .nav-label { position: relative; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle .nav-label::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: #ff4816;
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover .nav-label::after,
+#colorlib-aside #colorlib-main-menu > ul > li.active > .nav-sub-toggle .nav-label::after { transform: scaleX(1); }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover .nav-caret,
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle[aria-expanded="true"] .nav-caret { color: #E63109; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:focus { outline: none; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:focus-visible .nav-label { outline: 2px solid #E63109; outline-offset: 4px; }
+/* 箭頭：40px 的圓形點擊區，展開時轉成向上 */
+#colorlib-aside #colorlib-main-menu .nav-caret {
+    flex: none; width: 40px; height: 40px; margin-right: -8px; border-radius: 50%; color: #8a8a90; position: relative;
     transition: background 0.2s, color 0.2s;
 }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle::before {
-    content: ''; display: block; width: 7px; height: 7px; margin: 7px auto 0;
-    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.25s, margin 0.25s;
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover .nav-caret { background: #f6f1ee; }
+#colorlib-aside #colorlib-main-menu .nav-caret::before {
+    content: ''; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; margin: -7px 0 0 -4.5px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg);
+    transition: transform 0.25s, margin 0.25s;
 }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle[aria-expanded="true"]::before { transform: rotate(-135deg); margin-top: 11px; }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover { background: #f4efed; color: #E63109; }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle:focus { outline: none; }
-#colorlib-aside #colorlib-main-menu .nav-sub-toggle:focus-visible { outline: 2px solid #E63109; outline-offset: 2px; }
+#colorlib-aside #colorlib-main-menu .nav-sub-toggle[aria-expanded="true"] .nav-caret::before { transform: rotate(-135deg); margin-top: -2px; }
+
+/* 子選單：直式清單，每列一個產品（英文代號 + 中文功能名） */
 #colorlib-aside #colorlib-main-menu ul.nav-sub {
-    margin: 0.15rem 0 0.7rem; padding: 0.35rem 0 0.35rem 0.9rem; border-left: 2px solid #f0d5cc;
+    margin: 0 0 0.6rem; padding: 0.3rem 0 0.4rem 0.9rem; border-left: 2px solid #f0d5cc;
 }
-#colorlib-aside #colorlib-main-menu ul.nav-sub li { font-size: 14px; line-height: 1.55; margin: 0; font-weight: 400; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub li { font-size: 14px; line-height: 1.5; margin: 0; font-weight: 400; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub li a { padding: 1px 0; font-family: inherit; color: #3a3a3f; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub li a:after { bottom: -1px; height: 1px; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-all a { font-weight: 600; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg { margin: 0.5rem 0 0; line-height: 1.4; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-name { display: block; font-size: 11px; letter-spacing: 0.08em; color: #a3a3a8; margin-bottom: 0.2rem; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-all a { font-weight: 600; display: inline-block; padding: 4px 0; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-all a[aria-current="page"] { color: #E63109; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg { margin: 0.55rem 0 0; }
+/* 組名：12px、#6b6b70（白底對比約 5.4:1，舊的 #a3a3a8 只有 2.5:1） */
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-name {
+    display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: #6b6b70; margin-bottom: 0.15rem;
+}
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links { display: block; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a {
-    font-size: 13px; line-height: 1.45; padding: 0.1rem 0.6rem; border: 1px solid #e7e2df; border-radius: 999px;
-    color: #3a3a3f; background: #fff; transition: border-color 0.2s, color 0.2s, background 0.2s;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.5rem; min-height: 34px; padding: 5px 8px; margin: 0 0 0 -8px;
+    border-radius: 8px; color: #3a3a3f; box-shadow: inset 3px 0 0 transparent;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:after { display: none; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover { border-color: #E63109; color: #E63109; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] { background: #E63109; border-color: #E63109; color: #fff; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a b { flex: none; font-size: 14px; font-weight: 600; color: #28282c; }
+/* 說明放不下時整段換到名稱下一行，不在字中間折 */
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a span { flex: 1 0 auto; max-width: 100%; font-size: 12px; line-height: 1.5; color: #6b6b70; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover { background: #fff5f2; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover b { color: #E63109; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] { background: #fdeae4; box-shadow: inset 3px 0 0 #E63109; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] b { color: #E63109; }
 #colorlib-aside #colorlib-main-menu .nav-ext { font-size: 0.5em; color: #b0b0b5; margin-left: 0.25em; vertical-align: 0.35em; }
+/* 目前所在頁面（沒有子選單的項目）：沿用原本滑過時的橘色底線 */
+#colorlib-aside #colorlib-main-menu > ul > li.active > a:after { visibility: visible; transform: scaleX(1); }
 
-/* 目前所在頁面：沿用原本滑過時的橘色底線 */
-#colorlib-aside #colorlib-main-menu > ul > li.active > a:after,
-#colorlib-aside #colorlib-main-menu > ul > li.active > .nav-row > a:after { visibility: visible; transform: scaleX(1); }
+/* 手機：「聯絡我們」固定在選單底部，不用捲到最後才找得到；側欄本身是 fixed + transform，
+   裡面的 fixed 會以側欄為準，所以釘在側欄底部、隨側欄一起滑進滑出 */
+@media (max-width: 991.98px) {
+    #colorlib-aside { padding-bottom: 84px; }
+    #colorlib-aside #colorlib-main-menu > ul > li.nav-pin {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 2; margin: 0; padding: 10px 2em 12px;
+        background: #fff; border-top: 1px solid #eee5e1; font-size: 20px;
+    }
+    #colorlib-aside #colorlib-main-menu > ul > li.nav-pin > a { padding: 4px 0; }
+}
 
 /* 矮螢幕：子選單展開後會碰到固定在底部的標誌，改成接在選單後面 */
 @media (max-height: 880px) {
@@ -110,10 +152,6 @@ html.ss-open, html.ss-open body { overflow: hidden; }
 .ss-hint { font-size: 0.78rem; color: #999; margin: 0.9rem 0 0; }
 @media (max-width: 767.98px) { .ss-overlay { padding-top: 16px; } .ss-dialog { max-height: calc(100vh - 32px); padding: 1.1rem; } }
 
-/* 手機選單：「AI 治理平台」「產業解決方案」與展開箭頭維持同一行 */
-@media (max-width: 991.98px) {
-    #colorlib-main-menu .nav-row { white-space: nowrap; }
-}
 
 /* ── 手寫頁面的常見問題（由 _pages.json 產生）── */
 .pg-faq { padding-top: 2rem; }
