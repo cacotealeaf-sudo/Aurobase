@@ -129,8 +129,40 @@ def available_icons():
     return set(re.findall(r'\.iconoir-([a-z0-9-]+)::before', css))
 
 
+def load_inquiry():
+    return json.loads(read(os.path.join(SRC, '_inquiry.json')))['chips']
+
+
 def inquiry_chips():
-    return re.findall(r'name="entry\.1863307942" value="([^"]+)"', load_chrome()[0])
+    return [c['value'] for c in load_inquiry()]
+
+
+CHIPS_BEGIN, CHIPS_END = '<!-- INQUIRY-CHIPS:BEGIN（由 tools/build-module-pages.py 依 _inquiry.json 產生）-->', '<!-- INQUIRY-CHIPS:END -->'
+CHIPS_RE = re.compile(r'(<div class="(qf|ct)-chips">)\s*(?:' + re.escape(CHIPS_BEGIN) + r'.*?' + re.escape(CHIPS_END) + r'|(?:<div class="(?:qf|ct)-chip">.*?</div>\s*)+)\s*', re.S)
+
+
+def chips_html(cls, checked=None):
+    """諮詢類型的核取方塊：id f05-1…，值與 _inquiry.json 一致；checked 是這一頁要預勾的值。"""
+    out = []
+    for i, c in enumerate(load_inquiry(), 1):
+        out.append('<div class="%s-chip"><input type="checkbox" id="f05-%d" name="entry.1863307942" value="%s"%s><label for="f05-%d">%s</label></div>'
+                   % (cls, i, attr(c['value']), ' checked' if c['value'] == checked else '', i, html.escape(c.get('label', c['value']))))
+    return CHIPS_BEGIN + '\n' + '\n'.join(out) + '\n' + CHIPS_END
+
+
+def update_inquiry_chips():
+    """每一頁的諮詢彈窗與聯絡頁表單共用同一份選項；手寫頁依 _pages.json 的 inquiry_chip 預勾，產品頁外框不預勾（build() 再依產品 JSON 勾）。"""
+    cfg = load_pages_cfg()
+    changed = []
+    for p in nav_pages():
+        s = read(p)
+        rel = os.path.relpath(p, ROOT)
+        checked = None if p.endswith('chrome-top.html') else cfg.get(rel, {}).get('inquiry_chip')
+        t = CHIPS_RE.sub(lambda m: m.group(1) + '\n' + chips_html(m.group(2), checked) + '\n', s)
+        if t != s:
+            io.open(p, 'w', encoding='utf-8').write(t)
+            changed.append(rel)
+    return changed
 
 
 def known_slugs(mods, pf):
@@ -413,6 +445,7 @@ def head(m):
     <meta name="twitter:image" content="{SITE}/{og_image}">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="theme-color" content="{m['theme']['deep']}">
+    <meta name="inquiry-source" content="{attr(full_name(m))}">
 
     <script type="application/ld+json">
 {jsonld(m)}
@@ -1588,6 +1621,9 @@ def update_static_pages():
             t, n = re.subn(r'<h2 style="color:#d9e0e7;">(.*?)</h2>', r'<h1 class="h2" style="color:#d9e0e7;">\1</h1>', t, count=1)
             if not n:
                 t = re.sub(r'<h3 (style="color:#28282c; text-indent: 0\.35em;")>(.*?)</h3>', r'<h1 class="h3" \1>\2</h1>', t, count=1)
+        # 舊版橫幅標題用和背景同色（#d9e0e7）藏起來，頁首只剩一條空白帶，而且隱藏的 H1 對搜尋引擎也不好：
+        # 拿掉行內顏色改成 .pg-title（css/site-nav.css），讓它成為看得見的頁面標題
+        t = re.sub(r'<(h1|p) class="(h[123])" style="color:#d9e0e7;">', r'<\1 class="\2 pg-title">', t)
         if cfg.get('type') == 'BlogPosting':
             alt = attr(re.sub(r'｜.*$', '', re.search(r'<title>(.*?)</title>', t, re.S).group(1)))
             t = re.sub(r'(<img loading="lazy" src="\.\./images/[^"]+") alt=""', lambda x: '%s alt="%s"' % (x.group(1), alt), t)
@@ -1648,7 +1684,7 @@ def build_all():
     errors = check_all(mods, pf)
     if errors:
         return {'errors': errors, 'written': [], 'removed': []}
-    nav_changed = update_nav(mods, pf) + update_static_pages()
+    nav_changed = update_inquiry_chips() + update_nav(mods, pf) + update_static_pages()
     top, bottom = load_chrome()
     written, removed = [], []
     for m in mods.values():
@@ -1763,6 +1799,12 @@ CJK_PRELOAD_RE = re.compile(r'[ \t]*<link rel="preload" href="[./]*WOFF2/LINESee
 LOADER_RE = re.compile(r'[ \t]*(?:<!-- loader -->\s*)?<div id="ftco-loader"[^>]*>.*?</svg>\s*</div>\n?', re.S)
 
 
+def site_nav_version():
+    """css/site-nav.css 內容的短雜湊，當作連結的版本參數。"""
+    import hashlib
+    return hashlib.sha1(io.open(os.path.join(ROOT, 'css', 'site-nav.css'), 'rb').read()).hexdigest()[:8]
+
+
 def update_nav(mods, pf=None):
     """改寫每一頁的左側選單，並確保載入 css/site-nav.css。回傳有變動的檔案。"""
     pf = pf or load_platform()
@@ -1781,8 +1823,10 @@ def update_nav(mods, pf=None):
         # 中文字型子集約 300 KB：預先載入會和畫面需要的 CSS 搶頻寬，首次繪製在慢速網路慢 1 秒以上；
         # 字型已設 font-display: swap，不預載也會先用系統字顯示、載到再換
         t = CJK_PRELOAD_RE.sub('', t)
-        link = '<link rel="stylesheet" href="%scss/site-nav.css">' % prefix
-        if link not in t and '</head>' in t:
+        # 連結帶檔案內容的雜湊：GitHub Pages 的 CSS 快取 10 分鐘，改了選單樣式後舊頁面才不會配到舊 CSS
+        link = '<link rel="stylesheet" href="%scss/site-nav.css?v=%s">' % (prefix, site_nav_version())
+        t, n = re.subn(r'<link rel="stylesheet" href="(?:\.\./)?css/site-nav\.css(?:\?v=[0-9a-f]+)?">', lambda x: link, t, count=1)
+        if not n and '</head>' in t:
             t = t.replace('</head>', '    %s\n  </head>' % link, 1)
         if t != s:
             io.open(p, 'w', encoding='utf-8').write(t)

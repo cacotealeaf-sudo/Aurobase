@@ -29,7 +29,7 @@
     "ink1": "#0C0F1F",
     "ink2": "#141A35"
   },
-  "inquiry_chip": "NEXUS AI 自動化平台",
+  "inquiry_chip": "AURO NEXUS AI 治理平台",
   "hero": {
     "h1": "Forge｜地端 AI 閘道・LLM Gateway",
     "sub": "各部門開始用 AI 之後，問題就來了：誰用了哪個模型、送出了什麼資料、查了哪份知識、呼叫了哪個工具？Forge 是所有 AI 請求的必經閘道，先檢查權限與政策，再送往模型，並把每一步寫進可驗證的稽核帳。",

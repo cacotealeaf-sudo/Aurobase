@@ -80,6 +80,22 @@
     #colorlib-aside #colorlib-main-menu > ul > li.nav-pin > a { padding: 4px 0; }
 }
 
+/* 全站側欄統一 340px 白底（平台總覽、產品頁與深色頁本來就是這樣；代理產品、行銷服務、新聞等舊版頁面原本是 22% 灰底） */
+#colorlib-aside { width: 340px !important; background-color: #fff !important; }
+#colorlib-main { margin-left: 340px !important; width: calc(100% - 340px) !important; float: none !important; }
+@media (max-width: 991.98px) {
+    #colorlib-aside { width: 270px !important; }
+    #colorlib-main { margin-left: 0 !important; width: 100% !important; }
+}
+
+/* 舊版頁面的頁首橫幅：標題原本與背景同色而隱形，現在是看得見的頁面標題 */
+.ftco-bread { padding: 2.6em 1.8em 1.4em !important; }
+.ftco-bread .pg-title { color: #28282c; font-size: 2rem; font-weight: 700; line-height: 1.3; margin: 0; }
+.ftco-bread .breadcrumbs + br { display: none; }
+/* 標題下方第一段內容不用再留 7em（舊版是給隱形標題上下留白用的） */
+.ftco-bread + .ftco-section { padding-top: 2em; }
+@media (max-width: 767.98px) { .ftco-bread .pg-title { font-size: 1.5rem; } }
+
 /* 矮螢幕：子選單展開後會碰到固定在底部的標誌，改成接在選單後面 */
 @media (max-height: 880px) {
     #colorlib-aside .colorlib-footer { position: static; margin-top: 1.5rem; padding-left: 0; }

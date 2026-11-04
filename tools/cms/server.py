@@ -38,7 +38,7 @@ gen = load_generator()
 TEMPLATE = {
     'slug': '', 'file': '', 'code': '', 'name_zh': '', 'leg': '', 'draft': True,
     'title': '', 'description': '', 'keywords': [], 'eyebrow': '', 'updated': '',
-    'inquiry_chip': 'NEXUS AI 自動化平台',
+    'inquiry_chip': 'AURO NEXUS AI 治理平台',
     'theme': {},
     'hero': {'h1': '', 'slogan': '', 'sub': '', 'tagline': '', 'badges': []},
     'summary': [['是什麼', ''], ['所屬', '']],

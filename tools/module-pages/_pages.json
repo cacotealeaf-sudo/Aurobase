@@ -1,5 +1,5 @@
 {
-  "_說明": "手寫頁（不是由產品 JSON 產生的頁面）的 SEO / GEO 設定。產生器會套用搜尋摘要、寫入結構化資料、把側欄標誌的 <h1> 改成 <div>。改完跑 python3 tools/build-module-pages.py。",
+  "_說明": "手寫頁（不是由產品 JSON 產生的頁面）的 SEO / GEO 設定。產生器會套用搜尋摘要、寫入結構化資料、把側欄標誌的 <h1> 改成 <div>。改完跑 python3 tools/build-module-pages.py。 inquiry_chip：這一頁的諮詢彈窗預先勾選的類型（值見 _inquiry.json）。",
   "pages": {
     "index.html": {
       "type": "WebPage",
@@ -79,7 +79,8 @@
           "q": "要怎麼開始和奧洛合作數位行銷？",
           "a": "填寫網站上的諮詢表單或來電 02-5568-4688，說明產品、目標客群與預算，奧洛會回覆建議的投放與經營方式。"
         }
-      ]
+      ],
+      "inquiry_chip": "廣告投放"
     },
     "solution.html": {
       "type": "ItemList",
@@ -163,7 +164,8 @@
           "q": "AI 智慧語伴如何協助社工？",
           "a": "語伴把對話自動轉成文字並產生關懷報告，社工不必逐一記錄；系統也會分析長者需求，協助社工安排資源，新進社工也能較快上手。"
         }
-      ]
+      ],
+      "inquiry_chip": "AI 智慧語伴"
     },
     "blog.html": {
       "type": "Blog",
@@ -226,7 +228,8 @@
         "AI 治理",
         "奧洛",
         "Aurobase"
-      ]
+      ],
+      "inquiry_chip": "AURO NEXUS AI 治理平台"
     },
     "fsc-ai-guideline.html": {
       "type": "Article",
@@ -292,7 +295,8 @@
           "q": "金融機構委託廠商導入 AI，指引要求注意什麼？",
           "a": "評估廠商專業與集中度風險、以書面契約明定責任與追索途徑、涉及客戶資料時簽訂資料保護條款、訂定停止委託時的資料或系統遷移機制，並要求廠商留存受託作業的書面或數位紀錄。"
         }
-      ]
+      ],
+      "inquiry_chip": "AURO NEXUS AI 治理平台"
     },
     "llm-gateway-guide.html": {
       "type": "Article",
@@ -341,7 +345,8 @@
           "q": "LLM 閘道的 POC 要準備什麼？",
           "a": "一個代表性的應用（例如內部知識問答）、一組測試帳號與權限、含假個資的測試提示、一台可放地端模型的主機，並請稽核或法遵人員一起驗證稽核紀錄。"
         }
-      ]
+      ],
+      "inquiry_chip": "AURO NEXUS AI 治理平台"
     },
     "privacypolicy.html": {
       "type": "WebPage",

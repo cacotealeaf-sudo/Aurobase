@@ -1,0 +1,36 @@
+{
+  "_說明": "諮詢表單（每頁彈窗與聯絡頁）的「諮詢類型」選項，依客戶想談的主題，不依產品代號。Google 表單這一題是簡答題，值可自由改，送出時以逗號串接；值會直接出現在業務的試算表，改名前先知會。產品頁預勾的選項寫在各產品 JSON 的 inquiry_chip，手寫頁寫在 _pages.json 的 inquiry_chip。改完跑 python3 tools/build-module-pages.py。",
+  "chips": [
+    {
+      "value": "AURO NEXUS AI 治理平台"
+    },
+    {
+      "value": "AURA CDP 客戶數據平台"
+    },
+    {
+      "value": "產業解決方案"
+    },
+    {
+      "value": "AI 智慧語伴"
+    },
+    {
+      "value": "HCL Discover 數位體驗分析"
+    },
+    {
+      "value": "HCL Unica 行銷自動化"
+    },
+    {
+      "value": "Magnolia CMS"
+    },
+    {
+      "value": "廣告投放"
+    },
+    {
+      "value": "社群經營"
+    },
+    {
+      "value": "其他",
+      "label": "其他 / 還不確定"
+    }
+  ]
+}

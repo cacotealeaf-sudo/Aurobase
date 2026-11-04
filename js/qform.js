@@ -37,9 +37,11 @@ function checkedConsultationTypes() {
 // 送出後的下一步：依勾選的諮詢類型告訴客戶接下來會發生什麼，並給一頁可以先看的內容。
 // 比對的是 checkbox 的 value（Google 表單的選項值，不能改），不是畫面上的標籤。
 const NEXT_STEPS = [
-    { match: /NEXUS|AI 智慧語伴|AI Voice Studio/, text: '業務會與您聯繫，安排一場線上簡報或需求訪談，先了解您的環境與要導入的情境。', link: 'nexus.html#platform', label: '先看 AURO NEXUS 平台總覽' },
-    { match: /CDP/, text: '業務會與您聯繫，安排一場線上簡報或需求訪談，先了解您的資料來源與要經營的客戶旅程。', link: 'nexus-cdp.html', label: '先看 AURA CDP 介紹' },
-    { match: /ACOUSTIC CXA|HCL UNICA|MAGNOLIA/i, text: '業務會與您聯繫，依您的系統環境提供產品規格與導入方式說明。', link: 'solution.html', label: '先看代理產品介紹' },
+    { match: /AURA CDP/, text: '業務會與您聯繫，安排一場線上簡報或需求訪談，先了解您的資料來源與要經營的客戶旅程。', link: 'nexus-cdp.html', label: '先看 AURA CDP 介紹' },
+    { match: /產業解決方案/, text: '業務會與您聯繫，先了解您所屬產業與要處理的情境，再安排對應方案的展示。', link: 'nexus.html#solutions', label: '先看產業解決方案' },
+    { match: /AI 智慧語伴/, text: '業務會與您聯繫，了解服務對象與場域後，安排語伴的實機展示。', link: 'ai-companion.html', label: '先看 AI 智慧語伴' },
+    { match: /AURO NEXUS/, text: '業務會與您聯繫，安排一場線上簡報或需求訪談，先了解您的環境與要導入的情境。', link: 'nexus.html#platform', label: '先看 AURO NEXUS 平台總覽' },
+    { match: /HCL Discover|HCL Unica|Magnolia/i, text: '業務會與您聯繫，依您的系統環境提供產品規格與導入方式說明。', link: 'solution.html', label: '先看代理產品介紹' },
     { match: /廣告投放|社群/, text: '業務會與您聯繫，請教您的行銷目標、目標客群與預算範圍，再提出投放或經營建議。', link: 'marketing.html', label: '先看數位行銷服務' }
 ];
 
@@ -80,7 +82,9 @@ document.getElementById("submitButton").addEventListener("click", async function
     // 4. 清理數據
     const cleanData = FormValidator.sanitizeFormData(formData);
     // 附上來源頁面，讓業務知道客戶從哪一個產品或方案頁提出需求
-    const source = document.title.split('｜')[0].trim();
+    // 產品頁在 <meta name="inquiry-source"> 寫產品全名（標題開頭是關鍵字，不一定是產品名）
+    const sourceMeta = document.querySelector('meta[name="inquiry-source"]');
+    const source = (sourceMeta && sourceMeta.content) || document.title.split('｜')[0].trim();
     cleanData.message = (cleanData.message ? cleanData.message + '\n\n' : '') + '（來源頁面：' + source + '）';
 
     // 5. 提交到 Google Forms
