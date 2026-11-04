@@ -63,8 +63,11 @@
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a span { flex: 1 0 auto; max-width: 100%; font-size: 12px; line-height: 1.5; color: #6b6b70; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover { background: #fff5f2; }
 #colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a:hover b { color: #E63109; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] { background: #fdeae4; box-shadow: inset 3px 0 0 #E63109; }
-#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] b { color: #E63109; }
+/* 目前所在頁面：整列橘底白字（#fff 在 #E63109 上對比約 4.4:1，與改版前相同） */
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"],
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"]:hover { background: #E63109; color: #fff; }
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] b,
+#colorlib-aside #colorlib-main-menu ul.nav-sub .nav-leg-links a[aria-current="page"] span { color: #fff; }
 #colorlib-aside #colorlib-main-menu .nav-ext { font-size: 0.5em; color: #b0b0b5; margin-left: 0.25em; vertical-align: 0.35em; }
 /* 目前所在頁面（沒有子選單的項目）：沿用原本滑過時的橘色底線 */
 #colorlib-aside #colorlib-main-menu > ul > li.active > a:after { visibility: visible; transform: scaleX(1); }
