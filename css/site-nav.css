@@ -116,8 +116,10 @@
 
 /* 手機：頁首錨點按鈕列可橫向滑動並讓開漢堡選單（nexus.html、solution.html 等） */
 @media (max-width: 991.98px) {
-    .btn.fixed-top.text-right { white-space: nowrap; overflow-x: auto; padding-left: 72px; scrollbar-width: none;
-        background: rgba(255,255,255,0.94); box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    /* 從漢堡鈕右側開始（漢堡鈕在 left 12–60px、top 32–80px），與它同一水平線，白底不再蓋到漢堡鈕 */
+    .btn.fixed-top.text-right { left: auto; right: 8px; max-width: calc(100% - 78px); top: 36px; padding: 4px; border-radius: 999px;
+        white-space: nowrap; overflow-x: auto; scrollbar-width: none;
+        background: rgba(255,255,255,0.94); box-shadow: 0 1px 6px rgba(0,0,0,0.12);
         /* 右側淡出，提示還可以往右滑 */
         -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
                 mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
