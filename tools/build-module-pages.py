@@ -2070,7 +2070,7 @@ def site_nav_version():
 
 # 連結帶內容雜湊的共用樣式表：GitHub Pages 的 CSS 快取 10 分鐘，改了樣式後頁面才不會配到舊 CSS。
 # 字型與圖示子集（line-seed-font.css、iconoir-subset.css）由 CI 在產生頁面之後才重建，不放進來，否則雜湊會落後一版。
-VERSIONED_CSS = ('nexus-module.css', 'aurora-theme.css', 'inquiry-modal.css')
+VERSIONED_CSS = ('nexus-module.css', 'aurora-theme.css', 'inquiry-modal.css', 'scroll-fx.css')
 
 
 def css_link_versions(t, prefix=''):
@@ -2106,6 +2106,11 @@ def update_nav(mods, pf=None):
         t, n = re.subn(r'<link rel="stylesheet" href="(?:\.\./)?css/site-nav\.css(?:\?v=[0-9a-f]+)?">', lambda x: link, t, count=1)
         if not n and '</head>' in t:
             t = t.replace('</head>', '    %s\n  </head>' % link, 1)
+        # 捲動進場效果（css/scroll-fx.css）：每一頁都要，緊接在 site-nav.css 之後；版本由 css_link_versions 補上
+        if 'css/scroll-fx.css' not in t:
+            t = re.sub(r'([ \t]*)' + re.escape(link),
+                       lambda x: '%s%s\n%s<link rel="stylesheet" href="%scss/scroll-fx.css">' % (x.group(1), link, x.group(1), prefix),
+                       t, count=1)
         t = css_link_versions(t, prefix)
         if t != s:
             io.open(p, 'w', encoding='utf-8').write(t)

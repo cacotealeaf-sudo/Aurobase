@@ -1,0 +1,133 @@
+/* 捲動驅動的進場效果（每一頁都載入，由 tools/build-module-pages.py 連結）
+ *
+ * - 只用 CSS 的 animation-timeline（view() / scroll()），不用 JS，不佔主執行緒。
+ * - 全部包在 @supports 裡：不支援的瀏覽器維持原本的靜態樣子。
+ * - 位移一律用 translate / scale 屬性，不碰 transform，避免蓋掉元件原本的 transform。
+ * - 「減少動態效果」開啟時只淡入、不位移不縮放（站主的 Mac 有開，所以不整個關掉）。
+ * - 進場區間結束在 entry 100%：元件一完整進入畫面就是最終狀態，捲到頁底也不會停在半透明。
+ * - 有 data-id 的元件（首頁架構圖的 .ha-mod / .ha-forge）不動 opacity：滑過時的
+ *   .is-focus 淡化靠 opacity，動畫會蓋掉它。
+ */
+
+:root { --fx-y: 24px; }
+
+@keyframes fx-rise { from { opacity: 0; translate: 0 var(--fx-y); } }
+@keyframes fx-lift { from { translate: 0 var(--fx-y); } }
+@keyframes fx-fade { from { opacity: 0; } }
+@keyframes fx-grow-x { from { scale: 0 1; } }
+@keyframes fx-grow-y { from { scale: 1 0; } }
+@keyframes fx-progress { to { scale: 1 1; } }
+
+@supports (animation-timeline: view()) {
+
+  /* style.css 的 #colorlib-page { overflow: hidden } 讓它成了「不會捲動的捲動容器」，
+     view() 會綁到它而永遠不動。clip 一樣裁掉手機側欄，但不是捲動容器；flow-root 保留原本的 BFC。 */
+  #colorlib-page { overflow: clip; display: flow-root; }
+
+  /* ── 區段標題：深色頁、產品頁、淺色舊頁 ── */
+  .idx-sec-head,
+  .nm-section:not(.nm-hero) .section-label,
+  .nm-section:not(.nm-hero) .section-heading,
+  .nm-section:not(.nm-hero) .section-intro,
+  section.dsc h2, section.mk h2, section.ac h2 {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  /* ── 首頁平台架構：一列一組依序浮上，Forge 底座最後接上 ── */
+  .ha-group, .ha .ha-join {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .ha-mod {
+    animation: fx-lift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .ha-mod:nth-child(2) { animation-range: entry 10% entry 80%; }
+  .ha-mod:nth-child(3) { animation-range: entry 20% entry 90%; }
+  .ha-mod:nth-child(n+4) { animation-range: entry 30% entry 100%; }
+  .ha-join::before {
+    transform-origin: 50% 0;
+    animation: fx-grow-y linear both;
+    animation-timeline: view();
+    animation-range: entry 30% entry 100%;
+  }
+  .idx-page a.ha-forge {
+    animation: fx-lift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .ha-forge li {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .ha-forge li:nth-child(2) { animation-range: entry 15% entry 85%; }
+  .ha-forge li:nth-child(3) { animation-range: entry 30% entry 100%; }
+
+  /* ── 代理產品頁 4 節點流程：節點依序出現，箭頭跟在後面 ── */
+  .rs-flow li {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .rs-flow li:nth-child(2) { animation-range: entry 10% entry 80%; }
+  .rs-flow li:nth-child(3) { animation-range: entry 20% entry 90%; }
+  .rs-flow li:nth-child(4) { animation-range: entry 30% entry 100%; }
+  .rs-flow li:not(:last-child)::after {
+    animation: fx-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 50% entry 100%;
+  }
+
+  /* ── 產業解決方案步驟：卡片依序浮上，頂端色條依序點亮 ── */
+  .flow-step {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .flow-step::before {
+    content: ""; position: absolute; top: -1px; left: 12px; right: 12px; height: 3px;
+    background: var(--m-bright, #E63109); border-radius: 0 0 3px 3px; transform-origin: 0 50%;
+    animation: fx-grow-x linear both;
+    animation-timeline: view();
+    animation-range: entry 40% entry 100%;
+  }
+  .flow-step:nth-child(2) { animation-range: entry 10% entry 80%; }
+  .flow-step:nth-child(3) { animation-range: entry 20% entry 90%; }
+  .flow-step:nth-child(n+4) { animation-range: entry 30% entry 100%; }
+  /* 色條比卡片晚一拍，同一列由左到右點亮（contain 的前幾 % 只多捲幾十 px） */
+  .flow-step:nth-child(2)::before { animation-range: entry 55% contain 4%; }
+  .flow-step:nth-child(3)::before { animation-range: entry 70% contain 8%; }
+  .flow-step:nth-child(n+4)::before { animation-range: entry 85% contain 12%; }
+}
+
+/* ── 長文閱讀進度條：法遵指南兩頁（.gd-meta）與新聞文章（.pg-related） ── */
+@supports (animation-timeline: scroll()) {
+  body:has(.gd-meta)::after,
+  body:has(.pg-related)::after {
+    content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1030;
+    background: #E63109; transform-origin: 0 50%; scale: 0 1; pointer-events: none;
+    animation: fx-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+  body:has(.gd-meta)::after { background: #E84B22; }
+  @media (min-width: 992px) {
+    body:has(.gd-meta)::after, body:has(.pg-related)::after { left: 340px; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --fx-y: 0px; }
+  .ha-join::before, .flow-step::before { animation: none; }
+}
+
+@media print {
+  .idx-sec-head, .section-label, .section-heading, .section-intro, section h2,
+  .ha-group, .ha-join, .ha-join::before, .ha-mod, .ha-forge, .ha-forge li,
+  .rs-flow li, .rs-flow li::after, .flow-step, .flow-step::before { animation: none !important; }
+  body::after { display: none !important; }
+}
