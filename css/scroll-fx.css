@@ -103,6 +103,105 @@
   .flow-step:nth-child(2)::before { animation-range: entry 55% contain 4%; }
   .flow-step:nth-child(3)::before { animation-range: entry 70% contain 8%; }
   .flow-step:nth-child(n+4)::before { animation-range: entry 85% contain 12%; }
+
+  /* ── 首頁 hero：往下捲時文字淡出上移，極光畫布慢半拍（視差）──
+     .idx-aurora 是 overflow: hidden（會變成捲動容器），所以不用 view()，改由 hero 自己掛具名時間軸。
+     畫布只用 translate：aurora.js 量的是寬高與左上角，位移不影響繪製尺寸，滑鼠座標也對得上。 */
+  #idx-hero { view-timeline: --fx-hero block; }
+  #idx-hero .idx-aurora-body {
+    animation: fx-hero-out linear both;
+    animation-timeline: --fx-hero;
+    animation-range: exit 0% exit 70%;
+  }
+  #idx-hero canvas {
+    animation: fx-hero-sky linear both;
+    animation-timeline: --fx-hero;
+    animation-range: exit 0% exit 100%;
+  }
+
+  /* ── nexus.html 架構圖：由上往下逐層出現（.nm-hero 也是 overflow: hidden，同 #colorlib-page 改 clip）──
+     a.arch-node 有 data-id、靠 opacity 做滑過淡化，所以只動它們的外層。 */
+  .nm-hero { overflow: clip; display: flow-root; }
+  .arch-sols, .arch-join, .arch-layer-head, .arch-info, .arch-forge-head {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .arch-group {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+  .arch-group:nth-child(2) { animation-range: entry 10% entry 70%; }
+  .arch-group:nth-child(3) { animation-range: entry 20% entry 80%; }
+  .arch-group:nth-child(4) { animation-range: entry 30% entry 90%; }
+  .arch-group:nth-child(n+5) { animation-range: entry 40% entry 100%; }
+  .arch-forge {
+    animation: fx-lift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .arch-steps li {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .arch-steps li:nth-child(2) { animation-range: entry 15% entry 85%; }
+  .arch-steps li:nth-child(3) { animation-range: entry 30% entry 100%; }
+
+  /* ── marketing.html：插圖從它所在的那一側滑入，文字不動；開頭三步依序出現 ── */
+  .mk-fig {
+    --fx-x: -40px;
+    animation: fx-side linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .mk-item.is-flip .mk-fig { --fx-x: 40px; }
+  .mk-loop li {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  .mk-loop li:nth-child(2) { animation-range: entry 15% entry 85%; }
+  .mk-loop li:nth-child(3) { animation-range: entry 30% entry 100%; }
+
+  /* ── 「現在／導入後」對照（solution.html、ai-companion.html）：導入後晚一拍 ── */
+  .rs-now, .ac-now {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+  .rs-after, .ac-after {
+    animation: fx-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 35% entry 100%;
+  }
+
+  /* ── 產品頁截圖：圖在框裡由 1.06 縮回 1（.nm-shot 是 overflow: hidden，所以由框掛具名時間軸）── */
+  .nm-shot { view-timeline: --fx-shot block; }
+  .nm-shot img {
+    animation: fx-settle linear both;
+    animation-timeline: --fx-shot;
+    animation-range: entry 0% entry 100%;
+  }
+
+  /* ── 深色帶（.nm-diff）：進場時由內縮的圓角卡片展開成滿版 ── */
+  .nm-diff {
+    animation: fx-band linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+@keyframes fx-hero-out { to { opacity: 0.15; translate: 0 calc(var(--fx-y) * -2); } }
+@keyframes fx-hero-sky { to { translate: 0 var(--fx-sky, 35%); } }
+@keyframes fx-side { from { opacity: 0; translate: var(--fx-x) 0; } }
+@keyframes fx-settle { from { scale: 1.06; } }
+@keyframes fx-band { from { clip-path: inset(0 3% round 28px); } to { clip-path: inset(0 0 round 0); } }
+
+@media (max-width: 767.98px) {
+  /* 手機上插圖和文字上下排，不從側邊滑入，只淡入 */
+  .mk-fig, .mk-item.is-flip .mk-fig { --fx-x: 0px; }
 }
 
 /* ── 長文閱讀進度條：法遵指南兩頁（.gd-meta）與新聞文章（.pg-related） ── */
@@ -121,13 +220,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --fx-y: 0px; }
-  .ha-join::before, .flow-step::before { animation: none; }
+  :root { --fx-y: 0px; --fx-sky: 0%; }
+  .mk-fig, .mk-item.is-flip .mk-fig { --fx-x: 0px; }
+  .ha-join::before, .flow-step::before, .nm-shot img, .nm-diff { animation: none; }
 }
 
 @media print {
   .idx-sec-head, .section-label, .section-heading, .section-intro, section h2,
   .ha-group, .ha-join, .ha-join::before, .ha-mod, .ha-forge, .ha-forge li,
-  .rs-flow li, .rs-flow li::after, .flow-step, .flow-step::before { animation: none !important; }
+  .rs-flow li, .rs-flow li::after, .flow-step, .flow-step::before,
+  #idx-hero .idx-aurora-body, #idx-hero canvas, .arch-sols, .arch-join, .arch-layer-head, .arch-info,
+  .arch-forge-head, .arch-group, .arch-forge, .arch-steps li, .mk-fig, .mk-loop li,
+  .rs-now, .ac-now, .rs-after, .ac-after, .nm-shot img, .nm-diff { animation: none !important; }
   body::after { display: none !important; }
 }
