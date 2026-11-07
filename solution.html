@@ -224,7 +224,7 @@
     /* 資料來源：12px 淺灰小字 */
     .rs-src { font-size: 12px; line-height: 1.7; color: #8a8a90; margin: 0.45rem 0 0; }
     .rs-src a { color: #8a8a90; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; }
-    .rs-src a:hover { color: #E63109; }
+    .rs-src a:hover { color: #FF2624; }
 
     /* 為什麼透過奧洛：四個事實，上緣細線，不做卡片 */
     .rs-facts { list-style: none; padding: 0; margin: 1.8rem 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 2rem; }
@@ -237,20 +237,20 @@
     .rs-flow { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: none; }
     .rs-flow li { position: relative; padding: 0 2.2rem 0 0; }
     .rs-flow li + li { padding-left: 1.2rem; }
-    .rs-flow li:not(:last-child)::after { content: ''; position: absolute; right: 0.6rem; top: 1.1rem; width: 1.1rem; height: 1.1rem; border-top: 2px solid #E63109; border-right: 2px solid #E63109; transform: rotate(45deg); }
+    .rs-flow li:not(:last-child)::after { content: ''; position: absolute; right: 0.6rem; top: 1.1rem; width: 1.1rem; height: 1.1rem; border-top: 2px solid #FF2624; border-right: 2px solid #FF2624; transform: rotate(45deg); }
     .rs-flow a { display: block; color: inherit; }
-    .rs-flow a:hover .rs-flow-name { color: #E63109; }
+    .rs-flow a:hover .rs-flow-name { color: #FF2624; }
     .rs-flow-name { display: block; font-size: 1.15rem; font-weight: 700; color: #28282c; line-height: 1.4; }
     .rs-flow-role { display: block; font-size: 0.92rem; color: #4a4a4a; line-height: 1.7; margin-top: 0.3rem; }
-    .rs-flow-mine { display: inline-block; font-size: 12px; color: #E63109; border: 1px solid rgba(230,49,9,0.4); border-radius: 999px; padding: 0 0.5rem; margin-top: 0.5rem; line-height: 1.6; }
+    .rs-flow-mine { display: inline-block; font-size: 12px; color: #FF2624; border: 1px solid rgba(255,38,36,0.4); border-radius: 999px; padding: 0 0.5rem; margin-top: 0.5rem; line-height: 1.6; }
 
     /* 現在／導入後 + 示意圖 */
     .rs-split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 2.4rem; align-items: start; margin-top: 2.2rem; }
     .rs-compare { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
     .rs-now, .rs-after { padding-left: 1.1rem; border-left: 3px solid rgba(0,0,0,0.15); }
-    .rs-after { border-left-color: #E63109; }
+    .rs-after { border-left-color: #FF2624; }
     .rs-tag { display: block; font-size: 0.82rem; font-weight: 700; color: #6b6b70; margin-bottom: 0.3rem; }
-    .rs-after .rs-tag { color: #E63109; }
+    .rs-after .rs-tag { color: #FF2624; }
     .rs-now p, .rs-after p { font-size: 1.05rem; line-height: 1.85; color: #28282c; margin: 0; }
     .rs-now p { color: #4a4a4a; }
 
@@ -268,14 +268,14 @@
     .rs-field { margin-bottom: 10px; }
     .rs-field small { display: block; font-size: 11px; color: #8a8a90; margin-bottom: 3px; }
     .rs-field div { height: 26px; border: 1px solid #d8d8dd; border-radius: 5px; background: #fafafa; }
-    .rs-field.is-hot div { border-color: #E63109; background: #fff5f2; }
+    .rs-field.is-hot div { border-color: #FF2624; background: #fff5f2; }
     .rs-blob { position: absolute; width: 54px; height: 54px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(230,49,9,0.55) 0%, rgba(255,160,0,0.35) 40%, rgba(255,220,0,0) 70%); }
+      background: radial-gradient(circle, rgba(255,38,36,0.55) 0%, rgba(255,160,0,0.35) 40%, rgba(255,220,0,0) 70%); }
     .rs-heat-side { border-left: 1px solid rgba(0,0,0,0.08); padding-left: 14px; }
     .rs-heat-side b { display: block; font-size: 11px; color: #28282c; margin-bottom: 8px; }
     .rs-bar { display: grid; grid-template-columns: 66px 1fr; gap: 6px; align-items: center; margin-bottom: 7px; font-size: 11px; color: #4a4a4a; white-space: nowrap; }
     .rs-bar i { display: block; height: 8px; border-radius: 4px; background: #e2e2e6; position: relative; overflow: hidden; }
-    .rs-bar i::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: #E63109; border-radius: 4px; }
+    .rs-bar i::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); background: #FF2624; border-radius: 4px; }
     .rs-replay { margin-top: 14px; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #6b6b70; }
     .rs-replay i { width: 18px; height: 18px; border-radius: 50%; background: #28282c; position: relative; flex: none; }
     .rs-replay i::after { content: ''; position: absolute; left: 7px; top: 5px; border-left: 6px solid #fff; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
@@ -289,12 +289,12 @@
     .rs-aud small { display: block; font-size: 11px; color: #8a8a90; margin-top: 2px; }
     .rs-gate { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #6b6b70; padding-left: 4px; }
     .rs-gate::before { content: ''; width: 2px; height: 22px; background: #d8d8dd; margin-left: 14px; }
-    .rs-gate b { display: inline-block; border: 1px dashed #E63109; color: #E63109; border-radius: 6px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }
+    .rs-gate b { display: inline-block; border: 1px dashed #FF2624; color: #FF2624; border-radius: 6px; padding: 4px 8px; font-size: 11px; white-space: nowrap; }
     .rs-chan { display: grid; gap: 7px; }
     .rs-chan div { display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid #d8d8dd; border-radius: 6px; padding: 6px 10px; font-size: 12px; color: #28282c; background: #fff; }
     .rs-chan em { font-style: normal; font-size: 11px; color: #fff; background: #28282c; border-radius: 999px; padding: 1px 7px; white-space: nowrap; }
     .rs-chan div.is-hold { border-style: dashed; color: #8a8a90; }
-    .rs-chan div.is-hold em { background: transparent; color: #E63109; border: 1px solid rgba(230,49,9,0.5); }
+    .rs-chan div.is-hold em { background: transparent; color: #FF2624; border: 1px solid rgba(255,38,36,0.5); }
     .rs-journey-foot { margin-top: 12px; font-size: 11px; color: #6b6b70; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 
     /* 示意圖三：行銷人員在視覺編輯器裡改前端元件，同一份內容到每個通路 */
@@ -323,7 +323,7 @@
     .rs-more { margin-top: 1.2rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; background: #fff; }
     .rs-more summary { cursor: pointer; list-style: none; padding: 0.9rem 1.2rem; font-weight: 700; color: #28282c; display: flex; justify-content: space-between; align-items: center; }
     .rs-more summary::-webkit-details-marker { display: none; }
-    .rs-more summary::after { content: '+'; font-size: 1.3rem; color: #E63109; line-height: 1; }
+    .rs-more summary::after { content: '+'; font-size: 1.3rem; color: #FF2624; line-height: 1; }
     .rs-more[open] summary::after { content: '−'; }
     .rs-more[open] summary { border-bottom: 1px solid rgba(0,0,0,0.08); }
     .rs-more-body { padding: 0.4rem 1.2rem 1.3rem; }
@@ -334,11 +334,11 @@
     .dsc-card p { font-size: 0.88rem; color: #666; line-height: 1.75; margin: 0; }
     .dsc-list { padding-left: 1.2rem; color: #4a4a4a; line-height: 1.9; margin: 0.8rem 0 0; }
     .dsc-list li { margin-bottom: 0.4rem; }
-    .dsc-list a { color: #E63109; }
+    .dsc-list a { color: #FF2624; }
 
     /* 預約展示 */
     .rs-cta { margin-top: 1.8rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .rs-btn { background: #E63109; color: #fff; border: 0; border-radius: 8px; padding: 0.7rem 1.3rem; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .rs-btn { background: #FF2624; color: #fff; border: 0; border-radius: 8px; padding: 0.7rem 1.3rem; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; }
     .rs-btn:hover { background: #c92a06; }
     .rs-btn:focus-visible { outline: 2px solid #28282c; outline-offset: 2px; }
     .rs-cta .rs-src { margin: 0; }
