@@ -7,8 +7,8 @@
 
 /* Tokens (same values as css/aurora-theme.css :root), scoped to the pop-up and its button */
 .qf-fab, .qf-modal {
-  --idx-accent: #E84B22;
-  --idx-accent-hover: #ff4816;
+  --idx-accent: #FF2624;
+  --idx-accent-hover: #ff4d4a;
   --idx-bg: #0e0e10;
   --idx-surface: #151518;
   --idx-raised: #28282c;
@@ -97,7 +97,7 @@ body.modal-open .colorlib-nav-toggle { visibility: hidden !important; }
   background: no-repeat center / 10px 10px; transition: background-color 0.2s, border-color 0.2s;
 }
 .qf-chip label:hover { border-color: var(--idx-accent); }
-.qf-chip input:checked + label { border-color: var(--idx-accent); background: rgba(232,75,34,0.08); color: var(--idx-ink); }
+.qf-chip input:checked + label { border-color: var(--idx-accent); background: rgba(255,38,36,0.08); color: var(--idx-ink); }
 .qf-chip input:checked + label::before {
   background-color: var(--idx-accent); border-color: var(--idx-accent);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' fill='none' stroke='%230e0e10' stroke-width='1.8'%3E%3Cpath d='M1.5 5.2l2.3 2.3L8.5 2.8'/%3E%3C/svg%3E");

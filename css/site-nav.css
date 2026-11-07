@@ -15,7 +15,7 @@
 }
 #colorlib-aside #colorlib-main-menu .nav-sub-toggle .nav-label { position: relative; }
 #colorlib-aside #colorlib-main-menu .nav-sub-toggle .nav-label::after {
-    content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: #ff4816;
+    content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; background: #FF2624;
     transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 #colorlib-aside #colorlib-main-menu .nav-sub-toggle:hover .nav-label::after,

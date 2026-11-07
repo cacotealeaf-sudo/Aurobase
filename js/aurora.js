@@ -3,7 +3,7 @@
  * (hue, alpha) bucket so each bucket is drawn with a single fillStyle.
  * Palette stops run from the bright lower hem (index 0) up to the fading rays. */
 var AURORA_PALETTES = {
-  aurobase: [[255, 150, 100], [255, 72, 22], [232, 75, 34], [178, 38, 44], [110, 26, 52]],
+  aurobase: [[255, 150, 140], [255, 62, 52], [255, 38, 36], [178, 24, 36], [110, 20, 44]],
   ember:    [[255, 214, 170], [255, 150, 60], [255, 72, 22], [200, 50, 30], [120, 40, 40]],
   natural:  [[70, 255, 165], [45, 230, 195], [70, 195, 245], [135, 125, 255], [215, 105, 235]]
 };

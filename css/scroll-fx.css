@@ -213,7 +213,7 @@
     animation: fx-progress linear both;
     animation-timeline: scroll(root block);
   }
-  body:has(.gd-meta)::after { background: #E84B22; }
+  body:has(.gd-meta)::after { background: #FF2624; }
   @media (min-width: 992px) {
     body:has(.gd-meta)::after, body:has(.pg-related)::after { left: 340px; }
   }

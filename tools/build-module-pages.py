@@ -1324,7 +1324,7 @@ HOME_ARCH_CSS = '''<style>
 .ha-join::before { content: ""; width: 1px; height: 22px; background: var(--idx-accent); }
 .idx-page a.ha-forge {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 20px; align-items: center; padding: 20px 22px;
-  background: linear-gradient(90deg, rgba(232, 75, 34, .16), rgba(232, 75, 34, .04)); border: 1px solid rgba(232, 75, 34, .55);
+  background: linear-gradient(90deg, rgba(255, 38, 36, .16), rgba(255, 38, 36, .04)); border: 1px solid rgba(255, 38, 36, .55);
   transition: border-color .2s, opacity .2s;
 }
 .ha-forge-head small { display: block; font-size: 12px; color: var(--idx-accent); }
