@@ -255,10 +255,50 @@
   "legacy_faq": [
     {
       "@type": "Question",
-      "name": "NEXUS OS 跟 ChatGPT 有什麼不同？",
+      "name": "NEXUS OS 適合什麼工作？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ChatGPT 是通用的聊天服務；NEXUS OS 是部署在企業環境裡的對話式工作台。除了對話，它會依需求呼叫文件產製、法規查詢、財報分析與知識庫等工具，每個動作先經風險評估並留下紀錄。"
+        "text": "適合需要整理資料、執行任務、人工確認與交付成果的企業工作情境。導入時先選定具體流程，再確認所需知識、工具與驗收方式。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "NEXUS OS 能串接既有系統嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "依目標系統提供的介面、權限與資料條件評估串接方式。導入範圍會明確列出可用的整合與需要額外開發的項目。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "NEXUS OS 的 AI 可以自行執行所有操作嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "操作範圍依工具權限與治理配置決定。需要人工核准的動作，應在核准流程完成後執行；實際支援範圍於方案中確認。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "使用 NEXUS OS 時，公司資料會送到外部服務嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "資料流向取決於使用的模型、工具及部署方式。導入時會確認資料可使用的服務與邊界，並依需求評估地端方案。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "NEXUS OS 可以事後查看任務成果與紀錄嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可用的成果與活動紀錄依功能及保存配置提供。保存期間、存取權限與刪除方式需在導入時明確約定。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何開始導入 NEXUS OS？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先選一項有明確輸入、人工決策點與交付成果的工作，確認整合與驗收條件，再逐步擴大使用範圍。"
       }
     },
     {
