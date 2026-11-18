@@ -8,19 +8,104 @@ var AURORA_PALETTES = {
   natural:  [[70, 255, 165], [45, 230, 195], [70, 195, 245], [135, 125, 255], [215, 105, 235]]
 };
 var AURORA_SLOTS = {
-  hero: { curtains: 3, horizon: 0.58, ridge: true, bias: true, gain: 1 },
-  cta:  { curtains: 2, horizon: 0.74, ridge: true, bias: false, gain: 0.55 }
+  // skyline = the tallest the skyline may get, as a share of the canvas height (0 = none).
+  hero: { curtains: 3, horizon: 0.58, skyline: 0.42, bias: true, gain: 1 },
+  cta:  { curtains: 2, horizon: 0.74, skyline: 0.30, bias: false, gain: 0.55 }
 };
 var CURTAINS = [
   { off:  0.00, amp: 0.075, f1: 0.0085, s1:  0.11, f2: 0.021, s2:  0.07, h: 0.30 },
   { off: -0.10, amp: 0.090, f1: 0.0065, s1: -0.08, f2: 0.017, s2:  0.05, h: 0.24 },
   { off:  0.07, amp: 0.050, f1: 0.0110, s1:  0.06, f2: 0.027, s2: -0.09, h: 0.18 }
 ];
-var GLYPHS = '.:-+=tS%X#@' + "'/\\_^";
+var GLYPHS = '.:-+=tS%X#@' + "'";
 var RAMP_LEN = 11;
-var G_DOT = 0, G_PLUS = 3, G_TICK = 11, G_UP = 12, G_DOWN = 13, G_FLAT = 14, G_PEAK = 15;
+var G_DOT = 0, G_PLUS = 3, G_TICK = 11;
+var SKY_STROKES = [ // back first so the front strokes sit on top
+  { key: 'back', rgba: 'rgba(214,212,208,0.20)', width: 2.6 },
+  { key: 'front', rgba: 'rgba(214,212,208,0.46)', width: 3.4 }
+];
+var SKY_STRETCH = 1.3; // wide canvases may widen the drawing this much before it is centred
 var HUES = 10, LEVELS = 6, PALE_RGB = [214, 212, 208];
 var SKY = '#0b0b0d';
+
+/* Taipei skyline (traced from the owner's line drawing): polylines as flat x,y lists in source
+ * pixels, front = dark strokes, back = the paler buildings behind. Bottom of the drawing = y 323. */
+var SKYLINE = {
+  w: 1509, h: 323,
+  front: [
+    [408,303,409,249,413,247,437,247,439,240,470,238,478,247,488,254,488,303,490,305,504,304,518,291,526,288,542,302,543,317,545,319,555,320,558,320,562,317,564,307,568,304,602,304,609,297,637,296,643,291,669,291,673,284,680,256,679,249,681,247],
+    [305,320,306,323],
+    [215,321,195,321],
+    [787,245,788,240,786,238,780,237,779,235],
+    [216,320,216,300],
+    [787,247,788,258,796,288],
+    [170,320,171,300],
+    [80,321,80,301],
+    [80,321,67,322],
+    [80,321,102,321],
+    [217,321,236,321,237,304],
+    [1505,303,1479,302,1476,292,1453,292,1452,265,1446,259,1431,258,1426,259,1422,262,1422,296,1415,296,1402,301,1383,312,1380,320,1355,319,1351,281,1351,268,1354,252,1354,244,1351,241,1354,227,1354,216,1352,214,1354,189,1351,187,1354,167,1354,163,1351,160,1354,140,1354,135,1351,133,1351,127,1354,109,1351,105,1354,91,1354,81,1345,73,1343,69,1343,45,1339,41,1339,30,1335,27],
+    [804,291,825,291,831,296,858,296,865,304,898,304,902,307,905,318,907,320,918,320],
+    [787,319,787,315,782,304,779,301,757,300,754,302,757,320,786,320],
+    [679,319,683,307,687,301,709,300,712,302,712,313,709,320,679,319],
+    [1315,320,1313,321,1298,319,1297,277,1294,275,1286,275,1281,272,1281,217],
+    [169,321,127,321],
+    [103,320,103,301],
+    [102,244,98,243,90,250,81,255,61,262,43,265,17,264,16,268,30,280,25,283,10,283,8,287,11,290,29,299,29,321,2,322],
+    [1276,209,1216,217,1213,222,1213,240,1205,246,1204,250,1205,271,1198,273,1185,273,1182,278,1168,279,1165,287,1148,289,1146,291,1145,312,1128,312,1126,310,1126,278,1121,275,1116,268,1116,220,1100,219,1097,213,1092,211,1062,211,1058,219,1047,219,1044,222,1042,293,981,294,981,265,979,263,960,264,950,255,935,251,922,255,914,267,899,269,873,278,870,281,870,298],
+    [196,242,191,246,108,246],
+    [171,321,193,321],
+    [125,321,104,321],
+    [288,285,284,290,269,298,268,319,304,320],
+    [126,320,126,301],
+    [681,245,679,240,690,235],
+    [1334,27,1330,31,1330,42,1326,44,1325,70,1315,82,1317,97,1317,108,1315,110,1317,123,1317,134,1315,136,1317,151,1317,162,1315,164,1317,188,1314,191,1317,207,1317,215,1314,218,1317,231,1317,240,1314,243,1317,263,1317,284,1314,309,1315,314],
+    [171,300,127,300],
+    [171,300,192,299],
+    [215,299,194,299],
+    [125,300,104,300],
+    [1334,0,1334,26],
+    [736,198,737,193,733,191,730,194,730,200,713,215,704,220,687,225,686,228,691,234],
+    [60,318,62,300,79,300],
+    [217,299,235,299],
+    [194,320,193,300],
+    [102,300,81,300],
+    [197,242,201,243,214,254,235,262,249,265,282,264,282,268,271,276,267,281,269,283,275,284,288,284],
+    [779,233,782,228,780,224,768,221,756,215,741,204],
+    [697,235,692,235],
+    [305,319,304,281,307,278,344,265,362,275,379,281,381,304,407,304],
+    [742,297,722,297,720,295,720,278,722,273,728,267,738,267,742,269,747,276,747,296,742,297]
+  ],
+  back: [
+    [315,269,317,256,322,250,321,192,323,186,330,176,338,168],
+    [16,258,16,249,0,248],
+    [983,258,981,252,984,245,994,244,1017,234,1036,241],
+    [1509,268,1480,270,1478,272,1477,281,1477,285,1479,287],
+    [477,240,475,227,464,225,462,223,461,210,459,208,435,210,432,213,432,227,430,229,415,229,414,195,412,193,387,195,384,198,383,230,374,230,371,233,372,271],
+    [1428,252,1429,229,1432,226,1465,224],
+    [94,239,95,232,99,229,143,227,162,227,164,229,164,239],
+    [303,275,284,275],
+    [190,240,191,232,195,227,216,217,220,217,222,219,223,251],
+    [1112,213,1112,188,1114,185,1150,173,1154,173],
+    [241,256,241,204],
+    [23,259,48,258,52,257,53,253,56,250,76,250,83,248],
+    [531,174,540,175,545,178,546,245,552,249,553,265,566,275,576,275,577,255,579,253,600,252,602,254,602,280,604,282,635,281,635,213,638,209,644,206,663,198,667,198],
+    [1288,218,1304,217,1306,219,1305,259,1309,261],
+    [1189,267,1191,265,1192,242,1194,240,1199,240],
+    [786,232,800,231,807,234,813,239,821,239,823,241,823,281,825,283,853,281,855,279,854,269,856,253,857,176,860,173,877,166,883,167,895,175,896,174],
+    [338,168,342,174,347,189],
+    [348,198,347,255,355,265],
+    [1466,232,1466,276,1467,286,1469,287],
+    [1200,241,1200,247],
+    [492,250,490,246,490,237,494,178,497,176,525,171],
+    [899,183,897,236,912,237,918,250],
+    [1361,301,1372,300,1374,298,1373,284,1376,280,1386,280,1387,275,1390,273,1407,272,1411,267,1415,266],
+    [1181,270,1174,271,1165,267,1154,267,1152,265,1153,184],
+    [669,265,667,198],
+    [1092,204,1092,192,1083,190,1066,191,1063,195,1063,205],
+    [283,257,274,256,274,202,266,195,261,193,243,198]
+  ]
+};
 
 function auroraClamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 function auroraSmooth(a, b, x) { var t = auroraClamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
@@ -48,7 +133,7 @@ function createAurora(canvas, initial) {
   var bg = document.createElement('canvas');
   var o = {}, styles = [], font = '';
   var W = 0, H = 0, dpr = 1, cw = 10, ch = 15, cols = 0, rows = 0;
-  var energy = new Float32Array(0), tmp = energy, glyph = new Uint8Array(0), ridge = new Int16Array(0);
+  var energy = new Float32Array(0), tmp = energy, glyph = new Uint8Array(0), ridge = new Int16Array(0), sky = null;
   var yb = new Float32Array(0), ray = yb, fold = yb;
   var buckets = []; for (var b = 0; b < (HUES + 1) * LEVELS; b++) buckets.push([]);
   var t = 8 + Math.random() * 30, last = 0, raf = 0, visible = true, dead = false;
@@ -75,15 +160,50 @@ function createAurora(canvas, initial) {
     var n = cols * rows, m = CURTAINS.length * cols;
     energy = new Float32Array(n); tmp = new Float32Array(n); glyph = new Uint8Array(n);
     yb = new Float32Array(m); ray = new Float32Array(m); fold = new Float32Array(m);
-    ridge = new Int16Array(cols);
-    var scale = o.horizon > 0.7 ? 0.7 : 1;
-    for (var c = 0; c < cols; c++) {
-      var x = c * cw;
-      var hgt = 0.10 + 0.05 * Math.sin(x * 0.0042 + 1.3) + 0.03 * Math.sin(x * 0.011) + 0.014 * Math.sin(x * 0.031 + 2);
-      ridge[c] = o.ridge ? rows - Math.round(rows * hgt * scale) : rows;
-    }
+    placeSkyline();
     font = '700 ' + Math.round(cw * 1.45) + 'px "Space Mono", ui-monospace, Menlo, monospace';
     paintBackground();
+  }
+
+  // Bottom-aligned, as wide as the canvas unless that would make it taller than o.skyline.
+  // ridge[c] = first row hidden behind the skyline in column c, so aurora glyphs stop above it.
+  function placeSkyline() {
+    ridge = new Int16Array(cols).fill(rows);
+    sky = null;
+    if (!o.skyline) return;
+    var sy = Math.min(W / SKYLINE.w, (H * o.skyline) / SKYLINE.h);
+    var sx = Math.min(W / SKYLINE.w, sy * SKY_STRETCH);
+    sky = { sx: sx, sy: sy, ox: (W - SKYLINE.w * sx) / 2, oy: H + 2 - SKYLINE.h * sy };
+    var pad = SKY_STROKES[1].width * sy;
+    SKY_STROKES.forEach(function (st) {
+      SKYLINE[st.key].forEach(function (l) {
+        for (var i = 2; i < l.length; i += 2) {
+          var x0 = sky.ox + l[i - 2] * sx, y0 = sky.oy + l[i - 1] * sy;
+          var x1 = sky.ox + l[i] * sx, y1 = sky.oy + l[i + 1] * sy;
+          var n = Math.max(1, Math.ceil(Math.abs(x1 - x0) / (cw / 2)));
+          for (var k = 0; k <= n; k++) {
+            var c = Math.floor((x0 + (x1 - x0) * k / n) / cw);
+            var r = Math.floor((y0 + (y1 - y0) * k / n - pad) / ch);
+            if (c >= 0 && c < cols && r < ridge[c]) ridge[c] = Math.max(0, r);
+          }
+        }
+      });
+    });
+  }
+
+  function paintSkyline(g) {
+    if (!sky) return;
+    g.lineCap = g.lineJoin = 'round';
+    SKY_STROKES.forEach(function (st) {
+      g.strokeStyle = st.rgba;
+      g.lineWidth = Math.max(1.25, st.width * sky.sy);
+      g.beginPath();
+      SKYLINE[st.key].forEach(function (l) {
+        g.moveTo(sky.ox + l[0] * sky.sx, sky.oy + l[1] * sky.sy);
+        for (var i = 2; i < l.length; i += 2) g.lineTo(sky.ox + l[i] * sky.sx, sky.oy + l[i + 1] * sky.sy);
+      });
+      g.stroke();
+    });
   }
 
   function paintBackground() {
@@ -91,13 +211,15 @@ function createAurora(canvas, initial) {
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.fillStyle = SKY;
     g.fillRect(0, 0, W, H);
-    if (!o.showGrid) return;
-    g.strokeStyle = 'rgba(255,255,255,0.032)';
-    g.lineWidth = 1 / dpr;
-    g.beginPath();
-    for (var c = 0; c <= cols; c++) { g.moveTo(c * cw, 0); g.lineTo(c * cw, H); }
-    for (var r = 0; r <= rows; r++) { g.moveTo(0, r * ch); g.lineTo(W, r * ch); }
-    g.stroke();
+    if (o.showGrid) {
+      g.strokeStyle = 'rgba(255,255,255,0.032)';
+      g.lineWidth = 1 / dpr;
+      g.beginPath();
+      for (var c = 0; c <= cols; c++) { g.moveTo(c * cw, 0); g.lineTo(c * cw, H); }
+      for (var r = 0; r <= rows; r++) { g.moveTo(0, r * ch); g.lineTo(W, r * ch); }
+      g.stroke();
+    }
+    paintSkyline(g);
   }
 
   function deposit(c, r, amount) {
@@ -160,14 +282,9 @@ function createAurora(canvas, initial) {
     return HUES * LEVELS + Math.min(LEVELS - 1, Math.floor(tw * 4));
   }
 
+  // Behind the skyline: no aurora, only a sparse scatter of dim ticks (lit windows).
   function cellRidge(c, r) {
-    var top = ridge[c];
-    if (r === top) {
-      var prev = c > 0 ? ridge[c - 1] : top, next = c < cols - 1 ? ridge[c + 1] : top;
-      glyph[r * cols + c] = next < top ? G_UP : prev < top ? G_DOWN : (next > top && prev > top ? G_PEAK : G_FLAT);
-      return HUES * LEVELS + 2;
-    }
-    if (auroraHash(c, r, 11) < 0.94) return -1;
+    if (r === ridge[c] || auroraHash(c, r, 11) < 0.95) return -1;
     glyph[r * cols + c] = auroraHash(c, r, 13) > 0.5 ? G_TICK : G_DOT;
     return HUES * LEVELS;
   }
