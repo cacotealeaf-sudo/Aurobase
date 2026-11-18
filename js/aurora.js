@@ -20,16 +20,14 @@ var CURTAINS = [
 var GLYPHS = '.:-+=tS%X#@' + "'";
 var RAMP_LEN = 11;
 var G_DOT = 0, G_PLUS = 3, G_TICK = 11;
-var SKY_STROKES = [ // back first so the front strokes sit on top
-  { key: 'back', rgba: 'rgba(214,212,208,0.20)', width: 2.6 },
-  { key: 'front', rgba: 'rgba(214,212,208,0.46)', width: 3.4 }
-];
+// Dashed like the old ASCII ridge: dash and gap are fractions of a grid cell, width is in CSS px.
+var SKY_LINE = { rgba: 'rgba(214,212,208,0.5)', width: 1.4, dash: 0.7, gap: 0.3 };
 var SKY_STRETCH = 1.3; // wide canvases may widen the drawing this much before it is centred
 var HUES = 10, LEVELS = 6, PALE_RGB = [214, 212, 208];
 var SKY = '#0b0b0d';
 
 /* Taipei skyline (traced from the owner's line drawing): polylines as flat x,y lists in source
- * pixels, front = dark strokes, back = the paler buildings behind. Bottom of the drawing = y 323. */
+ * pixels (front layer only). Bottom of the drawing = y 323. */
 var SKYLINE = {
   w: 1509, h: 323,
   front: [
@@ -75,35 +73,6 @@ var SKYLINE = {
     [697,235,692,235],
     [305,319,304,281,307,278,344,265,362,275,379,281,381,304,407,304],
     [742,297,722,297,720,295,720,278,722,273,728,267,738,267,742,269,747,276,747,296,742,297]
-  ],
-  back: [
-    [315,269,317,256,322,250,321,192,323,186,330,176,338,168],
-    [16,258,16,249,0,248],
-    [983,258,981,252,984,245,994,244,1017,234,1036,241],
-    [1509,268,1480,270,1478,272,1477,281,1477,285,1479,287],
-    [477,240,475,227,464,225,462,223,461,210,459,208,435,210,432,213,432,227,430,229,415,229,414,195,412,193,387,195,384,198,383,230,374,230,371,233,372,271],
-    [1428,252,1429,229,1432,226,1465,224],
-    [94,239,95,232,99,229,143,227,162,227,164,229,164,239],
-    [303,275,284,275],
-    [190,240,191,232,195,227,216,217,220,217,222,219,223,251],
-    [1112,213,1112,188,1114,185,1150,173,1154,173],
-    [241,256,241,204],
-    [23,259,48,258,52,257,53,253,56,250,76,250,83,248],
-    [531,174,540,175,545,178,546,245,552,249,553,265,566,275,576,275,577,255,579,253,600,252,602,254,602,280,604,282,635,281,635,213,638,209,644,206,663,198,667,198],
-    [1288,218,1304,217,1306,219,1305,259,1309,261],
-    [1189,267,1191,265,1192,242,1194,240,1199,240],
-    [786,232,800,231,807,234,813,239,821,239,823,241,823,281,825,283,853,281,855,279,854,269,856,253,857,176,860,173,877,166,883,167,895,175,896,174],
-    [338,168,342,174,347,189],
-    [348,198,347,255,355,265],
-    [1466,232,1466,276,1467,286,1469,287],
-    [1200,241,1200,247],
-    [492,250,490,246,490,237,494,178,497,176,525,171],
-    [899,183,897,236,912,237,918,250],
-    [1361,301,1372,300,1374,298,1373,284,1376,280,1386,280,1387,275,1390,273,1407,272,1411,267,1415,266],
-    [1181,270,1174,271,1165,267,1154,267,1152,265,1153,184],
-    [669,265,667,198],
-    [1092,204,1092,192,1083,190,1066,191,1063,195,1063,205],
-    [283,257,274,256,274,202,266,195,261,193,243,198]
   ]
 };
 
@@ -174,36 +143,34 @@ function createAurora(canvas, initial) {
     var sy = Math.min(W / SKYLINE.w, (H * o.skyline) / SKYLINE.h);
     var sx = Math.min(W / SKYLINE.w, sy * SKY_STRETCH);
     sky = { sx: sx, sy: sy, ox: (W - SKYLINE.w * sx) / 2, oy: H + 2 - SKYLINE.h * sy };
-    var pad = SKY_STROKES[1].width * sy;
-    SKY_STROKES.forEach(function (st) {
-      SKYLINE[st.key].forEach(function (l) {
-        for (var i = 2; i < l.length; i += 2) {
-          var x0 = sky.ox + l[i - 2] * sx, y0 = sky.oy + l[i - 1] * sy;
-          var x1 = sky.ox + l[i] * sx, y1 = sky.oy + l[i + 1] * sy;
-          var n = Math.max(1, Math.ceil(Math.abs(x1 - x0) / (cw / 2)));
-          for (var k = 0; k <= n; k++) {
-            var c = Math.floor((x0 + (x1 - x0) * k / n) / cw);
-            var r = Math.floor((y0 + (y1 - y0) * k / n - pad) / ch);
-            if (c >= 0 && c < cols && r < ridge[c]) ridge[c] = Math.max(0, r);
-          }
+    var pad = SKY_LINE.width * 2;
+    SKYLINE.front.forEach(function (l) {
+      for (var i = 2; i < l.length; i += 2) {
+        var x0 = sky.ox + l[i - 2] * sx, y0 = sky.oy + l[i - 1] * sy;
+        var x1 = sky.ox + l[i] * sx, y1 = sky.oy + l[i + 1] * sy;
+        var n = Math.max(1, Math.ceil(Math.abs(x1 - x0) / (cw / 2)));
+        for (var k = 0; k <= n; k++) {
+          var c = Math.floor((x0 + (x1 - x0) * k / n) / cw);
+          var r = Math.floor((y0 + (y1 - y0) * k / n - pad) / ch);
+          if (c >= 0 && c < cols && r < ridge[c]) ridge[c] = Math.max(0, r);
         }
-      });
+      }
     });
   }
 
   function paintSkyline(g) {
     if (!sky) return;
-    g.lineCap = g.lineJoin = 'round';
-    SKY_STROKES.forEach(function (st) {
-      g.strokeStyle = st.rgba;
-      g.lineWidth = Math.max(1.25, st.width * sky.sy);
-      g.beginPath();
-      SKYLINE[st.key].forEach(function (l) {
-        g.moveTo(sky.ox + l[0] * sky.sx, sky.oy + l[1] * sky.sy);
-        for (var i = 2; i < l.length; i += 2) g.lineTo(sky.ox + l[i] * sky.sx, sky.oy + l[i + 1] * sky.sy);
-      });
+    g.lineCap = 'butt'; g.lineJoin = 'miter';
+    g.strokeStyle = SKY_LINE.rgba;
+    g.lineWidth = SKY_LINE.width;
+    g.setLineDash([cw * SKY_LINE.dash, cw * SKY_LINE.gap]);
+    SKYLINE.front.forEach(function (l) {
+      g.beginPath(); // one path per stroke so each starts on a dash
+      g.moveTo(sky.ox + l[0] * sky.sx, sky.oy + l[1] * sky.sy);
+      for (var i = 2; i < l.length; i += 2) g.lineTo(sky.ox + l[i] * sky.sx, sky.oy + l[i + 1] * sky.sy);
       g.stroke();
     });
+    g.setLineDash([]);
   }
 
   function paintBackground() {
