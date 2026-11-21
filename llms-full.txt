@@ -1382,6 +1382,20 @@ Forge 產品頁列有本機實測結果與實機畫面。若要在貴機構環�
 **問：AI 智慧語伴如何協助社工？**
 答：語伴把對話自動轉成文字並產生關懷報告，社工不必逐一記錄；系統也會分析長者需求，協助社工安排資源，新進社工也能較快上手。
 
+### 關於奧洛：常見問題（https://aurobase.com/about.html）
+
+**問：奧洛 Aurobase 是什麼公司？**
+答：奧洛 Aurobase（奧洛股份有限公司）位於台北內湖，開發可部署於企業自有機房的 AURO NEXUS AI 治理平台，並代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，提供廣告投放與社群經營服務。
+
+**問：奧洛的 AI 治理平台叫什麼？**
+答：奧洛的 AI 治理平台叫 AURO NEXUS，以 Forge 為治理底座：每一次 AI 呼叫都先檢查權限與政策，可限定只用地端模型，並寫入可離線驗證的雜湊鏈稽核軌跡。
+
+**問：奧洛 Aurobase 代理哪些行銷科技產品？**
+答：奧洛代理並導入 HCL Discover 數位體驗分析、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，並提供 Google、Meta、LINE 廣告投放與社群經營服務。
+
+**問：奧洛 Aurobase 在哪裡？怎麼聯絡？**
+答：奧洛 Aurobase 位於 114 台北市內湖區洲子街101號2樓，電話 +886-2-5568-4688，Email ad@aurocore.com，也可在網站填寫諮詢表單，由專人回覆。
+
 ### 金融業運用 AI 指引怎麼落實：常見問題（https://aurobase.com/fsc-ai-guideline.html）
 
 **問：金融業運用 AI 指引有法律拘束力嗎？**

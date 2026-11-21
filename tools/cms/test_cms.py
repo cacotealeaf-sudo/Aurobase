@@ -207,6 +207,22 @@ class AuditTest(SiteCopy):
         self.assertIn('ai-companion.html', sol)
         self.assertNotIn('ai-companion.html', svc[:svc.index('</section>')])
 
+    def test_every_hand_written_page_has_breadcrumb_and_entity_aliases(self):
+        # 手寫頁（首頁除外）都要有 BreadcrumbList；Organization 列出對外品牌名「奧洛 Aurobase」，AI 引擎才對得到同一個實體
+        import re
+        gen.build_all()
+        for rel in gen.load_pages_cfg():
+            path = os.path.join(self.root, rel)
+            if rel == 'index.html' or not os.path.exists(path):
+                continue
+            s = open(path, encoding='utf-8').read()
+            self.assertIn('"@type": "BreadcrumbList"', s, rel)
+        home = open(os.path.join(self.root, 'index.html'), encoding='utf-8').read()
+        self.assertIn('"奧洛 Aurobase"', home)
+        self.assertIsNone(re.search('奧洛科技', home))
+        about = open(os.path.join(self.root, 'about.html'), encoding='utf-8').read()
+        self.assertIn('"@type": "AboutPage"', about)
+
     def test_title_width_counts_latin_as_half(self):
         self.assertEqual(gen.disp_width('AI 治理'), 3.5)
 

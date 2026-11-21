@@ -37,11 +37,12 @@ ORG = {
     '@type': 'Organization',
     '@id': SITE + '/#organization',
     'name': '奧洛股份有限公司',
-    'alternateName': ['Aurobase', '奧洛'],
+    # 對外統一稱「奧洛 Aurobase」（Roger 2026-11-22）；法定名稱放 legalName。別名列齊，讓搜尋與 AI 引擎對到同一個實體
+    'alternateName': ['奧洛 Aurobase', 'Aurobase', '奧洛'],
     'url': SITE + '/',
     'logo': SITE + '/images/logo.svg',
     'address': {'@type': 'PostalAddress', 'streetAddress': '洲子街101號2樓', 'addressLocality': '內湖區',
-                'addressRegion': '台北市', 'addressCountry': 'TW'},
+                'addressRegion': '台北市', 'postalCode': '114', 'addressCountry': 'TW'},
     'telephone': '+886-2-5568-4688',
     'email': 'ad@aurocore.com',
     'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'telephone': '+886-2-5568-4688',
@@ -50,6 +51,7 @@ ORG = {
     'legalName': '奧洛股份有限公司',
     'description': '奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案（含 AI 智慧語伴），代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並提供數位廣告投放、社群經營與客服中心服務。',
     'areaServed': {'@type': 'Country', 'name': '台灣'},
+    'brand': {'@type': 'Brand', 'name': 'AURO NEXUS'},
     'knowsAbout': ['AI 治理', '生成式 AI', '地端 AI', '企業知識庫', '客戶數據平台', '行銷自動化', '數位體驗分析',
                    '資料治理', '資安弱點掃描', '數位廣告投放', '社群經營'],
 }
@@ -1757,6 +1759,14 @@ def static_ld(rel, cfg, s):
     graph = [page, ORG]
     if rel == 'index.html':
         graph.append(WEBSITE)
+    else:
+        # 麵包屑：首頁 → （上一層）→ 本頁；上一層由 _pages.json 的 parent 指定，新聞文章固定掛在新聞中心
+        parent = cfg.get('parent') or (['新聞中心', 'blog.html'] if cfg.get('type') == 'BlogPosting' else None)
+        crumbs = [('首頁', SITE + '/')] + ([(parent[0], SITE + '/' + parent[1])] if parent else []) + \
+                 [(cfg.get('name') or re.sub(r'｜.*$', '', title), url)]
+        graph.append({'@type': 'BreadcrumbList', '@id': url + '#breadcrumb', 'itemListElement': [
+            {'@type': 'ListItem', 'position': i, 'name': n, 'item': u} for i, (n, u) in enumerate(crumbs, 1)]})
+        page['breadcrumb'] = {'@id': url + '#breadcrumb'}
     if cfg.get('faq'):
         graph.append({'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': [
             {'@type': 'Question', 'name': f['q'], 'acceptedAnswer': {'@type': 'Answer', 'text': f['a']}} for f in cfg['faq']]})
@@ -1767,6 +1777,9 @@ def static_ld(rel, cfg, s):
     if t == 'ContactPage':
         page['@type'] = 'ContactPage'
         page['about'] = {'@id': ORG['@id']}
+    elif t == 'AboutPage':
+        page['@type'] = 'AboutPage'
+        page['about'] = page['mainEntity'] = {'@id': ORG['@id']}
     elif t == 'Service':
         graph.append({'@type': 'Service', 'name': cfg['name'], 'serviceType': cfg.get('service_type', cfg['name']),
                       'description': desc, 'provider': {'@id': ORG['@id']}, 'areaServed': {'@type': 'Country', 'name': '台灣'},

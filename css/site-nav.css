@@ -215,3 +215,7 @@ html.ss-open, html.ss-open body { overflow: hidden; }
     /* 選單打開時收起頁首的錨點按鈕列，否則會蓋住側欄最上方的標誌 */
     body.offcanvas .btn.fixed-top.text-right { display: none; }
 }
+
+/* ── 新聞文章：舊文標示發表年份 ── */
+.pg-archive-note { font-size: 0.9rem; color: #6b6b72; background: #f6f6f7; border-radius: 8px; padding: 0.6rem 0.9rem; margin: 0 0 1.2rem; }
+.pg-archive-note a { color: #E63109; }

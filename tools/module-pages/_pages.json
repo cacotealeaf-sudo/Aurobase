@@ -4,7 +4,7 @@
     "index.html": {
       "type": "WebPage",
       "og_card": {
-        "kicker": "AI 治理平台・數位行銷・行銷科技",
+        "kicker": "企業 AI 治理平台・行銷科技",
         "title": "奧洛 Aurobase",
         "sub": "",
         "tag": "AURO NEXUS AI 治理平台、HCL Discover 與 HCL Unica 等行銷科技，以及數位廣告與社群經營服務。"
@@ -24,8 +24,8 @@
         "AI 智慧語伴",
         "客服中心"
       ],
-      "description": "奧洛（Aurobase）提供 AURO NEXUS AI 治理平台與產業解決方案（含 AI 智慧語伴），代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，並有 Google、Facebook 廣告投放、社群經營與客服中心服務；可部署於雲端、地端或依需求客製。",
-      "title": "奧洛 Aurobase｜AI 治理平台・數位整合行銷・行銷科技"
+      "description": "奧洛 Aurobase 開發可部署於企業自有機房的 AURO NEXUS AI 治理平台，讓金融與受監理產業在推論前檢查權限、全程留下可稽核的紀錄；並代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技，提供廣告投放與社群經營服務。",
+      "title": "奧洛 Aurobase｜企業 AI 治理平台・地端 AI・行銷科技"
     },
     "marketing.html": {
       "type": "Service",
@@ -165,25 +165,69 @@
           "a": "語伴把對話自動轉成文字並產生關懷報告，社工不必逐一記錄；系統也會分析長者需求，協助社工安排資源，新進社工也能較快上手。"
         }
       ],
-      "inquiry_chip": "AI 智慧語伴"
+      "inquiry_chip": "AI 智慧語伴",
+      "parent": [
+        "產業解決方案",
+        "nexus.html#solutions"
+      ]
     },
     "blog.html": {
       "type": "Blog",
-      "name": "奧洛新聞中心",
-      "description": "奧洛新聞中心收錄數位行銷、CDP 客戶數據平台、IBM Tealeaf 顧客行為分析與社群經營等文章，整理行銷科技的觀念與實務做法，協助企業規劃數位行銷策略。",
+      "name": "新聞中心",
+      "description": "奧洛 Aurobase 新聞中心：金融業運用 AI 指引落實、地端 LLM 閘道選型等 AI 治理指南，以及 CDP 客戶數據平台、顧客體驗分析與社群經營等行銷科技文章。",
       "og_card": {
         "kicker": "新聞中心",
-        "title": "行銷科技文章",
+        "title": "AI 治理與行銷科技文章",
         "sub": "",
-        "tag": "數位行銷、CDP 客戶數據平台、顧客體驗分析與社群經營的觀念與實務。"
+        "tag": "AI 治理指南、地端 AI 選型，以及行銷科技的觀念與實務。"
       },
       "keywords": [
-        "奧洛新聞中心",
-        "數位行銷",
+        "奧洛 Aurobase",
+        "AI 治理",
+        "金融業運用AI指引",
+        "LLM 閘道",
         "CDP",
         "顧客體驗分析",
-        "社群經營",
         "行銷科技"
+      ]
+    },
+    "about.html": {
+      "type": "AboutPage",
+      "name": "關於奧洛",
+      "description": "奧洛 Aurobase（奧洛股份有限公司）位於台北內湖，開發可部署於企業自有機房的 AURO NEXUS AI 治理平台，並代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，提供廣告投放與社群經營服務。",
+      "og_card": {
+        "kicker": "關於奧洛",
+        "title": "奧洛 Aurobase",
+        "sub": "",
+        "tag": "AURO NEXUS AI 治理平台・行銷科技・數位行銷服務"
+      },
+      "keywords": [
+        "關於奧洛",
+        "奧洛 Aurobase",
+        "奧洛股份有限公司",
+        "AURO NEXUS",
+        "AI 治理平台",
+        "地端 AI",
+        "行銷科技",
+        "台北內湖"
+      ],
+      "faq": [
+        {
+          "q": "奧洛 Aurobase 是什麼公司？",
+          "a": "奧洛 Aurobase（奧洛股份有限公司）位於台北內湖，開發可部署於企業自有機房的 AURO NEXUS AI 治理平台，並代理 HCL Discover、HCL Unica、Magnolia CMS 等行銷科技產品，提供廣告投放與社群經營服務。"
+        },
+        {
+          "q": "奧洛的 AI 治理平台叫什麼？",
+          "a": "奧洛的 AI 治理平台叫 AURO NEXUS，以 Forge 為治理底座：每一次 AI 呼叫都先檢查權限與政策，可限定只用地端模型，並寫入可離線驗證的雜湊鏈稽核軌跡。"
+        },
+        {
+          "q": "奧洛 Aurobase 代理哪些行銷科技產品？",
+          "a": "奧洛代理並導入 HCL Discover 數位體驗分析、HCL Unica 行銷自動化與 Magnolia CMS 內容管理系統，並提供 Google、Meta、LINE 廣告投放與社群經營服務。"
+        },
+        {
+          "q": "奧洛 Aurobase 在哪裡？怎麼聯絡？",
+          "a": "奧洛 Aurobase 位於 114 台北市內湖區洲子街101號2樓，電話 +886-2-5568-4688，Email ad@aurocore.com，也可在網站填寫諮詢表單，由專人回覆。"
+        }
       ]
     },
     "contact.html": {
@@ -296,7 +340,11 @@
           "a": "評估廠商專業與集中度風險、以書面契約明定責任與追索途徑、涉及客戶資料時簽訂資料保護條款、訂定停止委託時的資料或系統遷移機制，並要求廠商留存受託作業的書面或數位紀錄。"
         }
       ],
-      "inquiry_chip": "AURO NEXUS AI 治理平台"
+      "inquiry_chip": "AURO NEXUS AI 治理平台",
+      "parent": [
+        "新聞中心",
+        "blog.html"
+      ]
     },
     "llm-gateway-guide.html": {
       "type": "Article",
@@ -346,7 +394,11 @@
           "a": "一個代表性的應用（例如內部知識問答）、一組測試帳號與權限、含假個資的測試提示、一台可放地端模型的主機，並請稽核或法遵人員一起驗證稽核紀錄。"
         }
       ],
-      "inquiry_chip": "AURO NEXUS AI 治理平台"
+      "inquiry_chip": "AURO NEXUS AI 治理平台",
+      "parent": [
+        "新聞中心",
+        "blog.html"
+      ]
     },
     "privacypolicy.html": {
       "type": "WebPage",
@@ -381,6 +433,10 @@
           "label": "網站數據分析",
           "url": "marketing.html#data_analysis"
         }
+      ],
+      "parent": [
+        "新聞中心",
+        "blog.html"
       ]
     },
     "blogpost/single-2023-11-10.html": {
@@ -407,6 +463,10 @@
           "label": "網站數據分析",
           "url": "marketing.html#data_analysis"
         }
+      ],
+      "parent": [
+        "新聞中心",
+        "blog.html"
       ]
     },
     "blogpost/single-2023-12-4.html": {
@@ -433,6 +493,10 @@
           "label": "AURA Connect 數位軌跡行銷資料整合",
           "url": "solution-digital-trail.html"
         }
+      ],
+      "parent": [
+        "新聞中心",
+        "blog.html"
       ]
     },
     "blogpost/single-2024-1-8.html": {
@@ -459,6 +523,10 @@
           "label": "數位廣告投放服務",
           "url": "marketing.html#advertising"
         }
+      ],
+      "parent": [
+        "新聞中心",
+        "blog.html"
       ]
     }
   }

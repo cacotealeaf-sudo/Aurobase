@@ -60,7 +60,7 @@ def section(sid, num, eyebrow, title, inner, more=None, last=False):
 ''' % (sid, ' sec-last' if last else '', num, num, eyebrow, title, m, inner)
 
 
-def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, ghost):
+def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, ghost, kicker='AUROBASE 指南'):
     s = io.open(ROOT + '/security.html', encoding='utf-8').read()
     s = re.sub(r'<title>.*?</title>', '<title>%s</title>' % title, s, 1)
     s = re.sub(r'<meta name="description" content="[^"]*">', lambda m: '<meta name="description" content="%s">' % desc, s, 1)
@@ -76,7 +76,7 @@ def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, gh
   <section class="idx-aurora idx-hero gd-hero">
     <canvas data-aurora="hero" aria-hidden="true"></canvas>
     <div class="idx-aurora-body idx-wrap">
-      <div class="idx-tagpair"><span>AUROBASE 指南</span><span>%s</span></div>
+      <div class="idx-tagpair"><span>%s</span><span>%s</span></div>
       <h1 class="idx-hero-title">%s</h1>
       <div class="idx-rule"></div>
       <p class="idx-hero-desc">%s</p>
@@ -87,7 +87,7 @@ def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, gh
       <p class="gd-meta">%s</p>
     </div>
   </section>
-''' % (tag, ''.join('<span>%s</span>' % x for x in h1), lead, primary[0], primary[1], ARROW, ghost[0], ghost[1], meta)
+''' % (kicker, tag, ''.join('<span>%s</span>' % x for x in h1), lead, primary[0], primary[1], ARROW, ghost[0], ghost[1], meta)
     # 產生器會在頁尾前插入常見問題，這裡不寫
     s = s[:i] + hero + ''.join(sections) + '\n' + s[j:]
     s = re.sub(r'\n  <!-- PAGE-FAQ:BEGIN.*?<!-- PAGE-FAQ:END -->', '', s, flags=re.S)
