@@ -20,6 +20,8 @@ STYLE = '''    <style>
 .gd-card .gd-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin: 6px 0 2px; }
 .gd-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.85; color: var(--idx-text-2); }
 .gd-card ul li + li { margin-top: 4px; }
+.gd-card .gd-desc { font-size: 14px; line-height: 1.85; color: var(--idx-text-2); margin: 8px 0 10px; }
+.gd-card .gd-kw { font-size: 12px; line-height: 1.8; color: var(--idx-muted); margin: 12px 0 0; }
 .gd-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.8; }
 .gd-table th, .gd-table td { border-bottom: 1px solid var(--idx-line); padding: 14px 12px; text-align: left; vertical-align: top; }
 .gd-table th { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); border-bottom: 2px solid var(--idx-line-2); }

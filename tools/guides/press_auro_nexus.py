@@ -2,8 +2,46 @@
 不放進選單、首頁、新聞中心與站內搜尋；只列在 sitemap 與 llms.txt，讓搜尋引擎與 AI 找得到，也可直接把網址或檔案寄給媒體與合作夥伴。
 內容只用網站上已公開的事實。發稿日改 DATE／DATE_ZH，並同步 _pages.json 的 date。
 改完跑 python3 tools/guides/press_auro_nexus.py，再跑 tools/build-module-pages.py。"""
-import os, sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from guidekit import build, section
+import os, sys, json, re, io; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from guidekit import build, section, ROOT
+
+# 模組與解決方案的說明、要點、關鍵字直接讀產品頁的設定檔，新聞稿和產品頁用同一份說法
+SRC = os.path.join(ROOT, 'tools', 'module-pages')
+MODULE_ORDER = ['nexus-forge', 'nexus-auro', 'nexus-cdp', 'nexus-abm', 'nexus-insight', 'nexus-library', 'nexus-mira',
+                'nexus-pulse', 'nexus-geo', 'nexus-saga', 'nexus-ai-office', 'nexus-lisa', 'nexus-scanner', 'nexus-cardea']
+SOLUTION_ORDER = ['solution-police-record', 'solution-telesales', 'solution-ai-ocr', 'solution-digital-trail']
+SKIP_ROWS = ('是什麼', '所屬')
+
+
+def load(slug):
+    return json.load(io.open(os.path.join(SRC, slug + '.json'), encoding='utf-8'))
+
+
+def topics(m):
+    """關鍵字轉成「相關主題」：去掉平台名、問句型與重複的詞。"""
+    seen, out = set(), []
+    for k in m.get('keywords', []):
+        if k == 'AURO NEXUS' or re.search(r'是什麼|查詢$', k) or k.lower() in seen:
+            continue
+        seen.add(k.lower()); out.append(k)
+    return out
+
+
+def detail_card(m, meta):
+    rows = ''.join('<li><b>%s</b>：%s</li>' % (r[0], r[1]) for r in (m.get('summary') or []) if r[0] not in SKIP_ROWS)
+    return ('      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// %s</span></div>'
+            '<h3 class="idx-card-title"><a href="%s">%s｜%s</a></h3><p class="gd-desc">%s</p><ul>%s</ul>'
+            '<p class="gd-kw">相關主題：%s</p></article>'
+            % (meta, m['file'], m['code'], m['name_zh'], m['description'], rows, '・'.join(topics(m))))
+
+
+def sol_label(m):
+    label = m['name_zh'] if m['code'] == m['name_zh'] else '%s %s' % (m['code'], m['name_zh'])
+    return (' ' if label[0].isascii() else '') + label
+
+
+MODULES = [load(x) for x in MODULE_ORDER]
+SOLUTIONS = [load(x) for x in SOLUTION_ORDER]
 
 DATE_ZH = '2026 年 11 月 22 日'
 
@@ -11,7 +49,9 @@ body = '''    <div class="gd-answer">
       <p>【%s，台北】奧洛 Aurobase（奧洛股份有限公司）推出 <a href="nexus.html">AURO NEXUS</a> AI 治理平台。平台以 <a href="nexus-forge.html">Forge</a> 為治理底座，串起 AI Agent、客戶數據平台、企業知識庫、AI 內容產製、源碼檢測與 SSL 憑證管理等 14 個模組。各模組的 AI 呼叫在送往模型之前，先完成權限與政策檢查；模型可以限定只用地端；每一次呼叫都寫入雜湊鏈稽核軌跡，證據包附獨立驗證工具，稽核人員不需要連上平台就能查驗。</p>
       <p>金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導性質，以治理及問責、保護隱私及客戶權益、系統穩健與安全、透明及可解釋等六項原則為架構。指引第三章指出，在沒有適當管控機制的情況下，金融機構人員不得向生成式 AI 提供未經客戶同意提供的資訊；適當的管控機制例如採用封閉型部署的模型。</p>
       <p>企業各部門各自採購、各自串接 AI 工具時，資訊、資安與法遵單位很難掌握每一次 AI 使用的權限、資料與核准紀錄。AURO NEXUS 讓這些 AI 使用經過同一個入口：不符合政策的請求不會到達模型，含個人資料的請求可以只送往地端模型，事後可以逐筆查驗。</p>
-    </div>''' % DATE_ZH
+      <p>AURO NEXUS 的 14 個模組為：%s。各模組可單獨導入，也可組合成產業解決方案，例如%s，以及社福長照的 AI 智慧語伴。</p>
+    </div>''' % (DATE_ZH, '、'.join('%s（%s）' % (m['code'], m['name_zh']) for m in MODULES),
+                   '、'.join('%s的%s' % (m['leg'].replace('解決方案', ''), sol_label(m)) for m in SOLUTIONS))
 
 points = '''    <div class="gd-cols">
       <div class="gd-block"><h3>先檢查，再推論</h3><ul><li>AI 請求在送往模型之前就完成權限與政策檢查</li><li>不符合政策的請求不會到達模型</li></ul></div>
@@ -38,6 +78,14 @@ module_table = ('    <table class="gd-table"><thead><tr><th>能力</th><th>做�
                 '金融保險的<a href="solution-telesales.html">電話與視訊銷售對話智能</a>、社福長照的<a href="ai-companion.html">AI 智慧語伴</a>，'
                 '以及跨產業的<a href="solution-ai-ocr.html">AI OCR 智慧文件辨識</a>。</p>')
 
+module_cards = '    <div class="idx-grid">\n' + '\n'.join(detail_card(m, m['leg']) for m in MODULES) + '\n    </div>'
+solution_cards = ('    <div class="idx-grid">\n' + '\n'.join(detail_card(m, m['leg']) for m in SOLUTIONS) + '\n'
+                  '      <article class="idx-card gd-card"><div class="idx-card-meta"><span>// 社福長照解決方案</span></div>'
+                  '<h3 class="idx-card-title"><a href="ai-companion.html">AI 智慧語伴｜長者陪伴與社工協作</a></h3>'
+                  '<p class="gd-desc">AI 智慧語伴是奧洛（Aurobase）以 AI 語音為核心的智慧陪伴方案：透過語音互動主動陪伴長者，提供用藥提醒與關懷報告，'
+                  '結合健康監測與情緒分析，協助社工即時掌握長者的健康與情緒變化。</p>'
+                  '<p class="gd-kw">相關主題：AI 陪伴・長者照護・長照 AI・社工協作・用藥提醒・情緒分析</p></article>\n    </div>')
+
 deploy = '''    <div class="gd-cols">
       <div class="gd-block"><h3>公有雲台灣區域</h3><ul><li>部署於公有雲台灣區域的 Kubernetes，資料留在台灣</li><li>適合要快速上線的企業</li></ul></div>
       <div class="gd-block"><h3>企業自有機房或隔離網路</h3><ul><li>平台與模型都在企業環境內，模型可限定只用地端</li><li>適合金融與受監理產業</li></ul></div>
@@ -60,13 +108,16 @@ sections = [
     section('pr-body', '01', '新聞稿', '每一次 AI 呼叫，先檢查、可查驗', body),
     section('pr-points', '02', '平台特點', '三個設計原則', points),
     section('pr-modules', '03', '平台模組', '一個治理底座，14 個模組', module_table),
-    section('pr-deploy', '04', '部署方式', '雲端、地端、隔離網路', deploy),
-    section('pr-about', '05', '關於奧洛', '公司簡介與媒體聯絡', about, last=True),
+    section('pr-module-detail', '04', '模組介紹', '14 個模組逐一介紹', module_cards),
+    section('pr-solutions', '05', '產業解決方案', '由平台模組組成的方案', solution_cards),
+    section('pr-deploy', '06', '部署方式', '雲端、地端、隔離網路', deploy),
+    section('pr-about', '07', '關於奧洛', '公司簡介與媒體聯絡', about, last=True),
 ]
 build('press-auro-nexus.html',
       '奧洛 Aurobase 推出 AURO NEXUS AI 治理平台｜新聞稿',
       '奧洛 Aurobase 推出 AURO NEXUS AI 治理平台：以 Forge 治理底座串起 14 個模組，AI 呼叫在推論前先檢查權限與政策、可限定只用地端模型，並寫入可離線驗證的雜湊鏈稽核軌跡，協助金融與受監理產業在自有環境導入生成式 AI。',
-      ['奧洛 Aurobase', 'AURO NEXUS', 'AI 治理平台', '地端 AI', '生成式 AI 治理', '金融業運用 AI 指引', 'AI 稽核軌跡', '新聞稿'],
+      list(dict.fromkeys(['奧洛 Aurobase', 'AURO NEXUS', 'AI 治理平台', '地端 AI', '生成式 AI 治理', '金融業運用 AI 指引', 'AI 稽核軌跡', '新聞稿']
+                         + [m['code'] for m in MODULES + SOLUTIONS] + sum([topics(m)[:4] for m in MODULES + SOLUTIONS], []))),
       '新聞稿', ['奧洛 Aurobase 推出<br>AURO NEXUS AI 治理平台<em>.</em>'],
       '每一次 AI 呼叫先檢查權限與政策、可限定只用地端模型、證據可離線驗證，協助金融與受監理產業在自有環境導入生成式 AI。',
       '新聞稿 ・ %s ・ 台北' % DATE_ZH,
