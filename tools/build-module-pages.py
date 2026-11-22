@@ -1263,12 +1263,15 @@ def llms_full(mods, pf):
         if e['cat'] in ('數位行銷服務', '代理產品', '產業解決方案', '客服中心'):
             u = e['url'] if e['url'].startswith('http') else '%s/%s' % (SITE, e['url'])
             out.append('- [%s](%s)（%s）：%s' % (e['title'], u, e['cat'], e['desc']))
-    guides = [(rel, cfg) for rel, cfg in load_pages_cfg().items() if cfg.get('type') == 'Article' and os.path.exists(os.path.join(ROOT, rel))]
-    if guides:
-        out += ['', '## 指南', '']
-    for rel, cfg in guides:
-        out += ['', '### %s（%s/%s，%s 更新）' % (cfg.get('headline', cfg['name']), SITE, rel, cfg.get('modified', cfg['date'])), '']
-        out += article_text(read(os.path.join(ROOT, rel)))
+    articles = [(rel, cfg) for rel, cfg in load_pages_cfg().items() if cfg.get('type') == 'Article' and os.path.exists(os.path.join(ROOT, rel))]
+    # schema_type=NewsArticle 的是新聞稿，其餘 Article 是指南；兩者分開列
+    for heading, group in (('## 新聞稿', [a for a in articles if a[1].get('schema_type') == 'NewsArticle']),
+                           ('## 指南', [a for a in articles if a[1].get('schema_type') != 'NewsArticle'])):
+        if group:
+            out += ['', heading, '']
+        for rel, cfg in group:
+            out += ['', '### %s（%s/%s，%s 更新）' % (cfg.get('headline', cfg['name']), SITE, rel, cfg.get('modified', cfg['date'])), '']
+            out += article_text(read(os.path.join(ROOT, rel)))
     for rel, cfg in load_pages_cfg().items():
         if cfg.get('faq'):
             title = html.unescape(re.search(r'<title>(.*?)</title>', read(os.path.join(ROOT, rel)), re.S).group(1)) if os.path.exists(os.path.join(ROOT, rel)) else rel
@@ -1798,7 +1801,8 @@ def static_ld(rel, cfg, s):
         graph.append({'@type': 'Blog', '@id': url + '#blog', 'name': cfg['name'], 'url': url, 'publisher': {'@id': ORG['@id']}, 'blogPost': posts})
     elif t == 'Article':
         # 指南類文章：不屬於新聞中心，附出處（citation）讓 AI 引擎知道內容依據
-        graph.append({'@type': 'Article', '@id': url + '#article', 'headline': cfg.get('headline', re.sub(r'｜.*$', '', title)),
+        # schema_type 可設 NewsArticle（新聞稿）；未設就是一般指南文章
+        graph.append({'@type': cfg.get('schema_type', 'Article'), '@id': url + '#article', 'headline': cfg.get('headline', re.sub(r'｜.*$', '', title)),
                       'description': desc, 'datePublished': cfg['date'], 'dateModified': cfg.get('modified', cfg['date']),
                       'inLanguage': 'zh-Hant-TW', 'mainEntityOfPage': {'@id': url + '#webpage'},
                       'author': {'@id': ORG['@id']}, 'publisher': {'@id': ORG['@id']}, 'image': page['primaryImageOfPage'],

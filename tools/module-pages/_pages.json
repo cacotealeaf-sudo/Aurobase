@@ -400,6 +400,42 @@
         "blog.html"
       ]
     },
+    "press-auro-nexus.html": {
+      "type": "Article",
+      "schema_type": "NewsArticle",
+      "name": "AURO NEXUS 新聞稿",
+      "headline": "奧洛 Aurobase 推出 AURO NEXUS AI 治理平台",
+      "date": "2026-11-22",
+      "description": "奧洛 Aurobase 推出 AURO NEXUS AI 治理平台：以 Forge 治理底座串起 14 個模組，AI 呼叫在推論前先檢查權限與政策、可限定只用地端模型，並寫入可離線驗證的雜湊鏈稽核軌跡，協助金融與受監理產業在自有環境導入生成式 AI。",
+      "about": [
+        "AURO NEXUS",
+        "AI 治理平台",
+        "生成式 AI 治理"
+      ],
+      "citations": [
+        {
+          "name": "金融監督管理委員會〈金融業運用人工智慧(AI)指引〉（113 年 6 月 20 日）",
+          "url": "https://law.fsc.gov.tw/LawContent.aspx?id=GL003920"
+        }
+      ],
+      "og_card": {
+        "kicker": "新聞稿",
+        "title": "AURO NEXUS",
+        "sub": "",
+        "tag": "奧洛 Aurobase 推出 AI 治理平台"
+      },
+      "keywords": [
+        "奧洛 Aurobase",
+        "AURO NEXUS",
+        "AI 治理平台",
+        "地端 AI",
+        "生成式 AI 治理",
+        "金融業運用 AI 指引",
+        "AI 稽核軌跡",
+        "新聞稿"
+      ],
+      "inquiry_chip": "AURO NEXUS AI 治理平台"
+    },
     "privacypolicy.html": {
       "type": "WebPage",
       "name": "隱私權政策",

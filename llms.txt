@@ -28,6 +28,10 @@
 - [隱私權政策](privacypolicy.html): 個人資料蒐集、處理與利用方式
 - [客服中心](https://aurocore.com/): 客服中心系統建置與外包服務（外部網站）
 
+## 新聞稿
+
+- [奧洛 Aurobase 推出 AURO NEXUS AI 治理平台](press-auro-nexus.html) - 2026/11/22：平台做什麼、三個設計原則、14 個模組、部署方式、公司簡介與媒體聯絡
+
 ## 新聞中心文章
 
 - [金融業運用 AI 指引怎麼落實](fsc-ai-guideline.html) - 2026/11/02（指南）

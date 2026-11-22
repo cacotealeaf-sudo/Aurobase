@@ -188,8 +188,9 @@ class AuditTest(SiteCopy):
             if cfg.get('type') != 'Article':
                 continue
             page = open(os.path.join(self.root, rel), encoding='utf-8').read()
-            self.assertIn('"@type": "Article"', page, rel)
-            self.assertIn('<details><summary>', page, rel)
+            self.assertIn('"@type": "%s"' % cfg.get('schema_type', 'Article'), page, rel)
+            if cfg.get('faq'):
+                self.assertIn('<details><summary>', page, rel)
             self.assertIn(cfg['headline'], full, rel)
         self.assertIn('【實務建議】', full)
         self.assertIn('"citation"', open(os.path.join(self.root, 'fsc-ai-guideline.html'), encoding='utf-8').read())
@@ -206,6 +207,19 @@ class AuditTest(SiteCopy):
         svc = home[home.index('id="idx-services"'):]
         self.assertIn('ai-companion.html', sol)
         self.assertNotIn('ai-companion.html', svc[:svc.index('</section>')])
+
+    def test_press_release_is_findable_but_not_linked_from_the_site(self):
+        # 新聞稿給搜尋引擎、AI 與媒體用：要在 sitemap 與 llms 裡，但不出現在選單、新聞中心與站內搜尋
+        rel = 'press-auro-nexus.html'
+        page = open(os.path.join(self.root, rel), encoding='utf-8').read()
+        self.assertIn('"@type": "NewsArticle"', page)
+        self.assertIn(rel, self.page('sitemap.xml'))
+        self.assertIn(rel, self.page('llms.txt'))
+        self.assertIn('## 新聞稿', self.page('llms-full.txt'))
+        self.assertNotIn(rel, self.page('search-index.json'))
+        for f in os.listdir(self.root):
+            if f.endswith('.html') and f != rel:
+                self.assertNotIn('href="%s"' % rel, open(os.path.join(self.root, f), encoding='utf-8').read(), f)
 
     def test_every_hand_written_page_has_breadcrumb_and_entity_aliases(self):
         # 手寫頁（首頁除外）都要有 BreadcrumbList；Organization 列出對外品牌名「奧洛 Aurobase」，AI 引擎才對得到同一個實體
