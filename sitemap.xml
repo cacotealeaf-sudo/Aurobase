@@ -25,6 +25,8 @@
   <url><loc>https://aurobase.com/security.html</loc><changefreq>monthly</changefreq><priority>0.6</priority><image:image><image:loc>https://aurobase.com/images/og/security.jpg</image:loc></image:image></url>
   <url><loc>https://aurobase.com/fsc-ai-guideline.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><image:image><image:loc>https://aurobase.com/images/og/fsc-ai-guideline.jpg</image:loc></image:image></url>
   <url><loc>https://aurobase.com/llm-gateway-guide.html</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><image:image><image:loc>https://aurobase.com/images/og/llm-gateway-guide.jpg</image:loc></image:image></url>
+  <url><loc>https://aurobase.com/nexus-os.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aurobase.com/voice-studio.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://aurobase.com/press-auro-nexus.html</loc><lastmod>2026-11-22</lastmod><changefreq>yearly</changefreq><priority>0.6</priority><image:image><image:loc>https://aurobase.com/images/og/press-auro-nexus.jpg</image:loc></image:image></url>
   <url><loc>https://aurobase.com/privacypolicy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://aurobase.com/blogpost/single-2023-10-6.html</loc><lastmod>2023-10-06</lastmod><changefreq>yearly</changefreq><priority>0.6</priority><image:image><image:loc>https://aurobase.com/images/og/blogpost-single-2023-10-6.jpg</image:loc></image:image></url>

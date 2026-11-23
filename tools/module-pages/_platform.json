@@ -252,64 +252,7 @@
       "a": "金管會〈金融業運用人工智慧（AI）指引〉以治理與問責、隱私與客戶權益、系統穩健與安全、透明與可解釋等原則為架構。AURO NEXUS 以推論前檢查、地端模型、雜湊鏈稽核軌跡與可離線驗證的證據包對應這些原則；是否符合由主管機關與貴機構法遵認定。"
     }
   ],
-  "legacy_faq": [
-    {
-      "@type": "Question",
-      "name": "NEXUS OS 適合什麼工作？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "適合需要整理資料、執行任務、人工確認與交付成果的企業工作情境。導入時先選定具體流程，再確認所需知識、工具與驗收方式。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "NEXUS OS 能串接既有系統嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "依目標系統提供的介面、權限與資料條件評估串接方式。導入範圍會明確列出可用的整合與需要額外開發的項目。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "NEXUS OS 的 AI 可以自行執行所有操作嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "操作範圍依工具權限與治理配置決定。需要人工核准的動作，應在核准流程完成後執行；實際支援範圍於方案中確認。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "使用 NEXUS OS 時，公司資料會送到外部服務嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "資料流向取決於使用的模型、工具及部署方式。導入時會確認資料可使用的服務與邊界，並依需求評估地端方案。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "NEXUS OS 可以事後查看任務成果與紀錄嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "可用的成果與活動紀錄依功能及保存配置提供。保存期間、存取權限與刪除方式需在導入時明確約定。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "如何開始導入 NEXUS OS？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "先選一項有明確輸入、人工決策點與交付成果的工作，確認整合與驗收條件，再逐步擴大使用範圍。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "AI Voice Studio 生成的語音夠自然嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "AI Voice Studio 整合多個語音引擎，可依用途選用；中文語音以台灣口音為主要調校對象。正式使用前，建議用貴機構的實際稿件試聽比較。"
-      }
-    }
-  ],
+  "legacy_faq": [],
   "deploy_intro": "同一套平台可以放在公有雲、企業自有機房或隔離網路；三種方式使用相同的權限、模型路由與稽核軌跡，之後也可以搬移。",
   "deploy": [
     {

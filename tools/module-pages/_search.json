@@ -41,6 +41,36 @@
       ]
     },
     {
+      "title": "NEXUS OS 企業 AI 工作台",
+      "url": "nexus-os.html",
+      "cat": "AI 治理平台",
+      "desc": "在同一個工作空間整理資料、委派 AI 任務、處理人工核准並檢視交付成果。",
+      "terms": [
+        "NEXUS OS",
+        "AI 工作台",
+        "AI Agent",
+        "任務委派",
+        "人工核准",
+        "AI 工作流程"
+      ]
+    },
+    {
+      "title": "AI Voice Studio 企業 AI 語音平台",
+      "url": "voice-studio.html",
+      "cat": "AI 治理平台",
+      "desc": "語音合成、經授權的聲音複製與虛擬角色影片；可依名單批次生成個人化語音。",
+      "terms": [
+        "AI Voice Studio",
+        "語音合成",
+        "文字轉語音",
+        "TTS",
+        "聲音複製",
+        "AI 配音",
+        "虛擬角色",
+        "Avatar"
+      ]
+    },
+    {
       "title": "數位廣告投放",
       "url": "marketing.html#advertising",
       "cat": "數位行銷服務",
