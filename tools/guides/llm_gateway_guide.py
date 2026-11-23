@@ -44,5 +44,8 @@ build('llm-gateway-guide.html',
       'LLM 閘道選型', ['LLM 閘道', '選型清單<em>.</em>'],
       '導入生成式 AI 前要確認的 10 件事，每項附 POC 驗證方法。',
       '最後更新：2026-11-02',
-      sections, ('#gd-check', '看 10 項清單'), ('contact.html', '安排 POC'))
+      sections, ('#gd-check', '看 10 項清單'), ('contact.html', '安排 POC'),
+      end=('想在自己的環境驗證這 10 項？',
+           '告訴我們要接的模型、要開放的部門，以及資料能不能離開機房。業務會安排一場線上簡報或需求訪談，再一起決定 POC 要驗證哪些項目。',
+           '安排 POC'))
 print('ok')

@@ -231,6 +231,12 @@ class AuditTest(SiteCopy):
         self.assertLess(page.index('data-cta="band-deploy"'), page.index('id="modules"'))
         self.assertLess(page.index('關於 AURO NEXUS 的常見問題'), page.index('data-cta="band-faq"'))
         self.assertIn('href="tel:+886-2-5568-4688"', page[page.index('data-cta="band-deploy"'):])
+        # 從搜尋進站的指南：頁首與文末都能直接打開諮詢表單
+        for rel in ('fsc-ai-guideline.html', 'llm-gateway-guide.html'):
+            g = self.page(rel)
+            self.assertIn('data-target="#myModal" data-cta="guide-hero"', g, rel)
+            self.assertIn('data-target="#myModal" data-cta="guide-end"', g, rel)
+            self.assertLess(g.index('data-cta="guide-end"'), g.index('PAGE-FAQ:BEGIN') if 'PAGE-FAQ:BEGIN' in g else len(g), rel)
 
     def test_every_hand_written_page_has_breadcrumb_and_entity_aliases(self):
         # 手寫頁（首頁除外）都要有 BreadcrumbList；Organization 列出對外品牌名「奧洛 Aurobase」，AI 引擎才對得到同一個實體

@@ -63,6 +63,8 @@
 .gd-card .gd-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin: 6px 0 2px; }
 .gd-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.85; color: var(--idx-text-2); }
 .gd-card ul li + li { margin-top: 4px; }
+.gd-card .gd-desc { font-size: 14px; line-height: 1.85; color: var(--idx-text-2); margin: 8px 0 10px; }
+.gd-card .gd-kw { font-size: 12px; line-height: 1.8; color: var(--idx-muted); margin: 12px 0 0; }
 .gd-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.8; }
 .gd-table th, .gd-table td { border-bottom: 1px solid var(--idx-line); padding: 14px 12px; text-align: left; vertical-align: top; }
 .gd-table th { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); border-bottom: 2px solid var(--idx-line-2); }
@@ -73,6 +75,13 @@
 .gd-check { counter-reset: gd; display: grid; gap: 16px; }
 .gd-check article { counter-increment: gd; }
 .gd-check .idx-card-title::before { content: counter(gd, decimal-leading-zero) ' '; font-family: var(--idx-mono); color: var(--idx-accent); margin-right: 6px; }
+.gd-cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; border: 1px solid var(--idx-line-2); border-left: 3px solid var(--idx-accent); background: var(--idx-surface); padding: 32px 36px; max-width: 1040px; }
+.gd-cta h2 { font-size: 22px; margin: 0 0 10px; color: var(--idx-ink); }
+.gd-cta p { font-size: 15px; line-height: 1.9; color: var(--idx-text-2); margin: 0; max-width: 60ch; }
+.gd-cta-act { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.gd-cta-act .gd-alt { font-size: 13px; color: var(--idx-muted); }
+.gd-cta-act .gd-alt a { color: var(--idx-text-2); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+@media (max-width: 991.98px) { .gd-cta { flex-direction: column; align-items: stretch; padding: 24px 20px; gap: 20px; } }
 @media (max-width: 991.98px) { .gd-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 110px; } }
 @media (max-width: 767.98px) {
   .gd-answer { padding: 22px 20px; }
@@ -377,7 +386,7 @@
       <p class="idx-hero-desc">可治理的 AI 平台，加上行銷科技與數位行銷服務。</p>
       <div class="idx-hero-actions">
         <a href="#ab-lines" class="idx-btn idx-btn-primary">看產品與服務<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
-        <a href="contact.html" class="idx-btn idx-btn-ghost">聯絡我們</a>
+        <a href="contact.html" class="idx-btn idx-btn-ghost" data-toggle="modal" data-target="#myModal" data-cta="guide-hero">聯絡我們</a>
       </div>
       <p class="gd-meta">奧洛股份有限公司 ・ 台北市內湖區</p>
     </div>

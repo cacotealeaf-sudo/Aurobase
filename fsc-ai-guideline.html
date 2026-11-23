@@ -66,6 +66,8 @@
 .gd-card .gd-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin: 6px 0 2px; }
 .gd-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.85; color: var(--idx-text-2); }
 .gd-card ul li + li { margin-top: 4px; }
+.gd-card .gd-desc { font-size: 14px; line-height: 1.85; color: var(--idx-text-2); margin: 8px 0 10px; }
+.gd-card .gd-kw { font-size: 12px; line-height: 1.8; color: var(--idx-muted); margin: 12px 0 0; }
 .gd-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.8; }
 .gd-table th, .gd-table td { border-bottom: 1px solid var(--idx-line); padding: 14px 12px; text-align: left; vertical-align: top; }
 .gd-table th { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); border-bottom: 2px solid var(--idx-line-2); }
@@ -76,6 +78,13 @@
 .gd-check { counter-reset: gd; display: grid; gap: 16px; }
 .gd-check article { counter-increment: gd; }
 .gd-check .idx-card-title::before { content: counter(gd, decimal-leading-zero) ' '; font-family: var(--idx-mono); color: var(--idx-accent); margin-right: 6px; }
+.gd-cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; border: 1px solid var(--idx-line-2); border-left: 3px solid var(--idx-accent); background: var(--idx-surface); padding: 32px 36px; max-width: 1040px; }
+.gd-cta h2 { font-size: 22px; margin: 0 0 10px; color: var(--idx-ink); }
+.gd-cta p { font-size: 15px; line-height: 1.9; color: var(--idx-text-2); margin: 0; max-width: 60ch; }
+.gd-cta-act { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.gd-cta-act .gd-alt { font-size: 13px; color: var(--idx-muted); }
+.gd-cta-act .gd-alt a { color: var(--idx-text-2); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+@media (max-width: 991.98px) { .gd-cta { flex-direction: column; align-items: stretch; padding: 24px 20px; gap: 20px; } }
 @media (max-width: 991.98px) { .gd-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 110px; } }
 @media (max-width: 767.98px) {
   .gd-answer { padding: 22px 20px; }
@@ -447,7 +456,7 @@
       <p class="idx-hero-desc">依金管會指引原文，整理六章重點、該做的控制與該留的紀錄。</p>
       <div class="idx-hero-actions">
         <a href="#gd-chapters" class="idx-btn idx-btn-primary">看六章重點<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
-        <a href="contact.html" class="idx-btn idx-btn-ghost">詢問導入做法</a>
+        <a href="contact.html" class="idx-btn idx-btn-ghost" data-toggle="modal" data-target="#myModal" data-cta="guide-hero">詢問導入做法</a>
       </div>
       <p class="gd-meta">最後更新：2026-11-02 ・ 依金管會公布的指引原文整理</p>
     </div>
@@ -551,6 +560,16 @@
     <div class="idx-rule"></div>
     <ol class="gd-src"><li>金融監督管理委員會，〈金融業運用人工智慧(AI)指引〉，113 年 6 月 20 日，<a href="https://law.fsc.gov.tw/LawContent.aspx?id=GL003920" target="_blank" rel="noopener">金管會主管法規共用系統</a>。</li><li>金融監督管理委員會新聞稿，〈金管會發布「金融業運用人工智慧(AI)指引」〉，113 年 6 月 20 日，<a href="https://www.fsc.gov.tw/ch/home.jsp?id=96&amp;parentpath=0%2C2&amp;mcustomize=news_view.jsp&amp;dataserno=202406200001&amp;dtable=News" target="_blank" rel="noopener">金管會全球資訊網</a>。</li></ol>
     <p class="gd-note">本文依指引原文整理並改寫，條文以金管會公布的版本為準；標示「實務建議」的段落為奧洛的建議做法。</p>
+  </section>
+
+  <section class="idx-section idx-wrap" aria-label="要把這份指引落到您的 AI 系統上？">
+    <div class="gd-cta">
+      <div><h2>要把這份指引落到您的 AI 系統上？</h2><p>告訴我們您目前怎麼使用 AI、資料放在哪裡，以及法遵或稽核最在意的項目。業務會安排一場線上簡報或需求訪談，說明 AURO NEXUS 在您的環境裡怎麼做到上面的控制與紀錄。</p></div>
+      <div class="gd-cta-act">
+        <a href="contact.html" class="idx-btn idx-btn-primary" data-toggle="modal" data-target="#myModal" data-cta="guide-end">詢問導入做法<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        <span class="gd-alt">或直接來電 <a href="tel:+886-2-5568-4688">02-5568-4688</a>、寫信到 <a href="mailto:ad@aurocore.com">ad@aurocore.com</a></span>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->

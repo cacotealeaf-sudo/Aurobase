@@ -32,6 +32,13 @@ STYLE = '''    <style>
 .gd-check { counter-reset: gd; display: grid; gap: 16px; }
 .gd-check article { counter-increment: gd; }
 .gd-check .idx-card-title::before { content: counter(gd, decimal-leading-zero) ' '; font-family: var(--idx-mono); color: var(--idx-accent); margin-right: 6px; }
+.gd-cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; border: 1px solid var(--idx-line-2); border-left: 3px solid var(--idx-accent); background: var(--idx-surface); padding: 32px 36px; max-width: 1040px; }
+.gd-cta h2 { font-size: 22px; margin: 0 0 10px; color: var(--idx-ink); }
+.gd-cta p { font-size: 15px; line-height: 1.9; color: var(--idx-text-2); margin: 0; max-width: 60ch; }
+.gd-cta-act { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.gd-cta-act .gd-alt { font-size: 13px; color: var(--idx-muted); }
+.gd-cta-act .gd-alt a { color: var(--idx-text-2); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+@media (max-width: 991.98px) { .gd-cta { flex-direction: column; align-items: stretch; padding: 24px 20px; gap: 20px; } }
 @media (max-width: 991.98px) { .gd-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 110px; } }
 @media (max-width: 767.98px) {
   .gd-answer { padding: 22px 20px; }
@@ -62,7 +69,26 @@ def section(sid, num, eyebrow, title, inner, more=None, last=False):
 ''' % (sid, ' sec-last' if last else '', num, num, eyebrow, title, m, inner)
 
 
-def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, ghost, kicker='AUROBASE 指南'):
+MODAL = 'data-toggle="modal" data-target="#myModal"'
+
+
+def end_cta(heading, text, button):
+    """文末諮詢區塊：讀完指南最想問的時候，一顆按鈕直接打開諮詢表單（各頁預勾的類型寫在 _pages.json inquiry_chip），
+    加上不想填表的人可以來電或寫信。text 只寫送出後實際會發生的事，與 js/qform.js 的成功訊息一致。"""
+    return '''
+  <section class="idx-section idx-wrap" aria-label="%s">
+    <div class="gd-cta">
+      <div><h2>%s</h2><p>%s</p></div>
+      <div class="gd-cta-act">
+        <a href="contact.html" class="idx-btn idx-btn-primary" %s data-cta="guide-end">%s%s</a>
+        <span class="gd-alt">或直接來電 <a href="tel:+886-2-5568-4688">02-5568-4688</a>、寫信到 <a href="mailto:ad@aurocore.com">ad@aurocore.com</a></span>
+      </div>
+    </div>
+  </section>
+''' % (heading, heading, text, MODAL, button, ARROW)
+
+
+def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, ghost, kicker='AUROBASE 指南', end=None):
     s = io.open(ROOT + '/security.html', encoding='utf-8').read()
     s = re.sub(r'<title>.*?</title>', '<title>%s</title>' % title, s, 1)
     s = re.sub(r'<meta name="description" content="[^"]*">', lambda m: '<meta name="description" content="%s">' % desc, s, 1)
@@ -84,13 +110,15 @@ def build(out, title, desc, keywords, tag, h1, lead, meta, sections, primary, gh
       <p class="idx-hero-desc">%s</p>
       <div class="idx-hero-actions">
         <a href="%s" class="idx-btn idx-btn-primary">%s%s</a>
-        <a href="%s" class="idx-btn idx-btn-ghost">%s</a>
+        <a href="%s" class="idx-btn idx-btn-ghost"%s>%s</a>
       </div>
       <p class="gd-meta">%s</p>
     </div>
   </section>
-''' % (kicker, tag, ''.join('<span>%s</span>' % x for x in h1), lead, primary[0], primary[1], ARROW, ghost[0], ghost[1], meta)
+''' % (kicker, tag, ''.join('<span>%s</span>' % x for x in h1), lead, primary[0], primary[1], ARROW, ghost[0],
+       # 連到聯絡頁的按鈕改成直接打開諮詢表單（不支援 JS 時仍走連結）
+       (' ' + MODAL + ' data-cta="guide-hero"') if ghost[0] == 'contact.html' else '', ghost[1], meta)
     # 產生器會在頁尾前插入常見問題，這裡不寫
-    s = s[:i] + hero + ''.join(sections) + '\n' + s[j:]
+    s = s[:i] + hero + ''.join(sections) + (end_cta(*end) if end else '') + '\n' + s[j:]
     s = re.sub(r'\n  <!-- PAGE-FAQ:BEGIN.*?<!-- PAGE-FAQ:END -->', '', s, flags=re.S)
     io.open(ROOT + '/' + out, 'w', encoding='utf-8').write(s)

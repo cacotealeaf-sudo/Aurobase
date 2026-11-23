@@ -66,6 +66,8 @@
 .gd-card .gd-sub { font-family: var(--idx-mono); font-size: 12px; color: var(--idx-muted); margin: 6px 0 2px; }
 .gd-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.85; color: var(--idx-text-2); }
 .gd-card ul li + li { margin-top: 4px; }
+.gd-card .gd-desc { font-size: 14px; line-height: 1.85; color: var(--idx-text-2); margin: 8px 0 10px; }
+.gd-card .gd-kw { font-size: 12px; line-height: 1.8; color: var(--idx-muted); margin: 12px 0 0; }
 .gd-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.8; }
 .gd-table th, .gd-table td { border-bottom: 1px solid var(--idx-line); padding: 14px 12px; text-align: left; vertical-align: top; }
 .gd-table th { font-family: var(--idx-mono); font-size: 12px; font-weight: 400; color: var(--idx-muted); border-bottom: 2px solid var(--idx-line-2); }
@@ -76,6 +78,13 @@
 .gd-check { counter-reset: gd; display: grid; gap: 16px; }
 .gd-check article { counter-increment: gd; }
 .gd-check .idx-card-title::before { content: counter(gd, decimal-leading-zero) ' '; font-family: var(--idx-mono); color: var(--idx-accent); margin-right: 6px; }
+.gd-cta { display: flex; align-items: center; justify-content: space-between; gap: 32px; border: 1px solid var(--idx-line-2); border-left: 3px solid var(--idx-accent); background: var(--idx-surface); padding: 32px 36px; max-width: 1040px; }
+.gd-cta h2 { font-size: 22px; margin: 0 0 10px; color: var(--idx-ink); }
+.gd-cta p { font-size: 15px; line-height: 1.9; color: var(--idx-text-2); margin: 0; max-width: 60ch; }
+.gd-cta-act { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.gd-cta-act .gd-alt { font-size: 13px; color: var(--idx-muted); }
+.gd-cta-act .gd-alt a { color: var(--idx-text-2); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+@media (max-width: 991.98px) { .gd-cta { flex-direction: column; align-items: stretch; padding: 24px 20px; gap: 20px; } }
 @media (max-width: 991.98px) { .gd-hero .idx-aurora-body { padding-top: 112px; padding-bottom: 110px; } }
 @media (max-width: 767.98px) {
   .gd-answer { padding: 22px 20px; }
@@ -423,7 +432,7 @@
       <p class="idx-hero-desc">導入生成式 AI 前要確認的 10 件事，每項附 POC 驗證方法。</p>
       <div class="idx-hero-actions">
         <a href="#gd-check" class="idx-btn idx-btn-primary">看 10 項清單<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
-        <a href="contact.html" class="idx-btn idx-btn-ghost">安排 POC</a>
+        <a href="contact.html" class="idx-btn idx-btn-ghost" data-toggle="modal" data-target="#myModal" data-cta="guide-hero">安排 POC</a>
       </div>
       <p class="gd-meta">最後更新：2026-11-02</p>
     </div>
@@ -493,6 +502,16 @@
     <p class="gd-note">奧洛的 <a href="nexus-forge.html">Forge</a> 是 AURO NEXUS 平台的治理化 AI 閘道，對應做法如下：推論前做權限與政策檢查；含個資的提示只能送往地端模型；回覆也經政策檢查；支援地端 Ollama、OpenAI 相容服務與 Anthropic，並可限定只用地端；以 OpenAI 相容 API 提供服務；知識庫與段落可設定密級，撤權在下一次檢索就生效；雜湊鏈稽核軌跡可匯出證據包離線驗證；工具呼叫先經政策決策並寫入稽核帳。</p>
     <p class="gd-note">Forge 產品頁列有本機實測結果與實機畫面。若要在貴機構環境跑一次上述驗證，可以從一個部門、一個模型開始。</p>
     <p class="gd-note">延伸閱讀：<a href="fsc-ai-guideline.html">金融業運用 AI 指引怎麼落實</a>・<a href="security.html">資安與資料處理</a></p>
+  </section>
+
+  <section class="idx-section idx-wrap" aria-label="想在自己的環境驗證這 10 項？">
+    <div class="gd-cta">
+      <div><h2>想在自己的環境驗證這 10 項？</h2><p>告訴我們要接的模型、要開放的部門，以及資料能不能離開機房。業務會安排一場線上簡報或需求訪談，再一起決定 POC 要驗證哪些項目。</p></div>
+      <div class="gd-cta-act">
+        <a href="contact.html" class="idx-btn idx-btn-primary" data-toggle="modal" data-target="#myModal" data-cta="guide-end">安排 POC<svg class="idx-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a>
+        <span class="gd-alt">或直接來電 <a href="tel:+886-2-5568-4688">02-5568-4688</a>、寫信到 <a href="mailto:ad@aurocore.com">ad@aurocore.com</a></span>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
