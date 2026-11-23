@@ -152,6 +152,41 @@ def chips_html(cls, checked=None):
     return CHIPS_BEGIN + '\n' + '\n'.join(out) + '\n' + CHIPS_END
 
 
+OFFER_RE = re.compile(r'<!-- LEAD-OFFER:BEGIN ([\w-]+) -->.*?<!-- LEAD-OFFER:END -->', re.S)
+LEAD_JS = '<script src="js/lead-magnet.js" defer></script>'
+
+
+def load_offers():
+    return json.loads(read(os.path.join(SRC, '_offers.json')))['offers']
+
+
+def offer_html(oid, o):
+    """留 Email 換資料：一個 Email 欄位，送出後顯示下載連結（js/lead-magnet.js）。"""
+    fid = 'lm-' + oid
+    return (f'<!-- LEAD-OFFER:BEGIN {oid} --><div class="lm-box"><div class="lm-copy"><h2>{html.escape(o['heading'])}</h2><p>{html.escape(o['text'])}</p></div>'
+            f'<form class="lm-form" novalidate data-lead-id="{attr(oid)}" data-lead-name="{attr(o['name'])}" data-lead-file="{attr(o['file'])}"'
+            f' data-lead-type="{attr(o['lead_type'])}" data-lead-button="{attr(o['button'])}">'
+            f'<label for="{fid}">工作 Email</label><div class="lm-row"><input type="email" id="{fid}" name="email" autocomplete="email" inputmode="email" placeholder="name@company.com" required>'
+            f'<button type="submit">{html.escape(o['button'])}</button></div><p class="lm-msg" aria-live="polite"></p>'
+            '<p class="lm-note">送出即表示同意<a href="privacypolicy.html">隱私權政策</a>；業務可能以 Email 與您聯繫。</p></form></div><!-- LEAD-OFFER:END -->')
+
+
+def update_offers():
+    """把各頁的 LEAD-OFFER 標記填成表單，並補上 js/lead-magnet.js。"""
+    offers, changed = load_offers(), []
+    for p in nav_pages():
+        s = read(p)
+        if 'LEAD-OFFER:BEGIN' not in s:
+            continue
+        t = OFFER_RE.sub(lambda m: offer_html(m.group(1), offers[m.group(1)]), s)
+        if LEAD_JS not in t:
+            t = t.replace('<script src="js/qform.js" defer></script>', '<script src="js/qform.js" defer></script>\n  ' + LEAD_JS, 1)
+        if t != s:
+            io.open(p, 'w', encoding='utf-8').write(t)
+            changed.append(os.path.relpath(p, ROOT))
+    return changed
+
+
 def update_inquiry_chips():
     """每一頁的諮詢彈窗與聯絡頁表單共用同一份選項；手寫頁依 _pages.json 的 inquiry_chip 預勾，產品頁外框不預勾（build() 再依產品 JSON 勾）。"""
     cfg = load_pages_cfg()
@@ -1015,6 +1050,12 @@ def arch_html(pf, mods):
 PHONE_HREF, PHONE_TEXT, MAIL = 'tel:+886-2-5568-4688', '02-5568-4688', 'ad@aurocore.com'
 
 
+def offer_band(b):
+    """平台總覽中段的「留 Email 換資料」區塊，表單由 update_offers() 依 _offers.json 填入。"""
+    return (f'\n            <section class="nm-cta-band nm-offer-band nm-section"><div class="container-fluid px-3 px-md-0">'
+            f'<!-- LEAD-OFFER:BEGIN {b["offer"]} --><!-- LEAD-OFFER:END --></div></section>\n')
+
+
 def cta_band(b):
     """平台總覽中段的諮詢區塊：一句話說明送出後會發生什麼，一顆打開諮詢表單的按鈕，加上不想填表的人可以直接來電或寫信。"""
     return f'''
@@ -1032,7 +1073,7 @@ def cta_band(b):
 
 def overview_html(pf, mods):
     get = overview_mods(pf, mods)
-    bands = {b['after']: cta_band(b) for b in pf.get('cta_bands', {}).get('items', [])}
+    bands = {b['after']: offer_band(b) if b.get('offer') else cta_band(b) for b in pf.get('cta_bands', {}).get('items', [])}
     summary = ''.join(f'<dt>{k}</dt><dd>{v}</dd>' for k, v in pf['summary'])
     out = [f'''
             <section id="platform" class="nm-hero nm-hero-arch nm-section nm-dark">
@@ -1115,6 +1156,7 @@ def overview_html(pf, mods):
         cards(pf['diff'], lambda it: f'''
                                     <div class="diff-card"><i class="iconoir-{it['icon']} diff-icon"></i>
                                         <h3>{it['title']}</h3><p>{it['text']}</p></div>'''), dark=True))
+    out.append(bands.get('diff', ''))
 
     # 名詞解釋：各產品頁「什麼是…」的第一句定義，連回該頁（結構化資料的 DefinedTermSet 指向這裡）
     terms = [(t, m) for t, m in ((defined_term(m), m) for m in mods.values()) if t]
@@ -1991,6 +2033,7 @@ def build_all():
             os.remove(p)
             removed.append(m['file'])
     build_overview(mods, pf)
+    nav_changed += update_offers()
     update_llms(mods, pf)
     update_sitemap(mods)
     update_search_index(mods, pf)

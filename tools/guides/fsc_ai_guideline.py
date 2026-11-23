@@ -77,18 +77,21 @@ sections = [
   section('gd-answer', '01', '一段話看懂', '指引是什麼、從哪裡開始', answer),
   section('gd-general', '02', '總則', '先分級，再決定控管程度', general),
   section('gd-chapters', '03', '六章重點', '每一章要做什麼、留下什麼', cards),
+  # 留 Email 下載本文的 PDF 檢核表（表單由 tools/build-module-pages.py 依 _offers.json 填入）
+  '\n  <section class="idx-section idx-wrap gd-offer"><!-- LEAD-OFFER:BEGIN fsc-checklist --><!-- LEAD-OFFER:END --></section>\n',
   section('gd-platform', '04', '平台對應', 'AURO NEXUS 能協助的部分', table, more=('nexus.html#platform', '平台總覽')),
   section('gd-sources', '05', '資料來源', '出處', src, last=True),
 ]
-build('fsc-ai-guideline.html',
-      '金融業運用 AI 指引怎麼落實｜六章重點與控制清單｜奧洛 Aurobase',
-      '金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。',
-      ['金融業運用AI指引', '金管會 AI 指引', '金融業 AI 治理', 'AI 六大核心原則', 'AI 風險評估', '金融 AI 稽核', '生成式 AI 金融', 'AI 治理平台', '奧洛', 'Aurobase'],
-      '金融業運用 AI 指引', ['AI 指引', '怎麼落實<em>.</em>'],
-      '依金管會指引原文，整理六章重點、該做的控制與該留的紀錄。',
-      '最後更新：2026-11-02 ・ 依金管會公布的指引原文整理',
-      sections, ('#gd-chapters', '看六章重點'), ('contact.html', '詢問導入做法'),
-      end=('要把這份指引落到您的 AI 系統上？',
-           '告訴我們您目前怎麼使用 AI、資料放在哪裡，以及法遵或稽核最在意的項目。業務會安排一場線上簡報或需求訪談，說明 AURO NEXUS 在您的環境裡怎麼做到上面的控制與紀錄。',
-           '詢問導入做法'))
-print('ok')
+if __name__ == '__main__':   # tools/guides/fsc_checklist.py 會匯入上面的內容產生 PDF 檢核表
+    build('fsc-ai-guideline.html',
+          '金融業運用 AI 指引怎麼落實｜六章重點與控制清單｜奧洛 Aurobase',
+          '金管會於 113 年 6 月 20 日發布〈金融業運用人工智慧（AI）指引〉，屬行政指導，分總則與六章。本文依原文整理各章重點，對照可執行的控制措施與該留下的紀錄，協助金融機構以風險為基礎落實。',
+          ['金融業運用AI指引', '金管會 AI 指引', '金融業 AI 治理', 'AI 六大核心原則', 'AI 風險評估', '金融 AI 稽核', '生成式 AI 金融', 'AI 治理平台', '奧洛', 'Aurobase'],
+          '金融業運用 AI 指引', ['AI 指引', '怎麼落實<em>.</em>'],
+          '依金管會指引原文，整理六章重點、該做的控制與該留的紀錄。',
+          '最後更新：2026-11-02 ・ 依金管會公布的指引原文整理',
+          sections, ('#gd-chapters', '看六章重點'), ('contact.html', '詢問導入做法'),
+          end=('要把這份指引落到您的 AI 系統上？',
+               '告訴我們您目前怎麼使用 AI、資料放在哪裡，以及法遵或稽核最在意的項目。業務會安排一場線上簡報或需求訪談，說明 AURO NEXUS 在您的環境裡怎麼做到上面的控制與紀錄。',
+               '詢問導入做法'))
+    print('ok')

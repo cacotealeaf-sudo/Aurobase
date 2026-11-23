@@ -3,3 +3,6 @@ website/
 .DS_Store
 system_ui/
 __pycache__/
+
+# 檢核表 PDF 的中間檔（含本機路徑）；正式檔在 downloads/
+tools/guides/fsc-checklist/

@@ -284,7 +284,7 @@
   ],
   "inquiry_chip": "AURO NEXUS AI 治理平台",
   "cta_bands": {
-    "_說明": "平台總覽頁中段的諮詢區塊：after 是放在哪一段之後（deploy / faq）。按鈕都打開同一個諮詢表單，cta 是送到 GA 的按鈕代號（inquiry_open 的 cta 參數）。",
+    "_說明": "平台總覽頁中段的諮詢區塊：after 是放在哪一段之後（deploy / faq）。按鈕都打開同一個諮詢表單，cta 是送到 GA 的按鈕代號（inquiry_open 的 cta 參數）。 有 offer 的區塊改放「留 Email 換資料」表單（_offers.json）。",
     "items": [
       {
         "after": "deploy",
@@ -292,6 +292,10 @@
         "heading": "想確認能不能放進您的環境？",
         "text": "告訴我們您打算放在哪裡（公有雲、自有機房或隔離網路），以及想先用 AI 處理的工作。業務會安排一場線上簡報或需求訪談，說明這套平台在您的環境裡怎麼部署。",
         "button": "預約平台簡報"
+      },
+      {
+        "after": "diff",
+        "offer": "fsc-checklist"
       },
       {
         "after": "faq",

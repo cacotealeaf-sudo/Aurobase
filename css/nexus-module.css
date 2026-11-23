@@ -412,3 +412,4 @@ a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none;
     .nm-cta-box { flex-direction: column; align-items: stretch; padding: 1.5rem 1.25rem; gap: 1.2rem; }
     .nm-cta-act .btn-nm-primary { text-align: center; }
 }
+#colorlib-main .nm-offer-band.nm-section { padding-top: 4.5rem; }

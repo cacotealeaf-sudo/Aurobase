@@ -1,0 +1,14 @@
+{
+  "_說明": "留 Email 換資料的區塊。頁面放 <!-- LEAD-OFFER:BEGIN <代號> --><!-- LEAD-OFFER:END -->，tools/build-module-pages.py 依這裡填入表單（js/lead-magnet.js 處理送出）。lead_type 是送到 Google 表單「諮詢類型」的值，要在 _inquiry.json 裡。file 改了要重跑產生 PDF 的腳本。",
+  "offers": {
+    "fsc-checklist": {
+      "name": "金融業 AI 指引落實檢核表",
+      "file": "downloads/fsc-ai-guideline-checklist.pdf",
+      "source": "tools/guides/fsc_checklist.py",
+      "lead_type": "AURO NEXUS AI 治理平台",
+      "heading": "下載「金融業 AI 指引落實檢核表」",
+      "text": "把金管會指引整理成可勾選的檢核表：六項風險分級因素、六章的檢核項目與應留下的紀錄、委外與採購檢核，以及 AURO NEXUS 的對應表。留下工作 Email 即可下載 PDF。",
+      "button": "取得檢核表"
+    }
+  }
+}

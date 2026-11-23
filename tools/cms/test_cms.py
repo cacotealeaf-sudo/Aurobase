@@ -238,6 +238,27 @@ class AuditTest(SiteCopy):
             self.assertIn('data-target="#myModal" data-cta="guide-end"', g, rel)
             self.assertLess(g.index('data-cta="guide-end"'), g.index('PAGE-FAQ:BEGIN') if 'PAGE-FAQ:BEGIN' in g else len(g), rel)
 
+    def test_lead_offers_render_and_point_at_real_files(self):
+        # 留 Email 換資料：標記要被填成表單、PDF 要存在、送出的諮詢類型要是表單既有的選項、頁面要載入 lead-magnet.js
+        gen.build_all()
+        offers = gen.load_offers()
+        chips = gen.inquiry_chips()
+        for oid, o in offers.items():
+            self.assertTrue(os.path.exists(os.path.join(REPO, o['file'])), o['file'])
+            self.assertIn(o['lead_type'], chips, oid)
+        for rel in ('nexus.html', 'fsc-ai-guideline.html'):
+            page = self.page(rel)
+            self.assertIn('class="lm-form"', page, rel)
+            self.assertIn('data-lead-file="downloads/fsc-ai-guideline-checklist.pdf"', page, rel)
+            self.assertIn('<script src="js/lead-magnet.js" defer></script>', page, rel)
+        # 搬走的段落不再留在平台總覽，各自成頁
+        nx = self.page('nexus.html')
+        self.assertNotIn('id="nexus-v4"', nx)
+        self.assertNotIn('id="nexus-voice"', nx)
+        for rel in ('nexus-os.html', 'voice-studio.html'):
+            self.assertIn(rel, self.page('sitemap.xml'))
+            self.assertIn('"@type": "FAQPage"', self.page(rel), rel)
+
     def test_every_hand_written_page_has_breadcrumb_and_entity_aliases(self):
         # 手寫頁（首頁除外）都要有 BreadcrumbList；Organization 列出對外品牌名「奧洛 Aurobase」，AI 引擎才對得到同一個實體
         import re
