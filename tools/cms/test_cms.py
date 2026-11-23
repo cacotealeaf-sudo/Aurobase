@@ -221,6 +221,17 @@ class AuditTest(SiteCopy):
             if f.endswith('.html') and f != rel:
                 self.assertNotIn('href="%s"' % rel, open(os.path.join(self.root, f), encoding='utf-8').read(), f)
 
+    def test_platform_overview_offers_inquiry_between_sections(self):
+        # 平台總覽很長：頁首之後、部署段與常見問題段之後都要有打開諮詢表單的按鈕，表單預勾 AI 治理平台
+        gen.build_all()
+        page = self.page('nexus.html')
+        for cta in ('hero', 'band-deploy', 'band-faq'):
+            self.assertRegex(page, r'data-target="#myModal" data-cta="%s"' % cta)
+        self.assertIn('value="AURO NEXUS AI 治理平台" checked', page)
+        self.assertLess(page.index('data-cta="band-deploy"'), page.index('id="modules"'))
+        self.assertLess(page.index('關於 AURO NEXUS 的常見問題'), page.index('data-cta="band-faq"'))
+        self.assertIn('href="tel:+886-2-5568-4688"', page[page.index('data-cta="band-deploy"'):])
+
     def test_every_hand_written_page_has_breadcrumb_and_entity_aliases(self):
         # 手寫頁（首頁除外）都要有 BreadcrumbList；Organization 列出對外品牌名「奧洛 Aurobase」，AI 引擎才對得到同一個實體
         import re

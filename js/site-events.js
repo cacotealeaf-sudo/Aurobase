@@ -1,6 +1,6 @@
 /* 網站轉換事件：推到 GTM 的 dataLayer，由 GTM 轉成 GA4 事件。
  * 本檔只負責「發生了什麼」；要在 GA4 看到，GTM 需為下列事件名稱各設一個「自訂事件」觸發條件與 GA4 事件代碼。
- *   inquiry_open     打開諮詢表單（form_location：哪一頁）           ← js/inquiry-modal.js 發送
+ *   inquiry_open     打開諮詢表單（form_location：哪一頁；cta：哪一顆按鈕） ← js/inquiry-modal.js 發送
  *   generate_lead    送出諮詢表單（consultation_type：勾選的類型）   ← js/qform.js 發送
  *   search           站內搜尋（search_term、result_count；0 筆就是找不到的需求） ← js/site-search.js 發送
  *   contact_click    點電話或 Email（method：phone / email）

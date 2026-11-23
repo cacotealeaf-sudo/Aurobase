@@ -160,6 +160,8 @@ def update_inquiry_chips():
         s = read(p)
         rel = os.path.relpath(p, ROOT)
         checked = None if p.endswith('chrome-top.html') else cfg.get(rel, {}).get('inquiry_chip')
+        if rel == 'nexus.html':   # 平台總覽不在 _pages.json，預勾寫在 _platform.json
+            checked = load_platform().get('inquiry_chip')
         t = CHIPS_RE.sub(lambda m: m.group(1) + '\n' + chips_html(m.group(2), checked) + '\n', s)
         if t != s:
             io.open(p, 'w', encoding='utf-8').write(t)
@@ -1010,8 +1012,27 @@ def arch_html(pf, mods):
                     <script>{ARCH_JS}</script>'''
 
 
+PHONE_HREF, PHONE_TEXT, MAIL = 'tel:+886-2-5568-4688', '02-5568-4688', 'ad@aurocore.com'
+
+
+def cta_band(b):
+    """平台總覽中段的諮詢區塊：一句話說明送出後會發生什麼，一顆打開諮詢表單的按鈕，加上不想填表的人可以直接來電或寫信。"""
+    return f'''
+            <section class="nm-cta-band nm-section" aria-label="{attr(b['heading'])}">
+                <div class="container-fluid px-3 px-md-0"><div class="nm-cta-box">
+                    <div class="nm-cta-copy"><h2>{b['heading']}</h2><p>{b['text']}</p></div>
+                    <div class="nm-cta-act">
+                        <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal" data-cta="{attr(b['cta'])}">{b['button']}</a>
+                        <p class="nm-cta-alt">或直接來電 <a href="{PHONE_HREF}">{PHONE_TEXT}</a>、寫信到 <a href="mailto:{MAIL}">{MAIL}</a></p>
+                    </div>
+                </div></div>
+            </section>
+'''
+
+
 def overview_html(pf, mods):
     get = overview_mods(pf, mods)
+    bands = {b['after']: cta_band(b) for b in pf.get('cta_bands', {}).get('items', [])}
     summary = ''.join(f'<dt>{k}</dt><dd>{v}</dd>' for k, v in pf['summary'])
     out = [f'''
             <section id="platform" class="nm-hero nm-hero-arch nm-section nm-dark">
@@ -1024,7 +1045,7 @@ def overview_html(pf, mods):
                         <div class="col-lg-5 mt-4 mt-lg-0">
                             <p class="hero-sub">{pf['sub']}</p>
                             <div class="hero-actions">
-                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal">預約平台簡報</a>
+                                <a href="contact.html" class="btn-nm-primary" data-toggle="modal" data-target="#myModal" data-cta="hero">預約平台簡報</a>
                                 <a href="#finder" class="btn-nm-outline">依需求找模組</a>
                             </div>
                         </div>
@@ -1043,6 +1064,7 @@ def overview_html(pf, mods):
 
     if pf.get('deploy'):
         out.append(deploy_section(pf['deploy'], pf.get('deploy_intro', DEPLOY_INTRO)))
+        out.append(bands.get('deploy', ''))
 
     def mod_link(slug):
         x = get(slug)
@@ -1086,7 +1108,7 @@ def overview_html(pf, mods):
                                 <thead><tr><th scope="col">您的需求</th><th scope="col">對應模組</th></tr></thead>
                                 <tbody>{rows}</tbody></table></div>
                             <div class="nm-finder-none" hidden><p>沒有找到直接對應的模組。您的需求可能需要組合幾個模組或客製，直接告訴我們，我們會回覆建議的做法。</p>
-                                <a href="contact.html" class="btn-nm-primary nm-finder-ask" data-toggle="modal" data-target="#myModal">把這個需求告訴我們</a></div>
+                                <a href="contact.html" class="btn-nm-primary nm-finder-ask" data-toggle="modal" data-target="#myModal" data-cta="finder-none">把這個需求告訴我們</a></div>
                             <script>{FINDER_JS}</script>''', intro=nd['intro'], sid='finder'))
 
     out.append(section('nm-diff', "WHAT'S DIFFERENT", '平台的三個設計',
@@ -1110,6 +1132,7 @@ def overview_html(pf, mods):
     items = '\n'.join(f'''                                    <div class="faq-item"><h3>{f['q']}</h3><p>{f['a']}</p></div>''' for f in pf['faq'])
     out.append(section('nm-faq', 'FAQ', '關於 AURO NEXUS 的常見問題',
         f'                            <div class="row"><div class="col-lg-10">\n{items}\n                            </div></div>'))
+    out.append(bands.get('faq', ''))
     return BEGIN + '\n<div class="nm-overview" style="--m-deep:#2B3A8C;--m-bright:#4659C9;--m-soft:#8FA0F0;--m-tint:#ECEFFC;--m-ink1:#0C0F1F;--m-ink2:#141A35">' + ''.join(out) + '</div>\n' + END
 
 

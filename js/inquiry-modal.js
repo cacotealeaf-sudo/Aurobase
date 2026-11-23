@@ -108,9 +108,12 @@
   form.addEventListener('submit', function (event) { event.preventDefault(); });
 
   $(modal)
-    .on('shown.bs.modal', function () {
+    .on('shown.bs.modal', function (event) {
       focusStep();
-      if (window.auroTrack) window.auroTrack('inquiry_open', { form_location: location.pathname });
+      // cta：哪一顆按鈕打開表單（data-cta，沒有就取按鈕文字），用來比較頁首、中段、浮動按鈕各帶來多少諮詢
+      var opener = event.relatedTarget;
+      var cta = opener ? (opener.getAttribute('data-cta') || opener.textContent.replace(/\s+/g, ' ').trim().slice(0, 40)) : '';
+      if (window.auroTrack) window.auroTrack('inquiry_open', { form_location: location.pathname, cta: cta || '其他' });
     })
     .on('hidden.bs.modal', function () {
       // qform.js clears the values after a successful send; start the next visit at step 1.

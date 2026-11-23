@@ -395,3 +395,20 @@ a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none;
     #colorlib-main .nm-section:not(.nm-hero) { padding-top: 3.6rem; padding-bottom: 3.6rem; }
     .cap-card, .pain-card { padding: 1.7rem 1.5rem; }
 }
+
+/* 平台總覽中段的諮詢區塊（tools/build-module-pages.py cta_band） */
+#colorlib-main .nm-cta-band.nm-section { padding-top: 0; padding-bottom: 4.5rem; }
+.nm-cta-box {
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    background: var(--m-tint, #ECEFFC); border: 1px solid rgba(43,58,140,0.14); border-radius: 14px;
+    padding: 2rem 2.2rem; max-width: 1120px;
+}
+.nm-cta-copy h2 { font-size: 1.3rem; font-weight: 700; color: var(--m-ink1, #0C0F1F); margin: 0 0 0.6rem; }
+.nm-cta-copy p { color: #3a3f55; line-height: 1.85; margin: 0; max-width: 60ch; }
+.nm-cta-act { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+.nm-cta-alt { font-size: 0.85rem; color: #555b70; margin: 0; line-height: 1.7; }
+.nm-cta-alt a { color: var(--m-deep, #2B3A8C); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+@media (max-width: 991px) {
+    .nm-cta-box { flex-direction: column; align-items: stretch; padding: 1.5rem 1.25rem; gap: 1.2rem; }
+    .nm-cta-act .btn-nm-primary { text-align: center; }
+}
