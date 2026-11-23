@@ -24,6 +24,7 @@
  "nexus-library": "9b0157a10165",
  "nexus-lisa": "b3eba0ade06d",
  "nexus-mira": "f441a3034bc0",
+ "nexus-os": "b7a983a2e154",
  "nexus-pulse": "d2ba161c4f36",
  "nexus-saga": "0e45603aaa0e",
  "nexus-scanner": "bdbc872642a4",
@@ -33,5 +34,6 @@
  "solution-ai-ocr": "b5fb6adeaf26",
  "solution-digital-trail": "fd98f81b4ec1",
  "solution-police-record": "31ad577237a4",
- "solution-telesales": "76d0584f01b2"
+ "solution-telesales": "76d0584f01b2",
+ "voice-studio": "bb35c761ff1e"
 }
