@@ -398,6 +398,9 @@ a.nm-chip:hover { background: var(--m-deep); color: #fff; text-decoration: none;
 
 /* 平台總覽中段的諮詢區塊（tools/build-module-pages.py cta_band） */
 #colorlib-main .nm-cta-band.nm-section { padding-top: 0; padding-bottom: 4.5rem; }
+/* 沒有底色會露出 body 的灰（#d9e0e7），夾在白色段落之間變成一條灰帶；改成接續前一段的底色 */
+#colorlib-main .nm-cta-band { background: #fff; }
+#colorlib-main .nm-faq + .nm-cta-band { background: #f8f9fa; }
 .nm-cta-box {
     display: flex; align-items: center; justify-content: space-between; gap: 2rem;
     background: var(--m-tint, #ECEFFC); border: 1px solid rgba(43,58,140,0.14); border-radius: 14px;
