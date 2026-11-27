@@ -167,18 +167,25 @@ class AuditTest(SiteCopy):
                 if c['label'].startswith('內容不寫開發進度'):
                     self.assertEqual(c['status'], 'pass', (a['page'], c['detail']))
 
-    def test_every_chinese_font_face_declares_unicode_range(self):
-        # 沒宣告 unicode-range 的完整字型檔，會在網頁出現它沒有的符號時被整支下載（3.3 MB）
+    def test_site_font_is_subset_only_with_cmap_range(self):
+        # 只宣告子集，不宣告 10 MB 的完整字型；unicode-range 由子集的 cmap 產生，
+        # 子集沒有的字（例如選單的 ⌕ ▾）不能落在 range 裡，否則瀏覽器會以為這支有、改用 .notdef 豆腐
         import re
-        css = open(os.path.join(REPO, 'css', 'line-seed-font.css'), encoding='utf-8').read()
-        faces = re.findall(r"@font-face \{[^}]*font-family: 'LINE Seed TW';[^}]*\}", css)
-        self.assertEqual(len(faces), 6)
-        for face in faces:
-            self.assertIn('unicode-range:', face, face)
-        full = re.search(r"OTF_Rg\.woff2'\) format\('woff2'\);\n  unicode-range: ([^;]+);", css).group(1)
-        spans = [[int(x, 16) for x in r[2:].split('-')] for r in full.split(',')]
-        for ch in '⌕▾・为':   # 完整字型沒有、站上用到的字，不能落在它的 range 裡
+        from fontTools.ttLib import TTFont
+        css = open(os.path.join(REPO, 'css', 'fonts.css'), encoding='utf-8').read()
+        faces = re.findall(r"@font-face \{[^}]*font-family: 'Zev Hei TC';[^}]*\}", css)
+        self.assertEqual(len(faces), 1)
+        self.assertIn('ZevHeiTC-F.subset.woff2', faces[0])
+        self.assertIn('font-weight: 300 900;', faces[0])
+        ur = re.search(r'unicode-range: ([^;]+);', faces[0]).group(1)
+        spans = [[int(x, 16) for x in r[2:].split('-')] for r in ur.split(',')]
+        cmap = set(TTFont(os.path.join(REPO, 'WOFF2', 'ZevHeiTC-F.subset.woff2')).getBestCmap())
+        for ch in '⌕▾':
+            self.assertNotIn(ord(ch), cmap)
             self.assertFalse(any(s[0] <= ord(ch) <= s[-1] for s in spans), ch)
+        for ch in '奧洛治理平台':
+            self.assertIn(ord(ch), cmap)
+        self.assertFalse(re.search(r'LINESeed|LINE Seed', css))
 
     def test_guides_reach_ai_engines(self):
         # 指南頁：Article 結構化資料附出處，全文進 llms-full.txt，常見問題用深色版型的展開式問答

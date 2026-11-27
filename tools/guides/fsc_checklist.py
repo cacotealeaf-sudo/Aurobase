@@ -70,11 +70,11 @@ def page():
 <meta name="author" content="奧洛股份有限公司">
 <link rel="stylesheet" href="{SKILL}/brand/report.css">
 <style>
-  /* 字型改讀網站 repo 內的檔案：線上的 LINE Seed TW 每檔 3MB 以上，headless Chrome 下載太慢會卡住不出 PDF */
-  @font-face {{ font-family: 'LINE Seed TW'; font-weight: 400; src: url('file://{ROOT}/WOFF2/LINESeedTW_OTF_Rg.woff2') format('woff2'); }}
-  @font-face {{ font-family: 'LINE Seed TW'; font-weight: 700; src: url('file://{ROOT}/WOFF2/LINESeedTW_OTF_Bd.woff2') format('woff2'); }}
-  @font-face {{ font-family: 'LINE Seed Sans'; font-weight: 400; src: url('file://{ROOT}/WOFF2/LINESeedSans_W_Rg.woff2') format('woff2'); }}
-  @font-face {{ font-family: 'LINE Seed Sans'; font-weight: 700; src: url('file://{ROOT}/WOFF2/LINESeedSans_W_Bd.woff2') format('woff2'); }}
+  /* 字型讀 repo 內的宙黑體完整檔（tools/fonts/）。品牌樣式表 report.css 指定的是舊字族名稱，
+     這裡把那幾個名稱都指到宙黑體，PDF 才會跟網站同一套字。 */
+  @font-face {{ font-family: 'Zev Hei TC'; font-weight: 300 900; src: url('file://{ROOT}/tools/fonts/ZevHeiTC-F-VF.woff2') format('woff2'); }}
+  @font-face {{ font-family: 'LINE Seed TW'; font-weight: 300 900; src: url('file://{ROOT}/tools/fonts/ZevHeiTC-F-VF.woff2') format('woff2'); }}
+  @font-face {{ font-family: 'LINE Seed Sans'; font-weight: 300 900; src: url('file://{ROOT}/tools/fonts/ZevHeiTC-F-VF.woff2') format('woff2'); }}
   html {{ --doc-title: '{TITLE} {VERSION}'; --doc-confidential: '公開文件'; }}
   table.chk td.st {{ white-space: nowrap; }}
   table.chk td.st .cb + .cb {{ margin-left: 2.4mm; }}

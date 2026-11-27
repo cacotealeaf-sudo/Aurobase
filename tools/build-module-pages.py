@@ -491,8 +491,8 @@ def head(m):
 </script>
 
     <link href="images/favicon.ico" rel="shortcut icon">
-    <link rel="preload" href="WOFF2/LINESeedSans_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/line-seed-font.css">
+    <!-- 字型：宙黑體 Zev Hei TC -->
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/inquiry-modal.css?v={css_version('inquiry-modal.css')}">
     <link rel="stylesheet" href="css/iconoir-subset.css">
@@ -2136,7 +2136,7 @@ def nav_pages():
     return [p for p in pages if os.path.basename(p) not in NOT_INDEXED] + [os.path.join(SRC, 'chrome-top.html')]
 
 
-CJK_PRELOAD_RE = re.compile(r'[ \t]*<link rel="preload" href="[./]*WOFF2/LINESeedTW_OTF_(?:Rg|Bd)\.subset\.woff2"[^>]*>\n?')
+CJK_PRELOAD_RE = re.compile(r'[ \t]*<link rel="preload" href="[./]*WOFF2/(?:LINESeed|ZevHeiTC)[^"]*\.woff2"[^>]*>\n?')
 ASIDE_FOOTER_LOGO_RE = re.compile(r'[ \t]*<div class="colorlib-footer">\s*<div class="aside-logo">.*?</div>\s*</div>[ \t]*\n?', re.S)
 LOADER_RE = re.compile(r'[ \t]*(?:<!-- loader -->\s*)?<div id="ftco-loader"[^>]*>.*?</svg>\s*</div>\n?', re.S)
 
@@ -2152,7 +2152,7 @@ def site_nav_version():
 
 
 # 連結帶內容雜湊的共用樣式表：GitHub Pages 的 CSS 快取 10 分鐘，改了樣式後頁面才不會配到舊 CSS。
-# 字型與圖示子集（line-seed-font.css、iconoir-subset.css）由 CI 在產生頁面之後才重建，不放進來，否則雜湊會落後一版。
+# 字型與圖示子集（fonts.css、iconoir-subset.css）由 CI 在產生頁面之後才重建，不放進來，否則雜湊會落後一版。
 VERSIONED_CSS = ('nexus-module.css', 'aurora-theme.css', 'inquiry-modal.css', 'scroll-fx.css')
 
 

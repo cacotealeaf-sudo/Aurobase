@@ -16,9 +16,9 @@
   --idx-text: #b9b9c0;
   --idx-text-2: #c6c6cc;
   --idx-muted: #8b8b92;
-  --idx-font: 'LINE Seed Sans', 'LINE Seed TW', system-ui, sans-serif;
-  --idx-display: 'Archivo', 'LINE Seed Sans', 'LINE Seed TW', sans-serif;
-  --idx-mono: 'Space Mono', 'LINE Seed TW', ui-monospace, Menlo, monospace;
+  --idx-font: 'Zev Hei TC', system-ui, 'PingFang TC', sans-serif;
+  --idx-display: 'Archivo', 'Zev Hei TC', sans-serif;
+  --idx-mono: 'Space Mono', 'Zev Hei TC', ui-monospace, Menlo, monospace;
 }
 
 /* ── COLORLIB LAYOUT FIX (same as nexus.html) ── */

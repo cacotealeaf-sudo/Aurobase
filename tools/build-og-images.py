@@ -4,7 +4,7 @@
     python3 tools/build-og-images.py          # 只重畫內容有變的圖
     python3 tools/build-og-images.py --all    # 全部重畫
 
-用 Chrome 無頭模式截圖，字型取自 WOFF2/ 的 LINE Seed，本機與 GitHub Action 畫出來一樣。
+用 Chrome 無頭模式截圖，字型取自 tools/fonts/ 的宙黑體，本機與 GitHub Action 畫出來一樣。
 找不到 Chrome 時不做任何事（頁面會沿用 images/og/default.png）。
 內容來源：產品與解決方案取自產品 JSON；平台總覽取自 _platform.json；其他頁面取自 _pages.json 的 og_card。
 """
@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..'))
 OUT = os.path.join(ROOT, 'images', 'og')
 MANIFEST = os.path.join(OUT, 'manifest.json')
-VERSION = '2'   # 改版面時加一，所有圖都會重畫
+VERSION = '3'   # 改版面或字型時加一，所有圖都會重畫
 
 spec = importlib.util.spec_from_file_location('gen', os.path.join(HERE, 'build-module-pages.py'))
 gen = importlib.util.module_from_spec(spec)
@@ -32,11 +32,10 @@ spec.loader.exec_module(gen)
 DEFAULT_THEME = {'deep': '#B8320F', 'bright': '#E63109', 'soft': '#F59A7E', 'ink1': '#140906', 'ink2': '#26100A'}
 
 TEMPLATE = '''<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><style>
-@font-face {{ font-family: Seed; src: url("{font_rg}") format("woff2"); font-weight: 400; }}
-@font-face {{ font-family: Seed; src: url("{font_bd}") format("woff2"); font-weight: 700; }}
+@font-face {{ font-family: Zev; src: url("{font}") format("woff2"); font-weight: 300 900; }}
 * {{ margin: 0; box-sizing: border-box; }}
 html, body {{ width: 1200px; height: 630px; overflow: hidden; }}
-body {{ font-family: Seed, sans-serif; color: #fff; padding: 72px 84px;
+body {{ font-family: Zev, sans-serif; color: #fff; padding: 72px 84px;
   background: radial-gradient(circle at 85% 15%, {bright}55 0, transparent 45%), linear-gradient(135deg, {ink1} 0%, {ink2} 55%, {deep} 140%);
   display: flex; flex-direction: column; }}
 .kicker {{ font-size: 26px; letter-spacing: 0.08em; color: {soft}; font-weight: 700; }}
@@ -111,8 +110,7 @@ def render(exe, card, dest):
     t = dict(DEFAULT_THEME, **card['theme'])
     title = text(card['title'])
     page = TEMPLATE.format(
-        font_rg='file://' + os.path.join(ROOT, 'WOFF2', 'LINESeedTW_OTF_Rg.woff2'),
-        font_bd='file://' + os.path.join(ROOT, 'WOFF2', 'LINESeedTW_OTF_Bd.woff2'),
+        font='file://' + os.path.join(ROOT, 'tools', 'fonts', 'ZevHeiTC-F-VF.woff2'),
         kicker=text(card['kicker']), title=title, title_size=96 if len(title) <= 12 else 76,
         sub='<div class="sub">%s</div>' % text(card['sub']) if card.get('sub') else '',
         tag='<div class="tag">%s</div>' % text(card['tag']) if card.get('tag') else '',
